@@ -1,10 +1,10 @@
-@import '../../styles.scss';
+// @import '../../styles.scss';
 .line-top-start{
     width: 80%;
     position:absolute;
     top: 0;
     left: 0;
-    background-color: $primary;
+    background-color: blue;
     height: 10px;
 }
 .three-dots{
@@ -17,6 +17,6 @@
     position:absolute;
     top: 0;
     right: 0;
-    background-color: $primarysec;
+    background-color: lightblue;
     height: 10px;
 }

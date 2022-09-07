@@ -1,0 +1,22 @@
+@import '../../styles.scss';
+.line-top-start{
+    width: 80%;
+    position:absolute;
+    top: 0;
+    left: 0;
+    background-color: $primary;
+    height: 10px;
+}
+.three-dots{
+    position: absolute;
+    right: 10px;
+    top:23px
+}
+.line-top-end{
+    width: 20%;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: $primarysec;
+    height: 10px;
+}

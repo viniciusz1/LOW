@@ -4,6 +4,7 @@ import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
 import { TelaHistoricoDemandaComponent } from './tela-historico-demanda/tela-historico-demanda.component';
 import { TelaClassificarDemandaComponent } from './tela-classificar-demanda/tela-classificar-demanda.component';
 import { GeracaoPropostaOuDemandaModule } from './geracao-proposta-ou-demanda/geracao-proposta-ou-demanda.module';
+import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 
 
 
@@ -15,7 +16,8 @@ import { GeracaoPropostaOuDemandaModule } from './geracao-proposta-ou-demanda/ge
   ],
   imports: [
     CommonModule,
-    GeracaoPropostaOuDemandaModule
+    GeracaoPropostaOuDemandaModule,
+    ComponentesReutilizaveisModule
   ]
 })
 export class DemandasModule { }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { PosHeaderComponent } from './pos-header/pos-header.component';
 import { EscopoPrincipalComponent } from './escopo-principal/escopo-principal.component';
+import { RotasModule } from '../rotas.module';
 
 
 
@@ -13,7 +14,8 @@ import { EscopoPrincipalComponent } from './escopo-principal/escopo-principal.co
     EscopoPrincipalComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RotasModule
   ]
 })
 export class ComponentesFixosModule { }

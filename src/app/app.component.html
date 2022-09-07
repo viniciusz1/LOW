@@ -1,16 +1,3 @@
 
 
-<div class="mt-5"></div>
-<div class="d-flex position-relative" style="width: 100vw;">
-    <div [style.left.px]="position_list_cards" class="div-cards d-flex position-relative transition-cards">
-        <app-card-demanda></app-card-demanda>
-        <app-card-demanda></app-card-demanda>
-        <app-card-demanda></app-card-demanda>
-        <app-card-demanda></app-card-demanda>
-        <app-card-demanda></app-card-demanda>
-        <app-card-demanda></app-card-demanda>
-        <app-card-demanda></app-card-demanda>
-    </div>
-    <div class="left-arrow" (click)="changeLeft()"></div>
-    <div class="right-arrow" (click)="changeRight()"></div>
-</div>
+<router-outlet></router-outlet>

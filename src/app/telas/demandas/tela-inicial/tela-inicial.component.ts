@@ -8,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class TelaInicialComponent implements OnInit {
 
   constructor() { }
+  position_list_cards = 0
 
+  changeRight(){
+    this.position_list_cards -= 700
+  }
+
+  changeLeft() {
+    this.position_list_cards += 700
+  }
   ngOnInit(): void {
   }
 

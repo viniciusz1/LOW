@@ -1,0 +1,38 @@
+.right-arrow{
+    position:absolute;
+    right: 0;
+    height: 100%;
+    width: 50px;
+    background-color: rgba(0, 0, 0, 0.26);
+}
+.left-arrow{
+    position:absolute;
+    left: 0;
+    height: 100%;
+    width: 50px;
+    background-color: rgba(0, 0, 0, 0.26);
+}
+.transition-cards{
+    transition-property: left, right;
+    transition-duration: 500ms;
+}
+.div-cards{
+    column-gap: 7px;
+}
+.alinhacao{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor:pointer;
+}
+.input{
+    outline: none;
+    border:none;
+}
+.div-input{
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;  
+}

@@ -9,6 +9,7 @@ import { PipesModule } from './pipes/pipes.module';
 import { RotasModule } from './rotas.module';
 import { TelasModule } from './telas/telas.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ComponentesFixosModule,
     ComponentesReutilizaveisModule,
     RotasModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

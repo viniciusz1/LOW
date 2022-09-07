@@ -1,1 +1,36 @@
-<p>tela-inicial works!</p>
+<div>
+    <nav class="nav my-4 justify-content-between">
+        <button class="ms-3 btn btn-primary">
+            + Criar Demanda
+        </button>
+        <ul class="nav justify-content-center">
+            <div class="div-input me-3">
+                <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
+            </div>
+            <button class="btn btn-primary me-3">
+                Filtrar Mais
+            </button>
+        </ul>
+    </nav>
+    <div>
+        <p class="h5 ms-3" style="text-decoration-line: underline;" for="status">
+            STATUS: Backlog - Classificação
+        </p>
+        <div class="d-flex position-relative" style="width: 100vw;">
+            <div [style.left.px]="position_list_cards" class="div-cards d-flex position-relative transition-cards">
+                <app-card-demanda></app-card-demanda>
+                <app-card-demanda></app-card-demanda>
+                <app-card-demanda></app-card-demanda>
+                <app-card-demanda></app-card-demanda>
+                <app-card-demanda></app-card-demanda>
+                <app-card-demanda></app-card-demanda>
+                <app-card-demanda></app-card-demanda>
+            </div>
+            <div class="left-arrow alinhacao" (click)="changeLeft()"><i style="font-size: 25px;"
+                    class="bi bi-chevron-left"></i></div>
+            <div class="right-arrow alinhacao" (click)="changeRight()"><i style="font-size: 25px;"
+                    class="bi bi-chevron-right"></i></div>
+        </div>
+    </div>
+    
+</div>

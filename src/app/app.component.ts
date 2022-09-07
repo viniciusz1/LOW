@@ -7,13 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'low';
-  position_list_cards = 0
-
-  changeRight(){
-    this.position_list_cards -= 700
-  }
-
-  changeLeft() {
-    this.position_list_cards += 700
-  }
+  
 }

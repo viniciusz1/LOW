@@ -6,5 +6,10 @@ p{
 $primary: #0074d9;
 $primarysec: #7ab0df;
 $danger: #ff4136;
+$btn-border-radius: 0px;
+
+.btn{
+    border-radius: 5px !important;
+}
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "~bootstrap-icons/font/bootstrap-icons.css";

@@ -36,3 +36,16 @@
     align-items: center;
     justify-content: space-around;  
 }
+.title-demanda{
+    display: flex;
+    justify-content: space-between;
+}
+.change-type-list{
+    background: blue;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    border-radius: 510px;
+    align-items: center;
+    justify-content: center;
+}

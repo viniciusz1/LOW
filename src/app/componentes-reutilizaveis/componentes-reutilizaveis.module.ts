@@ -20,7 +20,8 @@ import { CardDemandaComponent } from './card-demanda/card-demanda.component';
     CommonModule
   ],
   exports:[
-    CardDemandaComponent
+    CardDemandaComponent,
+    ListDemandaComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

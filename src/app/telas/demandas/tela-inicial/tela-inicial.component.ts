@@ -9,12 +9,17 @@ export class TelaInicialComponent implements OnInit {
 
   constructor() { }
   position_list_cards = 0
-
-  changeRight(){
+  tipo_exibicao_demanda = false
+  change_right(){
     this.position_list_cards -= 700
   }
-
-  changeLeft() {
+  change_to_list(){
+    this.tipo_exibicao_demanda = false
+  }
+  change_to_card(){
+    this.tipo_exibicao_demanda = true
+  }
+  change_left() {
     this.position_list_cards += 700
   }
   ngOnInit(): void {

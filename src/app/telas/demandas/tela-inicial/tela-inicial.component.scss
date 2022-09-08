@@ -1,3 +1,5 @@
+@import '../../../..//styles.scss';
+
 .right-arrow{
     position:absolute;
     right: 0;
@@ -41,11 +43,18 @@
     justify-content: space-between;
 }
 .change-type-list{
-    background: blue;
     width: 35px;
     height: 35px;
     display: flex;
     border-radius: 510px;
     align-items: center;
     justify-content: center;
+    cursor:pointer;
+}
+.change-type-list:hover{
+    background-color: rgb(196, 193, 193);
+    transition: 400ms;
+}
+.color-actived{
+    background: $primary!important;
 }

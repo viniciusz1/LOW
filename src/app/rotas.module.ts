@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EscopoPrincipalComponent } from './componentes-fixos/escopo-principal/escopo-principal.component';
 import { TelaInicialComponent } from './telas/demandas/tela-inicial/tela-inicial.component';
+import { TelaClassificarDemandaComponent } from './telas/demandas/tela-classificar-demanda/tela-classificar-demanda.component';
 
 
 
@@ -18,7 +19,11 @@ import { TelaInicialComponent } from './telas/demandas/tela-inicial/tela-inicial
           {
             path: '',
             component: TelaInicialComponent
-          }
+          },
+          {
+            path: 'classificar-demanda',
+            component: TelaClassificarDemandaComponent
+          },
         ]
       }
     ])

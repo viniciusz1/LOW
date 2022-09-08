@@ -1,0 +1,21 @@
+@import '../../../../styles.scss';
+.line-top-start{
+    width: 80%;
+    position:absolute;
+    top: 0;
+    left: 0;
+    background-color: $primary;
+    height: 10px;
+}
+.line-top-end{
+    width: 20%;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: $primarysec;
+    height: 10px;
+}
+.retangulo-container{
+    height: 400px;
+    background-color: grey;
+}

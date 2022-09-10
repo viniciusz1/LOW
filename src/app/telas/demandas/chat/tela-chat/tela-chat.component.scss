@@ -47,6 +47,24 @@ main {
     padding: 10px;
     background-color: #f8f8f8;
 }
+#send{
+    justify-content: space-around;
+    align-items: center;
+    input{
+        outline: none;
+        border: none;
+        background-color: transparent;
+        width: 100%;
+    }
+    div{
+        padding: 0.3em;
+        margin: 5px;
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
 
 #panel-left {
     border-right: #dbdbdb 1px solid;

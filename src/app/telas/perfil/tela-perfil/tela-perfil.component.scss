@@ -3,3 +3,16 @@
         padding: 0.5rem;
     }
 }
+.perfil-label{
+    display: flex;
+    justify-content: space-between;
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:2rem;
+    button{
+        margin: 0.5rem
+    }
+}

@@ -7,6 +7,7 @@ import { TelaClassificarDemandaComponent } from './telas/demandas/tela-classific
 import { TelaHistoricoDemandaComponent } from './telas/demandas/tela-historico-demanda/tela-historico-demanda.component';
 import { TelaChatComponent } from './telas/demandas/chat/tela-chat/tela-chat.component';
 import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.component';
+import { TelaEtapaUmComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-um/tela-etapa-um.component';
 
 
 
@@ -38,6 +39,10 @@ import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.comp
           {
             path: 'perfil',
             component: TelaPerfilComponent
+          },
+          {
+            path: 'proposta/1',
+            component: TelaEtapaUmComponent
           },
         ]
       }

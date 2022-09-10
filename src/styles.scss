@@ -2,7 +2,11 @@
 p{
     margin-bottom: 0.5rem!important;
 }
-.input-control{
+.low-input{
+    width: 100%;
+    border: 1px solid black;
+    border-left: #00579D 5px solid;
+    padding: 0.2rem;
 }
 .icon{
     font-size: 20px;

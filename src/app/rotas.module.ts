@@ -5,6 +5,7 @@ import { EscopoPrincipalComponent } from './componentes-fixos/escopo-principal/e
 import { TelaInicialComponent } from './telas/demandas/tela-inicial/tela-inicial.component';
 import { TelaClassificarDemandaComponent } from './telas/demandas/tela-classificar-demanda/tela-classificar-demanda.component';
 import { TelaHistoricoDemandaComponent } from './telas/demandas/tela-historico-demanda/tela-historico-demanda.component';
+import { TelaChatComponent } from './telas/demandas/chat/tela-chat/tela-chat.component';
 
 
 
@@ -28,6 +29,10 @@ import { TelaHistoricoDemandaComponent } from './telas/demandas/tela-historico-d
           {
             path: 'historico-demanda',
             component: TelaHistoricoDemandaComponent
+          },
+          {
+            path: 'chat',
+            component: TelaChatComponent
           },
         ]
       }

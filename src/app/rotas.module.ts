@@ -6,6 +6,7 @@ import { TelaInicialComponent } from './telas/demandas/tela-inicial/tela-inicial
 import { TelaClassificarDemandaComponent } from './telas/demandas/tela-classificar-demanda/tela-classificar-demanda.component';
 import { TelaHistoricoDemandaComponent } from './telas/demandas/tela-historico-demanda/tela-historico-demanda.component';
 import { TelaChatComponent } from './telas/demandas/chat/tela-chat/tela-chat.component';
+import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.component';
 
 
 
@@ -33,6 +34,10 @@ import { TelaChatComponent } from './telas/demandas/chat/tela-chat/tela-chat.com
           {
             path: 'chat',
             component: TelaChatComponent
+          },
+          {
+            path: 'perfil',
+            component: TelaPerfilComponent
           },
         ]
       }

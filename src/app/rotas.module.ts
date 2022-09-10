@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { EscopoPrincipalComponent } from './componentes-fixos/escopo-principal/escopo-principal.component';
 import { TelaInicialComponent } from './telas/demandas/tela-inicial/tela-inicial.component';
 import { TelaClassificarDemandaComponent } from './telas/demandas/tela-classificar-demanda/tela-classificar-demanda.component';
+import { TelaHistoricoDemandaComponent } from './telas/demandas/tela-historico-demanda/tela-historico-demanda.component';
 
 
 
@@ -23,6 +24,10 @@ import { TelaClassificarDemandaComponent } from './telas/demandas/tela-classific
           {
             path: 'classificar-demanda',
             component: TelaClassificarDemandaComponent
+          },
+          {
+            path: 'historico-demanda',
+            component: TelaHistoricoDemandaComponent
           },
         ]
       }

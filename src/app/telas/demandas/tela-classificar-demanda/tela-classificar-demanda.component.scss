@@ -7,6 +7,10 @@
     background-color: $primary;
     height: 10px;
 }
+.form-label{
+    margin: 0px;
+    margin-top: 10px
+}
 .line-top-end{
     width: 20%;
     position:absolute;
@@ -17,5 +21,4 @@
 }
 .retangulo-container{
     height: 400px;
-    background-color: grey;
 }

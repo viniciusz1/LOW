@@ -10,6 +10,15 @@ export class TelaInicialComponent implements OnInit {
   constructor() { }
   position_list_cards = 0
   tipo_exibicao_demanda = false
+
+  showSidebar = -0;
+  moveSidebar(){
+    if(this.showSidebar == 0){
+      this.showSidebar = -25
+    }else{
+      this.showSidebar = 0
+    }
+  }
   change_right(){
     this.position_list_cards -= 700
   }

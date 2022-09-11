@@ -12,7 +12,7 @@
             </button>
         </ul>
     </nav>
-    <app-sidebar-demanda style="position: fixed; z-index: 1"></app-sidebar-demanda>
+    <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()" style="position: fixed; z-index: 1"></app-sidebar-demanda>
     <div class="me-3 d-flex justify-content-end">
         <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()" class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
         <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>

@@ -1,14 +1,15 @@
-<nav class="nav">
+<nav class="nav" style="background-color: white;">
     <ul class="nav nav-pills nav-items-center" style="width: 40%;">
-        <li class="nav-item ">
+        <li class="nav-item" routerLink="/tela-inicial">
+            <li class="nav-item " >
             <img class="my-2 ms-5" style="width: 70px;" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="">
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Início</a>
+            <a class="nav-link">Início</a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#">></a>
+            <a class="nav-link">></a>
         </li>
     </ul>
     <ul class="nav justify-content-end nav-items-center" style="width:60%">
@@ -16,16 +17,16 @@
             <a class="nav-link disabled">REUNIÕES</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active">DEMANDAS</a>
+            <a class="nav-link active" routerLink="/tela-inicial">DEMANDAS</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" routerLink="/tela-inicial/chat">
             <a class="nav-link disabled"><i class="bi bi-chat-left-dots icon"></i></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" routerLink="/tela-inicial/perfil">
             <a class="nav-link disabled"><i class="bi bi-bell icon"></i></a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link disabled"><i class="bi bi-person-square icon"></i></a>
+        <li class="nav-item" routerLink="/tela-inicial/perfil">
+            <a class="nav-link disabled"  ><i class="bi bi-person-square icon"></i></a>
         </li>
     </ul>
 </nav>

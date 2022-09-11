@@ -21,7 +21,8 @@ import { CardDemandaComponent } from './card-demanda/card-demanda.component';
   ],
   exports:[
     CardDemandaComponent,
-    ListDemandaComponent
+    ListDemandaComponent,
+    SidebarDemandaComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

@@ -13,7 +13,7 @@
         </ul>
     </nav>
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
-        style="position: fixed; z-index: 1; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
+        style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
     <div class="me-3 d-flex justify-content-end">
         <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
             class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
@@ -71,7 +71,7 @@
 
     <div class="d-flex" *ngIf="tipo_exibicao_demanda">
         <div class="bloco-branco"></div>
-        <div>
+        <div class="tamanho-container">
             <div class="my-4">
                 <div class="ms-3 title-demanda" for="status">
                     <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>

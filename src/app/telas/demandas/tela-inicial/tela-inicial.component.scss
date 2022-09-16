@@ -8,10 +8,9 @@
     background-color: rgba(0, 0, 0, 0.26);
 }
 .bloco-branco{
-    width: 100px;
-    height: 100%;
     background-color: white;
-    padding: 100px;
+    padding: 3vw;
+    z-index: 1;
 }
 .left-arrow{
     position:absolute;
@@ -33,6 +32,10 @@
     justify-content: center;
     color: white;
     cursor:pointer;
+}
+.tamanho-container{
+    width: 93vw;
+    
 }
 .input{
     outline: none;

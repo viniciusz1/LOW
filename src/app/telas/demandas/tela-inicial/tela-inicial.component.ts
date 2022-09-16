@@ -9,7 +9,7 @@ export class TelaInicialComponent implements OnInit {
 
   constructor() { }
   position_list_cards = 0
-  tipo_exibicao_demanda = false
+  tipo_exibicao_demanda = true
 
   showSidebar = -0;
   moveSidebar(){

@@ -1,3 +1,4 @@
+import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListDemandaComponent } from './list-demanda/list-demanda.component';
@@ -17,12 +18,14 @@ import { CardDemandaComponent } from './card-demanda/card-demanda.component';
     SidebarReuniaoComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NgbModule
   ],
   exports:[
     CardDemandaComponent,
     ListDemandaComponent,
-    SidebarDemandaComponent
+    SidebarDemandaComponent,
+    
   ]
 })
 export class ComponentesReutilizaveisModule { }

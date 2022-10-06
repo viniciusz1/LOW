@@ -11,7 +11,7 @@ export class TelaInicialComponent implements OnInit {
   position_list_cards = 0
   tipo_exibicao_demanda = true
 
-  showSidebar = -0;
+  showSidebar = -25;
   moveSidebar(){
     if(this.showSidebar == 0){
       this.showSidebar = -25

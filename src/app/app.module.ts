@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
     ComponentesReutilizaveisModule,
     RotasModule,
     NgbModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

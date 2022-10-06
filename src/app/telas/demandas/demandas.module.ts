@@ -1,3 +1,5 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TelaInicialComponent } from './tela-inicial/tela-inicial.component';
@@ -17,7 +19,8 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
   imports: [
     CommonModule,
     GeracaoPropostaOuDemandaModule,
-    ComponentesReutilizaveisModule
+    ComponentesReutilizaveisModule,
+    NgbModule
   ]
 })
 export class DemandasModule { }

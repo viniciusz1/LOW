@@ -9,6 +9,7 @@ import { TelaChatComponent } from './telas/demandas/chat/tela-chat/tela-chat.com
 import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.component';
 import { TelaEtapaUmComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-um/tela-etapa-um.component';
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
+import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-quatro/tela-etapa-quatro.component';
 
 
 
@@ -44,6 +45,10 @@ import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-dem
           {
             path: 'proposta/1',
             component: TelaEtapaUmComponent
+          },
+          {
+            path: 'proposta/4',
+            component: TelaEtapaQuatroComponent
           },
           {
             path: 'sidebar',

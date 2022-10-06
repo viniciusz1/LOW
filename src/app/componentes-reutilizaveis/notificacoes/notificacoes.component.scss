@@ -1,0 +1,16 @@
+.bloco{
+    width: 400px;
+    height: 500px;
+    background-color: #eee;
+    position: absolute;
+    z-index: 99;
+    right: 5rem;
+    top: 6%;
+    overflow: auto;
+}
+.mensagem{
+    width: 100%;
+    background-color: #FFFFFF;
+    justify-content: center;
+    align-items: center;
+}

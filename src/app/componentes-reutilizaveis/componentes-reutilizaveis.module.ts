@@ -6,6 +6,7 @@ import { CardReuniaoComponent } from './card-reuniao/card-reuniao.component';
 import { SidebarDemandaComponent } from './sidebar-demanda/sidebar-demanda.component';
 import { SidebarReuniaoComponent } from './sidebar-reuniao/sidebar-reuniao.component';
 import { CardDemandaComponent } from './card-demanda/card-demanda.component';
+import { NotificacoesComponent } from './notificacoes/notificacoes.component';
 
 
 
@@ -15,7 +16,8 @@ import { CardDemandaComponent } from './card-demanda/card-demanda.component';
     CardReuniaoComponent,
     CardDemandaComponent,
     SidebarDemandaComponent,
-    SidebarReuniaoComponent
+    SidebarReuniaoComponent,
+    NotificacoesComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,7 @@ import { CardDemandaComponent } from './card-demanda/card-demanda.component';
     CardDemandaComponent,
     ListDemandaComponent,
     SidebarDemandaComponent,
-    
+    NotificacoesComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

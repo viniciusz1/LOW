@@ -4,9 +4,9 @@
     <div class="card-body pb-1">
         <div class="mt-2 card-title d-flex" style="align-items: baseline;">
             <label class="me-2" for="">002</label>
-            <label class="me-2 text-truncate" style="" for=""><b>Sistema de Entrega...</b></label>
+            <label class="me-2 text-truncate" for="titulo"><b>Sistema de Entrega...</b></label>
             <small class="me-2" for="">Status: Backlog</small>
-            <i class="bi bi-three-dots-vertical three-dots" id="dropdownManual" (click)="myDrop.open()"></i>
+            <i class="bi bi-three-dots-vertical three-dots cursor-pointer"role="button" id="dropdownManual" (click)="myDrop.open()"></i>
             <div ngbDropdown #myDrop="ngbDropdown">
                 <div ngbDropdownMenu aria-labelledby="dropdownManual">
                     <button ngbDropdownItem>Action - 1</button>

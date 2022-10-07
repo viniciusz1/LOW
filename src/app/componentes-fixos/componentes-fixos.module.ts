@@ -5,6 +5,7 @@ import { PosHeaderComponent } from './pos-header/pos-header.component';
 import { EscopoPrincipalComponent } from './escopo-principal/escopo-principal.component';
 import { RotasModule } from '../rotas.module';
 import { RouterModule } from '@angular/router';
+import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/componentes-reutilizaveis.module';
 
 
 
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RotasModule,
-    RouterModule
+    RouterModule,
+    ComponentesReutilizaveisModule
   ]
 })
 export class ComponentesFixosModule { }

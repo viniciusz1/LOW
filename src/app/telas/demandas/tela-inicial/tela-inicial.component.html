@@ -1,15 +1,19 @@
 <div>
     <nav class="nav my-4 justify-content-between">
-        <button class="ms-3 btn btn-primary">
-            + Criar Demanda
-        </button>
+        <div class="low-shadow ms-5 rounded">
+            <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
+                + Criar Demanda
+            </button>
+        </div>
         <ul class="nav justify-content-center">
-            <div class="div-input me-3">
+            <div class="div-input me-3 low-shadow">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
-            <button class="btn btn-primary me-3">
-                Filtrar Mais
-            </button>
+            <div class="low-shadow me-3 rounded">
+                <button class="btn btn-primary">
+                    Filtrar Mais
+                </button>
+            </div>
         </ul>
     </nav>
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
@@ -21,51 +25,36 @@
                 class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
     </div>
     <div *ngIf="!tipo_exibicao_demanda">
-        <div class="my-4">
-            <div class="ms-3 title-demanda" for="status">
-                <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>
-                <div class="me-3" style="align-self: flex-end;">Ver mais</div>
-            </div>
-            <div class="d-flex flex-column position-relative mt-4" style="align-items:center">
-                <app-list-demanda></app-list-demanda>
-                <app-list-demanda></app-list-demanda>
-                <app-list-demanda></app-list-demanda>
-            </div>
-        </div>
-        <div class="my-4">
-            <div class="ms-3 title-demanda" for="status">
-                <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>
-                <div class="me-3" style="align-self: flex-end;">Ver mais</div>
-            </div>
-            <div class="d-flex flex-column position-relative mt-4" style="align-items:center">
-                <app-list-demanda></app-list-demanda>
-                <app-list-demanda></app-list-demanda>
-                <app-list-demanda></app-list-demanda>
-            </div>
-        </div>
-        <div class="my-4">
-            <div class="ms-3 title-demanda" for="status">
-                <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>
-                <div class="me-3" style="align-self: flex-end;">Ver mais</div>
-            </div>
-            <div class="d-flex flex-column position-relative mt-4" style="align-items:center">
-                <app-list-demanda></app-list-demanda>
-                <app-list-demanda></app-list-demanda>
-                <app-list-demanda></app-list-demanda>
+        <div class="m-5">
+            <div class="border low-shadow">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 style="text-decoration-line: underline;" class="my-3 ms-4">STATUS: Backlog - Classificação</h5>
+                    <i type="button" class="bi bi-chevron-down me-4" (click)="collapse.toggle()"
+                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"
+                        [ngClass]="!isCollapsed ? 'inverte': 'naoinverte'">
+                    </i>
+                </div>
+                <div class=" d-flex justify-content-center align-items-center flex-column my-4"
+                    style="margin-left:auto; margin-right:auto">
+                    <app-list-demanda class="mb-2"></app-list-demanda>
+                    <app-list-demanda class="mb-2"></app-list-demanda>
+                    <app-list-demanda class="mb-2"></app-list-demanda>
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                        <div class="d-flex justify-content-center align-items-center flex-column ">
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                            <app-list-demanda class="mb-2"></app-list-demanda>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="my-4">
-            <div class="ms-3 title-demanda" for="status">
-                <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>
-                <div class="me-3" style="align-self: flex-end;">Ver mais</div>
-            </div>
-            <div class="d-flex flex-column position-relative mt-4" style="align-items:center">
-                <app-list-demanda></app-list-demanda>
-                <app-list-demanda></app-list-demanda>
-                <app-list-demanda></app-list-demanda>
-            </div>
-        </div>
-
     </div>
 
     <div class="d-flex" *ngIf="tipo_exibicao_demanda">

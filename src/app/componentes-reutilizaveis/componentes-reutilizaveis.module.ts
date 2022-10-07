@@ -8,8 +8,8 @@ import { SidebarReuniaoComponent } from './sidebar-reuniao/sidebar-reuniao.compo
 import { CardDemandaComponent } from './card-demanda/card-demanda.component';
 import { NotificacoesComponent } from './notificacoes/notificacoes.component';
 import { RouterModule } from '@angular/router';
-
-
+import { MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,9 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule,
+    MatIconModule
   ],
   exports:[
     CardDemandaComponent,

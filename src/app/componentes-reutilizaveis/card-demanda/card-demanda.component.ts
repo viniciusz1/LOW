@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -8,9 +8,8 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
   providers: [NgbDropdownConfig]
 })
 export class CardDemandaComponent implements OnInit {
-
-  constructor(config: NgbDropdownConfig) {
-      config.placement='top-start'
+  @Output() abrirModal = new EventEmitter();
+  constructor() {
    }
 
   ngOnInit(): void {

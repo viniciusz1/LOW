@@ -8,7 +8,8 @@ import { TelaHistoricoDemandaComponent } from './tela-historico-demanda/tela-his
 import { TelaClassificarDemandaComponent } from './tela-classificar-demanda/tela-classificar-demanda.component';
 import { GeracaoPropostaOuDemandaModule } from './geracao-proposta-ou-demanda/geracao-proposta-ou-demanda.module';
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
-
+import {DialogModule} from '@angular/cdk/dialog';
+import { ModaisModule } from 'src/app/modais/modais.module';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    DialogModule,
+    ModaisModule
   ]
 })
 export class DemandasModule { }

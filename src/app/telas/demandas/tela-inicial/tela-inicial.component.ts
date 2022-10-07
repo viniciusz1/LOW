@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
+import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
+
 
 @Component({
   selector: 'app-tela-inicial',
@@ -7,11 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaInicialComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: Dialog) { }
+
   position_list_cards = 0
-  tipo_exibicao_demanda = false
+  tipo_exibicao_demanda = true
   isCollapsed = true;
   showSidebar = -25;
+
+
   moveSidebar(){
     if(this.showSidebar == 0){
       this.showSidebar = -25
@@ -19,6 +25,13 @@ export class TelaInicialComponent implements OnInit {
       this.showSidebar = 0
     }
   }
+
+  openDialog() {
+    this.dialog.open(ModalMotivoDevolucaoComponent, {
+      minWidth: '300px',
+    });
+  }
+
   change_right(){
     this.position_list_cards -= 700
   }

@@ -3,14 +3,14 @@
         <button class="ms-3 btn btn-primary">
             + Criar Demanda
         </button>
-        <ul class="nav justify-content-center">
+        <div class="nav justify-content-center">
             <div class="div-input me-3">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
             <button class="btn btn-primary me-3">
                 Filtrar Mais
             </button>
-        </ul>
+        </div>
     </nav>
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
         style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>

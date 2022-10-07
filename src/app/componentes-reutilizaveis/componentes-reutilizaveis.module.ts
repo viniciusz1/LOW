@@ -25,6 +25,7 @@ import { CardDemandaComponent } from './card-demanda/card-demanda.component';
     CardDemandaComponent,
     ListDemandaComponent,
     SidebarDemandaComponent,
+    CardReuniaoComponent
     
   ]
 })

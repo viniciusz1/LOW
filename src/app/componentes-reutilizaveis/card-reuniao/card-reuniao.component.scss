@@ -1,0 +1,26 @@
+.centralizar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Topo{
+    border: 1px solid black;
+    height: 10px;
+}
+
+.centro{
+    border: 1px solid black;
+    height: 150px;
+    border-top: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.desc{
+    width: 80%;
+}
+
+.status{
+    width: 20%;
+}

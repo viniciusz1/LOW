@@ -6,13 +6,13 @@
             </button>
         </div>
         <ul class="nav justify-content-center">
-            <div class="low-shadow me-3 rounded">                
+            <div class="low-shadow me-3 rounded">
                 <button class="btn btn-primary" *ngIf="isFiltrado">Exportar Resultados</button>
             </div>
             <div class="div-input me-3 low-shadow">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
-            <button class="btn btn-primary" (click)="isFiltrado = !isFiltrado"></button>
+            <button class="btn btn-primary me-3" (click)="isFiltrado = !isFiltrado">Dif. Exibicao</button>
             <div class="low-shadow me-3 rounded">
                 <button class="btn btn-primary" (click)="openModalFiltroDemandas()">
                     Filtrar Mais
@@ -24,19 +24,26 @@
         style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
     <div class="me-3 d-flex justify-content-between">
         <div class="rounded low-shadow ms-5 mb-2" *ngIf="isFiltrado">
-            <button class="btn btn-primary">Ordenar</button>
+            <div ngbDropdown class="d-inline-block">
+                <button type="button" class="btn btn-primary" id="dropdown" ngbDropdownToggle>Ordenar</button>
+                <div ngbDropdownMenu aria-labelledby="dropdown">
+                  <button ngbDropdownItem>Maior Score</button>
+                  <button ngbDropdownItem>Mais recente</button>
+                  <button ngbDropdownItem>Menor recente</button>
+                </div>
+              </div>
         </div>
         <div *ngIf="!isFiltrado"></div>
         <div class="d-flex">
             <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
                 class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
-            <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i
-                    class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
+            <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()"
+                class="change-type-list"><i class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
         </div>
     </div>
     <div *ngIf="!tipo_exibicao_demanda">
         <div class="m-5" *ngIf="!isFiltrado">
-            <div class="border low-shadow">
+            <div class="low-shadow" style="border: 1px solid #747474;">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 style="text-decoration-line: underline;" class="my-3 ms-4">STATUS: Backlog - Classificação</h5>
                     <i type="button" class="bi bi-chevron-down me-4" (click)="collapse.toggle()"
@@ -107,14 +114,14 @@
             </div>
         </div>
     </div>
-    <div *ngIf="isFiltrado">
+    <div *ngIf="isFiltrado && tipo_exibicao_demanda">
         <div class="container">
             <div class="row">
                 <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
                 <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
                 <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
                 <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>                
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
             </div>
         </div>
     </div>

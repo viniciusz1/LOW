@@ -1,3 +1,7 @@
+$primary: #00579D;
+$primarysec: #7ab0df;
+$danger: #ff4136;
+$btn-border-radius: 0px;
 
 p{
     margin-bottom: 0.5rem!important;
@@ -43,13 +47,15 @@ a{
 .icon{
     font-size: 20px;
 }
-$primary: #00579D;
-$primarysec: #7ab0df;
-$danger: #ff4136;
-$btn-border-radius: 0px;
+
+.btn-danger{
+    color:white !important;
+}
 
 .btn{
     border-radius: 5px !important;
 }
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

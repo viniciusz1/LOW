@@ -1,4 +1,3 @@
-@import '../../../..//styles.scss';
 
 .right-arrow{
     position:absolute;
@@ -74,6 +73,6 @@
     transition: 400ms;
 }
 .color-actived{
-    background: $primary!important;
+    background: #00579D!important;
     color: white;
 }

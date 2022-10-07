@@ -1,1 +1,68 @@
-<p>modal-filtro-demandas works!</p>
+<div style="padding: 8px; background: white; max-width: 500px;">
+    <div class="line">
+        <div class="bloco">
+            <div>
+                <div class="d-flex justify-content-between">
+                    <span class="h3">Filtrar Demandas
+                        <hr style="margin: 0; margin-bottom: 10px; width: 150%;">
+                    </span> 
+                    <i class="bi bi-x" role="button" (click)="dialogRef.close();"></i></div>
+            </div>
+            <div class="d-flex flex-column">
+                <div class="d-flex flex-column">
+                    <label for=" Número da solicitação:">
+                        Número da solicitação:
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="Responsável:">
+                        Responsável:
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="Tamanho da demanda:">
+                        Tamanho da demanda:
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for=" Fórum de aprovação:">
+                        Fórum de aprovação:
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="Status de aprovação:">
+                        Status de aprovação:
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="d-flex flex-column">
+                    <label for="Solicitante:">
+                        Solicitante:
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="d-flex">
+                    <div>
+                        <label for="subtitulo">
+                            Código PPM:
+                        </label>
+                        <input type="text">
+                    </div>
+                    <div class="ms-3">
+                        <label for="subtitulo">
+                            Departamento:
+                        </label>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary mt-3" style="width: 20%;">Filtrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

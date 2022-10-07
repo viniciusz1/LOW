@@ -1,0 +1,17 @@
+@import '../../../styles.scss';
+.bloco{
+    display: block;
+    background: #fff;
+    padding: 16px;
+}
+input{
+    width: 100%;
+
+}
+.line{
+    padding: 5px; 
+    background: $primary
+}
+i{
+    font-size: 25px;
+}

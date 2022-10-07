@@ -1,3 +1,4 @@
+import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
 import { Component, OnInit } from '@angular/core';
 import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
@@ -26,7 +27,12 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
-  openDialog() {
+  openModalFiltroDemandas(){
+    this.dialog.open(ModalFiltroDemandasComponent, {
+      minWidth: '300px',
+    });
+  }
+  openModalMotivoDevolucao() {
     this.dialog.open(ModalMotivoDevolucaoComponent, {
       minWidth: '300px',
     });
@@ -45,6 +51,7 @@ export class TelaInicialComponent implements OnInit {
     this.position_list_cards += 700
   }
   ngOnInit(): void {
+    this.openModalFiltroDemandas()
   }
 
 }

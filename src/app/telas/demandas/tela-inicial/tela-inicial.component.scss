@@ -7,6 +7,15 @@
     width: 50px;
     background-color: rgba(0, 0, 0, 0.26);
 }
+.inverte{
+    transform: rotate(180deg);
+    transition: 0.5s;
+}
+.naoinverte{
+    transform: rotate(0);
+    transition: 0.5s;
+}
+
 .bloco-branco{
     background-color: white;
     padding: 3vw;
@@ -66,4 +75,5 @@
 }
 .color-actived{
     background: $primary!important;
+    color: white;
 }

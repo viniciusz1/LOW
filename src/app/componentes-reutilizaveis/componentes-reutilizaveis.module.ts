@@ -1,4 +1,4 @@
-import { NgbDropdown, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListDemandaComponent } from './list-demanda/list-demanda.component';
@@ -7,6 +7,7 @@ import { SidebarDemandaComponent } from './sidebar-demanda/sidebar-demanda.compo
 import { SidebarReuniaoComponent } from './sidebar-reuniao/sidebar-reuniao.component';
 import { CardDemandaComponent } from './card-demanda/card-demanda.component';
 import { NotificacoesComponent } from './notificacoes/notificacoes.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ import { NotificacoesComponent } from './notificacoes/notificacoes.component';
   ],
   imports: [
     CommonModule,
-    NgbModule
+    NgbModule,
+    RouterModule
   ],
   exports:[
     CardDemandaComponent,

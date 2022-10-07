@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgModule } from '@angular/core';
@@ -20,7 +21,8 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
     CommonModule,
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
-    NgbModule
+    NgbModule,
+    RouterModule
   ]
 })
 export class DemandasModule { }

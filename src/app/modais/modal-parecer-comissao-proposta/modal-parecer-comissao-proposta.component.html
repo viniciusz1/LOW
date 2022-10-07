@@ -6,7 +6,7 @@
                     <span class="h3 me-5 mb-0">Proposta 001
                         <hr style="margin: 0; margin-bottom: 10px; width: 100%;">
                     </span>
-                    <div>
+                    <div class="d-flex justify-content-center align-items-center">
                         <mat-form-field appearance="fill" class="me-3">
                             <mat-label>Selecione o tipo de ata</mat-label>
                             <mat-select>
@@ -18,7 +18,15 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button class="btn btn-primary me-3">Visualizar Proposta</button>
+                        <!-- <select name="" id="">
+                            <option value="">
+                                Publicada</option>
+                            <option value="">
+                                Não Publicada</option>
+                        </select> -->
+                        <div class="rounded low-shadow me-3 ">
+                            <button class="btn btn-primary">Visualizar Proposta</button>
+                        </div>
                         <i class="bi bi-x me-3" role="button" (click)="dialogRef.close();"></i>
                     </div>
                 </div>

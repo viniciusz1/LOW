@@ -6,9 +6,13 @@
             </button>
         </div>
         <ul class="nav justify-content-center">
+            <div class="low-shadow me-3 rounded">                
+                <button class="btn btn-primary" *ngIf="isFiltrado">Exportar Resultados</button>
+            </div>
             <div class="div-input me-3 low-shadow">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
+            <button class="btn btn-primary" (click)="isFiltrado = !isFiltrado"></button>
             <div class="low-shadow me-3 rounded">
                 <button class="btn btn-primary" (click)="openModalFiltroDemandas()">
                     Filtrar Mais
@@ -18,14 +22,20 @@
     </nav>
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
         style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
-    <div class="me-3 d-flex justify-content-end">
-        <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
-            class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
-        <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i
-                class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
+    <div class="me-3 d-flex justify-content-between">
+        <div class="rounded low-shadow ms-5 mb-2" *ngIf="isFiltrado">
+            <button class="btn btn-primary">Ordenar</button>
+        </div>
+        <div *ngIf="!isFiltrado"></div>
+        <div class="d-flex">
+            <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
+                class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
+            <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i
+                    class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
+        </div>
     </div>
     <div *ngIf="!tipo_exibicao_demanda">
-        <div class="m-5">
+        <div class="m-5" *ngIf="!isFiltrado">
             <div class="border low-shadow">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 style="text-decoration-line: underline;" class="my-3 ms-4">STATUS: Backlog - Classificação</h5>
@@ -55,11 +65,24 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="isFiltrado">
+            <div class="container d-flex flex-column align-items-center">
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+            </div>
+        </div>
     </div>
 
     <div class="d-flex" *ngIf="tipo_exibicao_demanda">
         <div class="bloco-branco"></div>
-        <div class="tamanho-container">
+        <div class="tamanho-container" *ngIf="!isFiltrado">
             <div class="my-4">
                 <div class="ms-3 title-demanda" for="status">
                     <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>
@@ -81,6 +104,17 @@
                     <div class="right-arrow alinhacao" (click)="change_right()"><i style="font-size: 25px;"
                             class="bi bi-chevron-right"></i></div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isFiltrado">
+        <div class="container">
+            <div class="row">
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>                
             </div>
         </div>
     </div>

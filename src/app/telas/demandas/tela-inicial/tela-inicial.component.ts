@@ -17,6 +17,7 @@ export class TelaInicialComponent implements OnInit {
   position_list_cards = 0
   tipo_exibicao_demanda = true
   isCollapsed = true;
+  isFiltrado = true;
   showSidebar = -25;
 
 
@@ -58,7 +59,6 @@ export class TelaInicialComponent implements OnInit {
     this.position_list_cards += 700
   }
   ngOnInit(): void {
-    this.openModalParecerComissaoProposta();
   }
 
 }

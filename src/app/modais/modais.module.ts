@@ -1,3 +1,4 @@
+import { AngularMaterialModule } from './../angular-material/angular-material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalSuaPautaComponent } from './modal-sua-pauta/modal-sua-pauta.component';
@@ -7,6 +8,7 @@ import { ModalParecerComissaoPropostaComponent } from './modal-parecer-comissao-
 import { ModalFiltroDemandasComponent } from './modal-filtro-demandas/modal-filtro-demandas.component';
 import { ModalDemandaDocumentoComponent } from './modal-demanda-documento/modal-demanda-documento.component';
 import { ModalMotivoDevolucaoComponent } from './modal-motivo-devolucao/modal-motivo-devolucao.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -21,7 +23,8 @@ import { ModalMotivoDevolucaoComponent } from './modal-motivo-devolucao/modal-mo
     ModalMotivoDevolucaoComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatSelectModule
   ]
 })
 export class ModaisModule { }

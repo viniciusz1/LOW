@@ -1,3 +1,4 @@
+import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
 import { Component, OnInit } from '@angular/core';
 import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
@@ -38,6 +39,12 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  openModalParecerComissaoProposta() {
+    this.dialog.open(ModalParecerComissaoPropostaComponent, {
+      minWidth: '300px',
+    });
+  }
+
   change_right(){
     this.position_list_cards -= 700
   }
@@ -51,7 +58,7 @@ export class TelaInicialComponent implements OnInit {
     this.position_list_cards += 700
   }
   ngOnInit(): void {
-    this.openModalFiltroDemandas()
+    this.openModalParecerComissaoProposta();
   }
 
 }

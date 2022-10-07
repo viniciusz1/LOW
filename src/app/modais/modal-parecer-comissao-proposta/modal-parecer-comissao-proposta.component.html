@@ -1,1 +1,34 @@
-<p>modal-parecer-comissao-proposta works!</p>
+<div style="padding: 8px; background: white">
+    <div class="line">
+        <div class="bloco">
+            <div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="h3 me-5 mb-0">Proposta 001
+                        <hr style="margin: 0; margin-bottom: 10px; width: 100%;">
+                    </span>
+                    <div>
+                        <mat-form-field appearance="fill" class="me-3">
+                            <mat-label>Selecione o tipo de ata</mat-label>
+                            <mat-select>
+                                <mat-option value="Publicada">
+                                   Publicada
+                                </mat-option>
+                                <mat-option value="Não Publicada">
+                                   Não Publicada
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button class="btn btn-primary me-3">Visualizar Proposta</button>
+                        <i class="bi bi-x me-3" role="button" (click)="dialogRef.close();"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="d-block">
+                <label for="subtitulo">
+                    Informe o parecer da comissão sobre esta proposta:
+                </label>
+                <input type="text">
+            </div>
+        </div>
+    </div>
+</div>

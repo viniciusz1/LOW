@@ -11,6 +11,7 @@ import { TelaEtapaUmComponent } from './telas/demandas/geracao-proposta-ou-deman
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
 import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-quatro/tela-etapa-quatro.component';
 import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
+import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
 
 
 
@@ -50,6 +51,10 @@ import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-dem
           {
             path: 'proposta/2',
             component: TelaEtapaDoisComponent
+          },
+          {
+            path: 'proposta/3',
+            component: TelaEtapaTresComponent
           },
           {
             path: 'proposta/4',

@@ -23,6 +23,17 @@
         <button class="btn btn-primary btn-sm">Classificar Demanda</button>
     </li>
     <li>
-        <i class="bi bi-three-dots-vertical three-dots"></i>
+        <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <span>Histórico</span>
+          </button>
+          <button mat-menu-item disabled>
+            <span>Ver demanda</span>
+          </button>
+          <button mat-menu-item>
+            <span>Iniciar conversa</span>
+          </button>
+        </mat-menu>
     </li>
 </ul>

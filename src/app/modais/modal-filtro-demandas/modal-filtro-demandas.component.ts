@@ -1,3 +1,4 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalFiltroDemandasComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: DialogRef<ModalFiltroDemandasComponent>) { }
 
   ngOnInit(): void {
   }

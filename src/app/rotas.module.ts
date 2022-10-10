@@ -10,7 +10,12 @@ import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.comp
 import { TelaEtapaUmComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-um/tela-etapa-um.component';
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
 import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-quatro/tela-etapa-quatro.component';
+<<<<<<< HEAD
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
+=======
+import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
+import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
+>>>>>>> 897478d7cc6f6838d095d846c8d917e0c31fb1d5
 
 
 
@@ -52,13 +57,21 @@ import { TelaLoginComponent } from './telas/login/tela-login/tela-login.componen
             component: TelaEtapaUmComponent
           },
           {
+            path: 'proposta/2',
+            component: TelaEtapaDoisComponent
+          },
+          {
+            path: 'proposta/3',
+            component: TelaEtapaTresComponent
+          },
+          {
             path: 'proposta/4',
             component: TelaEtapaQuatroComponent
           },
           {
             path: 'sidebar',
             component: SidebarDemandaComponent
-          },
+          }
         ]
       }
     ])

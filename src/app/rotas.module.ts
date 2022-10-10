@@ -10,6 +10,7 @@ import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.comp
 import { TelaEtapaUmComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-um/tela-etapa-um.component';
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
 import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-quatro/tela-etapa-quatro.component';
+import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
 
 
 
@@ -18,6 +19,10 @@ import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-d
   imports: [
     CommonModule,
     RouterModule.forRoot([
+      {
+        path: '',
+        component: TelaLoginComponent,
+      },
       {
         path: 'tela-inicial',
         component: EscopoPrincipalComponent,

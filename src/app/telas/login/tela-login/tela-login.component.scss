@@ -1,0 +1,20 @@
+.bloco{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 40px;
+    right: 2%;
+    position: relative;
+    background-color: white;
+}
+.titulo{
+    position: relative;
+    padding: 3px;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -56px;
+    color:white;
+    border-radius: 5px;
+    width: 60%;
+}

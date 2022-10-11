@@ -10,6 +10,7 @@ import { NotificacoesComponent } from './notificacoes/notificacoes.component';
 import { RouterModule } from '@angular/router';
 import { MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import { FiltroDemandaComponent } from './filtro-demanda/filtro-demanda.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {MatIconModule} from '@angular/material/icon';
     CardDemandaComponent,
     SidebarDemandaComponent,
     SidebarReuniaoComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    FiltroDemandaComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import {MatIconModule} from '@angular/material/icon';
     CardDemandaComponent,
     ListDemandaComponent,
     SidebarDemandaComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    FiltroDemandaComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

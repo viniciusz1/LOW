@@ -52,6 +52,11 @@ export class TelaInicialComponent implements OnInit {
   change_to_list(){
     this.tipo_exibicao_demanda = false
   }
+
+  change_exibicao(){
+    this.tipo_exibicao_demanda = !this.tipo_exibicao_demanda
+  }
+  
   change_to_card(){
     this.tipo_exibicao_demanda = true
   }

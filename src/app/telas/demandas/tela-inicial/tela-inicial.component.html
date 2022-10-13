@@ -13,7 +13,54 @@
                 Filtrar Mais
             </button>
         </div>
-
+<!-- =======
+        <!-- <div class="low-shadow ms-5 rounded">
+            <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
+                + Criar Demanda
+            </button>
+        </div>
+        <ul class="nav justify-content-center">
+=======
+    <nav class="nav container justify-content-between my-4">
+        <div class="d-flex justify-content-around" style="width: 100%;">
+            <div class="">
+                <div class="low-shadow rounded mb-2">
+                    <button class="btn btn-primary w-100" routerLink="/tela-inicial/proposta/1">
+                        + Criar Demanda
+                    </button>
+                </div>
+                <div class="low-shadow rounded mb-2">
+                    <button (click)="change_exibicao()" class="btn btn-primary w-50">
+                        Exibição
+                    </button>
+                    <button (click)="isFiltrado = !isFiltrado" class="btn btn-primary w-50">
+                        outra
+                    </button>
+                </div>
+                <div class="rounded low-shadow mb-2" *ngIf="isFiltrado">
+                    <div ngbDropdown class="d-inline-block w-100">
+                        <button type="button" class="btn btn-primary w-100" id="dropdown" ngbDropdownToggle>Ordenar </button>
+                        <div ngbDropdownMenu aria-labelledby="dropdown">
+                            <button ngbDropdownItem>Maior Score</button>
+                            <button ngbDropdownItem>Mais recente</button>
+                            <button ngbDropdownItem>Menor recente</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- <div class="low-shadow me-3 rounded">
+                <button class="btn btn-primary" *ngIf="isFiltrado">Exportar Resultados</button>
+            </div>
+>>>>>>> 60a9d6acfc592712e20865a54842eeb6aeecb813
+            <div class="div-input me-3 low-shadow">
+                <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
+            </div>
+            <button class="btn btn-primary me-3" (click)="isFiltrado = !isFiltrado">Dif. Exibicao</button>
+            <div class="low-shadow me-3 rounded">
+                <button class="btn btn-primary" (click)="openModalFiltroDemandas()">
+                    Filtrar Mais
+                </button>
+            </div> -->
             <div>
                 <app-filtro-demanda></app-filtro-demanda>
             </div>

@@ -9,8 +9,8 @@ export class TelaInicialComponent implements OnInit {
 
   constructor() { }
   position_list_cards = 0
-  tipo_exibicao_demanda = true
-
+  tipo_exibicao_demanda = false
+  isCollapsed = true;
   showSidebar = -25;
   moveSidebar(){
     if(this.showSidebar == 0){

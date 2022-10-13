@@ -20,10 +20,11 @@
             <a class="nav-link active" routerLink="/tela-inicial">DEMANDAS</a>
         </li>
         <li class="nav-item" routerLink="/tela-inicial/chat">
-            <a class="nav-link disabled"><i class="bi bi-chat-left-dots icon"></i></a>
+            <a class="nav-link disabled"><i  class="bi bi-chat-left-dots icon"></i></a>
         </li>
-        <li class="nav-item" routerLink="/tela-inicial/perfil">
-            <a class="nav-link disabled"><i class="bi bi-bell icon"></i></a>
+        <li class="nav-item"(click)="mostrar_modal = !mostrar_modal">
+            <a class="nav-link disabled"><i  class="bi bi-bell icon"></i></a>
+            <app-notificacoes *ngIf="mostrar_modal"></app-notificacoes>
         </li>
         <li class="nav-item" routerLink="/tela-inicial/perfil">
             <a class="nav-link disabled"  ><i class="bi bi-person-square icon"></i></a>

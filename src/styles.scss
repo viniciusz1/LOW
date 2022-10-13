@@ -1,3 +1,7 @@
+$primary: #00579D;
+$primarysec: #7ab0df;
+$danger: #ff4136;
+$btn-border-radius: 0px;
 
 p{
     margin-bottom: 0.5rem!important;
@@ -30,6 +34,10 @@ a{
     background-color: #00612E;
 }
 
+.low-shadow{
+    box-shadow: 5px 6px 6px -6px;
+}
+
 .low-input{
     width: 100%;
     border: 1px solid black;
@@ -40,10 +48,6 @@ a{
     font-size: 20px;
 }
 
-$primary: #00579D;
-$primarysec: #7ab0df;
-$danger: #ff4136;
-$btn-border-radius: 0px;
 
 .btn{
     border-radius: 5px !important;

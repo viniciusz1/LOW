@@ -20,6 +20,9 @@ import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/com
     RotasModule,
     RouterModule,
     ComponentesReutilizaveisModule
+  ],
+  exports: [
+    HeaderComponent
   ]
 })
 export class ComponentesFixosModule { }

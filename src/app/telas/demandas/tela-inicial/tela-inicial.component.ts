@@ -1,4 +1,9 @@
+import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
+import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
 import { Component, OnInit } from '@angular/core';
+import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
+import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
+
 
 @Component({
   selector: 'app-tela-inicial',
@@ -7,11 +12,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaInicialComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: Dialog) { }
+
   position_list_cards = 0
-  tipo_exibicao_demanda = false
+  tipo_exibicao_demanda = true
   isCollapsed = true;
+  isFiltrado = true;
   showSidebar = -25;
+
+
   moveSidebar(){
     if(this.showSidebar == 0){
       this.showSidebar = -25
@@ -19,12 +28,35 @@ export class TelaInicialComponent implements OnInit {
       this.showSidebar = 0
     }
   }
+
+  openModalFiltroDemandas(){
+    this.dialog.open(ModalFiltroDemandasComponent, {
+      minWidth: '300px',
+    });
+  }
+  openModalMotivoDevolucao() {
+    this.dialog.open(ModalMotivoDevolucaoComponent, {
+      minWidth: '300px',
+    });
+  }
+
+  openModalParecerComissaoProposta() {
+    this.dialog.open(ModalParecerComissaoPropostaComponent, {
+      minWidth: '300px',
+    });
+  }
+
   change_right(){
     this.position_list_cards -= 700
   }
   change_to_list(){
     this.tipo_exibicao_demanda = false
   }
+
+  change_exibicao(){
+    this.tipo_exibicao_demanda = !this.tipo_exibicao_demanda
+  }
+  
   change_to_card(){
     this.tipo_exibicao_demanda = true
   }

@@ -35,22 +35,28 @@ a{
 }
 
 .low-shadow{
-    box-shadow: 5px 6px 6px -6px;
+    box-shadow: 5px 6px 6px -6px black;
 }
 
 .low-input{
     width: 100%;
     border: 1px solid black;
     border-left: #00579D 5px solid;
-    padding: 0.5rem;
+    padding: 5px;
+    outline: none;
 }
 .icon{
     font-size: 20px;
 }
 
+.btn-danger{
+    color:white !important;
+}
 
 .btn{
     border-radius: 5px !important;
 }
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

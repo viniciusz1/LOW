@@ -1,4 +1,5 @@
 <div>
+
     <nav class="nav my-4 justify-content-between">
 
         <button class="ms-3 btn btn-primary">
@@ -12,35 +13,35 @@
                 Filtrar Mais
             </button>
         </div>
-<!-- =======
-        <!-- <div class="low-shadow ms-5 rounded">
-            <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
-                + Criar Demanda
-            </button>
+
+            <div>
+                <app-filtro-demanda></app-filtro-demanda>
+            </div>
+
+        </ul> 
+
+
+
         </div>
-        <ul class="nav justify-content-center">
-            <div class="div-input me-3 low-shadow">
-                <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
-            </div>
-            <div class="low-shadow me-3 rounded">
-                <button class="btn btn-primary">
-                    Filtrar Mais
-                </button>
-            </div>
-        </ul> -->
-<!-- >>>>>>> 4386da662506614a3ae7df62a131961459b9b299 -->
+
+
+
     </nav>
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
         style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
-    <div class="me-3 d-flex justify-content-end">
-        <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
-            class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
-        <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i
-                class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
-    </div>
+    <!-- <div class="me-3 d-flex justify-content-between">
+        
+        <div *ngIf="!isFiltrado"></div>
+        <div class="d-flex">
+            <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
+                class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
+            <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()"
+                class="change-type-list"><i class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
+        </div>
+    </div> -->
     <div *ngIf="!tipo_exibicao_demanda">
-        <div class="m-5">
-            <div class="border low-shadow">
+        <div class="m-5" *ngIf="!isFiltrado">
+            <div class="low-shadow" style="border: 1px solid #747474;">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 style="text-decoration-line: underline;" class="my-3 ms-4">STATUS: Backlog - Classificação</h5>
                     <i type="button" class="bi bi-chevron-down me-4" (click)="collapse.toggle()"
@@ -69,11 +70,24 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="isFiltrado">
+            <div class="container d-flex flex-column align-items-center">
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+                <app-list-demanda class="mb-2"></app-list-demanda>
+            </div>
+        </div>
     </div>
 
     <div class="d-flex" *ngIf="tipo_exibicao_demanda">
-        <div class="bloco-branco"></div>
-        <div class="tamanho-container">
+        <!-- <div class="bloco-branco"></div> -->
+        <div class="tamanho-container" *ngIf="!isFiltrado">
             <div class="my-4">
                 <div class="ms-3 title-demanda" for="status">
                     <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>
@@ -82,7 +96,7 @@
                 <div class="d-flex position-relative" style="width: 100%;">
                     <div [style.left.px]="position_list_cards"
                         class="div-cards d-flex position-relative transition-cards">
-                        <app-card-demanda></app-card-demanda>
+                        <app-card-demanda (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
                         <app-card-demanda></app-card-demanda>
                         <app-card-demanda></app-card-demanda>
                         <app-card-demanda></app-card-demanda>
@@ -95,6 +109,17 @@
                     <div class="right-arrow alinhacao" (click)="change_right()"><i style="font-size: 25px;"
                             class="bi bi-chevron-right"></i></div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="isFiltrado && tipo_exibicao_demanda">
+        <div class="container">
+            <div class="row">
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
             </div>
         </div>
     </div>

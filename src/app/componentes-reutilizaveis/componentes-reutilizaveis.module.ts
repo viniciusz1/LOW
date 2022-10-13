@@ -8,8 +8,9 @@ import { SidebarReuniaoComponent } from './sidebar-reuniao/sidebar-reuniao.compo
 import { CardDemandaComponent } from './card-demanda/card-demanda.component';
 import { NotificacoesComponent } from './notificacoes/notificacoes.component';
 import { RouterModule } from '@angular/router';
-
-
+import { MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import { FiltroDemandaComponent } from './filtro-demanda/filtro-demanda.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +19,15 @@ import { RouterModule } from '@angular/router';
     CardDemandaComponent,
     SidebarDemandaComponent,
     SidebarReuniaoComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    FiltroDemandaComponent
   ],
   imports: [
     CommonModule,
     NgbModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule,
+    MatIconModule
   ],
   exports:[
     CardDemandaComponent,
@@ -31,6 +35,7 @@ import { RouterModule } from '@angular/router';
     SidebarDemandaComponent,
     CardReuniaoComponent,
     NotificacoesComponent,
+    FiltroDemandaComponent
 
   ]
 })

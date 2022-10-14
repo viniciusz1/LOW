@@ -3,6 +3,7 @@ import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-dem
 import { Component, OnInit } from '@angular/core';
 import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
+import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua-pauta.component';
 
 
 @Component({
@@ -46,6 +47,12 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  openModalSuaPauta(){
+    this.dialog.open(ModalSuaPautaComponent, {
+      minWidth: '300px',
+    });
+  }
+
   change_right(){
     this.position_list_cards -= 700
   }
@@ -64,6 +71,7 @@ export class TelaInicialComponent implements OnInit {
     this.position_list_cards += 700
   }
   ngOnInit(): void {
+    this.openModalSuaPauta()
   }
 
 }

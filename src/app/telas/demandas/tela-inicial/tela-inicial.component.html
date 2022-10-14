@@ -14,6 +14,9 @@
                     <button (click)="isFiltrado = !isFiltrado" class="btn btn-primary w-50">
                         outra
                     </button>
+                    <button (click)="openModalSuaPauta()" class="btn btn-primary w-50">
+                        pauta
+                    </button>
                 </div>
                 <div class="rounded low-shadow mb-2" *ngIf="isFiltrado">
                     <div ngbDropdown class="d-inline-block w-100">

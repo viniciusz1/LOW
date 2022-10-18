@@ -27,7 +27,8 @@
                     Departamento:
                 </b>
                 TI
-            </label><button class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Classificar Demanda</button>
+            </label><button *ngIf="!isPauta" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Classificar Demanda</button>
+            <i *ngIf="isPauta" class="bi bi-trash-fill"></i>
         </p>
     </div>
 </div>

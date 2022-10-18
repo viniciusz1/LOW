@@ -10,6 +10,8 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 export class CardDemandaComponent implements OnInit {
   @Output() abrirModal = new EventEmitter();
   @Input() mudarTamanho:string = "350px"
+  @Input() isPauta: boolean = false;
+
   constructor() {
    }
 

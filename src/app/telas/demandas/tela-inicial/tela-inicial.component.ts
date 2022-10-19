@@ -6,6 +6,7 @@ import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devol
 import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua-pauta.component';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
+import { Sort } from '@angular/material/sort';
 
 
 @Component({
@@ -32,6 +33,9 @@ export class TelaInicialComponent implements OnInit {
     }else{
       this.showSidebar = 0
     }
+  }
+
+  sortData(sort: Event) {
   }
 
   openModalFiltroDemandas(){

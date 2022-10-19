@@ -36,6 +36,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   sortData(sort: Event) {
+    console.log(sort)
   }
 
   openModalFiltroDemandas(){

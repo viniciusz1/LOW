@@ -119,13 +119,8 @@
                 <div class="d-flex position-relative" style="width: 100%;">
                     <div [style.left.px]="position_list_cards"
                         class="div-cards d-flex position-relative transition-cards">
-                        <app-card-demanda (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
-                        <app-card-demanda></app-card-demanda>
-                        <app-card-demanda></app-card-demanda>
-                        <app-card-demanda></app-card-demanda>
-                        <app-card-demanda></app-card-demanda>
-                        <app-card-demanda></app-card-demanda>
-                        <app-card-demanda></app-card-demanda>
+                        <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
+                        (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
                     </div>
                     <div class="left-arrow alinhacao" (click)="change_left()"><i style="font-size: 25px;"
                             class="bi bi-chevron-left"></i></div>
@@ -138,11 +133,9 @@
     <div *ngIf="isFiltrado && tipo_exibicao_demanda">
         <div class="container">
             <div class="row">
-                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
+                <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
+                (abrirModal)="openModalMotivoDevolucao()"
+                [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
             </div>
         </div>
     </div>

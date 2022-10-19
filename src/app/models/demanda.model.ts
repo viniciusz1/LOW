@@ -19,4 +19,8 @@ export interface Demanda {
     fimExDemanda?: Date,
     paybackSimplesDemanda?: string,
     responsaveisNegocioDemanda?: []
+    //Não tem nos inputs mas acredito que é necessário
+    ppmDemanda?: string
+    autorDemanda?: string
+    departamentoBenDemanda?: string
 }

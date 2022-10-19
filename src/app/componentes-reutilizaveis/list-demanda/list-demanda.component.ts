@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Demanda } from 'src/app/models/demanda.model';
 
 @Component({
   selector: 'app-list-demanda',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListDemandaComponent implements OnInit {
 
+  @Input() dadosDemada: Demanda = {}
   constructor() { }
 
   ngOnInit(): void {

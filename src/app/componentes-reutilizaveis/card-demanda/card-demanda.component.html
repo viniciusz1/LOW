@@ -6,9 +6,9 @@
     justify-content: space-between;">
           <div class="d-flex">
             <label class="me-2" for="">002</label>
-            <label class="me-2 text-truncate" for="titulo"><b>Sistema de Entrega...</b></label>
+            <label class="me-2 text-truncate" for="titulo"><b>{{dadosDemada.tituloDemanda}}</b></label>
           </div>
-            <small class="me-3" for="">Status: Backlog</small>
+            <small class="me-3" for="">Status: {{dadosDemada.statusDemanda}}</small>
             <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>
@@ -22,14 +22,14 @@
                 </button>
               </mat-menu>
         </div>
-        <p class="card-text">PPM</p>
-        <p class="card-text"><b>Autor: </b>Vinícius Bonatti Benner</p>
+        <p class="card-text">{{dadosDemada.ppmDemanda}}</p>
+        <p class="card-text"><b>Autor: </b>{{dadosDemada.autorDemanda}}</p>
         <p class="card-text bottom-card">
             <label class=" me-2">
                 <b>
                     Departamento:
                 </b>
-                TI
+                {{dadosDemada.departamentoBenDemanda}}
             </label><button *ngIf="!isPauta" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Classificar Demanda</button>
             <i *ngIf="isPauta" class="bi bi-trash-fill"></i>
         </p>

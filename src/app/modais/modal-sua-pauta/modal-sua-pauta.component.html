@@ -1,6 +1,6 @@
 <div class="bloco container position-relative">
-    
-    <i class="bi bi-x icon-right"></i>
+
+  <i class="bi bi-x icon-right" role="button" (click)="dialogRef.close();"></i>
     <div class="row mb-2">
         <div>
             <h4 class="text-center">
@@ -16,11 +16,11 @@
             </h6>
             <hr>
             <div class="lista-demandas">
-                <app-card-demanda></app-card-demanda>
-                <app-card-demanda></app-card-demanda>
-                <app-card-demanda></app-card-demanda>
-                <app-card-demanda></app-card-demanda>
-                <app-card-demanda></app-card-demanda>
+                <app-card-demanda class="mb-2"></app-card-demanda>
+                <app-card-demanda class="mb-2"></app-card-demanda>
+                <app-card-demanda class="mb-2"></app-card-demanda>
+                <app-card-demanda class="mb-2"></app-card-demanda>
+                <app-card-demanda class="mb-2"></app-card-demanda>
             </div>
         </div>
         <div class="d-flex flex-column justify-content-between col border-left">

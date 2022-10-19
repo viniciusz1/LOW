@@ -16,6 +16,8 @@ import { ReunioesModule } from './reunioes/reunioes.module';
     LoginModule,
     PerfilModule,
     ReunioesModule
+  ],
+  providers: [
   ]
 })
 export class TelasModule { }

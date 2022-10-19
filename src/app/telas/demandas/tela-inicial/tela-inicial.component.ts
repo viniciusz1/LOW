@@ -1,9 +1,11 @@
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
 import { Component, OnInit } from '@angular/core';
-import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
+import {Dialog } from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
 import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua-pauta.component';
+import { Demanda } from 'src/app/models/demanda.model';
+import { DemandaService } from 'src/app/services/demanda.service';
 
 
 @Component({
@@ -13,14 +15,16 @@ import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua
 })
 export class TelaInicialComponent implements OnInit {
 
-  constructor(public dialog: Dialog) { }
+  constructor(public dialog: Dialog,
+    private demandasService: DemandaService
+    ) { }
 
   position_list_cards = 0
   tipo_exibicao_demanda = true
   isCollapsed = true;
   isFiltrado = true;
   showSidebar = -25;
-
+  listaDemandas: Demanda[] = []
 
   moveSidebar(){
     if(this.showSidebar == 0){
@@ -71,7 +75,13 @@ export class TelaInicialComponent implements OnInit {
     this.position_list_cards += 700
   }
   ngOnInit(): void {
-    this.openModalSuaPauta()
+    this.demandasService.getDemandas()
+    .subscribe({next: (list) => {
+      this.listaDemandas = list
+    },
+    error: (err) => {
+      console.log(err)
+    }})
   }
 
 }

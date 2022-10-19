@@ -20,7 +20,7 @@ export class TelaInicialComponent implements OnInit {
     ) { }
 
   position_list_cards = 0
-  tipo_exibicao_demanda = true
+  tipo_exibicao_demanda = false
   isCollapsed = true;
   isFiltrado = true;
   showSidebar = -25;
@@ -71,9 +71,11 @@ export class TelaInicialComponent implements OnInit {
   change_to_card(){
     this.tipo_exibicao_demanda = true
   }
+
   change_left() {
     this.position_list_cards += 700
   }
+
   ngOnInit(): void {
     this.demandasService.getDemandas()
     .subscribe({next: (list) => {

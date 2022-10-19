@@ -2,11 +2,19 @@
     
 .container-lista{
     display: inline-flex;
-    column-gap: 10px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     text-align: center;
     padding:7px;
     border: 1px solid #000000;
     border-left: 7px solid $primary;
+}
+li{
+    display: inline-flex;
+    margin-left: 10px;
+}
+
+.final-list{
+    align-items: center;
+    justify-content: end;
 }

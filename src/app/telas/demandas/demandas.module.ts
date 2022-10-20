@@ -1,3 +1,4 @@
+import { AngularMaterialModule } from './../../angular-material/angular-material.module';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -26,7 +27,8 @@ import { DemandaService } from 'src/app/services/demanda.service';
     NgbModule,
     RouterModule,
     DialogModule,
-    ModaisModule
+    ModaisModule,
+    AngularMaterialModule
   ],
 })
 export class DemandasModule { }

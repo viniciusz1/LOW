@@ -1,6 +1,6 @@
 select{
     height: 5vh;
-    width: 4vw;
+    width: 4.5vw;
     background-color: #00579D;
     color: #ffffff;
     margin: 5px;
@@ -9,6 +9,7 @@ select{
     padding: 5px;
     font-weight: 600;
     font-size: 11px;
+    outline: none !important;
 }
 
 input{
@@ -22,14 +23,4 @@ input{
 label{
     font-size: 13px;
     margin: 5px;
-}
-
-button{
-    border: transparent;
-    width: 9vw;
-    height: 4vh;
-    color: #ffffff;
-    font-weight: 500;
-    border-radius: 5px;
-    margin-top: 1.5vh;
 }

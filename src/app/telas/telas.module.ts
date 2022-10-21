@@ -1,3 +1,4 @@
+import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,6 +17,8 @@ import { ReunioesModule } from './reunioes/reunioes.module';
     LoginModule,
     PerfilModule,
     ReunioesModule
+  ],
+  providers: [
   ]
 })
 export class TelasModule { }

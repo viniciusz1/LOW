@@ -71,6 +71,7 @@ import { MatTableModule } from '@angular/material/table';
     MatBadgeModule,
     MatChipsModule,
     MatIconModule,
+    MatRippleModule,
     MatProgressSpinnerModule]})
     
 export class AngularMaterialModule { }

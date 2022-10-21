@@ -1,19 +1,37 @@
-<div>
-
-    <div class="centralizar">
-        <div class="Topo" style="width: 500px; background-color: #EF8300;"></div>
-        <div class="Topo" style="width: 200px; background-color: #F9C48B; border-left: 0px;"></div>
-    </div>
-    <div class="centro">
-        <div class="desc">
-            <div class="centralizar">
-                <h6 style="margin-right: 20px;">ID</h6>
-                <h6>Dia da Comissão: Data</h6>
-            </div>
+<div class="card low-shadow position-relative" style="width: 80vw">
+    <div class="line-top-start"></div>
+    <div class="line-top-end"></div>
+    <div class="card-body pb-1">
+        <div class="mt-2 card-title d-flex" style="align-items: baseline;
+    justify-content: space-between;">
+          <div class="d-flex">
+            <label class="me-2" for="">001</label>
+            <label class="me-2 text-truncate" for="titulo"><b>Dia da comissão: 22/10/2022</b></label>
+          </div>
+            <small class="me-3" for="">Status: Próximo</small>
+            <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <span>Histórico</span>
+                </button>
+                <button mat-menu-item disabled>
+                  <span>Ver demanda</span>
+                </button>
+                <button mat-menu-item>
+                  <span>Iniciar conversa</span>
+                </button>
+              </mat-menu>
         </div>
-        <div class="status">
-
-        </div>
+        <p class="card-text">Comissão: çflasdjfças</p>
+        <p class="card-text"><b>Propostas adicionadas: </b> 9</p>
+        <p class="card-text bottom-card">
+            <label class=" me-2">
+                <b>
+                    Departamentos Beneficiados:
+                </b>
+                Vendas, Motores, Trefiliação
+            </label>
+            <!-- <button  class="btn btn-primary btn-sm">Classificar Demanda</button> -->
+        </p>
     </div>
-
 </div>

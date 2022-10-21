@@ -1,3 +1,5 @@
+import { TelaEtapaCincoComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-cinco/tela-etapa-cinco.component';
+import { TelaVerPauta } from './telas/reunioes/tela-ver-pauta/tela-ver-pauta.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -73,6 +75,14 @@ import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-dem
           {
             path: 'dataComissao',
             component: TelaDataComissaoComponent
+          },
+          {
+            path: 'ver-pauta',
+            component: TelaVerPauta
+          },
+          {
+            path: 'proposta/5',
+            component: TelaEtapaCincoComponent
           },
         ]
       }

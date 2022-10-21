@@ -9,6 +9,7 @@ import { ModalFiltroDemandasComponent } from './modal-filtro-demandas/modal-filt
 import { ModalDemandaDocumentoComponent } from './modal-demanda-documento/modal-demanda-documento.component';
 import { ModalMotivoDevolucaoComponent } from './modal-motivo-devolucao/modal-motivo-devolucao.component';
 import {MatSelectModule} from '@angular/material/select';
+import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/componentes-reutilizaveis.module';
 
 
 
@@ -24,7 +25,8 @@ import {MatSelectModule} from '@angular/material/select';
   ],
   imports: [
     CommonModule,
-    MatSelectModule
+    MatSelectModule,
+    ComponentesReutilizaveisModule
   ]
 })
 export class ModaisModule { }

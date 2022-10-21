@@ -1,8 +1,12 @@
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
 import { Component, OnInit } from '@angular/core';
-import {Dialog, DIALOG_DATA} from '@angular/cdk/dialog';
+import {Dialog } from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
+import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua-pauta.component';
+import { Demanda } from 'src/app/models/demanda.model';
+import { DemandaService } from 'src/app/services/demanda.service';
+import { Sort } from '@angular/material/sort';
 
 
 @Component({
@@ -12,14 +16,16 @@ import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devol
 })
 export class TelaInicialComponent implements OnInit {
 
-  constructor(public dialog: Dialog) { }
+  constructor(public dialog: Dialog,
+    private demandasService: DemandaService
+    ) { }
 
   position_list_cards = 0
-  tipo_exibicao_demanda = true
+  tipo_exibicao_demanda = false
   isCollapsed = true;
   isFiltrado = true;
   showSidebar = -25;
-
+  listaDemandas: Demanda[] = []
 
   moveSidebar(){
     if(this.showSidebar == 0){
@@ -27,6 +33,10 @@ export class TelaInicialComponent implements OnInit {
     }else{
       this.showSidebar = 0
     }
+  }
+
+  sortData(sort: Event) {
+    console.log(sort)
   }
 
   openModalFiltroDemandas(){
@@ -46,6 +56,12 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  openModalSuaPauta(){
+    this.dialog.open(ModalSuaPautaComponent, {
+      minWidth: '300px',
+    });
+  }
+
   change_right(){
     this.position_list_cards -= 700
   }
@@ -60,10 +76,19 @@ export class TelaInicialComponent implements OnInit {
   change_to_card(){
     this.tipo_exibicao_demanda = true
   }
+
   change_left() {
     this.position_list_cards += 700
   }
+
   ngOnInit(): void {
+    this.demandasService.getDemandas()
+    .subscribe({next: (list) => {
+      this.listaDemandas = list
+    },
+    error: (err) => {
+      console.log(err)
+    }})
   }
 
 }

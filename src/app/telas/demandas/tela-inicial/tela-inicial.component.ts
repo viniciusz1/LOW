@@ -20,8 +20,8 @@ export class TelaInicialComponent implements OnInit {
     private demandasService: DemandaService
     ) { }
 
-  position_list_cards = 0
-  tipo_exibicao_demanda = false
+  position_list_cards = 0;
+  tipo_exibicao_demanda = false;
   isCollapsed = true;
   isFiltrado = true;
   showSidebar = -25;
@@ -35,7 +35,7 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
-  sortData(sort: Event) {
+  sortData(sort: Sort) {
     console.log(sort)
   }
 

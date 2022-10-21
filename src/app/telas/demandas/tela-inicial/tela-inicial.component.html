@@ -77,12 +77,12 @@
         </div>
         <div *ngIf="isFiltrado">
             <div class="container d-flex flex-column align-items-center">
-                <div matSort fdsafsdafas (matSortChange)="sortData($event)">
-                    <label mat-sort-header="id" for="id">ID</label>
-                    <label mat-sort-header="titulo" for="id">Título</label>
-                    <label mat-sort-header="status" for="id">Status</label>
-                    <label mat-sort-header="autor" for="id">Autor</label>
-                    <label mat-sort-header="departamento" for="id">Departamento</label>
+                <div matSort class="w-100 px-4" (matSortChange)="sortData($event)">
+                    <label style="width: 35px; margin-left: 20px;" mat-sort-header="id" for="id">ID</label>
+                    <label style="width: 150px; margin-left: 10px;" mat-sort-header="titulo" for="id">Título</label>
+                    <label style="width: 100px; margin-left: 10px;" mat-sort-header="status" for="id">Status</label>
+                    <label style="width: 240px; margin-left: 10px;" mat-sort-header="autor" for="id">Autor</label>
+                    <label style="width: 120px; margin-left: 10px;" mat-sort-header="departamento" for="id">Departamento</label>
                 </div>
                 <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
                 class="mb-2"></app-list-demanda>

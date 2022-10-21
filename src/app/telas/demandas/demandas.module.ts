@@ -12,7 +12,7 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
 import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
 import { DemandaService } from 'src/app/services/demanda.service';
-
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { DemandaService } from 'src/app/services/demanda.service';
     RouterModule,
     DialogModule,
     ModaisModule,
-    AngularMaterialModule
+    MatSortModule
   ],
 })
 export class DemandasModule { }

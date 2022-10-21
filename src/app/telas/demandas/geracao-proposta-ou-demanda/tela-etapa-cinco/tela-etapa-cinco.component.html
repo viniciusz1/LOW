@@ -1,8 +1,19 @@
 <div class="mt-5 container">
-    <form [formGroup]="form">
-        <div class="NgxEditor__Wrapper">
-          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-          <ngx-editor [editor]="editor" formControlName="editorContent"> </ngx-editor>
-        </div>
-      </form>
+  <div class="memoria-calculo-real">
+    <div class="ben-real" style="display: grid">
+      <label style="font-weight: 600;">
+        Escopo da Demanda:
+      </label>
+      <div style="display: flex; ">
+        <div style="border: 3px solid #00579D; margin: 0px "></div>
+        <form [formGroup]="form">
+          <div class="NgxEditor__Wrapper" style="border-left: transparent; border-radius: 0 !important;">
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+            <ngx-editor [editor]="editor" formControlName="editorContent"> </ngx-editor>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </div>

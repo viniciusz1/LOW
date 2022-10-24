@@ -10,7 +10,8 @@ import { ModalDemandaDocumentoComponent } from './modal-demanda-documento/modal-
 import { ModalMotivoDevolucaoComponent } from './modal-motivo-devolucao/modal-motivo-devolucao.component';
 import {MatSelectModule} from '@angular/material/select';
 import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/componentes-reutilizaveis.module';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -21,12 +22,17 @@ import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/com
     ModalParecerComissaoPropostaComponent,
     ModalFiltroDemandasComponent,
     ModalDemandaDocumentoComponent,
-    ModalMotivoDevolucaoComponent
+    ModalMotivoDevolucaoComponent,
   ],
   imports: [
     CommonModule,
     MatSelectModule,
-    ComponentesReutilizaveisModule
+    ComponentesReutilizaveisModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
+  exports: [
+    ModalDemandaDocumentoComponent
   ]
 })
 export class ModaisModule { }

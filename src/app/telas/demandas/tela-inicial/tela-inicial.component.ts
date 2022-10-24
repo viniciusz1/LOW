@@ -1,13 +1,13 @@
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
 import { Component, OnInit } from '@angular/core';
-import {Dialog } from '@angular/cdk/dialog';
+import { Dialog } from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
 import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua-pauta.component';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { Sort } from '@angular/material/sort';
-
+import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -17,6 +17,7 @@ import { Sort } from '@angular/material/sort';
 export class TelaInicialComponent implements OnInit {
 
   constructor(public dialog: Dialog,
+    private matDialog: MatDialog,
     private demandasService: DemandaService
     ) { }
 
@@ -37,6 +38,12 @@ export class TelaInicialComponent implements OnInit {
 
   sortData(sort: Event) {
     console.log(sort)
+  }
+
+  openModalDemandaDocumento() {
+    this.matDialog.open(ModalDemandaDocumentoComponent, {
+      maxWidth: '70vw',
+    });
   }
 
   openModalFiltroDemandas(){
@@ -82,6 +89,8 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.openModalDemandaDocumento()
+    // this.openModalFiltroDemandas()
     this.demandasService.getDemandas()
     .subscribe({next: (list) => {
       this.listaDemandas = list

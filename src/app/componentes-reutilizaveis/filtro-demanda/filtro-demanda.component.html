@@ -1,31 +1,38 @@
-<div class="low-shadow" style=" border: 1px solid rgb(77, 76, 76); padding: 8px; background: white;">
+<div class="low-shadow" style=" border: 1px solid rgb(77, 76, 76); padding: 15px; background: white;">
     <div class="line">
         <div class="bloco">
-            <div class="d-flex flex-column margin">
-                <div class="d-flex">
-                    <div class="d-flex flex-column">
-                        <label for=" Número da solicitação:">
-                            Número da solicitação:
-                        </label>
-                        <input type="text">
+            <div class="d-flex flex-column">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <div class="d-flex flex-column">
+                            <label for=" Número da solicitação:">
+                                Número da solicitação:
+                            </label>
+                            <input type="text">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="Responsável:">
+                                Responsável:
+                            </label>
+                            <input type="text">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for="Tamanho da demanda:">
+                                Tamanho da demanda:
+                            </label>
+                            <input type="text">
+                        </div>
+                        <div class="d-flex flex-column">
+                            <label for=" Fórum de aprovação:">
+                                Fórum de aprovação:
+                            </label>
+                            <input type="text">
+                        </div>
                     </div>
-                    <div class="d-flex flex-column">
-                        <label for="Responsável:">
-                            Responsável:
-                        </label>
-                        <input type="text">
-                    </div>
-                    <div class="d-flex flex-column">
-                        <label for="Tamanho da demanda:">
-                            Tamanho da demanda:
-                        </label>
-                        <input type="text">
-                    </div>
-                    <div class="d-flex flex-column">
-                        <label for=" Fórum de aprovação:">
-                            Fórum de aprovação:
-                        </label>
-                        <input type="text">
+                    <div>
+                        <i type="button" class="bi bi-chevron-down" (click)="closeFiltro.emit()"
+                            aria-controls="collapseExample">
+                        </i>
                     </div>
                 </div>
                 <div class="d-flex">

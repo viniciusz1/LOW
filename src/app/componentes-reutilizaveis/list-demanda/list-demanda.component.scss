@@ -1,5 +1,13 @@
 @import '../../../styles.scss';
     
+
+.linha{
+    height: 100%;
+    width: 10px;
+    position: absolute;
+    left: 0;
+}
+
 .container-lista{
     display: inline-flex;
     align-items: center;
@@ -7,7 +15,6 @@
     text-align: center;
     padding:7px;
     border: 1px solid #000000;
-    border-left: 7px solid $primary;
     font-size: 15px;
 }
 li{

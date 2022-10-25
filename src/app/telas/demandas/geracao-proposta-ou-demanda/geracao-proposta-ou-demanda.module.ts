@@ -1,3 +1,4 @@
+import { RotasModule } from './../../../rotas.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,6 +22,7 @@ import { NgxEditorModule } from 'ngx-editor';
   ],
   imports: [
     CommonModule,
+    RotasModule,
     NgxEditorModule.forRoot({
       locals: {
         bold: 'Bold',

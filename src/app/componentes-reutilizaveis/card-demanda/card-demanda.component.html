@@ -1,6 +1,7 @@
-<div class="card low-shadow position-relative" style="width: {{mudarTamanho}}">
-    <div class="line-top-start"></div>
-    <div class="line-top-end"></div>
+<div class="card low-shadow position-relative" style="font-size: 14px; width: {{mudarTamanho}};">
+
+    <div class="line-top-start" [ngClass]="primaryColorClass"></div>
+    <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
     <div class="card-body pb-1">
         <div class="mt-2 card-title d-flex" style="align-items: baseline;
     justify-content: space-between;">
@@ -11,13 +12,13 @@
             <small class="me-3" for="">Status: {{dadosDemada.statusDemanda}}</small>
             <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
                   <span>Histórico</span>
                 </button>
-                <button mat-menu-item disabled>
+                <button (click)="verDocumentoProposta.emit()" mat-menu-item>
                   <span>Ver demanda</span>
                 </button>
-                <button mat-menu-item>
+                <button routerLink="/tela-inicial/chat" mat-menu-item>
                   <span>Iniciar conversa</span>
                 </button>
               </mat-menu>
@@ -27,7 +28,7 @@
         <p class="card-text bottom-card">
             <label class=" me-2">
                 <b>
-                    Departamento:
+                    Dep:
                 </b>
                 {{dadosDemada.departamentoBenDemanda}}
             </label><button *ngIf="!isPauta" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Classificar Demanda</button>

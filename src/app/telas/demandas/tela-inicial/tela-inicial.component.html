@@ -16,7 +16,8 @@
                     Filtrar Mais
                 </button>
             </div>
-            <app-filtro-demanda *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3"></app-filtro-demanda>
+            <app-filtro-demanda *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
+            </app-filtro-demanda>
         </ul>
     </nav>
     <!-- sidebar -->
@@ -34,74 +35,79 @@
     <div *ngIf="!tipo_exibicao_demanda">
 
         <div class="m-5" *ngIf="!isFiltrado">
-            <div class="low-shadow" style="border: 1px solid #747474;">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 style="text-decoration-line: underline;" class="my-3 ms-4">STATUS: Backlog - Classificação</h5>
-                    <i type="button" class="bi bi-chevron-down me-4" (click)="collapse.toggle()"
-                        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample"
-                        [ngClass]="!isCollapsed ? 'inverte': 'naoinverte'">
-                    </i>
-                </div>
+            <div>
                 <div class=" d-flex justify-content-center align-items-center flex-column my-4"
                     style="margin-left:auto; margin-right:auto">
-                    <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda" 
-                    class="mb-2"></app-list-demanda>
+                    <app-list-demanda *ngFor="let demanda of listaDemandas| slice:0:4" [dadosDemada]="demanda" class="mb-2">
+                    </app-list-demanda>
+                    
+
                     <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
                         <div class="d-flex justify-content-center align-items-center flex-column ">
-                            <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda" 
-                            class="mb-2"></app-list-demanda>
+                            <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
+                                class="mb-2"></app-list-demanda>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div *ngIf="isFiltrado">
-            <div class="container d-flex flex-column align-items-center">
-                <div matSort (matSortChange)="sortData($event)">
-                    <label mat-sort-header="id" for="id">ID</label>
-                    <label mat-sort-header="titulo" for="id">Título</label>
-                    <label mat-sort-header="status" for="id">Status</label>
-                    <label mat-sort-header="autor" for="id">Autor</label>
-                    <label mat-sort-header="departamento" for="id">Departamento</label>
-                </div>
-                <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
-                class="mb-2"></app-list-demanda>
-            </div>
-        </div>
-    </div>
-
-    <div class="d-flex" *ngIf="tipo_exibicao_demanda">
-        <div class="bloco-branco"></div>
-        <div class="tamanho-container" *ngIf="!isFiltrado">
-            <div class="my-4">
-                <div class="ms-3 title-demanda" for="status">
-                    <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>
-                    <div class="me-3" style="align-self: flex-end; cursor: pointer;">Ver mais</div>
-                </div>
-                <div class="d-flex position-relative" style="width: 100%;">
-                    <div [style.left.px]="position_list_cards"
-                        class="div-cards d-flex position-relative transition-cards">
-                        <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
-                        (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
+                    <!-- Bloco para expandir -->
+                    <div type="button" (click)="collapse.toggle()"
+                        class="d-flex justify-content-center align-items-center"
+                        style="border: 1px solid black; width: 55%; height: 50px">
+                        <i class="bi bi-chevron-down" [attr.aria-expanded]="!isCollapsed"
+                            aria-controls="collapseExample" [ngClass]="!isCollapsed ? 'inverte': 'naoinverte'">
+                        </i>
                     </div>
-                    <div class="left-arrow alinhacao" (click)="change_left()"><i style="font-size: 25px;"
-                            class="bi bi-chevron-left"></i></div>
-                    <div class="right-arrow alinhacao" (click)="change_right()"><i style="font-size: 25px;"
-                            class="bi bi-chevron-right"></i></div>
+
+
+                </div>
+            </div>
+
+            <div *ngIf="isFiltrado">
+                <div class="container d-flex flex-column align-items-center">
+                    <div matSort (matSortChange)="sortData($event)">
+                        <label mat-sort-header="id" for="id">ID</label>
+                        <label mat-sort-header="titulo" for="id">Título</label>
+                        <label mat-sort-header="status" for="id">Status</label>
+                        <label mat-sort-header="autor" for="id">Autor</label>
+                        <label mat-sort-header="departamento" for="id">Departamento</label>
+                    </div>
+                    <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda" class="mb-2">
+                    </app-list-demanda>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex" *ngIf="tipo_exibicao_demanda">
+            <div class="bloco-branco"></div>
+            <div class="tamanho-container" *ngIf="!isFiltrado">
+                <div class="my-4">
+                    <div class="ms-3 title-demanda" for="status">
+                        <h5 style="text-decoration-line: underline;">STATUS: Backlog - Classificação</h5>
+                        <div class="me-3" style="align-self: flex-end; cursor: pointer;">Ver mais</div>
+                    </div>
+                    <div class="d-flex position-relative" style="width: 100%;">
+                        <div [style.left.px]="position_list_cards"
+                            class="div-cards d-flex position-relative transition-cards">
+                            <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
+                                (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
+                        </div>
+                        <div class="left-arrow alinhacao" (click)="change_left()"><i style="font-size: 25px;"
+                                class="bi bi-chevron-left"></i></div>
+                        <div class="right-arrow alinhacao" (click)="change_right()"><i style="font-size: 25px;"
+                                class="bi bi-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="isFiltrado && tipo_exibicao_demanda">
+            <div class="container">
+                <div class="row">
+                    <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
+                        (abrirModal)="openModalMotivoDevolucao()" [mudarTamanho]="'100%'" class="col-sm-6 mb-3">
+                    </app-card-demanda>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <div *ngIf="isFiltrado && tipo_exibicao_demanda">
-        <div class="container">
-            <div class="row">
-                <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
-                (abrirModal)="openModalMotivoDevolucao()"
-                [mudarTamanho]="'100%'" class="col-sm-6 mb-3"></app-card-demanda>
-            </div>
-        </div>
-    </div>
-</div>

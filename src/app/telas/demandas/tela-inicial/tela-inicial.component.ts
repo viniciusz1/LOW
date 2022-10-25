@@ -103,7 +103,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openModalPropostaDocumento()
+    // this.openModalPropostaDocumento()
     // this.openModalFiltroDemandas()
     this.demandasService.getDemandas()
     .subscribe({next: (list) => {

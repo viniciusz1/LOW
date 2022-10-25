@@ -1,3 +1,4 @@
+import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
@@ -39,6 +40,11 @@ export class TelaInicialComponent implements OnInit {
 
   sortData(sort: Event) {
     console.log(sort)
+  }
+  openModalPropostaDocumento(){
+    this.matDialog.open(ModalPropostaDocumentoComponent, {
+      maxWidth: '70vw',
+    });
   }
 
   openModalDemandaDocumento() {
@@ -96,7 +102,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openModalAtaDocumento()
+    this.openModalPropostaDocumento()
     // this.openModalFiltroDemandas()
     this.demandasService.getDemandas()
     .subscribe({next: (list) => {

@@ -11,6 +11,7 @@ import { Demanda } from 'src/app/models/demanda.model';
 })
 export class CardDemandaComponent implements OnInit {
   @Output() abrirModal = new EventEmitter();
+  @Output() verDocumentoProposta = new EventEmitter()
   @Input() mudarTamanho: string = "350px"
   @Input() isPauta: boolean = false;
   @Input() dadosDemada: Demanda = {}

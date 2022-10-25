@@ -73,7 +73,7 @@ import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-dem
 
           },
           {
-            path: 'dataComissao',
+            path: 'data-comissao',
             component: TelaDataComissaoComponent
           },
           {

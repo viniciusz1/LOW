@@ -12,13 +12,13 @@
             <small class="me-3" for="">Status: {{dadosDemada.statusDemanda}}</small>
             <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
                   <span>Histórico</span>
                 </button>
-                <button mat-menu-item disabled>
+                <button (click)="verDocumentoProposta.emit()" mat-menu-item>
                   <span>Ver demanda</span>
                 </button>
-                <button mat-menu-item>
+                <button routerLink="/tela-inicial/chat" mat-menu-item>
                   <span>Iniciar conversa</span>
                 </button>
               </mat-menu>

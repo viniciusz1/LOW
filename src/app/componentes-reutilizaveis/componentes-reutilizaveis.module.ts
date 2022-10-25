@@ -1,3 +1,4 @@
+import { RotasModule } from './../rotas.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,7 +28,8 @@ import { FiltroDemandaComponent } from './filtro-demanda/filtro-demanda.componen
     NgbModule,
     RouterModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    RotasModule
   ],
   exports:[
     CardDemandaComponent,

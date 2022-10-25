@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Output, Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { Demanda } from 'src/app/models/demanda.model';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 
@@ -9,6 +9,7 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 })
 export class ListDemandaComponent implements OnInit {
   primaryColorClass: string = "";
+  @Output() verDocumentoProposta = new EventEmitter()
   @Input() dadosDemada: Demanda = {}
   constructor() { }
 

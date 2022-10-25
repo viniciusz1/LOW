@@ -102,8 +102,12 @@
                 <div class="d-flex position-relative" style="width: 100%;">
                     <div [style.left.px]="position_list_cards"
                         class="div-cards d-flex position-relative transition-cards">
-                        <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
-                            (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
+                        <app-card-demanda 
+                        *ngFor="let demanda of listaDemandas" 
+                        [dadosDemada]="demanda"
+                        (verDocumentoProposta)="openModalDemandaDocumento()"
+                        (abrirModal)="openModalMotivoDevolucao()"
+                        ></app-card-demanda>
                     </div>
                     <div class="left-arrow alinhacao" (click)="change_left()"><i style="font-size: 25px;"
                             class="bi bi-chevron-left"></i></div>

@@ -1,3 +1,4 @@
+import { AngularMaterialModule } from './../../angular-material/angular-material.module';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -11,7 +12,7 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
 import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
 import { DemandaService } from 'src/app/services/demanda.service';
-
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DemandaService } from 'src/app/services/demanda.service';
     NgbModule,
     RouterModule,
     DialogModule,
-    ModaisModule
+    ModaisModule,
+    MatSortModule
   ],
 })
 export class DemandasModule { }

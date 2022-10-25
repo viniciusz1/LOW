@@ -9,11 +9,11 @@
 <div class="memoria-calculo-real">
     <div class="ben-real" style="display: grid">
         <label style="font-weight: 600;">
-            Memória de Cálculo do Benefício Real:
+            Frequência de Uso do Sistema:
         </label>
         <div style="display: flex; ">
             <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-           <input style="width: 61vw;">            
+           <input class="entrada" style="width: 61vw; height: 10vh;">            
         </div>
     </div>
 </div>
@@ -21,27 +21,27 @@
     <div class="ben-real" style="display: grid">
         <div>
             <label style="font-weight: 600;">
-                Memória de Cálculo do Benefício Real:
+                Anexar Documento:
             </label>
-            <button>Escolher Arquivo</button>
+            <input id="file" name="file" type="file" class="file_customizada" style="font-size: 12px;" />
         </div>
         <div style="display: flex; ">
             <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-           <input style="width: 61vw; height: 14vh;">            
+           <input class="entrada" style="width: 61vw; height: 45vh;" placeholder="NENHUM DOCUMENTO ANEXADO">            
         </div>
     </div>
 </div>
 <div class="botoes" style="display: flex; align-items: center; justify-content: space-between; margin-top: 1vh;">
     <div class="voltar-sair" style="display: flex; column-gap: 1vw;">
         <div class="voltar">
-            <button style="background-color: #DE4343;">Voltar</button>
+            <button  class="btn btn-danger me-3">Voltar</button>
         </div>
         <div class="sair">
-            <button style="background-color: #00579D;">Sair e Salvar</button>
+            <button class="btn btn-outline-primary">Sair e Salvar</button>
         </div>
     </div>
     <div class="proximo">
-        <button style="background-color: #00579D;">Próximo</button>
+        <button class="btn btn-primary">Próximo</button>
     </div>
 </div>
 </div>

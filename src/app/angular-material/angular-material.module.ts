@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -30,22 +30,13 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
-// Material Popups & Modals
-import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
-// Material Data tables
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    MatSortModule,
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -71,6 +62,9 @@ import { MatTableModule } from '@angular/material/table';
     MatBadgeModule,
     MatChipsModule,
     MatIconModule,
-    MatProgressSpinnerModule]})
-    
+    MatRippleModule,
+    MatProgressSpinnerModule
+   ]
+})
+
 export class AngularMaterialModule { }

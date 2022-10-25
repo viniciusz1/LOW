@@ -10,6 +10,7 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import {MatDialog} from '@angular/material/dialog';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-tela-inicial',

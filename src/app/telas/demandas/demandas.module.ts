@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { AngularMaterialModule } from './../../angular-material/angular-material.module';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,6 +26,7 @@ import {MatSortModule} from '@angular/material/sort';
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
     NgbModule,
+    MatButtonModule,
     RouterModule,
     DialogModule,
     ModaisModule,

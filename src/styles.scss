@@ -9,29 +9,53 @@ p{
 a{
     color: white;
 }
-.color-backlog{
+.backlog{
     background-color: #00579D;
 }
-.color-assessment{
+.backlog-sec{
+    background-color: #4889B8;
+}
+.assessment{
     background-color: #8862A2;
 }
-.color-bussines-case{
+.assessment-sec{
+    background-color: #C2B0D2;
+}
+.bussines-case{
     background-color: #FFDD43;
 }
-.color-to-do{
+.bussines-case-sec{
+    background-color: #FFEAA0;
+}
+.to-do{
     background-color: #EF8300;
 }
-.color-design-and-build{
+.to-do-sec{
+    background-color: #F9C48B;
+}
+.design-and-build{
     background-color: #000000;
 }
-.color-support{
+.design-and-build-sec{
+    background-color: #515151;
+}
+.support{
     background-color: #0091BD;
 }
-.color-cancelled{
+.support-sec{
+    background-color: #28B9DA;
+}
+.cancelled{
     background-color: #EA1010;
 }
-.color-done{
+.cancelled-sec{
+    background-color: #FF7171;
+}
+.done{
     background-color: #00612E;
+}
+.done-sec{
+    background-color: #82A584;
 }
 
 .low-shadow{
@@ -55,6 +79,8 @@ a{
 
 .btn{
     border-radius: 5px !important;
+    box-shadow: 5px 6px 6px -6px black !important;
+    
 }
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "~bootstrap-icons/font/bootstrap-icons.css";

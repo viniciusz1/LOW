@@ -1,10 +1,12 @@
 @import '../../../styles.scss';
+@import '../../../themes.scss';
+
+
 .line-top-start{
     width: 80%;
     position:absolute;
     top: 0;
     left: 0;
-    background-color: $primary;
     height: 10px;
 }
 .three-dots{
@@ -17,7 +19,6 @@
     position:absolute;
     top: 0;
     right: 0;
-    background-color: $primarysec;
     height: 10px;
 }
 .bottom-card{

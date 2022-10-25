@@ -26,7 +26,8 @@ export class TelaInicialComponent implements OnInit {
   position_list_cards = 0
   tipo_exibicao_demanda = false
   isCollapsed = true;
-  isFiltrado = true;
+  isFiltrado = false;
+  showFiltro = false;
   showSidebar = -25;
   listaDemandas: Demanda[] = []
 

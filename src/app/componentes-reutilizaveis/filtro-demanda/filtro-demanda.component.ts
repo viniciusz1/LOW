@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { outputAst } from '@angular/compiler';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-filtro-demanda',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filtro-demanda.component.scss']
 })
 export class FiltroDemandaComponent implements OnInit {
-
+  @Output() closeFiltro = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {

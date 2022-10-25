@@ -1,58 +1,38 @@
 <div>
-    <nav class="nav container justify-content-between my-4">
-        <div class="d-flex justify-content-around" style="width: 100%;">
-            <div class="">
-                <div class="low-shadow rounded mb-2">
-                    <button class="btn btn-primary w-100" routerLink="/tela-inicial/proposta/1">
-                        + Criar Demanda
-                    </button>
-                </div>
-                <div class="low-shadow rounded mb-2">
-                    <button (click)="change_exibicao()" class="btn btn-primary w-50">
-                        Exibição
-                    </button>
-                    <button (click)="isFiltrado = !isFiltrado" class="btn btn-primary w-50">
-                        outra
-                    </button>
-                    <button (click)="openModalSuaPauta()" class="btn btn-primary w-50">
-                        pauta
-                    </button>
-                </div>
-                <div class="rounded low-shadow mb-2" *ngIf="isFiltrado">
-                    <div ngbDropdown class="d-inline-block w-100">
-                        <button type="button" class="btn btn-primary w-100" id="dropdown" ngbDropdownToggle>Ordenar </button>
-                        <div ngbDropdownMenu aria-labelledby="dropdown">
-                            <button ngbDropdownItem>Maior Score</button>
-                            <button ngbDropdownItem>Mais recente</button>
-                            <button ngbDropdownItem>Menor recente</button>
-                        </div>
-                    </div>
-                </div>
+    <nav class="nav my-4 justify-content-between">
+        <div>
+            <div class="low-shadow ms-5 rounded">
+                <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
+                    + Criar Demanda
+                </button>
             </div>
-                <!-- <div class="low-shadow me-3 rounded">
-                <button class="btn btn-primary" *ngIf="isFiltrado">Exportar Resultados</button>
-            </div>
-            <div class="div-input me-3 low-shadow">
+        </div>
+        <ul class="nav justify-content-center">
+            <div *ngIf="!showFiltro" class="div-input me-3 low-shadow">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
-            <button class="btn btn-primary me-3" (click)="isFiltrado = !isFiltrado">Dif. Exibicao</button>
-            <div class="low-shadow me-3 rounded">
-                <button class="btn btn-primary" (click)="openModalFiltroDemandas()">
+            <div *ngIf="!showFiltro" class="low-shadow me-3 rounded">
+                <button (click)="showFiltro = !showFiltro" class="btn btn-primary">
                     Filtrar Mais
                 </button>
-            </div> -->
-            <div>
-                <app-filtro-demanda></app-filtro-demanda>
             </div>
-
-
-        </div>
-
-
+            <app-filtro-demanda *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3"></app-filtro-demanda>
+        </ul>
     </nav>
+    <!-- sidebar -->
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
         style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
+    <div class="me-3 d-flex justify-content-end">
+        <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
+            class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
+        <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i
+                class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
+    </div>
+
+
+
     <div *ngIf="!tipo_exibicao_demanda">
+
         <div class="m-5" *ngIf="!isFiltrado">
             <div class="low-shadow" style="border: 1px solid #747474;">
                 <div class="d-flex justify-content-between align-items-center">
@@ -75,6 +55,7 @@
                 </div>
             </div>
         </div>
+
         <div *ngIf="isFiltrado">
             <div class="container d-flex flex-column align-items-center">
                 <div matSort (matSortChange)="sortData($event)">
@@ -91,7 +72,7 @@
     </div>
 
     <div class="d-flex" *ngIf="tipo_exibicao_demanda">
-        <!-- <div class="bloco-branco"></div> -->
+        <div class="bloco-branco"></div>
         <div class="tamanho-container" *ngIf="!isFiltrado">
             <div class="my-4">
                 <div class="ms-3 title-demanda" for="status">
@@ -112,6 +93,8 @@
             </div>
         </div>
     </div>
+
+
     <div *ngIf="isFiltrado && tipo_exibicao_demanda">
         <div class="container">
             <div class="row">

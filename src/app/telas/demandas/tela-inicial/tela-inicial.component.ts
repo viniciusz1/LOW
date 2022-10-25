@@ -1,3 +1,4 @@
+import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
 import { Component, OnInit } from '@angular/core';
@@ -46,6 +47,12 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  openModalAtaDocumento(){
+    this.matDialog.open(ModalAtaDocumentoComponent, {
+      maxWidth: '70vw',
+    });
+  }
+
   openModalFiltroDemandas(){
     this.dialog.open(ModalFiltroDemandasComponent, {
       minWidth: '300px',
@@ -89,7 +96,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openModalDemandaDocumento()
+    this.openModalAtaDocumento()
     // this.openModalFiltroDemandas()
     this.demandasService.getDemandas()
     .subscribe({next: (list) => {

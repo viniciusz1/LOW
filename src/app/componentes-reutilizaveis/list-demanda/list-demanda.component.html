@@ -1,4 +1,5 @@
-<ul class="nav container-lista low-shadow " style="min-width: 75vw;">
+<ul class="nav position-relative container-lista low-shadow " style="min-width: 75vw;">
+    <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
     <div class="d-flex">
         <li class="nav-item" style="">
             <label class="" for="">002</label>
@@ -23,16 +24,16 @@
         <li>
             <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <span>Histórico</span>
-              </button>
-              <button mat-menu-item disabled>
-                <span>Ver demanda</span>
-              </button>
-              <button mat-menu-item>
-                <span>Iniciar conversa</span>
-              </button>
-            </mat-menu>
+                <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
+                  <span>Histórico</span>
+                </button>
+                <button (click)="verDocumentoProposta.emit()" mat-menu-item>
+                  <span>Ver demanda</span>
+                </button>
+                <button routerLink="/tela-inicial/chat" mat-menu-item>
+                  <span>Iniciar conversa</span>
+                </button>
+              </mat-menu>
         </li>
     </div>    
 </ul>

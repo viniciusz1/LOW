@@ -1,4 +1,6 @@
 import { AngularMaterialModule } from './../../angular-material/angular-material.module';
+
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,6 +15,8 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { RascunhosComponent } from './rascunhos/rascunhos.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -27,10 +31,12 @@ import { RascunhosComponent } from './rascunhos/rascunhos.component';
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
     NgbModule,
+    MatButtonModule,
     RouterModule,
     DialogModule,
     ModaisModule,
-    AngularMaterialModule
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
 })
 export class DemandasModule { }

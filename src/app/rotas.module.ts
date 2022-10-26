@@ -12,7 +12,7 @@ import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.comp
 import { TelaEtapaUmComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-um/tela-etapa-um.component';
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
 import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-quatro/tela-etapa-quatro.component';
-import { TelaDataComissaoComponent } from './telas/reunioes/tela-dataComissao/tela-dataComissao.component';
+
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
 import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
 import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
@@ -74,8 +74,8 @@ import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.compone
 
           },
           {
-            path: 'dataComissao',
-            component: TelaDataComissaoComponent
+            path: 'data-comissao',
+            component: TelaReuniaoComponent
           },
           {
             path: 'ver-pauta',

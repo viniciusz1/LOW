@@ -1,8 +1,8 @@
 <div class="container">
-    <table class="table mt-5 table-bordered">
+    <table class="table mt-5 table-bordered border-dark" style="border-left: 10px #00579D solid !important;" >
         <thead>
             <tr>
-                <th scope="col">Recurso necessário </th>
+                <th scope="col"> <span> Recurso necessário</span> </th>
                 <th scope="col">Tipo da despesa</th>
                 <th scope="col">Perfil da despesa</th>
                 <th scope="col">Quantidade de horas</th>
@@ -17,9 +17,9 @@
             <tr>
                 <td><input type="text" class=""></td>
                 <td><select>
-                    <option value="0" selected>Interna</option>
-                    <option value="1">Externa</option>
-                </select></td>
+                        <option value="0" selected>Interna</option>
+                        <option value="1">Externa</option>
+                    </select></td>
                 <td><input type="text" class=""></td>
                 <td><input type="text" class=""></td>
                 <td><input type="text" class=""></td>
@@ -27,7 +27,7 @@
                 <td><input type="text" class=""></td>
                 <td>
                     <section class="d-flex ">
-                        <input type="text" class="border"><input type="text" class="border">    
+                        <input type="text" class="border"><input type="text" class="border">
                     </section>
                     <select name="" id="" class="border mt-2"></select>
                 </td>
@@ -35,6 +35,13 @@
 
             <tr>
                 <td scope="row"><button class="btn btn-primary btn-sm">Adicionar Recurso</button></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
+                <td scope="row"></td>
             </tr>
 
         </tbody>
@@ -43,9 +50,9 @@
 
     <div class="d-flex justify-content-between " style="margin-top: 0.7rem !important;">
         <div>
-            <button class="btn btn-danger me-3">Cancelar</button>
+            <button routerLink="/tela-inicial" class="btn btn-danger me-3">Cancelar</button>
             <button class="btn btn-outline-primary">Sair e Salvar</button>
         </div>
-        <button class="btn btn-primary">Avançar</button>
+        <button routerLink="/tela-inicial/proposta/5" class="btn btn-primary">Avançar</button>
     </div>
 </div>

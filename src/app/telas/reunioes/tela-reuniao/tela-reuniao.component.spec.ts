@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TelaReuniaoComponent } from './tela-reuniao.component';
 
-import { TelaDataComissaoComponent } from './tela-dataComissao.component';
 
 describe('TelaDataComissaoComponent', () => {
-  let component: TelaDataComissaoComponent;
-  let fixture: ComponentFixture<TelaDataComissaoComponent>;
+  let component: TelaReuniaoComponent;
+  let fixture: ComponentFixture<TelaReuniaoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TelaDataComissaoComponent ]
+      declarations: [ TelaReuniaoComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TelaDataComissaoComponent);
+    fixture = TestBed.createComponent(TelaReuniaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

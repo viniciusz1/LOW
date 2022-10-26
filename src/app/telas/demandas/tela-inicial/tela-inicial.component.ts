@@ -19,7 +19,8 @@ import { Sort } from '@angular/material/sort';
 })
 export class TelaInicialComponent implements OnInit {
 
-  constructor(public dialog: Dialog,
+  constructor(
+    public dialog: Dialog,
     private matDialog: MatDialog,
     private demandasService: DemandaService
     ) { }
@@ -27,7 +28,7 @@ export class TelaInicialComponent implements OnInit {
   position_list_cards = 0;
   tipo_exibicao_demanda = true;
   isCollapsed = true;
-  isFiltrado = false;
+  isFiltrado = true;
   showFiltro = false;
   showSidebar = -25;
   listaDemandas: Demanda[] = []
@@ -78,11 +79,7 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalSuaPauta(){
-    this.dialog.open(ModalSuaPautaComponent, {
-      minWidth: '300px',
-    });
-  }
+ 
 
   change_right(){
     this.position_list_cards -= 700

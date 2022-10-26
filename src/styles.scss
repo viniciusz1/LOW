@@ -57,6 +57,9 @@ a{
 .done-sec{
     background-color: #82A584;
 }
+.borda{
+    border:#828282 solid 1px;
+}
 
 .low-shadow{
     box-shadow: 5px 6px 6px -6px black;
@@ -67,6 +70,7 @@ a{
     border: 1px solid black;
     border-left: #00579D 5px solid;
     padding: 5px;
+    font-size: 14px; 
     outline: none;
 }
 .icon{

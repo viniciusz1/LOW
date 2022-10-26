@@ -1,4 +1,4 @@
-@import '../../../../styles.scss';
+@import '../../../../themes.scss';
 .line-top-start{
     width: 80%;
     position:absolute;
@@ -10,6 +10,7 @@
 .form-label{
     margin: 0px;
     margin-top: 10px;
+    font-size: 15px;
 }
 .line-top-end{
     width: 20%;
@@ -19,6 +20,11 @@
     background-color: $primarysec;
     height: 10px;
 }
+h4{
+    font-size: 15px;
+}
 .retangulo-container{
     height: 400px;
+    padding: 10px;
+    font-size: 13px;
 }

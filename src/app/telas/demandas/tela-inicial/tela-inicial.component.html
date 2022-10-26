@@ -1,9 +1,9 @@
-<div>
+<div class="container">
     <nav class="nav my-4 justify-content-between">
 
 
         <div>
-            <div class="low-shadow ms-5 rounded">
+            <div class="low-shadow rounded">
                 <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
                     + Criar Demanda
                 </button>
@@ -14,13 +14,13 @@
         <ul class="nav justify-content-center">
 
             
-            <div *ngIf="!showFiltro" class="div-input me-3 low-shadow">
+            <div *ngIf="!showFiltro" class="div-input low-shadow">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
 
 
             <!-- <button mat-raised-button class="me-3" color="primary">Primary</button> -->
-            <div *ngIf="!showFiltro" class="low-shadow me-3 rounded">
+            <div *ngIf="!showFiltro" class="low-shadow ms-3 rounded">
                 <button (click)="showFiltro = !showFiltro" class="btn btn-primary">
                     Filtrar Mais
                 </button>
@@ -45,8 +45,7 @@
 
 
     <div *ngIf="!tipo_exibicao_demanda">
-
-        <div class="m-5" *ngIf="!isFiltrado">
+        <div class="m-5" *ngIf="isFiltrado == true">
             <div>
                 <div class=" d-flex justify-content-center align-items-center flex-column my-4"
                     style="margin-left:auto; margin-right:auto">
@@ -64,7 +63,7 @@
 
                     <!-- Bloco para expandir -->
 
-                    <div type="button" (click)="collapse.toggle()"
+                    <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
                         class="d-flex low-shadow rounded justify-content-center align-items-center"
                         style="background-color: #00579D; width: 30%; height: 30px">
                         <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed"
@@ -76,7 +75,8 @@
                 </div>
             </div>
 
-            <div *ngIf="isFiltrado">
+            <div *ngIf="!isFiltrado">
+
                 <div class="container d-flex flex-column align-items-center">
                     <div matSort (matSortChange)="sortData($event)">
                         <label mat-sort-header="id" for="id">ID</label>
@@ -128,4 +128,25 @@
             </div>
         </div>
     </div>
+
+    <mat-spinner *ngIf="listaDemandas.length == 0" [diameter]="50" class="circle"></mat-spinner>
+
+    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-5">
+        <nav aria-label="...">
+            <ul class="pagination">
+              <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active" aria-current="page">
+                <span class="page-link">2</span>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+    </div>
+    
 </div>

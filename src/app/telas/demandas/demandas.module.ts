@@ -1,5 +1,6 @@
-import { MatButtonModule } from '@angular/material/button';
 import { AngularMaterialModule } from './../../angular-material/angular-material.module';
+
+import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,8 +13,8 @@ import { GeracaoPropostaOuDemandaModule } from './geracao-proposta-ou-demanda/ge
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
-import { DemandaService } from 'src/app/services/demanda.service';
 import {MatSortModule} from '@angular/material/sort';
+import { MatSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {MatSortModule} from '@angular/material/sort';
     RouterModule,
     DialogModule,
     ModaisModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
 })
 export class DemandasModule { }

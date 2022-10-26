@@ -31,7 +31,7 @@
                     Dep:
                 </b>
                 {{dadosDemada.departamentoBenDemanda}}
-            </label><button *ngIf="!isPauta" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Classificar Demanda</button>
+            </label><button routelink="/tela-inicial/classificar-demanda" *ngIf="!isPauta" class="btn btn-primary btn-sm">Classificar Demanda</button>
             <i *ngIf="isPauta" class="bi bi-trash-fill"></i>
         </p>
     </div>

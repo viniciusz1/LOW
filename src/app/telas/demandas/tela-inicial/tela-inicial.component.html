@@ -45,8 +45,7 @@
 
 
     <div *ngIf="!tipo_exibicao_demanda">
-
-        <div class="m-5" *ngIf="!isFiltrado">
+        <div class="m-5" *ngIf="isFiltrado == true">
             <div>
                 <div class=" d-flex justify-content-center align-items-center flex-column my-4"
                     style="margin-left:auto; margin-right:auto">
@@ -76,7 +75,8 @@
                 </div>
             </div>
 
-            <div *ngIf="isFiltrado">
+            <div *ngIf="!isFiltrado">
+
                 <div class="container d-flex flex-column align-items-center">
                     <div matSort (matSortChange)="sortData($event)">
                         <label mat-sort-header="id" for="id">ID</label>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 
 @Component({
   selector: 'app-tela-classificar-demanda',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaClassificarDemandaComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(
+    private matDialog: MatDialog,
+    ) { }
+  openModalDemandaDocumento() {
+    this.matDialog.open(ModalDemandaDocumentoComponent, {
+      maxWidth: '70vw',
+    });
+  }
   ngOnInit(): void {
   }
 

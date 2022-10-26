@@ -1,9 +1,9 @@
-<div>
+<div class="container">
     <nav class="nav my-4 justify-content-between">
 
 
         <div>
-            <div class="low-shadow ms-5 rounded">
+            <div class="low-shadow rounded">
                 <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
                     + Criar Demanda
                 </button>
@@ -14,13 +14,13 @@
         <ul class="nav justify-content-center">
 
             
-            <div *ngIf="!showFiltro" class="div-input me-3 low-shadow">
+            <div *ngIf="!showFiltro" class="div-input low-shadow">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
 
 
             <!-- <button mat-raised-button class="me-3" color="primary">Primary</button> -->
-            <div *ngIf="!showFiltro" class="low-shadow me-3 rounded">
+            <div *ngIf="!showFiltro" class="low-shadow ms-3 rounded">
                 <button (click)="showFiltro = !showFiltro" class="btn btn-primary">
                     Filtrar Mais
                 </button>
@@ -63,7 +63,7 @@
 
                     <!-- Bloco para expandir -->
 
-                    <div type="button" (click)="collapse.toggle()"
+                    <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
                         class="d-flex low-shadow rounded justify-content-center align-items-center"
                         style="background-color: #00579D; width: 30%; height: 30px">
                         <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed"

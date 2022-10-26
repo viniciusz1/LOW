@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tela-reuniao.component.scss']
 })
 export class TelaReuniaoComponent implements OnInit {
-
+  tipoExibicao = true;
   constructor(
     public dialog: Dialog,
   ) { }

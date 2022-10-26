@@ -1,35 +1,53 @@
 <div style="height: 77vh; width: auto;">
     <div>
-        <div class="centralizar">
-            <div class="header centralizar">
-                <div>
-                    <b>Datas das Comissões</b>
-                    <div class="linha"></div>
-                    <button class="btn btn-primary" (click)="openModalSuaPauta()">
-                        Marcar Reunião
-                        <i class="bi bi-people"></i>
-                    </button>
-                </div>
-                <div>
-                    <div class="nav">
-                        <div class="div-input me-3 pesquisar centralizar">
-                            <i class="bi bi-search px-2 "></i> <input class="input" type="text"
-                                placeholder="Pesquisar Demanda">
+        <div class="container mt-4">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <b>Datas das Comissões</b>
+                        <div class="linha"></div>
+                    </div>
+                    <div>
+                        <div class="nav">
+                            <div class="div-input me-3 pesquisar centralizar">
+                                <i class="bi bi-search px-2 "></i> <input class="input" type="text"
+                                    placeholder="Pesquisar Demanda">
+                            </div>
+                            <button class="btn btn-primary">
+                                Filtrar Mais
+                                <i class="bi bi-chevron-double-down"></i>
+                            </button>
                         </div>
-                        <button class="btn btn-primary">
-                            Filtrar Mais
-                            <i class="bi bi-chevron-double-down"></i>
-                        </button>
                     </div>
                 </div>
-            </div>
+                
+                <button *ngIf="tipoExibicao == true" class="btn btn-primary" (click)="tipoExibicao = !tipoExibicao">
+                    Marcar Reunião
+                    <i class="bi bi-people"></i>
+                </button>
+                <div class="d-flex justify-content-between">
+                    <button *ngIf="tipoExibicao == false" class="btn btn-primary" (click)="openModalSuaPauta()">
+                        Sua Pauta<i class="bi bi-plus-lg"></i>
+                    </button>
+                    <button *ngIf="tipoExibicao == false" class="btn btn-primary">
+                        Adicionar Proposta
+                        <img style="width: 23px;" src="assets/pasta.png" alt="" srcset="">
+                    </button>
+                </div>
         </div>
-        <div class="main centralizar">
-            <div>
+        <div class="container">
+            <div *ngIf="tipoExibicao == true">
                 <app-card-reuniao class="m-1"></app-card-reuniao>
                 <app-card-reuniao class="m-1"></app-card-reuniao>
                 <app-card-reuniao class="m-1"></app-card-reuniao>
                 <app-card-reuniao class="m-1"></app-card-reuniao>
+            </div>
+            <div *ngIf="tipoExibicao == false" class="row m-3">
+                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100'"  class="col-6 mt-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100'"  class="col-6 mt-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100'"  class="col-6 mt-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100'"  class="col-6 mt-3"></app-card-demanda>
+                <app-card-demanda [mudarTamanho]="'100'"  class="col-6 mt-3"></app-card-demanda>
             </div>
         </div>
     </div>

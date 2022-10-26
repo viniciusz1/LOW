@@ -16,7 +16,7 @@ import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-d
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
 import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
 import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
-import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao.component';
+import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.component';
 
 
 @NgModule({
@@ -85,6 +85,10 @@ import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao
             path: 'proposta/5',
             component: TelaEtapaCincoComponent
           },
+          {
+            path: 'rascunhos',
+            component: RascunhosComponent
+          }
         ]
       }
     ])

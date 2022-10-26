@@ -15,6 +15,7 @@ export class CardDemandaComponent implements OnInit {
   @Input() mudarTamanho: string = "350px"
   @Input() isPauta: boolean = false;
   @Input() dadosDemada: Demanda = {}
+  @Input() rascunho: boolean = false;
   primaryColorClass: string = "";
   secondaryColorClass: string = "";
 

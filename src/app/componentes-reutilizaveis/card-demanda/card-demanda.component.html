@@ -8,8 +8,12 @@
             <label class="me-2" for="">002</label>
             <label class="me-2 text-truncate" for="titulo"><b>{{dadosDemada.tituloDemanda}}</b></label>
           </div>
-            <small class="me-3" for="">Status: {{dadosDemada.statusDemanda}}</small>
-            <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
+            <small class="me-3" for="" *ngIf="!rascunho">Status: {{dadosDemada.statusDemanda}}</small>
+            <i class="bi bi-three-dots-vertical three-dots" *ngIf="!rascunho" role="button" [matMenuTriggerFor]="menu"></i>
+            <div *ngIf="rascunho">
+              <i class="bi bi-trash3" role="button" [matMenuTriggerFor]="menu" style="font-size: 25px;"></i>
+              <i class="bi bi-arrows-fullscreen" role="button" [matMenuTriggerFor]="menu" style="font-size: 25px; margin-left: 1vw;"></i>
+            </div>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>
                   <span>Histórico</span>
@@ -30,7 +34,9 @@
                     Departamento:
                 </b>
                 {{dadosDemada.departamentoBenDemanda}}
-            </label><button *ngIf="!isPauta" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Classificar Demanda</button>
+            </label>
+            <button *ngIf="!isPauta && !rascunho" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Classificar Demanda</button>
+            <button *ngIf="!isPauta && rascunho" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Continuar Demanda</button>
             <i *ngIf="isPauta" class="bi bi-trash-fill"></i>
         </p>
     </div>

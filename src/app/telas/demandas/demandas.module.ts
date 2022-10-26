@@ -12,13 +12,15 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
 import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
 import { DemandaService } from 'src/app/services/demanda.service';
+import { RascunhosComponent } from './rascunhos/rascunhos.component';
 
 
 @NgModule({
   declarations: [
     TelaInicialComponent,
     TelaHistoricoDemandaComponent,
-    TelaClassificarDemandaComponent
+    TelaClassificarDemandaComponent,
+    RascunhosComponent
   ],
   imports: [
     CommonModule,

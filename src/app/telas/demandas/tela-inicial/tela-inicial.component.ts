@@ -26,7 +26,7 @@ export class TelaInicialComponent implements OnInit {
   isFiltrado = true;
   showSidebar = -25;
   listaDemandas: Demanda[] = []
-
+  
   moveSidebar(){
     if(this.showSidebar == 0){
       this.showSidebar = -25

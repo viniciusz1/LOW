@@ -1,20 +1,17 @@
 <div class="container">
     <nav class="nav my-4 justify-content-between">
 
-
         <div>
-            <div class="low-shadow rounded">
-                <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
-                    + Criar Demanda
-                </button>
-            </div>
+            <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
+                + Criar Demanda
+            </button>
         </div>
 
 
         <ul class="nav justify-content-center">
 
-
-            <div *ngIf="!showFiltro" class="div-input low-shadow">
+            
+            <div *ngIf="!showFiltro" class="div-input low-shadow rounded">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
 
@@ -23,6 +20,7 @@
             <div *ngIf="!showFiltro" class="low-shadow ms-3 rounded">
                 <button (click)="showFiltro = !showFiltro" class="btn btn-primary">
                     Filtrar Mais
+                    <i class="bi bi-chevron-double-down"></i>
                 </button>
             </div>
 
@@ -150,17 +148,17 @@
     <div *ngIf="isFiltrado && listaDemandas.length > 0"  class="d-flex justify-content-center mt-5">
         <nav aria-label="...">
             <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">2</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
+                  <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item active" aria-current="page">
+                        <span class="page-link">2</span>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                  </li>
             </ul>
         </nav>
     </div>

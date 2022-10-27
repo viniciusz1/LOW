@@ -1,3 +1,4 @@
+import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao.component';
 import { TelaEtapaCincoComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-cinco/tela-etapa-cinco.component';
 import { TelaVerPauta } from './telas/reunioes/tela-ver-pauta/tela-ver-pauta.component';
 import { NgModule } from '@angular/core';

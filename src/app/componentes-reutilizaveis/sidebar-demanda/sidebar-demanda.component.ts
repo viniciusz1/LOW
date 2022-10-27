@@ -9,5 +9,10 @@ export class SidebarDemandaComponent implements OnInit {
   
   ngOnInit(): void {
   }
+  centered = false;
+  disabled = false;
+  unbounded = false;
 
+  radius: number = 0;
+  color: string = 'black';
 }

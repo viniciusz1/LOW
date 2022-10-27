@@ -13,14 +13,18 @@ import { GeracaoPropostaOuDemandaModule } from './geracao-proposta-ou-demanda/ge
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
-import {MatSortModule} from '@angular/material/sort';
-import { MatSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DemandaService } from 'src/app/services/demanda.service';
+import { RascunhosComponent } from './rascunhos/rascunhos.component';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
     TelaInicialComponent,
     TelaHistoricoDemandaComponent,
-    TelaClassificarDemandaComponent
+    TelaClassificarDemandaComponent,
+    RascunhosComponent
   ],
   imports: [
     CommonModule,

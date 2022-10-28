@@ -1,16 +1,32 @@
 .bloco{
     width: 400px;
     height: 500px;
-    background-color: #eee;
+    background-color: #c9d7e5;
     position: absolute;
     z-index: 99;
-    right: 5rem;
-    top: 6%;
+    right: 3.8rem;
+    top: 7.5%;
     overflow: auto;
+    border-radius: 5px;
 }
+
+.triangulo{
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #c9d7e5;
+    position: absolute;
+    right: 3.85rem;
+    top: 5.85%;
+    z-index: 100;
+}
+
 .mensagem{
     width: 100%;
     background-color: #FFFFFF;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 }

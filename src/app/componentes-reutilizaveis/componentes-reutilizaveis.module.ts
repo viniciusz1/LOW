@@ -21,7 +21,8 @@ import { FiltroDemandaComponent } from './filtro-demanda/filtro-demanda.componen
     SidebarDemandaComponent,
     SidebarReuniaoComponent,
     NotificacoesComponent,
-    FiltroDemandaComponent
+    FiltroDemandaComponent,
+    SidebarReuniaoComponent
   ],
   imports: [
     CommonModule,

@@ -1,5 +1,5 @@
-<div class="container">
-    <nav class="nav my-4 justify-content-between">
+<div [ngClass]="{'container': isFiltrado}">
+    <nav [ngClass]="{'container': !isFiltrado}" class="nav my-4 justify-content-between">
 
         <div>
             <button class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
@@ -28,17 +28,19 @@
             <app-filtro-demanda *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
             </app-filtro-demanda>
         </ul>
+
+        <div [ngClass]="{'container': !isFiltrado}"  class="my-3 d-flex justify-content-end">
+            <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
+                class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
+            <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i
+                    class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
+        </div>
     </nav>
 
     <!-- sidebar -->
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
         style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
-    <div class="me-3 d-flex justify-content-end">
-        <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
-            class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
-        <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i
-                class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
-    </div>
+    
 
 
     <div *ngIf="!tipo_exibicao_demanda">

@@ -11,6 +11,8 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import {MatDialog} from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
+import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
+import { listaDemandas } from './listDemandas';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -26,9 +28,10 @@ export class TelaInicialComponent implements OnInit {
     ) { }
 
   position_list_cards = 0;
-  tipo_exibicao_demanda = false;
+  //true = card
+  tipo_exibicao_demanda = true;
   isCollapsed = true;
-  isFiltrado = true;
+  isFiltrado = false;
   showFiltro = false;
   showSidebar = -25;
   listaDemandas: Demanda[] = []
@@ -79,8 +82,6 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
- 
-
   change_right(){
     this.position_list_cards -= 700
   }
@@ -100,16 +101,54 @@ export class TelaInicialComponent implements OnInit {
     this.position_list_cards += 700
   }
 
+  listaTituloNaoFiltrado: string[] = []
+
+  exibirFilasDeStatus(){
+    if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
+      this.listaTituloNaoFiltrado.push("STATUS: Backlog - Classificação")
+    }
+    if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
+      this.listaTituloNaoFiltrado.push("Status: Backlog - Propostas")
+    }
+    if(this.listaDemandas.some(e => e.statusDemanda == 'assessment')){
+      this.listaTituloNaoFiltrado.push("Status: Assessment")
+    }
+    if(this.listaDemandas.some(e => e.statusDemanda == 'bussiness-case')){
+      this.listaTituloNaoFiltrado.push("Status: Business Case")
+    }
+    if(this.listaDemandas.some(e => e.statusDemanda == 'to-do')){
+      this.listaTituloNaoFiltrado.push("Status: To Do")
+    }
+    if(this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')){
+      this.listaTituloNaoFiltrado.push("Status: Design and Build")
+    }
+    if(this.listaDemandas.some(e => e.statusDemanda == 'support')){
+      this.listaTituloNaoFiltrado.push("Status: Support")
+    }
+    if(this.listaDemandas.some(e => e.statusDemanda == 'cancelled')){
+      this.listaTituloNaoFiltrado.push("Status: Cancelled")
+    }
+    if(this.listaDemandas.some(e => e.statusDemanda == 'done')){
+      this.listaTituloNaoFiltrado.push("Status: Done")
+    }
+  }
+
   ngOnInit(): void {
     // this.openModalPropostaDocumento()
     // this.openModalFiltroDemandas()
     this.demandasService.getDemandas()
     .subscribe({next: (list) => {
       this.listaDemandas = list
+      console.log(this.listaDemandas)
+      this.testandoEsquemaExibicaoDemandas()
+      this.exibirFilasDeStatus()
     },
     error: (err) => {
       console.log(err)
     }})
   }
-
+  testandoEsquemaExibicaoDemandas(){
+    this.listaDemandas = []
+    this.listaDemandas.push(...listaDemandas)
+  }
 }

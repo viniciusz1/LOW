@@ -16,14 +16,13 @@ export class CardDemandaComponent implements OnInit {
   @Input() isPauta: boolean = false;
   @Input() dadosDemada: Demanda = {}
   @Input() rascunho: boolean = false;
-  primaryColorClass: string = "";
+  primaryColorClass?: string = "";
   secondaryColorClass: string = "";
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.dadosDemada.statusDemanda = StatusDemanda.ASSESSMENT
     this.primaryColorClass = this.dadosDemada.statusDemanda;
     this.secondaryColorClass = this.dadosDemada.statusDemanda + "-sec";
   }

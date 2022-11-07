@@ -18,6 +18,7 @@ export class CardDemandaComponent implements OnInit {
   @Input() isPauta: boolean = false;
   @Input() dadosDemada: Demanda = {}
   @Input() rascunho: boolean = false;
+  usuario = "solicitante"
   primaryColorClass?: string = "";
   secondaryColorClass: string = "";
 

@@ -26,8 +26,16 @@
             <a  class="nav-link"><i  class="bi bi-bell icon"></i></a>
             <app-notificacoes *ngIf="mostrar_modal"></app-notificacoes>
         </li>
-        <li role="button" class="nav-item" routerLink="/tela-inicial/perfil">
+        <li [matMenuTriggerFor]="menu" role="button" class="nav-item">
             <a  class="nav-link"  ><i class="bi bi-person-square icon"></i></a>
         </li>
+        <mat-menu #menu="matMenu">
+            <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
+              <span><i class="bi bi-clipboard-plus me-3" style="font-size: 20px;"></i>Rascunhos</span>
+            </button>
+            <button mat-menu-item>
+              <span><i class="bi bi-gear me-3" style="font-size: 20px;"></i>Configurações</span>
+            </button>
+          </mat-menu>
     </ul>
 </nav>

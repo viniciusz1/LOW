@@ -36,7 +36,9 @@
                 </b>
                 {{dadosDemada.departamentoBenDemanda}}
             </label>
-            <button *ngIf="!isPauta && !rascunho" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Classificar Demanda</button>
+            <button *ngIf="!isPauta && !rascunho && botao" class="btn btn-primary btn-sm" (click)="direcionarUsuario()">
+              {{botao.texto}}
+            </button>
             <button *ngIf="!isPauta && rascunho" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Continuar Demanda</button>
             <i *ngIf="isPauta" class="bi bi-trash-fill"></i>
         </p>

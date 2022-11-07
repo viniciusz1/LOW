@@ -1,7 +1,11 @@
 @import '../../../styles.scss';
 @import '../../../themes.scss';
 
-
+.progress{
+    width: 39%;
+    height: 12px;
+    margin-right: 20px;
+}
 .line-top-start{
     width: 80%;
     position:absolute;

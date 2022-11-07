@@ -1,7 +1,9 @@
+import { RotasModule } from './../../rotas.module';
 import { StatusDemanda } from './../../models/statusDemanda.enum';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Demanda } from 'src/app/models/demanda.model';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-demanda',
@@ -16,16 +18,46 @@ export class CardDemandaComponent implements OnInit {
   @Input() isPauta: boolean = false;
   @Input() dadosDemada: Demanda = {}
   @Input() rascunho: boolean = false;
-  primaryColorClass: string = "";
+  usuario = "solicitante"
+  primaryColorClass?: string = "";
   secondaryColorClass: string = "";
 
-  constructor() {
+  constructor(private route: Router) {
+    
+  }
+
+  direcionarUsuario(){
+    if(this.botao?.rota == ""){
+      this.abrirModal.emit()
+    }else{
+      this.route.navigate([this.botao?.rota])
+    }
+  }
+  botao: {rota: string, texto: string} | undefined = undefined;
+
+  botoes(){
+    if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG){
+      this.botao = {rota: "/tela-inicial/proposta/1", texto: "Classificar Demanda"}
+    }
+    if(this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT){
+      this.botao = {rota: "/tela-inicial/data-comissao", texto: "Adicionar Proposta"}
+    }
+    if(this.dadosDemada.statusDemanda == StatusDemanda.BUSSINESS_CASE){
+      this.botao = {rota: "/tela-inicial/data-comissao", texto: "Adicionar Proposta"}
+    }
+    // if(this.dadosDemada.statusDemanda == StatusDemanda.TO_DO){
+    //   this.botao = {rota: "/demandas", texto: "Adicionar a Pauta"}
+    // }
+    if(this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED){
+      this.botao = {rota: "", texto: "Motivo da Reprovação"}
+    }
   }
 
   ngOnInit(): void {
-    this.dadosDemada.statusDemanda = StatusDemanda.ASSESSMENT
     this.primaryColorClass = this.dadosDemada.statusDemanda;
     this.secondaryColorClass = this.dadosDemada.statusDemanda + "-sec";
+
+    this.botoes()
   }
 
 }

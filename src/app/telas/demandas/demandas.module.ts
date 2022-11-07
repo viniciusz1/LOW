@@ -17,6 +17,7 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { RascunhosComponent } from './rascunhos/rascunhos.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DialogModule,
     ModaisModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    PipesModule
   ],
 })
 export class DemandasModule { }

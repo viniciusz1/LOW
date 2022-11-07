@@ -77,3 +77,60 @@ main {
     color: #999;
     font-size: .8em;
 }
+
+
+.balao-chat-analista{
+    margin: 20px 20px 15px 35px;
+    position: relative;
+    font-size: 15px;
+    /* line-height: 14px; */
+    width: 30vw;
+    background-color: #dbdfdf;
+    border-radius: 10px;
+    padding: 10px 10px 10px 21px;
+    /* text-align: center; */
+    color: black;
+    word-wrap:break-word;
+}
+
+.balao-chat-analista:before{
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    
+    border-left: 12px solid #dbdfdf;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #dbdfdf;
+    border-bottom: 10px solid transparent;
+    left: 20px;
+    bottom: -15px;
+}
+
+.balao-chat-solicitante{
+    margin: 15px 35px 20px 20px;
+    position: relative;
+    font-size: 15px;
+    /* line-height: 14px; */
+    width: 30vw;
+    background-color: #b5cef3;
+    border-radius: 10px;
+    padding: 10px 10px 10px 21px;
+    /* text-align: center; */
+    color: black;
+}
+
+.balao-chat-solicitante:after{
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    justify-content: end;
+    border-left: 12px solid #b5cef3;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #b5cef3;
+    border-bottom: 10px solid transparent;
+    right: 20px;
+    bottom: -15px;
+}
+

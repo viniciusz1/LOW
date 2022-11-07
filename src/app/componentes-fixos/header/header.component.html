@@ -1,8 +1,9 @@
 <nav class="nav low-shadow" style="background-color: white;">
     <ul class="nav nav-pills nav-items-center" style="width: 40%;">
         <li class="nav-item" routerLink="/tela-inicial">
-            <li class="nav-item " >
-            <img class="my-2 ms-5" style="width: 70px;" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="">
+        <li class="nav-item ">
+            <img class="my-2 ms-5" style="width: 70px;"
+                src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="">
         </li>
         <li class="nav-item">
             <a class="nav-link">Início</a>
@@ -16,26 +17,47 @@
         <li class="nav-item">
             <a class="nav-link" routerLink="/tela-inicial/data-comissao">REUNIÕES</a>
         </li>
-        <li  class="nav-item">
+        <li class="nav-item">
             <a role="button" class="nav-link active" routerLink="/tela-inicial">DEMANDAS</a>
         </li>
-        <li  role="button" class="nav-item" routerLink="/tela-inicial/chat">
-            <a class="nav-link"><i  class="bi bi-chat-left-dots icon"></i></a>
+        <li role="button" class="nav-item" routerLink="/tela-inicial/chat">
+            <a class="nav-link"><i class="bi bi-chat-left-dots icon"></i></a>
         </li>
-        <li role="button" class="nav-item"(click)="mostrar_modal = !mostrar_modal">
-            <a  class="nav-link"><i  class="bi bi-bell icon"></i></a>
+        <li role="button" class="nav-item" (click)="mostrar_modal = !mostrar_modal">
+            <a class="nav-link"><i class="bi bi-bell icon"></i></a>
             <app-notificacoes *ngIf="mostrar_modal"></app-notificacoes>
         </li>
+        <li role="button" class="nav-item" [matMenuTriggerFor]="idiomaMenu">
+            <a class="nav-link"><img style="width: 30px; margin-right: 10px"
+                    src="https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png">
+                <i class="bi bi-chevron-down">
+                </i></a>
+        </li>
+        <mat-menu #idiomaMenu="matMenu">
+            <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
+                <span><img style="width:24px; margin-right: 10px" src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg">Español (ES)</span>
+            </button>
+            <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
+                <span><img style="width:24px; margin-right: 10px" src="https://ledefi.com.br/wp-content/uploads/2022/09/gb-flag.png">English (UK)</span>
+            </button>
+            <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
+                <span><img style="width:24px; margin-right: 10px" src="https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg">English (EN)</span>
+            </button>
+            <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
+                <span><img style="width:24px; margin-right: 10px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg/255px-Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg.png">Français (FR)</span>
+            </button>
+
+        </mat-menu>
         <li [matMenuTriggerFor]="menu" role="button" class="nav-item">
-            <a  class="nav-link"  ><i class="bi bi-person-square icon"></i></a>
+            <a class="nav-link"><i class="bi bi-person-square icon"></i></a>
         </li>
         <mat-menu #menu="matMenu">
             <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
-              <span><i class="bi bi-clipboard-plus me-3" style="font-size: 20px;"></i>Rascunhos</span>
+                <span><i class="bi bi-clipboard-plus me-3" style="font-size: 20px;"></i>Rascunhos</span>
             </button>
             <button mat-menu-item>
-              <span><i class="bi bi-gear me-3" style="font-size: 20px;"></i>Configurações</span>
+                <span><i class="bi bi-gear me-3" style="font-size: 20px;"></i>Configurações</span>
             </button>
-          </mat-menu>
+        </mat-menu>
     </ul>
 </nav>

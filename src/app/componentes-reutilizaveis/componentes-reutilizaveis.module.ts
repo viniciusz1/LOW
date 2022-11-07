@@ -21,8 +21,7 @@ import {MatRippleModule} from '@angular/material/core';
     SidebarDemandaComponent,
     SidebarReuniaoComponent,
     NotificacoesComponent,
-    FiltroDemandaComponent,
-    SidebarReuniaoComponent
+    FiltroDemandaComponent
   ],
   imports: [
     CommonModule,

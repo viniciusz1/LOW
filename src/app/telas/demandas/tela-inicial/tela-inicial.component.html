@@ -11,7 +11,7 @@
 
         <ul class="nav justify-content-center">
 
-            
+
             <div *ngIf="!showFiltro" class="div-input low-shadow rounded">
                 <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
@@ -36,34 +36,9 @@
         </div>
     </nav>
 
-    <div *ngIf="listaDemandas.length <= 0" class="sem-demandas" style="display: flex; align-items: center; justify-content: center;">
-        <!-- <div class="seta">
-            <i class="bi bi-arrow-90deg-up"></i>
-        </div> -->
-        <div class="frases" style="display: grid; justify-content: center; align-items: center; margin-top: 5%;">
-            <p style="display: flex; justify-content: center; align-items: center;">
-                AINDA NÃO EXISTEM DEMANDAS CRIADAS!
-            </p>
-            <p style="display: flex; justify-content: center; align-items: center;">
-                CLIQUE NO BOTÃO "CRIAR DEMANDA" E ENCAMINHE
-            </p>
-            <p style="display: flex; justify-content: center; align-items: center;">
-                SUA IDEIA PARA NÓS...
-            </p>
-        </div>
-    </div>
-
-
-
     <!-- sidebar -->
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
-style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;" *ngIf="listaDemandas.length > 0"></app-sidebar-demanda>
-<div class="me-3 d-flex justify-content-end" *ngIf="listaDemandas.length > 0">
-    <div [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
-        class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
-    <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()" class="change-type-list"><i
-            class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
-</div>
+        style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
     
 
 
@@ -71,11 +46,7 @@ style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;" *ngIf="lista
 
 
         <!-- Parte Filtrada em Lista -->
-        
 
-
-
-    <div *ngIf="!tipo_exibicao_demanda && listaDemandas.length > 0">
 
         <div class="m-5" *ngIf="isFiltrado == true">
             <div>
@@ -119,7 +90,10 @@ style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;" *ngIf="lista
             </div>
         </div>
     </div>
-    <div class="d-flex" *ngIf="tipo_exibicao_demanda && listaDemandas.length > 0 && !isFiltrado">
+    <div class="d-flex" *ngIf="tipo_exibicao_demanda && !isFiltrado">
+
+        <!-- Parte não Filtrada em card -->
+
         <div class="bloco-branco"></div>
         <div class="tamanho-container">
             <div *ngFor="let titulo of listaTituloNaoFiltrado">
@@ -146,7 +120,7 @@ style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;" *ngIf="lista
     </div>
 
 
-    <div *ngIf="isFiltrado && tipo_exibicao_demanda && listaDemandas.length > 0">
+    <div *ngIf="isFiltrado && tipo_exibicao_demanda">
         <div class="container">
             <div class="row">
                 <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
@@ -158,20 +132,20 @@ style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;" *ngIf="lista
 
     <mat-spinner *ngIf="listaDemandas.length == 0" [diameter]="50" class="circle"></mat-spinner>
 
-    <div *ngIf="isFiltrado && listaDemandas.length > 0"  class="d-flex justify-content-center mt-5">
+    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-5">
         <nav aria-label="...">
             <ul class="pagination">
-                  <li class="page-item disabled">
-                        <span class="page-link">Previous</span>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item active" aria-current="page">
-                        <span class="page-link">2</span>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                  </li>
+                <li class="page-item disabled">
+                    <span class="page-link">Previous</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active" aria-current="page">
+                    <span class="page-link">2</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
             </ul>
         </nav>
     </div>

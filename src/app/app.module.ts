@@ -7,12 +7,12 @@ import { ComponentesReutilizaveisModule } from './componentes-reutilizaveis/comp
 import { ModelsModule } from './models/models.module';
 import { PipesModule } from './pipes/pipes.module';
 import { RotasModule } from './rotas.module';
+import { TelasModule } from './telas/telas.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemandaService } from './services/demanda.service';
 import { HttpClientModule } from '@angular/common/http';
-import { TelasModule } from './telas/telas.module';
 
 @NgModule({
   declarations: [

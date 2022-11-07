@@ -1,3 +1,4 @@
+import { MatMenuModule } from '@angular/material/menu';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
@@ -19,7 +20,8 @@ import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/com
     CommonModule,
     RotasModule,
     RouterModule,
-    ComponentesReutilizaveisModule
+    ComponentesReutilizaveisModule,
+    MatMenuModule
   ],
   exports: [
     HeaderComponent

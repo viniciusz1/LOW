@@ -1,3 +1,4 @@
+import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao.component';
 import { TelaEtapaCincoComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-cinco/tela-etapa-cinco.component';
 import { TelaVerPauta } from './telas/reunioes/tela-ver-pauta/tela-ver-pauta.component';
 import { NgModule } from '@angular/core';
@@ -12,12 +13,10 @@ import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.comp
 import { TelaEtapaUmComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-um/tela-etapa-um.component';
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
 import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-quatro/tela-etapa-quatro.component';
-
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
 import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
 import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
 import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.component';
-import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao.component';
 import { TelaLayoutComponent } from './telas/perfil/tela-layout/tela-layout.component';
 
 

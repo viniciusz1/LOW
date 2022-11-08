@@ -120,7 +120,7 @@ export class TelaInicialComponent implements OnInit {
     if(this.listaDemandas.some(e => e.statusDemanda == 'assessment')){
       this.listaTituloNaoFiltrado.push("Status: Assessment")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'bussiness-case')){
+    if(this.listaDemandas.some(e => e.statusDemanda == 'business-case')){
       this.listaTituloNaoFiltrado.push("Status: Business Case")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'to-do')){

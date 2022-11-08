@@ -18,7 +18,7 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
       return demandas.filter(d => d.statusDemanda == StatusDemanda.ASSESSMENT)
     }
     if(titulo[0] == "Status: Business Case"){
-      return demandas.filter(d => d.statusDemanda == StatusDemanda.BUSSINESS_CASE)
+      return demandas.filter(d => d.statusDemanda == StatusDemanda.BUSINESS_CASE)
     }
     if(titulo[0] == "Status: To Do"){
       return demandas.filter(d => d.statusDemanda == StatusDemanda.TO_DO)

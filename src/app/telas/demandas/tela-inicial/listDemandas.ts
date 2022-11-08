@@ -14,7 +14,7 @@ export const listaDemandas: Demanda[] = [
     tituloDemanda: "Sistema de Gestão de Demandas",
   }, {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.BUSSINESS_CASE,
+    statusDemanda: StatusDemanda.BUSINESS_CASE,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
   }, {

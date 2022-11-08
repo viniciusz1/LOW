@@ -41,7 +41,7 @@ export class TelaInicialComponent implements OnInit {
   showFiltro = false;
   showSidebar = -25;
   listaDemandas: Demanda[] = []
-  tipoRascunho = true;
+  tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
   
   moveSidebar(){
@@ -112,22 +112,22 @@ export class TelaInicialComponent implements OnInit {
 
   exibirFilasDeStatus(){
     if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
-      this.listaTituloNaoFiltrado.push("STATUS: Backlog - Classificação")
+      this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
-      this.listaTituloNaoFiltrado.push("Status: Backlog - Propostas")
+      this.listaTituloNaoFiltrado.push("Backlog - Propostas")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'assessment')){
-      this.listaTituloNaoFiltrado.push("Status: Assessment")
+      this.listaTituloNaoFiltrado.push("Assessment")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'business-case')){
-      this.listaTituloNaoFiltrado.push("Status: Business Case")
+      this.listaTituloNaoFiltrado.push("Business Case")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'to-do')){
-      this.listaTituloNaoFiltrado.push("Status: To Do")
+      this.listaTituloNaoFiltrado.push("To Do")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')){
-      this.listaTituloNaoFiltrado.push("Status: Design and Build")
+      this.listaTituloNaoFiltrado.push("Design and Build")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'support')){
       this.listaTituloNaoFiltrado.push("Status: Support")

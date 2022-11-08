@@ -8,14 +8,15 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
   styleUrls: ['./list-demanda.component.scss']
 })
 export class ListDemandaComponent implements OnInit {
-  primaryColorClass: string = "";
+  primaryColorClass?: string = "";
+  secondaryColorClass?: string = "";
   @Output() verDocumentoProposta = new EventEmitter()
   @Input() dadosDemada: Demanda = {}
   constructor() { }
 
   ngOnInit(): void {
-    this.dadosDemada.statusDemanda = StatusDemanda.ASSESSMENT
     this.primaryColorClass = this.dadosDemada.statusDemanda;
+    this.secondaryColorClass = this.dadosDemada.statusDemanda + "-sec";
   }
 
 }

@@ -42,33 +42,41 @@
 
 
 
-    <div *ngIf="!tipo_exibicao_demanda" >
+    <div *ngIf="!tipo_exibicao_demanda">
         <!-- Parte Filtrada em Lista -->
 
         <div class="" *ngIf="!isFiltrado">
-
-
-            <div class=" d-flex justify-content-center align-items-center flex-column my-4"
-                style="margin-left:auto; margin-right:auto">
-                <app-list-demanda *ngFor="let demanda of listaDemandas| slice:0:4" [dadosDemada]="demanda" class="mb-2">
-                </app-list-demanda>
-
-
-                <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
-                    <div class="d-flex justify-content-center align-items-center flex-column ">
-                        <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda" class="mb-2">
-                        </app-list-demanda>
-                    </div>
+            <div *ngFor="let titulo of listaTituloNaoFiltrado; let i = index">
+                <div style="width: 20%;">
+                    <h5>{{titulo}}</h5>
+                    <hr style="margin:0; opacity: 1;" class="mb-2">
                 </div>
+                <div class=" d-flex justify-content-center align-items-center flex-column my-2"
+                    style="margin-left:auto; margin-right:auto">
+                    <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo | slice:0:4" 
+                    [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"
+                    (abrirModal)="openModalMotivoDevolucao()"
+                        class="mb-2">
+                    </app-list-demanda>
 
-                <!-- Bloco para expandir -->
 
-                <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
-                    class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
-                    style="width: 30%; height: 30px">
-                    <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed"
-                        aria-controls="collapseExample" [ngClass]="!isCollapsed ? 'inverte': 'naoinverte'">
-                    </i>
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                        <div class="d-flex justify-content-center align-items-center flex-column ">
+                            <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
+                                class="mb-2">
+                            </app-list-demanda>
+                        </div>
+                    </div>
+
+                    <!-- Bloco para expandir -->
+
+                    <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
+                        class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
+                        style="width: 30%; height: 30px">
+                        <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed"
+                            aria-controls="collapseExample" [ngClass]="!isCollapsed ? 'inverte': 'naoinverte'">
+                        </i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -95,7 +103,10 @@
             <div *ngFor="let titulo of listaTituloNaoFiltrado">
                 <div class="my-4">
                     <div class="ms-3 title-demanda" for="status">
-                        <h5 style="text-decoration-line: underline;">{{titulo}}</h5>
+                        <div style="width: 20%;">
+                            <h5>{{titulo}}</h5>
+                            <hr style="margin:0; opacity: 1;" class="mb-2">
+                        </div>
                         <div class="me-3" style="align-self: flex-end; cursor: pointer;">Ver mais</div>
                     </div>
                     <div class="d-flex position-relative" style="width: 100%;">

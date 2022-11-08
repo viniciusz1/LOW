@@ -12,4 +12,6 @@ export class TelaPerfilComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+
 }

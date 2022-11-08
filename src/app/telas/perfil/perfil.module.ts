@@ -5,6 +5,8 @@ import { TelaLayoutComponent } from './tela-layout/tela-layout.component';
 import { TelaNotificacoesComponent } from './tela-notificacoes/tela-notificacoes.component';
 import { TelaSugestoesComponent } from './tela-sugestoes/tela-sugestoes.component';
 import { TelaAjudaComponent } from './tela-ajuda/tela-ajuda.component';
+import { RouterModule } from '@angular/router';
+
 
 
 
@@ -17,7 +19,8 @@ import { TelaAjudaComponent } from './tela-ajuda/tela-ajuda.component';
     TelaAjudaComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ]
 })
 export class PerfilModule { }

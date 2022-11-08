@@ -1,0 +1,66 @@
+.row{
+    div{
+        padding: 0.5rem;
+    }
+}
+.perfil-label{
+    display: flex;
+    justify-content: space-between;
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:2rem;
+    button{
+        margin: 0.5rem
+    }
+}
+
+.icones{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+h6{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nome-dado{
+    width: 20vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.caracteristica{
+   width: 100%;
+}
+
+.alterar-dado{
+    font-size: 11px;
+ }
+
+
+ .download{
+    width: 10vw;
+    height: 5vh;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .perfil, .layout, .notificacoes, .sugestoes, .ajuda{
+    cursor: pointer;
+ }
+
+ .rota-Ativa{
+    background-color: #00579D;
+    color: #fff;
+ }

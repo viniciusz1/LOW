@@ -1,7 +1,7 @@
 <div class="princ-container">
     <div class="divisao-divs" style="display: flex;">
-        <div class="configuracoes" style=" width: 35vw;">
-            <div class="perfil" style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
+        <div class="configuracoes" style=" width: 35vw; height: 78.5vh;">
+            <div class="perfil" routerLink="/tela-inicial/perfil" style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-person"></i>
                 </div>
@@ -9,7 +9,7 @@
                     Conta
                 </h6>
             </div>
-            <div class="layout" style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
+            <div class="layout" routerLinkActive="rota-Ativa" routerLink="/tela-inicial/layout" style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-grid-1x2"></i>
                 </div>
@@ -17,7 +17,7 @@
                     Layout
                 </h6>
             </div>
-            <div class="notificacoes"
+            <div class="notificacoes" routerLink="/tela-inicial/notificacoes"
                 style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-bell"></i>
@@ -26,7 +26,7 @@
                     Notificações
                 </h6>
             </div>
-            <div class="sugestoes" style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
+            <div class="sugestoes" routerLink="/tela-inicial/sugestoes" style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-chat-right-quote"></i>
                 </div>
@@ -34,7 +34,7 @@
                     Sugestões
                 </h6>
             </div>
-            <div class="ajuda" style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
+            <div class="ajuda" routerLink="/tela-inicial/ajuda" style="display: flex; border-bottom: 1px solid black; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-question-circle"></i>
                 </div>
@@ -58,13 +58,15 @@
                                 <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
                                     <div class="caracteristica" style="margin-right: 10px;">
                                         <span>
-                                            Nome:
+                                            Temas:
                                         </span>
                                     </div>
                                     <div class="nome-dado">
-                                        <span>
-                                            Camilly Vitoria da Rocha Goltz
-                                        </span>
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <!-- <option selected>Selecione a opção:</option> -->
+                                            <option value="1">Padrão (Claro)</option>
+                                            <option value="2">Preto</option>
+                                          </select>
                                     </div>
                                 </div>
                             </div>
@@ -72,13 +74,17 @@
                                 <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
                                     <div class="caracteristica" style="margin-right: 10px;">
                                         <span>
-                                            Data de nascimento:
+                                            Fonte:
                                         </span>
                                     </div>
                                     <div class="nome-dado">
-                                        <span>
-                                            11/02/2004
-                                        </span>
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <!-- <option selected>Selecione a opção:</option> -->
+                                            <option value="1">Arial</option>
+                                            <option value="2">Times New Roman</option>
+                                            <option value="3">Colibri</option>
+                                            <option value="4">Roboto</option>
+                                          </select>
                                     </div>
                                 </div>
                             </div>
@@ -86,13 +92,21 @@
                                 <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
                                     <div class="caracteristica" style="margin-right: 10px;">
                                         <span>
-                                            CPF:
+                                            Tamanho da Fonte:
                                         </span>
                                     </div>
                                     <div class="nome-dado">
-                                        <span>
-                                            111.222.333-55
-                                        </span>
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <!-- <option selected>Selecione a opção:</option> -->
+                                            <option value="1">10</option>
+                                            <option value="2">12</option>
+                                            <option value="3">14</option>
+                                            <option value="4">16</option>
+                                            <option value="5">20</option>
+                                            <option value="6">24</option>
+                                            <option value="7">28</option>
+                                            <option value="8">32</option>
+                                          </select>
                                     </div>
                                 </div>
                             </div>
@@ -100,13 +114,20 @@
                                 <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
                                     <div class="caracteristica" style="margin-right: 10px;">
                                         <span>
-                                            Email:
+                                            Zoom:
                                         </span>
                                     </div>
                                     <div class="nome-dado">
-                                        <span>
-                                            camilly@gmail.com
-                                        </span>
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <option value="1">75%</option>
+                                            <option value="2">80%</option>
+                                            <option value="3">90%</option>
+                                            <option value="4">100%</option>
+                                            <option value="5">110%</option>
+                                            <option value="6">125%</option>
+                                            <option value="7">150%</option>
+                                            <option value="8">200%</option>
+                                          </select>
                                     </div>
                                 </div>
                             </div>

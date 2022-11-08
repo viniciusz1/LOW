@@ -1,3 +1,5 @@
+
+
 .row{
     div{
         padding: 0.5rem;
@@ -43,4 +45,13 @@ h6{
 
 .alterar-dado{
     font-size: 11px;
+ }
+
+ .perfil, .layout, .notificacoes, .sugestoes, .ajuda{
+    cursor: pointer;
+ }
+
+ .rota-Ativa{
+    background-color: #00579D;
+    color: #fff;
  }

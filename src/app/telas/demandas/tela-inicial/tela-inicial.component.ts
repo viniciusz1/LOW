@@ -37,11 +37,12 @@ export class TelaInicialComponent implements OnInit {
   //true = card
   tipo_exibicao_demanda = true;
   isCollapsed = true;
-  isFiltrado = true;
+  isFiltrado = false;
   showFiltro = false;
   showSidebar = -25;
   listaDemandas: Demanda[] = []
   tipoRascunho = true;
+  listaTituloNaoFiltrado: string[] = []
   
   moveSidebar(){
     if(this.showSidebar == 0){
@@ -108,7 +109,6 @@ export class TelaInicialComponent implements OnInit {
     this.position_list_cards += 700
   }
 
-  listaTituloNaoFiltrado: string[] = []
 
   exibirFilasDeStatus(){
     if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){

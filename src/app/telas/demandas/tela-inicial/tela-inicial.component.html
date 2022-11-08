@@ -62,7 +62,7 @@
 
                     <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
                         <div class="d-flex justify-content-center align-items-center flex-column ">
-                            <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
+                            <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo" [dadosDemada]="demanda"
                                 class="mb-2">
                             </app-list-demanda>
                         </div>

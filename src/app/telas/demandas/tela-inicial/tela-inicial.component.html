@@ -105,7 +105,7 @@
                     <div class="d-flex position-relative" style="width: 100%;">
                         <div [style.left.px]="position_list_cards"
                             class="div-cards d-flex position-relative transition-cards">
-                            <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo" [dadosDemada]="demanda"
+                            <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo" [dadosDemada]="demanda"
                                 (verDocumentoProposta)="openModalDemandaDocumento()"
                                 (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
                         </div>
@@ -123,7 +123,7 @@
     <div *ngIf="isFiltrado && tipo_exibicao_demanda">
         <div class="container">
             <div class="row">
-                <app-card-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
+                <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda"
                     (abrirModal)="openModalMotivoDevolucao()" [mudarTamanho]="'100%'" class="col-lg-6 col-xl-4 mb-3">
                 </app-card-demanda>
             </div>

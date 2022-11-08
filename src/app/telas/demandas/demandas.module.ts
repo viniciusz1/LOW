@@ -13,8 +13,6 @@ import { GeracaoPropostaOuDemandaModule } from './geracao-proposta-ou-demanda/ge
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
-import { DemandaService } from 'src/app/services/demanda.service';
-import { RascunhosComponent } from './rascunhos/rascunhos.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PipesModule } from 'src/app/pipes/pipes.module';
@@ -25,7 +23,6 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     TelaInicialComponent,
     TelaHistoricoDemandaComponent,
     TelaClassificarDemandaComponent,
-    RascunhosComponent
   ],
   imports: [
     CommonModule,

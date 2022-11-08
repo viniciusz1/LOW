@@ -1,33 +1,52 @@
+import { Demanda } from './../../../models/demanda.model';
 import { StatusDemanda } from "src/app/models/statusDemanda.enum";
 
-export const listaDemandas = [
+export const listaDemandas: Demanda[] = [
   {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.BACKLOG
+    statusDemanda: StatusDemanda.BACKLOG,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }, {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.ASSESSMENT
+    statusDemanda: StatusDemanda.ASSESSMENT,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }, {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.BUSSINESS_CASE
+    statusDemanda: StatusDemanda.BUSSINESS_CASE,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }, {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.TO_DO
+    statusDemanda: StatusDemanda.TO_DO,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }, {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.DESIGN_AND_BUILD
+    statusDemanda: StatusDemanda.DESIGN_AND_BUILD,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }, {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.SUPPORT
+    statusDemanda: StatusDemanda.SUPPORT,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }, {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.CANCELLED
+    statusDemanda: StatusDemanda.CANCELLED,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }, {
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.DONE
+    statusDemanda: StatusDemanda.DONE,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   },{
     autorDemanda: "Sabrina Hegmann",
-    statusDemanda: StatusDemanda.BACKLOG
+    statusDemanda: StatusDemanda.BACKLOG,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }, 
   // {
   //   autorDemanda: "Sabrina Hegmann",

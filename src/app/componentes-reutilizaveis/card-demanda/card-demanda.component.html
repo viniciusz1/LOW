@@ -1,4 +1,4 @@
-<div class="card low-shadow position-relative" style="font-size: 14px; width: {{mudarTamanho}};">
+<div class="card low-shadow position-relative" style="font-size: 14px; width: {{mudarTamanho}}; height: 16vh">
 
     <div class="line-top-start" [ngClass]="primaryColorClass"></div>
     <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
@@ -10,13 +10,13 @@
             <label class="me-2 text-truncate" for="titulo"><b>{{dadosDemada.tituloDemanda}}</b></label>
           </div>
             <small class="me-3" for="" *ngIf="!rascunho && usuario != 'solicitante'">Status: {{dadosDemada.statusDemanda}}</small>
-            <div class="progress low-shadow" *ngIf="usuario == 'solicitante'">
+            <div class="progress low-shadow" *ngIf="usuario == 'solicitante' && !rascunho">
               <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <i class="bi bi-three-dots-vertical three-dots" *ngIf="!rascunho" role="button" [matMenuTriggerFor]="menu"></i>
             <div *ngIf="rascunho">
-              <i class="bi bi-trash3" role="button" [matMenuTriggerFor]="menu" style="font-size: 25px;"></i>
-              <i class="bi bi-arrows-fullscreen" role="button" [matMenuTriggerFor]="menu" style="font-size: 25px; margin-left: 1vw;"></i>
+              <i class="bi bi-trash3" role="button" [matMenuTriggerFor]="menu" style="font-size: 20px;"></i>
+              <i class="bi bi-arrows-fullscreen" role="button" [matMenuTriggerFor]="menu" style="font-size: 20px; margin-left: 1vw;"></i>
             </div>
               <mat-menu #menu="matMenu">
                 <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>

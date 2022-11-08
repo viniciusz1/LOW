@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
@@ -24,8 +25,13 @@ export class TelaInicialComponent implements OnInit {
   constructor(
     public dialog: Dialog,
     private matDialog: MatDialog,
-    private demandasService: DemandaService
-    ) { }
+    private demandasService: DemandaService,
+    private router: Router
+    ) {
+      if(router.url == '/tela-inicial/rascunhos'){
+        this.tipoRascunho = true;
+      }
+    }
 
   position_list_cards = 0;
   //true = card
@@ -35,6 +41,7 @@ export class TelaInicialComponent implements OnInit {
   showFiltro = false;
   showSidebar = -25;
   listaDemandas: Demanda[] = []
+  tipoRascunho = true;
   
   moveSidebar(){
     if(this.showSidebar == 0){

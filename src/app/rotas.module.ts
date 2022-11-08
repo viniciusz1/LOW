@@ -16,7 +16,6 @@ import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-d
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
 import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
 import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
-import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.component';
 
 
 @NgModule({
@@ -39,6 +38,10 @@ import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.compone
           {
             path: 'classificar-demanda',
             component: TelaClassificarDemandaComponent
+          },
+          {
+            path: 'rascunhos',
+            component: TelaInicialComponent
           },
           {
             path: 'historico-demanda',
@@ -84,10 +87,6 @@ import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.compone
           {
             path: 'proposta/5',
             component: TelaEtapaCincoComponent
-          },
-          {
-            path: 'rascunhos',
-            component: RascunhosComponent
           }
         ]
       }

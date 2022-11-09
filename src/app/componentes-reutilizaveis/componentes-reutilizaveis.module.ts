@@ -13,6 +13,8 @@ import { MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import { FiltroDemandaComponent } from './filtro-demanda/filtro-demanda.component';
 import { FiltroReuniaoComponent } from './filtro-reuniao/filtro-reuniao.component';
+import {InputTextModule} from 'primeng/inputtext';
+
 @NgModule({
   declarations: [
     ListDemandaComponent,
@@ -30,7 +32,8 @@ import { FiltroReuniaoComponent } from './filtro-reuniao/filtro-reuniao.componen
     RouterModule,
     MatMenuModule,
     MatIconModule,
-    RotasModule
+    RotasModule,
+    InputTextModule
   ],
   exports:[
     CardDemandaComponent,

@@ -16,11 +16,6 @@ import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-d
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
 import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
 import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
-import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.component';
-import { TelaLayoutComponent } from './telas/perfil/tela-layout/tela-layout.component';
-import { TelaNotificacoesComponent } from './telas/perfil/tela-notificacoes/tela-notificacoes.component';
-import { TelaSugestoesComponent } from './telas/perfil/tela-sugestoes/tela-sugestoes.component';
-import { TelaAjudaComponent } from './telas/perfil/tela-ajuda/tela-ajuda.component';
 
 
 @NgModule({
@@ -43,6 +38,10 @@ import { TelaAjudaComponent } from './telas/perfil/tela-ajuda/tela-ajuda.compone
           {
             path: 'classificar-demanda',
             component: TelaClassificarDemandaComponent
+          },
+          {
+            path: 'rascunhos',
+            component: TelaInicialComponent
           },
           {
             path: 'historico-demanda',
@@ -88,26 +87,6 @@ import { TelaAjudaComponent } from './telas/perfil/tela-ajuda/tela-ajuda.compone
           {
             path: 'proposta/5',
             component: TelaEtapaCincoComponent
-          },
-          {
-            path: 'rascunhos',
-            component: RascunhosComponent
-          },
-          {
-            path: 'layout',
-            component: TelaLayoutComponent
-          },
-          {
-            path: 'notificacoes',
-            component: TelaNotificacoesComponent
-          },
-          {
-            path: 'sugestoes',
-            component: TelaSugestoesComponent
-          },
-          {
-            path: 'ajuda',
-            component: TelaAjudaComponent
           }
         ]
       }

@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaReuniaoComponent implements OnInit {
   tipoExibicao = true;
+  showFiltro = false;
+
   constructor(
     public dialog: Dialog,
   ) { }

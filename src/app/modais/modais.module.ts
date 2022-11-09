@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/componentes-reutilizaveis.module';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ModalReprovacaoDemandaComponent } from './modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
     ModalFiltroDemandasComponent,
     ModalDemandaDocumentoComponent,
     ModalMotivoDevolucaoComponent,
+    ModalReprovacaoDemandaComponent,
   ],
   imports: [
     CommonModule,

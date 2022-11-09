@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RascunhosComponent } from './rascunhos.component';
+import { FiltroReuniaoComponent } from './filtro-reuniao.component';
 
-describe('TelaClassificarDemandaComponent', () => {
-  let component: RascunhosComponent;
-  let fixture: ComponentFixture<RascunhosComponent>;
+describe('FiltroReuniaoComponent', () => {
+  let component: FiltroReuniaoComponent;
+  let fixture: ComponentFixture<FiltroReuniaoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RascunhosComponent ]
+      declarations: [ FiltroReuniaoComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RascunhosComponent);
+    fixture = TestBed.createComponent(FiltroReuniaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

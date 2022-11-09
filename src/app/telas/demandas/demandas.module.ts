@@ -1,3 +1,4 @@
+import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
 import { AngularMaterialModule } from './../../angular-material/angular-material.module';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -13,8 +14,6 @@ import { GeracaoPropostaOuDemandaModule } from './geracao-proposta-ou-demanda/ge
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
-import { DemandaService } from 'src/app/services/demanda.service';
-import { RascunhosComponent } from './rascunhos/rascunhos.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PipesModule } from 'src/app/pipes/pipes.module';
@@ -25,7 +24,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     TelaInicialComponent,
     TelaHistoricoDemandaComponent,
     TelaClassificarDemandaComponent,
-    RascunhosComponent
+    TelaAprovarDemandaComponent
   ],
   imports: [
     CommonModule,

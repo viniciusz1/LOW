@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
@@ -24,17 +25,24 @@ export class TelaInicialComponent implements OnInit {
   constructor(
     public dialog: Dialog,
     private matDialog: MatDialog,
-    private demandasService: DemandaService
-    ) { }
+    private demandasService: DemandaService,
+    private router: Router
+    ) {
+      if(router.url == '/tela-inicial/rascunhos'){
+        this.tipoRascunho = true;
+      }
+    }
 
   position_list_cards = 0;
   //true = card
   tipo_exibicao_demanda = true;
   isCollapsed = true;
-  isFiltrado = true;
+  isFiltrado = false;
   showFiltro = false;
   showSidebar = -25;
   listaDemandas: Demanda[] = []
+  tipoRascunho = false;
+  listaTituloNaoFiltrado: string[] = []
   
   moveSidebar(){
     if(this.showSidebar == 0){
@@ -101,26 +109,25 @@ export class TelaInicialComponent implements OnInit {
     this.position_list_cards += 700
   }
 
-  listaTituloNaoFiltrado: string[] = []
 
   exibirFilasDeStatus(){
     if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
-      this.listaTituloNaoFiltrado.push("STATUS: Backlog - Classificação")
+      this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
-      this.listaTituloNaoFiltrado.push("Status: Backlog - Propostas")
+      this.listaTituloNaoFiltrado.push("Backlog - Propostas")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'assessment')){
-      this.listaTituloNaoFiltrado.push("Status: Assessment")
+      this.listaTituloNaoFiltrado.push("Assessment")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'bussiness-case')){
-      this.listaTituloNaoFiltrado.push("Status: Business Case")
+    if(this.listaDemandas.some(e => e.statusDemanda == 'business-case')){
+      this.listaTituloNaoFiltrado.push("Business Case")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'to-do')){
-      this.listaTituloNaoFiltrado.push("Status: To Do")
+      this.listaTituloNaoFiltrado.push("To Do")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')){
-      this.listaTituloNaoFiltrado.push("Status: Design and Build")
+      this.listaTituloNaoFiltrado.push("Design and Build")
     }
     if(this.listaDemandas.some(e => e.statusDemanda == 'support')){
       this.listaTituloNaoFiltrado.push("Status: Support")

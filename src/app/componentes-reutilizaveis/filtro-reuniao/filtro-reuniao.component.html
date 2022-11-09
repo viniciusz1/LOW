@@ -1,25 +1,27 @@
 <div class="low-shadow" style=" border: 1px solid rgb(77, 76, 76); padding: 15px; background: white;">
-    <h6 class="d-flex justify-content-between">Filtrar demandas <i type="button" class="bi bi-chevron-down"
-            (click)="closeFiltro.emit()" aria-controls="collapseExample">
-        </i></h6>
+    <h6 class="d-flex justify-content-between">Filtrar Reuniões <i type="button" class="bi bi-chevron-down" (click)="closeFiltro.emit()"
+        aria-controls="collapseExample">
+    </i></h6>
     <div class="line">
         <div class="bloco">
-            <div class="p-float-label">
-                <input id="float-input" type="text" pInputText> 
-                <label for="float-input">Username</label>
-            </div>
             <div class="d-flex flex-column">
                 <div class="d-flex justify-content-between">
                     <div class="d-flex">
                         <div class="d-flex flex-column">
+                            <label for=" Número da solicitação:">
+                                Comissão:
+                            </label>
+                            <input type="text">
+                        </div>
+                        <div class="d-flex flex-column">
                             <label for="Responsável:">
-                                Responsável:
+                                Data:
                             </label>
                             <input type="text">
                         </div>
                         <div class="d-flex flex-column">
                             <label for="Tamanho da demanda:">
-                                Tamanho da demanda:
+                                Departamentos:
                             </label>
                             <input type="text">
                         </div>

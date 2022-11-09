@@ -42,7 +42,7 @@ export class CardDemandaComponent implements OnInit {
     if(this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT){
       this.botao = {rota: "/tela-inicial/data-comissao", texto: "Adicionar Proposta"}
     }
-    if(this.dadosDemada.statusDemanda == StatusDemanda.BUSSINESS_CASE){
+    if(this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE){
       this.botao = {rota: "/tela-inicial/data-comissao", texto: "Adicionar Proposta"}
     }
     // if(this.dadosDemada.statusDemanda == StatusDemanda.TO_DO){

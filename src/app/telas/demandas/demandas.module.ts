@@ -1,3 +1,4 @@
+import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
 import { AngularMaterialModule } from './../../angular-material/angular-material.module';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +24,7 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     TelaInicialComponent,
     TelaHistoricoDemandaComponent,
     TelaClassificarDemandaComponent,
+    TelaAprovarDemandaComponent
   ],
   imports: [
     CommonModule,

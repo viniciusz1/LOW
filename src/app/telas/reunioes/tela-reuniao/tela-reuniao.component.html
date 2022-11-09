@@ -3,27 +3,33 @@
         <div class="container mt-4">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <b>Datas das Comissões</b>
-                        <div class="linha"></div>
+                        <div>
+                            <b>Datas das Comissões</b>
+                            <div class="linha"></div>
+
+                        </div>
+                        <button *ngIf="tipoExibicao == true" class="btn btn-primary" (click)="tipoExibicao = !tipoExibicao">
+                            Marcar Reunião
+                            <i class="bi bi-people"></i>
+                        </button>
                     </div>
                     <div>
                         <div class="nav">
-                            <div class="div-input me-3 pesquisar centralizar rounded">
+                            <div *ngIf="!showFiltro" class="div-input me-3 pesquisar centralizar rounded">
                                 <i class="bi bi-search px-2 "></i> <input class="input" type="text"
                                     placeholder="Pesquisar Demanda">
                             </div>
-                            <button class="btn btn-primary">
+                            <button *ngIf="!showFiltro" class="btn btn-primary" (click)="showFiltro = !showFiltro">
                                 Filtrar Mais
                                 <i class="bi bi-chevron-double-down"></i>
                             </button>
+                            <app-filtro-reuniao *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
+                            </app-filtro-reuniao>
                         </div>
                     </div>
                 </div>
                 
-                <button *ngIf="tipoExibicao == true" class="btn btn-primary" (click)="tipoExibicao = !tipoExibicao">
-                    Marcar Reunião
-                    <i class="bi bi-people"></i>
-                </button>
+                
                 <div class="d-flex justify-content-between">
                     <button *ngIf="tipoExibicao == false" class="btn btn-primary" (click)="openModalSuaPauta()">
                         Sua Pauta<i class="bi bi-plus-lg"></i>

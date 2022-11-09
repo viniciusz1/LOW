@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 import { MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import { FiltroDemandaComponent } from './filtro-demanda/filtro-demanda.component';
-import {MatRippleModule} from '@angular/material/core';
+import { FiltroReuniaoComponent } from './filtro-reuniao/filtro-reuniao.component';
 @NgModule({
   declarations: [
     ListDemandaComponent,
@@ -21,7 +21,8 @@ import {MatRippleModule} from '@angular/material/core';
     SidebarDemandaComponent,
     SidebarReuniaoComponent,
     NotificacoesComponent,
-    FiltroDemandaComponent
+    FiltroDemandaComponent,
+    FiltroReuniaoComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +38,8 @@ import {MatRippleModule} from '@angular/material/core';
     SidebarDemandaComponent,
     CardReuniaoComponent,
     NotificacoesComponent,
-    FiltroDemandaComponent
+    FiltroDemandaComponent,
+    FiltroReuniaoComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

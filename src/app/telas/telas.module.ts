@@ -10,7 +10,8 @@ import { ReunioesModule } from './reunioes/reunioes.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     DemandasModule,

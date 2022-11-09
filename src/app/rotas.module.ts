@@ -17,6 +17,10 @@ import { TelaLoginComponent } from './telas/login/tela-login/tela-login.componen
 import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
 import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
 import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.component';
+import { TelaLayoutComponent } from './telas/perfil/tela-layout/tela-layout.component';
+import { TelaNotificacoesComponent } from './telas/perfil/tela-notificacoes/tela-notificacoes.component';
+import { TelaSugestoesComponent } from './telas/perfil/tela-sugestoes/tela-sugestoes.component';
+import { TelaAjudaComponent } from './telas/perfil/tela-ajuda/tela-ajuda.component';
 
 
 @NgModule({
@@ -88,6 +92,22 @@ import { RascunhosComponent } from './telas/demandas/rascunhos/rascunhos.compone
           {
             path: 'rascunhos',
             component: RascunhosComponent
+          },
+          {
+            path: 'layout',
+            component: TelaLayoutComponent
+          },
+          {
+            path: 'notificacoes',
+            component: TelaNotificacoesComponent
+          },
+          {
+            path: 'sugestoes',
+            component: TelaSugestoesComponent
+          },
+          {
+            path: 'ajuda',
+            component: TelaAjudaComponent
           }
         ]
       }

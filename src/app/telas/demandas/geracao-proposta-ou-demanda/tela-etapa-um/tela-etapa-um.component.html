@@ -6,7 +6,8 @@
     <div class="dash-cinco" style="background-color: #747474; height: 0.5vh; width: 20%;"></div>
 </div>
 
-<div class="campo" style="display: flex; justify-content: center; align-items: center; padding: 0px;" *ngIf="aparecer == 0">
+<div class="campo" style="display: flex; justify-content: center; align-items: center; padding: 0px;"
+    *ngIf="aparecer == 0" [ngStyle]="{'height: 30vh':aparecer == 0}">
     <div class="div-preenchida" style="width: 61vw; ">
         <div style="background-color: rgb(241 240 240); border: 1px solid #787070; padding: 10px;">
             <h6 style="font-weight: 600;">Campos obrigatórios para salvar a proposta:</h6>
@@ -36,7 +37,8 @@
     </div>
 </div>
 
-<div class="container" style="display: grid; justify-content: center;">
+<div class="container" style="display: grid; justify-content: center; height: 72vh;"
+    [ngStyle]="{'height: 40vh':aparecer == 1}">
     <div class="beneficios" style="display: grid; align-items: center; justify-content: space-between;">
         <div class="titulo" style="display: grid">
             <label style="font-weight: 600;">
@@ -81,12 +83,14 @@
                 </select>
             </div>
         </div>
-        <div class="d-flex justify-content-between " style="margin-top: 0.7rem !important;">
+        <div class="d-flex justify-content-between " style="margin: auto; bottom: 1vh; position: fixed; justify-content: space-between;">
             <div>
                 <button routerLink="/tela-inicial" class="btn btn-danger me-3">Cancelar</button>
                 <button class="btn btn-outline-primary">Sair e Salvar</button>
             </div>
-            <button routerLink="/tela-inicial/proposta/2" class="btn btn-primary">Avançar</button>
+            <div>
+                <button routerLink="/tela-inicial/proposta/2" class="btn btn-primary">Avançar</button>
+            </div>
         </div>
     </div>
 </div>

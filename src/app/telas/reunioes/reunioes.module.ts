@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { TelaReuniaoComponent } from './tela-reuniao/tela-reuniao.component';
+import { InputTextModule } from "primeng/inputtext";
 
 
 
@@ -13,7 +14,8 @@ import { TelaReuniaoComponent } from './tela-reuniao/tela-reuniao.component';
   ],
   imports: [
     CommonModule,
-    ComponentesReutilizaveisModule
+    ComponentesReutilizaveisModule,
+    InputTextModule
   ]
 })
 export class ReunioesModule { }

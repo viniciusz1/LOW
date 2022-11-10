@@ -37,7 +37,7 @@ export class TelaInicialComponent implements OnInit {
       console.log(textoTutorial)
       this.joyrideService.startTour(
           { 
-            steps: ['um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
+            steps: ['bv','um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
       }
       );
   }

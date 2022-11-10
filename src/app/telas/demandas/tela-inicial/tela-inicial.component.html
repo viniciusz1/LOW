@@ -6,7 +6,8 @@
                 [prevTemplate]="prevButton"
                 [nextTemplate]="nextButton"
                 [doneTemplate]="doneButton"
-                [text]="textoTutorial[0]"
+                [stepContent]="customContent"
+                [stepContentParams]="{'texto': textoTutorial[0]}"
                 class="btn btn-primary" routerLink="/tela-inicial/proposta/1">
                     + Criar Demanda
                 </button>
@@ -22,8 +23,10 @@
             <ng-template #doneButton>
                 <button class="btn btn-primary">Pronto</button>
             </ng-template>
-            <ng-template #customContent  let-texto="texto" 
-            >{{texto}}</ng-template>
+            <ng-template #customContent  let-texto="texto">
+                <div [innerHTML]="texto" style="max-width: 250px;"></div>
+            </ng-template> 
+            <joyrideStep joyrideStep="bv" title="Bem Vindo!" text="Agora você terá um tutorial de como o sistema de demandas funciona!" stepPosition="center"></joyrideStep>
         </div>
 
 

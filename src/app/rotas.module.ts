@@ -1,3 +1,4 @@
+import { TelaCalendarioComponent } from './telas/reunioes/tela-calendario/tela-calendario.component';
 import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao.component';
 import { TelaEtapaCincoComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-cinco/tela-etapa-cinco.component';
 import { TelaVerPauta } from './telas/reunioes/tela-ver-pauta/tela-ver-pauta.component';
@@ -38,6 +39,10 @@ import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-dem
           {
             path: 'classificar-demanda',
             component: TelaClassificarDemandaComponent
+          },
+          {
+            path: 'calendario',
+            component: TelaCalendarioComponent
           },
           {
             path: 'rascunhos',

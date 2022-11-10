@@ -12,6 +12,9 @@
                         Marcar Reunião
                         <i class="bi bi-people"></i>
                     </button>
+                    <button *ngIf="tipoExibicao == true" class="btn btn-primary ms-3" [routerLink]="'/tela-inicial/calendario'">
+                        Ver suas reuniões
+                    </button>
                 </div>
                 <div>
                     <div class="nav">

@@ -6,14 +6,14 @@ import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-dem
 import { Component, OnInit } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
-import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua-pauta.component';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import {MatDialog} from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
-import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { listaDemandas } from './listDemandas';
+import { JoyrideService } from 'ngx-joyride';
+import { textoTutorial } from './textoDoTutorial';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -21,18 +21,27 @@ import { listaDemandas } from './listDemandas';
   styleUrls: ['./tela-inicial.component.scss']
 })
 export class TelaInicialComponent implements OnInit {
-
   constructor(
     public dialog: Dialog,
     private matDialog: MatDialog,
     private demandasService: DemandaService,
-    private router: Router
+    private router: Router,
+    private readonly joyrideService: JoyrideService
     ) {
       if(router.url == '/tela-inicial/rascunhos'){
         this.tipoRascunho = true;
       }
     }
 
+    onClick() {
+      console.log(textoTutorial)
+      this.joyrideService.startTour(
+          { 
+            steps: ['um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
+      }
+      );
+  }
+  textoTutorial = textoTutorial
   position_list_cards = 0;
   //true = card
   tipo_exibicao_demanda = true;

@@ -1,5 +1,4 @@
 import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
-import { AngularMaterialModule } from './../../angular-material/angular-material.module';
 
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
@@ -17,7 +16,7 @@ import { ModaisModule } from 'src/app/modais/modais.module';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PipesModule } from 'src/app/pipes/pipes.module';
-
+import { JoyrideModule } from 'ngx-joyride';
 
 @NgModule({
   declarations: [
@@ -37,7 +36,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     ModaisModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    PipesModule
+    PipesModule,
+    JoyrideModule.forRoot()
   ],
 })
 export class DemandasModule { }

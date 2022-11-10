@@ -29,7 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [DemandaService],
   bootstrap: [AppComponent]

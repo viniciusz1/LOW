@@ -1,4 +1,4 @@
-<div style="height: 77vh; width: auto;">
+<div style="width: auto;">
     <div>
         <div class="container mt-4">
             <div class="d-flex justify-content-between">
@@ -48,7 +48,7 @@
                         </button>
                     </div>
 
-                    <div *ngFor="let demanda of listaDemandas" class="mt-3">
+                    <div *ngFor="let demanda of listaDemandas" class="mt-2">
                         <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas"
                             [dadosDemada]="demanda" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()">
                         </app-list-demanda>

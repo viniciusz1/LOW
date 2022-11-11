@@ -1,3 +1,9 @@
+import { TelaNotificacoesComponent } from './telas/perfil/tela-notificacoes/tela-notificacoes.component';
+import { TelaAjudaComponent } from './telas/perfil/tela-ajuda/tela-ajuda.component';
+import { TelaSugestoesComponent } from './telas/perfil/tela-sugestoes/tela-sugestoes.component';
+import { NotificacoesComponent } from './componentes-reutilizaveis/notificacoes/notificacoes.component';
+import { TelaLayoutComponent } from './telas/perfil/tela-layout/tela-layout.component';
+import { TelaCalendarioComponent } from './telas/reunioes/tela-calendario/tela-calendario.component';
 import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao.component';
 import { TelaEtapaCincoComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-cinco/tela-etapa-cinco.component';
 import { TelaVerPauta } from './telas/reunioes/tela-ver-pauta/tela-ver-pauta.component';
@@ -38,6 +44,10 @@ import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-dem
           {
             path: 'classificar-demanda',
             component: TelaClassificarDemandaComponent
+          },
+          {
+            path: 'calendario',
+            component: TelaCalendarioComponent
           },
           {
             path: 'rascunhos',
@@ -85,14 +95,26 @@ import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-dem
             component: TelaVerPauta
           },
           {
-            path: 'proposta/5',
-            component: TelaEtapaCincoComponent
+            path: 'layout',
+            component: TelaLayoutComponent
+          },
+          {
+            path: 'notificacoes',
+            component: TelaNotificacoesComponent
+          },
+          {
+            path: 'sugestoes',
+            component: TelaSugestoesComponent
+          },
+          {
+            path: 'ajuda',
+            component: TelaAjudaComponent
           }
         ]
       }
     ])
   ],
-  exports:[
+  exports: [
     RouterModule
   ],
 

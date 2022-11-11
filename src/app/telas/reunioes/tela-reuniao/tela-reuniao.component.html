@@ -12,7 +12,8 @@
                         Marcar Reunião
                         <i class="bi bi-people"></i>
                     </button>
-                    <button *ngIf="tipoExibicao == true" class="btn btn-primary ms-3" [routerLink]="'/tela-inicial/calendario'">
+                    <!-- [routerLink]="'/tela-inicial/calendario'" -->
+                    <button *ngIf="tipoExibicao == true" class="btn btn-primary ms-3" (click)="openCalendario()" >
                         Ver suas reuniões
                     </button>
                 </div>
@@ -51,13 +52,17 @@
                 <app-card-reuniao class="m-1"></app-card-reuniao>
             </div>
             <div *ngIf="tipoExibicao == false" class="row m-3">
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-            </div>
+                <div class="col-md-8 drag-column">
+                    <div *ngFor="let demanda of listaDemandas" >
+                        <app-card-demanda pDraggable="demandas" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()" 
+                        [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
+
+                    </div>
+                </div>
+                <div class="col-md-4 border drop-column"  style="height: 60vh;" pDroppable="demandas" (onDrop)="drop()">
+                    <app-card-demanda *ngFor="let demanda of listaDemandasEscolhidas" [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
+                </div>
+              </div>
         </div>
     </div>
 </div>

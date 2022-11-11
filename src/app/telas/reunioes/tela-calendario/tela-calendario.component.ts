@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { CalendarOptions, defineFullCalendarElement } from '@fullcalendar/web-component';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -9,10 +10,13 @@ defineFullCalendarElement();
 })
 export class TelaCalendarioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modal: MatDialog) { }
 
   ngOnInit(): void {
   }
+
+  
+
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin],
     headerToolbar: {

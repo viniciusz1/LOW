@@ -1,6 +1,7 @@
 import { StatusDemanda } from './statusDemanda.enum';
 import { Recurso } from "./recurso.model"
 export interface Demanda {
+    codigoDemanda?: string;
     tituloDemanda?: string,
     statusDemanda?: StatusDemanda,
     situacaoAtualDemanda?: string,

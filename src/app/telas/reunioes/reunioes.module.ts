@@ -6,7 +6,7 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
 import { TelaReuniaoComponent } from './tela-reuniao/tela-reuniao.component';
 import { InputTextModule } from "primeng/inputtext";
 import { TelaCalendarioComponent } from './tela-calendario/tela-calendario.component';
-
+import {DragDropModule} from 'primeng/dragdrop';
 import 'web-component-essentials';
 
 @NgModule({
@@ -19,7 +19,8 @@ import 'web-component-essentials';
     CommonModule,
     ComponentesReutilizaveisModule,
     InputTextModule,
-    RouterModule
+    RouterModule,
+    DragDropModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

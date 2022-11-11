@@ -13,10 +13,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tela-reuniao.component.scss']
 })
 export class TelaReuniaoComponent implements OnInit {
-  tipoExibicao = false;
+  tipoExibicao = true;
   showFiltro = false;
-
+  dataReuniao: any; 
+  comissaoSelecionada:any;
+  pesquisaDemanda: string = "";
+  listaDeComissoesReuniao: string[] = ['Vendas', 'Compras', 'Financeiro', 'RH', 'Marketing', 'TI', 'Jurídico', 'Diretoria'];
   listaDemandas: Demanda[] = [{
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.CANCELLED,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.TO_DO,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  },{
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.BUSINESS_CASE,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  },{
     autorDemanda: "Sabrina Hegmann",
     statusDemanda: StatusDemanda.CANCELLED,
     departamentoBenDemanda: "Tecnologia da Informação",

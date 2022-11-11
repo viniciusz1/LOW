@@ -1,11 +1,11 @@
-<ul class="nav position-relative container-lista low-shadow " style="min-width: 75vw;">
+<ul class="nav position-relative container-lista low-shadow " style="width: 100%;">
     <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
     <div class="d-flex">
-        <li class="nav-item" style="">
+        <li class="nav-item" >
             <label class="" for="">002</label>
         </li>
         <li class="nav-item text-truncate" style="width: 150px;">
-            <label class="" style="" for=""><b>{{dadosDemada.tituloDemanda}}</b></label>
+            <label class="" for=""><b>{{dadosDemada.tituloDemanda}}</b></label>
         </li>
         <li class="nav-item text-truncate" style="width: 100px;">
             <small class="" for="">{{dadosDemada.statusDemanda}}</small>
@@ -17,8 +17,8 @@
                 {{dadosDemada.departamentoBenDemanda}}
         </li>
     </div>    
-    <div class="d-flex final-list" style="">
-        <li style="">
+    <div class="d-flex final-list" >
+        <li *ngIf="mostrarBotao">
             <button class="btn btn-primary btn-sm">Classificar Demanda</button>
         </li>
         <li>

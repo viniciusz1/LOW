@@ -9,7 +9,7 @@
                     </button>
                     <!-- [routerLink]="'/tela-inicial/calendario'" -->
                     <button *ngIf="tipoExibicao == true" class="btn btn-primary ms-3" (click)="openCalendario()">
-                        Ver suas reuniões
+                        <i class="bi bi-calendar-week me-2"></i>Ver em calendário
                     </button>
                 </div>
                 <div *ngIf="tipoExibicao" class="d-flex align-items-center">

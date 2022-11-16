@@ -1,4 +1,4 @@
-<div class="card low-shadow position-relative" style="font-size: 14px; width: {{mudarTamanho}}; height: 150px">
+<div class="card low-shadow position-relative" style="font-size: 14px; width: {{mudarTamanho}}; height: 130px">
 
     <div class="line-top-start" [ngClass]="primaryColorClass"></div>
     <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
@@ -33,9 +33,9 @@
         <p class="card-text">{{dadosDemada.ppmDemanda}}</p>
         <p class="card-text"><b>Autor: </b>{{dadosDemada.autorDemanda}}</p>
         <p class="card-text bottom-card">
-            <label class=" me-2">
+            <label class="d-inline-block me-2" [ngClass]="{'text-truncate': botao, 'tamanho': !botao}" style="width: 160px;">
                 <b>
-                    Departamento:
+                    Depart.:
                 </b>
                 {{dadosDemada.departamentoBenDemanda}}
             </label>

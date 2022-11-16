@@ -10,7 +10,7 @@ import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devol
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { listaDemandas } from './listDemandas';
 import { JoyrideService } from 'ngx-joyride';
@@ -28,22 +28,22 @@ export class TelaInicialComponent implements OnInit {
     private demandasService: DemandaService,
     private router: Router,
     private readonly joyrideService: JoyrideService
-    ) {
-      if(router.url == '/tela-inicial/rascunhos'){
-        this.tipoRascunho = true;
-      }
+  ) {
+    if (router.url == '/tela-inicial/rascunhos') {
+      this.tipoRascunho = true;
     }
+  }
 
-    onClick() {
-      console.log(textoTutorial)
-      this.joyrideService.startTour(
-          { 
-            steps: ['bv','um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
+  onClick() {
+    console.log(textoTutorial)
+    this.joyrideService.startTour(
+      {
+        steps: ['bv', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
       }
-      );
+    );
   }
   textoTutorial = textoTutorial
-  positionListCards: number[] = [0, 0, 0, 0,0,0,0,0,0];
+  positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   //true = card
   tipoExibicaoDemanda = true;
   isCollapsed = true;
@@ -55,38 +55,38 @@ export class TelaInicialComponent implements OnInit {
   listaTituloNaoFiltrado: string[] = []
   pesquisaDemanda = ""
 
-  
-  changeRight(index: number){
-    if(this.positionListCards[index]> -2800){ 
+
+  changeRight(index: number) {
+    if (this.positionListCards[index] > -2800) {
       this.positionListCards[index] -= 700
       console.log(this.positionListCards[index])
     }
   }
   changeLeft(index: number) {
-    if(this.positionListCards[index] < 0){ 
+    if (this.positionListCards[index] < 0) {
       this.positionListCards[index] += 700
       console.log(this.positionListCards[index])
     }
   }
 
-  changeToList(){
+  changeToList() {
     this.tipoExibicaoDemanda = false
   }
 
-  changeExibicao(){
+  changeExibicao() {
     this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda
   }
-  
-  changeToCard(){
+
+  changeToCard() {
     this.tipoExibicaoDemanda = true
   }
 
-  
-  
-  moveSidebar(){
-    if(this.showSidebar == 0){
+
+
+  moveSidebar() {
+    if (this.showSidebar == 0) {
       this.showSidebar = -25
-    }else{
+    } else {
       this.showSidebar = 0
     }
   }
@@ -94,13 +94,13 @@ export class TelaInicialComponent implements OnInit {
   sortData(sort: Sort) {
     console.log(sort)
   }
-  openModalPropostaDocumento(){
+  openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
     });
   }
 
-  openModalReprovacaoDemanda(){
+  openModalReprovacaoDemanda() {
     this.dialog.open(ModalReprovacaoDemandaComponent), {
       maxWidth: '70vw',
     }
@@ -112,13 +112,13 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalAtaDocumento(){
+  openModalAtaDocumento() {
     this.matDialog.open(ModalAtaDocumentoComponent, {
       maxWidth: '70vw',
     });
   }
 
-  openModalFiltroDemandas(){
+  openModalFiltroDemandas() {
     this.dialog.open(ModalFiltroDemandasComponent, {
       minWidth: '300px',
     });
@@ -137,49 +137,51 @@ export class TelaInicialComponent implements OnInit {
 
 
 
-  exibirFilasDeStatus(){
-    if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
+  exibirFilasDeStatus() {
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog')) {
       this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog')) {
       this.listaTituloNaoFiltrado.push("Backlog - Propostas")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'assessment')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
       this.listaTituloNaoFiltrado.push("Assessment")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'business-case')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'business-case')) {
       this.listaTituloNaoFiltrado.push("Business Case")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'to-do')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'to-do')) {
       this.listaTituloNaoFiltrado.push("To Do")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')) {
       this.listaTituloNaoFiltrado.push("Design and Build")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'support')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'support')) {
       this.listaTituloNaoFiltrado.push("Status: Support")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'cancelled')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'cancelled')) {
       this.listaTituloNaoFiltrado.push("Status: Cancelled")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'done')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'done')) {
       this.listaTituloNaoFiltrado.push("Status: Done")
     }
   }
 
   ngOnInit(): void {
     this.demandasService.getDemandas()
-    .subscribe({next: (list) => {
-      this.listaDemandas = list
-      console.log(this.listaDemandas)
-      this.testandoEsquemaExibicaoDemandas()
-      this.exibirFilasDeStatus()
-    },
-    error: (err) => {
-      console.log(err)
-    }})
+      .subscribe({
+        next: (list) => {
+          this.listaDemandas = list
+          console.log(this.listaDemandas)
+          this.testandoEsquemaExibicaoDemandas()
+          this.exibirFilasDeStatus()
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
   }
-  testandoEsquemaExibicaoDemandas(){
+  testandoEsquemaExibicaoDemandas() {
     this.listaDemandas = []
     this.listaDemandas.push(...listaDemandas)
   }

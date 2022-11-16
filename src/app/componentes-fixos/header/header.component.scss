@@ -2,3 +2,9 @@
     display: flex;
     align-items: center;
 }
+.bread{
+    border:0;
+    .p-breadcrumb{
+        border: 0;
+    }
+}

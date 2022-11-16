@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,15 @@ export class HeaderComponent implements OnInit {
 
   constructor() { }
   mostrar_modal = false;
-  ngOnInit(): void {
-  }
 
+  items: MenuItem[] = [];
+
+  ngOnInit() {
+      this.items = [
+          {label:'Categories'},
+          {label:'Sports'},
+          {label:'Football'},
+          {label:'Countries'}
+      ];
+  }
 }

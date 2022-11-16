@@ -52,6 +52,7 @@ export class TelaInicialComponent implements OnInit {
   listaDemandas: Demanda[] = []
   tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
+  pesquisaDemanda = ""
   
   moveSidebar(){
     if(this.showSidebar == 0){

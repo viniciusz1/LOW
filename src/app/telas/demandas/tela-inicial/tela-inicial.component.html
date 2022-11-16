@@ -1,18 +1,14 @@
 <div [ngClass]="{'container': isFiltrado}" class="nav my-4 justify-content-center">
-    <nav [ngClass]="{'container': !isFiltrado}" class="nav my-4 justify-content-between w-100">
+    <nav [ngClass]="{'container': !isFiltrado}" class="nav justify-content-between w-100">
 
         <div class="d-flex" style="overflow: auto;">
-                <button joyrideStep="um" 
-                [prevTemplate]="prevButton"
-                [nextTemplate]="nextButton"
-                [doneTemplate]="doneButton"
-                [title]="'Criar uma Demanda'"
-                [stepContent]="customContent"
-                [stepContentParams]="{'texto': textoTutorial[0]}"
-                class="btn btn-primary position-relative" routerLink="/tela-inicial/proposta/1">
-                    + Criar Demanda
-                </button>
-            
+            <button joyrideStep="um" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
+                [title]="'Criar uma Demanda'" [stepContent]="customContent"
+                [stepContentParams]="{'texto': textoTutorial[0]}" class="btn btn-primary position-relative"
+                routerLink="/tela-inicial/proposta/1">
+                + Criar Demanda
+            </button>
+
             <button (click)="isFiltrado = !isFiltrado">change</button>
             <button (click)="onClick()">tutorial</button>
             <ng-template #prevButton>
@@ -24,46 +20,42 @@
             <ng-template #doneButton>
                 <button class="btn btn-primary">Pronto</button>
             </ng-template>
-            <ng-template #customContent  let-texto="texto" style="border-radius: 20px;">
+            <ng-template #customContent let-texto="texto" style="border-radius: 20px;">
                 <div [innerHTML]="texto" style="max-width: 300px; padding: 20px;"></div>
-            </ng-template> 
-            <joyrideStep joyrideStep="bv" title="Bem Vindo!" text="Agora você terá um tutorial de como o sistema de demandas funciona!" stepPosition="center"></joyrideStep>
+            </ng-template>
+            <joyrideStep joyrideStep="bv" title="Bem Vindo!"
+                text="Agora você terá um tutorial de como o sistema de demandas funciona!" stepPosition="center">
+            </joyrideStep>
         </div>
 
 
-        <ul joyrideStep="dois" 
-        [title]="'Filtrar Demandas'"
-        [stepContent]="customContent" 
-        [stepContentParams]="{'texto': textoTutorial[1]}"
-        class="nav justify-content-center">
+        <ul joyrideStep="dois" [title]="'Filtrar Demandas'" [stepContent]="customContent"
+            [stepContentParams]="{'texto': textoTutorial[1]}" class="nav justify-content-center">
+            <div  *ngIf="!showFiltro" class="d-flex align-items-center justify-content-center">
+                <span class="p-input-icon-left" style="width: 80%;">
+                    <i class="pi pi-search"></i>
+                    <input type="text" class="border" style="width: 100%;" pInputText placeholder="Pesquisar Demanda"
+                        [(ngModel)]="pesquisaDemanda" />
+                </span>
+                <div class="rounded">
+                    <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 180px;" (click)="showFiltro = !showFiltro">
+                        Filtrar Mais
+                        <i class="bi bi-chevron-double-down"></i>
+                    </button>
+                </div>
 
-
-            <div *ngIf="!showFiltro" class="div-input low-shadow rounded">
-                <i class="bi bi-search px-2 "></i> <input class="input" type="text" placeholder="Pesquisar Demanda">
             </div>
-
-            <div *ngIf="!showFiltro" class="low-shadow ms-3 rounded">
-                <button (click)="showFiltro = !showFiltro" class="btn btn-primary">
-                    Filtrar Mais
-                    <i class="bi bi-chevron-double-down"></i>
-                </button>
-            </div>
-
 
             <app-filtro-demanda *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
             </app-filtro-demanda>
         </ul>
 
-        <div
-        [ngClass]="{'container': !isFiltrado}" 
-        style="overflow: auto;"
-        class="my-3 d-flex justify-content-end w-100">
-            <div joyrideStep="tres"
-            [title]="'Trocar Exibição'"
-            [stepContent]="customContent" 
-            [stepContentParams]="{'texto': textoTutorial[2]}" 
-             [ngClass]="{'color-actived': !tipo_exibicao_demanda}" (click)="change_to_list()"
-                class="change-type-list me-2"><i class="bi bi-list" style="font-size:20px;"></i></div>
+        <div [ngClass]="{'container': !isFiltrado}" style="overflow: auto;"
+            class="my-3 d-flex justify-content-end w-100">
+            <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
+                [stepContentParams]="{'texto': textoTutorial[2]}" [ngClass]="{'color-actived': !tipo_exibicao_demanda}"
+                (click)="change_to_list()" class="change-type-list me-2"><i class="bi bi-list"
+                    style="font-size:20px;"></i></div>
             <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()"
                 class="change-type-list"><i class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
         </div>
@@ -86,17 +78,16 @@
                 </div>
                 <div class=" d-flex justify-content-center align-items-center flex-column my-2"
                     style="margin-left:auto; margin-right:auto">
-                    <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo | slice:0:4" 
-                    [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"
-                    (abrirModal)="openModalMotivoDevolucao()"
-                        class="mb-2">
+                    <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo | slice:0:4"
+                        [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"
+                        (abrirModal)="openModalMotivoDevolucao()" class="mb-2">
                     </app-list-demanda>
 
 
                     <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
                         <div class="d-flex justify-content-center align-items-center flex-column ">
-                            <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo" [dadosDemada]="demanda"
-                                class="mb-2">
+                            <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
+                                [dadosDemada]="demanda" class="mb-2">
                             </app-list-demanda>
                         </div>
                     </div>

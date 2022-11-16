@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +16,7 @@ import { DialogModule } from '@angular/cdk/dialog';
 import { ModaisModule } from 'src/app/modais/modais.module';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { InputTextModule } from "primeng/inputtext";
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { JoyrideModule } from 'ngx-joyride';
 
@@ -37,6 +39,8 @@ import { JoyrideModule } from 'ngx-joyride';
     MatSortModule,
     MatProgressSpinnerModule,
     PipesModule,
+    FormsModule,
+    InputTextModule,
     JoyrideModule.forRoot()
   ],
 })

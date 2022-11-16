@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-demanda-documento.component.scss']
 })
 export class ModalDemandaDocumentoComponent implements OnInit {
-
+  user = "gerente"
   constructor() { }
 
   ngOnInit(): void {

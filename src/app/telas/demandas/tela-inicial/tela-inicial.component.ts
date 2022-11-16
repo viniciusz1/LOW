@@ -43,9 +43,9 @@ export class TelaInicialComponent implements OnInit {
       );
   }
   textoTutorial = textoTutorial
-  position_list_cards = 0;
+  positionListCards: number[] = [0, 0, 0, 0,0,0,0,0,0];
   //true = card
-  tipo_exibicao_demanda = true;
+  tipoExibicaoDemanda = true;
   isCollapsed = true;
   isFiltrado = false;
   showFiltro = false;
@@ -54,6 +54,34 @@ export class TelaInicialComponent implements OnInit {
   tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
   pesquisaDemanda = ""
+
+  
+  changeRight(index: number){
+    if(this.positionListCards[index]> -2800){ 
+      this.positionListCards[index] -= 700
+      console.log(this.positionListCards[index])
+    }
+  }
+  changeLeft(index: number) {
+    if(this.positionListCards[index] < 0){ 
+      this.positionListCards[index] += 700
+      console.log(this.positionListCards[index])
+    }
+  }
+
+  changeToList(){
+    this.tipoExibicaoDemanda = false
+  }
+
+  changeExibicao(){
+    this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda
+  }
+  
+  changeToCard(){
+    this.tipoExibicaoDemanda = true
+  }
+
+  
   
   moveSidebar(){
     if(this.showSidebar == 0){
@@ -107,24 +135,6 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  change_right(){
-    this.position_list_cards -= 700
-  }
-  change_to_list(){
-    this.tipo_exibicao_demanda = false
-  }
-
-  change_exibicao(){
-    this.tipo_exibicao_demanda = !this.tipo_exibicao_demanda
-  }
-  
-  change_to_card(){
-    this.tipo_exibicao_demanda = true
-  }
-
-  change_left() {
-    this.position_list_cards += 700
-  }
 
 
   exibirFilasDeStatus(){
@@ -158,7 +168,6 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.openModalReprovacaoDemanda();
     this.demandasService.getDemandas()
     .subscribe({next: (list) => {
       this.listaDemandas = list

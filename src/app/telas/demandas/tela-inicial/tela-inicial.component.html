@@ -57,13 +57,13 @@
             [title]="'Trocar Exibição'" 
             [stepContent]="customContent"  
             [stepContentParams]="{'texto': textoTutorial[2]}" 
-            [ngClass]="{'color-actived': !tipo_exibicao_demanda}"
-            (click)="change_to_list()" 
+            [ngClass]="{'color-actived': !tipoExibicaoDemanda}"
+            (click)="changeToList()" 
             class="change-type-list me-2">
             <i class="bi bi-list" style="font-size:17px;"></i>
         </div>
-            <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" 
-                (click)="change_to_card()"
+            <div [ngClass]="{'color-actived': tipoExibicaoDemanda}" 
+                (click)="changeToCard()"
                 class="change-type-list">
                 <i class="bi bi-border-all" style="font-size:17px;">
                 </i>
@@ -77,7 +77,7 @@
 
 
 
-    <div *ngIf="!tipo_exibicao_demanda">
+    <div *ngIf="!tipoExibicaoDemanda">
         <!-- Parte Filtrada em Lista -->
 
         <div class="" *ngIf="!isFiltrado">
@@ -128,13 +128,13 @@
             </div>
         </div>
     </div>
-    <div class="d-flex" *ngIf="tipo_exibicao_demanda && !isFiltrado">
+    <div class="d-flex" *ngIf="tipoExibicaoDemanda && !isFiltrado">
 
         <!-- Parte não Filtrada em card -->
 
         <div class="bloco-branco"></div>
         <div class="tamanho-container">
-            <div *ngFor="let titulo of listaTituloNaoFiltrado">
+            <div *ngFor="let titulo of listaTituloNaoFiltrado; let i = index">
                 <div class="my-4">
                     <div class="ms-3 title-demanda" for="status">
                         <div style="width: 20%;">
@@ -144,16 +144,16 @@
                         <div class="me-3" style="align-self: flex-end; cursor: pointer;">Ver mais</div>
                     </div>
                     <div class="d-flex position-relative" style="width: 100%;">
-                        <div [style.left.px]="position_list_cards"
+                        <div [style.left.px]="positionListCards[i]"
                             class="div-cards d-flex position-relative transition-cards">
                             <app-card-demanda [rascunho]="tipoRascunho"
                                 *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
                                 [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"
                                 (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
                         </div>
-                        <div class="left-arrow alinhacao" (click)="change_left()"><i style="font-size: 25px;"
+                        <div class="left-arrow alinhacao" (click)="changeLeft(i)"><i style="font-size: 25px;"
                                 class="bi bi-chevron-left"></i></div>
-                        <div class="right-arrow alinhacao" (click)="change_right()"><i style="font-size: 25px;"
+                        <div class="right-arrow alinhacao" (click)="changeRight(i)"><i style="font-size: 25px;"
                                 class="bi bi-chevron-right"></i></div>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
     </div>
 
 
-    <div *ngIf="isFiltrado && tipo_exibicao_demanda">
+    <div *ngIf="isFiltrado && tipoExibicaoDemanda">
         <div class="container">
             <div class="row">
                 <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandas"

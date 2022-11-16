@@ -31,6 +31,7 @@ export class TelaInicialComponent implements OnInit {
   ) {
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
+      this.isFiltrado = true;
     }
   }
 
@@ -157,13 +158,13 @@ export class TelaInicialComponent implements OnInit {
       this.listaTituloNaoFiltrado.push("Design and Build")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'support')) {
-      this.listaTituloNaoFiltrado.push("Status: Support")
+      this.listaTituloNaoFiltrado.push("Support")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'cancelled')) {
-      this.listaTituloNaoFiltrado.push("Status: Cancelled")
+      this.listaTituloNaoFiltrado.push("Cancelled")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'done')) {
-      this.listaTituloNaoFiltrado.push("Status: Done")
+      this.listaTituloNaoFiltrado.push("Done")
     }
   }
 

@@ -10,3 +10,7 @@
 .barra-direita{
     display:flex; align-items:center; justify-content:center; color: white; width: 25px; background-color: rgba(0, 0, 0, 0.349)
 }
+.barra-direita:hover{
+    background-color: rgba(0, 0, 0, 0.596);
+     transition: 0.3s;
+}

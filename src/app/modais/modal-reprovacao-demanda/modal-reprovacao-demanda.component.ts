@@ -1,3 +1,5 @@
+import { ModalMotivoDevolucaoComponent } from './../modal-motivo-devolucao/modal-motivo-devolucao.component';
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalReprovacaoDemandaComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>) { }
 
   ngOnInit(): void {
   }

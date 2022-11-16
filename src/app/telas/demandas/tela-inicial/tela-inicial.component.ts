@@ -1,3 +1,4 @@
+import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
@@ -69,6 +70,12 @@ export class TelaInicialComponent implements OnInit {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
     });
+  }
+
+  openModalReprovacaoDemanda(){
+    this.dialog.open(ModalReprovacaoDemandaComponent), {
+      maxWidth: '70vw',
+    }
   }
 
   openModalDemandaDocumento() {
@@ -151,6 +158,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.openModalReprovacaoDemanda();
     this.demandasService.getDemandas()
     .subscribe({next: (list) => {
       this.listaDemandas = list

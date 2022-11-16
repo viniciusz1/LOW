@@ -1,7 +1,7 @@
 <div [ngClass]="{'container': isFiltrado}" class="nav my-4 justify-content-center">
     <nav [ngClass]="{'container': !isFiltrado}" class="nav justify-content-between w-100">
 
-        <div class="d-flex" style="overflow: auto;">
+        <div class="d-flex align-items-start" style="overflow: auto;">
             <button joyrideStep="um" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
                 [title]="'Criar uma Demanda'" [stepContent]="customContent"
                 [stepContentParams]="{'texto': textoTutorial[0]}" class="btn btn-primary position-relative"
@@ -50,20 +50,30 @@
             </app-filtro-demanda>
         </ul>
 
-        <div [ngClass]="{'container': !isFiltrado}" style="overflow: auto;"
-            class="my-3 d-flex justify-content-end w-100">
-            <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
-                [stepContentParams]="{'texto': textoTutorial[2]}" [ngClass]="{'color-actived': !tipo_exibicao_demanda}"
-                (click)="change_to_list()" class="change-type-list me-2"><i class="bi bi-list"
-                    style="font-size:20px;"></i></div>
-            <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" (click)="change_to_card()"
-                class="change-type-list"><i class="bi bi-grid-3x3-gap-fill" style="font-size:20px;"></i></div>
+        <div [ngClass]="{'container': !isFiltrado}" 
+        style="overflow: auto;" 
+        class="my-3 d-flex justify-content-end w-100">
+            <div joyrideStep="tres" 
+            [title]="'Trocar Exibição'" 
+            [stepContent]="customContent"  
+            [stepContentParams]="{'texto': textoTutorial[2]}" 
+            [ngClass]="{'color-actived': !tipo_exibicao_demanda}"
+            (click)="change_to_list()" 
+            class="change-type-list me-2">
+            <i class="bi bi-list" style="font-size:17px;"></i>
+        </div>
+            <div [ngClass]="{'color-actived': tipo_exibicao_demanda}" 
+                (click)="change_to_card()"
+                class="change-type-list">
+                <i class="bi bi-border-all" style="font-size:17px;">
+                </i>
+            </div>
         </div>
     </nav>
 
     <!-- sidebar -->
     <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
-        style="position: fixed; z-index: 2; transition: left 0.3s ease 0s;"></app-sidebar-demanda>
+        style="position: fixed; z-index: 2; transition: left 0.3s ease 0s; top: 43vh;"></app-sidebar-demanda>
 
 
 

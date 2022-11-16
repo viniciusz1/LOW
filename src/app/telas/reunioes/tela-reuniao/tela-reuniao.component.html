@@ -13,7 +13,7 @@
                     </button>
                 </div>
                 <div *ngIf="tipoExibicao" class="d-flex align-items-center">
-                    <span class="p-input-icon-left" style="width: 80%;">
+                    <span  *ngIf="!showFiltro" class="p-input-icon-left" style="width: 80%;">
                         <i class="pi pi-search"></i>
                         <input type="text" class="border" style="width: 100%;" pInputText
                             placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />

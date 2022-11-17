@@ -7,6 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaEtapaUmComponent implements OnInit {
 
+  disabled: boolean = true;
+
+  value1: string = "";
+
+  value2: string = "";
+
+  value3: string = "";
+
+  value4: string = "";
+
+  value5: string = 'Disabled';
 
   aparecer = 1;
 

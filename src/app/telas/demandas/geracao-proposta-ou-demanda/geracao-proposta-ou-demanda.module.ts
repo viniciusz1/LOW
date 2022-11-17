@@ -9,6 +9,8 @@ import { TelaEtapaQuatroComponent } from './tela-etapa-quatro/tela-etapa-quatro.
 import { TelaEtapaCincoComponent } from './tela-etapa-cinco/tela-etapa-cinco.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { InputTextModule } from 'primeng/inputtext';
+import { TelaCorridaComponent } from './tela-corrida/tela-corrida.component';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 
 
@@ -19,6 +21,7 @@ import { InputTextModule } from 'primeng/inputtext';
     TelaEtapaTresComponent,
     TelaEtapaQuatroComponent,
     TelaEtapaCincoComponent,
+    TelaCorridaComponent,
 
   ],
   imports: [
@@ -60,7 +63,8 @@ import { InputTextModule } from 'primeng/inputtext';
     }),
     FormsModule,
     ReactiveFormsModule,
-    InputTextModule
+    InputTextModule,
+    ScrollPanelModule
   ]
 })
 export class GeracaoPropostaOuDemandaModule { }

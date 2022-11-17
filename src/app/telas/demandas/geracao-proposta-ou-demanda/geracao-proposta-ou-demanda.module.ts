@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { RotasModule } from './../../../rotas.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,8 @@ import { NgxEditorModule } from 'ngx-editor';
 import { InputTextModule } from 'primeng/inputtext';
 import { TelaCorridaComponent } from './tela-corrida/tela-corrida.component';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import {TableModule} from 'primeng/table';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 
@@ -27,6 +30,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
   imports: [
     CommonModule,
     RotasModule,
+    TableModule,
+    DropdownModule,
     NgxEditorModule.forRoot({
       locals: {
         bold: 'Bold',
@@ -65,6 +70,9 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     ReactiveFormsModule,
     InputTextModule,
     ScrollPanelModule
+  ],
+  providers:[
+    MessageService
   ]
 })
 export class GeracaoPropostaOuDemandaModule { }

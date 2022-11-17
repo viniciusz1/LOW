@@ -19,7 +19,7 @@
                 </nav>
                 <a class="nav-link" href="#item-3" style="font-size: 0.9rem;">Documentos</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
-                     <a class="nav-link ms-3 my-1" href="#item-3-1">Frequência de Uso do Sistema</a>
+                    <a class="nav-link ms-3 my-1" href="#item-3-1">Frequência de Uso do Sistema</a>
                     <a class="nav-link ms-3 my-1" href="#item-3-2">Adicionar Documento</a>
                 </nav>
                 <a class="nav-link" href="#item-4" style="font-size: 0.9rem;">Custos Totais</a>
@@ -38,7 +38,8 @@
     </div>
 
     <div class="tela-corrida col-10">
-        <p-scrollPanel [style]="{height: '78.5vh'}" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+        <p-scrollPanel [style]="{height: '78.5vh'}" data-bs-spy="scroll" data-bs-target="#navbar-example3"
+            data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
             <div class="etapa-1" id="item-1">
                 <div class="campo" style="display: flex; justify-content: center; align-items: center; padding: 0px;"
                     *ngIf="aparecer == 0">
@@ -100,7 +101,7 @@
                             </div>
                         </div>
                         <div class="real" style="display: flex;" id="item-1-4">
-                            <div class="ben-real" style="display: grid" >
+                            <div class="ben-real" style="display: grid">
                                 <label style="font-weight: 600;">
                                     Centros de Custo:
                                 </label>
@@ -120,7 +121,8 @@
             </div>
             <div class="etapa-2" id="item-2">
                 <div style="display: grid; justify-content: center;  height: 72vh;">
-                    <div class="beneficios" style="display: flex; align-items: center; justify-content: space-between;" id="item-2-1">
+                    <div class="beneficios" style="display: flex; align-items: center; justify-content: space-between;"
+                        id="item-2-1">
                         <div class="real" style="display: flex;">
                             <div class="ben-real" style="display: grid">
                                 <label style="font-weight: 600;">
@@ -220,7 +222,7 @@
                     </div>
                 </div>
             </div>
-            <div class="etapa-4" id="item-4">
+            <!-- <div class="etapa-4" id="item-4">
                 <div style="display: flex; justify-content: center; align-items: center;">
                     <table class="table mt-5 table-bordered border-dark" id="item-4-1"
                         style="border-left: 6px #00579D solid !important; width: 61.5vw;">
@@ -269,6 +271,79 @@
                         </tbody>
                     </table>
                 </div>
+            </div> -->
+            <div class="card">
+                <h5>Row Editing</h5>
+                <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{'min-width': '50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width:20%">Code</th>
+                            <th style="width:20%">Name</th>
+                            <th style="width:20%">Category</th>
+                            <th style="width:20%">Price</th>
+                            <th style="width:20%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
+                        <tr [pEditableRow]="product">
+                            <td>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="text" [(ngModel)]="product.code">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{product.code}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="text" [(ngModel)]="product.name" required>
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{product.name}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <p-dropdown [options]="statuses" appendTo="body"
+                                            [(ngModel)]="product.inventoryStatus" [style]="{'width':'100%'}">
+                                        </p-dropdown>
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{product.inventoryStatus}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText type="text" [(ngModel)]="product.price">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        {{product.price | currency: 'USD'}}
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td>
+                                <div class="flex align-items-center justify-content-center gap-2">
+                                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow
+                                        icon="pi pi-pencil" (click)="onRowEditInit(product)"
+                                        class="p-button-rounded p-button-text"></button>
+                                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow
+                                        icon="pi pi-check" (click)="onRowEditSave(product)"
+                                        class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow
+                                        icon="pi pi-times" (click)="onRowEditCancel(product, ri)"
+                                        class="p-button-rounded p-button-text p-button-danger"></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
             <div class="etapa-5" id="item-5">
                 <div style="display: grid; justify-content: center;">

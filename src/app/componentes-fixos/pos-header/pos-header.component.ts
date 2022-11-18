@@ -1,4 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-pos-header',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PosHeaderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private location:Location) {
+    this.location.onUrlChange(e => {
+      console.log(e)
+    })
+    
+   }
+   currentRoute= "";
+  titulo = 'Demandas'
   ngOnInit(): void {
+    
   }
 
 }

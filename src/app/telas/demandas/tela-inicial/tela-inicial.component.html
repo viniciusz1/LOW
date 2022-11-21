@@ -94,7 +94,7 @@
                     </app-list-demanda>
 
 
-                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
                         <div class="d-flex justify-content-center align-items-center flex-column ">
                             <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
                                 [dadosDemada]="demanda" class="mb-2">
@@ -107,8 +107,8 @@
                     <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
                         class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
                         style="width: 30%; height: 30px">
-                        <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed"
-                            aria-controls="collapseExample" [ngClass]="!isCollapsed ? 'inverte': 'naoinverte'">
+                        <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed[i]"
+                            aria-controls="collapseExample" [ngClass]="!isCollapsed[i] ? 'inverte': 'naoinverte'">
                         </i>
                     </div>
                 </div>

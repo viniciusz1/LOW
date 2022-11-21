@@ -43,7 +43,8 @@
               {{botao.texto}}
             </button>
             <button *ngIf="!isPauta && rascunho" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Continuar Demanda</button>
-            <i *ngIf="isPauta" class="bi bi-trash-fill"></i>
+            <i role='button' *ngIf="isPauta" class="bi bi-trash-fill fs-5" (click)="clicouEmExcluir.emit()"></i>
+            
         </p>
     </div>
 </div>

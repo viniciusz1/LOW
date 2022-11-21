@@ -10,11 +10,13 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 export class ListDemandaComponent implements OnInit {
   primaryColorClass?: string = "";
   secondaryColorClass?: string = "";
-  @Output() verDocumentoProposta = new EventEmitter()
-  @Input() dadosDemada: Demanda = {}
-  @Input() mostrarBotao = true
-  constructor() { }
+  @Output() verDocumentoProposta = new EventEmitter();
+  @Output() clicouAdicionarPauta = new EventEmitter();
+  @Input() dadosDemada: Demanda = {};
+  @Input() mostrarBotao = true;
+  @Input() mostrarIconeAdicionar = false;
 
+  constructor() { }
   ngOnInit(): void {
     this.primaryColorClass = this.dadosDemada.statusDemanda;
     this.secondaryColorClass = this.dadosDemada.statusDemanda + "-sec";

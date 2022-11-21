@@ -36,16 +36,8 @@
             </div>
             <div *ngIf="tipoExibicao == false" class="row m-3">
                 <div class="col-md-8 drag-column">
-                    <div class="d-flex justify-content-between">
-                        <span class="p-input-icon-left" style="width: 80%;">
-                            <i class="pi pi-search"></i>
-                            <input type="text" class="border" style="width: 100%;" pInputText
-                                placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />
-                        </span>
-                        <button *ngIf="!showFiltro" class="btn btn-primary" style="" (click)="showFiltro = !showFiltro">
-                            Filtrar Mais
-                            <i class="bi bi-chevron-double-down"></i>
-                        </button>
+                    <div class="d-flex justify-content-center">
+                        <app-filtro-demanda class="mb-3" [mostrarIconeDeAbrirFiltro]="false"></app-filtro-demanda>
                     </div>
                     <div class="drop-column" pDroppable="demandas" (onDrop)="drop()">
                     <div *ngFor="let demanda of listaDemandas" class="mt-2">

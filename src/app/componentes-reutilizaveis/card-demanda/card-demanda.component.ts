@@ -49,7 +49,7 @@ export class CardDemandaComponent implements OnInit {
     //   this.botao = {rota: "/demandas", texto: "Adicionar a Pauta"}
     // }
     if(this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED){
-      this.botao = {rota: "", texto: "Motivo da Reprovação"}
+      this.botao = {rota: "", texto: "Ver Reprovação"}
     }
   }
 

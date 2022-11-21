@@ -1,6 +1,10 @@
+import { Recurso } from './../../../../models/recurso.model';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Validators, Editor, Toolbar } from 'ngx-editor';
+import { MessageService, SelectItem } from 'primeng/api';
+import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
+
 @Component({
   selector: 'app-tela-corrida',
   templateUrl: './tela-corrida.component.html',
@@ -10,7 +14,7 @@ export class TelaCorridaComponent implements OnInit {
 
   aparecer = 1;
 
-  constructor() { }
+  constructor(private messageService: MessageService) { }
 
   ngOnInit(): void {
   }
@@ -22,8 +26,11 @@ export class TelaCorridaComponent implements OnInit {
       console.log("Tipo incompativel")
     }
   }
-
+  recursos: Recurso[] = [{id: "1", nomeRecurso: "Recurso 1", tipoDespesa: TipoDespesa.EXTERNO, perfilDespesa: "Perfil 1", quantidadeHoras: 1, valorHora: 1, valorTotalDespesa: 1, periodoExMeses: 1, centrosCustoPagantes: []}, ]
+  clonedRecursos: { [s: string]: Recurso; } = {};
   editor: Editor = new Editor();
+  statuses: SelectItem[] = [{label: 'In Stock', value: 'INSTOCK'},{label: 'Low Stock', value: 'LOWSTOCK'},{label: 'Out of Stock', value: 'OUTOFSTOCK'}];
+  
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -34,6 +41,20 @@ export class TelaCorridaComponent implements OnInit {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
+
+  onRowEditInit(product: Recurso) {
+    this.clonedRecursos[product.id] = {...product};
+}
+
+onRowEditSave(product: Recurso) {
+        delete this.clonedRecursos[product.id];
+        this.messageService.add({severity:'success', summary: 'Success', detail:'Recurso is updated'});
+}
+
+onRowEditCancel(product: Recurso, index: number) {
+    this.recursos[index] = this.clonedRecursos[product.id];
+    delete this.clonedRecursos[product.id];
+}
 
   form = new FormGroup({
     editorContent: new FormControl('', Validators.required()),

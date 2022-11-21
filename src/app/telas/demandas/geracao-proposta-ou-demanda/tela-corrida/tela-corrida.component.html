@@ -19,7 +19,7 @@
                 </nav>
                 <a class="nav-link" href="#item-3" style="font-size: 0.9rem;">Documentos</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
-                     <a class="nav-link ms-3 my-1" href="#item-3-1">Frequência de Uso do Sistema</a>
+                    <a class="nav-link ms-3 my-1" href="#item-3-1">Frequência de Uso do Sistema</a>
                     <a class="nav-link ms-3 my-1" href="#item-3-2">Adicionar Documento</a>
                 </nav>
                 <a class="nav-link" href="#item-4" style="font-size: 0.9rem;">Custos Totais</a>
@@ -38,7 +38,8 @@
     </div>
 
     <div class="tela-corrida col-10">
-        <p-scrollPanel [style]="{height: '78.5vh'}" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+        <p-scrollPanel [style]="{height: '78.5vh'}" data-bs-spy="scroll" data-bs-target="#navbar-example3"
+            data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
             <div class="etapa-1" id="item-1">
                 <div class="campo" style="display: flex; justify-content: center; align-items: center; padding: 0px;"
                     *ngIf="aparecer == 0">
@@ -100,7 +101,7 @@
                             </div>
                         </div>
                         <div class="real" style="display: flex;" id="item-1-4">
-                            <div class="ben-real" style="display: grid" >
+                            <div class="ben-real" style="display: grid">
                                 <label style="font-weight: 600;">
                                     Centros de Custo:
                                 </label>
@@ -120,7 +121,8 @@
             </div>
             <div class="etapa-2" id="item-2">
                 <div style="display: grid; justify-content: center;  height: 72vh;">
-                    <div class="beneficios" style="display: flex; align-items: center; justify-content: space-between;" id="item-2-1">
+                    <div class="beneficios" style="display: flex; align-items: center; justify-content: space-between;"
+                        id="item-2-1">
                         <div class="real" style="display: flex;">
                             <div class="ben-real" style="display: grid">
                                 <label style="font-weight: 600;">
@@ -220,7 +222,7 @@
                     </div>
                 </div>
             </div>
-            <div class="etapa-4" id="item-4">
+            <!-- <div class="etapa-4" id="item-4">
                 <div style="display: flex; justify-content: center; align-items: center;">
                     <table class="table mt-5 table-bordered border-dark" id="item-4-1"
                         style="border-left: 6px #00579D solid !important; width: 61.5vw;">
@@ -268,6 +270,116 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div> -->
+            <div class="d-grid justify-content-center my-3">
+                <div class="d-flex">
+                    <div style="border: 3px solid #00579D;"></div>
+                    <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{'width': '61vw'}">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col"> <span> Recurso necessário</span> </th>
+                                <th scope="col">Tipo da despesa</th>
+                                <th scope="col">Perfil da despesa</th>
+                                <th scope="col">Quantidade de horas</th>
+                                <th scope="col">Valor da hora </th>
+                                <th scope="col">Valor total da despesa</th>
+                                <th scope="col">Período de execução(Em meses)</th>
+                                <th scope="col">Centros de custos pagantes</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-recursos>
+                            <tr>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="recursos.nomeRecurso" required>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{recursos.nomeRecurso}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <p-dropdown [options]="['Interno',  'Externo']" appendTo="body"
+                                                [(ngModel)]="recursos.perfilDespesa" [style]="{'width':'100%'}">
+                                            </p-dropdown>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{recursos.tipoDespesa}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="recursos.tipoDespesa" required>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{recursos.perfilDespesa}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="recursos.quantidadeHoras" required>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{recursos.quantidadeHoras}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="recursos.valorHora" required>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{recursos.valorHora}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="recursos.valorTotalDespesa" required>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{recursos.valorTotalDespesa}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="recursos.periodoExMeses" required>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{recursos.periodoExMeses}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                                <td pEditableColumn>
+                                    <p-cellEditor>
+                                        <ng-template pTemplate="input">
+                                            <input pInputText type="text" [(ngModel)]="recursos.centrosCustoPagantes" required>
+                                        </ng-template>
+                                        <ng-template pTemplate="output">
+                                            {{recursos.centrosCustoPagantes}}
+                                        </ng-template>
+                                    </p-cellEditor>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-primary"><i class="bi bi-plus-lg"></i></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
             </div>
             <div class="etapa-5" id="item-5">

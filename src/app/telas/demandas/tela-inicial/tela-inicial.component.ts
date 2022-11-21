@@ -1,3 +1,4 @@
+import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
@@ -9,7 +10,7 @@ import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devol
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
 import { listaDemandas } from './listDemandas';
 import { JoyrideService } from 'ngx-joyride';
@@ -27,24 +28,25 @@ export class TelaInicialComponent implements OnInit {
     private demandasService: DemandaService,
     private router: Router,
     private readonly joyrideService: JoyrideService
-    ) {
-      if(router.url == '/tela-inicial/rascunhos'){
-        this.tipoRascunho = true;
-      }
+  ) {
+    if (router.url == '/tela-inicial/rascunhos') {
+      this.tipoRascunho = true;
+      this.isFiltrado = true;
     }
+  }
 
-    onClick() {
-      console.log(textoTutorial)
-      this.joyrideService.startTour(
-          { 
-            steps: ['bv','um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
+  onClick() {
+    console.log(textoTutorial)
+    this.joyrideService.startTour(
+      {
+        steps: ['bv', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
       }
-      );
+    );
   }
   textoTutorial = textoTutorial
-  position_list_cards = 0;
+  positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   //true = card
-  tipo_exibicao_demanda = true;
+  tipoExibicaoDemanda = true;
   isCollapsed = true;
   isFiltrado = false;
   showFiltro = false;
@@ -52,11 +54,40 @@ export class TelaInicialComponent implements OnInit {
   listaDemandas: Demanda[] = []
   tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
-  
-  moveSidebar(){
-    if(this.showSidebar == 0){
+  pesquisaDemanda = ""
+
+
+  changeRight(index: number) {
+    if (this.positionListCards[index] > -2800) {
+      this.positionListCards[index] -= 700
+      console.log(this.positionListCards[index])
+    }
+  }
+  changeLeft(index: number) {
+    if (this.positionListCards[index] < 0) {
+      this.positionListCards[index] += 700
+      console.log(this.positionListCards[index])
+    }
+  }
+
+  changeToList() {
+    this.tipoExibicaoDemanda = false
+  }
+
+  changeExibicao() {
+    this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda
+  }
+
+  changeToCard() {
+    this.tipoExibicaoDemanda = true
+  }
+
+
+
+  moveSidebar() {
+    if (this.showSidebar == 0) {
       this.showSidebar = -25
-    }else{
+    } else {
       this.showSidebar = 0
     }
   }
@@ -64,10 +95,16 @@ export class TelaInicialComponent implements OnInit {
   sortData(sort: Sort) {
     console.log(sort)
   }
-  openModalPropostaDocumento(){
+  openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
     });
+  }
+
+  openModalReprovacaoDemanda() {
+    this.dialog.open(ModalReprovacaoDemandaComponent), {
+      maxWidth: '70vw',
+    }
   }
 
   openModalDemandaDocumento() {
@@ -76,13 +113,13 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalAtaDocumento(){
+  openModalAtaDocumento() {
     this.matDialog.open(ModalAtaDocumentoComponent, {
       maxWidth: '70vw',
     });
   }
 
-  openModalFiltroDemandas(){
+  openModalFiltroDemandas() {
     this.dialog.open(ModalFiltroDemandasComponent, {
       minWidth: '300px',
     });
@@ -99,69 +136,53 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  change_right(){
-    this.position_list_cards -= 700
-  }
-  change_to_list(){
-    this.tipo_exibicao_demanda = false
-  }
-
-  change_exibicao(){
-    this.tipo_exibicao_demanda = !this.tipo_exibicao_demanda
-  }
-  
-  change_to_card(){
-    this.tipo_exibicao_demanda = true
-  }
-
-  change_left() {
-    this.position_list_cards += 700
-  }
 
 
-  exibirFilasDeStatus(){
-    if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
+  exibirFilasDeStatus() {
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog')) {
       this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'backlog')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog')) {
       this.listaTituloNaoFiltrado.push("Backlog - Propostas")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'assessment')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
       this.listaTituloNaoFiltrado.push("Assessment")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'business-case')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'business-case')) {
       this.listaTituloNaoFiltrado.push("Business Case")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'to-do')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'to-do')) {
       this.listaTituloNaoFiltrado.push("To Do")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')){
+    if (this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')) {
       this.listaTituloNaoFiltrado.push("Design and Build")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'support')){
-      this.listaTituloNaoFiltrado.push("Status: Support")
+    if (this.listaDemandas.some(e => e.statusDemanda == 'support')) {
+      this.listaTituloNaoFiltrado.push("Support")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'cancelled')){
-      this.listaTituloNaoFiltrado.push("Status: Cancelled")
+    if (this.listaDemandas.some(e => e.statusDemanda == 'cancelled')) {
+      this.listaTituloNaoFiltrado.push("Cancelled")
     }
-    if(this.listaDemandas.some(e => e.statusDemanda == 'done')){
-      this.listaTituloNaoFiltrado.push("Status: Done")
+    if (this.listaDemandas.some(e => e.statusDemanda == 'done')) {
+      this.listaTituloNaoFiltrado.push("Done")
     }
   }
 
   ngOnInit(): void {
     this.demandasService.getDemandas()
-    .subscribe({next: (list) => {
-      this.listaDemandas = list
-      console.log(this.listaDemandas)
-      this.testandoEsquemaExibicaoDemandas()
-      this.exibirFilasDeStatus()
-    },
-    error: (err) => {
-      console.log(err)
-    }})
+      .subscribe({
+        next: (list) => {
+          this.listaDemandas = list
+          console.log(this.listaDemandas)
+          this.testandoEsquemaExibicaoDemandas()
+          this.exibirFilasDeStatus()
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
   }
-  testandoEsquemaExibicaoDemandas(){
+  testandoEsquemaExibicaoDemandas() {
     this.listaDemandas = []
     this.listaDemandas.push(...listaDemandas)
   }

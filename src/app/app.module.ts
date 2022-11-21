@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { NgModule  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -29,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [DemandaService],
   bootstrap: [AppComponent],

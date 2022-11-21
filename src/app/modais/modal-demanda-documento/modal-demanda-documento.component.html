@@ -74,6 +74,7 @@
   <p><b>Frequência de uso do sistema:</b>Sistema utilizado diariamente</p>
   <h4><b>DOCUMENTOS:</b></h4>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+<mat-dialog-actions align="end" *ngIf="user == 'gerente'">
+  <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">Cancelar</button>
+  <button class="btn btn-primary">Aprovar demanda</button>
 </mat-dialog-actions>

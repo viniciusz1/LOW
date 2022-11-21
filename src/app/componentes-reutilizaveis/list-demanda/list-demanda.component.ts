@@ -12,6 +12,7 @@ export class ListDemandaComponent implements OnInit {
   secondaryColorClass?: string = "";
   @Output() verDocumentoProposta = new EventEmitter()
   @Input() dadosDemada: Demanda = {}
+  @Input() mostrarBotao = true
   constructor() { }
 
   ngOnInit(): void {

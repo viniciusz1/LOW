@@ -5,6 +5,12 @@
     width: 50px;
     background-color: rgba(0, 0, 0, 0.26);
 }
+
+.right-arrow:hover, .left-arrow:hover{
+    background-color: rgba(0, 0, 0, 0.596);
+     transition: 0.3s;
+}
+
 h5{
     margin-bottom: 3px;
 }

@@ -1,46 +1,30 @@
-<div style="height: 77vh; width: auto;">
+<div style="width: auto;">
     <div>
         <div class="container mt-4">
             <div class="d-flex justify-content-between">
                 <div>
-                    <div>
-                        <b>Datas das Comissões</b>
-                        <div class="linha"></div>
-
-                    </div>
                     <button *ngIf="tipoExibicao == true" class="btn btn-primary" (click)="tipoExibicao = !tipoExibicao">
                         Marcar Reunião
                         <i class="bi bi-people"></i>
                     </button>
-                    <button *ngIf="tipoExibicao == true" class="btn btn-primary ms-3" [routerLink]="'/tela-inicial/calendario'">
-                        Ver suas reuniões
+                    <!-- [routerLink]="'/tela-inicial/calendario'" -->
+                    <button *ngIf="tipoExibicao == true" class="btn btn-primary ms-3" (click)="openCalendario()">
+                        <i class="bi bi-calendar-week me-2"></i>Ver em calendário
                     </button>
                 </div>
-                <div>
-                    <div class="nav">
-                        <div *ngIf="!showFiltro" class="div-input me-3 pesquisar centralizar rounded">
-                            <i class="bi bi-search px-2 "></i> <input class="input" type="text"
-                                placeholder="Pesquisar Demanda">
-                        </div>
-                        <button *ngIf="!showFiltro" class="btn btn-primary" (click)="showFiltro = !showFiltro">
-                            Filtrar Mais
-                            <i class="bi bi-chevron-double-down"></i>
-                        </button>
-                        <app-filtro-reuniao *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
-                        </app-filtro-reuniao>
-                    </div>
+                <div *ngIf="tipoExibicao" class="d-flex align-items-center">
+                    <span  *ngIf="!showFiltro" class="p-input-icon-left" style="width: 80%;">
+                        <i class="pi pi-search"></i>
+                        <input type="text" class="border" style="width: 100%;" pInputText
+                            placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />
+                    </span>
+                    <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 180px;" (click)="showFiltro = !showFiltro">
+                        Filtrar Mais
+                        <i class="bi bi-chevron-double-down"></i>
+                    </button>
+                    <app-filtro-reuniao *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
+                    </app-filtro-reuniao>
                 </div>
-            </div>
-
-
-            <div class="d-flex justify-content-between">
-                <button *ngIf="tipoExibicao == false" class="btn btn-primary" (click)="openModalSuaPauta()">
-                    Sua Pauta<i class="bi bi-plus-lg"></i>
-                </button>
-                <button *ngIf="tipoExibicao == false" class="btn btn-primary">
-                    Adicionar Proposta
-                    <img style="width: 23px;" src="assets/pasta.png" alt="" srcset="">
-                </button>
             </div>
         </div>
         <div class="container">
@@ -51,13 +35,56 @@
                 <app-card-reuniao class="m-1"></app-card-reuniao>
             </div>
             <div *ngIf="tipoExibicao == false" class="row m-3">
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
-                <app-card-demanda [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
+                <div class="col-md-8 drag-column">
+                    <div class="d-flex justify-content-between">
+                        <span class="p-input-icon-left" style="width: 80%;">
+                            <i class="pi pi-search"></i>
+                            <input type="text" class="border" style="width: 100%;" pInputText
+                                placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />
+                        </span>
+                        <button *ngIf="!showFiltro" class="btn btn-primary" style="" (click)="showFiltro = !showFiltro">
+                            Filtrar Mais
+                            <i class="bi bi-chevron-double-down"></i>
+                        </button>
+                    </div>
+
+                    <div *ngFor="let demanda of listaDemandas" class="mt-2">
+                        <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas"
+                            [dadosDemada]="demanda" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()">
+                        </app-list-demanda>
+
+                    </div>
+                </div>
+                <div class="col-md-4" style="height: 60vh;" pDroppable="demandas" (onDrop)="drop()">
+                    <div class="border rounded drop-column p-1">
+
+                        <p-scrollPanel [style]="{width: '100%', height: '40vh'}">
+                            <div *ngIf="listaDemandasEscolhidas.length == 0">
+                                Arraste as Propostas para este campo!
+                            </div>
+                            <app-card-demanda [dadosDemada]="demanda" *ngFor="let demanda of listaDemandasEscolhidas"
+                                [mudarTamanho]="'100'" class="col-6 mt-3"></app-card-demanda>
+                        </p-scrollPanel>
+
+                    </div>
+                    <div class="p-fluid grid formgrid mt-3">
+                        <div class="field col-12 md:col-4">
+                            <label for="time">Data e Hora da Reunião:</label>
+                            <p-calendar placeholder="Clique aqui!" [(ngModel)]="dataReuniao" [showTime]="true"
+                                [showSeconds]="true" inputId="time"></p-calendar>
+                        </div>
+                        <div class="field col-12 md:col-4 mt-3">
+                            <label for="time">Selecione a Comissão da Reunião:</label>
+                            <p-cascadeSelect [(ngModel)]="comissaoSelecionada" [options]="listaDeComissoesReuniao"
+                                optionLabel="" [optionGroupChildren]="[]" [style]="{'minWidth': '14rem'}"
+                                placeholder="Selecione a Comissão"></p-cascadeSelect>
+
+                        </div>
+                        <div class="field col-12 md:col-4 mt-3">
+                            <button class="btn btn-primary">Marcar Reunião</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>

@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { TelaVerPauta } from './tela-ver-pauta/tela-ver-pauta.component';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -6,6 +7,9 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
 import { TelaReuniaoComponent } from './tela-reuniao/tela-reuniao.component';
 import { InputTextModule } from "primeng/inputtext";
 import { TelaCalendarioComponent } from './tela-calendario/tela-calendario.component';
+import {DragDropModule} from 'primeng/dragdrop';
+import {CalendarModule} from 'primeng/calendar';
+import {CascadeSelectModule} from 'primeng/cascadeselect';
 
 import 'web-component-essentials';
 
@@ -19,7 +23,11 @@ import 'web-component-essentials';
     CommonModule,
     ComponentesReutilizaveisModule,
     InputTextModule,
-    RouterModule
+    RouterModule,
+    DragDropModule,
+    CalendarModule,
+    CascadeSelectModule,
+    SharedModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

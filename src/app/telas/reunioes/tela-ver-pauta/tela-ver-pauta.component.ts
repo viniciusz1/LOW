@@ -2,6 +2,7 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { Demanda } from 'src/app/models/demanda.model';
 
 import { Component, OnInit } from '@angular/core';
+import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 
 @Component({
   selector: 'app-tela-ver-pauta',
@@ -16,6 +17,9 @@ export class TelaVerPauta implements OnInit {
     this.demandaService.getDemandas()
     .subscribe({next: (x) => {
       this.listaDemanda = x
+      this.listaDemanda.forEach((demanda) => {
+      demanda.statusDemanda = StatusDemanda.TO_DO
+      })
     }})
   }
 

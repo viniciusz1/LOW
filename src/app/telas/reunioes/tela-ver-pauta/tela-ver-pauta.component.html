@@ -8,9 +8,9 @@
             <div>
             </div>
         </div>
-        <div class="col-6 mb-5" style="overflow: auto; max-height: 80vh;" >
-            <div>
-                <app-card-demanda class="mb-3" *ngFor="let demanda of listaDemanda" [dadosDemada]="demanda" [mudarTamanho]="'100%'"></app-card-demanda>
+        <div class="col-6 mb-5" style="overflow: auto; max-height: 60vh;" >
+            <div  *ngFor="let demanda of listaDemanda" class="mb-2">
+                <app-card-demanda [dadosDemada]="demanda" [mudarTamanho]="'100%'"></app-card-demanda>
             </div>
         </div>
         <div class="col-6 direita-grande">

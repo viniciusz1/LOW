@@ -15,6 +15,7 @@ export class ListDemandaComponent implements OnInit {
   @Input() mostrarBotao = true
   constructor() { }
 
+
   ngOnInit(): void {
     this.primaryColorClass = this.dadosDemada.statusDemanda;
     this.secondaryColorClass = this.dadosDemada.statusDemanda + "-sec";

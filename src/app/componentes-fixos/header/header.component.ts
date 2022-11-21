@@ -14,11 +14,6 @@ export class HeaderComponent implements OnInit {
   items: MenuItem[] = [];
 
   ngOnInit() {
-      this.items = [
-          {label:'Categories'},
-          {label:'Sports'},
-          {label:'Football'},
-          {label:'Countries'}
-      ];
+
   }
 }

@@ -1,8 +1,19 @@
+<p-timeline [value]="events1" align="alternate" layout="horizontal">
+  <ng-template pTemplate="marker" let-event>
+      <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+          <i [ngClass]="event.icon"></i>
+      </span>
+  </ng-template>
+  <ng-template pTemplate="content" let-event>
+  </ng-template>
+</p-timeline>
+
+
 <p class="paragrafo-inicial"><b class="me-2">01</b><span><img style="width: 60px;"
       src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt=""></span></p>
 <mat-dialog-content class="mat-typography">
   <h4 mat-dialog-title class="d-flex justify-content-between"><span><b>SOLICITANTE: </b>Vinicius Bonatti Benner</span>
-    <span><b>DATA:</b> 18/05/2022</span></h4>
+    <span><b>DATA:</b> 22/05/2022</span></h4>
   <h4><b>SETOR:</b> TI</h4>
   <h4 class="d-flex justify-content-center"><b>MELHORIA PERFORMANCE E DISPONIBILIDADE DO SISTEMA MAESTRO – 1000025500</b></h4>
 

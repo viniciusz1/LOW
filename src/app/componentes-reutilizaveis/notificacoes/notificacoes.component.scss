@@ -1,16 +1,89 @@
-.bloco{
-    width: 400px;
-    height: 500px;
-    background-color: #eee;
+.bloco {
+    width: 20.8vw;
+    background-color: #fff;
     position: absolute;
     z-index: 99;
     right: 5rem;
     top: 6%;
     overflow: auto;
+    border-radius: 5PX;
+    border: 1px solid #c5bcbc;
 }
-.mensagem{
+
+.mensagem {
     width: 100%;
-    background-color: #FFFFFF;
     justify-content: center;
     align-items: center;
+}
+
+h4{
+    margin-bottom: 2vh;
+}
+
+
+.custom-marker {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+::ng-deep {
+
+    .p-timeline-event-content,
+    .p-timeline-event-opposite {
+        line-height: 1;
+    }
+}
+
+::ng-deep {
+    .p-timeline-event-opposite {
+        display: none;
+    }
+}
+
+::ng-deep {
+    .p-card{
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+::ng-deep {
+    .p-card{
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+::ng-deep {
+    .p-card-body{
+        padding: 0rem !important;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    ::ng-deep {
+        .customized-timeline {
+            .p-timeline-event:nth-child(even) {
+                flex-direction: row !important;
+
+                .p-timeline-event-content {
+                    text-align: left !important;
+                }
+            }
+
+            .p-timeline-event-opposite {
+                flex: 0;
+            }
+
+            .p-card {
+                margin-top: 1rem;
+            }
+        }
+    }
 }

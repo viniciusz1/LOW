@@ -13,6 +13,7 @@ import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/com
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ModalReprovacaoDemandaComponent } from './modal-reprovacao-demanda/modal-reprovacao-demanda.component';
+import {TimelineModule} from 'primeng/timeline';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ModalReprovacaoDemandaComponent } from './modal-reprovacao-demanda/moda
     MatSelectModule,
     ComponentesReutilizaveisModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    TimelineModule
   ],
   exports: [
     ModalDemandaDocumentoComponent

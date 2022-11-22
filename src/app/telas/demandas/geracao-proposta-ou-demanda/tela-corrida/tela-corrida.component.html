@@ -3,19 +3,10 @@
         <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
             <nav class="nav nav-pills flex-column">
                 <a class="nav-link" href="#item-1" style="font-size: 0.9rem;">Dados Gerais</a>
-                <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
-                    <a class="nav-link ms-3 my-1" href="#item-1-1">Título</a>
-                    <a class="nav-link ms-3 my-1" href="#item-1-2">Situação Atual</a>
-                    <a class="nav-link ms-3 my-1" href="#item-1-3">Objetivo</a>
-                    <a class="nav-link ms-3 my-1" href="#item-1-4">Centro de Custo</a>
-                </nav>
                 <a class="nav-link" href="#item-2" style="font-size: 0.9rem;">Benefícios</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
-                    <a class="nav-link ms-3 my-1" href="#item-2-1">Beneficio Real</a>
-                    <a class="nav-link ms-3 my-1" href="#item-2-1">Beneficio Potencial</a>
-                    <a class="nav-link ms-3 my-1" href="#item-2-3">Memória de Cálculo Real</a>
-                    <a class="nav-link ms-3 my-1" href="#item-2-4">Memória de Cálculo Potencial</a>
-                    <a class="nav-link ms-3 my-1" href="#item-2-5">Benefício Qualitativo</a>
+                    <a class="nav-link ms-3 my-1" href="#item-2-1">Beneficios</a>
+                    <a class="nav-link ms-3 my-1" href="#item-2-3">Memória de Cálculo</a>
                 </nav>
                 <a class="nav-link" href="#item-3" style="font-size: 0.9rem;">Documentos</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
@@ -272,10 +263,10 @@
                     </table>
                 </div>
             </div> -->
-            <div class="d-grid justify-content-center my-3">
+            <div class="d-grid justify-content-center my-3" id="item-4">
                 <div class="d-flex">
                     <div style="border: 3px solid #00579D;"></div>
-                    <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{'width': '61vw'}">
+                    <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{'width': '61vw'}" id="item-4-1">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th scope="col"> <span> Recurso necessário</span> </th>

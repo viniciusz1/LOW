@@ -14,6 +14,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { FiltroDemandaComponent } from './filtro-demanda/filtro-demanda.component';
 import { FiltroReuniaoComponent } from './filtro-reuniao/filtro-reuniao.component';
 import {InputTextModule} from 'primeng/inputtext';
+import { TimelineModule } from 'primeng/timeline';
+import { CardModule } from 'primeng/card';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import {InputTextModule} from 'primeng/inputtext';
     MatMenuModule,
     MatIconModule,
     RotasModule,
-    InputTextModule
+    InputTextModule,
+    TimelineModule,
+    CardModule,
+    ScrollPanelModule
   ],
   exports:[
     CardDemandaComponent,

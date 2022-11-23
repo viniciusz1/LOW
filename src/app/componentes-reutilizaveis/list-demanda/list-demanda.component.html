@@ -22,7 +22,8 @@
             <button class="btn btn-primary btn-sm">Classificar Demanda</button>
         </li>
         <li>
-            <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
+            <i class="bi bi-three-dots-vertical three-dots" *ngIf="!mostrarIconeAdicionar" role="button" [matMenuTriggerFor]="menu"></i>
+            <i class="bi bi-plus-lg" *ngIf="mostrarIconeAdicionar" role="button" (click)="clicouAdicionarPauta.emit()"></i>
             <mat-menu #menu="matMenu">
                 <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
                   <span>Histórico</span>

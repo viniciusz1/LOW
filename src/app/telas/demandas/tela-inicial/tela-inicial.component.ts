@@ -47,7 +47,7 @@ export class TelaInicialComponent implements OnInit {
   positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   //true = card
   tipoExibicaoDemanda = true;
-  isCollapsed = true;
+  isCollapsed: boolean[] = [true, true, true, true, true, true, true, true, true];
   isFiltrado = false;
   showFiltro = false;
   showSidebar = -25;

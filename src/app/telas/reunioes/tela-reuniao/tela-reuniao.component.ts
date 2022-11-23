@@ -15,8 +15,8 @@ import { Component, OnInit } from '@angular/core';
 export class TelaReuniaoComponent implements OnInit {
   tipoExibicao = true;
   showFiltro = false;
-  dataReuniao: any; 
-  comissaoSelecionada:any;
+  dataReuniao: any;
+  comissaoSelecionada: any;
   pesquisaDemanda: string = "";
   listaDeComissoesReuniao: string[] = ['Vendas', 'Compras', 'Financeiro', 'RH', 'Marketing', 'TI', 'Jurídico', 'Diretoria'];
   listaDemandas: Demanda[] = [{
@@ -29,12 +29,12 @@ export class TelaReuniaoComponent implements OnInit {
     statusDemanda: StatusDemanda.TO_DO,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
-  },{
+  }, {
     autorDemanda: "Sabrina Hegmann",
     statusDemanda: StatusDemanda.BUSINESS_CASE,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
-  },{
+  }, {
     autorDemanda: "Sabrina Hegmann",
     statusDemanda: StatusDemanda.CANCELLED,
     departamentoBenDemanda: "Tecnologia da Informação",
@@ -44,17 +44,17 @@ export class TelaReuniaoComponent implements OnInit {
     statusDemanda: StatusDemanda.TO_DO,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
-  },{
+  }, {
     autorDemanda: "Sabrina Hegmann",
     statusDemanda: StatusDemanda.BUSINESS_CASE,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
-  }]; 
+  }];
 
-  listaDemandasEscolhidas: Demanda[] = []; 
+  listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
 
-  openModalSuaPauta(){
+  openModalSuaPauta() {
     this.dialog.open(ModalSuaPautaComponent, {
       minWidth: '300px',
     });
@@ -62,42 +62,52 @@ export class TelaReuniaoComponent implements OnInit {
 
   dragStart(demanda: Demanda) {
     this.draggedDemanda = demanda;
-}
+  }
 
-drop() {
-  console.log("hey")
+  excluirDemanda(demanda: Demanda) {
+    this.listaDemandasEscolhidas.splice(this.listaDemandasEscolhidas.indexOf(demanda), 1);
+    this.listaDemandas.push(demanda);
+  }
+
+  adicionarDemanda(demanda: Demanda) {
+    this.listaDemandasEscolhidas.push(demanda);
+    this.listaDemandas.splice(this.listaDemandas.indexOf(demanda), 1);
+  }
+
+  drop() {
     if (this.draggedDemanda) {
-        let draggedProductIndex = this.findIndex(this.draggedDemanda);
-        this.listaDemandasEscolhidas = [...this.listaDemandasEscolhidas, this.draggedDemanda];
-        this.listaDemandas = this.listaDemandas.filter((val,i) => i!=draggedProductIndex);
-        this.draggedDemanda = undefined;
+      let draggedProductIndex = this.findIndex(this.draggedDemanda);
+      this.listaDemandasEscolhidas = [...this.listaDemandasEscolhidas, this.draggedDemanda];
+      this.listaDemandas = this.listaDemandas.filter((val, i) => i != draggedProductIndex);
+      this.draggedDemanda = undefined;
     }
-}
+  }
 
-dragEnd() {
+  dragEnd() {
     this.draggedDemanda = undefined;
-}
+  }
 
-findIndex(demanda: Demanda) {
+  findIndex(demanda: Demanda) {
     let index = -1;
-    for(let i = 0; i < this.listaDemandas.length; i++) {
-        if (demanda.codigoDemanda === this.listaDemandas[i].codigoDemanda) {
-            index = i;
-            break;
-        }
+    for (let i = 0; i < this.listaDemandas.length; i++) {
+      if (demanda.codigoDemanda === this.listaDemandas[i].codigoDemanda) {
+        index = i;
+        break;
+      }
     }
     return index;
-}
+  }
 
   constructor(
     public dialog: Dialog,) {
   }
 
-  openCalendario(){
+  openCalendario() {
     this.dialog.open(TelaCalendarioComponent, {
-      minWidth:'60vw'
+      minWidth: '60vw'
     })
   }
 
   ngOnInit() {
-}}
+  }
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { RotasService } from 'src/app/services/rotas.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,19 @@ import { MenuItem } from 'primeng/api';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private rotasService: RotasService) { }
   mostrar_modal = false;
 
   items: MenuItem[] = [];
+  activeItem: MenuItem | undefined;
 
   ngOnInit() {
+    this.rotasService.titulo.subscribe((texto) => {
+      this.items[0] = {label: "Home"},
+      this.items[1] = { label: texto };
+    })
 
+
+    this.activeItem = this.items[0];
   }
 }

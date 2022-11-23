@@ -33,14 +33,14 @@
             [stepContentParams]="{'texto': textoTutorial[1]}" class="nav justify-content-center">
             <div  *ngIf="!showFiltro" class="d-flex align-items-center justify-content-center">
                 <span  *ngIf="!showFiltro" class="p-input-icon-left" style="width: 80%;">
-                    <i class="pi pi-search"></i>
-                    <input type="text" class="border" style="width: 100%;" pInputText
-                        placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />
-                </span>
-                <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 180px;" (click)="showFiltro = !showFiltro">
-                    Filtrar Mais
-                    <i class="bi bi-chevron-double-down"></i>
-                </button>
+                        <i class="pi pi-search"></i>
+                        <input type="text" class="border" style="width: 100%;" pInputText
+                            placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />
+                    </span>
+                    <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 180px;" (click)="showFiltro = !showFiltro">
+                        Filtrar Mais
+                        <i class="bi bi-chevron-double-down"></i>
+                    </button>
             </div>
 
             <app-filtro-demanda *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
@@ -159,7 +159,7 @@
     </div>
 
 
-    <div *ngIf="isFiltrado && tipoExibicaoDemanda" style="width: 70vw;">
+    <div *ngIf="isFiltrado && tipoExibicaoDemanda">
         <div class="container">
             <div class="row">
                 <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandas"

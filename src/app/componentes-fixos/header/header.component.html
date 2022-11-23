@@ -4,24 +4,24 @@
             <img class="my-2 ms-5" style="width: 70px;"
                 src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="">
         </li>
-        <nav aria-label="breadcrumb" class="ms-4">
+        <nav aria-label="breadcrumb" class="ms-4" *ngIf="!inicial">
             <ol class="breadcrumb" style="margin:0">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item"><a href="#">Demandas</a></li>
             </ol>
           </nav>
-    </ul>
-    <ul class="nav justify-content-end nav-items-center" style="width:60%">
-        <li class="nav-item">
+    </ul >
+    <ul class="nav justify-content-end nav-items-center" style="width:60%" >
+        <li class="nav-item" *ngIf="!inicial">
             <a class="nav-link" routerLink="/tela-inicial/data-comissao">REUNIÕES</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!inicial">
             <a role="button" class="nav-link active" routerLink="/tela-inicial">DEMANDAS</a>
         </li>
-        <li role="button" class="nav-item" routerLink="/tela-inicial/chat">
+        <li role="button" class="nav-item" routerLink="/tela-inicial/chat" *ngIf="!inicial">
             <a class="nav-link"><i class="bi bi-chat-left-dots icon"></i></a>
         </li>
-        <li role="button" class="nav-item" (click)="mostrar_modal = !mostrar_modal">
+        <li role="button" class="nav-item" (click)="mostrar_modal = !mostrar_modal" *ngIf="!inicial">
             <a class="nav-link"><i class="bi bi-bell icon"></i></a>
             <app-notificacoes *ngIf="mostrar_modal"></app-notificacoes>
         </li>
@@ -46,7 +46,7 @@
             </button>
 
         </mat-menu>
-        <li [matMenuTriggerFor]="menu" role="button" class="nav-item">
+        <li [matMenuTriggerFor]="menu" role="button" class="nav-item" *ngIf="!inicial">
             <a class="nav-link"><i class="bi bi-person-square icon"></i></a>
         </li>
         <mat-menu #menu="matMenu">

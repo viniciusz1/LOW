@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TelaLoginComponent } from './tela-login.component';
+import {InputTextModule} from 'primeng/inputtext';
 
 describe('TelaLoginComponent', () => {
   let component: TelaLoginComponent;

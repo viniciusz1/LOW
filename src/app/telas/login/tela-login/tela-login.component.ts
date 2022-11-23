@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {InputTextModule} from 'primeng/inputtext';
 
 @Component({
   selector: 'app-tela-login',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tela-login.component.scss']
 })
 export class TelaLoginComponent implements OnInit {
+
+  usuario = "";
+  senha = "";
 
   constructor() { }
 

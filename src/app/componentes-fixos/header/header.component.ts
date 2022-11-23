@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +10,28 @@ import { MenuItem } from 'primeng/api';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private location:Location,
+    private router: Router
+    ) { }
   mostrar_modal = false;
 
   items: MenuItem[] = [];
+  inicial = true;
 
   ngOnInit() {
-
+    console.log(this.router.url)
+    if(this.router.url != "/"){
+      this.inicial = false;
+    }
+    // this.location.onUrlChange(e => {
+    //   console.log(e)
+    // })
+      this.items = [
+          {label:'Categories'},
+          {label:'Sports'},
+          {label:'Football'},
+          {label:'Countries'}
+      ];
   }
 }

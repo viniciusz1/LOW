@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   inicial = true;
 
   ngOnInit() {
-    console.log(this.router.url)
+    
     if(this.router.url != "/"){
       this.inicial = false;
     }

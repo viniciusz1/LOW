@@ -38,13 +38,13 @@ export class CardDemandaComponent implements OnInit {
 
   botoes(){
     if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG){
-      this.botao = {rota: "/tela-inicial/proposta/1", texto: "Classificar Demanda"}
+      this.botao = {rota: "/tela-inicial/classificar-demanda", texto: "Classificar Demanda"}
     }
     if(this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT){
-      this.botao = {rota: "/tela-inicial/data-comissao", texto: "Adicionar Proposta"}
+      this.botao = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}
     }
     if(this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE){
-      this.botao = {rota: "/tela-inicial/data-comissao", texto: "Adicionar Proposta"}
+      this.botao = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}
     }
     // if(this.dadosDemada.statusDemanda == StatusDemanda.TO_DO){
     //   this.botao = {rota: "/demandas", texto: "Adicionar a Pauta"}

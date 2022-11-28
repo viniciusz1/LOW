@@ -99,36 +99,42 @@ export class TelaInicialComponent implements OnInit {
   openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
+      minWidth: '50vw',
     });
   }
 
   openModalReprovacaoDemanda() {
-    this.dialog.open(ModalReprovacaoDemandaComponent), {
+    this.matDialog.open(ModalReprovacaoDemandaComponent), {
       maxWidth: '70vw',
+      minWidth: '50vw',
     }
   }
 
   openModalDemandaDocumento() {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
+      minWidth: '50vw',
     });
   }
 
   openModalAtaDocumento() {
     this.matDialog.open(ModalAtaDocumentoComponent, {
       maxWidth: '70vw',
+      minWidth: '50vw',
     });
   }
 
 
   openModalMotivoDevolucao() {
     this.matDialog.open(ModalMotivoDevolucaoComponent, {
+      maxWidth: '70vw',
       minWidth: '50vw',
     });
   }
 
   openModalParecerComissaoProposta() {
     this.matDialog.open(ModalParecerComissaoPropostaComponent, {
+      maxWidth: '70vw',
       minWidth: '50vw',
     });
   }
@@ -170,8 +176,8 @@ export class TelaInicialComponent implements OnInit {
     // this.openModalAtaDocumento()
     // this.openModalDemandaDocumento()
     // this.openModalMotivoDevolucao()
-    this.openModalParecerComissaoProposta()
-    // this.openModalReprovacaoDemanda()
+    // this.openModalParecerComissaoProposta()
+    this.openModalReprovacaoDemanda()
     // this.openModalFiltroDemandas()
 
     

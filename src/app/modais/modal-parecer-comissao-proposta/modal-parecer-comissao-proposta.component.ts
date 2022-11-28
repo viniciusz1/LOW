@@ -9,6 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class ModalParecerComissaoPropostaComponent implements OnInit {
 
   constructor(public dialogRef: DialogRef<ModalParecerComissaoPropostaComponent>) { }
+  tipoAtaSelecionada: string = "";
+  tipoAtas = [
+    { name: 'Ata Publicada', value: '0' },
+    { name: 'Ata não Publicada', value: '1' },
+  ]
 
   ngOnInit(): void {
   }

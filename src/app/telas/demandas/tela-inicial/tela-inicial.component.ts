@@ -15,6 +15,7 @@ import { Sort } from '@angular/material/sort';
 import { listaDemandas } from './listDemandas';
 import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from './textoDoTutorial';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -119,20 +120,16 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalFiltroDemandas() {
-    this.dialog.open(ModalFiltroDemandasComponent, {
-      minWidth: '300px',
-    });
-  }
+
   openModalMotivoDevolucao() {
-    this.dialog.open(ModalMotivoDevolucaoComponent, {
-      minWidth: '300px',
+    this.matDialog.open(ModalMotivoDevolucaoComponent, {
+      minWidth: '50vw',
     });
   }
 
   openModalParecerComissaoProposta() {
-    this.dialog.open(ModalParecerComissaoPropostaComponent, {
-      minWidth: '300px',
+    this.matDialog.open(ModalParecerComissaoPropostaComponent, {
+      minWidth: '50vw',
     });
   }
 
@@ -169,6 +166,15 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.openModalPropostaDocumento()
+    // this.openModalAtaDocumento()
+    // this.openModalDemandaDocumento()
+    // this.openModalMotivoDevolucao()
+    this.openModalParecerComissaoProposta()
+    // this.openModalReprovacaoDemanda()
+    // this.openModalFiltroDemandas()
+
+    
     this.demandasService.getDemandas()
       .subscribe({
         next: (list) => {

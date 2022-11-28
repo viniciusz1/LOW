@@ -40,7 +40,7 @@ export class TelaInicialComponent implements OnInit {
     console.log(textoTutorial)
     this.joyrideService.startTour(
       {
-        steps: ['bv', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
+        steps: ['bv', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete'],
       }
     );
   }
@@ -177,7 +177,7 @@ export class TelaInicialComponent implements OnInit {
     // this.openModalDemandaDocumento()
     // this.openModalMotivoDevolucao()
     // this.openModalParecerComissaoProposta()
-    this.openModalReprovacaoDemanda()
+    // this.openModalReprovacaoDemanda()
     // this.openModalFiltroDemandas()
 
     

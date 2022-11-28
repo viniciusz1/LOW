@@ -1,3 +1,4 @@
+import { textoTutorial } from './../../telas/demandas/tela-inicial/textoDoTutorial';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Location } from '@angular/common';
@@ -15,7 +16,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
     ) { }
   mostrar_modal = false;
-
+  textoTutorial = textoTutorial;
   items: MenuItem[] = [];
   inicial = true;
 

@@ -8,7 +8,7 @@ import { RotasModule } from '../rotas.module';
 import { RouterModule } from '@angular/router';
 import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/componentes-reutilizaveis.module';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
-
+import { JoyrideModule } from 'ngx-joyride';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,8 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     RouterModule,
     ComponentesReutilizaveisModule,
     MatMenuModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    JoyrideModule.forRoot()
   ],
   exports: [
     HeaderComponent

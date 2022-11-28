@@ -88,7 +88,11 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
 
           },
           {
-            path: 'data-comissao',
+            path: 'reunioes',
+            component: TelaReuniaoComponent
+          },
+          {
+            path: 'nova-pauta',
             component: TelaReuniaoComponent
           },
           {

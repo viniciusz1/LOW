@@ -68,6 +68,15 @@ export class TelaReuniaoComponent implements OnInit {
     this.draggedDemanda = undefined;
   }
 
+  showSidebar = -25;
+  moveSidebar() {
+    if (this.showSidebar == 0) {
+      this.showSidebar = -25
+    } else {
+      this.showSidebar = 0
+    }
+  }
+
   findIndex(demanda: Demanda) {
     let index = -1;
     for (let i = 0; i < this.listaDemandas.length; i++) {

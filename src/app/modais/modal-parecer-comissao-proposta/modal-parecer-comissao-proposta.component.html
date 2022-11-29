@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-center align-items-center">
                 <p-dropdown class="me-3" [options]="tipoAtas" [(ngModel)]="tipoAtaSelecionada" optionLabel="name"></p-dropdown>
                 <div class="rounded low-shadow me-3 ">
-                    <button class="btn btn-primary">Visualizar Proposta</button>
+                    <button class="btn btn-primary" (click)="openModalPropostaDocumento()">Visualizar Proposta</button>
                 </div>
                 <i class="bi bi-x me-3" role="button" (click)="dialogRef.close();"></i>
             </div>

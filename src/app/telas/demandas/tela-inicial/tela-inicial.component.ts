@@ -117,12 +117,6 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalAtaDocumento() {
-    this.matDialog.open(ModalAtaDocumentoComponent, {
-      maxWidth: '70vw',
-      minWidth: '50vw',
-    });
-  }
 
 
   openModalMotivoDevolucao() {
@@ -132,12 +126,6 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalParecerComissaoProposta() {
-    this.matDialog.open(ModalParecerComissaoPropostaComponent, {
-      maxWidth: '70vw',
-      minWidth: '50vw',
-    });
-  }
 
 
 

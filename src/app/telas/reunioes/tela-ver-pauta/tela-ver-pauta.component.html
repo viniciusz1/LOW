@@ -1,26 +1,22 @@
 <div class="container mt-5">
     <div class="row">
-        <div class="header centralizar mb-4">
-            <div>
-                <b>Propostas adicionadas: </b>
-                <div class="linha"></div>
-            </div>
-            <div>
-            </div>
-        </div>
-        <div class="col-6 mb-5" style="overflow: auto; max-height: 60vh;" >
+        
+        <div class="col-9 mb-5" style="overflow: auto; max-height: 60vh;" >
             <div  *ngFor="let demanda of listaDemanda" class="mb-2">
-                <app-card-demanda [dadosDemada]="demanda" [mudarTamanho]="'100%'"></app-card-demanda>
+                <app-card-demanda [exibirBotaoParecerComissao]="true" (abrirModal)="openModalParecerComissaoProposta()" [dadosDemada]="demanda" [mudarTamanho]="'100%'"></app-card-demanda>
             </div>
         </div>
-        <div class="col-6 direita-grande">
+        <div class="col-3 direita-grande">
             <div class="alinhar-direita">
                 <div class="d-flex flex-column p-3" style="border: 1px solid black; width: fit-content;">
                     <span class="d-flex">Data da comissão: 27/08/2022</span>
+                    <hr>
                     <span class="d-flex">Comissão: 007</span>
+                    <hr>
+                    <span class="d-flex">Qtd Propostas: 8</span>
                 </div>
-                <button class="btn btn-primary mt-3">Visualizar ata publicada</button>
-                <button class="btn btn-primary mt-3">Visualizar ata publicada</button>
+                <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento()">Visualizar ata publicada</button>
+                <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento()">Visualizar ata não publicada</button>
             </div>
             <button class="btn btn-primary mb-3">Gerar documentação</button>
         </div>

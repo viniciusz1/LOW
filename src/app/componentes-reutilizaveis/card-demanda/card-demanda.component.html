@@ -33,18 +33,19 @@
         <p class="card-text">{{dadosDemada.ppmDemanda}}</p>
         <p class="card-text"><b>Autor: </b>{{dadosDemada.autorDemanda}}</p>
         <p class="card-text bottom-card">
-            <label class="d-inline-block me-2" [ngClass]="{'text-truncate': botao || rascunho, 'tamanho': !botao && !rascunho}" style="width: 160px;">
+            <label class="d-inline-block me-2" [ngClass]="{'text-truncate': textoExibidoEmBotaoDependendoRota || rascunho, 'tamanho': !textoExibidoEmBotaoDependendoRota && !rascunho && !exibirBotaoParecerComissao}" style="width: 70%">
                 <b>
                     Depart.:
                 </b>
                 {{dadosDemada.departamentoBenDemanda}}
             </label>
-            <button *ngIf="!isPauta && !rascunho && botao" class="btn btn-primary btn-sm" (click)="direcionarUsuario()">
-              {{botao.texto}}
+            <button *ngIf="!isPauta && !rascunho && textoExibidoEmBotaoDependendoRota" class="btn btn-primary btn-sm" (click)="direcionarUsuario()">
+              {{textoExibidoEmBotaoDependendoRota.texto}}
             </button>
             <button *ngIf="!isPauta && rascunho" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Continuar Demanda</button>
+            <button *ngIf="!isPauta && exibirBotaoParecerDg" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Parecer da DG</button>
+            <button *ngIf="!isPauta && exibirBotaoParecerComissao" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Parecer da Comissão</button>
             <i role='button' *ngIf="isPauta" class="bi bi-trash-fill fs-5" (click)="clicouEmExcluir.emit()"></i>
-            
         </p>
     </div>
 </div>

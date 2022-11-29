@@ -51,7 +51,7 @@ export class TelaInicialComponent implements OnInit {
   isCollapsed: boolean[] = [true, true, true, true, true, true, true, true, true];
   isFiltrado = false;
   showFiltro = false;
-  showSidebar = -25;
+  showSidebar = -350;
   listaDemandas: Demanda[] = []
   tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
@@ -87,7 +87,7 @@ export class TelaInicialComponent implements OnInit {
 
   moveSidebar() {
     if (this.showSidebar == 0) {
-      this.showSidebar = -25
+      this.showSidebar = -350
     } else {
       this.showSidebar = 0
     }

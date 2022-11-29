@@ -13,12 +13,13 @@
                     </button>
                 </div>
                 <div *ngIf="tipoExibicao" class="d-flex align-items-center">
-                    <span  *ngIf="!showFiltro" class="p-input-icon-left" style="width: 80%;">
+                    <span *ngIf="!showFiltro" class="p-input-icon-left" style="width: 80%;">
                         <i class="pi pi-search"></i>
                         <input type="text" class="border" style="width: 100%;" pInputText
                             placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />
                     </span>
-                    <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 180px;" (click)="showFiltro = !showFiltro">
+                    <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 180px;"
+                        (click)="showFiltro = !showFiltro">
                         Filtrar Mais
                         <i class="bi bi-chevron-double-down"></i>
                     </button>
@@ -35,47 +36,44 @@
                 <app-card-reuniao class="m-1"></app-card-reuniao>
             </div>
             <div *ngIf="tipoExibicao == false" class="row m-3">
-                <div class="col-md-8 drag-column">
+                <div class="col-xl-8 drag-column">
                     <div class="d-flex justify-content-center">
                         <app-filtro-demanda class="mb-3" [mostrarIconeDeAbrirFiltro]="false"></app-filtro-demanda>
                     </div>
-                    <div class="drop-column" pDroppable="demandas" (onDrop)="drop()">
-                    <div *ngFor="let demanda of listaDemandas" class="mt-2">
-                        <app-list-demanda role="button"
-                        [mostrarBotao]="false" 
-                        pDraggable="demandas"
-                        [dadosDemada]="demanda" 
-                        [mostrarIconeAdicionar]="true"
-                        (clicouAdicionarPauta)="adicionarDemanda(demanda)"
-                        (onDragStart)="dragStart(demanda)" 
-                        (onDragEnd)="dragEnd()">
-                        </app-list-demanda>
+                    <div class="drop-column d-table border p-3 rounded low-shadow"
+                        style="margin-left: auto; margin-right: auto; min-height: 415px; width: 0;" pDroppable="demandas"
+                        (onDrop)="drop()">
+                        <p-scrollPanel [style]="{width: '100%', height: '40vh'}">
+                            <h6>Propostas</h6>
+                            <div *ngFor="let demanda of listaDemandas" class="mt-2">
+                                <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas"
+                                    [dadosDemada]="demanda" [mostrarIconeAdicionar]="true"
+                                    (clicouAdicionarPauta)="adicionarDemanda(demanda)"
+                                    (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()">
+                                </app-list-demanda>
 
+                            </div>
+
+                        </p-scrollPanel>
                     </div>
                 </div>
-                </div>
-                <div class="col-md-4" style="height: 60vh;" pDroppable="demandas" (onDrop)="drop()">
-                    <div class="border rounded drop-column p-1">
+                <div class="col-xl-4" style="height: 60vh;" pDroppable="demandas" (onDrop)="drop()">
+                    <div class="border rounded drop-column p-1 low-shadow">
 
-                        <p-scrollPanel [style]="{width: '100%', height: '40vh'}">
-                            <div class="text-center h5 mt-3" *ngIf="listaDemandasEscolhidas.length == 0">
+                        <p-scrollPanel [style]="{width: '100%', height: '40vh'} " styleClass="scroll">
+                            <div class="text-center h6 mt-3" *ngIf="listaDemandasEscolhidas.length == 0">
                                 Arraste as Propostas para este campo!
                             </div>
-                            <div class=""
-                            *ngFor="let demanda of listaDemandasEscolhidas">
-                                <app-card-demanda  
-                                pDraggable="products" 
-                                (onDragStart)="dragStart(demanda)" 
-                                (onDragEnd)="dragEnd()"
-                                [dadosDemada]="demanda" 
-                                [isPauta]="true"
-                                (clicouEmExcluir)="excluirDemanda(demanda)">
-                                [mudarTamanho]="'100%'" class="col-6 mt-3"></app-card-demanda>
+                            <div class="" *ngFor="let demanda of listaDemandasEscolhidas">
+                                <app-card-demanda pDraggable="products" (onDragStart)="dragStart(demanda)"
+                                    (onDragEnd)="dragEnd()" [dadosDemada]="demanda" [isPauta]="true"
+                                    (clicouEmExcluir)="excluirDemanda(demanda)">
+                                    [mudarTamanho]="'100%'" class="col-6 mt-3"></app-card-demanda>
                             </div>
                         </p-scrollPanel>
 
                     </div>
-                    <div class="p-fluid grid formgrid mt-3">
+                    <div class="p-fluid grid formgrid mt-3 p-3 border rounded low-shadow">
                         <div class="field col-12 md:col-4">
                             <label for="time">Data e Hora da Reunião:</label>
                             <p-calendar placeholder="Clique aqui!" [(ngModel)]="dataReuniao" [showTime]="true"

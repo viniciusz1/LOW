@@ -8,6 +8,9 @@ import { RotasModule } from '../rotas.module';
 import { RouterModule } from '@angular/router';
 import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/componentes-reutilizaveis.module';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {MenuItem} from 'primeng/api';
+import { RotasService } from '../services/rotas.service';
 
 
 @NgModule({
@@ -22,10 +25,14 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     RouterModule,
     ComponentesReutilizaveisModule,
     MatMenuModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    TabMenuModule
   ],
   exports: [
     HeaderComponent
+  ],
+  providers: [
+    RotasService
   ]
 })
 export class ComponentesFixosModule { }

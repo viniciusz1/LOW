@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { RotasService } from 'src/app/services/rotas.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -10,28 +11,19 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(
-    private location:Location,
-    private router: Router
-    ) { }
+  constructor(private rotasService: RotasService) { }
   mostrar_modal = false;
 
   items: MenuItem[] = [];
-  inicial = true;
+  activeItem: MenuItem | undefined;
 
   ngOnInit() {
-    
-    if(this.router.url != "/"){
-      this.inicial = false;
-    }
-    // this.location.onUrlChange(e => {
-    //   console.log(e)
-    // })
-      this.items = [
-          {label:'Categories'},
-          {label:'Sports'},
-          {label:'Football'},
-          {label:'Countries'}
-      ];
+    this.rotasService.titulo.subscribe((texto) => {
+      this.items[0] = {label: "Home"},
+      this.items[1] = { label: texto };
+    })
+
+
+    this.activeItem = this.items[0];
   }
 }

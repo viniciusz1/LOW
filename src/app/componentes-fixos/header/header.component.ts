@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   textoTutorial = textoTutorial;
   items: MenuItem[] = [];
   activeItem: MenuItem | undefined;
-
+  inicial = false;
   ngOnInit() {
     this.rotasService.titulo.subscribe((texto) => {
       this.items[0] = {label: "Home"},

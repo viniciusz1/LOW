@@ -139,5 +139,45 @@ export class TelaReuniaoComponent implements OnInit {
     statusDemanda: StatusDemanda.BUSINESS_CASE,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.BUSINESS_CASE,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.CANCELLED,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.TO_DO,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.BUSINESS_CASE,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.BUSINESS_CASE,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.CANCELLED,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.TO_DO,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+  }, {
+    autorDemanda: "Sabrina Hegmann",
+    statusDemanda: StatusDemanda.BUSINESS_CASE,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
   }];
 }

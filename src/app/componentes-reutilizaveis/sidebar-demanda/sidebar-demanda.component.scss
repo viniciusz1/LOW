@@ -1,8 +1,17 @@
-.container-sidebar{
-    background-color: #4889B8;
-}
+
 .barra-nav-item{
     width: 10px;
+}
+.nav-item{
+    background-color: #4889B8;
+    cursor: pointer;
+}
+.nav-item:hover{
+    background-color: #4281ac;
+    transition: 0.3s;
+}
+.barra-nav-item{
+    border-right: 1px solid white;
 }
 .nav-link{
     color:white

@@ -22,9 +22,10 @@
     border: 1px solid black;
     
 }
-.p-scrollpanel-content{
-    padding: 0!important;
-}
+.p-scrollpanel .p-scrollpanel-content {
+    overflow-y: scroll !important;
+    padding: 0;
+  }
 input{
     outline: none;
     border: none;

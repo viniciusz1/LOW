@@ -4,18 +4,19 @@
             <img class="my-2 ms-5" style="width: 70px;"
                 src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="">
         </li>
-        <nav aria-label="breadcrumb" class="ms-4" *ngIf="!inicial">
-            <ol class="breadcrumb" style="margin:0">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item"><a href="#">Demandas</a></li>
-            </ol>
-          </nav>
-    </ul >
+        <nav aria-label="breadcrumb" class="ms-4">
+            <p-tabMenu [model]="items" [activeItem]="items[0]" ></p-tabMenu>
+            <!-- <ol class="breadcrumb" style="margin:0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Demandas</a></li>
+            </ol> -->
+        </nav>
+    </ul>
     <ul class="nav justify-content-end nav-items-center" style="width:60%" >
-        <li class="nav-item" *ngIf="!inicial">
-            <a class="nav-link" routerLink="/tela-inicial/reunioes">REUNIÕES</a>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/tela-inicial/data-comissao">REUNIÕES</a>
         </li>
-        <li class="nav-item" *ngIf="!inicial">
+        <li class="nav-item" >
             <a role="button" class="nav-link active" routerLink="/tela-inicial">DEMANDAS</a>
         </li>
         <li role="button" class="nav-item" routerLink="/tela-inicial/chat" *ngIf="!inicial"
@@ -48,16 +49,23 @@
         </li>
         <mat-menu #idiomaMenu="matMenu">
             <button mat-menu-item>
-                <span><img style="width:24px; margin-right: 10px" src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg">Español (ES)</span>
+                <span><img style="width:24px; margin-right: 10px"
+                        src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg">Español
+                    (ES)</span>
             </button>
             <button mat-menu-item>
-                <span><img style="width:24px; margin-right: 10px" src="https://ledefi.com.br/wp-content/uploads/2022/09/gb-flag.png">English (UK)</span>
+                <span><img style="width:24px; margin-right: 10px"
+                        src="https://ledefi.com.br/wp-content/uploads/2022/09/gb-flag.png">English (UK)</span>
             </button>
             <button mat-menu-item>
-                <span><img style="width:24px; margin-right: 10px" src="https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg">English (EN)</span>
+                <span><img style="width:24px; margin-right: 10px"
+                        src="https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg">English
+                    (EN)</span>
             </button>
             <button mat-menu-item>
-                <span><img style="width:24px; margin-right: 10px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg/255px-Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg.png">Français (FR)</span>
+                <span><img style="width:24px; margin-right: 10px;"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg/255px-Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg.png">Français
+                    (FR)</span>
             </button>
 
         </mat-menu>
@@ -79,8 +87,11 @@
             <button routerLink="/tela-inicial/rascunhos" mat-menu-item>
                 <span><i class="bi bi-clipboard-plus me-3" style="font-size: 20px;"></i>Rascunhos</span>
             </button>
-            <button mat-menu-item  routerLink="/tela-inicial/perfil">
+            <button mat-menu-item routerLink="/tela-inicial/perfil">
                 <span><i class="bi bi-gear me-3" style="font-size: 20px;"></i>Configurações</span>
+            </button>
+            <button routerLink="/tela-inicial/rascunhos" mat-menu-item>
+                <span><i class="bi bi-box-arrow-right me-3" style="font-size: 20px;"></i>Sair</span>
             </button>
         </mat-menu>
     </ul>

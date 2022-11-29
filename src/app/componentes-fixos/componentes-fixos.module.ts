@@ -9,6 +9,10 @@ import { RouterModule } from '@angular/router';
 import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/componentes-reutilizaveis.module';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { JoyrideModule } from 'ngx-joyride';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {MenuItem} from 'primeng/api';
+import { RotasService } from '../services/rotas.service';
+
 
 @NgModule({
   declarations: [
@@ -23,10 +27,14 @@ import { JoyrideModule } from 'ngx-joyride';
     ComponentesReutilizaveisModule,
     MatMenuModule,
     BreadcrumbModule,
-    JoyrideModule.forRoot()
+    JoyrideModule.forRoot(),
+    TabMenuModule
   ],
   exports: [
     HeaderComponent
+  ],
+  providers: [
+    RotasService
   ]
 })
 export class ComponentesFixosModule { }

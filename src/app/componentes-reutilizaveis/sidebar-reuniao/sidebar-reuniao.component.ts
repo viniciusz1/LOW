@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar-reuniao',
@@ -10,6 +10,13 @@ export class SidebarReuniaoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  isCollapsed: boolean = false;
+  @Output() clicouNaSeta = new EventEmitter();
+
+  onClick(){
+    this.isCollapsed = !this.isCollapsed;
+    this.clicouNaSeta.emit();
   }
 
 }

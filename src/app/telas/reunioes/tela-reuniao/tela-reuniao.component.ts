@@ -68,10 +68,10 @@ export class TelaReuniaoComponent implements OnInit {
     this.draggedDemanda = undefined;
   }
 
-  showSidebar = -25;
+  showSidebar = -350;
   moveSidebar() {
     if (this.showSidebar == 0) {
-      this.showSidebar = -25
+      this.showSidebar = -350
     } else {
       this.showSidebar = 0
     }

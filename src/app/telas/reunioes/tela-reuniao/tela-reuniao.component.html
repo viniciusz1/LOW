@@ -4,8 +4,8 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <button *ngIf="tipoExibicao == true" class="btn btn-primary" (click)="trocarExibicao()">
+                        <i class="bi bi-people me-2"></i>
                         Marcar Reunião
-                        <i class="bi bi-people"></i>
                     </button>
                     <!-- [routerLink]="'/tela-inicial/calendario'" -->
                     <button *ngIf="tipoExibicao == true" class="btn btn-primary ms-3" (click)="openCalendario()">
@@ -96,3 +96,6 @@
             </div>
         </div>
     </div>
+
+    <app-sidebar-reuniao [style.left.vw]="showSidebar" (click)="moveSidebar()"
+        style="position: fixed; z-index: 2; transition: left 0.3s ease 0s; top: 43vh;"></app-sidebar-reuniao>

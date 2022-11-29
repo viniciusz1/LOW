@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { AngularMaterialModule } from './../angular-material/angular-material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ModalReprovacaoDemandaComponent } from './modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import {TimelineModule} from 'primeng/timeline';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import {TimelineModule} from 'primeng/timeline';
     ComponentesReutilizaveisModule,
     MatDialogModule,
     MatButtonModule,
-    TimelineModule
+    FormsModule,
+    TimelineModule,
+    DropdownModule,
+    InputTextareaModule
   ],
   exports: [
     ModalDemandaDocumentoComponent

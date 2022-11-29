@@ -48,7 +48,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     CardReuniaoComponent,
     NotificacoesComponent,
     FiltroDemandaComponent,
-    FiltroReuniaoComponent
+    FiltroReuniaoComponent,
+    SidebarReuniaoComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

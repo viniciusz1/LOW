@@ -14,7 +14,7 @@ export class ListDemandaComponent implements OnInit {
   @Output() clicouAdicionarPauta = new EventEmitter();
   @Input() dadosDemada: Demanda = {};
   @Input() mostrarBotao = true;
-  @Input() mostrarIconeAdicionar = false;
+  @Input('mostrarIconeAdicionar') demandaPequena = false;
 
   constructor() { }
 

@@ -25,4 +25,5 @@ export interface Demanda {
     ppmDemanda?: string
     autorDemanda?: string
     departamentoBenDemanda?: string
+    scoreDemanda?: number
 }

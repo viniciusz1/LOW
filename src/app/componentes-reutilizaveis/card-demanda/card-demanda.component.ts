@@ -13,11 +13,15 @@ import { Route, Router } from '@angular/router';
 })
 export class CardDemandaComponent implements OnInit {
   @Output() abrirModal = new EventEmitter();
-  @Output() verDocumentoProposta = new EventEmitter()
-  @Input() mudarTamanho: string = "370px"
+  @Output() verDocumentoProposta = new EventEmitter();
+  @Input() mudarTamanho: string = "370px";
   @Input() isPauta: boolean = false;
-  @Input() dadosDemada: Demanda = {}
+  @Input() dadosDemada: Demanda = {};
   @Input() rascunho: boolean = false;
+  @Input() exibirBotaoParecerComissao: boolean = false;
+  @Input() exibirBotaoParecerDg: boolean = false;
+  @Input() tipoDeAta: string = "";
+
   @Output() clicouEmExcluir = new EventEmitter();
   usuario = "solicitante"
   primaryColorClass?: string = "";
@@ -28,29 +32,29 @@ export class CardDemandaComponent implements OnInit {
   }
 
   direcionarUsuario(){
-    if(this.botao?.rota == ""){
+    if(this.textoExibidoEmBotaoDependendoRota?.rota == ""){
       this.abrirModal.emit()
     }else{
-      this.route.navigate([this.botao?.rota])
+      this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota])
     }
   }
-  botao: {rota: string, texto: string} | undefined = undefined;
+  textoExibidoEmBotaoDependendoRota: {rota: string, texto: string} | undefined = undefined;
 
   botoes(){
     if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG){
-      this.botao = {rota: "/tela-inicial/classificar-demanda", texto: "Classificar Demanda"}
+      this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/classificar-demanda", texto: "Classificar Demanda"}
     }
     if(this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT){
-      this.botao = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}
+      this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}
     }
     if(this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE){
-      this.botao = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}
+      this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}
     }
     // if(this.dadosDemada.statusDemanda == StatusDemanda.TO_DO){
     //   this.botao = {rota: "/demandas", texto: "Adicionar a Pauta"}
     // }
     if(this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED){
-      this.botao = {rota: "", texto: "Ver Reprovação"}
+      this.textoExibidoEmBotaoDependendoRota = {rota: "", texto: "Ver Reprovação"}
     }
   }
 

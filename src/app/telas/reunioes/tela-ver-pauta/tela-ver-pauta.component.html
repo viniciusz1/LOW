@@ -3,12 +3,12 @@
         
         <div class="col-9 mb-5" style="overflow: auto; max-height: 60vh;" >
             <div  *ngFor="let demanda of listaDemanda" class="mb-2">
-                <app-card-demanda [exibirBotaoParecerComissao]="true" (abrirModal)="openModalParecerComissaoProposta()" [dadosDemada]="demanda" [mudarTamanho]="'100%'"></app-card-demanda>
+                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModal)="openModalParecerComissaoProposta()" [dadosDemada]="demanda" [mudarTamanho]="'100%'"></app-card-demanda>
             </div>
         </div>
         <div class="col-3 direita-grande">
             <div class="alinhar-direita">
-                <div class="d-flex flex-column p-3" style="border: 1px solid black; width: fit-content;">
+                <div class="d-flex flex-column p-3 rounded" style="border: 1px solid rgb(112, 110, 110); width: fit-content;">
                     <span class="d-flex">Data da comissão: 27/08/2022</span>
                     <hr>
                     <span class="d-flex">Comissão: 007</span>

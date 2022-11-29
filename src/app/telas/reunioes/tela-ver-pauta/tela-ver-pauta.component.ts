@@ -1,3 +1,6 @@
+import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
+import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
+import { MatDialog } from '@angular/material/dialog';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Demanda } from 'src/app/models/demanda.model';
 
@@ -11,7 +14,8 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 })
 export class TelaVerPauta implements OnInit {
 
-  constructor(private demandaService: DemandaService) { }
+  constructor(private demandaService: DemandaService,
+    private matDialog: MatDialog) { }
   listaDemanda:Demanda[] = []
   ngOnInit(): void {
     this.demandaService.getDemandas()
@@ -21,6 +25,21 @@ export class TelaVerPauta implements OnInit {
       demanda.statusDemanda = StatusDemanda.TO_DO
       })
     }})
+  }
+
+  openModalAtaDocumento() {
+    this.matDialog.open(ModalAtaDocumentoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    });
+  }
+
+
+  openModalParecerComissaoProposta() {
+    this.matDialog.open(ModalParecerComissaoPropostaComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    });
   }
 
 }

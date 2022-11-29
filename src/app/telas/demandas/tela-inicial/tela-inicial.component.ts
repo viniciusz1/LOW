@@ -15,6 +15,7 @@ import { Sort } from '@angular/material/sort';
 import { listaDemandas } from './listDemandas';
 import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from './textoDoTutorial';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -39,7 +40,7 @@ export class TelaInicialComponent implements OnInit {
     console.log(textoTutorial)
     this.joyrideService.startTour(
       {
-        steps: ['bv', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis'],
+        steps: ['bv', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete'],
       }
     );
   }
@@ -50,7 +51,7 @@ export class TelaInicialComponent implements OnInit {
   isCollapsed: boolean[] = [true, true, true, true, true, true, true, true, true];
   isFiltrado = false;
   showFiltro = false;
-  showSidebar = -25;
+  showSidebar = -350;
   listaDemandas: Demanda[] = []
   tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
@@ -86,7 +87,7 @@ export class TelaInicialComponent implements OnInit {
 
   moveSidebar() {
     if (this.showSidebar == 0) {
-      this.showSidebar = -25
+      this.showSidebar = -350
     } else {
       this.showSidebar = 0
     }
@@ -98,43 +99,33 @@ export class TelaInicialComponent implements OnInit {
   openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
+      minWidth: '50vw',
     });
   }
 
   openModalReprovacaoDemanda() {
-    this.dialog.open(ModalReprovacaoDemandaComponent), {
+    this.matDialog.open(ModalReprovacaoDemandaComponent), {
       maxWidth: '70vw',
+      minWidth: '50vw',
     }
   }
 
   openModalDemandaDocumento() {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
+      minWidth: '50vw',
     });
   }
 
-  openModalAtaDocumento() {
-    this.matDialog.open(ModalAtaDocumentoComponent, {
-      maxWidth: '70vw',
-    });
-  }
 
-  openModalFiltroDemandas() {
-    this.dialog.open(ModalFiltroDemandasComponent, {
-      minWidth: '300px',
-    });
-  }
+
   openModalMotivoDevolucao() {
-    this.dialog.open(ModalMotivoDevolucaoComponent, {
-      minWidth: '300px',
+    this.matDialog.open(ModalMotivoDevolucaoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
     });
   }
 
-  openModalParecerComissaoProposta() {
-    this.dialog.open(ModalParecerComissaoPropostaComponent, {
-      minWidth: '300px',
-    });
-  }
 
 
 
@@ -169,6 +160,15 @@ export class TelaInicialComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.openModalPropostaDocumento()
+    // this.openModalAtaDocumento()
+    // this.openModalDemandaDocumento()
+    // this.openModalMotivoDevolucao()
+    // this.openModalParecerComissaoProposta()
+    // this.openModalReprovacaoDemanda()
+    // this.openModalFiltroDemandas()
+
+    
     this.demandasService.getDemandas()
       .subscribe({
         next: (list) => {

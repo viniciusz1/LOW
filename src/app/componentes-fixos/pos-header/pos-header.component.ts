@@ -14,36 +14,37 @@ export class PosHeaderComponent implements OnInit {
       if (e == '/tela-inicial/data-comissao') {
         this.titulo = 'Reuniões';
       }
-      if (e == '/tela-inicial') {
+      else if (e == '/tela-inicial') {
         this.titulo = 'Demandas';
       }
-      if (e == '/tela-inicial/chat') {
+      else if (e == '/tela-inicial/chat') {
         this.titulo = 'Chat'
       }
-      if (e == '/tela-inicial/proposta/1') {
+      else if (e == '/tela-inicial/proposta/1') {
         this.titulo = 'Criar Demanda'
       }
-      if (e == '/tela-inicial/rascunhos') {
+      else if (e == '/tela-inicial/rascunhos') {
         this.titulo = 'Rascunhos'
       }
-      if (e == '/tela-inicial/rascunhos') {
+      else if (e == '/tela-inicial/rascunhos') {
         this.titulo = 'Perfil'
       }
-      if (e == '/tela-inicial/layout') {
+      else if (e == '/tela-inicial/layout') {
         this.titulo = 'Layout'
       }
-      if (e == '/tela-inicial/notificacoes') {
+      else if (e == '/tela-inicial/notificacoes') {
         this.titulo = 'Notificações'
       }
-      if (e == '/tela-inicial/ajuda') {
+      else if (e == '/tela-inicial/ajuda') {
         this.titulo = 'Ajuda'
       }
-      if (e == '/tela-inicial/sugestoes') {
+      else if (e == '/tela-inicial/sugestoes') {
         this.titulo = 'Sugestões'
       }
-      if (e == '/tela-inicial/sugestoes') {
-        this.titulo = 'Rascunhos'
+      else if (e == '/tela-inicial/ver-pauta') {
+        this.titulo = 'Pauta'
       }
+      
     })
   }
   currentRoute = "";

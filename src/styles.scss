@@ -3,90 +3,162 @@ $primarysec: #7ab0df;
 $danger: #ff4136;
 $btn-border-radius: 0px;
 
-p{
-    margin-bottom: 0.5rem!important;
-}
-a{
-    color: white;
-}
-.backlog{
-    background-color: #00579D;
-}
-.backlog-sec{
-    background-color: #4889B8;
-}
-.assessment{
-    background-color: #8862A2;
-}
-.assessment-sec{
-    background-color: #C2B0D2;
-}
-.business-case{
-    background-color: #FFDD43;
-}
-.business-case-sec{
-    background-color: #FFEAA0;
-}
-.to-do{
-    background-color: #EF8300;
-}
-.to-do-sec{
-    background-color: #F9C48B;
-}
-.design-and-build{
-    background-color: #000000;
-}
-.design-and-build-sec{
-    background-color: #515151;
-}
-.support{
-    background-color: #0091BD;
-}
-.support-sec{
-    background-color: #28B9DA;
-}
-.cancelled{
-    background-color: #EA1010;
-}
-.cancelled-sec{
-    background-color: #FF7171;
-}
-.done{
-    background-color: #00612E;
-}
-.done-sec{
-    background-color: #82A584;
-}
-.borda{
-    border:#828282 solid 1px;
+p {
+    margin-bottom: 0.5rem !important;
 }
 
-.low-shadow{
+a {
+    color: white;
+}
+
+.proximo {
+    background-color: #EF8300;
+}
+
+.proximo-sec {
+    background-color: #e4a251;
+
+}
+
+.aguardando {
+    background-color: #00579D;
+
+}
+
+.aguardando-sec {
+    background-color: #4889B8;
+
+}
+
+.pendente {
+    background-color: #681F8B;
+}
+
+.pendente-sec {
+    background-color: #9f75b3;
+
+}
+
+.concluido {
+    background-color: #00612E;
+}
+
+.concluido-sec {
+    background-color: #82A584;
+}
+
+.cancelado {
+    background-color: #EA1010;
+}
+
+.cancelado-sec {
+    background-color: #FF7171;
+}
+
+.backlog {
+    background-color: #00579D;
+}
+
+.backlog-sec {
+    background-color: #4889B8;
+}
+
+.assessment {
+    background-color: #8862A2;
+}
+
+.assessment-sec {
+    background-color: #C2B0D2;
+}
+
+.business-case {
+    background-color: #FFDD43;
+}
+
+.business-case-sec {
+    background-color: #FFEAA0;
+}
+
+.to-do {
+    background-color: #EF8300;
+}
+
+.to-do-sec {
+    background-color: #F9C48B;
+}
+
+.design-and-build {
+    background-color: #000000;
+}
+
+.design-and-build-sec {
+    background-color: #515151;
+}
+
+.support {
+    background-color: #0091BD;
+}
+
+.support-sec {
+    background-color: #28B9DA;
+}
+
+.cancelled {
+    background-color: #EA1010;
+}
+
+.cancelled-sec {
+    background-color: #FF7171;
+}
+
+.done {
+    background-color: #00612E;
+}
+
+.done-sec {
+    background-color: #82A584;
+}
+
+.borda {
+    border: #828282 solid 1px;
+}
+
+.low-shadow {
     box-shadow: 5px 6px 6px -6px black;
 }
 
-.low-input{
+.low-input {
     width: 100%;
     border: 1px solid black;
     border-left: #00579D 5px solid;
     padding: 5px;
-    font-size: 14px; 
+    font-size: 14px;
     outline: none;
 }
-.icon{
+
+.icon {
     font-size: 20px;
 }
 
-.btn-danger{
-    color:white !important;
+.btn-danger {
+    color: white !important;
 }
 
-.btn{
+.btn {
     border-radius: 5px !important;
     box-shadow: 5px 6px 6px -6px black !important;
-    
+
 }
+
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

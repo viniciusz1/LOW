@@ -39,7 +39,8 @@
                     <div class="d-flex justify-content-center">
                         <app-filtro-demanda class="mb-3" [mostrarIconeDeAbrirFiltro]="false"></app-filtro-demanda>
                     </div>
-                    <div class="drop-column" pDroppable="demandas" (onDrop)="drop()">
+                    <div class="drop-column d-table" style="margin-left: auto;
+                    margin-right: auto;" pDroppable="demandas" (onDrop)="drop()">
                     <div *ngFor="let demanda of listaDemandas" class="mt-2">
                         <app-list-demanda role="button"
                         [mostrarBotao]="false" 

@@ -14,16 +14,16 @@ import { Route, Router } from '@angular/router';
 export class CardDemandaComponent implements OnInit {
   @Output() abrirModal = new EventEmitter();
   @Output() verDocumentoProposta = new EventEmitter();
-  @Input() mudarTamanho: string = "370px";
+  @Input() mudarTamanho: string = "390px";
   @Input() isPauta: boolean = false;
   @Input() dadosDemada: Demanda = {};
   @Input() rascunho: boolean = false;
   @Input() exibirBotaoParecerComissao: boolean = false;
   @Input() exibirBotaoParecerDg: boolean = false;
   @Input() tipoDeAta: string = "";
-
   @Output() clicouEmExcluir = new EventEmitter();
-  usuario = "solicitante"
+  
+  usuario = ""
   primaryColorClass?: string = "";
   secondaryColorClass: string = "";
 

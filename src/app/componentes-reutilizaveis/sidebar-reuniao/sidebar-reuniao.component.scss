@@ -1,0 +1,31 @@
+
+.barra-nav-item{
+    width: 10px;
+}
+.nav-link{
+    color:white
+}
+.nav-item{
+    background-color: #4889B8;
+    cursor: pointer;
+}
+.nav-item:hover{
+    background-color: #4281ac;
+    transition: 0.3s;
+}
+.barra-direita{
+    display:flex; align-items:center; justify-content:center; color: white; width: 25px; background-color: rgba(0, 0, 0, 0.349)
+}
+.barra-direita:hover{
+    background-color: rgba(0, 0, 0, 0.596);
+     transition: 0.3s;
+}
+.inverte {
+    transform: rotate(180deg);
+    transition: 0.5s;
+}
+
+.naoinverte {
+    transform: rotate(0);
+    transition: 0.5s;
+}

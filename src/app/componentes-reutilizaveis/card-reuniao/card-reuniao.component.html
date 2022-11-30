@@ -1,6 +1,6 @@
 <div class="card low-shadow position-relative">
-    <div class="line-top-start"></div>
-    <div class="line-top-end"></div>
+    <div class="line-top-start" [ngClass]="primaryColorClass"></div>
+    <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
     <div class="card-body pb-1">
         <div class="mt-2 card-title d-flex" style="align-items: baseline;
     justify-content: space-between;">
@@ -31,7 +31,7 @@
                 </b>
                 Vendas, Motores, Trefiliação
             </label>
-            <!-- <button  class="btn btn-primary btn-sm">Classificar Demanda</button> -->
+            <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta">Detalhes da Reunião</button>
         </p>
     </div>
 </div>

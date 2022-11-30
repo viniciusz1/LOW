@@ -30,38 +30,36 @@
 
 
         <ul joyrideStep="dois" [title]="'Filtrar Demandas'" [stepContent]="customContent"
-            [stepContentParams]="{'texto': textoTutorial[1]}" class="nav justify-content-center">
-            <div  *ngIf="!showFiltro" class="d-flex align-items-center justify-content-center">
-                <span  *ngIf="!showFiltro" class="p-input-icon-left" style="width: 80%;">
-                        <i class="pi pi-search"></i>
-                        <input type="text" class="border" style="width: 100%;" pInputText
-                            placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />
-                    </span>
-                    <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 180px;" (click)="showFiltro = !showFiltro">
-                        Filtrar Mais
-                        <i class="bi bi-chevron-double-down"></i>
-                    </button>
+            [stepContentParams]="{'texto': textoTutorial[1]}" class="nav justify-content-center"
+            style="overflow: auto;">
+            <div *ngIf="!showFiltro" class="d-flex align-items-center justify-content-center">
+                <span *ngIf="!showFiltro" class="p-input-icon-left" [ngClass]="{'tam': !tipoRascunho}">
+                    <i class="pi pi-search"></i>
+                    <input type="text" class="border" style="width: 100%;" pInputText placeholder="Pesquisar Demanda"
+                        [(ngModel)]="pesquisaDemanda" />
+                </span>
+                <button *ngIf="!showFiltro && !tipoRascunho" class="btn btn-primary ms-3" style="width: 180px;"
+                    (click)="showFiltro = !showFiltro">
+                    Filtrar Mais
+                    <i class="bi bi-chevron-double-down"></i>
+                </button>
             </div>
 
             <app-filtro-demanda *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
             </app-filtro-demanda>
         </ul>
 
-        <div [ngClass]="{'container': !isFiltrado}" 
-        style="overflow: auto;" 
-        class="my-3 d-flex justify-content-end w-100">
-            <div joyrideStep="tres" 
-            [title]="'Trocar Exibição'" 
-            [stepContent]="customContent"  
-            [stepContentParams]="{'texto': textoTutorial[2]}" 
-            [ngClass]="{'color-actived': !tipoExibicaoDemanda}"
-            (click)="changeToList()" 
-            class="change-type-list me-2">
-            <i class="bi bi-list" style="font-size:15px;"></i>
-        </div>
-            <div [ngClass]="{'color-actived': tipoExibicaoDemanda}" 
-                (click)="changeToCard()"
-                class="change-type-list">
+
+
+        <!-- Trocar exibição de lista para card e vice-versa -->
+        <div *ngIf="!tipoRascunho" [ngClass]="{'container': !isFiltrado}" style="overflow: auto;"
+            class="my-3 d-flex justify-content-end w-100">
+            <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
+                [stepContentParams]="{'texto': textoTutorial[2]}" [ngClass]="{'color-actived': !tipoExibicaoDemanda}"
+                (click)="changeToList()" class="change-type-list me-2">
+                <i class="bi bi-list" style="font-size:15px;"></i>
+            </div>
+            <div [ngClass]="{'color-actived': tipoExibicaoDemanda}" (click)="changeToCard()" class="change-type-list">
                 <i class="bi bi-border-all" style="font-size:15px;">
                 </i>
             </div>
@@ -69,13 +67,13 @@
     </nav>
 
     <!-- sidebar -->
-    <app-sidebar-demanda [style.left.vw]="showSidebar" (click)="moveSidebar()"
+    <app-sidebar-demanda [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()"
         style="position: fixed; z-index: 2; transition: left 0.3s ease 0s; top: 43vh;"></app-sidebar-demanda>
 
 
 
     <div *ngIf="!tipoExibicaoDemanda">
-        <!-- Parte Filtrada em Lista -->
+        <!-- Parte Não Filtrada em Lista -->
 
         <div class="" *ngIf="!isFiltrado">
             <div *ngFor="let titulo of listaTituloNaoFiltrado; let i = index">
@@ -111,6 +109,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Parte Filtrada em Lista -->
+
         <div *ngIf="isFiltrado">
             <div matSort (matSortChange)="sortData($event)" style="padding: 10px; margin-left: 6px;">
                 <label mat-sort-header="id" for="id">ID</label>
@@ -137,13 +138,13 @@
                             <h5>{{titulo}}</h5>
                             <hr style="margin:0; opacity: 1;" class="mb-2">
                         </div>
-                        <div class="me-3" style="align-self: flex-end; cursor: pointer;">Ver mais</div>
+                        <div class="me-3" style="align-self: flex-end; cursor: pointer;"
+                            (click)="isFiltrado = !isFiltrado">Ver mais</div>
                     </div>
                     <div class="d-flex position-relative" style="width: 100%;">
                         <div [style.left.px]="positionListCards[i]"
                             class="div-cards d-flex position-relative transition-cards">
-                            <app-card-demanda [rascunho]="tipoRascunho"
-                                *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
+                            <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
                                 [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"
                                 (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
                         </div>
@@ -159,7 +160,7 @@
     </div>
 
 
-    <div *ngIf="isFiltrado && tipoExibicaoDemanda">
+    <div *ngIf="isFiltrado && tipoExibicaoDemanda" [ngClass]="{'mt-5': tipoRascunho}" style="width: -webkit-fill-available;">
         <div matSort (matSortChange)="sortData($event)" style="padding: 10px; margin-left: 6px;">
             <label mat-sort-header="id" for="id">ID</label>
             <label mat-sort-header="titulo" for="id">Título</label>
@@ -168,16 +169,27 @@
             <label mat-sort-header="departamento" for="id">Departamento</label>
         </div>
         <div class="container">
-            <div class="row">
-                <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandas"
-                    [dadosDemada]="demanda" (abrirModal)="openModalMotivoDevolucao()" [mudarTamanho]="'100%'"
+            <div class="row" *ngIf="tipoRascunho">
+                <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandasRascunho; let i = index"
+                    [dadosDemada]="demanda" (abrirModal)="openModalMotivoDevolucao()"
+                    (verDocumentoProposta)="openModalDemandaDocumento()" [mudarTamanho]="'100%'"
                     class="col-lg-6 col-xl-4 mb-3">
                 </app-card-demanda>
+            </div>
+            <div class="row" *ngIf="!tipoRascunho">
+                <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemada]="demanda"
+                    (abrirModal)="openModalMotivoDevolucao()" (verDocumentoProposta)="openModalDemandaDocumento()"
+                    (clicouEmExcluir)="excluirDemandaRascunho(i)" [mudarTamanho]="'100%'"
+                    class="col-lg-6 col-xl-4 mb-3">
+                </app-card-demanda>
+
             </div>
         </div>
     </div>
 
-    <mat-spinner *ngIf="listaDemandas.length == 0" [diameter]="50" class="circle"></mat-spinner>
+    <div *ngIf="listaDemandas.length == 0">
+        <mat-spinner  [diameter]="50" class="circle"></mat-spinner>
+    </div>
 
     <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-5">
         <nav aria-label="...">

@@ -1,22 +1,22 @@
-<div class="mt-4 " style="margin-left: 200px; margin-right: 200px;">
+<div class="mt-5 container">
     <div class="row d-flex justify-content-between" style="border: 1px solid black">
-        <div class="col-md-5 p-3 position-relative">
+        <div class="col-md-5 ps-5 py-5 position-relative">
             <div style="width: 140%;" class="line-top-start"></div>
             <div class="">
                 <label class="form-label">Tamanho:</label>
-                <input type="text" class="low-input" placeholder="Tamanho">
+                <p-dropdown [options]="opcoesDeTamanhoDemanda" optionLabel="name"></p-dropdown>
             </div>
             <div class="">
                 <label class="form-label">BU beneficiada:</label>
-                <input type="text" class="low-input" placeholder="BU beneficiada">
+                <input type="text" class="low-input p-2" placeholder="BU beneficiada">
             </div>
             <div class="">
                 <label class="form-label">BU solicitante:</label>
-                <input type="text" class="low-input" placeholder="BU solicitante">
+                <input type="text" class="low-input p-2" placeholder="BU solicitante">
             </div>
             <div class="">
                 <label class="form-label">Sessão de TI Responsável:</label>
-                <input type="text" class="low-input" placeholder="Sessão de TI Responsável">
+                <input type="text" class="low-input p-2" placeholder="Sessão de TI Responsável">
             </div>
             <div class="">
                 <label class="form-label">Anexar documento:</label>

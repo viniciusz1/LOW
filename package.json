@@ -28,6 +28,7 @@
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.9.1",
+    "ng-spy": "^4.0.2",
     "ngx-editor": "^15.0.0",
     "ngx-joyride": "^2.5.0",
     "primeicons": "^6.0.1",

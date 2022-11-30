@@ -1,1 +1,27 @@
-<p>sidebar-reuniao works!</p>
+<nav class="nav position-relative">
+    <ul class="nav flex-column container-sidebar" style="width: 350px">
+        <li class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item backlog"></div>
+            <a class="nav-link" href="#"><img style="width: 35px;" class="me-2" src="assets/icons8-waiting-64 1.png"> Aguardando</a>
+        </li>
+        <li class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item to-do"></div>
+            <a class="nav-link" href="#"><img style="width: 35px;" class="me-2" src="assets/icons8-à-direita-dentro-de-um-círculo-50 1.png" alt=""> Próximo</a>
+        </li>
+        <li class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item" style="background-color: #681F8B;"></div>
+            <a class="nav-link"><img style="width: 35px;" class="me-2" src="assets/icons8-à-direita-dentro-de-um-círculo-50 2.png"> Pendente</a>
+        </li>
+        <li class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item design-and-build done"></div>
+            <a class="nav-link"><img style="width: 35px;" class="me-2" src="assets/icons8-marcador-duplo-100 3.png"> Concluído</a>
+        </li>
+        <li class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item cancelled"></div>
+            <a class="nav-link"><img style="width: 35px;" class="me-2" src="assets/icons8-cancelar-50 2.png"> Cancelado</a>
+        </li>
+        
+    </ul>
+
+    <div class="barra-direita" role="button" (click)="onClick()" matRipple><i class="bi bi-chevron-right " [ngClass]="isCollapsed ? 'inverte': 'naoinverte'"></i></div>
+</nav>

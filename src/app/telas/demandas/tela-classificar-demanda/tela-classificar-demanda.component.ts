@@ -17,6 +17,12 @@ export class TelaClassificarDemandaComponent implements OnInit {
       maxWidth: '70vw',
     });
   }
+  opcoesDeTamanhoDemanda = [
+    {name:'Grande'},
+    {name:'Muito Grande'},
+    {name:'Média'},
+    {name:'Pequena'}
+  ]
   ngOnInit(): void {
   }
 

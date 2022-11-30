@@ -1,3 +1,4 @@
+import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
 
@@ -41,7 +42,8 @@ import { JoyrideModule } from 'ngx-joyride';
     PipesModule,
     FormsModule,
     InputTextModule,
-    JoyrideModule.forRoot()
+    JoyrideModule.forRoot(),
+    DropdownModule
   ],
 })
 export class DemandasModule { }

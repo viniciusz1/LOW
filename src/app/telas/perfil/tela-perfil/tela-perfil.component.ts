@@ -1,3 +1,4 @@
+import { JoyrideService } from 'ngx-joyride';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,11 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaPerfilComponent implements OnInit {
 
-  constructor() { }
+  constructor(private joyrideService: JoyrideService) { }
 
   ngOnInit(): void {
   }
 
-  
+  onClick() {
+    this.joyrideService.startTour(
+      {
+        steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete'],
+      }
+    );
+  }
 
 }

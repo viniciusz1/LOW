@@ -1,3 +1,4 @@
+import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
@@ -56,7 +57,25 @@ export class TelaInicialComponent implements OnInit {
   tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
   pesquisaDemanda = ""
+  listaDemandasRascunho: Demanda[] = [ {
+    autorDemanda: "Sabrina Hegmann",
+    scoreDemanda: 2034,
+    statusDemanda: StatusDemanda.DRAFT,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+    ppmDemanda: "PPM 123456",
+  },{
+    autorDemanda: "Sabrina Hegmann",
+    scoreDemanda: 2034,
+    statusDemanda: StatusDemanda.DRAFT,
+    departamentoBenDemanda: "Tecnologia da Informação",
+    tituloDemanda: "Sistema de Gestão de Demandas",
+    ppmDemanda: "PPM 123456",
+  }]
 
+  excluirDemandaRascunho(index: number){
+    this.listaDemandasRascunho = this.listaDemandasRascunho.splice(1, index)
+  }
 
   changeRight(index: number) {
     if (this.positionListCards[index] > -2800) {
@@ -96,6 +115,7 @@ export class TelaInicialComponent implements OnInit {
   sortData(sort: Sort) {
     console.log(sort)
   }
+
   openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',

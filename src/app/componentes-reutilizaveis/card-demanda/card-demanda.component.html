@@ -15,8 +15,8 @@
             </div>
             <i class="bi bi-three-dots-vertical three-dots" *ngIf="!rascunho" role="button" [matMenuTriggerFor]="menu"></i>
             <div *ngIf="rascunho">
-              <i class="bi bi-trash3" role="button" [matMenuTriggerFor]="menu" style="font-size: 20px;"></i>
-              <i class="bi bi-arrows-fullscreen" role="button" [matMenuTriggerFor]="menu" style="font-size: 20px; margin-left: 1vw;"></i>
+              <i class="bi bi-trash3" role="button" (click)="clicouEmExcluir.emit()" style="font-size: 20px;"></i>
+              <i class="bi bi-arrows-fullscreen" role="button" (click)="verDocumentoProposta.emit()" style="font-size: 20px; margin-left: 1vw;"></i>
             </div>
               <mat-menu #menu="matMenu">
                 <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>

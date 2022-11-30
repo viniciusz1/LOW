@@ -2,38 +2,38 @@
     <ul class="nav flex-column container-sidebar" style="width: 350px">
         <li class="nav-item d-flex border-bottom">
             <div class="barra-nav-item backlog"></div>
-            <a class="nav-link active" aria-current="page" href="#">Backlog</a>
+            <a class="nav-link active" aria-current="page" href="#"><img style="width: 35px; margin-right: 13px;"  src="assets/icons8-backlog-68 2.png" alt="" srcset=""> Backlog</a>
         </li>
         <li class="nav-item d-flex border-bottom">
             <div class="barra-nav-item assessment"></div>
-            <a class="nav-link" href="#">Assessment</a>
+            <a class="nav-link" href="#"><img  style="width: 35px; margin-right: 13px;" src="assets/icons8-assessment-64 2.png" alt="" srcset=""> Assessment</a>
         </li>
         <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item bussines-case"></div>
-            <a class="nav-link" href="#">Bussines Case</a>
+            <div class="barra-nav-item business-case"></div>
+            <a class="nav-link" href="#"><img style="width: 35px; margin-right: 13px;" src="assets/icons8-relatório-de-negócios-100 2.png" alt="" srcset=""> Business Case</a>
         </li>
         <li class="nav-item d-flex border-bottom">
             <div class="barra-nav-item to-do"></div>
-            <a class="nav-link">To-do</a>
+            <a class="nav-link"><img style="width: 35px; margin-right: 13px;" src="assets/icons8-à-fazer-100 2.png" alt="" srcset=""> To-do</a>
         </li>
         <li class="nav-item d-flex border-bottom">
             <div class="barra-nav-item design-and-build"></div>
-            <a class="nav-link">Design and Build</a>
+            <a class="nav-link"><img style="width: 35px; margin-right: 13px;" src="assets/icons8-ferramenta-de-pintura-online-80 2.png" alt="" srcset=""> Design and Build</a>
         </li>
         <li class="nav-item d-flex border-bottom">
             <div class="barra-nav-item support"></div>
-            <a class="nav-link">Support</a>
+            <a class="nav-link"><img style="width: 35px; margin-right: 13px;" src="assets/icons8-suporte-ao-cliente-100 2.png" srcset=""> Support</a>
         </li>
         <li class="nav-item d-flex border-bottom">
             <div class="barra-nav-item cancelled"></div>
-            <a class="nav-link">Cancelled</a>
+            <a class="nav-link"><img style="width: 35px; margin-right: 13px;" src="assets/icons8-cancelar-50 2.png" alt="" srcset=""> Cancelled</a>
         </li>
         <li class="nav-item d-flex border-bottom">
             <div class="barra-nav-item done"></div>
-            <a class="nav-link">Done</a>
+            <a class="nav-link"><img style="width: 35px; margin-right: 13px;" src="assets/icons8-marcador-duplo-100 2.png" alt="" srcset=""> Done</a>
         </li>
 
     </ul>
 
-    <div class="barra-direita" role="button" matRipple><i class="bi bi-chevron-right "></i></div>
+    <div class="barra-direita" role="button" (click)="onClick()" matRipple><i class="bi bi-chevron-right " [ngClass]="isCollapsed ? 'inverte': 'naoinverte'"></i></div>
 </nav>

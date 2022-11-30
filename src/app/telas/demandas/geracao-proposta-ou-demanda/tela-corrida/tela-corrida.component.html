@@ -1,37 +1,27 @@
 <div class="row">
     <div class="col-2">
-        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+        <nav id="navbar-example3" scroll-spy class="h-100 flex-column align-items-stretch pe-4 border-end">
             <nav class="nav nav-pills flex-column">
-                <a class="nav-link" href="#item-1" style="font-size: 0.9rem;">Dados Gerais</a>
-                <a class="nav-link" href="#item-2" style="font-size: 0.9rem;">Benefícios</a>
+                <a class="nav-link mt-5" spyOn="target-1" activeClass="active"  href="#target-1" style="font-size: 0.9rem;">Dados Gerais</a>
+                <a class="nav-link" spyOn="target-2" activeClass="active"  href="#target-2" style="font-size: 0.9rem;">Benefícios</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
-                    <a class="nav-link ms-3 my-1" href="#item-2-1">Beneficios</a>
-                    <a class="nav-link ms-3 my-1" href="#item-2-3">Memória de Cálculo</a>
                 </nav>
-                <a class="nav-link" href="#item-3" style="font-size: 0.9rem;">Documentos</a>
+                <a class="nav-link" spyOn="target-3" activeClass="active"  href="#target-3"  style="font-size: 0.9rem;">Documentos</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
-                    <a class="nav-link ms-3 my-1" href="#item-3-1">Frequência de Uso do Sistema</a>
-                    <a class="nav-link ms-3 my-1" href="#item-3-2">Adicionar Documento</a>
                 </nav>
-                <a class="nav-link" href="#item-4" style="font-size: 0.9rem;">Custos Totais</a>
+                <a class="nav-link" spyOn="target-4" activeClass="active"  href="#target-4"  style="font-size: 0.9rem;">Custos Totais</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
-                    <a class="nav-link ms-3 my-1" href="#item-4-1">Tabela de Recursos</a>
                 </nav>
-                <a class="nav-link" href="#item-5" style="font-size: 0.9rem;">Finalizar</a>
+                <a class="nav-link" spyOn="target-5" activeClass="active"  href="#target-5" style="font-size: 0.9rem;">Finalizar</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
-                    <a class="nav-link ms-3 my-1" href="#item-5-1">Escopo</a>
-                    <a class="nav-link ms-3 my-1" href="#item-5-2">Periodo de Execução</a>
-                    <a class="nav-link ms-3 my-1" href="#item-5-2">Payback Simples</a>
-                    <a class="nav-link ms-3 my-1" href="#item-5-4">Responsáveis pelo Negócio</a>
                 </nav>
             </nav>
         </nav>
     </div>
 
     <div class="tela-corrida col-10">
-        <p-scrollPanel [style]="{height: '78.5vh'}" data-bs-spy="scroll" data-bs-target="#navbar-example3"
-            data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
-            <div class="etapa-1" id="item-1">
+        <p-scrollPanel [style]="{height: '78.5vh'}">
+            <div class="etapa-1" spyTarget="target-1">
                 <div class="campo" style="display: flex; justify-content: center; align-items: center; padding: 0px;"
                     *ngIf="aparecer == 0">
                     <div class="div-preenchida" style="width: 61vw; ">
@@ -110,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="etapa-2" id="item-2">
+            <div class="etapa-2" spyTarget="target-2">
                 <div style="display: grid; justify-content: center;  height: 72vh;">
                     <div class="beneficios" style="display: flex; align-items: center; justify-content: space-between;"
                         id="item-2-1">
@@ -182,7 +172,7 @@
                     </div>
                 </div>
             </div>
-            <div class="etapa-3" id="item-3">
+            <div class="etapa-3"  spyTarget="target-3">
                 <div style="display: grid; justify-content: center;">
                     <div class="memoria-calculo-real" id="item-3-1">
                         <div class="ben-real" style="display: grid">
@@ -213,57 +203,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="etapa-4" id="item-4">
-                <div style="display: flex; justify-content: center; align-items: center;">
-                    <table class="table mt-5 table-bordered border-dark" id="item-4-1"
-                        style="border-left: 6px #00579D solid !important; width: 61.5vw;">
-                        <thead>
-                            <tr>
-                                <th scope="col"> <span> Recurso necessário</span> </th>
-                                <th scope="col">Tipo da despesa</th>
-                                <th scope="col">Perfil da despesa</th>
-                                <th scope="col">Quantidade de horas</th>
-                                <th scope="col">Valor da hora </th>
-                                <th scope="col">Valor total da despesa</th>
-                                <th scope="col">Período de execução
-                                    (Em meses)</th>
-                                <th scope="col">Centros de custos pagantes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="text" class="input"></td>
-                                <td><select class="select">
-                                        <option value="0" selected>Interna</option>
-                                        <option value="1">Externa</option>
-                                    </select></td>
-                                <td><input type="text" class="input"></td>
-                                <td><input type="text" class="input"></td>
-                                <td><input type="text" class="input"></td>
-                                <td><input type="text" class="input"></td>
-                                <td><input type="text" class="input"></td>
-                                <td>
-                                    <section class="d-flex ">
-                                        <input type="text" class="border input"><input type="text" class="border input">
-                                    </section>
-                                    <select name="" id="" class="border mt-2"></select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td scope="row"><button class="btn btn-primary btn-sm">Adicionar Recurso</button></td>
-                                <td scope="row"></td>
-                                <td scope="row"></td>
-                                <td scope="row"></td>
-                                <td scope="row"></td>
-                                <td scope="row"></td>
-                                <td scope="row"></td>
-                                <td scope="row"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div> -->
-            <div class="d-grid justify-content-center my-3" id="item-4">
+            <div class="d-grid justify-content-center my-3" spyTarget="target-4">
                 <div class="d-flex">
                     <div style="border: 3px solid #00579D;"></div>
                     <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{'width': '61vw'}" id="item-4-1">
@@ -373,7 +313,7 @@
                     </p-table>
                 </div>
             </div>
-            <div class="etapa-5" id="item-5">
+            <div class="etapa-5" spyTarget="target-5">
                 <div style="display: grid; justify-content: center;">
                     <div class="beneficios" style="align-items: center; justify-content: space-between;">
                         <div class="escopo-demanda" id="item-5-1">

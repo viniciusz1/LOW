@@ -4,6 +4,7 @@ import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Validators, Editor, Toolbar } from 'ngx-editor';
 import { MessageService, SelectItem } from 'primeng/api';
 import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
+import { ScrollSpyService } from 'ng-spy';
 
 @Component({
   selector: 'app-tela-corrida',
@@ -14,7 +15,8 @@ export class TelaCorridaComponent implements OnInit {
 
   aparecer = 1;
 
-  constructor(private messageService: MessageService) { }
+  constructor(private messageService: MessageService,
+    private spyService: ScrollSpyService) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +28,21 @@ export class TelaCorridaComponent implements OnInit {
       console.log("Tipo incompativel")
     }
   }
+
+  activeTarget: string = "";
+
+  setActiveTarget(targetName: string) {
+    this.activeTarget = targetName;
+  }
+  ngAfterViewInit() {
+    console.log('oi')
+    this.spyService.spy({ thresholdBottom: 50 });
+    this.spyService.activeSpyTarget.subscribe(
+      (activeTargetName: string) => console.log(activeTargetName)
+    );
+  }
+  
+
   recursos: Recurso[] = [{id: "1", nomeRecurso: "Recurso 1", tipoDespesa: TipoDespesa.EXTERNO, perfilDespesa: "Perfil 1", quantidadeHoras: 1, valorHora: 1, valorTotalDespesa: 1, periodoExMeses: 1, centrosCustoPagantes: []}, ]
   clonedRecursos: { [s: string]: Recurso; } = {};
   editor: Editor = new Editor();

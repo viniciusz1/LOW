@@ -187,7 +187,9 @@
         </div>
     </div>
 
-    <mat-spinner *ngIf="listaDemandas.length == 0" [diameter]="50" class="circle"></mat-spinner>
+    <div *ngIf="listaDemandas.length == 0">
+        <mat-spinner  [diameter]="50" class="circle"></mat-spinner>
+    </div>
 
     <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-5">
         <nav aria-label="...">

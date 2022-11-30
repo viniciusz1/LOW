@@ -6,5 +6,6 @@ export enum StatusDemanda{
     DESIGN_AND_BUILD = "design-and-build",
     SUPPORT = "support",
     CANCELLED = "cancelled",
-    DONE = "done"
+    DONE = "done",
+    DRAFT = "draft"
 }

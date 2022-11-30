@@ -1,3 +1,5 @@
+
+
 import { MessageService } from 'primeng/api';
 import { RotasModule } from './../../../rotas.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +16,7 @@ import { TelaCorridaComponent } from './tela-corrida/tela-corrida.component';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
-
+import { ScrollSpyModule } from 'ng-spy';
 
 
 @NgModule({
@@ -25,7 +27,6 @@ import {DropdownModule} from 'primeng/dropdown';
     TelaEtapaQuatroComponent,
     TelaEtapaCincoComponent,
     TelaCorridaComponent,
-
   ],
   imports: [
     CommonModule,
@@ -69,10 +70,12 @@ import {DropdownModule} from 'primeng/dropdown';
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    ScrollSpyModule
   ],
   providers:[
-    MessageService
+    MessageService,
+    
   ]
 })
 export class GeracaoPropostaOuDemandaModule { }

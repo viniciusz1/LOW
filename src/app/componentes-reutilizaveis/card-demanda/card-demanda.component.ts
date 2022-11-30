@@ -40,7 +40,7 @@ export class CardDemandaComponent implements OnInit {
   }
   textoExibidoEmBotaoDependendoRota: {rota: string, texto: string} | undefined = undefined;
 
-  botoes(){
+  exibicaoBotoes(){
     if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG){
       this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/classificar-demanda", texto: "Classificar Demanda"}
     }
@@ -50,9 +50,6 @@ export class CardDemandaComponent implements OnInit {
     if(this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE){
       this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}
     }
-    // if(this.dadosDemada.statusDemanda == StatusDemanda.TO_DO){
-    //   this.botao = {rota: "/demandas", texto: "Adicionar a Pauta"}
-    // }
     if(this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED){
       this.textoExibidoEmBotaoDependendoRota = {rota: "", texto: "Ver Reprovação"}
     }
@@ -62,7 +59,7 @@ export class CardDemandaComponent implements OnInit {
     this.primaryColorClass = this.dadosDemada.statusDemanda;
     this.secondaryColorClass = this.dadosDemada.statusDemanda + "-sec";
 
-    this.botoes()
+    this.exibicaoBotoes()
   }
 
 }

@@ -21,10 +21,12 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     //   { status: 'Gestor' }
     // ];
     this.events1 = [
-      { status: 'Ordered', date: '15/10/2020 10:30', icon: PrimeIcons.SHOPPING_CART, color: '#9C27B0', image: 'game-controller.jpg' },
-      { status: 'Processing', date: '15/10/2020 14:00', icon: PrimeIcons.COG, color: '#673AB7' },
-      { status: 'Shipped', date: '15/10/2020 16:15', icon: PrimeIcons.ENVELOPE, color: '#FF9800' },
-      { status: 'Delivered', date: '16/10/2020 10:00', icon: PrimeIcons.CHECK, color: '#607D8B' }
+      { status: 'Reserva', date: '15/10/2020 10:30', icon: PrimeIcons.HOURGLASS, color: '#00579D', fontWeight: '600'},
+      { status: 'Avaliação', date: '15/10/2020 14:00', icon: PrimeIcons.ELLIPSIS_H, color: '#c9c9c9', fontWeight: '100' },
+      { status: 'Negociação', date: '15/10/2020 16:15', icon: PrimeIcons.CHART_BAR, color: '#c9c9c9', fontWeight: '100' },
+      { status: 'Execução', date: '16/10/2020 10:00', icon: PrimeIcons.EJECT, color: '#c9c9c9', weigth: '100' },
+      { status: 'Projeção', date: '16/10/2020 10:00', icon: PrimeIcons.CHART_PIE, color: '#c9c9c9', weigth: '100' },
+      { status: 'Concluído', date: '16/10/2020 10:00', icon: PrimeIcons.CHECK, color: '#c9c9c9', weigth: '100' }
     ];
 
     this.events2 = [

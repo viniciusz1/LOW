@@ -8,6 +8,8 @@ import { FullCalendarElement } from '@fullcalendar/web-component';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua-pauta.component';
 import { Component, OnInit } from '@angular/core';
+import { listaReunioes } from './listReunioes';
+import { Reuniao } from 'src/app/models/reuniao.model';
 
 @Component({
   selector: 'app-tela-login',
@@ -22,7 +24,7 @@ export class TelaReuniaoComponent implements OnInit {
   dataReuniao: any;
   comissaoSelecionada: any;
   pesquisaDemanda: string = "";
-  
+  listaReunioes: Reuniao[] = listaReunioes;
 
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;

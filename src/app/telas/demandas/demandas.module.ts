@@ -20,6 +20,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InputTextModule } from "primeng/inputtext";
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { JoyrideModule } from 'ngx-joyride';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { JoyrideModule } from 'ngx-joyride';
     FormsModule,
     InputTextModule,
     JoyrideModule.forRoot(),
-    DropdownModule
+    DropdownModule,
+    FileUploadModule,
+    HttpClientModule
   ],
 })
 export class DemandasModule { }

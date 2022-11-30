@@ -34,12 +34,12 @@
                                         </span>
                                     </div>
                                     <div class="nome-dado">
-                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <select #themefont (click)="setFontTheme(themefont.value)" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <!-- <option selected>Selecione a opção:</option> -->
-                                            <option value="1">Arial</option>
-                                            <option value="2">Times New Roman</option>
-                                            <option value="3">Colibri</option>
-                                            <option value="4">Roboto</option>
+                                            <option value="system-ui">System-ui</option>
+                                            <option value="monospace">Monospace</option>
+                                            <option value="ui-sans-serif">Ui-sans-serif</option>
+                                            <option value="Roboto, Helvetica Neue, sans-serif" selected>Roboto</option>
                                           </select>
                                     </div>
                                 </div>

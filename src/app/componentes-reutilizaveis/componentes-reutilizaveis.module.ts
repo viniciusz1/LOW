@@ -1,3 +1,4 @@
+import { NotificacoesComponent } from './notificacoes/notificacoes.component';
 import { RotasModule } from './../rotas.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
@@ -25,7 +26,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     SidebarDemandaComponent,
     SidebarReuniaoComponent,
     FiltroDemandaComponent,
-    FiltroReuniaoComponent
+    FiltroReuniaoComponent,
+    NotificacoesComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     CardReuniaoComponent,
     FiltroDemandaComponent,
     FiltroReuniaoComponent,
-    SidebarReuniaoComponent
+    SidebarReuniaoComponent,
+    NotificacoesComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

@@ -7,7 +7,6 @@ import { CardReuniaoComponent } from './card-reuniao/card-reuniao.component';
 import { SidebarDemandaComponent } from './sidebar-demanda/sidebar-demanda.component';
 import { SidebarReuniaoComponent } from './sidebar-reuniao/sidebar-reuniao.component';
 import { CardDemandaComponent } from './card-demanda/card-demanda.component';
-import { NotificacoesComponent } from './notificacoes/notificacoes.component';
 import { RouterModule } from '@angular/router';
 import { MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
@@ -25,7 +24,6 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     CardDemandaComponent,
     SidebarDemandaComponent,
     SidebarReuniaoComponent,
-    NotificacoesComponent,
     FiltroDemandaComponent,
     FiltroReuniaoComponent
   ],
@@ -46,7 +44,6 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     ListDemandaComponent,
     SidebarDemandaComponent,
     CardReuniaoComponent,
-    NotificacoesComponent,
     FiltroDemandaComponent,
     FiltroReuniaoComponent,
     SidebarReuniaoComponent

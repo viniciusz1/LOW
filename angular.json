@@ -37,7 +37,7 @@
                 "input": "src/bootstrap-dark-blue.scss",
                 "bundleName": "bootstrap-dark-blue",
                 "inject": false
-              }
+              },
               {
                 "input": "src/bootstrap-light-blue.scss",
                 "bundleName": "bootstrap-light-blue",

@@ -191,13 +191,7 @@
                                 <label style="font-weight: 600;">
                                     Anexar Documento:
                                 </label>
-                                <input id="file" name="file" type="file" class="file_customizada"
-                                    style="font-size: 12px;" />
-                            </div>
-                            <div style="display: flex; ">
-                                <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                <input class="entrada" style="width: 61vw; height: 20vh;"
-                                    placeholder="NENHUM DOCUMENTO ANEXADO">
+                                    <p-fileUpload name="myfile[]" url="./upload.php" [multiple]="true" ></p-fileUpload>
                             </div>
                         </div>
                     </div>

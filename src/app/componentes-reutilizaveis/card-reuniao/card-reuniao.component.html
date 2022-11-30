@@ -6,9 +6,9 @@
     justify-content: space-between;">
           <div class="d-flex">
             <label class="me-2" for="">001</label>
-            <label class="me-2 text-truncate" for="titulo"><b>Dia da comissão: 22/10/2022</b></label>
+            <label class="me-2 text-truncate" for="titulo"><b>Dia da comissão: {{dadosReuniao.diaReuniao | date:"dd/MM/YY"}}</b></label>
           </div>
-            <small class="me-3" for="">Status: Próximo</small>
+            <small class="me-3" for="">Status: {{dadosReuniao.statusReuniao | titlecase}}</small>
             <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>
@@ -22,8 +22,8 @@
                 </button>
               </mat-menu>
         </div>
-        <p class="card-text">Comissão: çflasdjfças</p>
-        <p class="card-text"><b>Propostas adicionadas: </b> 9</p>
+        <p class="card-text">Comissão: {{dadosReuniao.nomeComissao}}</p>
+        <p class="card-text"><b>Propostas adicionadas: </b> {{dadosReuniao.propostas?.length}}</p>
         <p class="card-text bottom-card">
             <label class=" me-2">
                 <b>
@@ -31,7 +31,7 @@
                 </b>
                 Vendas, Motores, Trefiliação
             </label>
-            <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta">Detalhes da Reunião</button>
+            <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta" *ngIf="dadosReuniao.statusReuniao != 'cancelado'">Detalhes da Reunião</button>
         </p>
     </div>
 </div>

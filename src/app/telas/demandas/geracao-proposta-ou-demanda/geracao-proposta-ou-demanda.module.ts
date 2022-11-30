@@ -17,6 +17,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
 import {TableModule} from 'primeng/table';
 import {DropdownModule} from 'primeng/dropdown';
 import { ScrollSpyModule } from 'ng-spy';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -71,7 +73,9 @@ import { ScrollSpyModule } from 'ng-spy';
     ReactiveFormsModule,
     InputTextModule,
     ScrollPanelModule,
-    ScrollSpyModule
+    ScrollSpyModule,
+    FileUploadModule,
+    HttpClientModule
   ],
   providers:[
     MessageService,

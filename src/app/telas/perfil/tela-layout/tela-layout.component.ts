@@ -22,6 +22,18 @@ export class TelaLayoutComponent implements OnInit {
     let themelink = this.document.getElementById('app-theme') as HTMLLinkElement;
     themelink.href = `bootstrap-${theme}-blue.css`;
   }
+
+  fontSize = "13";
+  setFontSize(opc: string){
+   this.fontSize = opc;
+
+    let htmlRoot:HTMLElement = <HTMLElement> document.getElementsByTagName('html')[0];
+    if(htmlRoot != null){
+      htmlRoot.style.fontSize = this.fontSize + 'px';
+    }
+  }
+
+
   ngOnInit(): void {
   }
 

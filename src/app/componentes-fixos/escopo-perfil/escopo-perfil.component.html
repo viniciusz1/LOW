@@ -19,7 +19,7 @@
                     Layout
                 </h6>
             </div>
-            
+
             <div class="sugestoes menu-item" routerLinkActive="rota-Ativa" routerLink="sugestoes" style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-chat-right-quote"></i>
@@ -36,11 +36,11 @@
                     Ajuda
                 </h6>
             </div>
-            <div class="tutorial menu-item"  style="display: flex; border-bottom: 1px solid #8f8f8f !important;; padding: 10px 0px 10px 10px;">
+            <div (click)="onClick()" class="tutorial menu-item"  style="display: flex; border-bottom: 1px solid #8f8f8f !important;; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-diagram-3"></i>
                 </div>
-                <h6 style="margin: 0px;" (click)="onClick()">
+                <h6 style="margin: 0px;">
                     Tutorial
                 </h6>
             </div>
@@ -54,7 +54,7 @@
                         Notificações
 
                     </span>
-                    
+
                     <input class="form-check-input" style="position: absolute; right: 20px" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
                 </h6>
             </div>

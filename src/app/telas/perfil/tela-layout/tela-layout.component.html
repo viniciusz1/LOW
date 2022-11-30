@@ -18,7 +18,7 @@
                                         </span>
                                     </div>
                                     <div class="nome-dado">
-                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example" (click)="changeTheme(true)">
+                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <!-- <option selected>Selecione a opção:</option> -->
                                             <option value="1">Padrão (Claro)</option>
                                             <option value="2">Preto</option>
@@ -52,16 +52,17 @@
                                         </span>
                                     </div>
                                     <div class="nome-dado">
-                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <select #fontes (change)="setFontSize(fontes.value)" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <!-- <option selected>Selecione a opção:</option> -->
-                                            <option value="1">10</option>
-                                            <option value="2">12</option>
-                                            <option value="3">14</option>
-                                            <option value="4">16</option>
-                                            <option value="5">20</option>
-                                            <option value="6">24</option>
-                                            <option value="7">28</option>
-                                            <option value="8">32</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16" selected>16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
                                           </select>
                                     </div>
                                 </div>

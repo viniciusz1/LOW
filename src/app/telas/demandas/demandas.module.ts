@@ -1,3 +1,4 @@
+import { ChatModule } from './chat/chat.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
@@ -32,6 +33,7 @@ import { JoyrideModule } from 'ngx-joyride';
     CommonModule,
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
+    ChatModule,
     NgbModule,
     MatButtonModule,
     RouterModule,

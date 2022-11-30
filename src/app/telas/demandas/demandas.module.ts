@@ -1,3 +1,4 @@
+import { ChatModule } from './chat/chat.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
@@ -34,6 +35,7 @@ import {HttpClientModule} from '@angular/common/http';
     CommonModule,
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
+    ChatModule,
     NgbModule,
     MatButtonModule,
     RouterModule,

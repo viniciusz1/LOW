@@ -144,7 +144,7 @@
                     <div class="d-flex position-relative" style="width: 100%;">
                         <div [style.left.px]="positionListCards[i]"
                             class="div-cards d-flex position-relative transition-cards">
-                            <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
+                            <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo | slice: 0:20"
                                 [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"
                                 (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
                         </div>

@@ -33,11 +33,11 @@
           <i class="bi bi-arrows-angle-expand me-3"></i>
           <span>Ver demanda</span>
         </button>
-        <button routerLink="/tela-inicial/ver-pauta" mat-menu-item>
+        <button *ngIf="existePauta()" routerLink="/tela-inicial/ver-pauta" mat-menu-item>
           <i class="bi bi-person-lines-fill me-3"></i>
           <span>Ir para Reunião</span>
         </button>
-        <button *ngIf="existePauta()" routerLink="/tela-inicial/chat" mat-menu-item>
+        <button routerLink="/tela-inicial/chat" mat-menu-item>
           <i class="bi bi-chat-left-quote me-3"></i>
           <span>Iniciar conversa</span>
         </button>

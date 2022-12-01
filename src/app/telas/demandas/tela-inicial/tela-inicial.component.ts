@@ -90,15 +90,13 @@ export class TelaInicialComponent implements OnInit {
   }
 
   changeRight(index: number) {
-    if (this.positionListCards[index] > -2800) {
+    if (this.positionListCards[index] > -5000) {
       this.positionListCards[index] -= 700
-      console.log(this.positionListCards[index])
     }
   }
   changeLeft(index: number) {
     if (this.positionListCards[index] < 0) {
       this.positionListCards[index] += 700
-      console.log(this.positionListCards[index])
     }
   }
 

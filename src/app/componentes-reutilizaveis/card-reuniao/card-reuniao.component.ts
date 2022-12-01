@@ -14,9 +14,8 @@ export class CardReuniaoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.dadosReuniao.statusReuniao = StatusReuniao.CANCELADO
     this.primaryColorClass = this.dadosReuniao.statusReuniao;
     this.secondaryColorClass = this.dadosReuniao.statusReuniao + "-sec";
-  }
+1  }
 
 }

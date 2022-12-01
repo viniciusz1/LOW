@@ -3,7 +3,7 @@
         <div class="col-md-5 ps-5 py-5 position-relative">
             <div style="width: 140%;" class="line-top-start"></div>
             <div class="">
-                <label class="form-label">Tamanho:</label>
+                <label class="form-label me-2">Tamanho:</label>
                 <p-dropdown [options]="opcoesDeTamanhoDemanda" optionLabel="name"></p-dropdown>
             </div>
             <div class="">
@@ -20,7 +20,7 @@
             </div>
             <div class="">
                 <label class="form-label">Anexar documento:</label>
-                <input type="text" style="height: 110px;" class="low-input" placeholder="ANEXAR DOCUMENTO">
+                <p-fileUpload name="myfile[]" url="./upload.php" [multiple]="true" ></p-fileUpload>
             </div>
         </div>
         <div class="col-md-1"><div class="w-50" style="border-right: 1px solid black; height: 100%;"></div></div>

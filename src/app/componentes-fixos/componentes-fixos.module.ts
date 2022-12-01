@@ -12,13 +12,15 @@ import { JoyrideModule } from 'ngx-joyride';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {MenuItem} from 'primeng/api';
 import { RotasService } from '../services/rotas.service';
+import { EscopoPerfilComponent } from './escopo-perfil/escopo-perfil.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     PosHeaderComponent,
-    EscopoPrincipalComponent
+    EscopoPrincipalComponent,
+    EscopoPerfilComponent
   ],
   imports: [
     CommonModule,

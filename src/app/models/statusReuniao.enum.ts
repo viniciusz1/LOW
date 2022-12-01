@@ -1,7 +1,7 @@
 export enum StatusReuniao {
     AGUARDANDO = "aguardando",
-    PROXIMO = "proximo",
+    PROXIMO = "próximo",
     PENDENTE = "pendente",
-    CONCLUIDO = "concluido",
+    CONCLUIDO = "concluído",
     CANCELADO = "cancelado"
 }

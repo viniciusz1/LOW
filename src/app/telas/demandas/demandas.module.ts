@@ -1,3 +1,4 @@
+import { ChatModule } from './chat/chat.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
@@ -20,7 +21,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InputTextModule } from "primeng/inputtext";
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { JoyrideModule } from 'ngx-joyride';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -34,6 +36,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     CommonModule,
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
+    ChatModule,
     NgbModule,
     MatButtonModule,
     RouterModule,
@@ -46,7 +49,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     InputTextModule,
     JoyrideModule.forRoot(),
     DropdownModule,
-    ConfirmDialogModule
+    FileUploadModule,
+    HttpClientModule
   ],
 })
 export class DemandasModule { }

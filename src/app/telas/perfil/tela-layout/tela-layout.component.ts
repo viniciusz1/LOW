@@ -16,6 +16,14 @@ export class TelaLayoutComponent implements OnInit {
     //   this.themeSelection = theme == 'dark' ? true : false;
     //   this.changeTheme(this.themeSelection);
     // }
+    let font = window.localStorage.getItem('fontFamily');
+    if(font){
+      this.fontAtual = font
+    }
+    let fontSize = window.localStorage.getItem('fontSize');
+    if(fontSize){
+      this.fontSize = fontSize
+    }
    }
 
   // changeTheme(state:boolean){
@@ -26,11 +34,13 @@ export class TelaLayoutComponent implements OnInit {
   // }
 
   fontSize = "13";
+  fontAtual = "Roboto"
 
   setFontTheme(opc: string){
     let htmlRoot:HTMLElement = <HTMLElement> document.getElementsByTagName('body')[0];
     if(htmlRoot != null){
       htmlRoot.style.fontFamily = opc;
+      window.localStorage.setItem('fontFamily', opc);
     }
   }
 
@@ -38,8 +48,9 @@ export class TelaLayoutComponent implements OnInit {
    this.fontSize = opc;
 
     let htmlRoot:HTMLElement = <HTMLElement> document.getElementsByTagName('html')[0];
-    if(htmlRoot != null){
+    if(htmlRoot != null && window.localStorage.getItem('fontSize') != htmlRoot.style.fontSize){
       htmlRoot.style.fontSize = this.fontSize + 'px';
+      window.localStorage.setItem('fontSize', this.fontSize);
     }
   }
 

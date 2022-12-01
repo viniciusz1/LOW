@@ -196,8 +196,12 @@
         <mat-spinner [diameter]="50" class="circle"></mat-spinner>
     </div>
 
-    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-5">
-        <nav aria-label="...">
+    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-3 mb-4">
+        <!-- <p-paginator [first]="first" [rows]="1" [totalRecords]="totalRecords2" (onPageChange)="onPageChange($event)"
+        [showJumpToPageDropdown]="true" [showPageLinks]="false"></p-paginator> -->
+
+        <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"></p-paginator>
+        <!-- <nav aria-label="...">
             <ul class="pagination">
                 <li class="page-item disabled">
                     <span class="page-link">Previous</span>
@@ -211,7 +215,7 @@
                     <a class="page-link" href="#">Next</a>
                 </li>
             </ul>
-        </nav>
+        </nav> -->
     </div>
 
     <div>

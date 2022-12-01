@@ -28,3 +28,11 @@ h4{
     padding: 10px;
     font-size: 13px;
 }
+
+:host ::ng-deep .p-multiselect {
+    width: 25.5vw;
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 25.5vw;
+}

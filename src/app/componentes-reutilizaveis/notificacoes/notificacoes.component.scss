@@ -20,7 +20,6 @@ h4{
     margin-bottom: 2vh;
 }
 
-
 .custom-marker {
     display: flex;
     width: 2rem;
@@ -30,6 +29,12 @@ h4{
     color: #ffffff;
     border-radius: 50%;
     z-index: 1;
+}
+
+::ng-deep{
+    .p-card:hover{
+        background-color: #ecebeb;
+    }
 }
 
 ::ng-deep {

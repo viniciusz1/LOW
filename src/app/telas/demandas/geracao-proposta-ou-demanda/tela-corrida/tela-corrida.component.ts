@@ -6,6 +6,7 @@ import { MessageService, SelectItem } from 'primeng/api';
 import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
 import { ScrollSpyService } from 'ng-spy';
 
+
 @Component({
   selector: 'app-tela-corrida',
   templateUrl: './tela-corrida.component.html',
@@ -20,12 +21,20 @@ export class TelaCorridaComponent implements OnInit {
     }
 
   aparecer = 1;
-
+  uploadedFiles: any[] = [];
   constructor(private messageService: MessageService,
     private spyService: ScrollSpyService) { }
 
   ngOnInit(): void {
   }
+
+  // onUpload(event) {
+  //       for(let file of event.files) {
+  //           this.uploadedFiles.push(file);
+  //       }
+
+  //       this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+  //   }
 
   chamarAnalista(tipo: number){
     if(tipo >= 0 && tipo <= 1){

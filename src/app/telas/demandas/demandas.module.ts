@@ -21,6 +21,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InputTextModule } from "primeng/inputtext";
 import { PipesModule } from 'src/app/pipes/pipes.module';
 import { JoyrideModule } from 'ngx-joyride';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
+import {PaginatorModule} from 'primeng/paginator';
+import {MultiSelectModule} from 'primeng/multiselect';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
+
 
 @NgModule({
   declarations: [
@@ -45,7 +52,12 @@ import { JoyrideModule } from 'ngx-joyride';
     FormsModule,
     InputTextModule,
     JoyrideModule.forRoot(),
-    DropdownModule
+    DropdownModule,
+    FileUploadModule,
+    HttpClientModule,
+    PaginatorModule,
+    MultiSelectModule,
+    ConfirmDialogModule
   ],
 })
 export class DemandasModule { }

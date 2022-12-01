@@ -14,6 +14,9 @@ import { Sort } from '@angular/material/sort';
 import { listaDemandas } from './listDemandas';
 import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from './textoDoTutorial';
+import { ConfirmationService } from 'primeng/api';
+import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
+
 
 @Component({
   selector: 'app-tela-inicial',
@@ -27,13 +30,22 @@ export class TelaInicialComponent implements OnInit {
     private matDialog: MatDialog,
     private demandasService: DemandaService,
     private router: Router,
-    private readonly joyrideService: JoyrideService
+    private readonly joyrideService: JoyrideService,
+    private confirmationService: ConfirmationService
   ) {
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
     }
   }
+
+  irParaChat() {
+    this.confirmationService.confirm({
+        message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+        accept: () => {
+            //Actual logic to perform a confirmation
+        }
+    })};
 
   onClick() {
     console.log(textoTutorial)
@@ -133,7 +145,12 @@ export class TelaInicialComponent implements OnInit {
       minWidth: '50vw',
     });
   }
-
+  openModalHistorico() {
+    this.matDialog.open(ModalHistoricoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    });
+  }
 
 
   openModalMotivoDevolucao() {

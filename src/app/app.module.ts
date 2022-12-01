@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemandaService } from './services/demanda.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [DemandaService],
+  providers: [DemandaService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

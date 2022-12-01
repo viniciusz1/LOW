@@ -84,14 +84,14 @@
                 <div class=" d-flex justify-content-center align-items-center flex-column my-2"
                     style="margin-left:auto; margin-right:auto">
                     <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo | slice:0:4"
-                        [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"
+                        [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"  (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
                         (abrirModal)="openModalMotivoDevolucao()" class="mb-2">
                     </app-list-demanda>
 
 
                     <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
                         <div class="d-flex justify-content-center align-items-center flex-column ">
-                            <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
+                            <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"  (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
                                 [dadosDemada]="demanda" class="mb-2">
                             </app-list-demanda>
                         </div>
@@ -121,7 +121,8 @@
                 <label mat-sort-header="departamento" for="id">Departamento</label>
             </div>
             <div class="container d-flex flex-column align-items-center">
-                <app-list-demanda *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda" class="mb-2">
+                <app-list-demanda  (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
+                *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda" class="mb-2">
                 </app-list-demanda>
             </div>
         </div>
@@ -144,8 +145,10 @@
                     <div class="d-flex position-relative" style="width: 100%;">
                         <div [style.left.px]="positionListCards[i]"
                             class="div-cards d-flex position-relative transition-cards">
-                            <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo | slice: 0:20"
-                                [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"
+                            <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
+                                [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"  (irParaChat)="irParaChat()"
+                                (modalHistorico)="openModalHistorico()"
+
                                 (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
                         </div>
                         <div class="left-arrow alinhacao" (click)="changeLeft(i)"><i style="font-size: 25px;"
@@ -160,7 +163,8 @@
     </div>
 
 
-    <div *ngIf="isFiltrado && tipoExibicaoDemanda" [ngClass]="{'mt-5': tipoRascunho}" style="width: -webkit-fill-available;">
+    <div *ngIf="isFiltrado && tipoExibicaoDemanda" [ngClass]="{'mt-5': tipoRascunho}"
+        style="width: -webkit-fill-available;">
         <div matSort (matSortChange)="sortData($event)" style="padding: 10px; margin-left: 6px;">
             <label mat-sort-header="id" for="id">ID</label>
             <label mat-sort-header="titulo" for="id">Título</label>
@@ -172,14 +176,15 @@
             <div class="row" *ngIf="tipoRascunho">
                 <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandasRascunho; let i = index"
                     [dadosDemada]="demanda" (abrirModal)="openModalMotivoDevolucao()"
-                    (verDocumentoProposta)="openModalDemandaDocumento()" [mudarTamanho]="'100%'"
+                    (verDocumentoProposta)="openModalDemandaDocumento()" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
                     class="col-lg-6 col-xl-4 mb-3">
                 </app-card-demanda>
             </div>
             <div class="row" *ngIf="!tipoRascunho">
                 <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemada]="demanda"
                     (abrirModal)="openModalMotivoDevolucao()" (verDocumentoProposta)="openModalDemandaDocumento()"
-                    (clicouEmExcluir)="excluirDemandaRascunho(i)" [mudarTamanho]="'100%'"
+                    (clicouEmExcluir)="excluirDemandaRascunho(i)" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()"
+                    (modalHistorico)="openModalHistorico()"
                     class="col-lg-6 col-xl-4 mb-3">
                 </app-card-demanda>
 
@@ -188,11 +193,15 @@
     </div>
 
     <div *ngIf="listaDemandas.length == 0">
-        <mat-spinner  [diameter]="50" class="circle"></mat-spinner>
+        <mat-spinner [diameter]="50" class="circle"></mat-spinner>
     </div>
 
-    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-5">
-        <nav aria-label="...">
+    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-3 mb-4">
+        <!-- <p-paginator [first]="first" [rows]="1" [totalRecords]="totalRecords2" (onPageChange)="onPageChange($event)"
+        [showJumpToPageDropdown]="true" [showPageLinks]="false"></p-paginator> -->
+
+        <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"></p-paginator>
+        <!-- <nav aria-label="...">
             <ul class="pagination">
                 <li class="page-item disabled">
                     <span class="page-link">Previous</span>
@@ -206,7 +215,11 @@
                     <a class="page-link" href="#">Next</a>
                 </li>
             </ul>
-        </nav>
+        </nav> -->
+    </div>
+
+    <div>
+        <p-confirmDialog  header="Iniciar Chat" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     </div>
 
 </div>

@@ -30,10 +30,10 @@
         </div>
         <div class="container">
             <div *ngIf="tipoExibicao == true">
+                <app-card-reuniao class="m-1" *ngFor="let reuniao of listaReunioes" [dadosReuniao]="reuniao"></app-card-reuniao>
+                <!-- <app-card-reuniao class="m-1"></app-card-reuniao>
                 <app-card-reuniao class="m-1"></app-card-reuniao>
-                <app-card-reuniao class="m-1"></app-card-reuniao>
-                <app-card-reuniao class="m-1"></app-card-reuniao>
-                <app-card-reuniao class="m-1"></app-card-reuniao>
+                <app-card-reuniao class="m-1"></app-card-reuniao> -->
             </div>
             <div *ngIf="tipoExibicao == false" class="row m-3">
                 <div class="col-xl-8 drag-column">

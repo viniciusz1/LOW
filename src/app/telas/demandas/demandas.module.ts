@@ -25,6 +25,8 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 import {PaginatorModule} from 'primeng/paginator';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
     FileUploadModule,
     HttpClientModule,
     PaginatorModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ConfirmDialogModule
   ],
 })
 export class DemandasModule { }

@@ -20,6 +20,9 @@ import { ScrollSpyModule } from 'ng-spy';
 import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {CalendarModule} from 'primeng/calendar';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 
 @NgModule({
@@ -78,6 +81,9 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     FileUploadModule,
     HttpClientModule,
     InputTextareaModule,
+    CalendarModule,
+    InputNumberModule,
+    MultiSelectModule
   ],
   providers:[
     MessageService,

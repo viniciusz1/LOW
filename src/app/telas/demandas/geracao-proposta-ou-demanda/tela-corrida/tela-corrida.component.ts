@@ -1,5 +1,5 @@
 import { Recurso } from './../../../../models/recurso.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Validators, Editor, Toolbar } from 'ngx-editor';
 import { MessageService, SelectItem } from 'primeng/api';
@@ -13,6 +13,12 @@ import { ScrollSpyService } from 'ng-spy';
   styleUrls: ['./tela-corrida.component.scss']
 })
 export class TelaCorridaComponent implements OnInit {
+  @HostListener('window:scroll', ['$event'])
+    doSomething() {
+      // console.debug("Scroll Event", document.body.scrollTop);
+      // see András Szepesházi's comment below
+      console.debug("Scroll Event", window.pageYOffset );
+    }
 
   aparecer = 1;
   uploadedFiles: any[] = [];
@@ -38,11 +44,10 @@ export class TelaCorridaComponent implements OnInit {
   //       this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
   //   }
 
-  chamarAnalista(tipo: number){ 
+  chamarAnalista(tipo: number){
     if(tipo >= 0 && tipo <= 1){
       this.aparecer == tipo;
     } else {
-      console.log("Tipo incompativel")
     }
   }
 
@@ -52,19 +57,18 @@ export class TelaCorridaComponent implements OnInit {
     this.activeTarget = targetName;
   }
   ngAfterViewInit() {
-    console.log('oi')
     this.spyService.spy({ thresholdBottom: 50 });
     this.spyService.activeSpyTarget.subscribe(
       (activeTargetName: string) => console.log(activeTargetName)
     );
   }
-  
+
 
   recursos: Recurso[] = [{id: "1", nomeRecurso: "Recurso 1", tipoDespesa: TipoDespesa.EXTERNO, perfilDespesa: "Perfil 1", quantidadeHoras: 1, valorHora: 1, valorTotalDespesa: 1, periodoExMeses: 1, centrosCustoPagantes: []}, ]
   clonedRecursos: { [s: string]: Recurso; } = {};
   editor: Editor = new Editor();
   statuses: SelectItem[] = [{label: 'In Stock', value: 'INSTOCK'},{label: 'Low Stock', value: 'LOWSTOCK'},{label: 'Out of Stock', value: 'OUTOFSTOCK'}];
-  
+
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],

@@ -1,10 +1,8 @@
+import { fadeAnimation } from './../../../shared/app.animation';
 import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
-import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
-import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
-import { ModalFiltroDemandasComponent } from './../../../modais/modal-filtro-demandas/modal-filtro-demandas.component';
 import { Component, OnInit } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
@@ -16,7 +14,6 @@ import { Sort } from '@angular/material/sort';
 import { listaDemandas } from './listDemandas';
 import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from './textoDoTutorial';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 
@@ -24,7 +21,8 @@ import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-hi
 @Component({
   selector: 'app-tela-inicial',
   templateUrl: './tela-inicial.component.html',
-  styleUrls: ['./tela-inicial.component.scss']
+  styleUrls: ['./tela-inicial.component.scss'],
+  animations: [fadeAnimation]
 })
 export class TelaInicialComponent implements OnInit {
   constructor(
@@ -64,6 +62,7 @@ export class TelaInicialComponent implements OnInit {
   isCollapsed: boolean[] = [true, true, true, true, true, true, true, true, true];
   isFiltrado = false;
   showFiltro = false;
+  showPesquisaEBotaoFiltro = true;
   showSidebar = -350;
   listaDemandas: Demanda[] = []
   tipoRascunho = false;
@@ -194,6 +193,16 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
+  mudarStatusFiltro(){
+      this.showFiltro = !this.showFiltro
+      if(!this.showFiltro){
+        setTimeout(()=>{
+        this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
+        },200)
+      }else{
+        this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
+      }
+  }
   ngOnInit(): void {
     // this.openModalPropostaDocumento()
     // this.openModalAtaDocumento()
@@ -203,7 +212,7 @@ export class TelaInicialComponent implements OnInit {
     // this.openModalReprovacaoDemanda()
     // this.openModalFiltroDemandas()
 
-    
+
     this.demandasService.getDemandas()
       .subscribe({
         next: (list) => {

@@ -9,18 +9,12 @@
             <label class="me-2 text-truncate" for="titulo"><b>Dia da comissão: {{dadosReuniao.diaReuniao | date:"dd/MM/YY"}}</b></label>
           </div>
             <small class="me-3" for="">Status: {{dadosReuniao.statusReuniao | titlecase}}</small>
-            <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
+            <!-- <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>
-                  <span>Histórico</span>
+                  <span><i class="bi bi-x-circle me-3"></i> Cancelar Reunião</span>
                 </button>
-                <button mat-menu-item disabled>
-                  <span>Ver demanda</span>
-                </button>
-                <button mat-menu-item>
-                  <span>Iniciar conversa</span>
-                </button>
-              </mat-menu>
+              </mat-menu> -->
         </div>
         <p class="card-text">Comissão: {{dadosReuniao.nomeComissao}}</p>
         <p class="card-text"><b>Propostas adicionadas: </b> {{dadosReuniao.propostas?.length}}</p>
@@ -31,7 +25,13 @@
                 </b>
                 Vendas, Motores, Trefiliação
             </label>
-            <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta" *ngIf="dadosReuniao.statusReuniao != 'cancelado'">Detalhes da Reunião</button>
-        </p>
+            <span class="d-flex">
+              <button class="btn btn-outline-danger btn-sm me-2" routerLink="/tela-inicial/ver-pauta" *ngIf="
+              dadosReuniao.statusReuniao != 'cancelado' &&
+              dadosReuniao.statusReuniao != 'concluído'">Cancelar Reunião</button>
+              <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'cancelado'">Ver motivo do cancelamento</button>
+              <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta" *ngIf="dadosReuniao.statusReuniao != 'cancelado'">Detalhes da Reunião</button>
+            </span>
+          </p>
     </div>
 </div>

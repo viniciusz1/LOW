@@ -24,6 +24,7 @@ import { JoyrideModule } from 'ngx-joyride';
 import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     TelaInicialComponent,

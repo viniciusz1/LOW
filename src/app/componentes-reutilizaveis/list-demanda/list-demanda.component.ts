@@ -17,6 +17,8 @@ export class ListDemandaComponent implements OnInit {
   @Input() dadosDemada: Demanda = {};
   @Input() mostrarBotao = true;
   @Input('mostrarIconeAdicionar') demandaPequena = false;
+  @Output() irParaChat = new EventEmitter();
+
   textoExibidoEmBotaoDependendoRota: {rota: string, texto: string} | undefined = undefined;
 
   constructor(private route: Router) { }

@@ -1,3 +1,4 @@
+import { ChatModule } from './chat/chat.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
@@ -25,6 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {PaginatorModule} from 'primeng/paginator';
 import {MultiSelectModule} from 'primeng/multiselect';
 
+
 @NgModule({
   declarations: [
     TelaInicialComponent,
@@ -36,6 +38,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
     CommonModule,
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
+    ChatModule,
     NgbModule,
     MatButtonModule,
     RouterModule,

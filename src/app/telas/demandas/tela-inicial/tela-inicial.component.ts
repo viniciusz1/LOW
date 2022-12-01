@@ -17,6 +17,9 @@ import { listaDemandas } from './listDemandas';
 import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from './textoDoTutorial';
 import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import { ConfirmationService } from 'primeng/api';
+import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
+
 
 @Component({
   selector: 'app-tela-inicial',
@@ -29,13 +32,22 @@ export class TelaInicialComponent implements OnInit {
     private matDialog: MatDialog,
     private demandasService: DemandaService,
     private router: Router,
-    private readonly joyrideService: JoyrideService
+    private readonly joyrideService: JoyrideService,
+    private confirmationService: ConfirmationService
   ) {
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
     }
   }
+
+  irParaChat() {
+    this.confirmationService.confirm({
+        message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+        accept: () => {
+            //Actual logic to perform a confirmation
+        }
+    })};
 
   onClick() {
     console.log(textoTutorial)
@@ -78,15 +90,13 @@ export class TelaInicialComponent implements OnInit {
   }
 
   changeRight(index: number) {
-    if (this.positionListCards[index] > -2800) {
+    if (this.positionListCards[index] > -5000) {
       this.positionListCards[index] -= 700
-      console.log(this.positionListCards[index])
     }
   }
   changeLeft(index: number) {
     if (this.positionListCards[index] < 0) {
       this.positionListCards[index] += 700
-      console.log(this.positionListCards[index])
     }
   }
 
@@ -136,7 +146,12 @@ export class TelaInicialComponent implements OnInit {
       minWidth: '50vw',
     });
   }
-
+  openModalHistorico() {
+    this.matDialog.open(ModalHistoricoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    });
+  }
 
 
   openModalMotivoDevolucao() {

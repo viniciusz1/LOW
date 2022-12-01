@@ -22,7 +22,9 @@ export class CardDemandaComponent implements OnInit {
   @Input() exibirBotaoParecerDg: boolean = false;
   @Input() tipoDeAta: string = "";
   @Output() clicouEmExcluir = new EventEmitter();
-  
+  @Output() irParaChat = new EventEmitter();
+  @Output() modalHistorico = new EventEmitter();
+
   usuario = ""
   primaryColorClass?: string = "";
   secondaryColorClass: string = "";

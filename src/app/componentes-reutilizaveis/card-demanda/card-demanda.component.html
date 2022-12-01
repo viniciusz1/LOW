@@ -1,52 +1,73 @@
 <div class="card low-shadow position-relative" style="font-size: 14px; width: {{mudarTamanho}}; height:163px;">
 
-    <div class="line-top-start" [ngClass]="primaryColorClass"></div>
-    <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
-    <div class="card-body pb-1">
-        <div class="mt-2 card-title d-flex" style="align-items: baseline;
+  <div class="line-top-start" [ngClass]="primaryColorClass"></div>
+  <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
+  <div class="card-body pb-1">
+    <div class="mt-2 card-title d-flex" style="align-items: baseline;
     justify-content: space-between;">
-          <div class="d-flex">
-            <label class="me-2" for="">002</label>
-            <label class="me-2 text-truncate" for="titulo"><b>{{dadosDemada.tituloDemanda}}</b></label>
-          </div>
-            <small class="me-3" for="" *ngIf="!rascunho && usuario != 'solicitante'">{{dadosDemada.statusDemanda | uppercase }}</small>
-            <div class="progress low-shadow" *ngIf="usuario == 'solicitante' && !rascunho">
-              <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <i class="bi bi-three-dots-vertical three-dots" *ngIf="!rascunho" role="button" [matMenuTriggerFor]="menu"></i>
-            <div *ngIf="rascunho">
-              <i class="bi bi-trash3" role="button" (click)="clicouEmExcluir.emit()" style="font-size: 20px;"></i>
-              <i class="bi bi-arrows-fullscreen" role="button" (click)="verDocumentoProposta.emit()" style="font-size: 20px; margin-left: 1vw;"></i>
-            </div>
-              <mat-menu #menu="matMenu">
-                <button routerLink="/tela-inicial/historico-demanda" mat-menu-item>
-                  <span>Histórico</span>
-                </button>
-                <button (click)="verDocumentoProposta.emit()" mat-menu-item>
-                  <span>Ver demanda</span>
-                </button>
-                <button routerLink="/tela-inicial/chat" mat-menu-item>
-                  <span>Iniciar conversa</span>
-                </button>
-              </mat-menu>
-        </div>
-        <p class="card-text">{{dadosDemada.ppmDemanda}}</p>
-        <p class="card-text d-flex justify-content-between"><span><b>Autor: </b>{{dadosDemada.autorDemanda}}</span> <span *ngIf="tipoDeAta.length != 0">{{tipoDeAta}}</span></p>
-        <p class="card-text bottom-card">
-            <label class="d-inline-block me-2" 
-            [ngClass]="{'text-truncate': textoExibidoEmBotaoDependendoRota || rascunho, 'tamanho': !textoExibidoEmBotaoDependendoRota && !rascunho &&!exibirBotaoParecerComissao && !exibirBotaoParecerDg}" style="width: 160px;">
-                <b>
-                    Depart.:
-                </b>
-                {{dadosDemada.departamentoBenDemanda}}
-            </label>
-            <button *ngIf="!isPauta && !rascunho && textoExibidoEmBotaoDependendoRota" class="btn btn-primary btn-sm" (click)="direcionarUsuario()">
-              {{textoExibidoEmBotaoDependendoRota.texto}}
-            </button>
-            <button *ngIf="!isPauta && rascunho" class="btn btn-primary btn-sm" [routerLink]="['../proposta/1']">Continuar Demanda</button>
-            <button *ngIf="exibirBotaoParecerDg" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Parecer da DG</button>
-            <button *ngIf="exibirBotaoParecerComissao" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Parecer da Comissão</button>
-            <i role='button' *ngIf="isPauta" class="bi bi-trash-fill fs-5" (click)="clicouEmExcluir.emit()"></i>
-        </p>
+      <div class="d-flex">
+        <label class="me-2" for="">002</label>
+        <label class="me-2 text-truncate" for="titulo"><b>{{dadosDemada.tituloDemanda}}</b></label>
+      </div>
+
+      <div class="progress low-shadow" *ngIf="usuario == 'solicitante' && !rascunho">
+        <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75"
+          aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <i class="bi bi-chat-left-dots me-3" *ngIf="!rascunho" (click)="irParaChat.emit()" style="cursor: pointer;"></i>
+      <i class="bi bi-three-dots-vertical three-dots" *ngIf="!rascunho" role="button" [matMenuTriggerFor]="menu"></i>
+      <div *ngIf="rascunho">
+        <i class="bi bi-trash3" role="button" (click)="clicouEmExcluir.emit()" style="font-size: 20px;"></i>
+        <i class="bi bi-arrows-fullscreen" role="button" (click)="verDocumentoProposta.emit()"
+          style="font-size: 20px; margin-left: 1vw;"></i>
+      </div>
+      <mat-menu #menu="matMenu">
+        <button (click)="modalHistorico.emit()"  mat-menu-item>
+          <i class="bi bi-arrow-counterclockwise me-3"></i>
+          <span>Histórico</span>
+        </button>
+        <button (click)="verDocumentoProposta.emit()" mat-menu-item>
+          <i class="bi bi-arrows-angle-expand me-3"></i>
+          <span>Ver demanda</span>
+        </button>
+        <button routerLink="/tela-inicial/chat" mat-menu-item>
+          <i class="bi bi-chat-left-quote me-3"></i>
+          <span>Iniciar conversa</span>
+        </button>
+      </mat-menu>
     </div>
+    <p class="card-text d-flex justify-content-between">
+      <span>
+        {{dadosDemada.ppmDemanda}}
+      </span>
+      <span>
+        <small for="" *ngIf="!rascunho && usuario != 'solicitante'">
+          {{dadosDemada.statusDemanda | uppercase}}
+        </small>
+      </span>
+    </p>
+    <p class="card-text d-flex justify-content-between"><span><b>Autor: </b>{{dadosDemada.autorDemanda}}</span> <span
+        *ngIf="tipoDeAta.length != 0">{{tipoDeAta}}</span></p>
+    <p class="card-text bottom-card">
+      <label class="d-inline-block me-2"
+        [ngClass]="{'text-truncate': textoExibidoEmBotaoDependendoRota || rascunho, 'tamanho': !textoExibidoEmBotaoDependendoRota && !rascunho &&!exibirBotaoParecerComissao && !exibirBotaoParecerDg}"
+        style="width: 160px;">
+        <b>
+          Depart.:
+        </b>
+        {{dadosDemada.departamentoBenDemanda}}
+      </label>
+      <button *ngIf="!isPauta && !rascunho && textoExibidoEmBotaoDependendoRota" class="btn btn-primary btn-sm"
+        (click)="direcionarUsuario()">
+        {{textoExibidoEmBotaoDependendoRota.texto}}
+      </button>
+      <button *ngIf="!isPauta && rascunho" class="btn btn-primary btn-sm" [routerLink]="['../proposta/1']">Continuar
+        Demanda</button>
+      <button *ngIf="exibirBotaoParecerDg" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Parecer da
+        DG</button>
+      <button *ngIf="exibirBotaoParecerComissao" class="btn btn-primary btn-sm" (click)="abrirModal.emit()">Parecer da
+        Comissão</button>
+      <i role='button' *ngIf="isPauta" class="bi bi-trash-fill fs-5" (click)="clicouEmExcluir.emit()"></i>
+    </p>
+  </div>
 </div>

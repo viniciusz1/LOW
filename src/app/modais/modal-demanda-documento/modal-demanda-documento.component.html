@@ -1,11 +1,11 @@
 <p-timeline [value]="events1" align="top" layout="horizontal">
   <ng-template pTemplate="marker" let-event>
-      <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-          <i [ngClass]="event.icon"></i>
-      </span>
+    <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+      <i [ngClass]="event.icon"></i>
+    </span>
   </ng-template>
   <ng-template pTemplate="opposite" let-event>
-    <span [style.fontWeight]="event.fontWeight">
+    <span [style.fontWeight]="event.fontWeight" class="TitulosRodape">
       {{event.status}}
     </span>
   </ng-template>
@@ -14,13 +14,20 @@
 </p-timeline>
 
 
-<p class="paragrafo-inicial"><b class="me-2">01</b><span><img style="width: 60px;"
-      src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt=""></span></p>
+<p class="paragrafo-inicial"><b class="me-2">01</b>
+  <span>
+    <img style="width: 60px;" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt="">
+  </span>
+</p>
+
 <mat-dialog-content class="mat-typography">
+  <p-scrollPanel [style]="{width: '100%', height: '65vh'}" styleClass="custombar1">
   <h4 mat-dialog-title class="d-flex justify-content-between"><span><b>SOLICITANTE: </b>Vinicius Bonatti Benner</span>
-    <span><b>DATA:</b> 22/05/2022</span></h4>
+    <span><b>DATA:</b> 22/05/2022</span>
+  </h4>
   <h4><b>SETOR:</b> TI</h4>
-  <h4 class="d-flex justify-content-center"><b>MELHORIA PERFORMANCE E DISPONIBILIDADE DO SISTEMA MAESTRO – 1000025500</b></h4>
+  <h4 class="d-flex justify-content-center"><b>MELHORIA PERFORMANCE E DISPONIBILIDADE DO SISTEMA MAESTRO –
+      1000025500</b></h4>
 
 
   <h4><b>Objetivo:</b></h4>
@@ -89,6 +96,7 @@
   </ul>
   <p><b>Frequência de uso do sistema:</b>Sistema utilizado diariamente</p>
   <h4><b>DOCUMENTOS:</b></h4>
+</p-scrollPanel>
 </mat-dialog-content>
 <mat-dialog-actions align="end" *ngIf="user == 'gerente'">
   <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">Cancelar</button>

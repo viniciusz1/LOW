@@ -22,14 +22,29 @@ export class TelaChatComponent implements OnInit {
 ]
   ngOnInit(): void {
   }
-  enviarMensagem(){
 
-    this.mensagens.push({
-      mensagem: this.mensagem.nativeElement.value,
-      rementente: "solicitante"
-    })
-    console.log(this.mensagens)
-    this.mensagem.nativeElement.value = ""
+
+
+  enviarMensagem(event: KeyboardEvent | Event) {
+    if(this.mensagem.nativeElement.value == ""){
+      return
+    }
+
+    if (event instanceof KeyboardEvent) {
+      if (event.key === "Enter") {
+        this.mensagens.push({
+          mensagem: this.mensagem.nativeElement.value,
+          rementente: "solicitante"
+        })
+        this.mensagem.nativeElement.value = "";
+      }
+    }else{
+      this.mensagens.push({
+        mensagem: this.mensagem.nativeElement.value,
+        rementente: "solicitante"
+      })
+      this.mensagem.nativeElement.value = ""
+    }
   }
 }
 interface Mensagem{

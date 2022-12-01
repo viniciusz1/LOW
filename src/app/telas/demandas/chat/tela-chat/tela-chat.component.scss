@@ -3,13 +3,18 @@ h6 {
 }
 
 section header {
-    border-bottom: #dbdbdb 1px solid;
+    border-bottom: #fff 1px solid;
 }
 
 header, footer {
-    background-color: #eee;
+    background-color:#ffff;
     padding: 5px;
     min-height: 60px;
+}
+
+main {
+  background-color: rgb(245, 245, 245);
+  min-height: calc(100vh - 32.5vh);
 }
 
 header img,
@@ -29,10 +34,7 @@ header img {
     border-color: #f8f8f8;
 }
 
-main {
-    background-color: #f5f1ee;
-    min-height: calc(100vh - 32.5vh);
-}
+
 
 .badge-success {
     background-color: #09d261;
@@ -45,7 +47,7 @@ main {
         background-color: transparent;
     }
     padding: 10px;
-    background-color: #f8f8f8;
+    background-color:  rgb(245, 245, 245);
 }
 #send{
     justify-content: space-around;
@@ -85,11 +87,11 @@ main {
     font-size: 15px;
     /* line-height: 14px; */
     width: 30vw;
-    background-color: #dbdfdf;
+    background-color: #6a7575;
     border-radius: 10px;
     padding: 10px 10px 10px 21px;
     /* text-align: center; */
-    color: black;
+    color: rgb(255, 255, 255);
     word-wrap:break-word;
 }
 
@@ -98,10 +100,10 @@ main {
     width: 0px;
     height: 0px;
     position: absolute;
-    
-    border-left: 12px solid #dbdfdf;
+
+    border-left: 12px solid #6a7575;
     border-right: 6px solid transparent;
-    border-top: 6px solid #dbdfdf;
+    border-top: 6px solid #6a7575;
     border-bottom: 10px solid transparent;
     left: 20px;
     bottom: -15px;
@@ -113,11 +115,11 @@ main {
     font-size: 15px;
     /* line-height: 14px; */
     width: 30vw;
-    background-color: #b5cef3;
+    background-color: #0c5279;
     border-radius: 10px;
     padding: 10px 10px 10px 21px;
     /* text-align: center; */
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .balao-chat-solicitante:after{
@@ -126,9 +128,9 @@ main {
     height: 0px;
     position: absolute;
     justify-content: end;
-    border-left: 12px solid #b5cef3;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #b5cef3;
+    border-right: 12px solid #0c5279;
+    border-left: 6px solid transparent;
+    border-top: 6px solid #0c5279;
     border-bottom: 10px solid transparent;
     right: 20px;
     bottom: -15px;

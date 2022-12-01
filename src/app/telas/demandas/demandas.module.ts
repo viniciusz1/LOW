@@ -22,6 +22,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { JoyrideModule } from 'ngx-joyride';
 import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
+import {PaginatorModule} from 'primeng/paginator';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import {HttpClientModule} from '@angular/common/http';
     JoyrideModule.forRoot(),
     DropdownModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    PaginatorModule,
+    MultiSelectModule
   ],
 })
 export class DemandasModule { }

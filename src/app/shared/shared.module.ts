@@ -13,7 +13,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
   ],
   exports:[
     ScrollPanelModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class SharedModule { }

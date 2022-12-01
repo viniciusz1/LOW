@@ -1,9 +1,13 @@
-<div class="row">
-    <div class="col-2">
-        <nav id="navbar-example3" scroll-spy class="h-100 flex-column align-items-stretch pe-4 border-end">
+<div class="row" scroll-spy>
+    <div class="col-2" >
+      <div>
+
+        <nav id="navbar-example3"style="position: fixed;
+        top: 30vh; left: 4vw
+    " class="h-100 flex-column align-items-stretch pe-4">
             <nav class="nav nav-pills flex-column">
                 <a class="nav-link mt-5" spyOn="target-1" activeClass="active"  href="#target-1" style="font-size: 0.9rem;">Dados Gerais</a>
-                <a class="nav-link" spyOn="target-2" activeClass="active"  href="#target-2" style="font-size: 0.9rem;">Benefícios</a>
+                <a class="nav-link" spyOn="beneficios"  activeClass="active" href="#beneficios" style="font-size: 0.9rem;">Benefícios</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
                 </nav>
                 <a class="nav-link" spyOn="target-3" activeClass="active"  href="#target-3"  style="font-size: 0.9rem;">Documentos</a>
@@ -17,11 +21,11 @@
                 </nav>
             </nav>
         </nav>
+      </div>
     </div>
 
-    <div class="tela-corrida col-10">
-        <p-scrollPanel [style]="{height: '78.5vh'}">
-            <div class="etapa-1" spyTarget="target-1">
+    <div   class="tela-corrida col-10 border-start">
+            <div >
                 <div class="campo" style="display: flex; justify-content: center; align-items: center; padding: 0px;"
                     *ngIf="aparecer == 0">
                     <div class="div-preenchida" style="width: 61vw; ">
@@ -52,7 +56,7 @@
                     </div>
                 </div>
 
-                <div style="display: grid; justify-content: center; margin-top: 1.5vh;">
+                <div spyTarget="etapa-1" style="display: grid; justify-content: center; margin-top: 1.5vh;" class="etapa-1" >
                     <div class="beneficios" style="display: grid; align-items: center; justify-content: space-between;">
                         <div class="titulo" style="display: grid" id="item-1-1">
                             <label style="font-weight: 600;">
@@ -100,7 +104,7 @@
                     </div>
                 </div>
             </div>
-            <div class="etapa-2" spyTarget="target-2">
+            <div class="etapa-2" spyTarget="beneficios">
                 <div style="display: grid; justify-content: center;  height: 72vh;">
                     <div class="beneficios" style="display: flex; align-items: center; justify-content: space-between;"
                         id="item-2-1">
@@ -407,6 +411,5 @@
                     </div>
                 </div>
             </div>
-        </p-scrollPanel>
     </div>
 </div>

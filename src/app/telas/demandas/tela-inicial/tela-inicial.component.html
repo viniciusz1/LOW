@@ -9,8 +9,6 @@
                 + Criar Demanda
             </button>
 
-            <button (click)="isFiltrado = !isFiltrado">change</button>
-            <button (click)="onClick()">tutorial</button>
             <ng-template #prevButton>
                 <button class="btn btn-outline-primary">Anterior</button>
             </ng-template>
@@ -36,7 +34,7 @@
                 <span *ngIf="showPesquisaEBotaoFiltro" class="p-input-icon-left" [ngClass]="{'tam': !tipoRascunho}">
                     <i class="pi pi-search"></i>
                     <input type="text" class="border" style="width: 100%;" pInputText placeholder="Pesquisar Demanda"
-                        [(ngModel)]="pesquisaDemanda" />
+                        [(ngModel)]="pesquisaDemanda" (keypress)="isFiltrado = !isFiltrado" />
                 </span>
                 <button *ngIf="showPesquisaEBotaoFiltro && !tipoRascunho" class="btn btn-primary ms-3" style="width: 180px;"
                     (click)="mudarStatusFiltro()">

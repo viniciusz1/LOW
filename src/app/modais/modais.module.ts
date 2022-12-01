@@ -17,6 +17,10 @@ import { ModalReprovacaoDemandaComponent } from './modal-reprovacao-demanda/moda
 import {TimelineModule} from 'primeng/timeline';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
+import { ModalHistoricoComponent } from './modal-historico/modal-historico.component';
+
 
 
 @NgModule({
@@ -29,6 +33,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     ModalDemandaDocumentoComponent,
     ModalMotivoDevolucaoComponent,
     ModalReprovacaoDemandaComponent,
+    ModalHistoricoComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +44,9 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
     FormsModule,
     TimelineModule,
     DropdownModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ConfirmDialogModule,
+    ScrollPanelModule
   ],
   exports: [
     ModalDemandaDocumentoComponent

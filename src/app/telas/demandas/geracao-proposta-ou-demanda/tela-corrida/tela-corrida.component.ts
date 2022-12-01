@@ -22,6 +22,14 @@ export class TelaCorridaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  opcoesDeTamanho = [
+    {name:'Muito Pequena'},
+    {name:'Pequena'},
+    {name:'Média'},
+    {name:'Grande'},
+    {name:'Muito Grande'}
+  ]
+
   // onUpload(event) {
   //       for(let file of event.files) {
   //           this.uploadedFiles.push(file);

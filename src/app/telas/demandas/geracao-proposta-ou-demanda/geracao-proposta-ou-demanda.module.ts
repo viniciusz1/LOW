@@ -19,6 +19,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import { ScrollSpyModule } from 'ng-spy';
 import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import {HttpClientModule} from '@angular/common/http';
     ScrollPanelModule,
     ScrollSpyModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    InputTextareaModule,
   ],
   providers:[
     MessageService,

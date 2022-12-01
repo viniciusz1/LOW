@@ -21,6 +21,9 @@
         <i class="bi bi-arrows-fullscreen" role="button" (click)="verDocumentoProposta.emit()"
           style="font-size: 20px; margin-left: 1vw;"></i>
       </div>
+
+
+
       <mat-menu #menu="matMenu">
         <button (click)="modalHistorico.emit()"  mat-menu-item>
           <i class="bi bi-arrow-counterclockwise me-3"></i>
@@ -30,12 +33,21 @@
           <i class="bi bi-arrows-angle-expand me-3"></i>
           <span>Ver demanda</span>
         </button>
+        <button *ngIf="existePauta()" routerLink="/tela-inicial/ver-pauta" mat-menu-item>
+          <i class="bi bi-person-lines-fill me-3"></i>
+          <span>Ir para Reunião</span>
+        </button>
         <button routerLink="/tela-inicial/chat" mat-menu-item>
           <i class="bi bi-chat-left-quote me-3"></i>
           <span>Iniciar conversa</span>
         </button>
+
       </mat-menu>
     </div>
+
+
+
+
     <p class="card-text d-flex justify-content-between">
       <span>
         {{dadosDemada.ppmDemanda}}

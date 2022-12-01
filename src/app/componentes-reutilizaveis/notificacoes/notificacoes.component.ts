@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
-
+import { fadeAnimation } from 'src/app/shared/app.animation';
 @Component({
   selector: 'app-notificacoes',
   templateUrl: './notificacoes.component.html',
-  styleUrls: ['./notificacoes.component.scss']
+  styleUrls: ['./notificacoes.component.scss'],
+  animations: [fadeAnimation]
 })
 export class NotificacoesComponent implements OnInit {
-  
+
   events1: any[] = [];
-    
+
   events2: any[] = [];
-  
+
   ngOnInit() {
       this.events1 = [
           {message: 'Sua demanda está sendo analisada pelo Gerente de TI', date: '15/10/2020 10:30', icon: PrimeIcons.CHECK, color: 'blue'},

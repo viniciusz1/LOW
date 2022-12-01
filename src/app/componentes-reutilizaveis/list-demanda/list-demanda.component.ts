@@ -14,6 +14,7 @@ export class ListDemandaComponent implements OnInit {
   @Output() abrirModal = new EventEmitter();
   @Output() verDocumentoProposta = new EventEmitter();
   @Output() clicouAdicionarPauta = new EventEmitter();
+  @Output() modalHistorico = new EventEmitter();
   @Input() dadosDemada: Demanda = {};
   @Input() mostrarBotao = true;
   @Input('mostrarIconeAdicionar') demandaPequena = false;
@@ -22,7 +23,17 @@ export class ListDemandaComponent implements OnInit {
   textoExibidoEmBotaoDependendoRota: {rota: string, texto: string} | undefined = undefined;
 
   constructor(private route: Router) { }
-
+  existePauta() {
+    if (
+      this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
+      this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE ||
+      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG ||
+      this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED
+    ) {
+      return false;
+    }
+    return true;
+  }
   direcionarUsuario(){
     if(this.textoExibidoEmBotaoDependendoRota?.rota == ""){
       this.abrirModal.emit()

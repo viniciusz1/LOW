@@ -27,6 +27,7 @@ export class TelaChatComponent implements OnInit {
   silenciarChat() {
     this.confirmationService.confirm({
         message: 'Deseja realmente silenciar esta conversa?',
+        dismissableMask: true,
         accept: () => {
             //Actual logic to perform a confirmation
         }

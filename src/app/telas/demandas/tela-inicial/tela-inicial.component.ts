@@ -43,12 +43,14 @@ export class TelaInicialComponent implements OnInit {
 
   irParaChat() {
     this.confirmationService.confirm({
-        blockScroll: false,
-        message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
-        accept: () => {
-            this.router.navigate(['/tela-inicial/chat'])
-        }
-    })};
+      dismissableMask: true,
+      blockScroll: false,
+      message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+      accept: () => {
+        this.router.navigate(['/tela-inicial/chat'])
+      }
+    })
+  };
 
   onClick() {
     console.log(textoTutorial)
@@ -70,14 +72,14 @@ export class TelaInicialComponent implements OnInit {
   tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
   pesquisaDemanda = ""
-  listaDemandasRascunho: Demanda[] = [ {
+  listaDemandasRascunho: Demanda[] = [{
     autorDemanda: "Sabrina Hegmann",
     scoreDemanda: 2034,
     statusDemanda: StatusDemanda.DRAFT,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
     ppmDemanda: "PPM 123456",
-  },{
+  }, {
     autorDemanda: "Sabrina Hegmann",
     scoreDemanda: 2034,
     statusDemanda: StatusDemanda.DRAFT,
@@ -86,7 +88,7 @@ export class TelaInicialComponent implements OnInit {
     ppmDemanda: "PPM 123456",
   }]
 
-  excluirDemandaRascunho(index: number){
+  excluirDemandaRascunho(index: number) {
     this.listaDemandasRascunho = this.listaDemandasRascunho.splice(1, index)
   }
 
@@ -204,7 +206,7 @@ export class TelaInicialComponent implements OnInit {
     // this.openModalReprovacaoDemanda()
     // this.openModalFiltroDemandas()
 
-    
+
     this.demandasService.getDemandas()
       .subscribe({
         next: (list) => {

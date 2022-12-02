@@ -26,9 +26,9 @@
                 Vendas, Motores, Trefiliação
             </label>
             <span class="d-flex">
-              <button class="btn btn-outline-danger btn-sm me-2" routerLink="/tela-inicial/ver-pauta" *ngIf="
+              <button class="btn btn-outline-danger btn-sm me-2" *ngIf="
               dadosReuniao.statusReuniao != 'cancelado' &&
-              dadosReuniao.statusReuniao != 'concluído'">Cancelar Reunião</button>
+              dadosReuniao.statusReuniao != 'concluído'" (click)="cancelarReuniao.emit()">Cancelar Reunião</button>
               <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'cancelado'">Ver motivo do cancelamento</button>
               <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta" *ngIf="dadosReuniao.statusReuniao != 'cancelado'">Detalhes da Reunião</button>
             </span>

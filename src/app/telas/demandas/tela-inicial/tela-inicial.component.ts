@@ -11,9 +11,9 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
-import { listaDemandas } from './listDemandas';
+import { listaDemandas } from '../../../shared/listDemandas';
 import { JoyrideService } from 'ngx-joyride';
-import { textoTutorial } from './textoDoTutorial';
+import { textoTutorial } from '../../../shared/textoDoTutorial';
 import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 

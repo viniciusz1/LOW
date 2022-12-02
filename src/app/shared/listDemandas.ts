@@ -1,4 +1,4 @@
-import { Demanda } from './../../../models/demanda.model';
+import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from "src/app/models/statusDemanda.enum";
 
 export const listaDemandas: Demanda[] = [

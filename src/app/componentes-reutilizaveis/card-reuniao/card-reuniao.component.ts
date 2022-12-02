@@ -1,6 +1,6 @@
 import { Reuniao } from './../../models/reuniao.model';
-import { Component, Input, OnInit } from '@angular/core';
-import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-card-reuniao',
@@ -9,6 +9,7 @@ import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 })
 export class CardReuniaoComponent implements OnInit {
   @Input() dadosReuniao: Reuniao = {};
+  @Output() cancelarReuniao = new EventEmitter();
   primaryColorClass?: string = "";
   secondaryColorClass: string = "";
   constructor() { }

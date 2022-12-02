@@ -31,7 +31,7 @@
             [stepContentParams]="{'texto': textoTutorial[1]}" class="nav justify-content-center"
             style="overflow: auto;">
             <div *ngIf="showPesquisaEBotaoFiltro" class="d-flex align-items-center justify-content-center">
-                <span *ngIf="showPesquisaEBotaoFiltro" class="p-input-icon-left" [ngClass]="{'tam': !tipoRascunho}">
+                <span class="p-input-icon-left" [ngClass]="{'tam': !tipoRascunho}">
                     <i class="pi pi-search"></i>
                     <input type="text" class="border" style="width: 100%;" pInputText placeholder="Pesquisar Demanda"
                         [(ngModel)]="pesquisaDemanda" (keypress)="isFiltrado = !isFiltrado" />

@@ -32,7 +32,12 @@ export class CardDemandaComponent implements OnInit {
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
 
-  constructor(private route: Router) {}
+  constructor(private route: Router) {
+    this.textoExibidoEmBotaoDependendoRota = {
+      rota: '/tela-inicial/ver-pauta',
+      texto: 'Ver em Ata',
+    };
+  }
 
   direcionarUsuario() {
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
@@ -41,6 +46,8 @@ export class CardDemandaComponent implements OnInit {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
+
+  
 
   exibicaoBotoes() {
     if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG) {

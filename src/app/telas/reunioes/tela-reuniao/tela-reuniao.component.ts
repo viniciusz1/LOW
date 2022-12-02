@@ -10,17 +10,20 @@ import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua
 import { Component, OnInit } from '@angular/core';
 import { listaReunioes } from './listReunioes';
 import { Reuniao } from 'src/app/models/reuniao.model';
+import { fadeAnimation } from './../../../shared/app.animation';
 
 @Component({
   selector: 'app-tela-login',
   templateUrl: './tela-reuniao.component.html',
-  styleUrls: ['./tela-reuniao.component.scss']
+  styleUrls: ['./tela-reuniao.component.scss'],
+  animations: [fadeAnimation]
 })
 export class TelaReuniaoComponent implements OnInit {
   //tipoExibicao = true --> mostrar todas reuniões
   //tipoExibicao = false --> Cria nova pauta
   tipoExibicao = true;
   showFiltro = false;
+  showPesquisaEBotaoFiltro = true;
   dataReuniao: any;
   comissaoSelecionada: any;
   pesquisaDemanda: string = "";
@@ -106,6 +109,17 @@ export class TelaReuniaoComponent implements OnInit {
       minWidth: '60vw'
     })
   }
+
+  mudarStatusFiltro(){
+    this.showFiltro = !this.showFiltro
+    if(!this.showFiltro){
+      setTimeout(()=>{
+      this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
+      },200)
+    }else{
+      this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
+    }
+}
 
   ngOnInit() {
   }

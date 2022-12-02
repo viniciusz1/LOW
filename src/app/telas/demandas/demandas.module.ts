@@ -26,6 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {PaginatorModule} from 'primeng/paginator';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -57,7 +58,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     HttpClientModule,
     PaginatorModule,
     MultiSelectModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    SharedModule
   ],
 })
 export class DemandasModule { }

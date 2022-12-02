@@ -40,7 +40,7 @@
                     <h6>Sistema de Entrega de Demandas de TI</h6>
                     <small class="timeago">Visto por último: Segunda-feira às 12:34</small>
                 </div>
-                <i class="bi bi-mic-mute me-3"></i>
+                <i class="bi bi-mic-mute me-3" (click)="silenciarChat()" style="cursor: pointer;"></i>
                 <i class="bi bi-x-circle me-3"></i>
             </header>
             <main>
@@ -66,6 +66,24 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <div>
+        <p-confirmDialog #cd [style]="{width: '25vw'}" icon="pi pi-exclamation-triangle">
+            <ng-template pTemplate="header"  icon="pi pi-exclamation-triangle">
+                <h4>Silenciar Chat</h4>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <button type="button" class="btn btn-primary" (click)="cd.reject()">
+                    <i class="pi pi-times me-2"></i>
+                    Não
+                </button>
+                <button type="button" class="btn btn-primary" (click)="cd.accept()">
+                    <i class="pi pi-check me-2"></i>
+                    Sim
+                </button>
+            </ng-template>
+        </p-confirmDialog>
     </div>
 
 </div>

@@ -2,10 +2,12 @@
     <nav [ngClass]="{'container': !isFiltrado}" class="nav justify-content-between w-100">
 
         <div class="d-flex align-items-start" style="overflow: auto;">
-            <button joyrideStep="um" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
+            <!-- <button pButton pRipple type="button" label="Primary" class="p-button-raised"></button> -->
+
+            <button  pButton pRipple joyrideStep="um" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
                 [title]="'Criar uma Demanda'" [stepContent]="customContent"
-                [stepContentParams]="{'texto': textoTutorial[0]}" class="btn btn-primary position-relative"
-                routerLink="/tela-inicial/proposta/1">
+                [stepContentParams]="{'texto': textoTutorial[0]}" class="p-button-secondary position-relative"
+                routerLink="/tela-inicial/proposta">
                 + Criar Demanda
             </button>
 
@@ -218,8 +220,20 @@
         </nav> -->
     </div>
 
-    <div>
-        <p-confirmDialog  header="Iniciar Chat" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-    </div>
+    <p-confirmDialog #cd [style]="{width: '27vw'}" icon="pi pi-exclamation-triangle">
+        <ng-template pTemplate="header"  icon="pi pi-exclamation-triangle">
+            <h4>Iniciar Chat</h4>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button type="button" class="btn btn-primary" (click)="cd.reject()">
+                <i class="pi pi-times me-2"></i>
+                Não
+            </button>
+            <button type="button" class="btn btn-primary" (click)="cd.accept()">
+                <i class="pi pi-check me-2"></i>
+                Sim
+            </button>
+        </ng-template>
+    </p-confirmDialog>
 
 </div>

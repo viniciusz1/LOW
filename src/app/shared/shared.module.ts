@@ -2,6 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -13,7 +14,8 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
   ],
   exports:[
     ScrollPanelModule,
-    FormsModule
+    FormsModule,
+    ButtonModule
   ]
 })
 export class SharedModule { }

@@ -43,9 +43,10 @@ export class TelaInicialComponent implements OnInit {
 
   irParaChat() {
     this.confirmationService.confirm({
+        blockScroll: false,
         message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
         accept: () => {
-            //Actual logic to perform a confirmation
+            this.router.navigate(['/tela-inicial/chat'])
         }
     })};
 

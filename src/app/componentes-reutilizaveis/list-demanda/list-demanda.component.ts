@@ -27,7 +27,8 @@ export class ListDemandaComponent implements OnInit {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
       this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG ||
+      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
+      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
       this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED
     ) {
       return false;
@@ -45,8 +46,11 @@ export class ListDemandaComponent implements OnInit {
     }
   }
   exibicaoBotoes(){
-    if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG){
+    if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO){
       this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/classificar-demanda", texto: "Classificar Demanda"}
+    }
+    else if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA){
+      this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/classificar-demanda", texto: "Criar Proposta"}
     }
     else if(this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT){
       this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}

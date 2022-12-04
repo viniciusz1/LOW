@@ -1,5 +1,6 @@
 export enum StatusDemanda{
-    BACKLOG = "backlog",
+    BACKLOG_PROPOSTA = "backlog-proposta",
+    BACKLOG_CLASSIFICACAO = "backlog-classificacao",
     ASSESSMENT = "assessment",
     BUSINESS_CASE = "business-case",
     TO_DO = "to-do",

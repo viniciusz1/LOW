@@ -43,25 +43,31 @@ export class CardDemandaComponent implements OnInit {
   }
 
   exibicaoBotoes() {
-    if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG) {
+    if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '/tela-inicial/classificar-demanda',
         texto: 'Classificar Demanda',
       };
     }
-    if (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA) {
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: '/tela-inicial/classificar-demanda',
+        texto: 'Criar Proposta',
+      };
+    }
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '/tela-inicial/nova-pauta',
         texto: 'Adicionar Proposta',
       };
     }
-    if (this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '/tela-inicial/nova-pauta',
         texto: 'Adicionar Proposta',
       };
     }
-    if (this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '',
         texto: 'Ver Reprovação',
@@ -72,7 +78,8 @@ export class CardDemandaComponent implements OnInit {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
       this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG ||
+      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
+      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
       this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED
     ) {
       return false;

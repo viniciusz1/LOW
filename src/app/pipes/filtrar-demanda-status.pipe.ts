@@ -9,10 +9,10 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
 
   transform(demandas: Demanda[], ...titulo: string[]): Demanda[] {
     if(titulo[0] == "Backlog - Classificação"){
-      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG)
+      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
     }
     if(titulo[0] == "Backlog - Propostas"){
-      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG)
+      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA)
     }
     if(titulo[0] == "Assessment"){
       return demandas.filter(d => d.statusDemanda == StatusDemanda.ASSESSMENT)

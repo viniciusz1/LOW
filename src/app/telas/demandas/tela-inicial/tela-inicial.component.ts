@@ -164,10 +164,10 @@ export class TelaInicialComponent implements OnInit {
 
 
   exibirFilasDeStatus() {
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog')) {
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-classificacao')) {
       this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog')) {
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-proposta')) {
       this.listaTituloNaoFiltrado.push("Backlog - Propostas")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {

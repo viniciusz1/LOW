@@ -1,13 +1,7 @@
+import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationService } from 'primeng/api';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
-import { StatusDemanda } from './../../../models/statusDemanda.enum';
-import { Demanda } from './../../../models/demanda.model';
-import { listaDemandas } from '../../../shared/listDemandas';
 import { TelaCalendarioComponent } from './../tela-calendario/tela-calendario.component';
-import { FullCalendarElement } from '@fullcalendar/web-component';
-import { Dialog } from '@angular/cdk/dialog';
-import { ModalSuaPautaComponent } from 'src/app/modais/modal-sua-pauta/modal-sua-pauta.component';
 import { Component, OnInit } from '@angular/core';
 import { listaReunioes } from './listReunioes';
 import { Reuniao } from 'src/app/models/reuniao.model';
@@ -20,45 +14,15 @@ import { Reuniao } from 'src/app/models/reuniao.model';
 export class TelaReuniaoComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
-    public dialog: Dialog,
-    private router: Router
+    public matDialog: MatDialog,
+    
   ) {
-    if (router.url == '/tela-inicial/reunioes') {
-      this.tipoExibicao = true;
-    } else if (router.url == '/tela-inicial/nova-pauta') {
-      this.tipoExibicao = false;
-    }
   }
 
-  //tipoExibicao = true --> mostrar todas reuniões
-  //tipoExibicao = false --> Cria nova pauta
-  tipoExibicao = true;
   showFiltro = false;
-  dataReuniao: any;
-  comissaoSelecionada: any;
-  pesquisaDemanda: string = '';
   listaReunioes: Reuniao[] = listaReunioes;
-  listaDemandasEscolhidas: Demanda[] = [];
-  draggedDemanda: Demanda | undefined = undefined;
   showSidebar = -350;
-  listaDeComissoesReuniao: string[] = [
-    'Vendas',
-    'Compras',
-    'Financeiro',
-    'RH',
-    'Marketing',
-    'TI',
-    'Jurídico',
-    'Diretoria',
-  ];
-
-  trocarExibicao() {
-    if (this.tipoExibicao) {
-      this.router.navigate(['/tela-inicial/nova-pauta']);
-    } else {
-      this.router.navigate(['/tela-inicial/reunioes']);
-    }
-  }
+  pesquisaReuniao = "";
 
   modalDeConfirmacaoCancelamentoDemanda() {
     this.confirmationService.confirm({
@@ -73,45 +37,22 @@ export class TelaReuniaoComponent implements OnInit {
     });
   }
 
-  openModalSuaPauta() {
-    this.dialog.open(ModalSuaPautaComponent, {
+
+  openModalCriarReuniao(){
+    console.log("oi")
+    this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
     });
   }
 
-  dragStart(demanda: Demanda) {
-    this.draggedDemanda = demanda;
+  openCalendario() {
+    this.matDialog.open(TelaCalendarioComponent, {
+      minWidth: '60vw',
+    });
   }
 
-  excluirDemanda(demanda: Demanda) {
-    this.listaDemandasEscolhidas.splice(
-      this.listaDemandasEscolhidas.indexOf(demanda),
-      1
-    );
-    this.listaDemandas.push(demanda);
-  }
-
-  adicionarDemanda(demanda: Demanda) {
-    this.listaDemandasEscolhidas.push(demanda);
-    this.listaDemandas.splice(this.listaDemandas.indexOf(demanda), 1);
-  }
-
-  drop() {
-    if (this.draggedDemanda) {
-      let draggedProductIndex = this.findIndex(this.draggedDemanda);
-      this.listaDemandasEscolhidas = [
-        ...this.listaDemandasEscolhidas,
-        this.draggedDemanda,
-      ];
-      this.listaDemandas = this.listaDemandas.filter(
-        (val, i) => i != draggedProductIndex
-      );
-      this.draggedDemanda = undefined;
-    }
-  }
-
-  dragEnd() {
-    this.draggedDemanda = undefined;
+  ngOnInit() {
+    this.openModalCriarReuniao();
   }
 
   moveSidebar() {
@@ -121,110 +62,4 @@ export class TelaReuniaoComponent implements OnInit {
       this.showSidebar = 0;
     }
   }
-
-  findIndex(demanda: Demanda) {
-    let index = -1;
-    for (let i = 0; i < this.listaDemandas.length; i++) {
-      if (demanda.codigoDemanda === this.listaDemandas[i].codigoDemanda) {
-        index = i;
-        break;
-      }
-    }
-    return index;
-  }
-
-  openCalendario() {
-    this.dialog.open(TelaCalendarioComponent, {
-      minWidth: '60vw',
-    });
-  }
-
-  ngOnInit() {}
-
-  listaDemandas: Demanda[] = [
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.CANCELLED,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.TO_DO,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.CANCELLED,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.TO_DO,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.CANCELLED,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.TO_DO,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.CANCELLED,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.TO_DO,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-  ];
 }

@@ -17,6 +17,7 @@ export class CardDemandaComponent implements OnInit {
   @Output() clicouEmExcluir = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
   @Output() modalHistorico = new EventEmitter();
+  
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
   @Input() dadosDemada: Demanda = {};

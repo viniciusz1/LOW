@@ -1,0 +1,169 @@
+import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
+import { Demanda } from 'src/app/models/demanda.model';
+import { Reuniao } from 'src/app/models/reuniao.model';
+import { Component, OnInit } from '@angular/core';
+import { listaReunioes } from 'src/app/telas/reunioes/tela-reuniao/listReunioes';
+
+@Component({
+  selector: 'app-modal-criar-reuniao',
+  templateUrl: './modal-criar-reuniao.component.html',
+  styleUrls: ['./modal-criar-reuniao.component.scss']
+})
+export class ModalCriarReuniaoComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+  
+  listaReunioes: Reuniao[] = listaReunioes;
+  listaDemandasEscolhidas: Demanda[] = [];
+  draggedDemanda: Demanda | undefined = undefined;
+  listaDeComissoesReuniao: any[] = [
+    'Vendas',
+    'Compras',
+    'Financeiro',
+    'RH',
+    'Marketing',
+    'TI',
+    'Jurídico',
+    'Diretoria',
+  ];
+  
+  dataReuniao: any;
+  comissaoSelecionada: any;
+
+  dragStart(demanda: Demanda) {
+    this.draggedDemanda = demanda;
+  }
+
+  excluirDemanda(demanda: Demanda) {
+    this.listaDemandasEscolhidas.splice(
+      this.listaDemandasEscolhidas.indexOf(demanda),
+      1
+    );
+    this.listaDemandas.push(demanda);
+  }
+
+  adicionarDemanda(demanda: Demanda) {
+    this.listaDemandasEscolhidas.push(demanda);
+    this.listaDemandas.splice(this.listaDemandas.indexOf(demanda), 1);
+  }
+
+  drop() {
+    if (this.draggedDemanda) {
+      let draggedProductIndex = this.findIndex(this.draggedDemanda);
+      this.listaDemandasEscolhidas = [
+        ...this.listaDemandasEscolhidas,
+        this.draggedDemanda,
+      ];
+      this.listaDemandas = this.listaDemandas.filter(
+        (val, i) => i != draggedProductIndex
+      );
+      this.draggedDemanda = undefined;
+    }
+  }
+
+  dragEnd() {
+    this.draggedDemanda = undefined;
+  }
+
+ 
+
+  findIndex(demanda: Demanda) {
+    let index = -1;
+    for (let i = 0; i < this.listaDemandas.length; i++) {
+      if (demanda.codigoDemanda === this.listaDemandas[i].codigoDemanda) {
+        index = i;
+        break;
+      }
+    }
+    return index;
+  }
+  listaDemandas: Demanda[] = [
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.CANCELLED,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.TO_DO,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.BUSINESS_CASE,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.CANCELLED,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.TO_DO,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.BUSINESS_CASE,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.BUSINESS_CASE,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.CANCELLED,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.TO_DO,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.BUSINESS_CASE,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.BUSINESS_CASE,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.CANCELLED,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.TO_DO,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.BUSINESS_CASE,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+  ];
+}

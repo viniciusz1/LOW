@@ -82,7 +82,7 @@
                 <div class=" d-flex justify-content-center align-items-center flex-column my-2"
                     style="margin-left:auto; margin-right:auto">
                     <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo | slice:0:4"
-                        [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"  (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
+                        [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"  (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
                         (abrirModal)="openModalMotivoDevolucao()" class="mb-2">
                     </app-list-demanda>
 
@@ -144,7 +144,7 @@
                         <div [style.left.px]="positionListCards[i]"
                             class="div-cards d-flex position-relative transition-cards">
                             <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
-                                [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"  (irParaChat)="irParaChat()"
+                                [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"  (irParaChat)="irParaChat()"
                                 (modalHistorico)="openModalHistorico()"
 
                                 (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
@@ -174,13 +174,13 @@
             <div class="row" *ngIf="tipoRascunho">
                 <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandasRascunho; let i = index"
                     [dadosDemada]="demanda" (abrirModal)="openModalMotivoDevolucao()"
-                    (verDocumentoProposta)="openModalDemandaDocumento()" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
+                    (verDocumentoProposta)="openModalDemandaDocumento($event)" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
                     class="col-lg-6 col-xl-4 mb-3">
                 </app-card-demanda>
             </div>
             <div class="row" *ngIf="!tipoRascunho">
                 <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemada]="demanda"
-                    (abrirModal)="openModalMotivoDevolucao()" (verDocumentoProposta)="openModalDemandaDocumento()"
+                    (abrirModal)="openModalMotivoDevolucao()" (verDocumentoProposta)="openModalDemandaDocumento($event)"
                     (clicouEmExcluir)="excluirDemandaRascunho(i)" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()"
                     (modalHistorico)="openModalHistorico()"
                     class="col-lg-6 col-xl-4 mb-3">

@@ -128,7 +128,7 @@ export class TelaInicialComponent implements OnInit {
   openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
-      minWidth: '50vw',
+      minWidth: '50vw'
     });
   }
 
@@ -139,10 +139,11 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
-  openModalDemandaDocumento() {
+  openModalDemandaDocumento(event: string) {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: event
     });
   }
   openModalHistorico() {
@@ -169,6 +170,9 @@ export class TelaInicialComponent implements OnInit {
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-proposta')) {
       this.listaTituloNaoFiltrado.push("Backlog - Propostas")
+    }
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-aprovacao')) {
+      this.listaTituloNaoFiltrado.push("Backlog - Aprovação")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
       this.listaTituloNaoFiltrado.push("Assessment")

@@ -13,7 +13,7 @@ export class ListDemandaComponent implements OnInit {
   secondaryColorClass?: string = "";
   
   @Output() abrirModal = new EventEmitter();
-  @Output() verDocumentoProposta = new EventEmitter();
+  @Output() verDocumentoProposta = new EventEmitter<string>();
   @Output() clicouAdicionarPauta = new EventEmitter();
   @Output() modalHistorico = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
@@ -44,6 +44,9 @@ export class ListDemandaComponent implements OnInit {
     }else if(this.textoExibidoEmBotaoDependendoRota?.rota == "abre documento"){
       this.verDocumentoProposta.emit()
     }
+    else if(this.textoExibidoEmBotaoDependendoRota?.rota == "aprovar"){
+      this.verDocumentoProposta.emit('gerente')
+    }
     else{
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota])
     }
@@ -54,6 +57,9 @@ export class ListDemandaComponent implements OnInit {
     }
     else if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA){
       this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/classificar-demanda", texto: "Criar Proposta"}
+    }
+    else if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO){
+      this.textoExibidoEmBotaoDependendoRota = {rota: "aprovar", texto: "Aprovar Demanda"}
     }
     else if(this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT){
       this.textoExibidoEmBotaoDependendoRota = {rota: "/tela-inicial/nova-pauta", texto: "Adicionar Proposta"}

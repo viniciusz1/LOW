@@ -39,7 +39,11 @@ export class CardDemandaComponent implements OnInit {
   direcionarUsuario() {
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
       this.abrirModal.emit();
-    } else {
+    } 
+    else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar'){
+      this.verDocumentoProposta.emit('gerente')
+    }
+    else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
@@ -59,7 +63,7 @@ export class CardDemandaComponent implements OnInit {
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/classificar-demanda',
+        rota: 'avaliar',
         texto: 'Avaliar Demanda',
       };
     }

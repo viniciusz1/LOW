@@ -174,11 +174,11 @@ export class TelaInicialComponent implements OnInit {
     if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-proposta')) {
       this.listaTituloNaoFiltrado.push("Backlog - Propostas")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
-      this.listaTituloNaoFiltrado.push("Assessment")
-    }
     if (this.listaDemandas.some(e => e.statusDemanda == 'business-case')) {
       this.listaTituloNaoFiltrado.push("Business Case")
+    }
+    if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
+      this.listaTituloNaoFiltrado.push("Assessment")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'to-do')) {
       this.listaTituloNaoFiltrado.push("To Do")

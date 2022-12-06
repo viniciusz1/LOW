@@ -5,7 +5,7 @@
             <div class="">
                 <label class="form-label me-2">Tamanho:</label>
                 <br>
-                <p-dropdown [options]="opcoesDeTamanhoDemanda" optionLabel="name"></p-dropdown>
+                <p-dropdown [options]="opcoesDeTamanho" optionLabel="name" placeholder="Selecione um tamanho"></p-dropdown>
             </div>
             <div class="">
                 <label class="form-label">BU beneficiada:</label>
@@ -15,12 +15,12 @@
             <div class="">
                 <label class="form-label">BU solicitante:</label>
                 <br>
-                <p-dropdown [options]="BUs" optionLabel="name"></p-dropdown>
+                <p-dropdown [options]="BUs" optionLabel="name" placeholder="Selecione uma BU"></p-dropdown>
             </div>
             <div class="">
                 <label class="form-label">Sessão de TI Responsável:</label>
                 <br>
-                <p-dropdown [options]="sessoes" optionLabel="name"></p-dropdown>
+                <p-dropdown [options]="sessoes" optionLabel="name" placeholder="Selecione uma sessão"></p-dropdown>
             </div>
             <div class="">
                 <label class="form-label">Anexar documento:</label>

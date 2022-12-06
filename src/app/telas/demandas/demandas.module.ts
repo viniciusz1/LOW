@@ -28,7 +28,6 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
-
 @NgModule({
   declarations: [
     TelaInicialComponent,

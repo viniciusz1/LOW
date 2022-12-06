@@ -34,7 +34,7 @@
             </button>
         </li>
         <i class="bi bi-chat-left-dots me-3 ms-3" *ngIf="!demandaPequena" (click)="irParaChat.emit()"></i>
-        <i class="bi bi-three-dots-vertical three-dots" *ngIf="!demandaPequena" role="button"
+        <i class="bi bi-three-dots-vertical three-dots" [ngClass]="{'me-3': demandaPequena}" role="button"
             [matMenuTriggerFor]="menu"></i>
         <i class="bi bi-plus-lg" *ngIf="demandaPequena" role="button" (click)="clicouAdicionarPauta.emit()"></i>
         <mat-menu #menu="matMenu">

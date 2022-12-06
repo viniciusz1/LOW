@@ -52,7 +52,7 @@ export class TelaReuniaoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.openModalCriarReuniao();
+    // this.openModalCriarReuniao();
   }
 
   moveSidebar() {

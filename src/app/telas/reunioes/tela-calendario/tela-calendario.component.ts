@@ -18,7 +18,7 @@ export class TelaCalendarioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+
 
   calendarOptions: CalendarOptions = {
     locales: [brasil],
@@ -29,13 +29,14 @@ export class TelaCalendarioComponent implements OnInit {
       center: 'title',
       right: 'dayGridMonth,dayGridWeek,dayGridDay'
     },
+    titleFormat: { year: 'numeric', month: 'long' },
     eventClick: (arg) => {
       this.route.navigate(['/tela-inicial/ver-pauta']);
       this.dialogRef.close()
     },
     events: [
-      { title: 'event 1', date: '2022-11-01' },
-      { title: 'event 2', date: '2022-11-02' }
+      { title: 'Sistema de gerenciamento de clientes', date: '2022-12-01' },
+      { title: 'Sistema de criação de motores', date: '2022-12-02' }
     ]
   };
   handleDateClick(arg : any) {

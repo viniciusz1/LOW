@@ -13,17 +13,19 @@
                     </button>
                 </div>
                 <div *ngIf="tipoExibicao" class="d-flex align-items-center">
-                    <span *ngIf="!showFiltro" class="p-input-icon-left" style="width: 80%;">
-                        <i class="pi pi-search"></i>
-                        <input type="text" class="border" style="width: 100%;" pInputText
-                            placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda" />
-                    </span>
-                    <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 180px;"
-                        (click)="showFiltro = !showFiltro">
-                        Filtrar Mais
-                        <i class="bi bi-chevron-double-down"></i>
-                    </button>
-                    <app-filtro-reuniao *ngIf="showFiltro" (closeFiltro)="showFiltro = !showFiltro" class="me-3">
+                    <div *ngIf="showPesquisaEBotaoFiltro" class="d-flex align-items-center justify-content-center">
+                        <span class="p-input-icon-left" style="width: 80%;">
+                            <i class="pi pi-search"></i>
+                            <input type="text" class="border" style="width: 100%;" pInputText placeholder="Pesquisar Demanda"
+                                [(ngModel)]="pesquisaDemanda" />
+                        </span>
+                        <button class="btn btn-primary ms-3" style="width: 180px;"
+                            (click)="mudarStatusFiltro()">
+                            Filtrar Mais
+                            <i class="bi bi-chevron-double-down"></i>
+                        </button>
+                    </div>
+                    <app-filtro-reuniao @fadeAnimation *ngIf="showFiltro" (closeFiltro)="mudarStatusFiltro()" class="me-3">
                     </app-filtro-reuniao>
                 </div>
             </div>
@@ -31,9 +33,6 @@
         <div class="container">
             <div *ngIf="tipoExibicao == true">
                 <app-card-reuniao class="m-1" *ngFor="let reuniao of listaReunioes" [dadosReuniao]="reuniao"></app-card-reuniao>
-                <!-- <app-card-reuniao class="m-1"></app-card-reuniao>
-                <app-card-reuniao class="m-1"></app-card-reuniao>
-                <app-card-reuniao class="m-1"></app-card-reuniao> -->
             </div>
             <div *ngIf="tipoExibicao == false" class="row m-3">
                 <div class="col-xl-8 drag-column">

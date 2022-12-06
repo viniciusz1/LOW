@@ -25,26 +25,26 @@
             <a role="button" class="nav-link active" routerLink="/tela-inicial">DEMANDAS</a>
         </li>
         <li role="button" class="nav-item" routerLink="/tela-inicial/chat" *ngIf="!inicial"
-        joyrideStep="sete" 
-        [title]="'Suas Mensagens'" 
-        [stepContent]="customContent"  
+        joyrideStep="sete"
+        [title]="'Suas Mensagens'"
+        [stepContent]="customContent"
         [stepContentParams]="{'texto': textoTutorial[6]}"
         style="overflow: auto;">
             <a class="nav-link"><i class="bi bi-chat-left-dots icon"></i></a>
         </li>
         <li role="button" class="nav-item" (click)="mostrar_modal = !mostrar_modal" *ngIf="!inicial"
-        joyrideStep="seis" 
-        [title]="'Notificações'" 
-        [stepContent]="customContent"  
+        joyrideStep="seis"
+        [title]="'Notificações'"
+        [stepContent]="customContent"
         [stepContentParams]="{'texto': textoTutorial[5]}"
         style="overflow: auto;">
             <a class="nav-link"><i class="bi bi-bell icon"></i></a>
-            <app-notificacoes *ngIf="mostrar_modal"></app-notificacoes>
+            <app-notificacoes class="" *ngIf="mostrar_modal"></app-notificacoes>
         </li>
-        <li role="button" class="nav-item" [matMenuTriggerFor]="idiomaMenu" 
-        joyrideStep="cinco" 
-        [title]="'Idiomas'" 
-        [stepContent]="customContent"  
+        <li role="button" class="nav-item" [matMenuTriggerFor]="idiomaMenu"
+        joyrideStep="cinco"
+        [title]="'Idiomas'"
+        [stepContent]="customContent"
         [stepContentParams]="{'texto': textoTutorial[4]}"
         style="overflow: auto;">
             <a class="nav-link"><img style="width: 30px; margin-right: 10px"
@@ -80,11 +80,11 @@
             <div [innerHTML]="texto" style="max-width: 300px; padding: 20px;"></div>
         </ng-template>
 
-        <li [matMenuTriggerFor]="menu" role="button" class="nav-item" *ngIf="!inicial" 
-        joyrideStep="quatro" 
-        [title]="'Configurações e Rascunho'" 
-        [stepContent]="customContent"  
-        [stepContentParams]="{'texto': textoTutorial[3]}" 
+        <li [matMenuTriggerFor]="menu" role="button" class="nav-item" *ngIf="!inicial"
+        joyrideStep="quatro"
+        [title]="'Configurações e Rascunho'"
+        [stepContent]="customContent"
+        [stepContentParams]="{'texto': textoTutorial[3]}"
         style="overflow: auto;">
             <a class="nav-link"><i class="bi bi-person-square icon"></i></a>
         </li>

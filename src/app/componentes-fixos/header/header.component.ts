@@ -2,13 +2,13 @@ import { textoTutorial } from './../../telas/demandas/tela-inicial/textoDoTutori
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { RotasService } from 'src/app/services/rotas.service';
-import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { fadeAnimation } from 'src/app/shared/app.animation';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  animations: [fadeAnimation]
 })
 export class HeaderComponent implements OnInit {
 

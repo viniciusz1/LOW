@@ -36,7 +36,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
       maxWidth: '70vw',
     });
   }
-  opcoesDeTamanhoDemanda = [
+  opcoesDeTamanho = [
     {name:'Muito Pequena'},
     {name:'Pequena'},
     {name:'Média'},

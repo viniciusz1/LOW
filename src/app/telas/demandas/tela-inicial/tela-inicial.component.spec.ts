@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { fadeAnimation } from 'src/app/shared/app.animation';
 import { TelaInicialComponent } from './tela-inicial.component';
 
 describe('TelaInicialComponent', () => {

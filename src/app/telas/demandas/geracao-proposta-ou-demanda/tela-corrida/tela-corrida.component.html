@@ -1,9 +1,13 @@
-<div class="row">
-    <div class="col-2">
-        <nav id="navbar-example3" scroll-spy class="h-100 flex-column align-items-stretch pe-4 border-end">
+<div class="row" scroll-spy>
+    <div class="col-2" >
+      <div>
+
+        <nav id="navbar-example3"style="position: fixed;
+        top: 30vh; left: 4vw
+    " class="h-100 flex-column align-items-stretch pe-4">
             <nav class="nav nav-pills flex-column">
                 <a class="nav-link mt-5" spyOn="target-1" activeClass="active"  href="#target-1" style="font-size: 0.9rem;">Dados Gerais</a>
-                <a class="nav-link" spyOn="target-2" activeClass="active"  href="#target-2" style="font-size: 0.9rem;">Benefícios</a>
+                <a class="nav-link" spyOn="beneficios"  activeClass="active" href="#beneficios" style="font-size: 0.9rem;">Benefícios</a>
                 <nav class="nav nav-pills flex-column" style="font-size: 0.75rem;">
                 </nav>
                 <a class="nav-link" spyOn="target-3" activeClass="active"  href="#target-3"  style="font-size: 0.9rem;">Documentos</a>
@@ -17,33 +21,33 @@
                 </nav>
             </nav>
         </nav>
+      </div>
     </div>
 
-    <div class="tela-corrida col-10">
-        <p-scrollPanel [style]="{height: '78.5vh'}">
-            <div class="etapa-1" spyTarget="target-1">
+    <div   class="tela-corrida col-10 border-start">
+            <div >
                 <div class="campo" style="display: flex; justify-content: center; align-items: center; padding: 0px;"
                     *ngIf="aparecer == 0">
                     <div class="div-preenchida" style="width: 61vw; ">
                         <div style="background-color: rgb(241 240 240); border: 1px solid #787070; padding: 10px;">
-                            <h6 style="font-weight: 600;">Campos obrigatórios para salvar a proposta:</h6>
+                            <h6 style="font-weight: 500;">Campos obrigatórios para salvar a proposta:</h6>
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <label style="font-weight: 600;" for="">Prazo para elaboração da proposta:</label>
+                                    <label style="font-weight: 500;" for="">Prazo para elaboração da proposta:</label>
                                     <div style="display: flex;">
                                         <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
                                         <input style="width: 36vw;">
                                     </div>
                                 </div>
                                 <div>
-                                    <label style="font-weight: 600;" for="">Código PPM:</label>
+                                    <label style="font-weight: 500;" for="">Código PPM:</label>
                                     <div style="display: flex;">
                                         <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
                                         <input type="text" class="low-input" style="width: 20vw;">
                                     </div>
                                 </div>
                             </div>
-                            <label style="font-weight: 600;" for="">Link jira</label>
+                            <label style="font-weight: 500;" for="">Link jira</label>
                             <div style="display: flex;">
                                 <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
                                 <input type="text" class="low-input" style="width: 61vw;">
@@ -52,40 +56,37 @@
                     </div>
                 </div>
 
-                <div style="display: grid; justify-content: center; margin-top: 1.5vh;">
+                <div spyTarget="etapa-1" style="display: grid; justify-content: center; margin-top: 1.5vh;" class="etapa-1" >
                     <div class="beneficios" style="display: grid; align-items: center; justify-content: space-between;">
                         <div class="titulo" style="display: grid" id="item-1-1">
-                            <label style="font-weight: 600;">
+                            <label style="font-weight: 500;">
                                 Título:
                             </label>
-                                <input class="pInputText" type="text" pInputText />
+                                <input type="text" pInputText class="input"/>
                         </div>
                         <div class="situacao-atual" style="display: grid" id="item-1-2">
-                            <label style="font-weight: 600;">
+                            <label style="font-weight: 500;">
                                 Situação Atual:
                             </label>
                             <div style="display: flex; ">
-                                <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                <input style="width: 61vw;">
+                                <input type="text" pInputText class="input"/>
                             </div>
                         </div>
                         <div class="objetivo" style="display: grid" id="item-1-3">
-                            <label style="font-weight: 600;">
+                            <label style="font-weight: 500;">
                                 Objetivo:
                             </label>
                             <div style="display: flex; ">
-                                <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                <input style="width: 61vw;">
+                                <input type="text" pInputText class="input"/>
                             </div>
                         </div>
                         <div class="real" style="display: flex;" id="item-1-4">
                             <div class="ben-real" style="display: grid">
-                                <label style="font-weight: 600;">
+                                <label style="font-weight: 500;">
                                     Centros de Custo:
                                 </label>
                                 <div style="display: flex; ">
-                                    <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                    <input style="width: 56vw;">
+                                    <input type="text" pInputText class="input"/>
                                 </div>
                             </div>
                             <div style="display: flex; align-items: end;">
@@ -97,18 +98,17 @@
                     </div>
                 </div>
             </div>
-            <div class="etapa-2" spyTarget="target-2">
+            <div class="etapa-2" spyTarget="beneficios">
                 <div style="display: grid; justify-content: center;  height: 72vh;">
                     <div class="beneficios" style="display: flex; align-items: center; justify-content: space-between;"
                         id="item-2-1">
-                        <div class="real" style="display: flex;">
-                            <div class="ben-real" style="display: grid">
-                                <label style="font-weight: 600;">
+                        <div style="display: flex; margin-right: 6vw;">
+                            <div style="display: grid">
+                                <label style="font-weight: 500;">
                                     Benefício Real:
                                 </label>
                                 <div style="display: flex; ">
-                                    <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                    <input style="width: 25vw;">
+                                    <input type="text" pInputText/>
                                 </div>
                             </div>
                             <div style="display: flex; align-items: end;">
@@ -117,14 +117,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="potencial" style="display: flex;">
-                            <div class="ben-potencial" style="display: grid">
-                                <label style="font-weight: 600;">
+                        <div style="display: flex;">
+                            <div style="display: grid">
+                                <label style="font-weight: 500;">
                                     Benefício Potencial:
                                 </label>
                                 <div style="display: flex; ">
-                                    <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                    <input style="width: 25vw;">
+                                    <input type="text" pInputText/>
                                 </div>
                             </div>
                             <div style="display: flex; align-items: end;">
@@ -134,58 +133,54 @@
                             </div>
                         </div>
                     </div>
-                    <div class="memoria-calculo-real" id="item-2-3">
-                        <div class="ben-real" style="display: grid">
-                            <label style="font-weight: 600;">
+                    <div id="item-2-3">
+                        <div style="display: grid">
+                            <label style="font-weight: 500;">
                                 Memória de Cálculo do Benefício Real:
                             </label>
                             <div style="display: flex; ">
-                                <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                <input style="width: 61vw; height: 14vh;">
+                                <textarea style="width: 58.5vw;" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="memoria-calculo-potencial" id="item-2-4">
                         <div class="ben-real" style="display: grid">
-                            <label style="font-weight: 600;">
+                            <label style="font-weight: 500;">
                                 Memória de Cálculo do Benefício Potencial:
                             </label>
                             <div style="display: flex; ">
-                                <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                <input style="width: 61vw; height: 14vh;">
+                                <textarea style="width: 58.5vw;" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="beneficio-qualitativo" id="item-2-5">
-                        <div class="ben-real" style="display: grid">
-                            <label style="font-weight: 600;">
+                    <div id="item-2-5">
+                        <div style="display: grid">
+                            <label style="font-weight: 500;">
                                 Benefício Qualitativo:
                             </label>
                             <div style="display: flex; ">
-                                <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                <input style="width: 61vw; height: 12vh;">
+                                <textarea style="width: 58.5vw;" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="etapa-3"  spyTarget="target-3">
-                <div style="display: grid; justify-content: center;">
-                    <div class="memoria-calculo-real" id="item-3-1">
-                        <div class="ben-real" style="display: grid">
-                            <label style="font-weight: 600;">
+                <div style="display: grid; justify-content: center; margin-right: 3vw;">
+                    <div id="item-3-1">
+                        <div style="display: grid" style="width: 58.5vw;">
+                            <label style="font-weight: 500;" >
                                 Frequência de Uso do Sistema:
                             </label>
                             <div style="display: flex; ">
-                                <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                <input class="entrada" style="width: 61vw; height: 10vh;">
+                                <p-dropdown [options]="opcoesDeTamanho" optionLabel="name" placeholder="Selecione a frequência"></p-dropdown>
                             </div>
                         </div>
                     </div>
-                    <div class="memoria-calculo-potencial" id="item-3-2">
-                        <div class="ben-real" style="display: grid">
+                    <div id="item-3-2">
+                        <div style="display: grid">
                             <div>
-                                <label style="font-weight: 600;">
+                                <label style="font-weight: 500;">
                                     Anexar Documento:
                                 </label>
                                     <p-fileUpload name="myfile[]" url="./upload.php" [multiple]="true" ></p-fileUpload>
@@ -309,7 +304,7 @@
                     <div class="beneficios" style="align-items: center; justify-content: space-between;">
                         <div class="escopo-demanda" id="item-5-1">
                             <div class="escopo" style="display: grid; ">
-                                <label style="font-weight: 600;">
+                                <label style="font-weight: 500;">
                                     Escopo da Demanda:
                                 </label>
                                 <div style="display: flex;">
@@ -326,64 +321,38 @@
                         </div>
                         <div class="linha-periodos" id="item-5-2"
                             style="display: flex; align-items: center; justify-content: space-between;">
-                            <div class="periodo-execucao" style="display: flex;">
+                            <div class="periodo-execucao" style="display: flex; margin: 5px;">
                                 <div class="periodo-exe" style="display: grid">
-                                    <label style="font-weight: 600;">
+                                    <label style="font-weight: 500; margin: 5px;">
                                         Periodo de execução da demanda:
                                     </label>
                                     <div style="display: flex; ">
-                                        <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                        <input id="input" style="width: 15vw;" placeholder="Início">
-                                        <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                        <input id="input" style="width: 15vw;" placeholder="Fim">
+                                        <p-calendar [(ngModel)]="inicioData" placeholder="Início" dateFormat="dd/mm/yy" style="width: 15vw;"></p-calendar>
+                                        <div style="margin-right: 2vw;"></div>
+                                        <p-calendar [(ngModel)]="fimData" placeholder="Fim" dateFormat="dd/mm/yy" [minDate]="inicioData" style="width: 15vw;"></p-calendar>
                                     </div>
                                 </div>
                             </div>
                             <div class="payback-simples" style="display: flex;">
                                 <div class="payback" style="display: grid">
-                                    <label style="font-weight: 600;">
+                                    <label style="font-weight: 500;">
                                         Payback Simples:
                                     </label>
                                     <div style="display: flex; ">
-                                        <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                        <input style="width: 25vw;">
+                                        <p-inputNumber [(ngModel)]="payback" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"></p-inputNumber>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="linha-periodos" id="item-5-3"
-                            style="display: flex; align-items: center; justify-content: space-between;">
+                            style="display: flex; align-items: center; margin: 5px;">
                             <div class="periodo-execucao" style="display: flex;">
-                                <div class="periodo-exe" style="display: grid">
-                                    <label style="font-weight: 600;">
+                                <div class="periodo-exe" style="display: grid;">
+                                    <label style="font-weight: 500; margin: 5px;">
                                         Responsáveis pelo Negócio:
                                     </label>
-                                    <div style="display: flex;">
-                                        <div style="display: flex; ">
-                                            <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                            <input id="input" style="width: 15vw;" placeholder="Nome">
-                                        </div>
-                                        <div style="display: flex; ">
-                                            <div style="border: 3px solid #00579D; margin: 5px 0px 5px 5px;"></div>
-                                            <input id="input" style="width: 25vw;" placeholder="Área">
-                                        </div>
-                                        <div style="display: flex; align-items: end;">
-                                            <button style="height: 5vh;
-                                           width: 4vw;
-                                           background-color: #00579D;
-                                           color: #ffffff;
-                                           margin: 5px;
-                                           border-radius: 5px;
-                                           border: transparent;
-                                           padding: 5px;
-                                           font-weight: 300;
-                                           font-size: 25px;
-                                           align-items: center;
-                                           justify-content: center;
-                                           display: flex;">
-                                                +
-                                            </button>
-                                        </div>
+                                    <div style="display: flex;" >
+                                        <p-multiSelect [options]="Responsaveis" [(ngModel)]="selectedResponsaveis" defaultLabel="Selecione os Responsaveis" optionLabel="nome" display="chip"></p-multiSelect>
                                     </div>
                                 </div>
                             </div>
@@ -398,6 +367,5 @@
                     </div>
                 </div>
             </div>
-        </p-scrollPanel>
     </div>
 </div>

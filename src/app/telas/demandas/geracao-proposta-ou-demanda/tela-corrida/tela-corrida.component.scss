@@ -60,9 +60,9 @@
 // }
 
 input{
-    height: 5vh;
+    // height: 5vh;
     margin: 5px 5px 5px 0px;
-    width: 25vw;
+    // width: 25vw;
 }
 
 .input{
@@ -79,4 +79,11 @@ label{
         width: 58.5vw;
     }
 } 
+
+::ng-deep{
+    .p-dropdown .p-dropdown-label  {
+        width: 56.5vw;
+    }
+} 
+    
     

@@ -13,7 +13,7 @@ defineFullCalendarElement();
 })
 export class TelaCalendarioComponent implements OnInit {
 
-  constructor(private route: Router,private dialogRef: DialogRef) { }
+  constructor(private route: Router,public dialogRef: DialogRef) { }
 
   ngOnInit(): void {
   }

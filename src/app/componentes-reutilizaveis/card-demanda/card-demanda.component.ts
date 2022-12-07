@@ -17,8 +17,10 @@ export class CardDemandaComponent implements OnInit {
   @Output() verDocumentoProposta = new EventEmitter();
   @Output() clicouEmExcluir = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
+  @Output() abrirModalCriarReuniao = new EventEmitter();
   @Output() modalHistorico = new EventEmitter();
-  
+  @Output() verDocumentoEmAta = new EventEmitter();
+
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
   @Input() dadosDemada: Demanda = {};
@@ -34,15 +36,32 @@ export class CardDemandaComponent implements OnInit {
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
 
-  constructor(private route: Router) {}
+  constructor(private route: Router) {
+    this.textoExibidoEmBotaoDependendoRota = {
+      rota: 'ver em ata',
+      texto: 'Ver em Ata',
+    };
+  }
 
   direcionarUsuario() {
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
       this.abrirModal.emit();
-    } else {
+    }
+    else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar'){
+      this.verDocumentoProposta.emit('gerente')
+    }
+    else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'){
+      this.abrirModalCriarReuniao.emit()
+    }
+    else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'ver em ata'){
+      this.verDocumentoEmAta.emit()
+    }
+    else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
+
+
 
   exibicaoBotoes() {
     if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO) {
@@ -53,25 +72,25 @@ export class CardDemandaComponent implements OnInit {
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/classificar-demanda',
+        rota: '/tela-inicial/proposta/1',
         texto: 'Criar Proposta',
       };
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/classificar-demanda',
+        rota: 'avaliar',
         texto: 'Avaliar Demanda',
       };
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/nova-pauta',
+        rota: 'adicionar a reuniao',
         texto: 'Adicionar Proposta',
       };
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/nova-pauta',
+        rota: 'adicionar a reuniao',
         texto: 'Adicionar Proposta',
       };
     }

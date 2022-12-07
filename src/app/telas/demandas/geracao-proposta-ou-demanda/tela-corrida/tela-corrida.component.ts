@@ -6,6 +6,10 @@ import { MessageService, SelectItem } from 'primeng/api';
 import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
 import { ScrollSpyService } from 'ng-spy';
 
+interface Responsavel {
+  nome: string,
+  area: string
+}
 
 @Component({
   selector: 'app-tela-corrida',
@@ -22,11 +26,35 @@ export class TelaCorridaComponent implements OnInit {
 
   aparecer = 1;
   uploadedFiles: any[] = [];
+  Responsaveis: Responsavel[] = [
+    {nome: 'Otavio Neves', area: 'WEG Digital'},
+    {nome: 'Vinicius Bonatti', area: 'Vendas'},
+    {nome: 'Camilly Vitoria', area: 'Motores'},
+    {nome: 'Kenzo Hedeaky', area: 'Trefilação'},
+    {nome: 'Felipe Viera', area: 'Corpotativo'}
+];
+
+  selectedResponsaveis: any;
+  
   constructor(private messageService: MessageService,
     private spyService: ScrollSpyService) { }
 
   ngOnInit(): void {
   }
+
+  inicioData: Date | any;
+  fimData: Date | undefined = undefined;
+  payback: number = 0;
+
+
+  opcoesDeTamanho = [
+    {name:'Muito Pequena'},
+    {name:'Pequena'},
+    {name:'Média'},
+    {name:'Grande'},
+    {name:'Muito Grande'}
+  ]
+
 
   // onUpload(event) {
   //       for(let file of event.files) {

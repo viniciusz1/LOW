@@ -11,6 +11,14 @@ interface Responsavel {
   area: string
 }
 
+interface CentrosCusto {
+  centro: string
+}
+
+interface Moedas {
+  abreviacao: string
+}
+
 @Component({
   selector: 'app-tela-corrida',
   templateUrl: './tela-corrida.component.html',
@@ -24,8 +32,24 @@ export class TelaCorridaComponent implements OnInit {
       console.debug("Scroll Event", window.pageYOffset );
     }
 
-  aparecer = 1;
+    selectedCoin: any;
+
+    moedas: Moedas[] = [
+      {abreviacao: 'BRL'},
+      {abreviacao: 'EUR'},
+      {abreviacao: 'USD'}
+    ]
+
+  selectedCentros: any;
+  centrosCusto: CentrosCusto[] = [
+    {centro: 'Weg 1'},
+    {centro: 'Weg 2'},
+    {centro: 'Weg 3'}
+  ];
+
+  aparecer = 0;
   uploadedFiles: any[] = [];
+
   Responsaveis: Responsavel[] = [
     {nome: 'Otavio Neves', area: 'WEG Digital'},
     {nome: 'Vinicius Bonatti', area: 'Vendas'},

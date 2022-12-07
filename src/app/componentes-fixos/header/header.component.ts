@@ -13,11 +13,13 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
 export class HeaderComponent implements OnInit {
 
   constructor(private rotasService: RotasService) { }
+
   mostrar_modal = false;
   textoTutorial = textoTutorial;
-  items: MenuItem[] = [];
+  items: MenuItem[] = [{label: "Home"}, {label: "Demandas"}];
   activeItem: MenuItem | undefined;
   inicial = false;
+
   ngOnInit() {
     this.rotasService.titulo.subscribe((texto) => {
       this.items[0] = {label: "Home"},

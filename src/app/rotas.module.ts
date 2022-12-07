@@ -61,20 +61,8 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
           },
           
           {
-            path: 'proposta/1',
+            path: 'proposta',
             component: TelaCorridaComponent
-          },
-          {
-            path: 'proposta/2',
-            component: TelaEtapaDoisComponent
-          },
-          {
-            path: 'proposta/3',
-            component: TelaEtapaTresComponent
-          },
-          {
-            path: 'proposta/4',
-            component: TelaEtapaQuatroComponent
           },
           {
             path: 'sidebar',

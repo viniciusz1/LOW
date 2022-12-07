@@ -17,7 +17,7 @@ import { Location } from '@angular/common';
 
     constructor(private location: Location) {
       this.location.onUrlChange(e => {
-        if (e == '/tela-inicial/data-comissao') {
+        if (e == '/tela-inicial/reunioes') {
           this.titulo.emit('Reunioes');
         }
         if (e == '/tela-inicial') {
@@ -26,24 +26,27 @@ import { Location } from '@angular/common';
         if (e == '/tela-inicial/chat') {
           this.titulo.emit('Chat');
         }
-        if (e == '/tela-inicial/proposta/1') {
+        if (e == '/tela-inicial/proposta') {
             this.titulo.emit('Propostas');
         }
         if (e == '/tela-inicial/rascunhos') {
             this.titulo.emit('Rascunhos');
         }
-        if (e == '/tela-inicial/layout') {
+        if (e == '/tela-inicial/configuracoes/layout') {
             this.titulo.emit('Layout');
         }
-        if (e == '/tela-inicial/notificacoes') {
-            this.titulo.emit('Notificações');
+        if (e == '/tela-inicial/configuracoes/perfil') {
+            this.titulo.emit('Perfil');
         }
-        if (e == '/tela-inicial/ajuda') {
+        if (e == '/tela-inicial/configuracoes/ajuda') {
             this.titulo.emit('Ajuda');
         }
-        if (e == '/tela-inicial/sugestoes') {
+        if (e == '/tela-inicial/configuracoes/sugestoes') {
             this.titulo.emit('Sugestões');
         }
+        if (e == '/tela-inicial/historico') {
+          this.titulo.emit('Histórico');
+      }
       })
      }
   }

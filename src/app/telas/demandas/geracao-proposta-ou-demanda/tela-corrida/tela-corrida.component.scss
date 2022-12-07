@@ -73,3 +73,10 @@ label{
     font-size: 0.85vw;
     margin: 5px;
 }
+
+::ng-deep{
+    .p-multiselect, .p-placeholder {
+        width: 58.5vw;
+    }
+} 
+    

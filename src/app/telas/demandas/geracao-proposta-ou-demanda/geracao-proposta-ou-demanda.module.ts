@@ -23,6 +23,8 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CalendarModule} from 'primeng/calendar';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
 
 
 @NgModule({
@@ -83,7 +85,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
     InputTextareaModule,
     CalendarModule,
     InputNumberModule,
-    MultiSelectModule
+    MultiSelectModule,
+    AutoCompleteModule
   ],
   providers:[
     MessageService,

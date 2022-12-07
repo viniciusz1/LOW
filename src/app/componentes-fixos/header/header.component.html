@@ -11,10 +11,9 @@
                 <li class="breadcrumb-item"><a href="#">Demandas</a></li>
             </ol>
         </nav> -->
-        <nav aria-label="breadcrumb" style="display: flex; justify-content: center; align-items: center;">
+        <nav aria-label="breadcrumb" style="display: flex; justify-content: center; align-items: center;" >
             <ol class="breadcrumb" style="margin: 0px 0px 0px 2vw !important; ">
-              <li class="breadcrumb-item"><a href="tela-inicial">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Library</li>
+              <li class="breadcrumb-item active" aria-current="page" *ngFor="let item of items">{{item.label}}</li>
             </ol>
         </nav>
     </ul>

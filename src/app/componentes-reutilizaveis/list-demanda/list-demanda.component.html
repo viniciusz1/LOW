@@ -1,58 +1,57 @@
-<ul class="nav position-relative container-lista low-shadow p-2" [ngClass]="{'w-100': !demandaPequena}">
+<ul class="nav position-relative container-lista low-shadow p-2" [ngStyle]="{'width':  mudarTamanho}">
     <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
-    <div class="d-flex">
-        <li class="nav-item" >
+    <div class="d-flex" style="width: 80%;">
+        <li class="nav-item">
             <label class="" for="">002</label>
         </li>
-        <li class="nav-item" style="width: 250px; margin-right: 1vw;">
+        <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '25%' : '45%'}">
             <label class="text-truncate d-inline-block" for=""><b>{{dadosDemada.tituloDemanda}}</b></label>
         </li>
-        <!-- <li class="nav-item text-truncate" style="width: 100px;">
-            <small class="" for="">{{dadosDemada.statusDemanda}}</small>
-        </li> -->
-        <li class="nav-item" style="width: 120px; margin-right: 1vw;">
+        <li *ngIf="!demandaPequena"  class="nav-item"  style="width: 20%;">
             <label class="text-truncate d-inline-block">{{dadosDemada.autorDemanda}}</label>
         </li>
-        <li class="nav-item" style="width: 230px; ">
+        <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '15%' : '50%'}">
             <label class="text-truncate d-inline-block">{{dadosDemada.departamentoBenDemanda}}</label>
         </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width: 100px; margin-right: 1vw;">
-            <label class="text-truncate d-inline-block">{{dadosDemada.ppmDemanda}}</label>
+        <li *ngIf="!demandaPequena" class="nav-item" style="width:  5%;">
+            <label class="text-truncate d-inline-block">190.8</label>
         </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width: 80px; margin-right: 1vw;">
+        <li *ngIf="!demandaPequena" class="nav-item" style="width:  15%;">
+
             <label class="text-truncate d-inline-block">{{dadosDemada.statusDemanda | uppercase}}</label>
         </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width: 80px; margin-right: 1vw;">
+        <li *ngIf="!demandaPequena" class="nav-item" style="width:  10%;">
             <label class="text-truncate d-inline-block">{{dadosDemada.scoreDemanda}}</label>
         </li>
 
     </div>
-    <div class="d-flex final-list" >
+    <div class="d-flex final-list" style="width: 20%;">
         <li *ngIf="mostrarBotao && textoExibidoEmBotaoDependendoRota">
-            <button class="btn btn-primary btn-sm me-2" style="width: 170px;" (click)="direcionarUsuario()">
+            <button class="btn btn-primary btn-sm me-2" style="width: 147px;" (click)="direcionarUsuario()">
                 {{textoExibidoEmBotaoDependendoRota.texto}}
             </button>
         </li>
-        <i class="bi bi-chat-left-dots me-3 ms-3" (click)="irParaChat.emit()" *ngIf="!demandaPequena"></i>
-            <i class="bi bi-three-dots-vertical three-dots" *ngIf="!demandaPequena" role="button" [matMenuTriggerFor]="menu"></i>
-            <i class="bi bi-plus-lg" *ngIf="demandaPequena" role="button" (click)="clicouAdicionarPauta.emit()"></i>
-            <mat-menu #menu="matMenu">
-              <button (click)="modalHistorico.emit()"  mat-menu-item>
+        <i class="bi bi-chat-left-dots me-3 ms-3" *ngIf="!demandaPequena" (click)="irParaChat.emit()"></i>
+        <i class="bi bi-three-dots-vertical three-dots" [ngClass]="{'me-3': demandaPequena}" role="button"
+            [matMenuTriggerFor]="menu"></i>
+        <i class="bi bi-plus-lg" *ngIf="demandaPequena" role="button" (click)="clicouAdicionarPauta.emit()"></i>
+        <mat-menu #menu="matMenu">
+            <button (click)="modalHistorico.emit()" mat-menu-item>
                 <i class="bi bi-arrow-counterclockwise me-3"></i>
                 <span>Histórico</span>
-              </button>
-              <button (click)="verDocumentoProposta.emit()" mat-menu-item>
+            </button>
+            <button (click)="verDocumentoProposta.emit()" mat-menu-item>
                 <i class="bi bi-arrows-angle-expand me-3"></i>
                 <span>Ver demanda</span>
-              </button>
-              <button *ngIf="existePauta()" routerLink="/tela-inicial/ver-pauta" mat-menu-item>
+            </button>
+            <button *ngIf="existePauta()" routerLink="/tela-inicial/ver-pauta" mat-menu-item>
                 <i class="bi bi-person-lines-fill me-3"></i>
                 <span>Ir para Reunião</span>
-              </button>
-              <button routerLink="/tela-inicial/chat" mat-menu-item>
+            </button>
+            <button routerLink="/tela-inicial/chat" mat-menu-item>
                 <i class="bi bi-chat-left-quote me-3"></i>
                 <span>Iniciar conversa</span>
-              </button>
-              </mat-menu>
+            </button>
+        </mat-menu>
     </div>
 </ul>

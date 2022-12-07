@@ -23,7 +23,6 @@ export class TelaChatComponent implements OnInit {
 ]
   ngOnInit(): void {
   }
-
   silenciarChat() {
     this.confirmationService.confirm({
         message: 'Deseja realmente silenciar esta conversa?',
@@ -33,14 +32,26 @@ export class TelaChatComponent implements OnInit {
         }
     })};
 
-  enviarMensagem(){
+  enviarMensagem(event: KeyboardEvent | Event) {
+    if(this.mensagem.nativeElement.value == ""){
+      return
+    }
 
-    this.mensagens.push({
-      mensagem: this.mensagem.nativeElement.value,
-      rementente: "solicitante"
-    })
-    console.log(this.mensagens)
-    this.mensagem.nativeElement.value = ""
+    if (event instanceof KeyboardEvent) {
+      if (event.key === "Enter") {
+        this.mensagens.push({
+          mensagem: this.mensagem.nativeElement.value,
+          rementente: "solicitante"
+        })
+        this.mensagem.nativeElement.value = "";
+      }
+    }else{
+      this.mensagens.push({
+        mensagem: this.mensagem.nativeElement.value,
+        rementente: "solicitante"
+      })
+      this.mensagem.nativeElement.value = ""
+    }
   }
 }
 interface Mensagem{

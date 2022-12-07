@@ -1,3 +1,4 @@
+import { SharedModule } from './../../../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 
 import { NgModule } from '@angular/core';
@@ -14,7 +15,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
   imports: [
     CommonModule,
     FormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    SharedModule
   ]
 })
 export class ChatModule { }

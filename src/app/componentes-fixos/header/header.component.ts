@@ -1,4 +1,4 @@
-import { textoTutorial } from './../../telas/demandas/tela-inicial/textoDoTutorial';
+import { textoTutorial } from '../../shared/textoDoTutorial';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { RotasService } from 'src/app/services/rotas.service';

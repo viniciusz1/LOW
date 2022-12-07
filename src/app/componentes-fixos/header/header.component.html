@@ -19,10 +19,10 @@
     </ul>
     <ul class="nav justify-content-end nav-items-center" style="width:60%" >
         <li class="nav-item">
-            <a class="nav-link" routerLink="/tela-inicial/reunioes">REUNIÕES</a>
+            <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'">REUNIÕES</a>
         </li>
         <li class="nav-item" >
-            <a role="button" class="nav-link active" routerLink="/tela-inicial">DEMANDAS</a>
+            <a role="button" class="nav-link" routerLink="/tela-inicial" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'">DEMANDAS</a>
         </li>
         <li role="button" class="nav-item" routerLink="/tela-inicial/chat" *ngIf="!inicial"
         joyrideStep="sete"

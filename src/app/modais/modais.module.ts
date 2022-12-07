@@ -1,8 +1,8 @@
+import { DragDropModule } from 'primeng/dragdrop';
+import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { AngularMaterialModule } from './../angular-material/angular-material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalSuaPautaComponent } from './modal-sua-pauta/modal-sua-pauta.component';
 import { ModalPropostaDocumentoComponent } from './modal-proposta-documento/modal-proposta-documento.component';
 import { ModalAtaDocumentoComponent } from './modal-ata-documento/modal-ata-documento.component';
 import { ModalParecerComissaoPropostaComponent } from './modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
@@ -20,12 +20,12 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ModalHistoricoComponent } from './modal-historico/modal-historico.component';
-
+import { ModalCriarReuniaoComponent } from './modal-criar-reuniao/modal-criar-reuniao.component';
+import {CalendarModule} from 'primeng/calendar';
 
 
 @NgModule({
   declarations: [
-    ModalSuaPautaComponent,
     ModalPropostaDocumentoComponent,
     ModalAtaDocumentoComponent,
     ModalParecerComissaoPropostaComponent,
@@ -34,6 +34,7 @@ import { ModalHistoricoComponent } from './modal-historico/modal-historico.compo
     ModalMotivoDevolucaoComponent,
     ModalReprovacaoDemandaComponent,
     ModalHistoricoComponent,
+    ModalCriarReuniaoComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +47,10 @@ import { ModalHistoricoComponent } from './modal-historico/modal-historico.compo
     DropdownModule,
     InputTextareaModule,
     ConfirmDialogModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    InputTextModule,
+    CalendarModule,
+    DragDropModule
   ],
   exports: [
     ModalDemandaDocumentoComponent

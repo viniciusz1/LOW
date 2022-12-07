@@ -15,10 +15,7 @@ import { TelaHistoricoDemandaComponent } from './telas/demandas/tela-historico-d
 import { TelaChatComponent } from './telas/demandas/chat/tela-chat/tela-chat.component';
 import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.component';
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
-import { TelaEtapaQuatroComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-quatro/tela-etapa-quatro.component';
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
-import { TelaEtapaDoisComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-dois/tela-etapa-dois.component';
-import { TelaEtapaTresComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-etapa-tres/tela-etapa-tres.component';
 import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-corrida/tela-corrida.component';
 
 
@@ -59,7 +56,11 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
             path: 'chat',
             component: TelaChatComponent
           },
-          
+          {
+            path: 'demanda',
+            component: TelaCorridaComponent
+          },
+
           {
             path: 'proposta',
             component: TelaCorridaComponent
@@ -102,7 +103,7 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
                 component: TelaAjudaComponent
               }
             ]
-          },          
+          },
         ]
       }
     ])

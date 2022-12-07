@@ -129,166 +129,53 @@
           </div>
         </div>
       </div>
-
-      <div
-        spyTarget="etapa-1"
-        style="
-          display: grid;
-          justify-content: center !important;
-          margin-top: 1vh;
-        "
-        class="etapa-1"
-      >
+      <div [formGroup]="demandaForm" (ngSubmit)="onSubmitDemanda()">
         <div
-          class="beneficios"
+          spyTarget="etapa-1"
           style="
             display: grid;
-            align-items: center;
-            justify-content: space-between;
+            justify-content: center !important;
+            margin-top: 1vh;
           "
+          class="etapa-1"
         >
-          <div class="titulo" style="display: grid" id="item-1-1">
-            <label style="font-weight: 500"> Título: </label>
-            <input
-              type="text"
-              pInputText
-              formControlName="tituloDemanda"
-              class="input"
-            />
-          </div>
-          <div class="situacao-atual" style="display: grid" id="item-1-2">
-            <label style="font-weight: 500"> Situação Atual: </label>
-            <div style="display: flex">
-              <input
-                type="text"
-                formControlName="situacaoAtualDemanda"
-                pInputText
-                class="input"
-              />
-            </div>
-          </div>
-          <div class="objetivo" style="display: grid" id="item-1-3">
-            <label style="font-weight: 500"> Objetivo: </label>
-            <div style="display: flex">
-              <input
-                type="text"
-                formControlName="objetivoDemanda"
-                pInputText
-                class="input"
-              />
-            </div>
-          </div>
           <div
-            class="real"
-            style="display: flex; justify-content: first baseline"
-            id="item-1-4"
+            class="beneficios"
+            style="
+              display: grid;
+              align-items: center;
+              justify-content: space-between;
+            "
           >
-            <div class="ben-real" style="display: grid">
-              <label style="font-weight: 500"> Centros de Custo: </label>
-              <span class="p-float-label">
-                <p-multiSelect
-                  style="width: 58.5vw"
-                  [options]="centrosCusto"
-                  [(ngModel)]="selectedCentros"
-                  defaultLabel="Selecione os Centros de Custo"
-                  optionLabel="centro"
-                  display="chip"
-                  formControlName="centroCustoDemanda"
-                >
-                </p-multiSelect>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        spyTarget="etapa-2"
-        style="
-          display: grid;
-          justify-content: center !important;
-          margin-top: 1vh;
-        "
-        class="etapa-2"
-      >
-        <div
-          class="beneficios"
-          style="
-            display: grid;
-            align-items: center;
-            justify-content: space-between;
-          "
-        >
-          <div formGroupName="beneficioRealDemanda">
-            <div class="titulo" style="display: grid" id="item-2-1">
-              <label style="font-weight: 500"> Benefício Real: </label>
-              <div style="display: flex; justify-content: space-between">
-                <input
-                  style="width: 55vw !important"
-                  type="text"
-                  pInputText
-                  class="input"
-                  formControlName="valor"
-                />
-                <select
-                  name="Moeda"
-                  style="
-                    background-color: #00579d;
-                    color: #fff;
-                    border-radius: 5px;
-                    padding: 4px;
-                    margin: 5px;
-                    border: none;
-                    outline: none;
-                  "
-                  formControlName="moeda"
-                >
-                  <option value="valor1">BR</option>
-                </select>
-              </div>
+            <div class="titulo" style="display: grid" id="item-1-1">
+              <label style="font-weight: 500"> Título: </label>
+              <input
+                type="text"
+                pInputText
+                formControlName="tituloDemanda"
+                class="input"
+              />
             </div>
             <div class="situacao-atual" style="display: grid" id="item-1-2">
-              <label style="font-weight: 500">
-                Memória de Cálculo do Benefício Real:
-              </label>
+              <label style="font-weight: 500"> Situação Atual: </label>
               <div style="display: flex">
-                <textarea
-                  style="width: 58.5vw"
-                  [rows]="5"
-                  [cols]="30"
-                  [autoResize]="true"
-                  pInputTextarea
-                  formControlName="memoriaCalculo"
-                ></textarea>
-              </div>
-            </div>
-          </div>
-          <div formGroupName="beneficioPotencialDemanda">
-            <div class="objetivo" style="display: grid" id="item-1-3">
-              <label style="font-weight: 500"> Benefício Potencial: </label>
-              <div style="display: flex; justify-content: space-between">
                 <input
-                  style="width: 55vw !important"
                   type="text"
+                  formControlName="situacaoAtualDemanda"
                   pInputText
                   class="input"
-                  formControlName="valor"
                 />
-                <select
-                  name="Moeda"
-                  style="
-                    background-color: #00579d;
-                    color: #fff;
-                    border-radius: 5px;
-                    padding: 4px;
-                    margin: 5px;
-                    border: none;
-                    outline: none;
-                  "
-                  formControlName="moeda"
-                >
-                  <option value="valor1">BR</option>
-                </select>
+              </div>
+            </div>
+            <div class="objetivo" style="display: grid" id="item-1-3">
+              <label style="font-weight: 500"> Objetivo: </label>
+              <div style="display: flex">
+                <input
+                  type="text"
+                  formControlName="objetivoDemanda"
+                  pInputText
+                  class="input"
+                />
               </div>
             </div>
             <div
@@ -297,8 +184,72 @@
               id="item-1-4"
             >
               <div class="ben-real" style="display: grid">
+                <label style="font-weight: 500"> Centros de Custo: </label>
+                <span class="p-float-label">
+                  <p-multiSelect
+                    style="width: 58.5vw"
+                    [options]="centrosCusto"
+                    [(ngModel)]="selectedCentros"
+                    defaultLabel="Selecione os Centros de Custo"
+                    optionLabel="centro"
+                    display="chip"
+                    formControlName="centroCustoDemanda"
+                  >
+                  </p-multiSelect>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          spyTarget="etapa-2"
+          style="
+            display: grid;
+            justify-content: center !important;
+            margin-top: 1vh;
+          "
+          class="etapa-2"
+        >
+          <div
+            class="beneficios"
+            style="
+              display: grid;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
+            <div formGroupName="beneficioRealDemanda">
+              <div class="titulo" style="display: grid" id="item-2-1">
+                <label style="font-weight: 500"> Benefício Real: </label>
+                <div style="display: flex; justify-content: space-between">
+                  <input
+                    style="width: 55vw !important"
+                    type="text"
+                    pInputText
+                    class="input"
+                    formControlName="valor"
+                  />
+                  <select
+                    name="Moeda"
+                    style="
+                      background-color: #00579d;
+                      color: #fff;
+                      border-radius: 5px;
+                      padding: 4px;
+                      margin: 5px;
+                      border: none;
+                      outline: none;
+                    "
+                    formControlName="moeda"
+                  >
+                    <option value="valor1">BR</option>
+                  </select>
+                </div>
+              </div>
+              <div class="situacao-atual" style="display: grid" id="item-1-2">
                 <label style="font-weight: 500">
-                  Memória de Cálculo do Benefício Potencial:
+                  Memória de Cálculo do Benefício Real:
                 </label>
                 <div style="display: flex">
                   <textarea
@@ -312,74 +263,123 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            class="real"
-            style="display: flex; justify-content: first baseline"
-            id="item-1-4"
-          >
-            <div class="ben-real" style="display: grid">
-              <label style="font-weight: 500"> Benefício Qualitativo: </label>
-              <div style="display: flex">
-                <textarea
-                  style="width: 58.5vw"
-                  [rows]="5"
-                  [cols]="30"
-                  [autoResize]="true"
-                  pInputTextarea
-                  formControlName="beneficioQualitativoDemanda"
-                ></textarea>
+            <div formGroupName="beneficioPotencialDemanda">
+              <div class="objetivo" style="display: grid" id="item-1-3">
+                <label style="font-weight: 500"> Benefício Potencial: </label>
+                <div style="display: flex; justify-content: space-between">
+                  <input
+                    style="width: 55vw !important"
+                    type="text"
+                    pInputText
+                    class="input"
+                    formControlName="valor"
+                  />
+                  <select
+                    name="Moeda"
+                    style="
+                      background-color: #00579d;
+                      color: #fff;
+                      border-radius: 5px;
+                      padding: 4px;
+                      margin: 5px;
+                      border: none;
+                      outline: none;
+                    "
+                    formControlName="moeda"
+                  >
+                    <option value="valor1">BR</option>
+                  </select>
+                </div>
+              </div>
+              <div
+                class="real"
+                style="display: flex; justify-content: first baseline"
+                id="item-1-4"
+              >
+                <div class="ben-real" style="display: grid">
+                  <label style="font-weight: 500">
+                    Memória de Cálculo do Benefício Potencial:
+                  </label>
+                  <div style="display: flex">
+                    <textarea
+                      style="width: 58.5vw"
+                      [rows]="5"
+                      [cols]="30"
+                      [autoResize]="true"
+                      pInputTextarea
+                      formControlName="memoriaCalculo"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="real"
+              style="display: flex; justify-content: first baseline"
+              id="item-1-4"
+            >
+              <div class="ben-real" style="display: grid">
+                <label style="font-weight: 500"> Benefício Qualitativo: </label>
+                <div style="display: flex">
+                  <textarea
+                    style="width: 58.5vw"
+                    [rows]="5"
+                    [cols]="30"
+                    [autoResize]="true"
+                    pInputTextarea
+                    formControlName="beneficioQualitativoDemanda"
+                  ></textarea>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div
-        spyTarget="target-3"
-        style="
-          display: grid;
-          justify-content: center !important;
-          margin-top: 1vh;
-        "
-        class="etapa-3"
-      >
         <div
-          class="beneficios"
+          spyTarget="target-3"
           style="
             display: grid;
-            align-items: center;
-            justify-content: space-between;
+            justify-content: center !important;
+            margin-top: 1vh;
           "
+          class="etapa-3"
         >
-          <div class="titulo" style="display: grid" id="item-2-1">
-            <label style="font-weight: 500">
-              Frequência de Uso do Sistema:
-            </label>
-            <div style="display: flex">
-              <p-dropdown
-                [options]="opcoesDeTamanho"
-                optionLabel="name"
-                placeholder="Selecione a frequência"
-                formControlName="frequenciaDeUsoDemanda"
-              ></p-dropdown>
-            </div>
-          </div>
           <div
-            class="situacao-atual"
-            style="display: grid; width: 58.5vw"
-            id="item-1-2"
+            class="beneficios"
+            style="
+              display: grid;
+              align-items: center;
+              justify-content: space-between;
+            "
           >
-            <label style="font-weight: 500"> Anexar Documento: </label>
-            <p-fileUpload
-              name="myfile[]"
-              url="./upload.php"
-              [multiple]="true"
-            ></p-fileUpload>
+            <div class="titulo" style="display: grid" id="item-2-1">
+              <label style="font-weight: 500">
+                Frequência de Uso do Sistema:
+              </label>
+              <div style="display: flex">
+                <p-dropdown
+                  [options]="opcoesDeTamanho"
+                  optionLabel="name"
+                  placeholder="Selecione a frequência"
+                  formControlName="frequenciaDeUsoDemanda"
+                ></p-dropdown>
+              </div>
+            </div>
+            <div
+              class="situacao-atual"
+              style="display: grid; width: 58.5vw"
+              id="item-1-2"
+            >
+              <label style="font-weight: 500"> Anexar Documento: </label>
+              <p-fileUpload
+                name="myfile[]"
+                url="./upload.php"
+                [multiple]="true"
+              ></p-fileUpload>
+            </div>
           </div>
         </div>
       </div>
-
       <div
         *ngIf="aparecerProposta"
         class="d-grid justify-content-center my-3"
@@ -672,15 +672,17 @@
             </div>
           </div>
         </div>
-        <div
-          class="d-flex justify-content-between"
-          style="margin-top: 2vh !important; margin-bottom: 2vh"
-        >
-          <div>
-            <button class="btn btn-danger me-3">Cancelar</button>
-          </div>
-          <button class="btn btn-primary">Finalizar</button>
+      </div>
+      <div
+        class="d-flex justify-content-between"
+        style="margin-top: 2vh !important; margin-bottom: 2vh"
+      >
+        <div>
+          <button class="btn btn-danger me-3">Cancelar</button>
         </div>
+        <button class="btn btn-primary" (click)="onSubmitDemanda()">
+          Finalizar
+        </button>
       </div>
     </div>
   </div>

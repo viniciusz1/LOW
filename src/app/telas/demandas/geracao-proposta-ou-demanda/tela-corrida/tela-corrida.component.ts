@@ -54,14 +54,15 @@ export class TelaCorridaComponent implements OnInit {
     // this.demandaForm.patchValue({
     //   anexoDemanda: JSON.stringify(this.arquivos),
     // });
-    this.demandaService.postDemanda(this.demandaForm.value).subscribe({
-        next: (response) => {
-          console.log(response)
-        },
-        error: (err) => {
-          console.error(err)
-        }
-      })
+    // this.demandaService.postDemanda(this.demandaForm.value).subscribe({
+    //     next: (response) => {
+    //       console.log(response)
+    //     },
+    //     error: (err) => {
+    //       console.error(err)
+    //     }
+    //   })
+    console.log(this.demandaForm.value)
   }
   arquivos: File[] = [];
   arquivosUpload(event: any) {

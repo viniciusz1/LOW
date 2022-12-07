@@ -111,7 +111,7 @@
       </label>
       <span>
         <button
-          *ngIf="!isPauta && !rascunho && textoExibidoEmBotaoDependendoRota"
+          *ngIf="!isPauta && !rascunho && textoExibidoEmBotaoDependendoRota && !exibirBotaoParecerComissao && !exibirBotaoParecerDg"
           class="btn btn-primary btn-sm"
           style="width: 147px;"
           (click)="direcionarUsuario()"

@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="row">
-        
-        <div class="col-9 mb-5" style="overflow: auto; max-height: 60vh;" >
+
+        <div class="col-9 mb-5" style="overflow: auto; max-height: 70vh;" >
             <div  *ngFor="let demanda of listaDemanda" class="mb-2">
                 <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModal)="openModalParecerComissaoProposta()" [dadosDemada]="demanda" [mudarTamanho]="'100%'"></app-card-demanda>
             </div>

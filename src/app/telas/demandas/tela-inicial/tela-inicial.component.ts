@@ -1,3 +1,4 @@
+import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
 import { fadeAnimation } from './../../../shared/app.animation';
 import { StatusDemanda } from './../../../models/statusDemanda.enum';
@@ -169,6 +170,12 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  openModalAtaDocumento() {
+    this.matDialog.open(ModalAtaDocumentoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    });
+  }
 
   exibirFilasDeStatus() {
     if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-classificacao')) {

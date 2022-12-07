@@ -19,6 +19,7 @@ export class CardDemandaComponent implements OnInit {
   @Output() irParaChat = new EventEmitter();
   @Output() abrirModalCriarReuniao = new EventEmitter();
   @Output() modalHistorico = new EventEmitter();
+  @Output() verDocumentoEmAta = new EventEmitter();
 
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
@@ -37,7 +38,7 @@ export class CardDemandaComponent implements OnInit {
 
   constructor(private route: Router) {
     this.textoExibidoEmBotaoDependendoRota = {
-      rota: '/tela-inicial/ver-pauta',
+      rota: 'ver em ata',
       texto: 'Ver em Ata',
     };
   }
@@ -51,6 +52,9 @@ export class CardDemandaComponent implements OnInit {
     }
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'){
       this.abrirModalCriarReuniao.emit()
+    }
+    else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'ver em ata'){
+      this.verDocumentoEmAta.emit()
     }
     else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);

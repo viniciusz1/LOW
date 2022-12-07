@@ -1,3 +1,4 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalHistoricoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: DialogRef<ModalHistoricoComponent>) { }
 
   ngOnInit(): void {
   }

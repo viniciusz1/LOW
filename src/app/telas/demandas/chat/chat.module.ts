@@ -1,3 +1,4 @@
+import { SharedModule } from './../../../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 
 import { NgModule } from '@angular/core';
@@ -12,7 +13,8 @@ import { TelaChatComponent } from './tela-chat/tela-chat.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class ChatModule { }

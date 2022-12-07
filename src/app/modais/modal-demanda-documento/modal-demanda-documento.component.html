@@ -1,4 +1,4 @@
-<p-timeline [value]="events1" align="top" layout="horizontal">
+<p-timeline *ngIf="user == 'solicitante'" [value]="events1" align="top" layout="horizontal">
   <ng-template pTemplate="marker" let-event>
     <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
       <i [ngClass]="event.icon"></i>
@@ -98,7 +98,11 @@
   <h4><b>DOCUMENTOS:</b></h4>
 </p-scrollPanel>
 </mat-dialog-content>
-<mat-dialog-actions align="end" *ngIf="user == 'gerente'">
+
+<mat-dialog-actions class="d-flex justify-content-between">
   <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">Cancelar</button>
-  <button class="btn btn-primary">Aprovar demanda</button>
+  <div>
+    <button class="btn btn-danger me-2" *ngIf="user == 'gerente'">Reprovar demanda</button>
+    <button class="btn btn-primary" *ngIf="user == 'gerente'">Aprovar demanda</button>
+  </div>
 </mat-dialog-actions>

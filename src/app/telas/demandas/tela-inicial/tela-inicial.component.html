@@ -1,223 +1,345 @@
-<div [ngClass]="{'container': isFiltrado}" class="nav my-4 justify-content-center">
-    <nav [ngClass]="{'container': !isFiltrado}" class="nav justify-content-between w-100">
+<div
+  [ngClass]="{ container: isFiltrado }"
+  class="nav my-4 justify-content-center"
+>
+  <nav
+    [ngClass]="{ container: !isFiltrado }"
+    class="nav justify-content-between w-100"
+  >
+    <div class="d-flex align-items-start" style="overflow: auto">
+      <button
+        joyrideStep="um"
+        [prevTemplate]="prevButton"
+        [nextTemplate]="nextButton"
+        [doneTemplate]="doneButton"
+        [title]="'Criar uma Demanda'"
+        [stepContent]="customContent"
+        [stepContentParams]="{ texto: textoTutorial[0] }"
+        class="btn btn-primary position-relative"
+        routerLink="/tela-inicial/proposta/1"
+      >
+        + Criar Demanda
+      </button>
 
-        <div class="d-flex align-items-start" style="overflow: auto;">
-            <button joyrideStep="um" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
-                [title]="'Criar uma Demanda'" [stepContent]="customContent"
-                [stepContentParams]="{'texto': textoTutorial[0]}" class="btn btn-primary position-relative"
-                routerLink="/tela-inicial/proposta/1">
-                + Criar Demanda
-            </button>
-
-            <ng-template #prevButton>
-                <button class="btn btn-outline-primary">Anterior</button>
-            </ng-template>
-            <ng-template #nextButton>
-                <button class="btn btn-primary">Próximo</button>
-            </ng-template>
-            <ng-template #doneButton>
-                <button class="btn btn-primary">Pronto</button>
-            </ng-template>
-            <ng-template #customContent let-texto="texto" style="border-radius: 20px;">
-                <div [innerHTML]="texto" style="max-width: 300px; padding: 20px;"></div>
-            </ng-template>
-            <joyrideStep joyrideStep="bv" title="Bem Vindo!"
-                text="Agora você terá um tutorial de como o sistema de demandas funciona!" stepPosition="center">
-            </joyrideStep>
-        </div>
-
-
-        <ul joyrideStep="dois" [title]="'Filtrar Demandas'" [stepContent]="customContent"
-            [stepContentParams]="{'texto': textoTutorial[1]}" class="nav justify-content-center"
-            style="overflow: auto;">
-            <div *ngIf="showPesquisaEBotaoFiltro" class="d-flex align-items-center justify-content-center">
-                <span class="p-input-icon-left" [ngClass]="{'tam': !tipoRascunho}">
-                    <i class="pi pi-search"></i>
-                    <input type="text" class="border" style="width: 100%;" pInputText placeholder="Pesquisar Demanda"
-                        [(ngModel)]="pesquisaDemanda" (keypress)="isFiltrado = !isFiltrado" />
-                </span>
-                <button *ngIf="showPesquisaEBotaoFiltro && !tipoRascunho" class="btn btn-primary ms-3" style="width: 180px;"
-                    (click)="mudarStatusFiltro()">
-                    Filtrar Mais
-                    <i class="bi bi-chevron-double-down"></i>
-                </button>
-            </div>
-
-            <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (closeFiltro)="mudarStatusFiltro()" class="me-3">
-            </app-filtro-demanda>
-        </ul>
-
-
-
-        <!-- Trocar exibição de lista para card e vice-versa -->
-        <div *ngIf="!tipoRascunho" [ngClass]="{'container': !isFiltrado}" style="overflow: auto;"
-            class="my-3 d-flex justify-content-end w-100">
-            <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
-                [stepContentParams]="{'texto': textoTutorial[2]}" [ngClass]="{'color-actived': !tipoExibicaoDemanda}"
-                (click)="changeToList()" class="change-type-list me-2">
-                <i class="bi bi-list" style="font-size:15px;"></i>
-            </div>
-            <div [ngClass]="{'color-actived': tipoExibicaoDemanda}" (click)="changeToCard()" class="change-type-list">
-                <i class="bi bi-border-all" style="font-size:15px;">
-                </i>
-            </div>
-        </div>
-    </nav>
-
-    <!-- sidebar -->
-    <app-sidebar-demanda [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()"
-        style="position: fixed; z-index: 2; transition: left 0.3s ease 0s; top: 43vh;"></app-sidebar-demanda>
-
-
-
-    <div @fadeAnimation *ngIf="!tipoExibicaoDemanda">
-        <!-- Parte Não Filtrada em Lista -->
-
-        <div class="" *ngIf="!isFiltrado">
-            <div *ngFor="let titulo of listaTituloNaoFiltrado; let i = index">
-                <div style="width: 25%;">
-                    <h5>{{titulo}}</h5>
-                    <hr style="margin:0; opacity: 1;" class="mb-2">
-                </div>
-                <div class=" d-flex justify-content-center align-items-center flex-column my-2"
-                    style="margin-left:auto; margin-right:auto">
-                    <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo | slice:0:4"
-                        [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"  (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-                        (abrirModal)="openModalMotivoDevolucao()" class="mb-2">
-                    </app-list-demanda>
-
-
-                    <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
-                        <div class="d-flex justify-content-center align-items-center flex-column ">
-                            <app-list-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"  (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-                                [dadosDemada]="demanda" class="mb-2">
-                            </app-list-demanda>
-                        </div>
-                    </div>
-
-                    <!-- Bloco para expandir -->
-
-                    <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
-                        class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
-                        style="width: 30%; height: 30px">
-                        <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed[i]"
-                            aria-controls="collapseExample" [ngClass]="!isCollapsed[i] ? 'inverte': 'naoinverte'">
-                        </i>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Parte Filtrada em Lista -->
-
-        <div *ngIf="isFiltrado">
-            <div matSort (matSortChange)="sortData($event)" style="padding: 10px; margin-left: 6px;">
-                <label mat-sort-header="id" for="id">ID</label>
-                <label mat-sort-header="titulo" for="id">Título</label>
-                <label mat-sort-header="status" for="id">Status</label>
-                <label mat-sort-header="autor" for="id">Autor</label>
-                <label mat-sort-header="departamento" for="id">Departamento</label>
-            </div>
-            <div class="container d-flex flex-column align-items-center">
-                <app-list-demanda  (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-                *ngFor="let demanda of listaDemandas" [dadosDemada]="demanda" class="mb-2">
-                </app-list-demanda>
-            </div>
-        </div>
-    </div>
-    <div @fadeAnimation class="d-flex" *ngIf="tipoExibicaoDemanda && !isFiltrado">
-
-        <!-- Parte não Filtrada em card -->
-        <div class="bloco-branco"></div>
-        <div class="tamanho-container">
-            <div *ngFor="let titulo of listaTituloNaoFiltrado; let i = index">
-                <div class="my-4 tamanho-container">
-                    <div class="ms-3 title-demanda" for="status">
-                        <div style="width: 20%;">
-                            <h5>{{titulo}}</h5>
-                            <hr style="margin:0; opacity: 1;" class="mb-2">
-                        </div>
-                        <div class="me-3" style="align-self: flex-end; cursor: pointer;"
-                            (click)="isFiltrado = !isFiltrado">Ver mais</div>
-                    </div>
-                    <div class="d-flex position-relative" style="width: 100%;">
-                        <div [style.left.px]="positionListCards[i]"
-                            class="div-cards d-flex position-relative transition-cards">
-                            <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
-                                [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento()"  (irParaChat)="irParaChat()"
-                                (modalHistorico)="openModalHistorico()"
-
-                                (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
-                        </div>
-                        <div class="left-arrow alinhacao" (click)="changeLeft(i)"><i style="font-size: 25px;"
-                                class="bi bi-chevron-left"></i></div>
-                        <div class="right-arrow alinhacao" (click)="changeRight(i)"><i style="font-size: 25px;"
-                                class="bi bi-chevron-right"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bloco-branco"></div>
+      <ng-template #prevButton>
+        <button class="btn btn-outline-primary">Anterior</button>
+      </ng-template>
+      <ng-template #nextButton>
+        <button class="btn btn-primary">Próximo</button>
+      </ng-template>
+      <ng-template #doneButton>
+        <button class="btn btn-primary">Pronto</button>
+      </ng-template>
+      <ng-template #customContent let-texto="texto" style="border-radius: 20px">
+        <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
+      </ng-template>
+      <joyrideStep
+        joyrideStep="bv"
+        title="Bem Vindo!"
+        text="Agora você terá um tutorial de como o sistema de demandas funciona!"
+        stepPosition="center"
+      >
+      </joyrideStep>
     </div>
 
+    <ul
+      joyrideStep="dois"
+      [title]="'Filtrar Demandas'"
+      [stepContent]="customContent"
+      [stepContentParams]="{ texto: textoTutorial[1] }"
+      class="nav p-1 justify-content-center"
+      style="overflow: auto"
+    >
+      <div
+        *ngIf="showPesquisaEBotaoFiltro"
+        class="d-flex align-items-center justify-content-center"
+      >
+      <button class="btn btn-primary me-3" *ngIf="isFiltrado" style="width: 225px;">Exportar Para PDF</button>
+        <span class="p-input-icon-left" [ngClass]="{ tam: !tipoRascunho }">
+          <i class="pi pi-search"></i>
+          <input
+            type="text"
+            class="border"
+            style="width: 100%"
+            pInputText
+            placeholder="Pesquisar Demanda"
+            [(ngModel)]="pesquisaDemanda"
+            (keypress)="isFiltrado = !isFiltrado"
+          />
+        </span>
+        <button
+          *ngIf="showPesquisaEBotaoFiltro && !tipoRascunho"
+          class="btn btn-primary ms-3"
+          style="width: 180px"
+          (click)="mudarStatusFiltro()"
+        >
+          Filtrar Mais
+          <i class="bi bi-chevron-double-down"></i>
+        </button>
+      </div>
 
-    <div *ngIf="isFiltrado && tipoExibicaoDemanda" [ngClass]="{'mt-5': tipoRascunho}"
-        style="width: -webkit-fill-available;">
-        <div matSort (matSortChange)="sortData($event)" style="padding: 10px; margin-left: 6px;">
-            <label mat-sort-header="id" for="id">ID</label>
-            <label mat-sort-header="titulo" for="id">Título</label>
-            <label mat-sort-header="status" for="id">Status</label>
-            <label mat-sort-header="autor" for="id">Autor</label>
-            <label mat-sort-header="departamento" for="id">Departamento</label>
+      <app-filtro-demanda
+        @fadeAnimation
+        *ngIf="showFiltro"
+        (closeFiltro)="mudarStatusFiltro()"
+        class="me-3"
+      >
+      </app-filtro-demanda>
+    </ul>
+
+    <!-- Trocar exibição de lista para card e vice-versa -->
+    <div
+      *ngIf="!tipoRascunho"
+      [ngClass]="{ container: !isFiltrado }"
+      style="overflow: auto"
+      class="my-3 d-flex justify-content-end w-100"
+    >
+      <div
+        joyrideStep="tres"
+        [title]="'Trocar Exibição'"
+        [stepContent]="customContent"
+        [stepContentParams]="{ texto: textoTutorial[2] }"
+        [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
+        (click)="changeToList()"
+        class="change-type-list me-2"
+      >
+        <i class="bi bi-list" style="font-size: 15px"></i>
+      </div>
+      <div
+        [ngClass]="{ 'color-actived': tipoExibicaoDemanda }"
+        (click)="changeToCard()"
+        class="change-type-list"
+      >
+        <i class="bi bi-border-all" style="font-size: 15px"> </i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- sidebar -->
+  <app-sidebar-demanda
+    [style.left.px]="showSidebar"
+    (clicouNaSeta)="moveSidebar()"
+    style="
+      position: fixed;
+      z-index: 2;
+      transition: left 0.3s ease 0s;
+      top: 43vh;
+    "
+  ></app-sidebar-demanda>
+
+  <div @fadeAnimation *ngIf="!tipoExibicaoDemanda">
+    <!-- Parte Não Filtrada em Lista -->
+
+    <div class="" *ngIf="!isFiltrado">
+      <div *ngFor="let titulo of listaTituloNaoFiltrado; let i = index">
+        <div style="width: 25%">
+          <h5>{{ titulo }}</h5>
+          <hr style="margin: 0; opacity: 1" class="mb-2" />
         </div>
-        <div class="container">
-            <div class="row" *ngIf="tipoRascunho">
-                <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandasRascunho; let i = index"
-                    [dadosDemada]="demanda" (abrirModal)="openModalMotivoDevolucao()"
-                    (verDocumentoProposta)="openModalDemandaDocumento()" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-                    class="col-lg-6 col-xl-4 mb-3">
-                </app-card-demanda>
-            </div>
-            <div class="row" *ngIf="!tipoRascunho">
-                <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemada]="demanda"
-                    (abrirModal)="openModalMotivoDevolucao()" (verDocumentoProposta)="openModalDemandaDocumento()"
-                    (clicouEmExcluir)="excluirDemandaRascunho(i)" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()"
-                    (modalHistorico)="openModalHistorico()"
-                    class="col-lg-6 col-xl-4 mb-3">
-                </app-card-demanda>
+        <div
+          class="d-flex justify-content-center align-items-center flex-column my-2"
+          style="margin-left: auto; margin-right: auto"
+        >
+          <app-list-demanda
+            *ngFor="
+              let demanda of listaDemandas
+                | filtrarDemandaStatus : titulo
+                | slice : 0 : 4
+            "
+            [dadosDemada]="demanda"
+            (verDocumentoProposta)="openModalDemandaDocumento($event)"
+            (irParaChat)="irParaChat()"
+            (modalHistorico)="openModalHistorico()"
+            (abrirModalCriarReuniao)="openModalCriarReuniao()"
+            (abrirModal)="openModalMotivoDevolucao()"
+            class="mb-2"
+          >
+          </app-list-demanda>
 
+          <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
+            <div
+              class="d-flex justify-content-center align-items-center flex-column"
+            >
+              <app-list-demanda
+                *ngFor="
+                  let demanda of listaDemandas | filtrarDemandaStatus : titulo
+                "
+                (irParaChat)="irParaChat()"
+                (modalHistorico)="openModalHistorico()"
+                (abrirModalCriarReuniao)="openModalCriarReuniao()"
+                [dadosDemada]="demanda"
+                class="mb-2"
+              >
+              </app-list-demanda>
             </div>
+          </div>
+
+          <!-- Bloco para expandir -->
+
+          <div
+            *ngIf="listaDemandas.length > 0"
+            type="button"
+            (click)="collapse.toggle()"
+            class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
+            style="width: 30%; height: 30px"
+          >
+            <i
+              class="bi bi-chevron-down text-light"
+              [attr.aria-expanded]="!isCollapsed[i]"
+              aria-controls="collapseExample"
+              [ngClass]="!isCollapsed[i] ? 'inverte' : 'naoinverte'"
+            >
+            </i>
+          </div>
         </div>
+      </div>
     </div>
 
-    <div *ngIf="listaDemandas.length == 0">
-        <mat-spinner [diameter]="50" class="circle"></mat-spinner>
+    <!-- Parte Filtrada em Lista -->
+
+    <div *ngIf="isFiltrado">
+      <div
+        matSort
+        (matSortChange)="sortData($event)"
+        style="padding: 10px; margin-left: 6px"
+      >
+        <label mat-sort-header="id" for="id">ID</label>
+        <label mat-sort-header="titulo" for="id">Título</label>
+        <label mat-sort-header="status" for="id">Status</label>
+        <label mat-sort-header="autor" for="id">Autor</label>
+        <label mat-sort-header="departamento" for="id">Departamento</label>
+      </div>
+      <div class="container d-flex flex-column align-items-center">
+        <app-list-demanda
+          (irParaChat)="irParaChat()"
+          (modalHistorico)="openModalHistorico()"
+          *ngFor="let demanda of listaDemandas"
+          [dadosDemada]="demanda"
+          class="mb-2"
+        >
+        </app-list-demanda>
+      </div>
     </div>
-
-    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-3 mb-4">
-        <!-- <p-paginator [first]="first" [rows]="1" [totalRecords]="totalRecords2" (onPageChange)="onPageChange($event)"
-        [showJumpToPageDropdown]="true" [showPageLinks]="false"></p-paginator> -->
-
-        <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"></p-paginator>
-        <!-- <nav aria-label="...">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active" aria-current="page">
-                    <span class="page-link">2</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav> -->
+  </div>
+  <div @fadeAnimation class="d-flex" *ngIf="tipoExibicaoDemanda && !isFiltrado">
+    <!-- Parte não Filtrada em card -->
+    <div class="bloco-branco"></div>
+    <div class="tamanho-container">
+      <div *ngFor="let titulo of listaTituloNaoFiltrado; let i = index">
+        <div class="my-4 tamanho-container">
+          <div class="ms-3 title-demanda" for="status">
+            <div style="width: 20%">
+              <h5>{{ titulo }}</h5>
+              <hr style="margin: 0; opacity: 1" class="mb-2" />
+            </div>
+            <div
+              class="me-3"
+              style="align-self: flex-end; cursor: pointer"
+              (click)="isFiltrado = !isFiltrado"
+            >
+              Ver mais
+            </div>
+          </div>
+          <div class="d-flex position-relative" style="width: 100%">
+            <div
+              [style.left.px]="positionListCards[i]"
+              class="div-cards d-flex position-relative transition-cards"
+            >
+              <app-card-demanda
+                *ngFor="
+                  let demanda of listaDemandas | filtrarDemandaStatus : titulo
+                "
+                [dadosDemada]="demanda"
+                (verDocumentoProposta)="openModalDemandaDocumento($event)"
+                (irParaChat)="irParaChat()"
+                (modalHistorico)="openModalHistorico()"
+                (abrirModal)="openModalMotivoDevolucao()"
+                (abrirModalCriarReuniao)="openModalCriarReuniao()"
+                (verDocumentoEmAta)="openModalAtaDocumento()"
+              ></app-card-demanda>
+            </div>
+            <div *ngIf="positionListCards[i] != 0" class="left-arrow alinhacao" (click)="changeLeft(i)">
+              <i style="font-size: 25px" class="bi bi-chevron-left"></i>
+            </div>
+            <div class="right-arrow alinhacao" (click)="changeRight(i)">
+              <i style="font-size: 25px" class="bi bi-chevron-right"></i>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="bloco-branco"></div>
+  </div>
 
-    <div>
-        <p-confirmDialog  header="Iniciar Chat" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+  <div
+    *ngIf="isFiltrado && tipoExibicaoDemanda"
+    [ngClass]="{ 'mt-5': tipoRascunho }"
+    style="width: -webkit-fill-available"
+  >
+    <div
+      matSort
+      (matSortChange)="sortData($event)"
+      style="padding: 10px; margin-left: 6px"
+    >
+      <label mat-sort-header="id" for="id">ID</label>
+      <label mat-sort-header="titulo" for="id">Título</label>
+      <label mat-sort-header="status" for="id">Status</label>
+      <label mat-sort-header="autor" for="id">Autor</label>
+      <label mat-sort-header="departamento" for="id">Departamento</label>
     </div>
+    <div class="container">
+      <div class="row" *ngIf="tipoRascunho">
+        <app-card-demanda
+          [rascunho]="tipoRascunho"
+          *ngFor="let demanda of listaDemandasRascunho; let i = index"
+          [dadosDemada]="demanda"
+          (abrirModal)="openModalMotivoDevolucao()"
+          (abrirModalCriarReuniao)="openModalCriarReuniao()"
+          (verDocumentoProposta)="openModalDemandaDocumento($event)"
+          [mudarTamanho]="'100%'"
+          (irParaChat)="irParaChat()"
+          (modalHistorico)="openModalHistorico()"
+          (verDocumentoEmAta)="openModalAtaDocumento()"
+          class="col-lg-6 col-xl-4 mb-3"
+        >
+        </app-card-demanda>
+      </div>
+      <div class="row" *ngIf="!tipoRascunho">
+        <app-card-demanda
+          *ngFor="let demanda of listaDemandas; let i = index"
+          [dadosDemada]="demanda"
+          (abrirModal)="openModalMotivoDevolucao()"
+          (verDocumentoProposta)="openModalDemandaDocumento($event)"
+          (clicouEmExcluir)="excluirDemandaRascunho(i)"
+          [mudarTamanho]="'100%'"
+          (irParaChat)="irParaChat()"
+          (modalHistorico)="openModalHistorico()"
+          (abrirModalCriarReuniao)="openModalCriarReuniao()"
+          (verDocumentoEmAta)="openModalAtaDocumento()"
+          class="col-lg-6 col-xl-4 mb-3"
+        >
+        </app-card-demanda>
+      </div>
+    </div>
+  </div>
 
+  <div *ngIf="listaDemandas.length == 0">
+    <mat-spinner [diameter]="50" class="circle"></mat-spinner>
+  </div>
+
+  <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-3 mb-4">
+    <p-paginator
+      [rows]="1"
+      [showJumpToPageDropdown]="true"
+      [showPageLinks]="false"
+      [totalRecords]="10"
+    ></p-paginator>
+  </div>
+
+  <div>
+    <p-confirmDialog
+      header="Iniciar Chat"
+      icon="pi pi-exclamation-triangle"
+    ></p-confirmDialog>
+  </div>
 </div>

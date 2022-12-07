@@ -1,3 +1,4 @@
+import { Beneficio } from './beneficio.model';
 import { StatusDemanda } from './statusDemanda.enum';
 import { Recurso } from "./recurso.model"
 export interface Demanda {
@@ -7,9 +8,9 @@ export interface Demanda {
     situacaoAtualDemanda?: string,
     objetivoDemanda?: string,
     centroDeCustoDemanda?: string[],
-    beneficioRealDemanda?: number,
-    beneficioPotencialDemanda?: number,
-    beneficioQualitativoDemanda?: number,
+    beneficioRealDemanda?: Beneficio,
+    beneficioPotencialDemanda?: Beneficio,
+    beneficioQualitativoDemanda?: Beneficio,
     memoriaCalcBenRealDemanda?: string,
     memoriaCalcBenPotencialDemanda?: string,
     memoriaCalcBenQualitativoDemanda?: string,

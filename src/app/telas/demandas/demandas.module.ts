@@ -56,7 +56,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     HttpClientModule,
     PaginatorModule,
     MultiSelectModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
   ],
 })
 export class DemandasModule { }

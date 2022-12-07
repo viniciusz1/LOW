@@ -1,3 +1,5 @@
+import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
+import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
 import { fadeAnimation } from './../../../shared/app.animation';
 import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
@@ -11,9 +13,9 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
-import { listaDemandas } from './listDemandas';
+import { listaDemandas } from '../../../shared/listDemandas';
 import { JoyrideService } from 'ngx-joyride';
-import { textoTutorial } from './textoDoTutorial';
+import { textoTutorial } from '../../../shared/textoDoTutorial';
 import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 
@@ -128,7 +130,7 @@ export class TelaInicialComponent implements OnInit {
   openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
-      minWidth: '50vw',
+      minWidth: '50vw'
     });
   }
 
@@ -139,10 +141,11 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
-  openModalDemandaDocumento() {
+  openModalDemandaDocumento(event: string) {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: event
     });
   }
   openModalHistorico() {
@@ -160,21 +163,35 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  openModalCriarReuniao(){
+    console.log("oi")
+    this.matDialog.open(ModalCriarReuniaoComponent, {
+      minWidth: '300px',
+    });
+  }
 
-
+  openModalAtaDocumento() {
+    this.matDialog.open(ModalAtaDocumentoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    });
+  }
 
   exibirFilasDeStatus() {
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog')) {
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-classificacao')) {
       this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog')) {
-      this.listaTituloNaoFiltrado.push("Backlog - Propostas")
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-aprovacao')) {
+      this.listaTituloNaoFiltrado.push("Backlog - Aprovação")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
-      this.listaTituloNaoFiltrado.push("Assessment")
+    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-proposta')) {
+      this.listaTituloNaoFiltrado.push("Backlog - Propostas")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'business-case')) {
       this.listaTituloNaoFiltrado.push("Business Case")
+    }
+    if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
+      this.listaTituloNaoFiltrado.push("Assessment")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'to-do')) {
       this.listaTituloNaoFiltrado.push("To Do")

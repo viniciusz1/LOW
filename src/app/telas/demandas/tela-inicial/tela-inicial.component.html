@@ -28,7 +28,7 @@
 
 
         <ul joyrideStep="dois" [title]="'Filtrar Demandas'" [stepContent]="customContent"
-            [stepContentParams]="{'texto': textoTutorial[1]}" class="nav justify-content-center"
+            [stepContentParams]="{'texto': textoTutorial[1]}" class="nav p-1 justify-content-center"
             style="overflow: auto;">
             <div *ngIf="showPesquisaEBotaoFiltro" class="d-flex align-items-center justify-content-center">
                 <span class="p-input-icon-left" [ngClass]="{'tam': !tipoRascunho}">
@@ -144,10 +144,12 @@
                         <div [style.left.px]="positionListCards[i]"
                             class="div-cards d-flex position-relative transition-cards">
                             <app-card-demanda *ngFor="let demanda of listaDemandas | filtrarDemandaStatus: titulo"
-                                [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"  (irParaChat)="irParaChat()"
+                                [dadosDemada]="demanda"
+                                (verDocumentoProposta)="openModalDemandaDocumento($event)"
+                                (irParaChat)="irParaChat()"
                                 (modalHistorico)="openModalHistorico()"
-
-                                (abrirModal)="openModalMotivoDevolucao()"></app-card-demanda>
+                                (abrirModal)="openModalMotivoDevolucao()"
+                                (abrirModalCriarReuniao)="openModalCriarReuniao()"></app-card-demanda>
                         </div>
                         <div class="left-arrow alinhacao" (click)="changeLeft(i)"><i style="font-size: 25px;"
                                 class="bi bi-chevron-left"></i></div>

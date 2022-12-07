@@ -1,3 +1,4 @@
+import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
 import { fadeAnimation } from './../../../shared/app.animation';
 import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
@@ -161,7 +162,12 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-
+  openModalCriarReuniao(){
+    console.log("oi")
+    this.matDialog.open(ModalCriarReuniaoComponent, {
+      minWidth: '300px',
+    });
+  }
 
 
   exibirFilasDeStatus() {

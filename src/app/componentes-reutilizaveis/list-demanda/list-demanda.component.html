@@ -1,35 +1,33 @@
-<ul class="nav position-relative container-lista low-shadow p-2 w-100">
+<ul class="nav position-relative container-lista low-shadow p-2" [ngStyle]="{'width':  mudarTamanho}">
     <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
-    <div class="d-flex">
+    <div class="d-flex" style="width: 80%;">
         <li class="nav-item">
             <label class="" for="">002</label>
         </li>
-        <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '250px' : ''}">
+        <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '25%' : '45%'}">
             <label class="text-truncate d-inline-block" for=""><b>{{dadosDemada.tituloDemanda}}</b></label>
         </li>
-        <!-- <li class="nav-item text-truncate" style="width: 100px;">
-            <small class="" for="">{{dadosDemada.statusDemanda}}</small>
-        </li> -->
-        <li *ngIf="!demandaPequena"  class="nav-item"  style="width: 120px; margin-right: 1vw;">
+        <li *ngIf="!demandaPequena"  class="nav-item"  style="width: 20%;">
             <label class="text-truncate d-inline-block">{{dadosDemada.autorDemanda}}</label>
         </li>
-        <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '210px' : ''}">
+        <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '15%' : '50%'}">
             <label class="text-truncate d-inline-block">{{dadosDemada.departamentoBenDemanda}}</label>
         </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width: 100px; margin-right: 1vw;">
+        <li *ngIf="!demandaPequena" class="nav-item" style="width:  5%;">
             <label class="text-truncate d-inline-block">190.8</label>
         </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width: 80px; margin-right: 1vw;">
+        <li *ngIf="!demandaPequena" class="nav-item" style="width:  15%;">
+
             <label class="text-truncate d-inline-block">{{dadosDemada.statusDemanda | uppercase}}</label>
         </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width: 80px; margin-right: 1vw;">
+        <li *ngIf="!demandaPequena" class="nav-item" style="width:  10%;">
             <label class="text-truncate d-inline-block">{{dadosDemada.scoreDemanda}}</label>
         </li>
 
     </div>
-    <div class="d-flex final-list">
+    <div class="d-flex final-list" style="width: 20%;">
         <li *ngIf="mostrarBotao && textoExibidoEmBotaoDependendoRota">
-            <button class="btn btn-primary btn-sm me-2" style="width: 170px;" (click)="direcionarUsuario()">
+            <button class="btn btn-primary btn-sm me-2" style="width: 147px;" (click)="direcionarUsuario()">
                 {{textoExibidoEmBotaoDependendoRota.texto}}
             </button>
         </li>

@@ -15,6 +15,7 @@
         <div *ngFor="let demanda of listaDemandas" class="mt-2">
           <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas" [dadosDemada]="demanda"
             [mostrarIconeAdicionar]="true" (clicouAdicionarPauta)="adicionarDemanda(demanda)"
+            [mudarTamanho]="''"
             (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()">
           </app-list-demanda>
         </div>

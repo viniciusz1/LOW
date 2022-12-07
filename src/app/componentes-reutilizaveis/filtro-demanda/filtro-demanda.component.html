@@ -9,20 +9,20 @@
             <div class="d-flex flex-column">
                 <div class="d-flex justify-content-between">
                     <div class="d-flex mt-3" [ngClass]="{'reduzir-inputs': filtroReduzidoVertical}">
-                        <span class="p-float-label">
+                        <span class="p-float-label me-2 ">
                             <input class="p-inputtext-sm" placeholder="Ex: Sistema de Gerenciamento" pInputText
                                 type="text" pInputText>
                             <label for="float-input">Título da Demanda:</label>
                         </span>
-                        <span class="p-float-label">
+                        <span class="p-float-label me-2">
                             <input class="p-inputtext-sm" placeholder="Ex: 123" pInputText type="text" pInputText>
                             <label for="float-input">Número da Solicitação:</label>
                         </span>
-                        <span class="p-float-label">
+                        <span class="p-float-label me-2">
                             <input class="p-inputtext-sm" placeholder="Ex: Vinícius" pInputText type="text" pInputText>
                             <label for="float-input">Responsável:</label>
                         </span>
-                        <span  *ngIf="!filtroReduzidoVertical" class="p-float-label">
+                        <span  *ngIf="!filtroReduzidoVertical" class="p-float-label me-2">
                             <input class="p-inputtext-sm" placeholder="Ex: Grande" pInputText type="text" pInputText>
                             <label for="float-input">Tamanho da demanda:</label>
                         </span>
@@ -30,34 +30,34 @@
                     </div>
                 </div>
                 <div class="d-flex mt-3" [ngClass]="{'reduzir-inputs': filtroReduzidoVertical}">
-                    <span class="p-float-label">
+                    <span class="p-float-label me-2">
                         <input class="p-inputtext-sm" placeholder="Ex: Vendas" pInputText type="text" pInputText>
                         <label for="float-input">Fórum de aprovação</label>
                     </span>
-                    <span class="p-float-label">
+                    <span class="p-float-label me-2">
                         <input class="p-inputtext-sm" placeholder="Ex: Cléber" pInputText type="text" pInputText>
                         <label for="float-input">Solicitante:</label>
                     </span>
-                    <span class="p-float-label">
+                    <span class="p-float-label  me-2">
                         <input class="p-inputtext-sm" placeholder="Ex: 9283" pInputText type="text" pInputText>
                         <label for="float-input">Código PPM:</label>
                     </span>
-                    <span *ngIf="!filtroReduzidoVertical" class="p-float-label">
+                    <span *ngIf="!filtroReduzidoVertical" class="p-float-label me-2">
                         <input class="p-inputtext-sm" placeholder="Ex: Motores" pInputText type="text" pInputText>
                         <label for="float-input">Departamento:</label>
                     </span>
 
                 </div>
                 <div class="d-flex mt-3" [ngClass]="{'reduzir-inputs': filtroReduzidoVertical}">
-                    <span class="p-float-label">
+                    <span class="p-float-label me-2">
                         <input class="p-inputtext-sm" placeholder="Ex: Backlog" pInputText type="text" pInputText>
                         <label for="float-input">Status de aprovação:</label>
                     </span>
-                    <span *ngIf="filtroReduzidoVertical" class="p-float-label">
+                    <span *ngIf="filtroReduzidoVertical" class="p-float-label me-2">
                         <input class="p-inputtext-sm" placeholder="Ex: Motores" pInputText type="text" pInputText>
                         <label for="float-input">Departamento:</label>
                     </span>
-                    <span  *ngIf="filtroReduzidoVertical" class="p-float-label">
+                    <span  *ngIf="filtroReduzidoVertical" class="p-float-label me-2">
                         <input class="p-inputtext-sm" placeholder="Ex: Grande" pInputText type="text" pInputText>
                         <label for="float-input">Tamanho da demanda:</label>
                     </span>

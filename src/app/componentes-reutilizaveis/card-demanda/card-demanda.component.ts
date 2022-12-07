@@ -13,6 +13,7 @@ import { Route, Router } from '@angular/router';
 })
 export class CardDemandaComponent implements OnInit {
   @Output() abrirModal = new EventEmitter();
+  @Output() abrirModalAvaliarDemanda = new EventEmitter();
   @Output() verDocumentoProposta = new EventEmitter();
   @Output() clicouEmExcluir = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
@@ -56,6 +57,12 @@ export class CardDemandaComponent implements OnInit {
         texto: 'Criar Proposta',
       };
     }
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: '/tela-inicial/classificar-demanda',
+        texto: 'Avaliar Demanda',
+      };
+    }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '/tela-inicial/nova-pauta',
@@ -80,6 +87,7 @@ export class CardDemandaComponent implements OnInit {
       this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
       this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE ||
       this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
+      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO ||
       this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
       this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED
     ) {

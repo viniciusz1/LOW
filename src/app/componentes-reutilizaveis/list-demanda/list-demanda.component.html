@@ -1,4 +1,4 @@
-<ul class="nav position-relative container-lista low-shadow p-2" [ngClass]="{'w-100': !demandaPequena}">
+<ul class="nav position-relative container-lista low-shadow p-2 w-100">
     <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
     <div class="d-flex">
         <li class="nav-item">
@@ -34,7 +34,7 @@
             </button>
         </li>
         <i class="bi bi-chat-left-dots me-3 ms-3" *ngIf="!demandaPequena" (click)="irParaChat.emit()"></i>
-        <i class="bi bi-three-dots-vertical three-dots" *ngIf="!demandaPequena" role="button"
+        <i class="bi bi-three-dots-vertical three-dots" [ngClass]="{'me-3': demandaPequena}" role="button"
             [matMenuTriggerFor]="menu"></i>
         <i class="bi bi-plus-lg" *ngIf="demandaPequena" role="button" (click)="clicouAdicionarPauta.emit()"></i>
         <mat-menu #menu="matMenu">

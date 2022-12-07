@@ -11,14 +11,17 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 export class ListDemandaComponent implements OnInit {
   primaryColorClass?: string = "";
   secondaryColorClass?: string = "";
+  
   @Output() abrirModal = new EventEmitter();
   @Output() verDocumentoProposta = new EventEmitter();
   @Output() clicouAdicionarPauta = new EventEmitter();
   @Output() modalHistorico = new EventEmitter();
+  @Output() irParaChat = new EventEmitter();
+
   @Input() dadosDemada: Demanda = {};
   @Input() mostrarBotao = true;
+  @Input() mudarTamanho: string = '390px';
   @Input('mostrarIconeAdicionar') demandaPequena = false;
-  @Output() irParaChat = new EventEmitter();
 
   textoExibidoEmBotaoDependendoRota: {rota: string, texto: string} | undefined = undefined;
 

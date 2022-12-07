@@ -1,3 +1,4 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
@@ -11,7 +12,7 @@ import { listaReunioes } from 'src/app/telas/reunioes/tela-reuniao/listReunioes'
 })
 export class ModalCriarReuniaoComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: DialogRef<ModalCriarReuniaoComponent>) { }
 
   ngOnInit(): void {
   }
@@ -83,31 +84,13 @@ export class ModalCriarReuniaoComponent implements OnInit {
   listaDemandas: Demanda[] = [
     {
       autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.CANCELLED,
+      statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
       autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.TO_DO,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.CANCELLED,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.TO_DO,
+      statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
@@ -119,19 +102,13 @@ export class ModalCriarReuniaoComponent implements OnInit {
     },
     {
       autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
+      statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
       autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.CANCELLED,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-      autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.TO_DO,
+      statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
@@ -149,13 +126,37 @@ export class ModalCriarReuniaoComponent implements OnInit {
     },
     {
       autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.CANCELLED,
+      statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
       autorDemanda: 'Sabrina Hegmann',
-      statusDemanda: StatusDemanda.TO_DO,
+      statusDemanda: StatusDemanda.ASSESSMENT,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.ASSESSMENT,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.ASSESSMENT,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.ASSESSMENT,
+      departamentoBenDemanda: 'Tecnologia da Informação',
+      tituloDemanda: 'Sistema de Gestão de Demandas',
+    },
+    {
+      autorDemanda: 'Sabrina Hegmann',
+      statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },

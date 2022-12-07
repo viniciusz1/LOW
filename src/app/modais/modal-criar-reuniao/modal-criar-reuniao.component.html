@@ -1,16 +1,17 @@
-<div class="row m-3">
-  <div class="col-xl-7 drag-column">
+<div class="d-flex justify-content-between">
+  <h5>Crie sua Reunião</h5>
+  <i class="bi bi-x-lg" role="button" (click)="dialogRef.close()"></i>
+</div>
+<hr class="mt-0" style="overflow: auto;">
+<div class="row m-3" style="width: 70vw;">
+  <div class="col drag-column">
     <div class="d-flex">
       <app-filtro-demanda class="mb-2" [filtroReduzidoVertical]="true" [mostrarIconeDeAbrirFiltro]="false">
       </app-filtro-demanda>
     </div>
-    <div class="drop-column d-table border p-3 rounded low-shadow" style="
-              margin-left: auto;
-              margin-right: auto;
-              width: 100%;
-            " pDroppable="demandas" (onDrop)="drop()">
+    <div class="drop-column d-table border p-3 rounded low-shadow w-100" pDroppable="demandas" (onDrop)="drop()">
       <p-scrollPanel [style]="{ width: '100%', height: '40vh' }">
-        <h6>Propostas</h6>
+        <h6>Demandas</h6>
         <div *ngFor="let demanda of listaDemandas" class="mt-2">
           <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas" [dadosDemada]="demanda"
             [mostrarIconeAdicionar]="true" (clicouAdicionarPauta)="adicionarDemanda(demanda)"
@@ -20,28 +21,29 @@
       </p-scrollPanel>
     </div>
   </div>
-  <div class="col-xl-5" style="height: 60vh" pDroppable="demandas" (onDrop)="drop()">
-    <div class="border rounded drop-column p-1 mb-2 low-shadow">
-      <p-scrollPanel [style]="{ width: '100%', height: '40vh' }" styleClass="scroll">
-        <div class="text-center h6 mt-3" *ngIf="listaDemandasEscolhidas.length == 0">
-          Arraste as Propostas para este campo!
+  <div class="col alinhar-baixo"  pDroppable="demandas" (onDrop)="drop()">
+    <div class="border rounded drop-column p-1 mb-2 low-shadow h-100">
+      <p-scrollPanel [style]="{ width: '100%', height: '47vh' }" styleClass="scroll">
+        <div class="text-center h5 mt-3" *ngIf="listaDemandasEscolhidas.length == 0">
+          Arraste as Demandas para este campo!
         </div>
         <span *ngFor="let demanda of listaDemandasEscolhidas" style="margin-top:10px ;">
           <app-card-demanda pDraggable="products" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()"
             [dadosDemada]="demanda" [isPauta]="true" (clicouEmExcluir)="excluirDemanda(demanda)"
-            [mudarTamanho]="'360px'"></app-card-demanda>
+            [mudarTamanho]="'100%'"></app-card-demanda>
         </span>
       </p-scrollPanel>
     </div>
     <div class=" mt-1 p-3 border rounded low-shadow">
       <div class="">
         <label for="time">Data e Hora da Reunião:</label>
-        <p-calendar placeholder="Clique aqui!" [(ngModel)]="dataReuniao" [showTime]="true" [showSeconds]="true"
+        <p-calendar style="width:100%; display: grid" placeholder="Clique aqui!" [(ngModel)]="dataReuniao" [showTime]="true" [showSeconds]="true"
           inputId="time"></p-calendar>
       </div>
-      <div class=" mt-1">
+      <div class="mt-1 d-grid">
         <label for="time">Selecione a Comissão da Reunião:</label>
-        <p-dropdown class="w-100" [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada"></p-dropdown>
+        <p-dropdown style="width:100%; display: grid;" [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada"
+          ></p-dropdown>
       </div>
       <div class=" mt-1">
         <button class="btn btn-primary">Marcar Reunião</button>

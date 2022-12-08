@@ -18,12 +18,16 @@ import {CalendarModule} from 'primeng/calendar';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import { ParteDemandaComponent } from './tela-corrida/parte-demanda/parte-demanda.component';
+import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reuniao.component';
 
 
 
 @NgModule({
   declarations: [
     TelaCorridaComponent,
+    ParteDemandaComponent,
+    ParteReuniaoComponent,
   ],
   imports: [
     CommonModule,

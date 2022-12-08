@@ -1,0 +1,87 @@
+<form class="container" [formGroup]="demandaForm" (ngSubmit)="onSubmitDemanda()">
+  <div spyTarget="etapa-1" class="etapa-1">
+    <div class="titulo" style="display: grid" id="item-1-1">
+      <label style="font-weight: 500"> Título: </label>
+      <input type="text" pInputText formControlName="tituloDemanda" class="input w-100" />
+    </div>
+    <div class="situacao-atual" style="display: grid" id="item-1-2">
+      <label style="font-weight: 500"> Situação Atual: </label>
+      <div style="display: flex">
+        <input type="text" formControlName="situacaoAtualDemanda" pInputText class="input w-100" />
+      </div>
+    </div>
+    <div class="objetivo" style="display: grid" id="item-1-3">
+      <label style="font-weight: 500"> Objetivo: </label>
+      <div style="display: flex">
+        <input type="text" formControlName="objetivoDemanda" pInputText class="input w-100" />
+      </div>
+    </div>
+    <label style="font-weight: 500; width: 100%;"> Centros de Custo: </label>
+    <span class="p-float-label">
+      <p-multiSelect class="w-100" [options]="centrosCusto" [(ngModel)]="selectedCentros"
+        defaultLabel="Selecione os Centros de Custo" optionLabel="centro" display="chip"
+        formControlName="centroCustoDemanda">
+      </p-multiSelect>
+    </span>
+  </div>
+
+  <div spyTarget="etapa-2">
+    <div formGroupName="beneficioRealDemanda">
+      <label style="font-weight: 500"> Benefício Real: </label>
+      <div style="display: flex; justify-content: space-between">
+        <input style="width: 93%;" type="text" pInputText class="input" formControlName="valor" />
+        <select name="Moeda" class="drop" formControlName="moeda">
+          <option value="valor1">BR</option>
+        </select>
+      </div>
+      <div class="situacao-atual" style="display: grid" id="item-1-2">
+        <label style="font-weight: 500">
+          Memória de Cálculo do Benefício Real:
+        </label>
+        <textarea style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
+          formControlName="memoriaCalculo"></textarea>
+      </div>
+    </div>
+    <div formGroupName="beneficioPotencialDemanda">
+      <div class="objetivo" style="display: grid" id="item-1-3">
+        <label style="font-weight: 500"> Benefício Potencial: </label>
+        <div style="display: flex; justify-content: space-between">
+          <input style="width: 93%;" type="text" pInputText class="input" formControlName="valor" />
+          <select name="Moeda" class="drop" formControlName="moeda">
+            <option value="valor1">BR</option>
+          </select>
+        </div>
+      </div>
+      <div class="ben-real">
+        <label style="font-weight: 500">
+          Memória de Cálculo do Benefício Potencial:
+        </label>
+        <div style="display: flex">
+          <textarea style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
+            formControlName="memoriaCalculo"></textarea>
+        </div>
+      </div>
+    </div>
+    <div style="display: grid">
+      <label style="font-weight: 500"> Benefício Qualitativo: </label>
+      <div style="display: flex">
+        <textarea style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
+          formControlName="beneficioQualitativoDemanda"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div spyTarget="target-3">
+    <div class="titulo" style="display: grid" id="item-2-1">
+      <label style="font-weight: 500">
+        Frequência de Uso do Sistema:
+      </label>
+      <p-dropdown [options]="opcoesDeTamanho" optionLabel="name" placeholder="Selecione a frequência"
+        formControlName="frequenciaDeUsoDemanda"></p-dropdown>
+    </div>
+    <div>
+      <label style="font-weight: 500"> Anexar Documento: </label>
+      <p-fileUpload name="myfile[]" url="./upload.php" [multiple]="true"></p-fileUpload>
+    </div>
+  </div>
+</form>

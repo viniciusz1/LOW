@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ScrollSpyService } from 'ng-spy';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
 import { Recurso } from 'src/app/models/recurso.model';
@@ -17,7 +18,10 @@ interface Responsavel {
 export class ParteReuniaoComponent implements OnInit {
 
   constructor(
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private spyService : ScrollSpyService) {
+      // spyService.addTarget(target: 'reuniao', offset: 0)
+     }
   recursos: Recurso[] = [
     {
       id: '1',

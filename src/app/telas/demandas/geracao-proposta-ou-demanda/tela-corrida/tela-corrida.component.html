@@ -1,68 +1,23 @@
 <div class="row" scroll-spy>
   <div class="col-2">
     <div>
-      <nav
-        id="navbar-example3"
-        style="position: fixed; top: 30vh; left: 4vw"
-        class="h-100 flex-column align-items-stretch pe-4"
-      >
+      <nav id="navbar-example3" style="position: fixed; top: 30vh; left: 4vw"
+        class="h-100 flex-column align-items-stretch pe-4">
         <nav class="nav nav-pills flex-column">
-          <a
-            class="nav-link mt-5"
-            spyOn="target-1"
-            activeClass="active"
-            href="#target-1"
-            style="font-size: 0.9rem"
-            >Dados Gerais</a
-          >
-          <a
-            class="nav-link"
-            spyOn="beneficios"
-            activeClass="active"
-            href="#beneficios"
-            style="font-size: 0.9rem"
-            >Benefícios</a
-          >
-          <nav
-            class="nav nav-pills flex-column"
-            style="font-size: 0.75rem"
-          ></nav>
-          <a
-            class="nav-link"
-            spyOn="target-3"
-            activeClass="active"
-            href="#target-3"
-            style="font-size: 0.9rem"
-            >Documentos</a
-          >
-          <nav
-            class="nav nav-pills flex-column"
-            style="font-size: 0.75rem"
-          ></nav>
-          <a
-            class="nav-link"
-            spyOn="target-4"
-            activeClass="active"
-            href="#target-4"
-            style="font-size: 0.9rem"
-            >Custos Totais</a
-          >
-          <nav
-            class="nav nav-pills flex-column"
-            style="font-size: 0.75rem"
-          ></nav>
-          <a
-            class="nav-link"
-            spyOn="target-5"
-            activeClass="active"
-            href="#target-5"
-            style="font-size: 0.9rem"
-            >Finalizar</a
-          >
-          <nav
-            class="nav nav-pills flex-column"
-            style="font-size: 0.75rem"
-          ></nav>
+          <a class="nav-link mt-5" spyOn="gerais" activeClass="active" href="#gerais"
+            style="font-size: 0.9rem">Dados Gerais</a>
+          <a class="nav-link" spyOn="beneficios" activeClass="active" href="#beneficios"
+            style="font-size: 0.9rem">Benefícios</a>
+          <nav class="nav nav-pills flex-column" style="font-size: 0.75rem"></nav>
+          <a class="nav-link" spyOn="documentos" activeClass="active" href="#documentos"
+            style="font-size: 0.9rem">Documentos</a>
+          <nav class="nav nav-pills flex-column" style="font-size: 0.75rem"></nav>
+          <a class="nav-link" spyOn="custos" activeClass="active" href="#custos" style="font-size: 0.9rem">Custos
+            Totais</a>
+          <nav class="nav nav-pills flex-column" style="font-size: 0.75rem"></nav>
+          <a class="nav-link" spyOn="finalizar" activeClass="active" href="#finalizar"
+            style="font-size: 0.9rem">Finalizar</a>
+          <nav class="nav nav-pills flex-column" style="font-size: 0.75rem"></nav>
         </nav>
       </nav>
     </div>
@@ -70,23 +25,17 @@
 
   <div class="tela-corrida col-10 border-start">
     <div>
-        <div style="margin: 0 10vw">
+      <div style="margin: 0 10vw" class="mt-5">
 
 
-          <app-parte-demanda></app-parte-demanda>
-          <app-parte-reuniao></app-parte-reuniao>
-          
+        <app-parte-demanda></app-parte-demanda>
+        <app-parte-reuniao></app-parte-reuniao>
+        <div class="d-flex justify-content-between" style="margin-top: 2vh !important; margin-bottom: 2vh">
+          <button class="btn btn-danger  ms-2">Cancelar</button>
+          <button class="btn btn-primary me-2" (click)="onSubmitDemanda()">
+            Finalizar
+          </button>
         </div>
-      <div
-        class="d-flex justify-content-between"
-        style="margin-top: 2vh !important; margin-bottom: 2vh"
-      >
-        <div>
-          <button class="btn btn-danger me-3">Cancelar</button>
-        </div>
-        <button class="btn btn-primary" (click)="onSubmitDemanda()">
-          Finalizar
-        </button>
       </div>
     </div>
   </div>

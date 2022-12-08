@@ -8,6 +8,7 @@ import { Validators, Editor, Toolbar } from 'ngx-editor';
 import { MessageService, SelectItem } from 'primeng/api';
 import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
 import { ScrollSpyService } from 'ng-spy';
+import { SpyTarget } from 'ng-spy/lib/spy-target.model';
 
 
 
@@ -25,7 +26,7 @@ interface Moedas {
   styleUrls: ['./tela-corrida.component.scss'],
 })
 export class TelaCorridaComponent implements OnInit {
-  
+
 
   onSubmitDemanda() {
     //ARQUIVO -- NÃO FUNCIONA
@@ -42,11 +43,8 @@ export class TelaCorridaComponent implements OnInit {
     //   })
     // console.log(this.demandaForm.value)
   }
-  arquivos: File[] = [];
-  arquivosUpload(event: any) {
-    console.log(event);
-    this.arquivos = event.currentFiles;
-  }
+  aparecerProposta = false
+
 
   constructor(
     private spyService: ScrollSpyService,
@@ -57,43 +55,7 @@ export class TelaCorridaComponent implements OnInit {
     this.tipoExibicaoTela();
   }
 
-  
-  activeTarget: string = '';
-  aparecerProposta = false;
-  uploadedFiles: any[] = [];
-  selectedCentros: any;
-  opcoesDeTamanho = [
-    { name: 'Muito Pequena' },
-    { name: 'Pequena' },
-    { name: 'Média' },
-    { name: 'Grande' },
-    { name: 'Muito Grande' },
-  ];
-  
-  statuses: SelectItem[] = [
-    { label: 'In Stock', value: 'INSTOCK' },
-    { label: 'Low Stock', value: 'LOWSTOCK' },
-    { label: 'Out of Stock', value: 'OUTOFSTOCK' },
-  ];
-  
-  moedas: Moedas[] = [
-    { abreviacao: 'BRL' },
-    { abreviacao: 'EUR' },
-    { abreviacao: 'USD' },
-  ];
-  centrosCusto: CentrosCusto[] = [
-    { centro: 'Weg 1' },
-    { centro: 'Weg 2' },
-    { centro: 'Weg 3' },
-  ];
-  
- 
 
-  setActiveTarget(targetName: string) {
-    this.activeTarget = targetName;
-  }
-
-  
 
   tipoExibicaoTela() {
     if (this.router.url == '/tela-inicial/demanda') {
@@ -102,7 +64,10 @@ export class TelaCorridaComponent implements OnInit {
       this.aparecerProposta = true;
     }
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.spyService.spy()
+    this.spyService.activeSpyTarget.subscribe(e => console.log(e))
+  }
 
-  
+
 }

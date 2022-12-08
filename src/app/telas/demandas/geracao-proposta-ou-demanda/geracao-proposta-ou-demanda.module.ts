@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { NgxEditorModule } from 'ngx-editor';
 import { InputTextModule } from 'primeng/inputtext';
 import { TelaCorridaComponent } from './tela-corrida/tela-corrida.component';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { ScrollSpyModule } from 'ng-spy';
@@ -72,7 +71,6 @@ import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reunia
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
-    ScrollPanelModule,
     ScrollSpyModule,
     FileUploadModule,
     HttpClientModule,

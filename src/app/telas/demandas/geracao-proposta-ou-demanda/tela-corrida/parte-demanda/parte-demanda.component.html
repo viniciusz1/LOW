@@ -1,5 +1,5 @@
 <form class="container" [formGroup]="demandaForm" (ngSubmit)="onSubmitDemanda()">
-  <div spyTarget="etapa-1" class="etapa-1">
+  <div spyTarget="gerais" class="etapa-1">
     <div class="titulo" style="display: grid" id="item-1-1">
       <label style="font-weight: 500"> Título: </label>
       <input type="text" pInputText formControlName="tituloDemanda" class="input w-100" />
@@ -25,7 +25,7 @@
     </span>
   </div>
 
-  <div spyTarget="etapa-2">
+  <div spyTarget="beneficios">
     <div formGroupName="beneficioRealDemanda">
       <label style="font-weight: 500"> Benefício Real: </label>
       <div style="display: flex; justify-content: space-between">
@@ -71,7 +71,7 @@
     </div>
   </div>
 
-  <div spyTarget="target-3">
+  <div spyTarget="documentos">
     <div class="titulo" style="display: grid" id="item-2-1">
       <label style="font-weight: 500">
         Frequência de Uso do Sistema:

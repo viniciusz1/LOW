@@ -1,5 +1,7 @@
 <form class="container" [formGroup]="demandaForm" (ngSubmit)="onSubmitDemanda()">
-  <div spyTarget="gerais" class="etapa-1">
+  <h3>Dados Gerais</h3>
+  <hr>
+  <div class="etapa-1">
     <div class="titulo" style="display: grid" id="item-1-1">
       <label style="font-weight: 500"> Título: </label>
       <input type="text" pInputText formControlName="tituloDemanda" class="input w-100" />
@@ -17,7 +19,7 @@
       </div>
     </div>
     <label style="font-weight: 500; width: 100%;"> Centros de Custo: </label>
-    <span class="p-float-label">
+    <span spyTarget="gerais" class="p-float-label">
       <p-multiSelect class="w-100" [options]="centrosCusto" [(ngModel)]="selectedCentros"
         defaultLabel="Selecione os Centros de Custo" optionLabel="centro" display="chip"
         formControlName="centroCustoDemanda">
@@ -25,7 +27,9 @@
     </span>
   </div>
 
-  <div spyTarget="beneficios">
+  <h3 class="mt-4" spyTarget="beneficios">Benefícios</h3>
+  <hr>
+  <div>
     <div formGroupName="beneficioRealDemanda">
       <label style="font-weight: 500"> Benefício Real: </label>
       <div style="display: flex; justify-content: space-between">
@@ -70,8 +74,9 @@
       </div>
     </div>
   </div>
-
-  <div spyTarget="documentos">
+  <h3 class="mt-4" spyTarget="adicionais">Adicionais</h3>
+  <hr>
+  <div>
     <div class="titulo" style="display: grid" id="item-2-1">
       <label style="font-weight: 500">
         Frequência de Uso do Sistema:

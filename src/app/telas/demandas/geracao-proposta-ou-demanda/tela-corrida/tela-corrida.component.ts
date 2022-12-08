@@ -1,7 +1,7 @@
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Router } from '@angular/router';
 import { Recurso } from './../../../../models/recurso.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators, Editor, Toolbar } from 'ngx-editor';
@@ -50,7 +50,8 @@ export class TelaCorridaComponent implements OnInit {
     private spyService: ScrollSpyService,
     private router: Router,
     private fb: FormBuilder,
-    private demandaService: DemandaService
+    private demandaService: DemandaService,
+    private element: ElementRef
   ) {
     this.tipoExibicaoTela();
   }
@@ -65,9 +66,10 @@ export class TelaCorridaComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.spyService.spy()
-    this.spyService.activeSpyTarget.subscribe(e => console.log(e))
+    this.spyService.spy({ scrollContainer: this.element })
+    
   }
+  
 
 
 }

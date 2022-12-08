@@ -1,4 +1,7 @@
 <form class="container">
+  <h3 class="mt-4" spyTarget="proposta">Proposta</h3>
+  <hr>
+
   <div class="campo" style="
   display: flex;
   justify-content: center;
@@ -36,7 +39,10 @@
       </div>
     </div>
   </div>
-  <div class="d-grid justify-content-center my-3" spyTarget="target-4" style="
+  <h3 class="mt-4" spyTarget="recursosTarget"
+>Recursos</h3>
+  <hr>
+  <div class="d-grid justify-content-center my-3" style="
           display: grid;
           justify-content: center !important;
           margin-top: 1vh;
@@ -167,7 +173,10 @@
       </ng-template>
     </p-table>
   </div>
-  <div spyTarget="target-5">
+  
+  <h3 class="mt-4" spyTarget="escopo">Escopo</h3>
+  <hr>
+  <div>
     <label style="font-weight: 500"> Escopo da Demanda: </label>
 
     <form [formGroup]="formEditor">
@@ -185,6 +194,8 @@
     </form>
   </div>
 
+  <h3 class="mt-4" spyTarget="dados finais">Dados finais</h3>
+  <hr>
   <div class="d-block">
     <label style="font-weight: 500; margin: 5px">
       Periodo de execução da demanda:

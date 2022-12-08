@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ScrollSpyService } from 'ng-spy';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
@@ -19,9 +19,13 @@ export class ParteReuniaoComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private spyService : ScrollSpyService) {
-      // spyService.addTarget(target: 'reuniao', offset: 0)
-     }
+    private spyService: ScrollSpyService,
+    private fb: FormBuilder) {
+    // spyService.addTarget(target: 'reuniao', offset: 0)
+  }
+  formProposta = this.fb.group({
+    
+  })
   recursos: Recurso[] = [
     {
       id: '1',
@@ -36,12 +40,12 @@ export class ParteReuniaoComponent implements OnInit {
     },
   ];
   responsaveis: Responsavel[] = [
-    {nome: 'Otavio Neves', area: 'WEG Digital'},
-    {nome: 'Vinicius Bonatti', area: 'Vendas'},
-    {nome: 'Camilly Vitoria', area: 'Motores'},
-    {nome: 'Kenzo Hedeaky', area: 'Trefilação'},
-    {nome: 'Felipe Viera', area: 'Corpotativo'}
-];
+    { nome: 'Otavio Neves', area: 'WEG Digital' },
+    { nome: 'Vinicius Bonatti', area: 'Vendas' },
+    { nome: 'Camilly Vitoria', area: 'Motores' },
+    { nome: 'Kenzo Hedeaky', area: 'Trefilação' },
+    { nome: 'Felipe Viera', area: 'Corpotativo' }
+  ];
 
   selectedResponsaveis: any;
   ngOnDestroy(): void {

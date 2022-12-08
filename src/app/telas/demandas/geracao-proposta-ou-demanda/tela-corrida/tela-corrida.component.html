@@ -4,19 +4,20 @@
       <nav id="navbar-example3" style="position: fixed; top: 30vh; left: 4vw"
         class="h-100 flex-column align-items-stretch pe-4">
         <nav class="nav nav-pills flex-column">
-          <a class="nav-link mt-5" spyOn="gerais" activeClass="active" href="#gerais" style="font-size: 0.9rem">Dados
-            Gerais</a>
-          <a class="nav-link" spyOn="beneficios" activeClass="active"
-            style="font-size: 0.9rem">Benefícios</a>
-          <a class="nav-link" spyOn="adicionais" activeClass="active"
-            style="font-size: 0.9rem">Adicionais</a>
-          <a class="nav-link" spyOn="proposta" activeClass="active" href="proposta"
-            style="font-size: 0.9rem">Proposta</a>
-          <a class="nav-link" spyOn="recursosTarget" activeClass="active" href="#recursosTarget"
-            style="font-size: 0.9rem">Recursos</a>
-          <a class="nav-link" spyOn="escopo" activeClass="active" href="#escopo" style="font-size: 0.9rem">Escopo</a>
-          <a class="nav-link" spyOn="dados finais " activeClass="active" href="#dados finais"
-            style="font-size: 0.9rem">Dados Finais</a>
+          <a class="nav-link mt-5" spyOn="gerais" activeClass="active" role="button" style="font-size: 0.9rem"
+            (click)="indoPraCima(0)">Dados Gerais</a>
+          <a class="nav-link" spyOn="beneficios" activeClass="active" role="button" style="font-size: 0.9rem"
+            (click)="indoPraCima(600)">Benefícios</a>
+          <a class="nav-link" spyOn="adicionais" activeClass="active" role="button" style="font-size: 0.9rem"
+            (click)="indoPraCima(1100)">Adicionais</a>
+          <a class="nav-link" spyOn="proposta" activeClass="active" role="button" style="font-size: 0.9rem"
+            (click)="indoPraCima(1500)">Proposta</a>
+          <a class="nav-link" spyOn="recursosTarget" activeClass="active" role="button" style="font-size: 0.9rem"
+            (click)="indoPraCima(1800)">Recursos</a>
+          <a class="nav-link" spyOn="escopo" activeClass="active" role="button" style="font-size: 0.9rem"
+            (click)="indoPraCima(2300)">Escopo</a>
+          <a class="nav-link" spyOn="dados finais " activeClass="active" role="button" style="font-size: 0.9rem"
+            (click)="indoPraCima(2497)">Dados Finais</a>
         </nav>
       </nav>
     </div>

@@ -1,4 +1,4 @@
-<form class="container">
+<form class="container" [formGroup]="formProposta">
   <h3 class="mt-4" spyTarget="proposta">Proposta</h3>
   <hr>
 
@@ -21,20 +21,20 @@
         </h6>
         <div class="d-flex justify-content-between">
           <div class="titulo" style="display: grid" id="item-1-1">
-            <label style="font-weight: 500">
+            <label style="font-weight: 500" formControlName="prazoProposta">
               Prazo para elaboração da proposta:
             </label>
             <input type="date" pInputText class="input" />
           </div>
           <div class="titulo" style="display: grid" id="item-1-1">
             <label style="font-weight: 500"> Código PPM: </label>
-            <input type="text" pInputText class="input" />
+            <input type="text" pInputText class="input" formControlName="codigoPPMProposta" />
 
           </div>
         </div>
         <div class="titulo" style="display: grid" id="item-1-1">
           <label style="font-weight: 500"> Link Jira: </label>
-          <input type="text" pInputText class="input" />
+          <input type="text" pInputText class="input" formControlName="jiraProposta"/>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@
           justify-content: center !important;
           margin-top: 1vh;
         ">
-    <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{ width: '100%' }" id="item-4-1">
+    <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{ width: '100%' }" id="item-4-1"  formControlName="recursosProposta">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 12.5% !important; border: 1px solid #dee2e6">
@@ -178,8 +178,6 @@
   <hr>
   <div>
     <label style="font-weight: 500"> Escopo da Demanda: </label>
-
-    <form [formGroup]="formEditor">
       <div class="NgxEditor__Wrapper" style="
                   border: 1px solid #dee2e6 !important;
                   border-radius: 5px !important;
@@ -191,7 +189,6 @@
         <ngx-editor [editor]="editor" formControlName="editorContent">
         </ngx-editor>
       </div>
-    </form>
   </div>
 
   <h3 class="mt-4" spyTarget="dados finais">Dados finais</h3>
@@ -201,8 +198,8 @@
       Periodo de execução da demanda:
     </label>
     <div class="d-flex gap-2">
-      <p-calendar [(ngModel)]="inicioData" placeholder="Início" dateFormat="dd/mm/yy" style="width:50%"></p-calendar>
-      <p-calendar [(ngModel)]="fimData" placeholder="Fim" dateFormat="dd/mm/yy" [minDate]="inicioData" style="width:50%"></p-calendar>
+      <p-calendar [(ngModel)]="inicioData" placeholder="Início" dateFormat="dd/mm/yy"></p-calendar>
+      <p-calendar [(ngModel)]="fimData" placeholder="Fim" dateFormat="dd/mm/yy" [minDate]="inicioData"></p-calendar>
     </div>
 
   </div>

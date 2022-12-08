@@ -56,7 +56,14 @@ export class TelaCorridaComponent implements OnInit {
     this.tipoExibicaoTela();
   }
 
-
+  indoPraCima(top: number){
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    console.log(scrollPosition)
+    window.scroll({ 
+      top: top,  
+      behavior: 'smooth' 
+    });
+  }
 
   tipoExibicaoTela() {
     if (this.router.url == '/tela-inicial/demanda') {

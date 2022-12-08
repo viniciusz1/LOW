@@ -7,17 +7,17 @@ import { CommonModule } from '@angular/common';
 import { NgxEditorModule } from 'ngx-editor';
 import { InputTextModule } from 'primeng/inputtext';
 import { TelaCorridaComponent } from './tela-corrida/tela-corrida.component';
-import {ScrollPanelModule} from 'primeng/scrollpanel';
-import {TableModule} from 'primeng/table';
-import {DropdownModule} from 'primeng/dropdown';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
 import { ScrollSpyModule } from 'ng-spy';
-import {FileUploadModule} from 'primeng/fileupload';
-import {HttpClientModule} from '@angular/common/http';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import {CalendarModule} from 'primeng/calendar';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {AutoCompleteModule} from 'primeng/autocomplete';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ParteDemandaComponent } from './tela-corrida/parte-demanda/parte-demanda.component';
 import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reuniao.component';
 
@@ -31,6 +31,7 @@ import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reunia
   ],
   imports: [
     CommonModule,
+    CalendarModule,
     RotasModule,
     TableModule,
     DropdownModule,
@@ -76,12 +77,11 @@ import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reunia
     FileUploadModule,
     HttpClientModule,
     InputTextareaModule,
-    CalendarModule,
     InputNumberModule,
     MultiSelectModule,
     AutoCompleteModule
   ],
-  providers:[
+  providers: [
     MessageService,
 
   ]

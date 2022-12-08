@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ButtonModule } from 'primeng/button';
+import { JoyrideModule } from 'ngx-joyride';
 
 
 
@@ -17,7 +18,7 @@ import { ButtonModule } from 'primeng/button';
     ScrollPanelModule,
     FormsModule,
     ButtonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
   ]
 })
 export class SharedModule { }

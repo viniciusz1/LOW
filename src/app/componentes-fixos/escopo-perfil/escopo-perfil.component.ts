@@ -12,10 +12,10 @@ export class EscopoPerfilComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onClick() {
+  iniciarTutorial() {
     this.joyrideService.startTour(
       {
-        steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete'],
+        steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete', 'oito@tela-inicial/reunioes', 'nove', 'dez'],
       }
     );
   }

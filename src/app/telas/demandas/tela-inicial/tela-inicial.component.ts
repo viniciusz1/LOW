@@ -52,14 +52,6 @@ export class TelaInicialComponent implements OnInit {
     })
   };
 
-  onClick() {
-    console.log(textoTutorial)
-    this.joyrideService.startTour(
-      {
-        steps: ['bv', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete'],
-      }
-    );
-  }
   textoTutorial = textoTutorial
   positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   //true = card

@@ -3,12 +3,26 @@
     <div class="container mt-4">
       <div class="d-flex justify-content-between">
         <div>
-          <button (click)="openModalCriarReuniao()" class="btn btn-primary">
+          <ng-template #customContent let-texto="texto" style="border-radius: 20px">
+            <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
+          </ng-template>
+          <button joyrideStep="nove"
+          [title]="'Filtrar Demandas'"
+          [stepContent]="customContent"
+          [stepContentParams]="{ texto: textoTutorial[8] }"
+          style="overflow: auto;"
+          (click)="openModalCriarReuniao()" class="btn btn-primary">
             <i class="bi bi-people me-2"></i>
             Marcar Reunião
           </button>
           <!-- [routerLink]="'/tela-inicial/calendario'" -->
-          <button  class="btn btn-primary ms-3" (click)="openCalendario()">
+          <button 
+          joyrideStep="dez"
+          [title]="'Filtrar Demandas'"
+          [stepContent]="customContent"
+          [stepContentParams]="{ texto: textoTutorial[9] }"
+          style="overflow: auto;"
+          class="btn btn-primary ms-3" (click)="openCalendario()">
             <i class="bi bi-calendar-week me-2"></i>Ver em calendário
           </button>
         </div>

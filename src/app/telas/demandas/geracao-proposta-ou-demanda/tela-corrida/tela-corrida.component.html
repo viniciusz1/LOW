@@ -5,19 +5,19 @@
         class="h-100 flex-column align-items-stretch pe-4">
         <nav class="nav nav-pills flex-column">
           <a class="nav-link mt-5" spyOn="gerais" activeClass="active" role="button" style="font-size: 0.9rem"
-            (click)="indoPraCima(0)">Dados Gerais</a>
+            (click)="indoPraCima(0)" >Dados Gerais</a>
           <a class="nav-link" spyOn="beneficios" activeClass="active" role="button" style="font-size: 0.9rem"
             (click)="indoPraCima(600)">Benefícios</a>
           <a class="nav-link" spyOn="adicionais" activeClass="active" role="button" style="font-size: 0.9rem"
             (click)="indoPraCima(1100)">Adicionais</a>
           <a class="nav-link" spyOn="proposta" activeClass="active" role="button" style="font-size: 0.9rem"
-            (click)="indoPraCima(1500)">Proposta</a>
+            (click)="indoPraCima(1500)" *ngIf="aparecerProposta">Proposta</a>
           <a class="nav-link" spyOn="recursosTarget" activeClass="active" role="button" style="font-size: 0.9rem"
-            (click)="indoPraCima(1800)">Recursos</a>
+            (click)="indoPraCima(1800)" *ngIf="aparecerProposta">Recursos</a>
           <a class="nav-link" spyOn="escopo" activeClass="active" role="button" style="font-size: 0.9rem"
-            (click)="indoPraCima(2300)">Escopo</a>
+            (click)="indoPraCima(2300)" *ngIf="aparecerProposta">Escopo</a>
           <a class="nav-link" spyOn="dados finais " activeClass="active" role="button" style="font-size: 0.9rem"
-            (click)="indoPraCima(2497)">Dados Finais</a>
+            (click)="indoPraCima(2497)" *ngIf="aparecerProposta">Dados Finais</a>
         </nav>
       </nav>
     </div>
@@ -29,7 +29,7 @@
 
 
         <app-parte-demanda></app-parte-demanda>
-        <app-parte-reuniao></app-parte-reuniao>
+        <app-parte-reuniao *ngIf="aparecerProposta"></app-parte-reuniao>
         <div class="d-flex justify-content-between" style="margin-top: 2vh !important; margin-bottom: 2vh">
           <button class="btn btn-danger  ms-2">Cancelar</button>
           <button class="btn btn-primary me-2" (click)="onSubmitDemanda()">

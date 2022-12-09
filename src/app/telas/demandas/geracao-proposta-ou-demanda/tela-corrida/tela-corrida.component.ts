@@ -53,10 +53,12 @@ export class TelaCorridaComponent implements OnInit {
     private demandaService: DemandaService,
     private element: ElementRef
   ) {
+    this.startSpy()
     this.tipoExibicaoTela();
   }
 
   indoPraCima(top: number){
+    this.startSpy()
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     console.log(scrollPosition)
     window.scroll({ 
@@ -72,9 +74,13 @@ export class TelaCorridaComponent implements OnInit {
       this.aparecerProposta = true;
     }
   }
+
+  startSpy(){
+    this.spyService.spy()
+  }
+
   ngOnInit(): void {
-    this.spyService.spy({ scrollContainer: this.element })
-    
+    this.startSpy()
   }
   
 

@@ -12,6 +12,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {CascadeSelectModule} from 'primeng/cascadeselect';
 
 import 'web-component-essentials';
+import { JoyrideModule } from 'ngx-joyride';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import 'web-component-essentials';
     DragDropModule,
     CalendarModule,
     CascadeSelectModule,
-    SharedModule
+    SharedModule,
+    JoyrideModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

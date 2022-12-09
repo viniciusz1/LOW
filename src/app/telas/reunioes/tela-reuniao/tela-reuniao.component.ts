@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { listaReunioes } from './listReunioes';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { fadeAnimation } from './../../../shared/app.animation';
+import { textoTutorial } from 'src/app/shared/textoDoTutorial';
 
 @Component({
   selector: 'app-tela-login',
@@ -25,6 +26,7 @@ export class TelaReuniaoComponent implements OnInit {
 
   //tipoExibicao = true --> mostrar todas reuniões
   //tipoExibicao = false --> Cria nova pauta
+  textoTutorial = textoTutorial
   showFiltro = false;
   showPesquisaEBotaoFiltro = true;
   dataReuniao: any;

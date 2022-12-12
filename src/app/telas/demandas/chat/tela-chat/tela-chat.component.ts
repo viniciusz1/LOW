@@ -20,20 +20,33 @@ export class TelaChatComponent implements OnInit {
     mensagem: "Sim. tudo bem",
     rementente: "solicitante"
   },
-]
+  ]
   ngOnInit(): void {
   }
   silenciarChat() {
     this.confirmationService.confirm({
-        message: 'Deseja realmente silenciar esta conversa?',
-        dismissableMask: true,
-        accept: () => {
-            //Actual logic to perform a confirmation
-        }
-    })};
+      message: 'Deseja realmente silenciar esta conversa?',
+      dismissableMask: true,
+      header: 'Silenciar Chat',
+      accept: () => {
+        //Actual logic to perform a confirmation
+      }
+    })
+  };
+
+  finalizarChat() {
+    this.confirmationService.confirm({
+      message: 'Deseja finalizar esta conversa?',
+      dismissableMask: true,
+      header: 'Finalizar Chat',
+      accept: () => {
+        //Actual logic to perform a confirmation
+      }
+    })
+  };
 
   enviarMensagem(event: KeyboardEvent | Event) {
-    if(this.mensagem.nativeElement.value == ""){
+    if (this.mensagem.nativeElement.value == "") {
       return
     }
 
@@ -45,7 +58,7 @@ export class TelaChatComponent implements OnInit {
         })
         this.mensagem.nativeElement.value = "";
       }
-    }else{
+    } else {
       this.mensagens.push({
         mensagem: this.mensagem.nativeElement.value,
         rementente: "solicitante"
@@ -54,7 +67,7 @@ export class TelaChatComponent implements OnInit {
     }
   }
 }
-interface Mensagem{
+interface Mensagem {
   rementente: string,
   mensagem: string
 }

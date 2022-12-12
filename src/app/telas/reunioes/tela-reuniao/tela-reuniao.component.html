@@ -52,7 +52,8 @@
       </p-confirmDialog>
       <div >
         <app-card-reuniao class="m-1" *ngFor="let reuniao of listaReunioes" [dadosReuniao]="reuniao"
-          (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda()"></app-card-reuniao>
+          (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda()"
+          (motivoCancelamento)="modalMotivoCancelamentoDemanda()"></app-card-reuniao>
       </div>
     </div>
   </div>
@@ -63,4 +64,5 @@
       transition: left 0.3s ease 0s;
       top: 43vh;
     "></app-sidebar-reuniao>
+  
 </div>

@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TelaChatComponent } from './tela-chat/tela-chat.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {SpeedDialModule} from 'primeng/speeddial';
+
 
 
 
@@ -16,7 +18,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     CommonModule,
     FormsModule,
     ConfirmDialogModule,
-    SharedModule
+    SharedModule,
+    SpeedDialModule
   ]
 })
 export class ChatModule { }

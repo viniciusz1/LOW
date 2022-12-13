@@ -34,6 +34,25 @@ header img {
     border-color: #f8f8f8;
 }
 
+::ng-deep{
+    .p-speeddial-button{
+         width: 16px !important; 
+         height: 20px !important; 
+    }
+    .p-button-icon {
+        font-size: 1rem !important;
+    }
+    .p-button{
+        background-color: transparent;
+        border: transparent;
+        color: black;
+    }
+    .p-button:enabled:hover {
+        background: rgb(238, 237, 237);
+        color: #000;
+        border-color: rgb(238, 237, 237);
+    }
+}
 
 
 .badge-success {

@@ -43,11 +43,12 @@
       </div>
     </div>
     <div class="container">
-      <p-confirmDialog #cd icon="pi pi-exclamation-triangle">
-        <ng-template pTemplate="footer">
-          <button type="button" (click)="cd.reject()" class="btn btn-outline-danger"><i
-              class="pi pi-times"></i>Não</button>
-          <button type="button" class="btn btn-danger" (click)="cd.accept()"><i class="pi pi-check"></i>Sim</button>
+      <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{width: '40vw'}">
+        <ng-template pTemplate="footer" >
+          <button *ngIf="!mostrarBotaoModal" type="button" (click)="cd.reject()" class="btn btn-outline-danger"><i
+              class="pi pi-times me-2"></i>Não</button>
+          <button *ngIf="!mostrarBotaoModal" type="button" class="btn btn-danger" (click)="cd.accept()"><i class="pi pi-check me-2"></i>Sim</button>
+          <button *ngIf="mostrarBotaoModal" type="button" class="btn btn-outline-primary" (click)="cd.accept()"><i class="pi pi-check me-2"></i>Ok</button>
         </ng-template>
       </p-confirmDialog>
       <div >
@@ -57,6 +58,7 @@
       </div>
     </div>
   </div>
+
 
   <app-sidebar-reuniao [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()" style="
       position: fixed;

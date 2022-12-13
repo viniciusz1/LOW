@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-tela-chat',
@@ -9,7 +9,9 @@ import { ConfirmationService } from 'primeng/api';
 
 
 export class TelaChatComponent implements OnInit {
-
+  messageService: any;
+  items: MenuItem[] = [];
+  
   constructor(private confirmationService: ConfirmationService) { }
   @ViewChild('mensagemDigitada') private mensagem: any;
   mensagens: Mensagem[] = [{
@@ -21,7 +23,37 @@ export class TelaChatComponent implements OnInit {
     rementente: "solicitante"
   },
   ]
+
   ngOnInit(): void {
+    this.items = [
+      {
+        icon: 'pi pi-pencil',
+        command: () => {
+          this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
+        }
+      },
+      {
+        icon: 'pi pi-refresh',
+        command: () => {
+          this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+        }
+      },
+      {
+        icon: 'pi pi-trash',
+        command: () => {
+          this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+        }
+      },
+      {
+        icon: 'pi pi-upload',
+        routerLink: ['/fileupload']
+      },
+      {
+        icon: 'pi pi-external-link',
+        url: 'http://angular.io'
+
+      }
+    ];
   }
   silenciarChat() {
     this.confirmationService.confirm({

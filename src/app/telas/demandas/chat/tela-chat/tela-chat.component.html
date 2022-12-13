@@ -62,8 +62,8 @@
                       </div>
                     </p-scrollPanel>
             </main>
-            <div id="send" class="d-flex ">
-                <i class="bi bi-plus-lg"></i>
+            <div id="send" class="d-flex">
+                <p-speedDial [model]="items" direction="up" [style]="{width: '1vh', height: '1vh'}" class="me-3 ms-3"></p-speedDial>
                 <div class="border rounded">
                     <input type="text" #mensagemDigitada  (keydown)="enviarMensagem($event)" placeholder="Escreva sua Mensagem">
                     <i class="bi bi-send" (click)="enviarMensagem($event)"></i>

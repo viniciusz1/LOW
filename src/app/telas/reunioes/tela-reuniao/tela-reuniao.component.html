@@ -18,7 +18,7 @@
             [title]="'Filtrar Demandas'"
             [stepContent]="customContent"
             [stepContentParams]="{ texto: textoTutorial[8] }"
-            style="overflow: auto"
+            style="overflow: auto; height: 42px;"
             (click)="openModalCriarReuniao()"
             class="btn btn-primary"
           >
@@ -31,7 +31,7 @@
             [title]="'Filtrar Demandas'"
             [stepContent]="customContent"
             [stepContentParams]="{ texto: textoTutorial[9] }"
-            style="overflow: auto"
+            style="overflow: auto; height: 42px;"
             class="btn btn-primary ms-3"
             (click)="openCalendario()"
           >
@@ -60,7 +60,7 @@
           <button
             *ngIf="!showFiltro"
             class="btn btn-primary ms-3"
-            style="width: 150px"
+            style="width: 150px;  height: 42px;"
             (click)="showFiltro = !showFiltro"
           >
             Filtrar Mais

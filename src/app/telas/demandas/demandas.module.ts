@@ -1,11 +1,9 @@
 import { ChatModule } from './chat/chat.module';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
-import { TelaAprovarDemandaComponent } from '../demandas/tela-aprovar-demanda/tela-aprovar-demanda.component';
-
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -34,10 +32,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
     TelaInicialComponent,
     TelaHistoricoDemandaComponent,
     TelaClassificarDemandaComponent,
-    TelaAprovarDemandaComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     GeracaoPropostaOuDemandaModule,
     ComponentesReutilizaveisModule,
     ChatModule,

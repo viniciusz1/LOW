@@ -1,43 +1,36 @@
 
-
 import { MessageService } from 'primeng/api';
 import { RotasModule } from './../../../rotas.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TelaEtapaUmComponent } from './tela-etapa-um/tela-etapa-um.component';
-import { TelaEtapaDoisComponent } from './tela-etapa-dois/tela-etapa-dois.component';
-import { TelaEtapaTresComponent } from './tela-etapa-tres/tela-etapa-tres.component';
-import { TelaEtapaQuatroComponent } from './tela-etapa-quatro/tela-etapa-quatro.component';
-import { TelaEtapaCincoComponent } from './tela-etapa-cinco/tela-etapa-cinco.component';
 import { NgxEditorModule } from 'ngx-editor';
 import { InputTextModule } from 'primeng/inputtext';
 import { TelaCorridaComponent } from './tela-corrida/tela-corrida.component';
-import {ScrollPanelModule} from 'primeng/scrollpanel';
-import {TableModule} from 'primeng/table';
-import {DropdownModule} from 'primeng/dropdown';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
 import { ScrollSpyModule } from 'ng-spy';
-import {FileUploadModule} from 'primeng/fileupload';
-import {HttpClientModule} from '@angular/common/http';
-import {InputTextareaModule} from 'primeng/inputtextarea';
-import {CalendarModule} from 'primeng/calendar';
-import {InputNumberModule} from 'primeng/inputnumber';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {AutoCompleteModule} from 'primeng/autocomplete';
+import { FileUploadModule } from 'primeng/fileupload';
+import { HttpClientModule } from '@angular/common/http';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ParteDemandaComponent } from './tela-corrida/parte-demanda/parte-demanda.component';
+import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reuniao.component';
 
 
 
 @NgModule({
   declarations: [
-    TelaEtapaUmComponent,
-    TelaEtapaDoisComponent,
-    TelaEtapaTresComponent,
-    TelaEtapaQuatroComponent,
-    TelaEtapaCincoComponent,
     TelaCorridaComponent,
+    ParteDemandaComponent,
+    ParteReuniaoComponent,
   ],
   imports: [
     CommonModule,
+    CalendarModule,
     RotasModule,
     TableModule,
     DropdownModule,
@@ -78,19 +71,17 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     FormsModule,
     ReactiveFormsModule,
     InputTextModule,
-    ScrollPanelModule,
     ScrollSpyModule,
     FileUploadModule,
     HttpClientModule,
     InputTextareaModule,
-    CalendarModule,
     InputNumberModule,
     MultiSelectModule,
     AutoCompleteModule
   ],
-  providers:[
+  providers: [
     MessageService,
-    
+
   ]
 })
 export class GeracaoPropostaOuDemandaModule { }

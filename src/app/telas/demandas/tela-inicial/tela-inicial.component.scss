@@ -6,6 +6,12 @@
     background-color: rgba(0, 0, 0, 0.26);
 }
 
+::ng-deep {
+    .p-dropdown{
+        width: 200px;
+    }
+}
+
 .right-arrow:hover, .left-arrow:hover{
     background-color: rgba(0, 0, 0, 0.596);
      transition: 0.3s;

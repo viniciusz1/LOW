@@ -23,9 +23,6 @@ export class ParteReuniaoComponent implements OnInit {
     private fb: FormBuilder) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
-  formProposta = this.fb.group({
-    
-  })
   recursos: Recurso[] = [
     {
       id: '1',
@@ -39,6 +36,9 @@ export class ParteReuniaoComponent implements OnInit {
       centrosCustoPagantes: [],
     },
   ];
+  onSubmit(){
+    console.log(this.formProposta.value)
+  }
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
     { nome: 'Vinicius Bonatti', area: 'Vendas' },
@@ -46,6 +46,19 @@ export class ParteReuniaoComponent implements OnInit {
     { nome: 'Kenzo Hedeaky', area: 'Trefilação' },
     { nome: 'Felipe Viera', area: 'Corpotativo' }
   ];
+
+  formProposta = this.fb.group({
+    prazoProposta: [''],
+    codigoPPMProposta: [''],
+    jiraProposta:[''],
+    recursosProposta: [this.recursos],
+    escopoDemanda: [''],
+    inicioExDemanda: [''],
+    fimExDemanda: [''],
+    paybackSimplesDemanda: [''],
+    responsaveisNegocioDemanda: ['']
+
+  })
 
   selectedResponsaveis: any;
   ngOnDestroy(): void {
@@ -67,7 +80,6 @@ export class ParteReuniaoComponent implements OnInit {
   editor: Editor = new Editor();
   inicioData: Date | any;
   fimData: Date | undefined = undefined;
-  payback: number = 0;
   selectedCoin: any;
   clonedRecursos: { [s: string]: Recurso } = {};
 

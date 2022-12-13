@@ -1,6 +1,6 @@
 import { DragDropModule } from 'primeng/dragdrop';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalPropostaDocumentoComponent } from './modal-proposta-documento/modal-proposta-documento.component';
@@ -50,6 +50,7 @@ import {CalendarModule} from 'primeng/calendar';
     ScrollPanelModule,
     InputTextModule,
     CalendarModule,
+    ReactiveFormsModule,
     DragDropModule
   ],
   exports: [

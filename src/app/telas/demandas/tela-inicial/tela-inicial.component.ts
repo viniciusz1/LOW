@@ -40,6 +40,14 @@ export class TelaInicialComponent implements OnInit {
       this.isFiltrado = true;
     }
   }
+  ordenarSelect =""
+  opcoesOrdenacao=[
+    {name: 'Data de criação', value: 'dataCriacao'},
+    {name: 'Data de atualização', value: 'dataAtualizacao'},
+    {name: 'Maior Score', value: 'autor'},
+    {name: 'A-Z', value: 'autor'},
+    {name: 'Z-A', value: 'autor'},
+  ]
 
   irParaChat() {
     this.confirmationService.confirm({

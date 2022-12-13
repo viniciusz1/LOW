@@ -6,7 +6,7 @@
     [ngClass]="{ container: !isFiltrado }"
     class="nav justify-content-between w-100"
   >
-    <div class="d-flex align-items-start" style="overflow: auto">
+    <div class="p-1 d-flex">
       <button
         joyrideStep="um"
         [prevTemplate]="prevButton"
@@ -15,7 +15,7 @@
         [title]="'Criar uma Demanda'"
         [stepContent]="customContent"
         [stepContentParams]="{ texto: textoTutorial[0] }"
-        class="btn btn-primary position-relative"
+        class="btn btn-primary"
         routerLink="/tela-inicial/demanda"
       >
         + Criar Demanda

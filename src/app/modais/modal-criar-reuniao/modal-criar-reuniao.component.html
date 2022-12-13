@@ -4,7 +4,7 @@
 </div>
 <hr class="mt-0" style="overflow: auto;">
 <div [formGroup]="novaReuniaoForm" (onSubmit)="onSubmit()"class="row m-3" style="width: 70vw;">
-  <div class="col-6 drag-column">
+  <div class="col-sm-6 drag-column">
     <div class="d-flex">
       <app-filtro-demanda class="mb-2" [filtroReduzidoVertical]="true" [mostrarIconeDeAbrirFiltro]="false">
       </app-filtro-demanda>
@@ -22,7 +22,7 @@
       </p-scrollPanel>
     </div>
   </div>
-  <div class="col-6 alinhar-baixo"  pDroppable="demandas" (onDrop)="drop()">
+  <div class="col-sm-6 alinhar-baixo"  pDroppable="demandas" (onDrop)="drop()">
     <div class="border rounded drop-column p-1 mb-2 low-shadow h-100">
       <p-scrollPanel [style]="{ width: '100%', height: '47vh' }" styleClass="scroll">
         <div class="text-center h5 mt-3" *ngIf="listaDemandasEscolhidas.length == 0">

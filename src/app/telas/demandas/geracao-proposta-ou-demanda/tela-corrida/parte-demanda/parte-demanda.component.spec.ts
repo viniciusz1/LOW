@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TelaEtapaUmComponent } from './tela-etapa-um.component';
+import { ParteDemandaComponent } from './parte-demanda.component';
 
-describe('TelaEtapaUmComponent', () => {
-  let component: TelaEtapaUmComponent;
-  let fixture: ComponentFixture<TelaEtapaUmComponent>;
+describe('ParteDemandaComponent', () => {
+  let component: ParteDemandaComponent;
+  let fixture: ComponentFixture<ParteDemandaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TelaEtapaUmComponent ]
+      declarations: [ ParteDemandaComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TelaEtapaUmComponent);
+    fixture = TestBed.createComponent(ParteDemandaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

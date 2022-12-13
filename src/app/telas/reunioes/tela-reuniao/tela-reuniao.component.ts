@@ -23,7 +23,8 @@ export class TelaReuniaoComponent implements OnInit {
     public matDialog: MatDialog,
 
   ) {}
-
+  opcoesOrdenacao=[{name: 'Data', value: 'data'}, {name: 'Comissão', value: 'comissao'}]
+  ordenarSelect=""
   //tipoExibicao = true --> mostrar todas reuniões
   //tipoExibicao = false --> Cria nova pauta
   textoTutorial = textoTutorial

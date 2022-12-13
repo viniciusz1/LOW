@@ -1,3 +1,4 @@
+import { FormBuilder } from '@angular/forms';
 import { DialogRef } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
@@ -8,15 +9,16 @@ import { listaReunioes } from 'src/app/telas/reunioes/tela-reuniao/listReunioes'
 @Component({
   selector: 'app-modal-criar-reuniao',
   templateUrl: './modal-criar-reuniao.component.html',
-  styleUrls: ['./modal-criar-reuniao.component.scss']
+  styleUrls: ['./modal-criar-reuniao.component.scss'],
 })
 export class ModalCriarReuniaoComponent implements OnInit {
+  constructor(
+    public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
+    private fb: FormBuilder
+  ) {}
 
-  constructor(public dialogRef: DialogRef<ModalCriarReuniaoComponent>) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-  
   listaReunioes: Reuniao[] = listaReunioes;
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
@@ -30,10 +32,19 @@ export class ModalCriarReuniaoComponent implements OnInit {
     'Jurídico',
     'Diretoria',
   ];
-  
+
   dataReuniao: any;
   comissaoSelecionada: any;
 
+  onSubmit(){
+    console.log(this.novaReuniaoForm.value)
+  }
+
+  novaReuniaoForm = this.fb.group({
+    listaDemandas: [this.listaDemandasEscolhidas],
+    dataReuniao: [''],
+    comissaoReuniao: ['']
+  })
   dragStart(demanda: Demanda) {
     this.draggedDemanda = demanda;
   }
@@ -68,8 +79,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
   dragEnd() {
     this.draggedDemanda = undefined;
   }
-
- 
 
   findIndex(demanda: Demanda) {
     let index = -1;

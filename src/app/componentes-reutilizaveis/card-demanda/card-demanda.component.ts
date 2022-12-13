@@ -72,7 +72,7 @@ export class CardDemandaComponent implements OnInit {
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/proposta/1',
+        rota: '/tela-inicial/proposta',
         texto: 'Criar Proposta',
       };
     }

@@ -1,3 +1,4 @@
+import { DropdownModule } from 'primeng/dropdown';
 import { SharedModule } from './../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { TelaVerPauta } from './tela-ver-pauta/tela-ver-pauta.component';
@@ -29,6 +30,7 @@ import { JoyrideModule } from 'ngx-joyride';
     CalendarModule,
     CascadeSelectModule,
     SharedModule,
+    DropdownModule,
     JoyrideModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

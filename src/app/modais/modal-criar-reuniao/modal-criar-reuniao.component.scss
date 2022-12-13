@@ -3,3 +3,6 @@
     flex-direction: column;
     justify-content: space-between;
 }
+::ng-deep .p-dropdown {
+    width: 100%;
+}

@@ -1,4 +1,4 @@
-<form class="container" [formGroup]="demandaForm" (ngSubmit)="onSubmitDemanda()">
+<form class="container" [formGroup]="demandaForm">
   <h3>Dados Gerais</h3>
   <hr>
   <div class="etapa-1">
@@ -22,7 +22,7 @@
     <span spyTarget="gerais" class="p-float-label">
       <p-multiSelect class="w-100" [options]="centrosCusto" [(ngModel)]="selectedCentros"
         defaultLabel="Selecione os Centros de Custo" optionLabel="nome" display="chip"
-        formControlName="centroCustoDemanda">
+        formControlName="centroCustos">
       </p-multiSelect>
     </span>
   </div>
@@ -33,9 +33,9 @@
     <div formGroupName="beneficioRealDemanda">
       <label style="font-weight: 500"> Benefício Real: </label>
       <div style="display: flex; justify-content: space-between">
-        <input style="width: 93%;" type="text" pInputText class="input" formControlName="valor" />
-        <select name="Moeda" class="drop" formControlName="moeda">
-          <option value="valor1">BR</option>
+        <input style="width: 93%;" type="text" pInputText class="input" formControlName="valorBeneficio" />
+        <select name="Moeda" class="drop" formControlName="moedaBeneficio">
+          <option value="Real">BR</option>
         </select>
       </div>
       <div class="situacao-atual" style="display: grid" id="item-1-2">
@@ -43,16 +43,16 @@
           Memória de Cálculo do Benefício Real:
         </label>
         <textarea style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
-          formControlName="memoriaCalculo"></textarea>
+          formControlName="memoriaDeCalculoBeneficio"></textarea>
       </div>
     </div>
     <div formGroupName="beneficioPotencialDemanda">
       <div class="objetivo" style="display: grid" id="item-1-3">
         <label style="font-weight: 500"> Benefício Potencial: </label>
         <div style="display: flex; justify-content: space-between">
-          <input style="width: 93%;" type="text" pInputText class="input" formControlName="valor" />
-          <select name="Moeda" class="drop" formControlName="moeda">
-            <option value="valor1">BR</option>
+          <input style="width: 93%;" type="text" pInputText class="input" formControlName="valorBeneficio" />
+          <select name="Moeda" class="drop" formControlName="moedaBeneficio">
+            <option value="Real">BR</option>
           </select>
         </div>
       </div>
@@ -62,7 +62,7 @@
         </label>
         <div style="display: flex">
           <textarea style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
-            formControlName="memoriaCalculo"></textarea>
+            formControlName="memoriaDeCalculoBeneficio"></textarea>
         </div>
       </div>
     </div>
@@ -81,7 +81,8 @@
       <label style="font-weight: 500">
         Frequência de Uso do Sistema:
       </label>
-      <p-dropdown [options]="opcoesDeTamanho" optionLabel="name" placeholder="Selecione a frequência"
+      <p-dropdown [options]="opcoesDeTamanho"
+     placeholder="Selecione a frequência"
         formControlName="frequenciaDeUsoDemanda"></p-dropdown>
     </div>
     <div>

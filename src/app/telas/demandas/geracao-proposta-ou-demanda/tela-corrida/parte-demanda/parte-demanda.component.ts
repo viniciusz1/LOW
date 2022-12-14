@@ -50,6 +50,11 @@ export class ParteDemandaComponent implements OnInit {
     { name: 'Grande' },
     { name: 'Muito Grande' },
   ];
+  opcoesDeMoeda = [
+    { name: 'BRL' },
+    { name: 'EUR' },
+    { name: 'DOL' },
+  ];
   onSubmitDemanda() {
     //ARQUIVO -- NÃO FUNCIONA
     // this.demandaForm.patchValue({

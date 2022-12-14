@@ -36,14 +36,30 @@ export class TelaReuniaoComponent implements OnInit {
   listaReunioes: Reuniao[] = listaReunioes;
   showSidebar = -350;
   pesquisaReuniao = "";
+  mostrarBotaoModal = false;
 
   modalDeConfirmacaoCancelamentoDemanda() {
+    this.mostrarBotaoModal = false;
     this.confirmationService.confirm({
       blockScroll: false,
       closeOnEscape: false,
       dismissableMask: true,
       header: 'Cancelar Reunião',
       message: 'Você tem certeza que deseja cancelar esta reunião no dia 22/11/2022 as 16:40?',
+      accept: () => {
+        //Actual logic to perform a confirmation
+      },
+    });
+  }
+
+  modalMotivoCancelamentoDemanda() {
+    this.mostrarBotaoModal = true;
+    this.confirmationService.confirm({
+      blockScroll: false,
+      closeOnEscape: false,
+      dismissableMask: true,
+      header: 'Motivo do Cancelamento',
+      message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, esse labore placeat soluta, eveniet voluptas debitis quod quaerat saepe, architecto recusandae provident repellendus fugiat expedita quos deleniti! Tempora, molestias illum?',
       accept: () => {
         //Actual logic to perform a confirmation
       },

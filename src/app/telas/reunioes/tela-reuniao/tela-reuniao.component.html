@@ -77,27 +77,35 @@
       </div>
     </div>
     <div class="container">
-      <p-confirmDialog #cd icon="pi pi-exclamation-triangle">
-        <ng-template pTemplate="footer">
-          <button
-            type="button"
-            (click)="cd.reject()"
-            class="btn btn-outline-danger"
-          >
-            <i class="pi pi-times"></i>Não
+      <p-confirmDialog #cd icon="pi pi-exclamation-triangle" 
+      [style]="{width: '40vw'}">
+        <ng-template pTemplate="footer" >
+          <button *ngIf="!mostrarBotaoModal" 
+          type="button" (click)="cd.reject()" 
+          class="btn btn-outline-danger">
+          <i class="pi pi-times me-2"></i>
+          Não
           </button>
-          <button type="button" class="btn btn-danger" (click)="cd.accept()">
-            <i class="pi pi-check"></i>Sim
+          <button *ngIf="!mostrarBotaoModal" 
+          type="button" class="btn btn-danger" 
+          (click)="cd.accept()">
+          <i class="pi pi-check me-2"></i>Sim</button>
+          <button *ngIf="mostrarBotaoModal" 
+          type="button" class="btn btn-outline-primary" 
+          (click)="cd.accept()">
+          <i class="pi pi-check me-2"></i>
+          Ok
           </button>
         </ng-template>
       </p-confirmDialog>
-      <div>
-        <app-card-reuniao
-          class="m-1"
-          *ngFor="let reuniao of listaReunioes"
-          [dadosReuniao]="reuniao"
-          (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda()"
-        ></app-card-reuniao>
+      <div >
+       <app-card-reuniao 
+       class="m-1" 
+       *ngFor="let reuniao of listaReunioes" 
+       [dadosReuniao]="reuniao"
+       (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda()"
+       (motivoCancelamento)="modalMotivoCancelamentoDemanda()">
+       </app-card-reuniao>
       </div>
     </div>
   </div>
@@ -111,5 +119,6 @@
       transition: left 0.3s ease 0s;
       top: 43vh;
     "
-  ></app-sidebar-reuniao>
+    ></app-sidebar-reuniao>
+
 </div>

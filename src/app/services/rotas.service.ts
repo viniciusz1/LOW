@@ -18,7 +18,7 @@ export class RotasService {
   constructor(private location: Location) {
     this.location.onUrlChange(e => {
       if (e == '/tela-inicial/reunioes') {
-        this.titulo.emit('Reunioes');
+        this.titulo.emit('Reuniões');
       }
       if (e == '/tela-inicial') {
         this.titulo.emit('Demandas');

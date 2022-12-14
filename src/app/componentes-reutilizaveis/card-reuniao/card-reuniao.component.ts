@@ -10,6 +10,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 export class CardReuniaoComponent implements OnInit {
   @Input() dadosReuniao: Reuniao = {};
   @Output() cancelarReuniao = new EventEmitter();
+  @Output() motivoCancelamento = new EventEmitter();
   primaryColorClass?: string = "";
   secondaryColorClass: string = "";
   constructor() { }

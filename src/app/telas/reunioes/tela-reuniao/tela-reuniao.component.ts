@@ -22,9 +22,9 @@ export class TelaReuniaoComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public matDialog: MatDialog,
 
-  ) {}
-  opcoesOrdenacao=[{name: 'Data', value: 'data'}, {name: 'Comissão', value: 'comissao'}]
-  ordenarSelect=""
+  ) { }
+  opcoesOrdenacao = [{ name: 'Data', value: 'data' }, { name: 'Comissão', value: 'comissao' }]
+  ordenarSelect = ""
   //tipoExibicao = true --> mostrar todas reuniões
   //tipoExibicao = false --> Cria nova pauta
   textoTutorial = textoTutorial
@@ -37,7 +37,7 @@ export class TelaReuniaoComponent implements OnInit {
   showSidebar = -350;
   pesquisaReuniao = "";
   mostrarBotaoModal = false;
-
+  showFiltroComponent = false;
   modalDeConfirmacaoCancelamentoDemanda() {
     this.mostrarBotaoModal = false;
     this.confirmationService.confirm({
@@ -65,9 +65,22 @@ export class TelaReuniaoComponent implements OnInit {
       },
     });
   }
+  changeFilter() {
+    if(this.showFiltro == true){
+      this.showFiltroComponent = false
+      setTimeout(() => {
+        this.showFiltro = false
+      }, 200)
+    }else{
+      this.showFiltro = true
+      setTimeout(() => {
+        this.showFiltroComponent = true
+      }, 200)
+    }
+    
+  }
 
-
-  openModalCriarReuniao(){
+  openModalCriarReuniao() {
     console.log("oi")
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
@@ -80,16 +93,16 @@ export class TelaReuniaoComponent implements OnInit {
     });
   }
 
-  mudarStatusFiltro(){
+  mudarStatusFiltro() {
     this.showFiltro = !this.showFiltro
-    if(!this.showFiltro){
-      setTimeout(()=>{
-      this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
-      },200)
-    }else{
+    if (!this.showFiltro) {
+      setTimeout(() => {
+        this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
+      }, 200)
+    } else {
       this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
     }
-}
+  }
 
   ngOnInit() {
     // this.openModalCriarReuniao();

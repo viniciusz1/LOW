@@ -9,10 +9,11 @@
         [title]="'Criar uma Demanda'"
         [stepContent]="customContent"
         [stepContentParams]="{ texto: textoTutorial[0] }"
-        class="btn btn-primary position-relative"
+        class="btn btn-primary"
+        style="height: 42px;"
         routerLink="/tela-inicial/demanda"
       >
-        + Criar Demanda
+      <i class="bi bi-plus" style="font-size: 17px;"></i> Criar Demanda
       </button>
 
       <ng-template #prevButton>
@@ -45,7 +46,7 @@
           *ngIf="isFiltrado"
           style="width: 225px"
         >
-          Exportar Para Exel
+        <i class="bi bi-filetype-csv me-3" style="font-size: 17px;"></i> Exportar Para Exel
         </button>
         <div>
           <p-dropdown

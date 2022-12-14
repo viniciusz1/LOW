@@ -19,6 +19,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ParteDemandaComponent } from './tela-corrida/parte-demanda/parte-demanda.component';
 import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reuniao.component';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 
@@ -77,7 +78,8 @@ import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reunia
     InputTextareaModule,
     InputNumberModule,
     MultiSelectModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    TooltipModule
   ],
   providers: [
     MessageService,

@@ -21,7 +21,7 @@ export class ListDemandaComponent implements OnInit {
 
   @Input() dadosDemada: Demanda = {};
   @Input() mostrarBotao = true;
-  @Input() mudarTamanho: string = '80vw';
+  @Input() mudarTamanho: string = '68vw';
   @Input('mostrarIconeAdicionar') demandaPequena = false;
 
   textoExibidoEmBotaoDependendoRota: {rota: string, texto: string} | undefined = undefined;

@@ -21,9 +21,22 @@ a {
 }
 
 .p-button{
-    background-color: #00579D !important;
-    border: #00579D 1px solid !important;
+    background-color: #00579D ;
+    border: #00579D 1px solid;
 }
+
+.p-multiselect-token {
+    background-color: #00579D !important;
+}
+
+.p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight{
+    background-color: #00579D !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight{
+    background-color: #00579D !important;
+}
+
 
 .p-calendar{
     width: 100% !important;

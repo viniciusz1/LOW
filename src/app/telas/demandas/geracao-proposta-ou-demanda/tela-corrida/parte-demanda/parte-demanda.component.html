@@ -34,9 +34,8 @@
       <label style="font-weight: 500"> Benefício Real: </label>
       <div style="display: flex; justify-content: space-between">
         <input style="width: 93%;" type="text" pInputText class="input" formControlName="valor" />
-        <select name="Moeda" class="drop" formControlName="moeda">
-          <option value="valor1">BR</option>
-        </select>
+        <p-dropdown [options]="opcoesDeMoeda" optionLabel="name" placeholder="BRL"
+        formControlName="frequenciaDeUsoDemanda" [style]="{widht: '2vw !important'}"></p-dropdown>
       </div>
       <div class="situacao-atual" style="display: grid" id="item-1-2">
         <label style="font-weight: 500">
@@ -81,7 +80,7 @@
       <label style="font-weight: 500">
         Frequência de Uso do Sistema:
       </label>
-      <p-dropdown [options]="opcoesDeTamanho" optionLabel="name" placeholder="Selecione a frequência"
+      <p-dropdown class="dropdown" [options]="opcoesDeTamanho" optionLabel="name" placeholder="Selecione a frequência"
         formControlName="frequenciaDeUsoDemanda"></p-dropdown>
     </div>
     <div>

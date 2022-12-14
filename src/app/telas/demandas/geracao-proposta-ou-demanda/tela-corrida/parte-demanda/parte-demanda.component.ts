@@ -1,21 +1,18 @@
+import { CentroCustoService } from './../../../../../services/centro-custo.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { CentroCusto } from 'src/app/models/centro-custo.model';
 
-
-interface CentrosCusto {
-  centro: string;
-}
 
 
 @Component({
   selector: 'app-parte-demanda',
   templateUrl: './parte-demanda.component.html',
-  styleUrls: ['./parte-demanda.component.scss']
+  styleUrls: ['./parte-demanda.component.scss'],
 })
 export class ParteDemandaComponent implements OnInit {
-
-  constructor(
-    private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private centroCustoService: CentroCustoService) {}
   demandaForm = this.fb.group({
     tituloDemanda: [''],
     situacaoAtualDemanda: [''],
@@ -34,15 +31,11 @@ export class ParteDemandaComponent implements OnInit {
     beneficioQualitativoDemanda: [''],
     frequenciaDeUsoDemanda: [''],
 
-    solicitanteDemanda: ['Por localStorage']
+    solicitanteDemanda: ['Por localStorage'],
   });
-  
+
   selectedCentros: any;
-  centrosCusto: CentrosCusto[] = [
-    { centro: 'Weg 1' },
-    { centro: 'Weg 2' },
-    { centro: 'Weg 3' },
-  ];
+  centrosCusto: CentroCusto[] = [];
   opcoesDeTamanho = [
     { name: 'Muito Pequena' },
     { name: 'Pequena' },
@@ -66,6 +59,12 @@ export class ParteDemandaComponent implements OnInit {
     // console.log(this.demandaForm.value)
   }
   ngOnInit(): void {
+    this.atualizarCentrosCusto();
   }
-
+  atualizarCentrosCusto() {
+    this.centroCustoService.getCentrosCusto().subscribe({
+      next: (centrosCusto) => (this.centrosCusto = centrosCusto),
+      error: (err) => console.log(err),
+    });
+  }
 }

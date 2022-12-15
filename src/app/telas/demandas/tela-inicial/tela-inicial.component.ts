@@ -18,7 +18,7 @@ import { textoTutorial } from '../../../shared/textoDoTutorial';
 import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 import { ThisReceiver } from '@angular/compiler';
-
+import { listaDemandas } from 'src/app/shared/listDemandas';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -225,16 +225,18 @@ export class TelaInicialComponent implements OnInit {
       }
   }
   ngOnInit(): void {
-    this.demandasService.getDemandas()
-      .subscribe({
-        next: (list) => {
-          this.listaDemandas = list
-          this.exibirFilasDeStatus()
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      })
+    this.listaDemandas = listaDemandas
+    this.exibirFilasDeStatus()
+    // this.demandasService.getDemandas()
+    //   .subscribe({
+    //     next: (list) => {
+    //       this.listaDemandas = listaDemandas
+    //       this.exibirFilasDeStatus()
+    //     },
+    //     error: (err) => {
+    //       console.log(err)
+    //     }
+    //   })
   }
 
 }

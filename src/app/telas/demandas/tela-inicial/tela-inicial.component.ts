@@ -182,9 +182,7 @@ export class TelaInicialComponent implements OnInit {
 
   exibirFilasDeStatus() {
     console.log(this.listaDemandas[0].statusDemanda)
-    if (this.listaDemandas.some(e => {
-      e.statusDemanda?.toString() == "BACKLOG_CLASSIFICACAO"
-  })) {
+    if (this.listaDemandas.some(e => e.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)) {
       this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-aprovacao')) {

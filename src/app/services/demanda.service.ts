@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
+import { StatusDemanda } from '../models/statusDemanda.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,12 @@ export class DemandaService {
     return this.http.get<Demanda[]>(
       'http://localhost:8080/demanda'
     );
+  }
+
+  formatarStatusDemanda(demandas: Demanda[]){
+    for(let i of demandas){
+
+    }
   }
 
   postDemanda() {

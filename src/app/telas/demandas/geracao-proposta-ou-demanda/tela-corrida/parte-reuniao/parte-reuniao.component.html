@@ -2,63 +2,48 @@
   <h3 class="mt-4" spyTarget="proposta">Proposta</h3>
   <hr />
 
-  <div
-    class="campo"
-    style="
+  <div class="campo" style="
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 0px;
-    "
-  >
+    ">
     <div class="w-100">
-        <div class="d-flex justify-content-between">
-          <div class="titulo" style="display: grid" id="item-1-1">
-            <label style="font-weight: 500">
-              Prazo para elaboração da proposta:
-            </label>
-            <input
-              type="date"
-              pInputText
-              class="input"
-              formControlName="prazoProposta"
-            />
-          </div>
-          <div class="titulo" style="display: grid" id="item-1-1">
-            <label style="font-weight: 500"> Código PPM: </label>
-            <input
-              type="text"
-              pInputText
-              class="input"
-              formControlName="codigoPPMProposta"
-            />
-          </div>
-        </div>
+      <div class="d-flex justify-content-between">
         <div class="titulo" style="display: grid" id="item-1-1">
-          <label style="font-weight: 500"> Link Jira: </label>
-          <input
-            type="text"
-            pInputText
-            class="input"
-            formControlName="jiraProposta"
-          />
+          <div class="infos" style="display: flex; align-items: center; width: 28vw">
+            <label style="font-weight: 500" class="me-2" for="time">Prazo para elaboração da proposta:</label>
+            <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
+              pTooltip="Em quanto tempo a proposta ficará pronta?" tooltipPosition="top"></i>
+          </div>
+          <p-calendar placeholder="Clique para Agendar" formControlName="dataReuniao" [showTime]="true"
+            [showSeconds]="true" inputId="time"></p-calendar>
+        </div>
+        <div class="titulo" style="display: grid; width: 32vw;" id="item-1-1">
+          <div class="infos" style="display: flex; align-items: center; width: 28vw">
+            <label style="font-weight: 500" class="me-2" for="time">Código PPM:</label>
+            <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
+              pTooltip="Qual o código do SAP?" tooltipPosition="top"></i>
+          </div>
+          <input placeholder="Ex: 458" type="text" pInputText class="input" formControlName="codigoPPMProposta" />
         </div>
       </div>
+      <div class="titulo" style="display: grid" id="item-1-1">
+        <div class="infos" style="display: flex; align-items: center; width: 28vw">
+          <label style="font-weight: 500" class="me-2" for="time">Link Jira:</label>
+          <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
+            pTooltip="Insira a URL que aparece ao topo da sua página do JIRA" tooltipPosition="top"></i>
+        </div>
+        <input placeholder="Ex: https://jiraprojetoweg.atlassian.net/jira/software/projects/LOW/boards/3" type="text" pInputText class="input" formControlName="jiraProposta" />
+      </div>
+    </div>
   </div>
   <h3 class="mt-4" spyTarget="recursosTarget">Recursos</h3>
   <hr />
-  <div
-    class="d-grid justify-content-center my-3"
-    style="display: grid; justify-content: center !important; margin-top: 1vh"
-  >
-    <p-table
-      [value]="recursos"
-      dataKey="id"
-      editMode="row"
-      [tableStyle]="{ width: '100%' }"
-      id="item-4-1"
-      formControlName="recursosProposta"
-    >
+  <div class="d-grid justify-content-center my-3"
+    style="display: grid; justify-content: center !important; margin-top: 1vh">
+    <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{ width: '100%' }" id="item-4-1"
+      formControlName="recursosProposta">
       <ng-template pTemplate="header">
         <tr>
           <th style="width: 12.5% !important; border: 1px solid #dee2e6">
@@ -92,12 +77,7 @@
           <td pEditableColumnb style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input
-                  pInputText
-                  type="text"
-                  [(ngModel)]="recursos.nomeRecurso"
-                  required
-                />
+                <input pInputText type="text" [(ngModel)]="recursos.nomeRecurso" required />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ recursos.nomeRecurso }}
@@ -107,12 +87,8 @@
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown
-                  [options]="['Interno', 'Externo']"
-                  appendTo="body"
-                  [(ngModel)]="recursos.perfilDespesa"
-                  [style]="{ width: '100%' }"
-                >
+                <p-dropdown [options]="['Interno', 'Externo']" appendTo="body" [(ngModel)]="recursos.perfilDespesa"
+                  [style]="{ width: '100%' }">
                 </p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
@@ -123,12 +99,8 @@
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown
-                  [options]="['Hardware', 'Software', 'Corporativo']"
-                  appendTo="body"
-                  [(ngModel)]="recursos.perfilDespesa"
-                  [style]="{ width: '100%' }"
-                >
+                <p-dropdown [options]="['Hardware', 'Software', 'Corporativo']" appendTo="body"
+                  [(ngModel)]="recursos.perfilDespesa" [style]="{ width: '100%' }">
                 </p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
@@ -139,12 +111,7 @@
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input
-                  pInputText
-                  type="text"
-                  [(ngModel)]="recursos.quantidadeHoras"
-                  required
-                />
+                <input pInputText type="text" [(ngModel)]="recursos.quantidadeHoras" required />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ recursos.quantidadeHoras }}
@@ -154,12 +121,7 @@
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input
-                  pInputText
-                  type="text"
-                  [(ngModel)]="recursos.valorHora"
-                  required
-                />
+                <input pInputText type="text" [(ngModel)]="recursos.valorHora" required />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ recursos.valorHora }}
@@ -169,12 +131,7 @@
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input
-                  pInputText
-                  type="text"
-                  [(ngModel)]="recursos.valorTotalDespesa"
-                  required
-                />
+                <input pInputText type="text" [(ngModel)]="recursos.valorTotalDespesa" required />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ recursos.valorTotalDespesa }}
@@ -184,12 +141,7 @@
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input
-                  pInputText
-                  type="text"
-                  [(ngModel)]="recursos.periodoExMeses"
-                  required
-                />
+                <input pInputText type="text" [(ngModel)]="recursos.periodoExMeses" required />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ recursos.periodoExMeses }}
@@ -199,12 +151,7 @@
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input
-                  pInputText
-                  type="text"
-                  [(ngModel)]="recursos.centrosCustoPagantes"
-                  required
-                />
+                <input pInputText type="text" [(ngModel)]="recursos.centrosCustoPagantes" required />
               </ng-template>
               <ng-template pTemplate="output">
                 {{ recursos.centrosCustoPagantes }}
@@ -226,10 +173,12 @@
   <h3 class="mt-4" spyTarget="escopo">Escopo</h3>
   <hr />
   <div>
-    <label style="font-weight: 500"> Escopo da Demanda: </label>
-    <div
-      class="NgxEditor__Wrapper escopo-demanda "
-    >
+    <div class="infos" style="display: flex; align-items: center; width: 28vw">
+      <label style="font-weight: 500" class="me-2" for="time">Escopo da Demanda:</label>
+      <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
+        pTooltip="Defina e personalize a finalidade da sua proposta" tooltipPosition="top"></i>
+    </div>
+    <div class="NgxEditor__Wrapper escopo-demanda ">
       <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
       <ngx-editor [editor]="editor" formControlName="escopoDemanda">
       </ngx-editor>
@@ -238,44 +187,37 @@
 
   <h3 class="mt-4" spyTarget="dados finais">Dados finais</h3>
   <hr />
-  <div class="d-block">
-    <label style="font-weight: 500; margin: 5px">
-      Periodo de execução da demanda:
-    </label>
-    <div class="d-flex gap-2">
-      <p-calendar
-        formControlName="inicioExDemanda"
-        placeholder="Início"
-        dateFormat="dd/mm/yy"
-      ></p-calendar>
-      <p-calendar
-      formControlName="fimExDemanda"
-        [(ngModel)]="fimData"
-        placeholder="Fim"
-        dateFormat="dd/mm/yy"
-        [minDate]="inicioData"
-      ></p-calendar>
+  <div class="union" style="display: flex; justify-content: space-between;">
+    <div class="d-block">
+      <div class="infos" style="display: flex; align-items: center; width: 28vw">
+        <label style="font-weight: 500" class="me-2" for="time">Período de Execução da Demanda:</label>
+        <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
+          pTooltip="Insira a data que irá iniciar sua proposta e data que irá finalizar sua proposta" tooltipPosition="top"></i>
+      </div>
+      <div class="d-flex gap-2">
+        <p-calendar formControlName="inicioExDemanda" placeholder="Início" dateFormat="dd/mm/yy"></p-calendar>
+        <p-calendar formControlName="fimExDemanda" [(ngModel)]="fimData" placeholder="Fim" dateFormat="dd/mm/yy"
+          [minDate]="inicioData"></p-calendar>
+      </div>
+    </div>
+  
+    <div class="d-flex flex-column">
+      <div class="infos" style="display: flex; align-items: center; width: 28vw">
+        <label style="font-weight: 500" class="me-2" for="time">Payback Simples:</label>
+        <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
+          pTooltip="Insira, em reais, o retorno dos benefícios" tooltipPosition="top"></i>
+      </div>
+      <p-inputNumber formControlName="paybackSimplesDemanda" mode="decimal" [minFractionDigits]="2"
+        [maxFractionDigits]="2"></p-inputNumber>
     </div>
   </div>
-  <div class="d-flex flex-column">
-    <label style="font-weight: 500"> Payback Simples: </label>
-    <p-inputNumber
-      formControlName="paybackSimplesDemanda"
-      mode="decimal"
-      [minFractionDigits]="2"
-      [maxFractionDigits]="2"
-    ></p-inputNumber>
-  </div>
 
-  <label style="font-weight: 500; margin: 5px" (click)="onSubmit()">
-    Responsáveis pelo Negócio:
-  </label>
-  <p-multiSelect
-    [options]="responsaveis"
-    formControlName="responsaveisNegocioDemanda"
-    defaultLabel="Selecione os Responsaveis"
-    optionLabel="nome"
-    display="chip"
-  >
+  <div class="infos" style="display: flex; align-items: center; width: 28vw">
+    <label style="font-weight: 500" class="me-2" for="time">Responsáveis pelo Negócio:</label>
+    <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
+      pTooltip="Insira os responsáveis por suceder a proposta" tooltipPosition="top"></i>
+  </div>
+  <p-multiSelect [options]="responsaveis" formControlName="responsaveisNegocioDemanda"
+    defaultLabel="Selecione os Responsaveis" optionLabel="nome" display="chip">
   </p-multiSelect>
 </form>

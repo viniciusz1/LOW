@@ -51,7 +51,6 @@
                     <div class="mensagens">
                         <div *ngFor="let mensagem of mensagens" class="row"
                         [ngStyle]="{'justify-content': mensagem.rementente == 'solicitante' ? 'flex-end' : 'flex-start'}">
-
                           <div  [ngClass]="[mensagem.rementente == 'solicitante' ? 'balao-chat-solicitante' : 'balao-chat-analista']">
                                 <span>
                                     {{mensagem.mensagem}}

@@ -6,31 +6,35 @@
     background-color: rgba(0, 0, 0, 0.26);
 }
 
-::ng-deep {
-    .p-dropdown{
-        width: 200px;
-    }
+
+.drop {
+    width: 200px !important;
 }
 
-.right-arrow:hover, .left-arrow:hover{
+.right-arrow:hover,
+.left-arrow:hover {
     background-color: rgba(0, 0, 0, 0.596);
-     transition: 0.3s;
+    transition: 0.3s;
 }
 
-h5{
+h5 {
     margin-bottom: 3px;
 }
-.joyride-step__container{
-border-radius: 20px;
+
+.joyride-step__container {
+    border-radius: 20px;
 }
+
 .circle {
     position: relative;
-	left: 48%;
-	top: 50%
+    left: 48%;
+    top: 50%
 }
-.tam{
+
+.tam {
     width: 80%;
 }
+
 .inverte {
     transform: rotate(180deg);
     transition: 0.5s;

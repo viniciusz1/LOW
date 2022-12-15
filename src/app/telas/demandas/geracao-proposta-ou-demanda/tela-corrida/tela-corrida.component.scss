@@ -1,13 +1,12 @@
-
-input{
+input {
     margin: 5px 5px 5px 0px;
 }
 
-.input{
+.input {
     width: 58.5vw;
 }
 
-label{
+label {
     font-size: 0.85vw;
     margin: 5px;
 }
@@ -17,11 +16,110 @@ label{
 //         width: 58.5vw;
 //     }
 // }
-hr{
+hr {
     margin: 0
 }
+
 // ::ng-deep{
 //     .p-dropdown .p-dropdown-label  {
 //         width: 56.5vw;
 //     }
 // } 
+
+
+// nav {
+//     animation-duration: 1s;
+//     animation-name: slidein;
+//     animation-delay: calc(var(--scroll) * -1s);
+//     scroll-snap-type: proximity;
+//     // position: fixed;
+//     /* make sure it stays put so we can see it! */
+
+//     // animation: slidein 1s linear infinite;
+//     // animation-play-state: paused;
+// }
+
+// @keyframes slidein {
+//     from {
+//         margin-top: 100%;
+//         height: 300%;
+//     }
+
+//     to {
+//         margin-top: 0%;
+//         height: 100%;
+//     }
+// }
+
+.custom-marker {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+:host ::ng-deep{
+    .p-card:hover{
+        background-color: #ecebeb;
+    }
+}
+
+:host ::ng-deep {
+
+    .p-timeline-event-content,
+    .p-timeline-event-opposite {
+        line-height: 1;
+    }
+}
+
+:host ::ng-deep {
+    .p-timeline-event-opposite {
+        display: none;
+    }
+}
+
+:host ::ng-deep {
+    .p-card{
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+:host ::ng-deep {
+    .p-card{
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+:host ::ng-deep {
+    .p-card-body{
+        padding: 0rem !important;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    ::ng-deep {
+        .customized-timeline {
+            .p-timeline-event:nth-child(even) {
+                flex-direction: row !important;
+
+                .p-timeline-event-content {
+                    text-align: left !important;
+                }
+            }
+
+            .p-timeline-event-opposite {
+                flex: 0;
+            }
+
+            .p-card {
+                margin-top: 1rem;
+            }
+        }
+    }
+}

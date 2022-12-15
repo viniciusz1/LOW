@@ -10,22 +10,12 @@ import { StatusDemanda } from '../models/statusDemanda.enum';
 })
 export class DemandaAnalistaService {
   public demandaAnalistaForm = this.fb.group({
-    "tamanhoDemandaAnalista":"MuitoPequeno",
-    "buSolicitanteDemandaAnalista": {
-        "codigoBusinessUnit": ['']
-    },
-    "busBeneficiadasDemandaAnalista":[{
-        "codigoBusinessUnit": ['']
-    }],
-    "demandaDemandaAnalista": {
-        "codigoDemanda": ['']
-    },
-    "analista": {
-        "codigoUsuario": ['']
-    },
-    "sessaoDemandaAnalista": {
-        "codigoSessao": ['']
-    }
+    tamanhoDemandaAnalista:[''],
+    buSolicitanteDemandaAnalista:[''],
+    busBeneficiadasDemandaAnalista:[''],
+    demandaDemandaAnalista: [''],
+    analista: [''],
+    sessaoDemandaAnalista: ['']
   });
 
 

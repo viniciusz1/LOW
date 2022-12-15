@@ -1,27 +1,27 @@
-<div class="mt-5 container" [formGroup]="classificacaoDemandaForm" (ngSubmit)="onSubmitClassificacaoDemanda()">
+<div class="mt-5 container" [formGroup]="demandaAnalistaForm" (ngSubmit)="onSubmitClassificacaoDemanda()">
     <div class="row d-flex justify-content-between" style="border: 1px solid #bcbaba; border-radius: 5px;">
         <div class="col-md-5 ps-5 py-5 position-relative">
             <div style="width: 140%;" class="line-top-start"></div>
             <div class="">
                 <label class="form-label me-2">Tamanho:</label>
                 <br>
-                <p-dropdown formControlName="tamanhoDemanda" [options]="opcoesDeTamanho" optionLabel="name" placeholder="Selecione um tamanho"></p-dropdown>
+                <p-dropdown formControlName="tamanhoDemandaAnalista" [options]="opcoesDeTamanho" placeholder="Selecione um tamanho"></p-dropdown>
             </div>
             <div class="">
                 <label class="form-label">BU beneficiada:</label>
                 <br>
-                <p-multiSelect [options]="BUs" formControlName="buBeneficiadaDemanda" defaultLabel="Selecione as BUs" optionLabel="nomeBusinessUnit" display="chip"></p-multiSelect>
+                <p-multiSelect [options]="BUs" formControlName="busBeneficiadasDemandaAnalista" defaultLabel="Selecione as BUs" optionLabel="nomeBusinessUnit" display="chip"></p-multiSelect>
             </div>
             <div class="">
                 <label class="form-label">BU solicitante:</label>
                 <br>
-                <p-dropdown formControlName="buSolicitanteDemanda"  [options]="BUs" optionLabel="nomeBusinessUnit" placeholder="Selecione uma BU"></p-dropdown>
+                <p-dropdown formControlName="buSolicitanteDemandaAnalista"  [options]="BUs" optionLabel="nomeBusinessUnit" placeholder="Selecione uma BU"></p-dropdown>
             </div>
             <div class="">
                 <label class="form-label">Sessão de TI Responsável:</label>
                 <br>
-                <p-dropdown [options]="sessoes" optionLabel="name"
-                formControlName="secaoDeTIResponsavelDemanda"
+                <p-dropdown [options]="sessoes"
+                formControlName="sessaoDemandaAnalista"
                 placeholder="Selecione uma sessão"></p-dropdown>
             </div>
             <div class="">
@@ -142,7 +142,7 @@
         <div routerLink="/tela-inicial" class="btn btn-danger">Reprovar</div>
         <div class="justify-content-end">
             <div class="btn btn-outline-primary">Contatar Solicitante</div>
-            <div routerLink="/tela-inicial" (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">Aprovar</div>
+            <div  (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">Aprovar</div>
         </div>
     </div>
 </div>

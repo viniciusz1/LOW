@@ -1,4 +1,4 @@
-<form class="container" [formGroup]="demandaForm" (ngSubmit)="onSubmitDemanda()">
+<form class="container" [formGroup]="demandaForm">
   <h3>Dados Gerais</h3>
   <hr>
   <div class="etapa-1">
@@ -41,7 +41,7 @@
     <span spyTarget="gerais" class="p-float-label">
       <p-multiSelect class="w-100" [options]="centrosCusto" [(ngModel)]="selectedCentros"
         placeholder="Selecione os Centros de Custo" defaultLabel="Selecione os centros de custo" optionLabel="centro"
-        display="chip" formControlName="centroCustoDemanda">
+        display="chip" formControlName="centroCustos">
       </p-multiSelect>
     </span>
   </div>
@@ -71,7 +71,7 @@
             pTooltip="Como você calculou o benefício?" tooltipPosition="top"></i>
         </div>
         <textarea placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..." style="width: 100%"
-          [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea formControlName="memoriaCalculo"></textarea>
+          [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea formControlName="memoriaDeCalculoBeneficio"></textarea>
       </div>
     </div>
     <div formGroupName="beneficioPotencialDemanda">
@@ -100,7 +100,7 @@
         <div style="display: flex">
           <textarea placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
             style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
-            formControlName="memoriaCalculo"></textarea>
+            formControlName="memoriaDeCalculoBeneficio"></textarea>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { ComissaoService } from './../../services/comissao.service';
 import { FormBuilder } from '@angular/forms';
 import { DialogRef } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
@@ -14,10 +15,13 @@ import { listaReunioes } from 'src/app/telas/reunioes/tela-reuniao/listReunioes'
 export class ModalCriarReuniaoComponent implements OnInit {
   constructor(
     public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private comissaoService: ComissaoService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.atualizarComissoes();
+  }
 
   listaReunioes: Reuniao[] = listaReunioes;
   listaDemandasEscolhidas: Demanda[] = [];
@@ -36,15 +40,15 @@ export class ModalCriarReuniaoComponent implements OnInit {
   dataReuniao: any;
   comissaoSelecionada: any;
 
-  onSubmit(){
-    console.log(this.novaReuniaoForm.value)
+  onSubmit() {
+    console.log(this.novaReuniaoForm.value);
   }
 
   novaReuniaoForm = this.fb.group({
     listaDemandas: [this.listaDemandasEscolhidas],
     dataReuniao: [''],
-    comissaoReuniao: ['']
-  })
+    comissaoReuniao: [''],
+  });
   dragStart(demanda: Demanda) {
     this.draggedDemanda = demanda;
   }
@@ -74,6 +78,15 @@ export class ModalCriarReuniaoComponent implements OnInit {
       );
       this.draggedDemanda = undefined;
     }
+  }
+
+  atualizarComissoes() {
+    this.comissaoService
+      .getComissao()
+      .subscribe({
+        next: (comissao) => (this.listaDeComissoesReuniao = comissao),
+        error: (err) => console.log(err),
+      });
   }
 
   dragEnd() {

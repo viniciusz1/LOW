@@ -7,12 +7,12 @@
 }
 
 
-::ng-deep {
+:host::ng-deep {
     .p-dropdown{
         width: 200px!important;
     }
 
-
+  }
 .right-arrow:hover,
 .left-arrow:hover {
     background-color: rgba(0, 0, 0, 0.596);

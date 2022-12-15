@@ -40,7 +40,7 @@
     </div>
     <span spyTarget="gerais" class="p-float-label">
       <p-multiSelect class="w-100" [options]="centrosCusto" [(ngModel)]="selectedCentros"
-        placeholder="Selecione os Centros de Custo" defaultLabel="Selecione os centros de custo" optionLabel="centro"
+        placeholder="Selecione os Centros de Custo" defaultLabel="Selecione os centros de custo" optionLabel="nome"
         display="chip" formControlName="centroCustos">
       </p-multiSelect>
     </span>
@@ -127,7 +127,7 @@
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
           pTooltip="Qual seria a usabilidade do sistema?" tooltipPosition="top"></i>
       </div>
-      <p-dropdown [options]="opcoesDeTamanho" optionLabel="name" placeholder="Selecione a frequência"
+      <p-dropdown [options]="opcoesDeTamanho"  placeholder="Selecione a frequência"
         formControlName="frequenciaDeUsoDemanda"></p-dropdown>
     </div>
     <div>

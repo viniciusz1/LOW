@@ -33,7 +33,9 @@ export class ParteDemandaComponent implements OnInit {
   }
   atualizarCentrosCusto() {
     this.centroCustoService.getCentrosCusto().subscribe({
-      next: (centrosCusto) => (this.centrosCusto = centrosCusto),
+      next: (centrosCusto) => {(this.centrosCusto = centrosCusto)
+      console.log(centrosCusto)
+      },
       error: (err) => console.log(err),
     });
   }

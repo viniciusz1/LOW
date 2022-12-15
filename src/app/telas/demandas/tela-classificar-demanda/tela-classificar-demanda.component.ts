@@ -1,3 +1,4 @@
+import { DemandaAnalistaService } from './../../../services/demanda-analista.service';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,10 +16,10 @@ interface BU {
 })
 export class TelaClassificarDemandaComponent implements OnInit {
   BUs: BU[];
-
+  demandaAnalistaForm = this.demandaAnalistaService.demandaAnalistaForm;
   selectedBUs: any;
 
-  constructor(private matDialog: MatDialog, private fb: FormBuilder) {
+  constructor(private matDialog: MatDialog, private fb: FormBuilder, private demandaAnalistaService: DemandaAnalistaService) {
     this.BUs = [
       { nomeBusinessUnit: 'WEG Digital', codigoBusinessUnit: 'WD' },
       { nomeBusinessUnit: 'Vendas', codigoBusinessUnit: 'VD' },
@@ -27,16 +28,9 @@ export class TelaClassificarDemandaComponent implements OnInit {
       { nomeBusinessUnit: 'Corpotativo', codigoBusinessUnit: 'CP' },
     ];
   }
-  classificacaoDemandaForm = this.fb.group({
-    tamanhoDemanda: [''],
-    buBeneficiadaDemanda: [''],
-    buSolicitanteDemanda: [''],
-    secaoDeTIResponsavelDemanda: [''],
-    documentoDemanda: [''],
-  });
 
   onSubmitClassificacaoDemanda(){
-    console.log(this.classificacaoDemandaForm.value)
+    console.log(this.demandaAnalistaForm.value)
   }
 
   openModalDemandaDocumento() {
@@ -45,17 +39,17 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
   }
   opcoesDeTamanho = [
-    { name: 'Muito Pequena' },
-    { name: 'Pequena' },
-    { name: 'Média' },
-    { name: 'Grande' },
-    { name: 'Muito Grande' },
+    'Muito Pequena',
+    'Pequena',
+    'Média',
+    'Grande',
+    'Muito Grande',
   ];
   sessoes = [
-    { name: 'TI' },
-    { name: 'WSA' },
-    { name: 'Corp' },
-    { name: 'WEG SM' },
+    'TI',
+    'WSA',
+    'Corp',
+    'WEG SM',
   ];
   ngOnInit(): void {}
 }

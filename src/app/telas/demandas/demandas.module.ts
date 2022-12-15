@@ -1,3 +1,4 @@
+import { DemandaAnalistaService } from './../../services/demanda-analista.service';
 import { ChatModule } from './chat/chat.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { MatButtonModule } from '@angular/material/button';
@@ -58,5 +59,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ConfirmDialogModule,
     SharedModule
   ],
+  providers:[DemandaAnalistaService]
 })
 export class DemandasModule { }

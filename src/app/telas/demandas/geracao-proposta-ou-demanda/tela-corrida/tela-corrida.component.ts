@@ -41,9 +41,7 @@ export class TelaCorridaComponent implements OnInit {
   constructor(
     private spyService: ScrollSpyService,
     private router: Router,
-    private fb: FormBuilder,
     private demandaService: DemandaService,
-    private element: ElementRef
   ) {
     this.startSpy();
     this.tipoExibicaoTela();

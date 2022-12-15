@@ -1,3 +1,4 @@
+import { DemandaAnalistaService } from './../../../../../services/demanda-analista.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ScrollSpyService } from 'ng-spy';
@@ -19,10 +20,10 @@ export class ParteReuniaoComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private spyService: ScrollSpyService,
     private fb: FormBuilder) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
+  propostaForm = new FormBuilder()
   recursos: Recurso[] = [
     {
       id: '1',

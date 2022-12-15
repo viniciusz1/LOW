@@ -1,3 +1,4 @@
+import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Beneficio } from './beneficio.model';
 import { StatusDemanda } from './statusDemanda.enum';
 import { Recurso } from "./recurso.model"
@@ -7,10 +8,10 @@ export interface Demanda {
     statusDemanda?: StatusDemanda,
     situacaoAtualDemanda?: string,
     objetivoDemanda?: string,
-    centroDeCustoDemanda?: string[],
+    centroDeCustoDemanda?: CentroCusto[],
     beneficioRealDemanda?: Beneficio,
     beneficioPotencialDemanda?: Beneficio,
-    beneficioQualitativoDemanda?: Beneficio,
+    beneficioQualitativoDemanda?: string,
     memoriaCalcBenRealDemanda?: string,
     memoriaCalcBenPotencialDemanda?: string,
     memoriaCalcBenQualitativoDemanda?: string,

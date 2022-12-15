@@ -10,8 +10,6 @@ import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
 import { ScrollSpyService } from 'ng-spy';
 import { SpyTarget } from 'ng-spy/lib/spy-target.model';
 
-
-
 interface CentrosCusto {
   centro: string;
 }
@@ -26,25 +24,18 @@ interface Moedas {
   styleUrls: ['./tela-corrida.component.scss'],
 })
 export class TelaCorridaComponent implements OnInit {
-
-
+  aparecerProposta = false;
+  formDemanda = new FormBuilder();
   onSubmitDemanda() {
-    //ARQUIVO -- NÃO FUNCIONA
-    // this.demandaForm.patchValue({
-    //   anexoDemanda: JSON.stringify(this.arquivos),
-    // });
-    // this.demandaService.postDemanda(this.demandaForm.value).subscribe({
-    //     next: (response) => {
-    //       console.log(response)
-    //     },
-    //     error: (err) => {
-    //       console.error(err)
-    //     }
-    //   })
-    // console.log(this.demandaForm.value)
+    this.demandaService.postDemanda().subscribe({
+        next: (response) => {
+          console.log(response)
+        },
+        error: (err) => {
+          console.error(err)
+        }
+      })
   }
-  aparecerProposta = false
-
 
   constructor(
     private spyService: ScrollSpyService,
@@ -53,17 +44,21 @@ export class TelaCorridaComponent implements OnInit {
     private demandaService: DemandaService,
     private element: ElementRef
   ) {
-    this.startSpy()
+    this.startSpy();
     this.tipoExibicaoTela();
   }
 
-  indoPraCima(top: number){
-    this.startSpy()
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    console.log(scrollPosition)
-    window.scroll({ 
-      top: top,  
-      behavior: 'smooth' 
+  indoPraCima(top: number) {
+    this.startSpy();
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+    console.log(scrollPosition);
+    window.scroll({
+      top: top,
+      behavior: 'smooth',
     });
   }
 
@@ -75,14 +70,11 @@ export class TelaCorridaComponent implements OnInit {
     }
   }
 
-  startSpy(){
-    this.spyService.spy()
+  startSpy() {
+    this.spyService.spy();
   }
 
   ngOnInit(): void {
-    this.startSpy()
+    this.startSpy();
   }
-  
-
-
 }

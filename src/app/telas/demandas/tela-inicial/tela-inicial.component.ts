@@ -13,11 +13,11 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Sort } from '@angular/material/sort';
-import { listaDemandas } from '../../../shared/listDemandas';
 import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from '../../../shared/textoDoTutorial';
 import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -181,7 +181,10 @@ export class TelaInicialComponent implements OnInit {
   }
 
   exibirFilasDeStatus() {
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-classificacao')) {
+    console.log(this.listaDemandas[0].statusDemanda)
+    if (this.listaDemandas.some(e => {
+      e.statusDemanda?.toString() == "BACKLOG_CLASSIFICACAO"
+  })) {
       this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
     if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-aprovacao')) {
@@ -224,21 +227,10 @@ export class TelaInicialComponent implements OnInit {
       }
   }
   ngOnInit(): void {
-    // this.openModalPropostaDocumento()
-    // this.openModalAtaDocumento()
-    // this.openModalDemandaDocumento()
-    // this.openModalMotivoDevolucao()
-    // this.openModalParecerComissaoProposta()
-    // this.openModalReprovacaoDemanda()
-    // this.openModalFiltroDemandas()
-
-
     this.demandasService.getDemandas()
       .subscribe({
         next: (list) => {
           this.listaDemandas = list
-          console.log(this.listaDemandas)
-          this.testandoEsquemaExibicaoDemandas()
           this.exibirFilasDeStatus()
         },
         error: (err) => {
@@ -246,8 +238,5 @@ export class TelaInicialComponent implements OnInit {
         }
       })
   }
-  testandoEsquemaExibicaoDemandas() {
-    this.listaDemandas = []
-    this.listaDemandas.push(...listaDemandas)
-  }
+
 }

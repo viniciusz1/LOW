@@ -116,6 +116,7 @@ export class CardDemandaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
     this.primaryColorClass = this.dadosDemada.statusDemanda;
     this.secondaryColorClass = this.dadosDemada.statusDemanda + '-sec';
 

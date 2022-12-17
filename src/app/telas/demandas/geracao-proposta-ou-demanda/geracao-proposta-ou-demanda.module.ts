@@ -20,6 +20,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ParteDemandaComponent } from './tela-corrida/parte-demanda/parte-demanda.component';
 import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reuniao.component';
 import {TooltipModule} from 'primeng/tooltip';
+import { TimelineModule } from 'primeng/timeline';
 
 
 
@@ -79,7 +80,8 @@ import {TooltipModule} from 'primeng/tooltip';
     InputNumberModule,
     MultiSelectModule,
     AutoCompleteModule,
-    TooltipModule
+    TooltipModule,
+    TimelineModule
   ],
   providers: [
     MessageService,

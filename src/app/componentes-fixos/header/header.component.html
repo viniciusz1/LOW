@@ -17,10 +17,10 @@
         [stepContentParams]="{'texto': textoTutorial[7]}"
         style="overflow: auto;">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'">REUNIÕES</a>
+                <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'" >REUNIÕES</a>
             </li>
             <li class="nav-item" >
-                <a role="button" class="nav-link" routerLink="/tela-inicial" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'">DEMANDAS</a>
+                <a role="button" class="nav-link" routerLink="/tela-inicial"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">DEMANDAS</a>
             </li>
         </div>
         <li role="button" class="nav-item" routerLink="/tela-inicial/chat" *ngIf="!inicial"

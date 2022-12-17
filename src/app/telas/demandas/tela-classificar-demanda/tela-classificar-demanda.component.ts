@@ -18,8 +18,19 @@ export class TelaClassificarDemandaComponent implements OnInit {
   BUs: BU[];
   demandaAnalistaForm = this.demandaAnalistaService.demandaAnalistaForm;
   selectedBUs: any;
-
-  constructor(private matDialog: MatDialog, private fb: FormBuilder, private demandaAnalistaService: DemandaAnalistaService) {
+  opcoesDeTamanho = [
+    'Muito Pequena',
+    'Pequena',
+    'Média',
+    'Grande',
+    'Muito Grande',
+  ];
+  sessoes = ['TI', 'WSA', 'Corp', 'WEG SM'];
+  constructor(
+    private matDialog: MatDialog,
+    private fb: FormBuilder,
+    private demandaAnalistaService: DemandaAnalistaService
+  ) {
     this.BUs = [
       { nomeBusinessUnit: 'WEG Digital', codigoBusinessUnit: 'WD' },
       { nomeBusinessUnit: 'Vendas', codigoBusinessUnit: 'VD' },
@@ -29,8 +40,13 @@ export class TelaClassificarDemandaComponent implements OnInit {
     ];
   }
 
-  onSubmitClassificacaoDemanda(){
-    console.log(this.demandaAnalistaForm.value)
+  onSubmitClassificacaoDemanda() {
+    this.demandaAnalistaService.postProposta()
+    .subscribe({next(value) {
+      console.log(value);
+    },error(err) {
+      console.log(err);
+    },})
   }
 
   openModalDemandaDocumento() {
@@ -38,18 +54,6 @@ export class TelaClassificarDemandaComponent implements OnInit {
       maxWidth: '70vw',
     });
   }
-  opcoesDeTamanho = [
-    'Muito Pequena',
-    'Pequena',
-    'Média',
-    'Grande',
-    'Muito Grande',
-  ];
-  sessoes = [
-    'TI',
-    'WSA',
-    'Corp',
-    'WEG SM',
-  ];
+
   ngOnInit(): void {}
 }

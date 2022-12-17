@@ -13,8 +13,8 @@ export class DemandaAnalistaService {
     tamanhoDemandaAnalista:[''],
     buSolicitanteDemandaAnalista:[''],
     busBeneficiadasDemandaAnalista:[''],
-    demandaDemandaAnalista: [''],
-    analista: [''],
+    demandaDemandaAnalista: {"codigoDemanda": 5,},
+    analista: {'codigoUsuario': 1},
     sessaoDemandaAnalista: ['']
   });
 
@@ -22,7 +22,7 @@ export class DemandaAnalistaService {
   postProposta() {
     console.log(this.demandaAnalistaForm.value);
     return this.http.post<Demanda | string>(
-      'http://localhost:8080/demanda',
+      'http://localhost:8080/demandaAnalista',
 
       this.demandaAnalistaForm.value
     );

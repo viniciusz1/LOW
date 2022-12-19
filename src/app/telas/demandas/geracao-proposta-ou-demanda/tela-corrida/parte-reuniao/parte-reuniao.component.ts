@@ -75,6 +75,18 @@ export class ParteReuniaoComponent implements OnInit {
       detail: 'Recurso is updated',
     });
   }
+  addRow(){
+    this.recursos.push({
+      codigoRecurso: '',
+      nomeRecurso: '',
+      tipoDespesaRecurso: TipoDespesa.EXTERNO,
+      perfilDespesaRecurso: '',
+      quantidadeHorasRecurso: 0,
+      valorHoraRecurso: 0,
+      periodoExMesesRecurso: 0,
+      centrosCustoPagantesRecurso: []
+    })
+  }
 
   onRowEditCancel(product: Recurso, index: number) {
     this.recursos[index] = this.clonedRecursos[product.codigoRecurso];

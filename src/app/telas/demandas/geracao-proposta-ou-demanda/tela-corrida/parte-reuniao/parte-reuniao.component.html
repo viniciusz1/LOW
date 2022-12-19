@@ -87,12 +87,12 @@
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <p-dropdown [options]="['Interno', 'Externo']" appendTo="body" [(ngModel)]="recursos.perfilDespesa"
+                <p-dropdown [options]="['Interno', 'Externo']" appendTo="body" [(ngModel)]="recursos.tipoDespesaRecurso"
                   [style]="{ width: '100%' }">
                 </p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ recursos.tipoDespesa }}
+                {{ recursos.tipoDespesaRecurso }}
               </ng-template>
             </p-cellEditor>
           </td>
@@ -100,68 +100,68 @@
             <p-cellEditor>
               <ng-template pTemplate="input">
                 <p-dropdown [options]="['Hardware', 'Software', 'Corporativo']" appendTo="body"
-                  [(ngModel)]="recursos.perfilDespesa" [style]="{ width: '100%' }">
+                  [(ngModel)]="recursos.perfilDespesaRecurso" [style]="{ width: '100%' }">
                 </p-dropdown>
               </ng-template>
               <ng-template pTemplate="output">
-                {{ recursos.perfilDespesa }}
+                {{ recursos.perfilDespesaRecurso }}
               </ng-template>
             </p-cellEditor>
           </td>
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.quantidadeHoras" required />
+                <input pInputText type="text" [(ngModel)]="recursos.quantidadeHorasRecurso" required />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ recursos.quantidadeHoras }}
+                {{ recursos.quantidadeHorasRecurso }}
               </ng-template>
             </p-cellEditor>
           </td>
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.valorHora" required />
+                <input pInputText type="text" [(ngModel)]="recursos.valorHoraRecurso" required />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ recursos.valorHora }}
+                {{ recursos.valorHoraRecurso }}
               </ng-template>
             </p-cellEditor>
           </td>
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.valorTotalDespesa" required />
+                <input pInputText type="text" [(ngModel)]="recursos.valorTotalDespesaRecurso" required />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ recursos.valorTotalDespesa }}
+                {{ recursos.quantidadeHorasRecurso * recursos.valorHoraRecurso }}
               </ng-template>
             </p-cellEditor>
           </td>
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.periodoExMeses" required />
+                <input pInputText type="text" [(ngModel)]="recursos.periodoExMesesRecurso" required />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ recursos.periodoExMeses }}
+                {{ recursos.periodoExMesesRecurso }}
               </ng-template>
             </p-cellEditor>
           </td>
           <td pEditableColumn style="border: 1px solid #dee2e6">
             <p-cellEditor>
               <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.centrosCustoPagantes" required />
+                <input pInputText type="text" [(ngModel)]="recursos.centrosCustoPagantesRecurso" required />
               </ng-template>
               <ng-template pTemplate="output">
-                {{ recursos.centrosCustoPagantes }}
+                {{ recursos.centrosCustoPagantesRecurso }}
               </ng-template>
             </p-cellEditor>
           </td>
         </tr>
         <tr>
           <td>
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" (click)="addRow()">
               <i class="bi bi-plus-lg"></i>
             </button>
           </td>

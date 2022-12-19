@@ -59,9 +59,9 @@
         <input placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
           formControlName="valorBeneficio" />
         <select class="drop" name="plataforma" required="required" formControlName="moedaBeneficio">
-          <option value="brl">BRL</option>
-          <option value="eur">EUR</option>
-          <option value="dol">DOL</option>
+          <option value="Real">BRL</option>
+          <option value="Euro">EUR</option>
+          <option value="Dollar">DOL</option>
         </select>
       </div>
       <div class="situacao-atual" style="display: grid" id="item-1-2">
@@ -85,9 +85,9 @@
           <input placeholder="Ex: 20.000" style="width: 93%;" type="text" pInputText class="input"
             formControlName="valorBeneficio" />
             <select class="drop" name="plataforma" required="required" formControlName="moedaBeneficio">
-              <option value="brl">BRL</option>
-              <option value="eur">EUR</option>
-              <option value="dol">DOL</option>
+              <option value="Real">BRL</option>
+              <option value="Euro">EUR</option>
+              <option value="Dollar">DOL</option>
             </select>
         </div>
       </div>
@@ -137,8 +137,9 @@
           pTooltip="Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"
           tooltipPosition="top"></i>
       </div>
-      <p-fileUpload [chooseLabel]="'Escolher'" [uploadLabel]="'Enviar'" [cancelLabel]="'Cancelar'" name="myfile[]"
-        url="./upload.php" [multiple]="true"></p-fileUpload>
+      <p-fileUpload (change)="teste($event)" [chooseLabel]="'Escolher'" [uploadLabel]="'Enviar'" [cancelLabel]="'Cancelar'"
+      formControlName="anexoDemanda"  [auto]="true"
+      [multiple]="true"></p-fileUpload>
     </div>
   </div>
 </form>

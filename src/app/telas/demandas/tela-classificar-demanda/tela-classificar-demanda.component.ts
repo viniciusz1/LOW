@@ -1,13 +1,12 @@
+import { Secao } from '../../../models/secao.model';
+import { SecaoService } from '../../../services/secao.service';
+import { BusinessUnitService } from './../../../services/business-unit.service';
+import { BusinessUnit } from './../../../models/business-unit.model';
 import { DemandaAnalistaService } from './../../../services/demanda-analista.service';
-import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 
-interface BU {
-  nomeBusinessUnit: string;
-  codigoBusinessUnit: string;
-}
 
 @Component({
   selector: 'app-tela-classificar-demanda',
@@ -15,38 +14,66 @@ interface BU {
   styleUrls: ['./tela-classificar-demanda.component.scss'],
 })
 export class TelaClassificarDemandaComponent implements OnInit {
-  BUs: BU[];
+  BUs: BusinessUnit[] = [];
   demandaAnalistaForm = this.demandaAnalistaService.demandaAnalistaForm;
   selectedBUs: any;
   opcoesDeTamanho = [
-    'Muito Pequena',
-    'Pequena',
-    'Média',
-    'Grande',
-    'Muito Grande',
+    {
+      name: 'Muito Pequena',
+      value: 'MuitoPequeno',
+    },
+    {
+      name: 'Pequena',
+      value: 'Pequeno',
+    },
+    {
+      name: 'Média',
+      value: 'Medio',
+    },
+    {
+      name: 'Grande',
+      value: 'Grande',
+    },
+    {
+      name: 'Muito Grande',
+      value: 'MuitoGrande',
+    },
   ];
-  sessoes = ['TI', 'WSA', 'Corp', 'WEG SM'];
+  secoes: Secao[] = [];
   constructor(
     private matDialog: MatDialog,
-    private fb: FormBuilder,
-    private demandaAnalistaService: DemandaAnalistaService
+    private demandaAnalistaService: DemandaAnalistaService,
+    private businessUnitService: BusinessUnitService,
+    private secaoService: SecaoService
   ) {
-    this.BUs = [
-      { nomeBusinessUnit: 'WEG Digital', codigoBusinessUnit: 'WD' },
-      { nomeBusinessUnit: 'Vendas', codigoBusinessUnit: 'VD' },
-      { nomeBusinessUnit: 'Motores', codigoBusinessUnit: 'MT' },
-      { nomeBusinessUnit: 'Trefilação', codigoBusinessUnit: 'TF' },
-      { nomeBusinessUnit: 'Corpotativo', codigoBusinessUnit: 'CP' },
-    ];
+    this.businessUnitService.getBusinessUnits().subscribe({
+      next: (value) => {
+        this.BUs = value;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.secaoService.getSecao().subscribe({
+      next: (value) => {
+        this.secoes = value;
+        console.log(this.secoes)
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   onSubmitClassificacaoDemanda() {
-    this.demandaAnalistaService.postProposta()
-    .subscribe({next(value) {
-      console.log(value);
-    },error(err) {
-      console.log(err);
-    },})
+    this.demandaAnalistaService.postProposta().subscribe({
+      next(value) {
+        console.log(value);
+      },
+      error(err) {
+        console.log(err);
+      },
+    });
   }
 
   openModalDemandaDocumento() {

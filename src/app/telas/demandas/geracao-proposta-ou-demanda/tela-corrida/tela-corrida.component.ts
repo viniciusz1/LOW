@@ -27,14 +27,15 @@ export class TelaCorridaComponent implements OnInit {
   aparecerProposta = false;
   formDemanda = new FormBuilder();
   onSubmitDemanda() {
-    this.demandaService.postDemanda().subscribe({
-        next: (response) => {
-          console.log(response)
-        },
-        error: (err) => {
-          console.error(err)
-        }
-      })
+    // this.demandaService.postDemanda().subscribe({
+    //     next: (response) => {
+    //       console.log(response)
+    //     },
+    //     error: (err) => {
+    //       console.error(err)
+    //     }
+    //   })
+    console.log(this.formDemanda);
   }
 
 
@@ -88,6 +89,6 @@ export class TelaCorridaComponent implements OnInit {
       // {titulo: 'Dados Finais', id: 'dadosFinais', icon: PrimeIcons.CHECK, color: 'rgb(233, 233, 233)'},
   ];
   }
-  
+
 
 }

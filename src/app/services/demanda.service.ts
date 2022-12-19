@@ -25,6 +25,7 @@ export class DemandaService {
       valorBeneficio: [''],
     }),
     beneficioQualitativoDemanda: [''],
+    anexoDemanda: [''],
     frequenciaDeUsoDemanda: [''],
     solicitanteDemanda: {
       codigoUsuario: 1,

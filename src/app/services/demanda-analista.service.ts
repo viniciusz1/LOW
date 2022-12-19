@@ -10,14 +10,13 @@ import { StatusDemanda } from '../models/statusDemanda.enum';
 })
 export class DemandaAnalistaService {
   public demandaAnalistaForm = this.fb.group({
-    tamanhoDemandaAnalista:[''],
+    tamanhoDemandaAnalista: [''],
     buSolicitanteDemandaAnalista:[''],
     busBeneficiadasDemandaAnalista:[''],
-    demandaDemandaAnalista: {"codigoDemanda": 5,},
-    analista: {'codigoUsuario': 1},
-    sessaoDemandaAnalista: ['']
+    demandaDemandaAnalista: { codigoDemanda: 22 },
+    analista: { codigoUsuario: 6 },
+    secaoDemandaAnalista: [''],
   });
-
 
   postProposta() {
     console.log(this.demandaAnalistaForm.value);

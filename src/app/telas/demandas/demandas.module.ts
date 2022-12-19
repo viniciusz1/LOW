@@ -1,3 +1,4 @@
+import { SecaoService } from '../../services/secao.service';
 import { DemandaAnalistaService } from './../../services/demanda-analista.service';
 import { ChatModule } from './chat/chat.module';
 import { DropdownModule } from 'primeng/dropdown';
@@ -26,6 +27,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BusinessUnitService } from 'src/app/services/business-unit.service';
 
 
 @NgModule({
@@ -57,8 +59,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PaginatorModule,
     MultiSelectModule,
     ConfirmDialogModule,
-    SharedModule
+    SharedModule,
+
   ],
-  providers:[DemandaAnalistaService]
+  providers:[DemandaAnalistaService,BusinessUnitService, SecaoService]
 })
 export class DemandasModule { }

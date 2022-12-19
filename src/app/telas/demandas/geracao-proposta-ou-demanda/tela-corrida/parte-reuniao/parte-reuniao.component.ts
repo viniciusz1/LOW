@@ -1,3 +1,4 @@
+import { PropostaService } from './../../../../../services/proposta.service';
 import { DemandaAnalistaService } from './../../../../../services/demanda-analista.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
@@ -20,23 +21,12 @@ export class ParteReuniaoComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private fb: FormBuilder) {
+    private propostaService: PropostaService
+    ) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
-  propostaForm = new FormBuilder()
-  recursos: Recurso[] = [
-    {
-      id: '1',
-      nomeRecurso: 'Recurso 1',
-      tipoDespesa: TipoDespesa.EXTERNO,
-      perfilDespesa: 'Perfil 1',
-      quantidadeHoras: 1,
-      valorHora: 1,
-      valorTotalDespesa: 1,
-      periodoExMeses: 1,
-      centrosCustoPagantes: [],
-    },
-  ];
+  formProposta = this.propostaService.formProposta;
+  recursos = this.propostaService.recursos;
   onSubmit(){
     console.log(this.formProposta.value)
   }
@@ -48,18 +38,7 @@ export class ParteReuniaoComponent implements OnInit {
     { nome: 'Felipe Viera', area: 'Corpotativo' }
   ];
 
-  formProposta = this.fb.group({
-    prazoProposta: [''],
-    codigoPPMProposta: [''],
-    jiraProposta:[''],
-    recursosProposta: [this.recursos],
-    escopoDemanda: [''],
-    inicioExDemanda: [''],
-    fimExDemanda: [''],
-    paybackSimplesDemanda: [''],
-    responsaveisNegocioDemanda: ['']
 
-  })
 
   selectedResponsaveis: any;
   ngOnDestroy(): void {
@@ -85,11 +64,11 @@ export class ParteReuniaoComponent implements OnInit {
   clonedRecursos: { [s: string]: Recurso } = {};
 
   onRowEditInit(product: Recurso) {
-    this.clonedRecursos[product.id] = { ...product };
+    this.clonedRecursos[product.codigoRecurso] = { ...product };
   }
 
   onRowEditSave(product: Recurso) {
-    delete this.clonedRecursos[product.id];
+    delete this.clonedRecursos[product.codigoRecurso];
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
@@ -98,8 +77,8 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
   onRowEditCancel(product: Recurso, index: number) {
-    this.recursos[index] = this.clonedRecursos[product.id];
-    delete this.clonedRecursos[product.id];
+    this.recursos[index] = this.clonedRecursos[product.codigoRecurso];
+    delete this.clonedRecursos[product.codigoRecurso];
   }
 
   ngOnInit(): void {

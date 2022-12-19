@@ -1,3 +1,4 @@
+import { PropostaService } from './../../services/proposta.service';
 import { SecaoService } from '../../services/secao.service';
 import { DemandaAnalistaService } from './../../services/demanda-analista.service';
 import { ChatModule } from './chat/chat.module';

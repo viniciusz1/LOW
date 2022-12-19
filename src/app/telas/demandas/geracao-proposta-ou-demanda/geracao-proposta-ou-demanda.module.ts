@@ -1,3 +1,4 @@
+import { PropostaService } from './../../../services/proposta.service';
 
 import { MessageService } from 'primeng/api';
 import { RotasModule } from './../../../rotas.module';
@@ -85,7 +86,7 @@ import { TimelineModule } from 'primeng/timeline';
   ],
   providers: [
     MessageService,
-
+    PropostaService
   ]
 })
 export class GeracaoPropostaOuDemandaModule { }

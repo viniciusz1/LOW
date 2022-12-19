@@ -7,41 +7,12 @@ import { Demanda } from '../models/demanda.model';
 @Injectable({
   providedIn: 'root',
 })
-export class DemandaService {
+export class PropostaService {
   public propostaForm = this.fb.group({
-    tituloDemanda: [''],
-    situacaoAtualDemanda: [''],
-    objetivoDemanda: [''],
-    centroCustos: [''],
-    beneficioRealDemanda: this.fb.group({
-      moedaBeneficio: [''],
-      memoriaDeCalculoBeneficio: [''],
-      valorBeneficio: [''],
-    }),
-    beneficioPotencialDemanda: this.fb.group({
-      moedaBeneficio: [''],
-      memoriaDeCalculoBeneficio: [''],
-      valorBeneficio: [''],
-    }),
-    beneficioQualitativoDemanda: [''],
-    frequenciaDeUsoDemanda: [''],
-    solicitanteDemanda: {
-      codigoUsuario: 1,
-      nomeUsuario: '1',
-      userUsuario: '1',
-      emailUsuario: '1',
-      senhaUsuario: '1',
-      departamentoUsuario: {
-        codigoDepartamento: 1,
-        nome: '1',
-      },
-      nivelAcessoUsuario: 'Solicitante',
-    },
   });
 
 
   postProposta() {
-    console.log(this.propostaForm.value);
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demanda',
 

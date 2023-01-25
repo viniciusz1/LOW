@@ -28,16 +28,7 @@ export class DemandaService {
     anexoDemanda: [''],
     frequenciaDeUsoDemanda: [''],
     solicitanteDemanda: {
-      codigoUsuario: 1,
-      nomeUsuario: '1',
-      userUsuario: '1',
-      emailUsuario: '1',
-      senhaUsuario: '1',
-      departamentoUsuario: {
-        codigoDepartamento: 1,
-        nome: '1',
-      },
-      nivelAcessoUsuario: 'Solicitante',
+      codigoUsuario: 3
     },
   });
 

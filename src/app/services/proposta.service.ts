@@ -33,7 +33,7 @@ export class PropostaService {
     fimExDemanda: [''],
     paybackSimplesDemanda: [''],
     responsaveisNegocioDemanda: [''],
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 23}
+    demandaAnalistaProposta: {'codigoDemandaAnalista': 11}
   });
   postProposta() {
     console.log(this.formProposta.value);

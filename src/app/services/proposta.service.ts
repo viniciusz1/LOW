@@ -16,7 +16,7 @@ export class PropostaService {
       codigoRecurso: '1',
       nomeRecurso: 'Recurso 1',
       tipoDespesaRecurso: TipoDespesa.EXTERNO,
-      perfilDespesaRecurso: 'Perfil 1',
+      perfilDespesaRecurso: 'hardware',
       quantidadeHorasRecurso: 1,
       valorHoraRecurso: 1,
       periodoExMesesRecurso: 1,
@@ -28,11 +28,11 @@ export class PropostaService {
     codigoPPMProposta: [''],
     jiraProposta: [''],
     recursosProposta: [this.recursos],
-    escopoDemanda: [''],
-    inicioExDemanda: [''],
-    fimExDemanda: [''],
-    paybackSimplesDemanda: [''],
-    responsaveisNegocioDemanda: [''],
+    escopoDemandaProposta: [''],
+    inicioExDemandaProposta: [''],
+    fimExDemandaProposta: [''],
+    paybackDemandaProposta: [''],
+    responsaveisNegocioDemanda: ['3'],
     demandaAnalistaProposta: {'codigoDemandaAnalista': 11}
   });
   postProposta() {

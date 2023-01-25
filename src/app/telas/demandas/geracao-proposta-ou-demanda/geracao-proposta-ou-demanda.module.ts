@@ -22,6 +22,7 @@ import { ParteDemandaComponent } from './tela-corrida/parte-demanda/parte-demand
 import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reuniao.component';
 import {TooltipModule} from 'primeng/tooltip';
 import { TimelineModule } from 'primeng/timeline';
+import {AccordionModule} from 'primeng/accordion';
 
 
 
@@ -82,7 +83,8 @@ import { TimelineModule } from 'primeng/timeline';
     MultiSelectModule,
     AutoCompleteModule,
     TooltipModule,
-    TimelineModule
+    TimelineModule,
+    AccordionModule
   ],
   providers: [
     MessageService,

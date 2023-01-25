@@ -1,39 +1,51 @@
 <div class="row">
-  <div class="col-2" style="padding: 3.5rem !important;">
-    <div style="position: fixed; left: 1vw; ">
-        <p-timeline [value]="titulosDemanda">
+  <div class="col-2" style="padding: 3.5rem !important">
+    <div style="position: fixed; left: 1vw">
+      <p-timeline [value]="titulosDemanda">
+        <ng-template pTemplate="marker" let-event>
+          <span
+            class="custom-marker shadow-2"
+            [style.backgroundColor]="event.color"
+          >
+            <i [ngClass]="event.icon"></i>
+          </span>
+        </ng-template>
 
-            <ng-template pTemplate="marker" let-event>
-                <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-                    <i [ngClass]="event.icon"></i>
-                </span>
-            </ng-template>
-
-
-            <ng-template pTemplate="content" let-event>
-              <span>
-                <a class="nav-link mt-5" spyOn="gerais" activeClass="active" role="button" style="font-size: 0.9rem; margin-top: 0.7vh !important;"
-                (click)="indoPraCima(event.local)" >{{event.titulo}}</a>
-              </span>
-            </ng-template>
-
-        </p-timeline>
+        <ng-template pTemplate="content" let-event>
+          <span>
+            <a
+              class="nav-link mt-5"
+              spyOn="gerais"
+              activeClass="active"
+              role="button"
+              style="font-size: 0.9rem; margin-top: 0.7vh !important"
+              (click)="indoPraCima(event.local)"
+              >{{ event.titulo }}</a
+            >
+          </span>
+        </ng-template>
+      </p-timeline>
     </div>
   </div>
 
   <div class="tela-corrida col-10 border-start">
     <div>
       <div style="margin: 0 10vw" class="mt-5">
-
-        <p-accordion>
+        <p-accordion *ngIf="aparecerProposta">
           <p-accordionTab header="Demanda">
             <app-parte-demanda></app-parte-demanda>
           </p-accordionTab>
-      </p-accordion>
+        </p-accordion>
+        <app-parte-demanda *ngIf="!aparecerProposta"></app-parte-demanda>
         <app-parte-reuniao *ngIf="aparecerProposta"></app-parte-reuniao>
-        <div class="d-flex justify-content-between" style="margin-top: 2vh !important; margin-bottom: 2vh">
-          <button class="btn btn-danger  ms-2" routerLink="/tela-inicial">Cancelar</button>
-          <button class="btn btn-primary me-2"  (click)="onSubmitDemanda()">
+        <div
+          class="d-flex justify-content-between"
+          style="margin-top: 2vh !important; margin-bottom: 2vh"
+        >
+          <button class="btn btn-danger ms-2" routerLink="/tela-inicial">
+            Cancelar
+          </button>
+          <button class="btn btn-primary me-2" (click)="onSubmitDemanda()">
             Finalizar
           </button>
         </div>

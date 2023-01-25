@@ -25,7 +25,6 @@ import { TimelineModule } from 'primeng/timeline';
 import {AccordionModule} from 'primeng/accordion';
 
 
-
 @NgModule({
   declarations: [
     TelaCorridaComponent,

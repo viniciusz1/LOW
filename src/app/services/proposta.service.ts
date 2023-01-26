@@ -31,9 +31,9 @@ export class PropostaService {
     escopoDemandaProposta: [''],
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],
-    paybackDemandaProposta: [''],
+    paybackProposta: [''],
     responsavelProposta: ['3'],
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 11}
+    demandaAnalistaProposta: {'codigoDemandaAnalista': 13}
   });
   postProposta() {
     console.log(this.formProposta.value);

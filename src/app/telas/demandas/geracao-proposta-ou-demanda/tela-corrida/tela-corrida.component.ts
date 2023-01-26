@@ -84,9 +84,19 @@ export class TelaCorridaComponent implements OnInit {
 
   ngOnInit(): void {
     this.startSpy();
+    setInterval(() => {
+       let icones = document.getElementsByClassName('nav-scroll');
+       for(let i = 0; i < icones.length; i++){
+        if(icones[i].classList.length > 2){
+          this.titulosDemanda[i].color="#00579d"
+        } else {
+          this.titulosDemanda[i].color="rgb(233, 233, 233)"
+        }
+      }
+    })
 
     this.titulosDemanda = [
-      {titulo: 'Dados Gerais', id: 'dadosGerais', icon: PrimeIcons.CHART_BAR, color: '#00579d', local: 0},
+      {titulo: 'Dados Gerais', id: 'dadosGerais', icon: PrimeIcons.CHART_BAR, color: 'rgb(233, 233, 233)', local: 0},
       {titulo: 'Benefícios', id: 'beneficios', icon: PrimeIcons.DATABASE, color: 'rgb(233, 233, 233)', local: 600},
       {titulo: 'Adicionais', id: 'adicionais', icon: PrimeIcons.CHECK, color: 'rgb(233, 233, 233)', local: 1100},
   ];

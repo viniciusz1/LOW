@@ -11,7 +11,7 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 export class TelaChatComponent implements OnInit {
   messageService: any;
   items: MenuItem[] = [];
-  
+
   constructor(private confirmationService: ConfirmationService) { }
   @ViewChild('mensagemDigitada') private mensagem: any;
   mensagens: Mensagem[] = [{
@@ -54,7 +54,9 @@ export class TelaChatComponent implements OnInit {
 
       }
     ];
+
   }
+
   silenciarChat() {
     this.confirmationService.confirm({
       message: 'Deseja realmente silenciar esta conversa?',

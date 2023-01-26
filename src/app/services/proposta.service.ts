@@ -32,7 +32,7 @@ export class PropostaService {
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],
     paybackDemandaProposta: [''],
-    responsaveisNegocioDemanda: ['3'],
+    responsavelProposta: ['3'],
     demandaAnalistaProposta: {'codigoDemandaAnalista': 11}
   });
   postProposta() {

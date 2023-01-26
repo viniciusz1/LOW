@@ -217,7 +217,5 @@
     <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
       pTooltip="Insira os responsáveis por suceder a proposta" tooltipPosition="top"></i>
   </div>
-  <p-multiSelect [options]="responsaveis" formControlName="responsaveisNegocioDemanda"
-    defaultLabel="Selecione os Responsaveis" optionLabel="nome" display="chip">
-  </p-multiSelect>
+  <p-dropdown [options]="responsaveis" placeholder="Selecione o Responsavel" formControlName="responsavelProposta" optionLabel="nome"></p-dropdown>
 </form>

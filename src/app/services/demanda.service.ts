@@ -9,6 +9,7 @@ import { StatusDemanda } from '../models/statusDemanda.enum';
   providedIn: 'root',
 })
 export class DemandaService {
+
   public demandaForm = this.fb.group({
     tituloDemanda: [''],
     situacaoAtualDemanda: [''],
@@ -32,6 +33,8 @@ export class DemandaService {
     },
   });
 
+  public arquivos: FileList[] = [];
+
   getDemandas() {
     return this.http.get<Demanda[]>(
       // 'http://localhost:8080/demanda'
@@ -46,11 +49,12 @@ export class DemandaService {
   }
 
   postDemanda() {
-    console.log(this.demandaForm.value);
+    let demandaFormData = new FormData();
+    demandaFormData.append('arquivos', JSON.stringify(this.arquivos));
+    demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+    console.log(demandaFormData.getAll('arquivos'))
     return this.http.post<Demanda | string>(
-      'http://localhost:8080/demanda',
-
-      this.demandaForm.value
+      'http://localhost:8080/demanda', demandaFormData
     );
   }
 

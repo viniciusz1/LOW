@@ -266,13 +266,13 @@
         ></i>
       </div>
       <p-fileUpload
-        (change)="teste($event)"
         [chooseLabel]="'Escolher'"
         [uploadLabel]="'Enviar'"
         [cancelLabel]="'Cancelar'"
-        formControlName="anexoDemanda"
-        [auto]="true"
         [multiple]="true"
+        [auto]="true"
+        [customUpload]="true"
+        (uploadHandler)="uploadDocumentos($event)"
       ></p-fileUpload>
     </div>
   </div>

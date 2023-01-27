@@ -26,14 +26,13 @@ export class DemandaService {
       valorBeneficio: [''],
     }),
     beneficioQualitativoDemanda: [''],
-    anexoDemanda: [''],
     frequenciaDeUsoDemanda: [''],
     solicitanteDemanda: {
-      codigoUsuario: 3
+      codigoUsuario: 2
     },
   });
 
-  public arquivos: FileList[] = [];
+  public arquivos: File[] = [];
 
   getDemandas() {
     return this.http.get<Demanda[]>(
@@ -50,7 +49,8 @@ export class DemandaService {
 
   postDemanda() {
     let demandaFormData = new FormData();
-    demandaFormData.append('arquivos', JSON.stringify(this.arquivos));
+    let teste = this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;
+
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     console.log(demandaFormData.getAll('arquivos'))
     return this.http.post<Demanda | string>(

@@ -64,8 +64,8 @@ export class ParteDemandaComponent implements OnInit {
   ngOnInit(): void {
     this.atualizarCentrosCusto();
   }
-  uploadDocumentos(event : FileList[]){
-    this.demandaService.arquivos = event;
+  uploadDocumentos(event : any){
+    this.demandaService.arquivos = event['files'] as File[];
   }
   atualizarCentrosCusto() {
     this.centroCustoService.getCentrosCusto().subscribe({

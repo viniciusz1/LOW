@@ -83,7 +83,8 @@ import {AccordionModule} from 'primeng/accordion';
     AutoCompleteModule,
     TooltipModule,
     TimelineModule,
-    AccordionModule
+    AccordionModule,
+    InputNumberModule
   ],
   providers: [
     MessageService,

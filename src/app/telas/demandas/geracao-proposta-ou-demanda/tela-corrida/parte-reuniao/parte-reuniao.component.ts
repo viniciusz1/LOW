@@ -62,6 +62,7 @@ export class ParteReuniaoComponent implements OnInit {
   fimData: Date | undefined = undefined;
   selectedCoin: any;
   clonedRecursos: { [s: string]: Recurso } = {};
+  quantidadeCC = [{'teste': 0}];
 
   onRowEditInit(product: Recurso) {
     this.clonedRecursos[product.codigoRecurso] = { ...product };
@@ -77,6 +78,10 @@ export class ParteReuniaoComponent implements OnInit {
       detail: 'Recurso is updated',
     });
   }
+  verificaPorcentagemCC(input: HTMLInputElement){
+    console.log(input.value)
+  }
+  //fazer verificações necessárias
   addRow(){
     this.listaRecursos.push(this.recursos.value as unknown as Recurso)
   }

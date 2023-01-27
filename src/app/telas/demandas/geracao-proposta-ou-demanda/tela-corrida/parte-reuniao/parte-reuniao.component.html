@@ -87,7 +87,11 @@
   </div>
   <h3 class="mt-4" spyTarget="recursosTarget">Recursos</h3>
   <hr />
-  <p-table *ngIf="listaRecursos.length != 0" styleClass="p-datatable-gridlines" [value]="listaRecursos" [tableStyle]="{ 'min-width': '50rem' }">
+  <p-table
+    *ngIf="listaRecursos.length != 0"
+    styleClass="p-datatable-gridlines"
+    [value]="listaRecursos"
+  >
     <ng-template pTemplate="header">
       <tr>
         <th>Recurso Necessário</th>
@@ -127,18 +131,12 @@
       </div>
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">Tipo da despesa:</label>
-        <input
-          placeholder="Ex: Programador Back-end"
-          type="text"
-          pInputText
-          class="input"
-          formControlName="tipoDespesaRecurso"
-        />
+        <p-dropdown [options]="['Interna', 'Externa']"></p-dropdown>
       </div>
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">Perfil da despesa:</label>
         <input
-          placeholder="Ex: Programador Back-end"
+          placeholder="Ex: ..."
           type="text"
           pInputText
           class="input"
@@ -149,13 +147,13 @@
         <label class="mt-1" for="Recurso Necessário:"
           >Centros de custos pagantes</label
         >
-        <input
-          placeholder="Ex: Programador Back-end"
-          type="text"
-          pInputText
-          class="input"
-          formControlName="centrosCustoPagantesRecurso"
-        />
+        <div class="d-flex" *ngFor="let i of quantidadeCC">
+          <p-dropdown
+            [options]="['Motores', 'WEG Digital']"
+            formControlName="centrosCustoPagantesRecurso"
+          ></p-dropdown>
+          <input type="text" #cc placeholder="Porcentagem" pInputText (keyup)="verificaPorcentagemCC(cc)" />
+        </div>
       </div>
     </div>
     <div class="row">
@@ -163,35 +161,38 @@
         <label class="mt-1" for="Recurso Necessário:">
           Quantidade de horas</label
         >
-        <input
-          placeholder="Ex: Programador Back-end"
-          type="text"
-          pInputText
-          class="input"
-          formControlName="quantidadeHorasRecurso"
-        />
+        <div style="width: 100%; display: grid">
+          <p-inputNumber
+            placeholder="Ex: 220"
+            type="text"
+            class="input"
+            formControlName="quantidadeHorasRecurso"
+          ></p-inputNumber>
+        </div>
       </div>
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:"> Valor da hora</label>
-        <input
-          placeholder="Ex: Programador Back-end"
-          type="text"
-          pInputText
-          class="input"
-          formControlName="valorHoraRecurso"
-        />
+        <div style="width: 100%; display: grid">
+          <p-inputNumber
+            placeholder="Ex: R$ 55,00"
+            type="text"
+            class="input"
+            formControlName="valorHoraRecurso"
+          ></p-inputNumber>
+        </div>
       </div>
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:"
           >Período de execução (Mensal)</label
         >
-        <input
-          placeholder="Ex: Programador Back-end"
-          type="text"
-          pInputText
-          class="input"
-          formControlName="periodoExMesesRecurso"
-        />
+        <div style="width: 100%; display: grid">
+          <p-inputNumber
+            placeholder="Ex: 5"
+            type="text"
+            class="input"
+            formControlName="periodoExMesesRecurso"
+          ></p-inputNumber>
+        </div>
       </div>
       <div class="">
         <button class="btn btn-primary" (click)="addRow()">Adicionar</button>

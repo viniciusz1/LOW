@@ -10,24 +10,23 @@ import { Demanda } from '../models/demanda.model';
   providedIn: 'root',
 })
 export class PropostaService {
+  listaRecursos:Recurso[] = []
 
-  recursos: Recurso[] = [
-    {
-      codigoRecurso: '1',
-      nomeRecurso: 'Recurso 1',
-      tipoDespesaRecurso: TipoDespesa.EXTERNO,
-      perfilDespesaRecurso: 'hardware',
-      quantidadeHorasRecurso: 1,
-      valorHoraRecurso: 1,
-      periodoExMesesRecurso: 1,
-      centrosCustoPagantesRecurso: [],
-    },
-  ];
+  formRecursos = this.fb.group({
+      codigoRecurso:[''],
+      nomeRecurso:  [''],
+      tipoDespesaRecurso:  [''],
+      perfilDespesaRecurso:  [''],
+      quantidadeHorasRecurso:  [''],
+      valorHoraRecurso:  [''],
+      periodoExMesesRecurso:  [''],
+      centrosCustoPagantesRecurso:  [''],
+  });
   formProposta = this.fb.group({
     prazoProposta: [''],
     codigoPPMProposta: [''],
     jiraProposta: [''],
-    recursosProposta: [this.recursos],
+    recursosProposta: [this.formRecursos],
     escopoDemandaProposta: [''],
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],

@@ -1,6 +1,8 @@
+import { CentroCustoService } from './../../../../../services/centro-custo.service';
+import { CentroCusto } from './../../../../../models/centro-custo.model';
 import { PropostaService } from './../../../../../services/proposta.service';
 import { DemandaAnalistaService } from './../../../../../services/demanda-analista.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ScrollSpyService } from 'ng-spy';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
@@ -21,15 +23,15 @@ export class ParteReuniaoComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private propostaService: PropostaService
+    private propostaService: PropostaService,
+    private centroCustoService: CentroCustoService,
     ) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
+  @Input() centrosCusto: CentroCusto[] = [];
   formProposta = this.propostaService.formProposta;
-  recursos = this.propostaService.recursos;
-  onSubmit(){
-    console.log(this.formProposta.value)
-  }
+  recursos = this.propostaService.formRecursos;
+  listaRecursos= this.propostaService.listaRecursos;
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
     { nome: 'Vinicius Bonatti', area: 'Vendas' },
@@ -37,9 +39,6 @@ export class ParteReuniaoComponent implements OnInit {
     { nome: 'Kenzo Hedeaky', area: 'Trefilação' },
     { nome: 'Felipe Viera', area: 'Corpotativo' }
   ];
-
-
-
   selectedResponsaveis: any;
   ngOnDestroy(): void {
     this.editor.destroy();
@@ -47,6 +46,7 @@ export class ParteReuniaoComponent implements OnInit {
   formEditor = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
   });
+
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -66,7 +66,9 @@ export class ParteReuniaoComponent implements OnInit {
   onRowEditInit(product: Recurso) {
     this.clonedRecursos[product.codigoRecurso] = { ...product };
   }
-
+  onSubmit(){
+    console.log(this.formProposta.value)
+  }
   onRowEditSave(product: Recurso) {
     delete this.clonedRecursos[product.codigoRecurso];
     this.messageService.add({
@@ -76,24 +78,19 @@ export class ParteReuniaoComponent implements OnInit {
     });
   }
   addRow(){
-    this.recursos.push({
-      codigoRecurso: '',
-      nomeRecurso: '',
-      tipoDespesaRecurso: TipoDespesa.EXTERNO,
-      perfilDespesaRecurso: '',
-      quantidadeHorasRecurso: 0,
-      valorHoraRecurso: 0,
-      periodoExMesesRecurso: 0,
-      centrosCustoPagantesRecurso: []
-    })
+    this.listaRecursos.push(this.recursos.value as unknown as Recurso)
   }
 
-  onRowEditCancel(product: Recurso, index: number) {
-    this.recursos[index] = this.clonedRecursos[product.codigoRecurso];
-    delete this.clonedRecursos[product.codigoRecurso];
+  atualizarCentrosCusto() {
+    this.centroCustoService.getCentrosCusto().subscribe({
+      next: (centrosCusto) => {(this.centrosCusto = centrosCusto)
+      console.log(centrosCusto)
+      },
+      error: (err) => console.log(err),
+    });
   }
-
   ngOnInit(): void {
+    this.atualizarCentrosCusto()
   }
 
 }

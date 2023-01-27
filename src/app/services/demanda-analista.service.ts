@@ -13,8 +13,8 @@ export class DemandaAnalistaService {
     tamanhoDemandaAnalista: [''],
     buSolicitanteDemandaAnalista:[''],
     busBeneficiadasDemandaAnalista:[''],
-    demandaDemandaAnalista: { codigoDemanda: 8 },
-    analista: { codigoUsuario: 3 },
+    demandaDemandaAnalista: { codigoDemanda: 28 },
+    analista: { codigoUsuario: 2 },
     secaoDemandaAnalista: [''],
   });
 

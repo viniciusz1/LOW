@@ -1,3 +1,5 @@
+import { CentroCusto } from './../../../../models/centro-custo.model';
+import { CentroCustoService } from './../../../../services/centro-custo.service';
 import { PropostaService } from './../../../../services/proposta.service';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Router } from '@angular/router';
@@ -5,13 +7,7 @@ import { Component, OnInit,  } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { ScrollSpyService } from 'ng-spy';
 
-interface CentrosCusto {
-  centro: string;
-}
 
-interface Moedas {
-  abreviacao: string;
-}
 
 @Component({
   selector: 'app-tela-corrida',
@@ -20,7 +16,7 @@ interface Moedas {
 })
 export class TelaCorridaComponent implements OnInit {
   aparecerProposta = false;
-
+  centrosCusto: CentroCusto[] = []
   onSubmitDemanda() {
     if(!this.aparecerProposta){
       this.demandaService.postDemanda().subscribe({
@@ -44,11 +40,12 @@ export class TelaCorridaComponent implements OnInit {
   }
 
 
+
   constructor(
     private spyService: ScrollSpyService,
     private router: Router,
     private demandaService: DemandaService,
-    private propostaService: PropostaService
+    private propostaService: PropostaService,
   ) {
     this.startSpy();
     this.tipoExibicaoTela();
@@ -82,9 +79,9 @@ export class TelaCorridaComponent implements OnInit {
 
   titulosDemanda: any[] = [];
 
+
   ngOnInit(): void {
     this.startSpy();
-
     this.titulosDemanda = [
       {titulo: 'Dados Gerais', id: 'dadosGerais', icon: PrimeIcons.CHART_BAR, color: '#00579d', local: 0},
       {titulo: 'Benefícios', id: 'beneficios', icon: PrimeIcons.DATABASE, color: 'rgb(233, 233, 233)', local: 600},

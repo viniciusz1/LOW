@@ -1,7 +1,7 @@
-<form class="container" [formGroup]="demandaForm">
+<form class="container" [formGroup]="demandaForm" data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
   <h3>Dados Gerais</h3>
-  <hr />
-  <div class="etapa-1">
+  <hr>
+  <div id="item-1">
     <div class="titulo" style="display: grid" id="item-1-1">
       <div class="infos" style="display: flex; align-items: center">
         <label style="font-weight: 500" class="me-2"> Título: </label>
@@ -60,7 +60,7 @@
         ></textarea>
       </div>
     </div>
-    <div class="infos" style="display: flex; align-items: center">
+    <div class="infos" style="display: flex; align-items: center;" id="item-1-4">
       <label style="font-weight: 500" class="me-2"> Centros de Custo: </label>
       <i
         class="bi bi-info-circle me-2"
@@ -85,8 +85,8 @@
   </div>
 
   <h3 class="mt-4" spyTarget="beneficios">Benefícios</h3>
-  <hr />
-  <div>
+  <hr>
+  <div id="item-2">
     <div formGroupName="beneficioRealDemanda">
       <div class="infos" style="display: flex; align-items: center">
         <label style="font-weight: 500" class="me-2"> Benefício Real: </label>
@@ -235,8 +235,8 @@
     </div>
   </div>
   <h3 class="mt-4" spyTarget="adicionais">Adicionais</h3>
-  <hr />
-  <div>
+  <hr>
+  <div id="item-3">
     <div class="titulo" style="display: grid" id="item-2-1">
       <div class="infos" style="display: flex; align-items: center">
         <label style="font-weight: 500" class="me-2">

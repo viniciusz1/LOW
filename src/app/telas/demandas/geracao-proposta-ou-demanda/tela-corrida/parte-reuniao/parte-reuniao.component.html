@@ -106,7 +106,7 @@
     <ng-template pTemplate="body" let-recursos>
       <tr>
         <td>{{ recursos.nomeRecurso }}</td>
-        <td>{{ recursos.tipoDespesaRecurso }}</td>
+        <td>{{ recursos.tipoDespesaRecurso.tipo }}</td>
         <td>{{ recursos.perfilDespesaRecurso }}</td>
         <td>{{ recursos.centrosCustoPagantesRecurso.nome }}</td>
         <td>{{ recursos.quantidadeHorasRecurso }}</td>
@@ -131,7 +131,13 @@
       </div>
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">Tipo da despesa:</label>
-        <p-dropdown [options]="['Interna', 'Externa']"></p-dropdown>
+        <p-dropdown
+          [options]="tipoDaDespesa"
+          optionLabel="tipo"
+          placeholder="Selecione o Tipo"
+          formControlName="tipoDespesaRecurso"
+          [showClear]="true"
+        ></p-dropdown>
       </div>
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">Perfil da despesa:</label>
@@ -142,19 +148,6 @@
           class="input"
           formControlName="perfilDespesaRecurso"
         />
-      </div>
-      <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:"
-          >Centros de custos pagantes</label
-        >
-        <div class="d-flex" *ngFor="let i of quantidadeCC">
-          <p-dropdown
-            [options]="centrosCusto"
-            optionLabel="nome"
-            formControlName="centrosCustoPagantesRecurso"
-          ></p-dropdown>
-          <input type="text" #cc placeholder="Porcentagem" pInputText (keyup)="verificaPorcentagemCC(cc)" />
-        </div>
       </div>
     </div>
     <div class="row">
@@ -195,8 +188,32 @@
           ></p-inputNumber>
         </div>
       </div>
+      <div class="row">
+        <div class="col-6"><label class="mt-1" for="Recurso Necessário:"
+          >Centros de custos pagantes</label
+        >
+        <div class="d-block" formGroupName="centrosCusto">
+          <div class="d-flex" *ngFor="let i of quantidadeCC">
+
+            <p-dropdown
+              [options]="centrosCusto"
+              optionLabel="nome"
+              #drop
+            ></p-dropdown>
+
+            <input type="text" #cc placeholder="Porcentagem" pInputText />
+            <button class="btn btn-primary" (click)="addRowCC(drop, cc)">+</button>
+          </div>
+        </div>
+      </div>
+        <div class="col-6"></div>
+
+      </div>
+
       <div class="">
-        <button class="btn btn-primary" (click)="addRow()">Adicionar</button>
+        <button class="btn btn-primary" (click)="addRowRecurso()">
+          Adicionar
+        </button>
       </div>
     </div>
   </div>

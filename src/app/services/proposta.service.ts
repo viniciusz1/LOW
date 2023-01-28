@@ -1,6 +1,6 @@
 import { TipoDespesa } from './../models/tipoDespesa.enum';
 import { Recurso } from './../models/recurso.model';
-import { FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -19,9 +19,10 @@ export class PropostaService {
       perfilDespesaRecurso:  [''],
       quantidadeHorasRecurso:  [''],
       valorHoraRecurso:  [''],
-      periodoExMesesRecurso:  [''],
-      centrosCustoPagantesRecurso:  [''],
+      periodoExMesesRecurso:  ['']
   });
+
+
   formProposta = this.fb.group({
     prazoProposta: [''],
     codigoPPMProposta: [''],

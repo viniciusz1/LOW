@@ -11,33 +11,32 @@ import { Recurso } from 'src/app/models/recurso.model';
 import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
 
 interface Responsavel {
-  nome: string,
-  area: string
+  nome: string;
+  area: string;
 }
 @Component({
   selector: 'app-parte-reuniao',
   templateUrl: './parte-reuniao.component.html',
-  styleUrls: ['./parte-reuniao.component.scss']
+  styleUrls: ['./parte-reuniao.component.scss'],
 })
 export class ParteReuniaoComponent implements OnInit {
-
   constructor(
     private messageService: MessageService,
     private propostaService: PropostaService,
-    private centroCustoService: CentroCustoService,
-    ) {
+    private centroCustoService: CentroCustoService
+  ) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
   @Input() centrosCusto: CentroCusto[] = [];
   formProposta = this.propostaService.formProposta;
   recursos = this.propostaService.formRecursos;
-  listaRecursos= this.propostaService.listaRecursos;
+  listaRecursos = this.propostaService.listaRecursos;
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
     { nome: 'Vinicius Bonatti', area: 'Vendas' },
     { nome: 'Camilly Vitoria', area: 'Motores' },
     { nome: 'Kenzo Hedeaky', area: 'Trefilação' },
-    { nome: 'Felipe Viera', area: 'Corpotativo' }
+    { nome: 'Felipe Viera', area: 'Corpotativo' },
   ];
   selectedResponsaveis: any;
   ngOnDestroy(): void {
@@ -62,40 +61,36 @@ export class ParteReuniaoComponent implements OnInit {
   fimData: Date | undefined = undefined;
   selectedCoin: any;
   clonedRecursos: { [s: string]: Recurso } = {};
-  quantidadeCC = [{'teste': 0}];
+  tipoDaDespesa = [{ tipo: 'Interna' }, { tipo: 'Externa' }];
 
-  onRowEditInit(product: Recurso) {
-    this.clonedRecursos[product.codigoRecurso] = { ...product };
+  onSubmit() {
+    console.log(this.formProposta.value);
   }
-  onSubmit(){
-    console.log(this.formProposta.value)
-  }
-  onRowEditSave(product: Recurso) {
-    delete this.clonedRecursos[product.codigoRecurso];
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Recurso is updated',
-    });
-  }
-  verificaPorcentagemCC(input: HTMLInputElement){
-    console.log(input.value)
-  }
+
+  porcentagemCC: [{ porcentagem: string; index: number }] = [
+    { porcentagem: '', index: 0 },
+  ];
+  quantidadeCC = [0];
+
   //fazer verificações necessárias
-  addRow(){
-    this.listaRecursos.push(this.recursos.value as unknown as Recurso)
+  addRowRecurso() {
+    this.listaRecursos.push(this.recursos.value as unknown as Recurso);
+  }
+  addRowCC(drop: any, input: any) {
+    console.log(drop)
+    console.log(input)
   }
 
   atualizarCentrosCusto() {
     this.centroCustoService.getCentrosCusto().subscribe({
-      next: (centrosCusto) => {(this.centrosCusto = centrosCusto)
-      console.log(centrosCusto)
+      next: (centrosCusto) => {
+        this.centrosCusto = centrosCusto;
+        console.log(centrosCusto);
       },
       error: (err) => console.log(err),
     });
   }
   ngOnInit(): void {
-    this.atualizarCentrosCusto()
+    this.atualizarCentrosCusto();
   }
-
 }

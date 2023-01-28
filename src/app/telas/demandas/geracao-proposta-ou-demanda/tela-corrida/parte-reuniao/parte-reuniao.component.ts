@@ -76,11 +76,11 @@ export class ParteReuniaoComponent implements OnInit {
   addRowRecurso() {
     this.listaRecursos.push(this.recursos.value as unknown as Recurso);
   }
-  addRowCC(drop: any, input: any) {
-    console.log(drop)
-    console.log(input)
+  addRowCC() {
+    console.log(this.teste)
+    this.quantidadeCC.push(this.quantidadeCC.length);
   }
-
+  teste: string[] = []
   atualizarCentrosCusto() {
     this.centroCustoService.getCentrosCusto().subscribe({
       next: (centrosCusto) => {

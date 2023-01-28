@@ -192,18 +192,18 @@
         <div class="col-6"><label class="mt-1" for="Recurso Necessário:"
           >Centros de custos pagantes</label
         >
-        <div class="d-block" formGroupName="centrosCusto">
+        <div class="d-block" ngModelGroup="person">
           <div class="d-flex" *ngFor="let i of quantidadeCC">
 
             <p-dropdown
               [options]="centrosCusto"
               optionLabel="nome"
-              #drop
+              [(ngModel)]="teste[i]"
             ></p-dropdown>
 
-            <input type="text" #cc placeholder="Porcentagem" pInputText />
-            <button class="btn btn-primary" (click)="addRowCC(drop, cc)">+</button>
+            <input type="text" class="mx-3" #cc placeholder="Porcentagem" pInputText />
           </div>
+          <button class="btn btn-primary" (click)="addRowCC()">+</button>
         </div>
       </div>
         <div class="col-6"></div>

@@ -22,6 +22,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ModalHistoricoComponent } from './modal-historico/modal-historico.component';
 import { ModalCriarReuniaoComponent } from './modal-criar-reuniao/modal-criar-reuniao.component';
 import {CalendarModule} from 'primeng/calendar';
+import { ModalClassificarDemandaComponent } from './modal-classificar-demanda/modal-classificar-demanda.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import {CalendarModule} from 'primeng/calendar';
     ModalReprovacaoDemandaComponent,
     ModalHistoricoComponent,
     ModalCriarReuniaoComponent,
+    ModalClassificarDemandaComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +53,8 @@ import {CalendarModule} from 'primeng/calendar';
     InputTextModule,
     CalendarModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    NgModule
   ],
   exports: [
     ModalDemandaDocumentoComponent

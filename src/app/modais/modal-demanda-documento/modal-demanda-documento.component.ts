@@ -19,6 +19,8 @@ export class ModalDemandaDocumentoComponent implements OnInit {
 
 
   enviarDecisao(decisao: string){
+    //Enviar numero ao inves de string
+    //tentar verificar pelo console se não troca no banco de dados por conta do front ou do back
       this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
   }
 

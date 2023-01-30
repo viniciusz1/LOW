@@ -1,0 +1,38 @@
+@import '../../../../themes.scss';
+.line-top-start{
+    width: 80%;
+    position:absolute;
+    top: 0;
+    left: 0;
+    background-color: $primary;
+    height: 10px;
+}
+.form-label{
+    margin: 0px;
+    margin-top: 10px;
+    font-size: 15px;
+}
+.line-top-end{
+    width: 20%;
+    position:absolute;
+    top: 0;
+    right: 0;
+    background-color: $primarysec;
+    height: 10px;
+}
+h4{
+    font-size: 15px;
+}
+.retangulo-container{
+    height: 60vh;
+    padding: 10px;
+    font-size: 13px;
+}
+
+:host ::ng-deep .p-multiselect {
+    width: 25.5vw;
+}
+
+:host ::ng-deep .p-dropdown {
+    width: 25.5vw;
+}

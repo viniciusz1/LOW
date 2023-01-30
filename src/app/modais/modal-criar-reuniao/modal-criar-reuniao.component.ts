@@ -105,85 +105,85 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
   listaDemandas: Demanda[] = [
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.BUSINESS_CASE,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.BUSINESS_CASE,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.BUSINESS_CASE,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.ASSESSMENT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
     },
     {
-      autorDemanda: 'Sabrina Hegmann',
+
       statusDemanda: StatusDemanda.BUSINESS_CASE,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',

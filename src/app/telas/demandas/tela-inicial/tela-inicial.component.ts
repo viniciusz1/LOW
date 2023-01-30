@@ -20,6 +20,8 @@ import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-hi
 import { ThisReceiver } from '@angular/compiler';
 import { listaDemandas } from 'src/app/shared/listDemandas';
 
+
+
 @Component({
   selector: 'app-tela-inicial',
   templateUrl: './tela-inicial.component.html',
@@ -74,14 +76,12 @@ export class TelaInicialComponent implements OnInit {
   listaTituloNaoFiltrado: string[] = []
   pesquisaDemanda = ""
   listaDemandasRascunho: Demanda[] = [{
-    autorDemanda: "Sabrina Hegmann",
     scoreDemanda: 2034,
     statusDemanda: StatusDemanda.DRAFT,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
     ppmDemanda: "PPM 123456",
   }, {
-    autorDemanda: "Sabrina Hegmann",
     scoreDemanda: 2034,
     statusDemanda: StatusDemanda.DRAFT,
     departamentoBenDemanda: "Tecnologia da Informação",
@@ -181,34 +181,34 @@ export class TelaInicialComponent implements OnInit {
   }
 
   exibirFilasDeStatus() {
-    if (this.listaDemandas.some(e => e.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')) {
       this.listaTituloNaoFiltrado.push("Backlog - Classificação")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-aprovacao')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
       this.listaTituloNaoFiltrado.push("Backlog - Aprovação")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-proposta')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_PROPOSTA')) {
       this.listaTituloNaoFiltrado.push("Backlog - Propostas")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'business-case')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BUSINESS_CASE')) {
       this.listaTituloNaoFiltrado.push("Business Case")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'ASSESSMENT')) {
       this.listaTituloNaoFiltrado.push("Assessment")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'to-do')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'TO_DO')) {
       this.listaTituloNaoFiltrado.push("To Do")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'DESIGN_AND_BUILD')) {
       this.listaTituloNaoFiltrado.push("Design and Build")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'support')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'SUPPORT')) {
       this.listaTituloNaoFiltrado.push("Support")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'cancelled')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'CANCELLED')) {
       this.listaTituloNaoFiltrado.push("Cancelled")
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'done')) {
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'DONE')) {
       this.listaTituloNaoFiltrado.push("Done")
     }
   }
@@ -224,18 +224,23 @@ export class TelaInicialComponent implements OnInit {
       }
   }
   ngOnInit(): void {
-    this.listaDemandas = listaDemandas
-    this.exibirFilasDeStatus()
-    // this.demandasService.getDemandas()
-    //   .subscribe({
-    //     next: (list) => {
-    //       this.listaDemandas = listaDemandas
-    //       this.exibirFilasDeStatus()
-    //     },
-    //     error: (err) => {
-    //       console.log(err)
-    //     }
-    //   })
+    // this.listaDemandas = listaDemandas
+    this.demandasService.getDemandasTelaInicial()
+      .subscribe({
+        next: (e) => {
+          e.forEach((demandas) => {
+            console.log(demandas)
+            demandas.content.forEach((demanda: Demanda) => {
+              this.listaDemandas.push(demanda)
+            })
+          })
+          this.exibirFilasDeStatus()
+
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
   }
 
 }

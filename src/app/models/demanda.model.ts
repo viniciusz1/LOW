@@ -1,3 +1,4 @@
+import { Usuario } from './usuario.model';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Beneficio } from './beneficio.model';
 import { StatusDemanda } from './statusDemanda.enum';
@@ -25,7 +26,7 @@ export interface Demanda {
     responsaveisNegocioDemanda?: []
     //Não tem nos inputs mas acredito que é necessário
     ppmDemanda?: string
-    autorDemanda?: string
+    solicitanteDemanda?: Usuario
     departamentoBenDemanda?: string
     scoreDemanda?: number
 }

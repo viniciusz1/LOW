@@ -88,7 +88,7 @@
       </span>
     </p>
     <p class="card-text d-flex justify-content-between">
-      <span><b>Autor: </b>{{ dadosDemada.autorDemanda }}</span>
+      <span><b>Autor: </b>{{ dadosDemada.solicitanteDemanda?.nomeUsuario }}</span>
       <span *ngIf="tipoDeAta.length != 0">{{ tipoDeAta }}</span>
     </p>
     <p class="card-text bottom-card">

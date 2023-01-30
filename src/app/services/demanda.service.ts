@@ -1,3 +1,4 @@
+import { Page } from './../models/page.model';
 import { FormBuilder } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
@@ -39,6 +40,13 @@ export class DemandaService {
       // 'http://localhost:8080/demanda'
       'https://63502d89df22c2af7b65c0d9.mockapi.io/api/demanda'
     );
+  }
+
+  getDemandasTelaInicial(){
+      return this.http.get<Page[]>(
+        // 'http://localhost:8080/demanda'
+        'http://localhost:8080/demanda/status'
+      );
   }
 
   formatarStatusDemanda(demandas: Demanda[]){

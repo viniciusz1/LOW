@@ -63,13 +63,5 @@ export class DemandaService {
     );
   }
 
-  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: string) {
-    console.log(codigoDemanda, decisao);
-    return this.http.put<Demanda | string>(
-      `http://localhost:8080/demanda/backlog/${codigoDemanda}?decisao=${decisao}`,
-      null
-    );
-  }
-
   constructor(private http: HttpClient, private fb: FormBuilder) {}
 }

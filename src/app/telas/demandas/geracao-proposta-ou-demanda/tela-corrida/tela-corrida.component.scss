@@ -102,6 +102,12 @@ hr {
     }
 }
 
+:host ::ng-deep{
+    .p-timeline.p-timeline-vertical .p-timeline-event-opposite, .p-timeline.p-timeline-vertical .p-timeline-event-content{
+        padding: 0.3vw;
+    }
+}
+
 @media screen and (max-width: 960px) {
     ::ng-deep {
         .customized-timeline {

@@ -101,7 +101,7 @@ header img {
 
 
 .balao-chat-analista{
-    margin: 20px 20px 15px 35px;
+    margin: 5px 20px 0px 35px;
     position: relative;
     font-size: 15px;
     /* line-height: 14px; */
@@ -126,10 +126,12 @@ header img {
     border-bottom: 10px solid transparent;
     left: 20px;
     bottom: -15px;
+    opacity: 0;
+
 }
 
 .balao-chat-solicitante{
-    margin: 15px 35px 20px 20px;
+    margin: 5px 20px 0px 20px;
     position: relative;
     font-size: 15px;
     /* line-height: 14px; */
@@ -139,6 +141,7 @@ header img {
     padding: 10px 10px 10px 21px;
     /* text-align: center; */
     color: rgb(255, 255, 255);
+    word-wrap:break-word;
 }
 
 .balao-chat-solicitante:after{
@@ -153,4 +156,5 @@ header img {
     border-bottom: 10px solid transparent;
     right: 20px;
     bottom: -15px;
+    opacity: 0;
 }

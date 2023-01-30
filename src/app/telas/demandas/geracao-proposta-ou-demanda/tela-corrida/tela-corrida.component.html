@@ -1,23 +1,22 @@
 <div class="row">
   <div class="col-2" style="padding: 3.5rem !important;">
-    <div style="position: fixed; left: 1vw; ">
+    <div style="position: fixed; left: 1vw; display: flex;">
+      <div style="margin-top: 0.45vh;">
         <p-timeline [value]="titulosDemanda">
-
             <ng-template pTemplate="marker" let-event>
-                <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+                <a class="custom-marker shadow-2" [style.backgroundColor]="event.color">
                     <i [ngClass]="event.icon"></i>
-                </span>
+                </a>
             </ng-template>
-
-
-            <ng-template pTemplate="content" let-event>
-              <span>
-                <a class="nav-link mt-5" spyOn="gerais" activeClass="active" role="button" style="font-size: 0.9rem; margin-top: 0.7vh !important;"
-                (click)="indoPraCima(event.local)" >{{event.titulo}}</a>
-              </span>
-            </ng-template>
-
         </p-timeline>
+      </div>
+        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4">
+          <nav class="nav nav-pills flex-column">
+            <a class="nav-link nav-scroll" style="margin-bottom: 3.1vh;" href="#item-1">Dados Gerais</a>
+            <a class="nav-link nav-scroll" style="margin-bottom: 3.1vh;" href="#item-2">Benefícios</a>
+            <a class="nav-link nav-scroll" href="#item-3">Adicionais</a>
+          </nav>
+        </nav>
     </div>
   </div>
 

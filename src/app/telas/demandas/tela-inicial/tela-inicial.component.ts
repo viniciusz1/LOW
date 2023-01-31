@@ -50,7 +50,12 @@ export class TelaInicialComponent implements OnInit {
     {name: 'A-Z', value: 'autor'},
     {name: 'Z-A', value: 'autor'},
   ]
-
+  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; }){
+    this.demandasService.getDemandasFiltradas(event).subscribe((listaDemandas: Demanda[]) => {
+      this.listaDemandas = listaDemandas;
+      this.isFiltrado = true;
+    })
+  }
   irParaChat() {
     this.confirmationService.confirm({
       dismissableMask: true,

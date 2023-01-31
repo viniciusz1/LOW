@@ -80,7 +80,7 @@
         </button>
       </div>
 
-      <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (closeFiltro)="mudarStatusFiltro()" class="me-3">
+      <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (filtroAcionado)="pesquisarDemandas($event)" (closeFiltro)="mudarStatusFiltro()" class="me-3">
       </app-filtro-demanda>
     </div>
 

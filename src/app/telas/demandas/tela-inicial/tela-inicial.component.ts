@@ -244,9 +244,11 @@ export class TelaInicialComponent implements OnInit {
             if(demandas.length > 0){
               demandas.forEach((demanda) => {
                 this.listaDemandas.push(demanda)
+
               })
             }
           })
+          console.log(this.listaDemandas[0].statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
           this.exibirFilasDeStatus()
 
         },

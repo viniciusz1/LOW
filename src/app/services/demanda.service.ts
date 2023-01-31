@@ -29,7 +29,7 @@ export class DemandaService {
     beneficioQualitativoDemanda: [''],
     frequenciaDeUsoDemanda: [''],
     solicitanteDemanda: {
-      codigoUsuario: 2
+      codigoUsuario: 3
     },
   });
 
@@ -43,7 +43,7 @@ export class DemandaService {
   }
 
   getDemandasTelaInicial(){
-      return this.http.get<Page[]>(
+      return this.http.get<[][]>(
         // 'http://localhost:8080/demanda'
         'http://localhost:8080/demanda/status'
       );
@@ -61,10 +61,11 @@ export class DemandaService {
     }
   }
   avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: string) {
-    console.log(codigoDemanda, decisao);
-    return this.http.put<Demanda | string>(
-      `http://localhost:8080/demanda/backlog/${codigoDemanda}?decisao=${decisao}`,
-      null
+    return this.http.put<any>(
+      `http://localhost:8080/demanda/backlog/${codigoDemanda}`,{
+        'decisao': decisao
+
+      }
     );
   }
   postDemanda() {

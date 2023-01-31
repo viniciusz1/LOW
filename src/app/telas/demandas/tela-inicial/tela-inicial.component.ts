@@ -229,10 +229,11 @@ export class TelaInicialComponent implements OnInit {
       .subscribe({
         next: (e) => {
           e.forEach((demandas) => {
-            console.log(demandas)
-            demandas.content.forEach((demanda: Demanda) => {
-              this.listaDemandas.push(demanda)
-            })
+            if(demandas.length > 0){
+              demandas.forEach((demanda) => {
+                this.listaDemandas.push(demanda)
+              })
+            }
           })
           this.exibirFilasDeStatus()
 

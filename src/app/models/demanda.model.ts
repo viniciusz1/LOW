@@ -1,8 +1,9 @@
-import { Usuario } from './usuario.model';
+
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Beneficio } from './beneficio.model';
 import { StatusDemanda } from './statusDemanda.enum';
 import { Recurso } from "./recurso.model"
+import { Usuario } from './usuario.model';
 export interface Demanda {
     codigoDemanda?: string;
     tituloDemanda?: string,

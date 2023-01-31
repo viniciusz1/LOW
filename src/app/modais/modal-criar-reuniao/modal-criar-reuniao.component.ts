@@ -1,9 +1,11 @@
 import { ComissaoService } from './../../services/comissao.service';
+import { DemandaService } from 'src/app/services/demanda.service';
 import { FormBuilder } from '@angular/forms';
 import { DialogRef } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
+import { Comissao } from 'src/app/models/comissao.model';
 import { Component, OnInit } from '@angular/core';
 import { listaReunioes } from 'src/app/telas/reunioes/tela-reuniao/listReunioes';
 
@@ -16,31 +18,27 @@ export class ModalCriarReuniaoComponent implements OnInit {
   constructor(
     public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
     private fb: FormBuilder,
-    private comissaoService: ComissaoService
+    private comissaoService: ComissaoService,
+    private demandaService: DemandaService
   ) {}
 
   ngOnInit(): void {
     this.atualizarComissoes();
+    this.atualizarDemandas();
   }
 
   listaReunioes: Reuniao[] = listaReunioes;
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
-  listaDeComissoesReuniao: any[] = [
-    'Vendas',
-    'Compras',
-    'Financeiro',
-    'RH',
-    'Marketing',
-    'TI',
-    'Jurídico',
-    'Diretoria',
-  ];
+  listaDeComissoesReuniao: Comissao[] = [];
+  listaDemandas: Demanda[] = [];
 
   dataReuniao: any;
   comissaoSelecionada: any;
 
   onSubmit() {
+    console.log(this.listaDemandas)
+    console.log(this.listaDeComissoesReuniao)
     console.log(this.novaReuniaoForm.value);
   }
 
@@ -89,6 +87,16 @@ export class ModalCriarReuniaoComponent implements OnInit {
       });
   }
 
+  atualizarDemandas() {
+    this.demandaService
+      .getDemandas()
+      .subscribe({
+        next: (demanda) => (this.listaDemandas = demanda),
+        error: (err) => console.log(err),
+      });
+  }
+
+
   dragEnd() {
     this.draggedDemanda = undefined;
   }
@@ -103,90 +111,5 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
     return index;
   }
-  listaDemandas: Demanda[] = [
-    {
 
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.ASSESSMENT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-    {
-
-      statusDemanda: StatusDemanda.BUSINESS_CASE,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-    },
-  ];
 }

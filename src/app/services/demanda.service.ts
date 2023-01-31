@@ -60,7 +60,13 @@ export class DemandaService {
 
     }
   }
-
+  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: string) {
+    console.log(codigoDemanda, decisao);
+    return this.http.put<Demanda | string>(
+      `http://localhost:8080/demanda/backlog/${codigoDemanda}?decisao=${decisao}`,
+      null
+    );
+  }
   postDemanda() {
     let demandaFormData = new FormData();
     let teste = this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;

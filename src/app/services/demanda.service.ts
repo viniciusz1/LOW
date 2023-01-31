@@ -49,6 +49,12 @@ export class DemandaService {
       );
   }
 
+  getDemandaByCodigoDemanda(codigoDemanda:number){
+    return this.http.get<Demanda>(
+      'http://localhost:8080/demanda/'+codigoDemanda
+    )
+  }
+
   formatarStatusDemanda(demandas: Demanda[]){
     for(let i of demandas){
 

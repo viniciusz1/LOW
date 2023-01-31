@@ -66,13 +66,13 @@ export class CardDemandaComponent implements OnInit {
   exibicaoBotoes() {
     if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/classificar-demanda',
+        rota: '/tela-inicial/classificar-demanda/'+this.dadosDemada.codigoDemanda,
         texto: 'Classificar Demanda',
       };
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/proposta',
+        rota: '/tela-inicial/proposta/'+this.dadosDemada.codigoDemanda,
         texto: 'Criar Proposta',
       };
     }

@@ -9,34 +9,54 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
 
   transform(demandas: Demanda[], ...titulo: string[]): Demanda[] {
     if(titulo[0] == "Backlog - Classificação"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "BACKLOG_CLASSIFICACAO")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "BACKLOG_CLASSIFICACAO")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.BACKLOG_CLASSIFICACAO);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "Backlog - Aprovação"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "BACKLOG_APROVACAO")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "BACKLOG_APROVACAO")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.BACKLOG_APROVACAO);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "Backlog - Propostas"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "BACKLOG_PROPOSTA")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "BACKLOG_PROPOSTA")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.BACKLOG_PROPOSTA);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "Assessment"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "ASSESSMENT")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "ASSESSMENT")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.ASSESSMENT);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "Business Case"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "BUSINESS_CASE")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "BUSINESS_CASE")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.BUSINESS_CASE);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "To Do"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "TO_DO")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "TO_DO")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.TO_DO);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "Design and Build"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "DESIGN_AND_BUILD")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "DESIGN_AND_BUILD")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.DESIGN_AND_BUILD);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "Support"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "SUPPORT")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "SUPPORT")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.SUPPORT);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "Cancelled"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "CANCELLED")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "CANCELLED")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.CANCELLED);
+      return demandasFiltradas;
     }
     else if(titulo[0] == "Done"){
-      return demandas.filter(d => d.statusDemanda?.toString() == "DONE")
+      let demandasFiltradas = demandas.filter(d => d.statusDemanda?.toString() == "DONE")
+      demandasFiltradas.forEach(d => d.statusDemanda = StatusDemanda.DONE);
+      return demandasFiltradas;
     }
     return demandas;
   }

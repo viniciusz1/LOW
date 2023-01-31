@@ -1,6 +1,6 @@
 export interface Beneficio{
   codigoBeneficio: number,
   moedaBeneficio: string,
-  memoriaCalculoBeneficio: string,
+  memoriaDeCalculoBeneficio: string,
   valorBeneficio: number
 }

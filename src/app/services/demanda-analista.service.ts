@@ -18,8 +18,9 @@ export class DemandaAnalistaService {
     secaoDemandaAnalista: [''],
   });
 
-  postProposta() {
-    console.log(this.demandaAnalistaForm.value);
+  postProposta(codigoDemanda: string | undefined) {
+    this.demandaAnalistaForm.get('demandaDemandaAnalista')?.get('codigoDemanda')?.setValue(codigoDemanda);
+
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demandaAnalista',
 

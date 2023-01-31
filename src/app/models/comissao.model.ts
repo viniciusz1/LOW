@@ -1,5 +1,5 @@
 export interface Comissao {
-    nome: string;
+    nomeComissao: string;
     codigoComissao: string;
 
 }

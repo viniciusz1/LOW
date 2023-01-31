@@ -44,8 +44,8 @@
       </div>
       <div class="mt-1 d-grid">
         <label for="time">Selecione a Comissão da Reunião:</label>
-        <p-dropdown [options]="listaDeComissoesReuniao" optionLabel="nome"  formControlName="comissaoReuniao"
-          ></p-dropdown>
+        <!-- <p-dropdown [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada" optionLabel="nomeComissao"  formControlName="comissaoReuniao"></p-dropdown> -->
+        <p-dropdown [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada" optionLabel="nomeComissao" [showClear]="true"></p-dropdown>
       </div>
       <div class=" mt-1 d-flex justify-content-end">
         <button type="submit" class="btn btn-primary" (click)="onSubmit()">Marcar Reunião</button>

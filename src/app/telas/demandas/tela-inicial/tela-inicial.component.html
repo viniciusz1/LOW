@@ -65,7 +65,7 @@
             pInputText
             placeholder="Pesquisar Demanda"
             [(ngModel)]="pesquisaDemanda"
-            (keypress)="isFiltrado = !isFiltrado"
+            (ngModelChange)="mudouCampodePesquisa()"
           />
         </span>
 

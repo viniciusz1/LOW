@@ -1,13 +1,13 @@
 export enum StatusDemanda{
-    BACKLOG_CLASSIFICACAO = "backlog-classificacao",
-    BACKLOG_PROPOSTA = "backlog-proposta",
-    BACKLOG_APROVACAO = "backlog-aprovacao",
-    ASSESSMENT = "assessment",
-    BUSINESS_CASE = "business-case",
-    TO_DO = "to-do",
-    DESIGN_AND_BUILD = "design-and-build",
-    SUPPORT = "support",
-    CANCELLED = "cancelled",
-    DONE = "done",
-    DRAFT = "draft"
+    BACKLOG_CLASSIFICACAO = "BACKLOG_CLASSIFICACAO",
+    BACKLOG_PROPOSTA = "BACKLOG_PROPOSTA",
+    BACKLOG_APROVACAO = "BACKLOG_APROVACAO",
+    ASSESSMENT = "ASSESSMENT",
+    BUSINESS_CASE = "BUSINESS_CASE",
+    TO_DO = "TO_DO",
+    DESIGN_AND_BUILD = "DESIGN_AND_BUILD",
+    SUPPORT = "SUPPORT",
+    CANCELLED = "CANCELLED",
+    DONE = "DONE",
+    DRAFT = "DRAFT"
 }

@@ -13,14 +13,15 @@ export class DemandaAnalistaService {
     tamanhoDemandaAnalista: [''],
     buSolicitanteDemandaAnalista:[''],
     busBeneficiadasDemandaAnalista:[''],
-    demandaDemandaAnalista: { codigoDemanda: 28 },
-    analista: { codigoUsuario: 2 },
+    demandaDemandaAnalista: { codigoDemanda: 6 },
+    analista: { codigoUsuario: 3 },
     secaoDemandaAnalista: [''],
   });
 
   postProposta(codigoDemanda: string | undefined) {
-    this.demandaAnalistaForm.get('demandaDemandaAnalista')?.get('codigoDemanda')?.setValue(codigoDemanda);
 
+    // this.demandaAnalistaForm.get('demandaDemandaAnalista')?.value?.codigoDemanda = codigoDemanda
+    this.demandaAnalistaForm.get('demandaDemandaAnalista')?.get('codigoDemanda')?.setValue(codigoDemanda);
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demandaAnalista',
 

@@ -17,10 +17,8 @@ import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from '../../../shared/textoDoTutorial';
 import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
-import { ThisReceiver } from '@angular/compiler';
-import { listaDemandas } from 'src/app/shared/listDemandas';
-
-
+import { Subject } from 'rxjs';
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'app-tela-inicial',
@@ -37,6 +35,12 @@ export class TelaInicialComponent implements OnInit {
     private readonly joyrideService: JoyrideService,
     private confirmationService: ConfirmationService
   ) {
+    this.pesquisaAlterada
+      .pipe(
+        debounceTime(500))
+      .subscribe(() => {
+        this.pesquisarDemandas({solicitante: "", codigoDemanda: "", status: "", tamanho: "", tituloDemanda: this.pesquisaDemanda})
+  })
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
@@ -50,23 +54,8 @@ export class TelaInicialComponent implements OnInit {
     {name: 'A-Z', value: 'autor'},
     {name: 'Z-A', value: 'autor'},
   ]
-  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; }){
-    this.demandasService.getDemandasFiltradas(event).subscribe((listaDemandas: Demanda[]) => {
-      this.listaDemandas = listaDemandas;
-      this.isFiltrado = true;
-    })
-  }
-  irParaChat() {
-    this.confirmationService.confirm({
-      dismissableMask: true,
-      blockScroll: false,
-      message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
-      accept: () => {
-        this.router.navigate(['/tela-inicial/chat'])
-      }
-    })
-  };
 
+  pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial
   positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   //true = card
@@ -93,7 +82,25 @@ export class TelaInicialComponent implements OnInit {
     tituloDemanda: "Sistema de Gestão de Demandas",
     ppmDemanda: "PPM 123456",
   }]
-
+  mudouCampodePesquisa(){
+    this.pesquisaAlterada.next(this.pesquisaDemanda as string);
+  }
+  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; }){
+    this.demandasService.getDemandasFiltradas(event).subscribe((listaDemandas: Demanda[]) => {
+      this.listaDemandas = listaDemandas;
+      this.isFiltrado = true;
+    })
+  }
+  irParaChat() {
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      blockScroll: false,
+      message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+      accept: () => {
+        this.router.navigate(['/tela-inicial/chat'])
+      }
+    })
+  };
   excluirDemandaRascunho(index: number) {
     this.listaDemandasRascunho = this.listaDemandasRascunho.splice(1, index)
   }

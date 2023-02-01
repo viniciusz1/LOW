@@ -37,7 +37,7 @@ export class DemandaService {
 
   getDemandasFiltradas(filtros: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; }){
     return this.http.get<Demanda[]>(
-      `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=&${filtros.status}tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}`
+      `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}`
     );
   }
 

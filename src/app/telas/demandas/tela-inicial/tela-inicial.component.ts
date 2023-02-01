@@ -19,6 +19,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from "rxjs/operators";
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -69,6 +70,7 @@ export class TelaInicialComponent implements OnInit {
   tipoRascunho = false;
   listaTituloNaoFiltrado: string[] = []
   pesquisaDemanda = ""
+  nenhumResultadoEncontrado = false;
   listaDemandasRascunho: Demanda[] = [{
     scoreDemanda: 2034,
     statusDemanda: StatusDemanda.DRAFT,
@@ -85,11 +87,33 @@ export class TelaInicialComponent implements OnInit {
   mudouCampodePesquisa(){
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
-  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; }){
-    this.demandasService.getDemandasFiltradas(event).subscribe((listaDemandas: Demanda[]) => {
-      this.listaDemandas = listaDemandas;
-      this.isFiltrado = true;
-    })
+  //Pesquisa demandas por status, ou por todos os campos, no caso o filtro de muitas informações
+  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; } | string){
+    if (typeof event === 'string') {
+      this.demandasService.getDemandasFiltradas({solicitante: "", codigoDemanda: "", status: event, tamanho: "", tituloDemanda: ""}).subscribe((listaDemandas: Demanda[]) => {
+        if(listaDemandas.length > 0){
+          this.listaDemandas = listaDemandas;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        }else{
+          this.isFiltrado = true;
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      })
+    }else{
+      this.demandasService.getDemandasFiltradas(event).subscribe((listaDemandas: Demanda[]) => {
+        if(listaDemandas.length > 0){
+          this.listaDemandas = listaDemandas;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        }else{
+          this.isFiltrado = true;
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      })
+    }
   }
   irParaChat() {
     this.confirmationService.confirm({

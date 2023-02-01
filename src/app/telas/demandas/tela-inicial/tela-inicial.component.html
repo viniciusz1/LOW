@@ -99,7 +99,9 @@
   </nav>
 
   <!-- sidebar -->
-  <app-sidebar-demanda [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()" style="
+  <app-sidebar-demanda [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()"
+  (clicouEmUmStatus)="pesquisarDemandas($event)"
+  style="
       position: fixed;
       z-index: 2;
       transition: left 0.3s ease 0s;
@@ -229,14 +231,16 @@
     </div>
   </div>
 
-  <div *ngIf="listaDemandas.length == 0">
+  <div *ngIf="listaDemandas.length == 0 && nenhumResultadoEncontrado == false">
     <mat-spinner [diameter]="50" class="circle"></mat-spinner>
   </div>
 
-  <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-3 mb-4">
+  <div *ngIf="isFiltrado && nenhumResultadoEncontrado == false" class="d-flex justify-content-center mt-3 mb-4">
     <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"></p-paginator>
   </div>
-
+  <div *ngIf="nenhumResultadoEncontrado == true" class="d-flex justify-content-center mt-3 mb-4">
+    <h2>Nenhuma demanda foi encontrada!</h2>
+  </div>
   <div>
     <p-confirmDialog header="Iniciar Chat" icon="pi pi-exclamation-triangle" #cd>
       <ng-template pTemplate="footer">

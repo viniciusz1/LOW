@@ -66,14 +66,6 @@ export class DemandaService {
 
     }
   }
-  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: string) {
-    return this.http.put<any>(
-      `http://localhost:8080/demanda/backlog/${codigoDemanda}`,{
-        'decisao': decisao
-
-      }
-    );
-  }
   postDemanda() {
     let demandaFormData = new FormData();
     let teste = this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;
@@ -83,6 +75,12 @@ export class DemandaService {
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demanda', demandaFormData
     );
+  }
+
+  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: number) {
+    console.log(codigoDemanda, decisao);
+    return this.http.put<any>(`http://localhost:8080/demanda/update/backlog/${codigoDemanda}`, decisao)
+    .subscribe();
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder) {}

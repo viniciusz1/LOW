@@ -19,10 +19,9 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   }
   dadosDemanda: Demanda | undefined;
 
-  enviarDecisao(decisao: string){
-    if(this.dadosDemanda?.codigoDemanda)
-      this.demandaService.avaliacaoGerenteDeNegocioDemanda(parseInt(this.dadosDemanda?.codigoDemanda), decisao)
-      .subscribe(e => console.log(e))
+  enviarDecisao(decisao: number){
+    console.log(decisao)
+    this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
   }
 
 

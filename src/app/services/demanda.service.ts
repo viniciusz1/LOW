@@ -63,12 +63,10 @@ export class DemandaService {
     );
   }
 
-  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: string) {
+  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: number) {
     console.log(codigoDemanda, decisao);
-    return this.http.put<Demanda | string>(
-      `http://localhost:8080/demanda/backlog/${codigoDemanda}?decisao=${decisao}`,
-      null
-    );
+    return this.http.put<any>(`http://localhost:8080/demanda/update/backlog/${codigoDemanda}`, decisao)
+    .subscribe();
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder) {}

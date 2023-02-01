@@ -1,8 +1,7 @@
+import { DemandaService } from 'src/app/services/demanda.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { DemandaService } from 'src/app/services/demanda.service';
-
 @Component({
   selector: 'app-modal-demanda-documento',
   templateUrl: './modal-demanda-documento.component.html',
@@ -13,7 +12,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   constructor(
     @Inject(DIALOG_DATA) public data: string,
     private dialogRef: DialogRef,
-    private demandaService : DemandaService) {
+    private demandaService: DemandaService) {
     this.user = data
   }
 

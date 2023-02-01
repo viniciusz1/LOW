@@ -43,8 +43,8 @@ export class DemandaService {
 
   getDemandas() {
     return this.http.get<Demanda[]>(
-      // 'http://localhost:8080/demanda'
-      'https://63502d89df22c2af7b65c0d9.mockapi.io/api/demanda'
+      'http://localhost:8080/demanda'
+      // 'https://63502d89df22c2af7b65c0d9.mockapi.io/api/demanda'
     );
   }
 
@@ -53,7 +53,6 @@ export class DemandaService {
 
     }
   }
-
   postDemanda() {
     console.log(this.demandaForm.value);
     return this.http.post<Demanda | string>(

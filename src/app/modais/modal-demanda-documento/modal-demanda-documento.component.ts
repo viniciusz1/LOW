@@ -17,8 +17,9 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   }
 
 
-  enviarDecisao(decisao: string){
-      this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
+  enviarDecisao(decisao: number){
+    console.log(decisao)
+    this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
   }
 
 

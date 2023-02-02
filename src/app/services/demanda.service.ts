@@ -86,10 +86,8 @@ export class DemandaService {
     );
   }
 
-  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number , decisao: number) {
-    console.log(codigoDemanda, decisao);
-    return this.http.put<any>(`http://localhost:8080/demanda/update/backlog/${codigoDemanda}`, decisao)
-    .subscribe();
+  avancarStatusDemandaComDecisao(codigoDemanda : string , decisao: number) {
+    return this.http.put<any>(`http://localhost:8080/demanda/update/status/${codigoDemanda}`, decisao)
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder) {}

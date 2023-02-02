@@ -1,5 +1,8 @@
-<div class="card low-shadow position-relative" [ngStyle]="{'width': mudarTamanho}" style="font-size: 14px; height:163px;">
-
+<div
+  class="card low-shadow position-relative"
+  [ngStyle]="{ width: mudarTamanho }"
+  style="font-size: 14px; height: 163px"
+>
   <div class="line-top-start" [ngClass]="primaryColorClass"></div>
   <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
   <div class="card-body pb-1">
@@ -8,7 +11,7 @@
       style="align-items: baseline; justify-content: space-between"
     >
       <div class="d-flex">
-        <label class="me-2" for="">{{dadosDemada.codigoDemanda}}</label>
+        <label class="me-2" for="">{{ dadosDemada.codigoDemanda }}</label>
         <label class="me-2 text-truncate" for="titulo"
           ><b>{{ dadosDemada.tituloDemanda }}</b></label
         >
@@ -30,7 +33,7 @@
       </div>
       <i
         class="bi bi-chat-left-dots me-3"
-        *ngIf="!rascunho  && statusPermitido()"
+        *ngIf="!rascunho && statusPermitido()"
         (click)="irParaChat.emit()"
         style="cursor: pointer"
       ></i>
@@ -72,6 +75,14 @@
           <i class="bi bi-person-lines-fill me-3"></i>
           <span>Ir para Reunião</span>
         </button>
+        <button
+          (click)="verDocumentoEmAta.emit()"
+          *ngIf="existeAta()"
+          mat-menu-item
+        >
+          <i class=" bi-file-text me-3"></i>
+          <span>Ver em Ata</span>
+        </button>
         <button routerLink="/tela-inicial/chat" mat-menu-item>
           <i class="bi bi-chat-left-quote me-3"></i>
           <span>Iniciar conversa</span>
@@ -88,7 +99,9 @@
       </span>
     </p>
     <p class="card-text d-flex justify-content-between">
-      <span><b>Autor: </b>{{ dadosDemada.solicitanteDemanda?.nomeUsuario }}</span>
+      <span
+        ><b>Autor: </b>{{ dadosDemada.solicitanteDemanda?.nomeUsuario }}</span
+      >
       <span *ngIf="tipoDeAta.length != 0">{{ tipoDeAta }}</span>
     </p>
     <p class="card-text bottom-card">
@@ -109,9 +122,15 @@
       </label>
       <span>
         <button
-          *ngIf="!isPauta && !rascunho && textoExibidoEmBotaoDependendoRota && !exibirBotaoParecerComissao && !exibirBotaoParecerDg"
+          *ngIf="
+            !isPauta &&
+            !rascunho &&
+            textoExibidoEmBotaoDependendoRota &&
+            !exibirBotaoParecerComissao &&
+            !exibirBotaoParecerDg
+          "
           class="btn btn-primary btn-sm"
-          style="width: 147px;"
+          style="width: 147px"
           (click)="direcionarUsuario()"
         >
           {{ textoExibidoEmBotaoDependendoRota.texto }}

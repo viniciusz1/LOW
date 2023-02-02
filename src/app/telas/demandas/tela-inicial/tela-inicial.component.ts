@@ -125,6 +125,9 @@ export class TelaInicialComponent implements OnInit {
       }
     })
   };
+
+
+
   excluirDemandaRascunho(index: number) {
     this.listaDemandasRascunho = this.listaDemandasRascunho.splice(1, index)
   }
@@ -215,6 +218,22 @@ export class TelaInicialComponent implements OnInit {
       minWidth: '50vw',
     });
   }
+
+  avancarStatusDemanda(info: {mensagem: string, codigoDemanda: string | undefined}){
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      blockScroll: false,
+      message: info.mensagem,
+      accept: () => {
+        if(info.codigoDemanda != undefined){
+        this.demandasService.avancarStatusDemandaComDecisao(info.codigoDemanda, 1).subscribe({next: () => {
+          this.carregarDemandasIniciais();
+        },error: () => {},})
+      }
+      }
+    })
+  }
+
 
   exibirFilasDeStatus() {
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')) {

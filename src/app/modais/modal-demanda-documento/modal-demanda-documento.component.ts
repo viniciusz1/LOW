@@ -23,7 +23,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   dadosDemandaAnalista: DemandaAnalista | undefined;
 
   enviarDecisao(decisao: number){
-    this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
+    this.demandaService.avancarStatusDemandaComDecisao("1", decisao).subscribe();
   }
 
   buscarDemandaAnalista(){

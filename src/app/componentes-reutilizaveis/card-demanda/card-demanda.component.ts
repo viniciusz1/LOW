@@ -20,6 +20,7 @@ export class CardDemandaComponent implements OnInit {
   @Output() abrirModalCriarReuniao = new EventEmitter();
   @Output() modalHistorico = new EventEmitter();
   @Output() verDocumentoEmAta = new EventEmitter();
+  @Output() avancarStatusDemanda = new EventEmitter<{mensagem: string, codigoDemanda: string | undefined}>();
 
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
@@ -61,11 +62,26 @@ export class CardDemandaComponent implements OnInit {
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'ver em ata'){
       this.verDocumentoEmAta.emit()
     }
+    else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'avancar fase'){
+      this.avancarStatusDemanda.emit({mensagem: "Tem certeza que deseja a fase da demanda?", codigoDemanda: this.dadosDemada.codigoDemanda})
+    }
     else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
 
+
+  existeAta(){
+    if (
+      this.dadosDemada.statusDemanda == StatusDemanda.TO_DO ||
+      this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT ||
+      this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
+      this.dadosDemada.statusDemanda == StatusDemanda.DONE
+    ) {
+      return true;
+    }
+    return false;
+  }
 
 
   exibicaoBotoes() {
@@ -93,7 +109,7 @@ export class CardDemandaComponent implements OnInit {
         texto: 'Adicionar Proposta',
       };
     }
-    else if (this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE || this.dadosDemada.statusDemanda == StatusDemanda.TO_DO || this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD || this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.TO_DO || this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD || this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'avancar fase',
         texto: 'Avançar Fase',

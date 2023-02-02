@@ -56,7 +56,7 @@
       </p-confirmDialog>
       <div>
         <app-card-reuniao class="m-1" *ngFor="let reuniao of listaReunioes" [dadosReuniao]="reuniao"
-          (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda()"
+          (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda(reuniao)"
           (motivoCancelamento)="modalMotivoCancelamentoDemanda()">
         </app-card-reuniao>
       </div>

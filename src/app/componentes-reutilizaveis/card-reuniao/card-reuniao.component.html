@@ -6,7 +6,7 @@
     justify-content: space-between;">
           <div class="d-flex">
             <label class="me-2" for="">001</label>
-            <label class="me-2 text-truncate" for="titulo"><b>Dia da comissão: {{dadosReuniao.diaReuniao | date:"dd/MM/YY"}}</b></label>
+            <label class="me-2 text-truncate" for="titulo"><b>Dia da comissão: {{dadosReuniao.dataReuniao | date:"dd/MM/YY"}}</b></label>
           </div>
             <small class="me-3" for="">Status: {{dadosReuniao.statusReuniao | titlecase}}</small>
             <!-- <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
@@ -16,8 +16,8 @@
                 </button>
               </mat-menu> -->
         </div>
-        <p class="card-text">Comissão: {{dadosReuniao.nomeComissao}}</p>
-        <p class="card-text"><b>Propostas adicionadas: </b> {{dadosReuniao.propostas?.length}}</p>
+        <p class="card-text">Comissão: {{dadosReuniao.comissaoReuniao?.nomeComissao}}</p>
+        <p class="card-text"><b>Propostas adicionadas: </b> {{dadosReuniao.propostasReuniao?.length}}</p>
         <p class="card-text bottom-card">
             <label class=" me-2">
                 <b>
@@ -27,10 +27,10 @@
             </label>
             <span class="d-flex">
               <button class="btn btn-outline-danger btn-sm me-2" *ngIf="
-              dadosReuniao.statusReuniao != 'cancelado' &&
-              dadosReuniao.statusReuniao != 'concluído'" (click)="cancelarReuniao.emit()">Cancelar Reunião</button>
-              <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'cancelado'" (click)="motivoCancelamento.emit()">Ver motivo do cancelamento</button>
-              <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta" *ngIf="dadosReuniao.statusReuniao != 'cancelado'">Detalhes da Reunião</button>
+              dadosReuniao.statusReuniao != 'CANCELADO' &&
+              dadosReuniao.statusReuniao != 'CONCLUIDO'" (click)="cancelarReuniao.emit()">Cancelar Reunião</button>
+              <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'CANCELADO'" (click)="motivoCancelamento.emit()">Ver motivo do cancelamento</button>
+              <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta" *ngIf="dadosReuniao.statusReuniao != 'CANCELADO'">Detalhes da Reunião</button>
             </span>
           </p>
     </div>

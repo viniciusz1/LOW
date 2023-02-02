@@ -1,13 +1,12 @@
 import { TipoDespesa } from "./tipoDespesa.enum";
 
 export interface Recurso {
-    id: string;
+  codigoRecurso: string;
     nomeRecurso: string,
-    tipoDespesa: TipoDespesa,
-    perfilDespesa: string,
-    quantidadeHoras: number,
-    valorHora: number,
-    valorTotalDespesa: number,
-    periodoExMeses: number,
-    centrosCustoPagantes: []
+    tipoDespesaRecurso: TipoDespesa,
+    perfilDespesaRecurso: string,
+    quantidadeHorasRecurso: number,
+    valorHoraRecurso: number,
+    periodoExMesesRecurso: number,
+    centrosCustoPagantesRecurso: []
 }

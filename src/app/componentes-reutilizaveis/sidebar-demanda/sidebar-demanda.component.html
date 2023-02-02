@@ -1,35 +1,43 @@
 <nav class="nav position-relative">
     <ul class="nav flex-column container-sidebar" style="width: 350px">
-        <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item backlog"></div>
-            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/icons8-backlog-68 2.png" alt="" srcset=""> Backlog</a>
+        <li (click)="clicouEmUmStatus.emit('BACKLOG_CLASSIFICACAO')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item BACKLOG_CLASSIFICACAO"></div>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/icons8-backlog-68 2.png" alt="" srcset=""> Backlog - Classificação</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item assessment"></div>
+        <li (click)="clicouEmUmStatus.emit('BACKLOG_PROPOSTA')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item BACKLOG_PROPOSTA"></div>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/icons8-backlog-68 2.png" alt="" srcset=""> Backlog - Proposta</a>
+        </li>
+        <li (click)="clicouEmUmStatus.emit('BACKLOG_APROVACAO')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item BACKLOG_APROVACAO"></div>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/icons8-backlog-68 2.png" alt="" srcset=""> Backlog - Aprovação</a>
+        </li>
+        <li (click)="clicouEmUmStatus.emit('ASSESSMENT')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item ASSESSMENT"></div>
             <a class="nav-link"><img  style="width: 1.5em; margin-right: 13px;" src="assets/icons8-assessment-64 2.png" alt="" srcset=""> Assessment</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item business-case"></div>
+        <li  (click)="clicouEmUmStatus.emit('BUSINESS_CASE')"class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item BUSINESS_CASE"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/icons8-relatório-de-negócios-100 2.png" alt="" srcset=""> Business Case</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item to-do"></div>
+        <li (click)="clicouEmUmStatus.emit('TO_DO')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item TO_DO"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/icons8-à-fazer-100 2.png" alt="" srcset=""> To-do</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item design-and-build"></div>
+        <li (click)="clicouEmUmStatus.emit('DESIGN_AND_BUILD')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item DESIGN_AND_BUILD"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/icons8-ferramenta-de-pintura-online-80 2.png" alt="" srcset=""> Design and Build</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item support"></div>
+        <li (click)="clicouEmUmStatus.emit('SUPPORT')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item SUPPORT"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/icons8-suporte-ao-cliente-100 2.png" srcset=""> Support</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item cancelled"></div>
+        <li (click)="clicouEmUmStatus.emit('CANCELLED')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item CANCELLED"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/icons8-cancelar-50 2.png" alt="" srcset=""> Cancelled</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item done"></div>
+        <li (click)="clicouEmUmStatus.emit('DONE')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item DONE"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/icons8-marcador-duplo-100 2.png" alt="" srcset=""> Done</a>
         </li>
 

@@ -125,5 +125,5 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
     return index;
   }
-  
+
 }

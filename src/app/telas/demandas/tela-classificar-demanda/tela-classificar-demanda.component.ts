@@ -1,3 +1,5 @@
+import { Demanda } from 'src/app/models/demanda.model';
+import { DemandaService } from 'src/app/services/demanda.service';
 import { Secao } from '../../../models/secao.model';
 import { SecaoService } from '../../../services/secao.service';
 import { BusinessUnitService } from './../../../services/business-unit.service';
@@ -6,6 +8,7 @@ import { DemandaAnalistaService } from './../../../services/demanda-analista.ser
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -15,6 +18,7 @@ import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-doc
 })
 export class TelaClassificarDemandaComponent implements OnInit {
   BUs: BusinessUnit[] = [];
+  demanda: Demanda | undefined = undefined
   demandaAnalistaForm = this.demandaAnalistaService.demandaAnalistaForm;
   selectedBUs: any;
   opcoesDeTamanho = [
@@ -40,12 +44,26 @@ export class TelaClassificarDemandaComponent implements OnInit {
     },
   ];
   secoes: Secao[] = [];
+  codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
   constructor(
     private matDialog: MatDialog,
     private demandaAnalistaService: DemandaAnalistaService,
+    private demandaService: DemandaService,
     private businessUnitService: BusinessUnitService,
-    private secaoService: SecaoService
+    private secaoService: SecaoService,
+    private activatedRoute: ActivatedRoute
   ) {
+
+    this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota).subscribe({
+      next: (value) => {
+        console.log(value)
+        this.demanda = value;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+
     this.businessUnitService.getBusinessUnits().subscribe({
       next: (value) => {
         this.BUs = value;
@@ -54,6 +72,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
         console.log(err);
       },
     });
+
     this.secaoService.getSecao().subscribe({
       next: (value) => {
         this.secoes = value;
@@ -66,7 +85,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
   }
 
   onSubmitClassificacaoDemanda() {
-    this.demandaAnalistaService.postProposta().subscribe({
+    this.demandaAnalistaService.postProposta(this.demanda?.codigoDemanda).subscribe({
       next(value) {
         console.log(value);
       },

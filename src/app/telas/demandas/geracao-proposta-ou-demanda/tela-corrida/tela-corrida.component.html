@@ -23,13 +23,21 @@
   <div class="tela-corrida col-10 border-start">
     <div>
       <div style="margin: 0 10vw" class="mt-5">
-
-
-        <app-parte-demanda></app-parte-demanda>
+        <p-accordion *ngIf="aparecerProposta">
+          <p-accordionTab header="Demanda">
+            <app-parte-demanda></app-parte-demanda>
+          </p-accordionTab>
+        </p-accordion>
+        <app-parte-demanda *ngIf="!aparecerProposta"></app-parte-demanda>
         <app-parte-reuniao *ngIf="aparecerProposta"></app-parte-reuniao>
-        <div class="d-flex justify-content-between" style="margin-top: 2vh !important; margin-bottom: 2vh">
-          <button class="btn btn-danger  ms-2" routerLink="/tela-inicial">Cancelar</button>
-          <button class="btn btn-primary me-2"  (click)="onSubmitDemanda()">
+        <div
+          class="d-flex justify-content-between"
+          style="margin-top: 2vh !important; margin-bottom: 2vh"
+        >
+          <button class="btn btn-danger ms-2" routerLink="/tela-inicial">
+            Cancelar
+          </button>
+          <button class="btn btn-primary me-2" (click)="onSubmitDemanda()">
             Finalizar
           </button>
         </div>

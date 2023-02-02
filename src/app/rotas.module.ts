@@ -37,7 +37,7 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
             component: TelaInicialComponent
           },
           {
-            path: 'classificar-demanda',
+            path: 'classificar-demanda/:codigoDemanda',
             component: TelaClassificarDemandaComponent
           },
           {

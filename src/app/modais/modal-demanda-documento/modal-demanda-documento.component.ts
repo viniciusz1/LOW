@@ -1,3 +1,6 @@
+import { DemandaAnalistaService } from './../../services/demanda-analista.service';
+import { Arquivo } from './../../models/arquivo.model';
+import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
@@ -8,32 +11,30 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
   styleUrls: ['./modal-demanda-documento.component.scss']
 })
 export class ModalDemandaDocumentoComponent implements OnInit {
-  user = ""
+  user = "gerente"
   constructor(
-    @Inject(DIALOG_DATA) public data: string,
-    private dialogRef: DialogRef,
+    @Inject(DIALOG_DATA) public data: Demanda,
     private demandaService: DemandaService) {
-    this.user = data
+    this.dadosDemanda = data
   }
-
+  dadosDemanda: Demanda | undefined;
 
   enviarDecisao(decisao: number){
-    console.log(decisao)
     this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
   }
 
+  download(arquivo: Arquivo): void {
+    this.demandaService
+    .saveByteArray(arquivo.dadosArquivo, arquivo.tipoArquivo, arquivo.nomeArquivo)
+
+  }
 
   event: any[] = [];
   events1: any[] = [];
   events2: any[] = [];
 
   ngOnInit() {
-    // this.events1 = [
-    //   { status: 'Solicitante', color: 'Pink' },
-    //   { status: 'Analista' },
-    //   { status: 'Gerente' },
-    //   { status: 'Gestor' }
-    // ];
+
     this.events1 = [
       { status: 'Reserva', date: '15/10/2020 10:30', icon: PrimeIcons.HOURGLASS, color: '#00579D', fontWeight: '600' },
       { status: 'Avaliação', date: '15/10/2020 14:00', icon: PrimeIcons.ELLIPSIS_H, color: '#c9c9c9', fontWeight: '100' },

@@ -4,10 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationService } from 'primeng/api';
 import { TelaCalendarioComponent } from './../tela-calendario/tela-calendario.component';
 import { Component, OnInit } from '@angular/core';
-import { listaReunioes } from './listReunioes';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { fadeAnimation } from './../../../shared/app.animation';
 import { textoTutorial } from 'src/app/shared/textoDoTutorial';
+import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 
 @Component({
   selector: 'app-tela-login',
@@ -21,7 +22,7 @@ export class TelaReuniaoComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
     public matDialog: MatDialog,
-
+    private reuniaoService: ReuniaoService
   ) { }
   opcoesOrdenacao = [{ name: 'Data', value: 'data' }, { name: 'Comissão', value: 'comissao' }]
   ordenarSelect = ""
@@ -33,12 +34,12 @@ export class TelaReuniaoComponent implements OnInit {
   dataReuniao: any;
   comissaoSelecionada: any;
   pesquisaDemanda: string = "";
-  listaReunioes: Reuniao[] = listaReunioes;
+  listaReunioes: Reuniao[] = [];
   showSidebar = -350;
   pesquisaReuniao = "";
   mostrarBotaoModal = false;
   showFiltroComponent = false;
-  modalDeConfirmacaoCancelamentoDemanda() {
+  modalDeConfirmacaoCancelamentoDemanda(reuniao: Reuniao) {
     this.mostrarBotaoModal = false;
     this.confirmationService.confirm({
       blockScroll: false,
@@ -47,7 +48,10 @@ export class TelaReuniaoComponent implements OnInit {
       header: 'Cancelar Reunião',
       message: 'Você tem certeza que deseja cancelar esta reunião no dia 22/11/2022 as 16:40?',
       accept: () => {
-        //Actual logic to perform a confirmation
+        reuniao.statusReuniao = StatusReuniao.CANCELADO
+        this.reuniaoService.putReuniao(reuniao).subscribe(e => {
+          console.log(e)
+        })
       },
     });
   }
@@ -106,6 +110,16 @@ export class TelaReuniaoComponent implements OnInit {
 
   ngOnInit() {
     // this.openModalCriarReuniao();
+    this.atualizarReunioes();
+  }
+
+  atualizarReunioes() {
+    this.reuniaoService
+      .getReuniao()
+      .subscribe({
+        next: (reuniao) => (this.listaReunioes = reuniao),
+        error: (err) => console.log(err),
+      });
   }
 
   moveSidebar() {

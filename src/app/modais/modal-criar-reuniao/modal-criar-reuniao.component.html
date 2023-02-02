@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between">
-  <h5>Crie sua Reunião</h5>
+  <h5>Marcar Reunião</h5>
   <i class="bi bi-x-lg" role="button" (click)="dialogRef.close()"></i>
 </div>
 <hr class="mt-0" style="overflow: auto;">
@@ -40,12 +40,12 @@
       <div class="">
         <label for="time">Data e Hora da Reunião:</label>
         <p-calendar placeholder="Clique aqui!" formControlName="dataReuniao" [showTime]="true" [showSeconds]="true"
-          inputId="time"></p-calendar>
+          inputId="time" [(ngModel)]="dataReuniao"></p-calendar>
       </div>
       <div class="mt-1 d-grid">
         <label for="time">Selecione a Comissão da Reunião:</label>
-        <!-- <p-dropdown [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada" optionLabel="nomeComissao"  formControlName="comissaoReuniao"></p-dropdown> -->
-        <p-dropdown [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada" optionLabel="nomeComissao" [showClear]="true"></p-dropdown>
+        <p-dropdown [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada" optionLabel="nomeComissao"  formControlName="comissaoReuniao"></p-dropdown>
+        <!-- <p-dropdown [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada" optionLabel="nomeComissao" [showClear]="true" ></p-dropdown> -->
       </div>
       <div class=" mt-1 d-flex justify-content-end">
         <button type="submit" class="btn btn-primary" (click)="onSubmit()">Marcar Reunião</button>

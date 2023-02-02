@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
+import { Proposta } from '../models/proposta.model';
 
 @Injectable({
   providedIn: 'root',

@@ -17,8 +17,9 @@ import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from '../../../shared/textoDoTutorial';
 import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
+import { Subject } from 'rxjs';
+import { debounceTime } from "rxjs/operators";
 import { ThisReceiver } from '@angular/compiler';
-import { listaDemandas } from 'src/app/shared/listDemandas';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -35,6 +36,12 @@ export class TelaInicialComponent implements OnInit {
     private readonly joyrideService: JoyrideService,
     private confirmationService: ConfirmationService
   ) {
+    this.pesquisaAlterada
+      .pipe(
+        debounceTime(500))
+      .subscribe(() => {
+        this.pesquisarDemandas({solicitante: "", codigoDemanda: "", status: "", tamanho: "", tituloDemanda: this.pesquisaDemanda})
+  })
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
@@ -49,17 +56,7 @@ export class TelaInicialComponent implements OnInit {
     {name: 'Z-A', value: 'autor'},
   ]
 
-  irParaChat() {
-    this.confirmationService.confirm({
-      dismissableMask: true,
-      blockScroll: false,
-      message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
-      accept: () => {
-        this.router.navigate(['/tela-inicial/chat'])
-      }
-    })
-  };
-
+  pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial
   positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   //true = card
@@ -71,24 +68,63 @@ export class TelaInicialComponent implements OnInit {
   showSidebar = -350;
   listaDemandas: Demanda[] = []
   tipoRascunho = false;
-  listaTituloNaoFiltrado: string[] = []
+  listaTituloNaoFiltrado: {status: string, titulo: string}[] = []
   pesquisaDemanda = ""
+  nenhumResultadoEncontrado = false;
   listaDemandasRascunho: Demanda[] = [{
-    autorDemanda: "Sabrina Hegmann",
     scoreDemanda: 2034,
     statusDemanda: StatusDemanda.DRAFT,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
     ppmDemanda: "PPM 123456",
   }, {
-    autorDemanda: "Sabrina Hegmann",
     scoreDemanda: 2034,
     statusDemanda: StatusDemanda.DRAFT,
     departamentoBenDemanda: "Tecnologia da Informação",
     tituloDemanda: "Sistema de Gestão de Demandas",
     ppmDemanda: "PPM 123456",
   }]
-
+  mudouCampodePesquisa(){
+    this.pesquisaAlterada.next(this.pesquisaDemanda as string);
+  }
+  //Pesquisa demandas por status, ou por todos os campos, no caso o filtro de muitas informações
+  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; } | string){
+    if (typeof event === 'string') {
+      this.demandasService.getDemandasFiltradas({solicitante: "", codigoDemanda: "", status: event, tamanho: "", tituloDemanda: ""}).subscribe((listaDemandas: Demanda[]) => {
+        if(listaDemandas.length > 0){
+          this.listaDemandas = listaDemandas;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        }else{
+          this.isFiltrado = true;
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      })
+    }else{
+      this.demandasService.getDemandasFiltradas(event).subscribe((listaDemandas: Demanda[]) => {
+        if(listaDemandas.length > 0){
+          this.listaDemandas = listaDemandas;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        }else{
+          this.isFiltrado = true;
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      })
+    }
+  }
+  irParaChat() {
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      blockScroll: false,
+      message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+      accept: () => {
+        this.router.navigate(['/tela-inicial/chat'])
+      }
+    })
+  };
   excluirDemandaRascunho(index: number) {
     this.listaDemandasRascunho = this.listaDemandasRascunho.splice(1, index)
   }
@@ -181,35 +217,35 @@ export class TelaInicialComponent implements OnInit {
   }
 
   exibirFilasDeStatus() {
-    if (this.listaDemandas.some(e => e.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)) {
-      this.listaTituloNaoFiltrado.push("Backlog - Classificação")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')) {
+      this.listaTituloNaoFiltrado.push({status: "BACKLOG_CLASSIFICACAO",titulo: "Backlog - Classificação"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-aprovacao')) {
-      this.listaTituloNaoFiltrado.push("Backlog - Aprovação")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
+      this.listaTituloNaoFiltrado.push({status: "BACKLOG_APROVACAO",titulo: "Backlog - Aprovação"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'backlog-proposta')) {
-      this.listaTituloNaoFiltrado.push("Backlog - Propostas")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_PROPOSTA')) {
+      this.listaTituloNaoFiltrado.push({status: "BACKLOG_PROPOSTA",titulo: "Backlog - Propostas"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'business-case')) {
-      this.listaTituloNaoFiltrado.push("Business Case")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BUSINESS_CASE')) {
+      this.listaTituloNaoFiltrado.push({status: "BUSINESS_CASE",titulo: "Business Case"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'assessment')) {
-      this.listaTituloNaoFiltrado.push("Assessment")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'ASSESSMENT')) {
+      this.listaTituloNaoFiltrado.push({status: "ASSESSMENT",titulo: "Assessment"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'to-do')) {
-      this.listaTituloNaoFiltrado.push("To Do")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'TO_DO')) {
+      this.listaTituloNaoFiltrado.push({status: "TO_DO",titulo: "To Do"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'design-and-build')) {
-      this.listaTituloNaoFiltrado.push("Design and Build")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'DESIGN_AND_BUILD')) {
+      this.listaTituloNaoFiltrado.push({status: "DESIGN_AND_BUILD",titulo: "Design and Build"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'support')) {
-      this.listaTituloNaoFiltrado.push("Support")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'SUPPORT')) {
+      this.listaTituloNaoFiltrado.push({status: "SUPPORT",titulo: "Support"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'cancelled')) {
-      this.listaTituloNaoFiltrado.push("Cancelled")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'CANCELLED')) {
+      this.listaTituloNaoFiltrado.push({status: "CANCELLED",titulo: "Cancelled"})
     }
-    if (this.listaDemandas.some(e => e.statusDemanda == 'done')) {
-      this.listaTituloNaoFiltrado.push("Done")
+    if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'DONE')) {
+      this.listaTituloNaoFiltrado.push({status: "DONE",titulo: "Done"})
     }
   }
 
@@ -223,19 +259,30 @@ export class TelaInicialComponent implements OnInit {
         this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
       }
   }
+
+  carregarDemandasIniciais(){
+    this.listaDemandas = []
+    this.demandasService.getDemandasTelaInicial()
+    .subscribe({
+      next: (e) => {
+        e.forEach((demandas) => {
+          if(demandas.length > 0){
+            this.listaDemandas.push(...demandas)
+              this.isFiltrado = false;
+          }
+        })
+        this.exibirFilasDeStatus()
+
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
   ngOnInit(): void {
-    this.listaDemandas = listaDemandas
-    this.exibirFilasDeStatus()
-    // this.demandasService.getDemandas()
-    //   .subscribe({
-    //     next: (list) => {
-    //       this.listaDemandas = listaDemandas
-    //       this.exibirFilasDeStatus()
-    //     },
-    //     error: (err) => {
-    //       console.log(err)
-    //     }
-    //   })
+    // this.listaDemandas = listaDemandas
+   this.carregarDemandasIniciais()
   }
 
 }

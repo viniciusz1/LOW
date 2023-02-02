@@ -2,222 +2,315 @@
   <h3 class="mt-4" spyTarget="proposta">Proposta</h3>
   <hr />
 
-  <div class="campo" style="
+  <div
+    class="campo"
+    style="
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 0px;
-    ">
+    "
+  >
     <div class="w-100">
       <div class="d-flex justify-content-between">
         <div class="titulo" style="display: grid" id="item-1-1">
-          <div class="infos" style="display: flex; align-items: center; width: 28vw">
-            <label style="font-weight: 500" class="me-2" for="time">Prazo para elaboração da proposta:</label>
-            <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
-              pTooltip="Em quanto tempo a proposta ficará pronta?" tooltipPosition="top"></i>
+          <div
+            class="infos"
+            style="display: flex; align-items: center; width: 28vw"
+          >
+            <label style="font-weight: 500" class="me-2" for="time"
+              >Prazo para elaboração da proposta:</label
+            >
+            <i
+              class="bi bi-info-circle me-2"
+              style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+              pTooltip="Em quanto tempo a proposta ficará pronta?"
+              tooltipPosition="top"
+            ></i>
           </div>
-          <p-calendar placeholder="Clique para Agendar" formControlName="dataReuniao" [showTime]="true"
-            [showSeconds]="true" inputId="time"></p-calendar>
+          <p-calendar
+            placeholder="Clique para Agendar"
+            formControlName="prazoProposta"
+            [showTime]="true"
+            [showSeconds]="true"
+            inputId="time"
+          ></p-calendar>
         </div>
-        <div class="titulo" style="display: grid; width: 32vw;" id="item-1-1">
-          <div class="infos" style="display: flex; align-items: center; width: 28vw">
-            <label style="font-weight: 500" class="me-2" for="time">Código PPM:</label>
-            <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
-              pTooltip="Qual o código do SAP?" tooltipPosition="top"></i>
+        <div class="titulo" style="display: grid; width: 32vw" id="item-1-1">
+          <div
+            class="infos"
+            style="display: flex; align-items: center; width: 28vw"
+          >
+            <label style="font-weight: 500" class="me-2" for="time"
+              >Código PPM:</label
+            >
+            <i
+              class="bi bi-info-circle me-2"
+              style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+              pTooltip="Qual o código do SAP?"
+              tooltipPosition="top"
+            ></i>
           </div>
-          <input placeholder="Ex: 458" type="text" pInputText class="input" formControlName="codigoPPMProposta" />
+          <input
+            placeholder="Ex: 458"
+            type="text"
+            pInputText
+            class="input"
+            formControlName="codigoPPMProposta"
+          />
         </div>
       </div>
       <div class="titulo" style="display: grid" id="item-1-1">
-        <div class="infos" style="display: flex; align-items: center; width: 28vw">
-          <label style="font-weight: 500" class="me-2" for="time">Link Jira:</label>
-          <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
-            pTooltip="Insira a URL que aparece ao topo da sua página do JIRA" tooltipPosition="top"></i>
+        <div
+          class="infos"
+          style="display: flex; align-items: center; width: 28vw"
+        >
+          <label style="font-weight: 500" class="me-2" for="time"
+            >Link Jira:</label
+          >
+          <i
+            class="bi bi-info-circle me-2"
+            style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+            pTooltip="Insira a URL que aparece ao topo da sua página do JIRA"
+            tooltipPosition="top"
+          ></i>
         </div>
-        <input placeholder="Ex: https://jiraprojetoweg.atlassian.net/jira/software/projects/LOW/boards/3" type="text" pInputText class="input" formControlName="jiraProposta" />
+        <input
+          placeholder="Ex: https://jiraprojetoweg.atlassian.net/jira/software/projects/LOW/boards/3"
+          type="text"
+          pInputText
+          class="input"
+          formControlName="jiraProposta"
+        />
       </div>
     </div>
   </div>
   <h3 class="mt-4" spyTarget="recursosTarget">Recursos</h3>
   <hr />
-  <div class="d-grid justify-content-center my-3"
-    style="display: grid; justify-content: center !important; margin-top: 1vh">
-    <p-table [value]="recursos" dataKey="id" editMode="row" [tableStyle]="{ width: '100%' }" id="item-4-1"
-      formControlName="recursosProposta">
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width: 12.5% !important; border: 1px solid #dee2e6">
-            Recurso necessário
-          </th>
-          <th style="width: 12.5% !important; border: 1px solid #dee2e6">
-            Tipo da despesa
-          </th>
-          <th style="width: 12.5% !important; border: 1px solid #dee2e6">
-            Perfil da despesa
-          </th>
-          <th style="width: 12.5% !important; border: 1px solid #dee2e6">
-            Quantidade de horas
-          </th>
-          <th style="width: 12.5% !important; border: 1px solid #dee2e6">
-            Valor da hora
-          </th>
-          <th style="width: 12.5% !important; border: 1px solid #dee2e6">
-            Valor total da despesa
-          </th>
-          <th style="width: 12.5% !important; border: 1px solid #dee2e6">
-            Período de execução(Em meses)
-          </th>
-          <th style="width: 12.5% !important; border: 1px solid #dee2e6">
-            Centros de custos pagantes
-          </th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-recursos>
-        <tr>
-          <td pEditableColumnb style="border: 1px solid #dee2e6">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.nomeRecurso" required />
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ recursos.nomeRecurso }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td pEditableColumn style="border: 1px solid #dee2e6">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <p-dropdown [options]="['Interno', 'Externo']" appendTo="body" [(ngModel)]="recursos.perfilDespesa"
-                  [style]="{ width: '100%' }">
-                </p-dropdown>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ recursos.tipoDespesa }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td pEditableColumn style="border: 1px solid #dee2e6">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <p-dropdown [options]="['Hardware', 'Software', 'Corporativo']" appendTo="body"
-                  [(ngModel)]="recursos.perfilDespesa" [style]="{ width: '100%' }">
-                </p-dropdown>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ recursos.perfilDespesa }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td pEditableColumn style="border: 1px solid #dee2e6">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.quantidadeHoras" required />
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ recursos.quantidadeHoras }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td pEditableColumn style="border: 1px solid #dee2e6">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.valorHora" required />
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ recursos.valorHora }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td pEditableColumn style="border: 1px solid #dee2e6">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.valorTotalDespesa" required />
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ recursos.valorTotalDespesa }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td pEditableColumn style="border: 1px solid #dee2e6">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.periodoExMeses" required />
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ recursos.periodoExMeses }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-          <td pEditableColumn style="border: 1px solid #dee2e6">
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input pInputText type="text" [(ngModel)]="recursos.centrosCustoPagantes" required />
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{ recursos.centrosCustoPagantes }}
-              </ng-template>
-            </p-cellEditor>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn btn-primary">
-              <i class="bi bi-plus-lg"></i>
-            </button>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+  <p-table
+    *ngIf="listaRecursos.length != 0"
+    styleClass="p-datatable-gridlines"
+    [value]="listaRecursos"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Recurso Necessário</th>
+        <th>Tipo da despesa</th>
+        <th>Perfil da despesa</th>
+        <th>Centros de custos pagantes</th>
+        <th>Quantidade de horas</th>
+        <th>Valor da hora</th>
+        <th>Período de execução (Mensal)</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-recursos>
+      <tr>
+        <td>{{ recursos.nomeRecurso }}</td>
+        <td>{{ recursos.tipoDespesaRecurso.tipo }}</td>
+        <td>{{ recursos.perfilDespesaRecurso }}</td>
+        <td>{{ recursos.centrosCustoPagantesRecurso.nome }}</td>
+        <td>{{ recursos.quantidadeHorasRecurso }}</td>
+        <td>{{ recursos.valorHoraRecurso }}</td>
+        <td>{{ recursos.periodoExMesesRecurso }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div [formGroup]="recursos">
+    <div class="row">
+      <div class="col-3">
+        <label class="mt-1" for="Recurso Necessário:"
+          >Recurso Necessário:</label
+        >
+        <input
+          placeholder="Ex: Programador Back-end"
+          type="text"
+          pInputText
+          class="input"
+          formControlName="nomeRecurso"
+        />
+      </div>
+      <div class="col-3">
+        <label class="mt-1" for="Recurso Necessário:">Tipo da despesa:</label>
+        <p-dropdown
+          [options]="tipoDaDespesa"
+          optionLabel="tipo"
+          placeholder="Selecione o Tipo"
+          formControlName="tipoDespesaRecurso"
+          [showClear]="true"
+        ></p-dropdown>
+      </div>
+      <div class="col-3">
+        <label class="mt-1" for="Recurso Necessário:">Perfil da despesa:</label>
+        <input
+          placeholder="Ex: ..."
+          type="text"
+          pInputText
+          class="input"
+          formControlName="perfilDespesaRecurso"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <label class="mt-1" for="Recurso Necessário:">
+          Quantidade de horas</label
+        >
+        <div style="width: 100%; display: grid">
+          <p-inputNumber
+            placeholder="Ex: 220"
+            type="text"
+            class="input"
+            formControlName="quantidadeHorasRecurso"
+          ></p-inputNumber>
+        </div>
+      </div>
+      <div class="col-3">
+        <label class="mt-1" for="Recurso Necessário:"> Valor da hora</label>
+        <div style="width: 100%; display: grid">
+          <p-inputNumber
+            placeholder="Ex: R$ 55,00"
+            type="text"
+            class="input"
+            formControlName="valorHoraRecurso"
+          ></p-inputNumber>
+        </div>
+      </div>
+      <div class="col-3">
+        <label class="mt-1" for="Recurso Necessário:"
+          >Período de execução (Mensal)</label
+        >
+        <div style="width: 100%; display: grid">
+          <p-inputNumber
+            placeholder="Ex: 5"
+            type="text"
+            class="input"
+            formControlName="periodoExMesesRecurso"
+          ></p-inputNumber>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6"><label class="mt-1" for="Recurso Necessário:"
+          >Centros de custos pagantes</label
+        >
+        <div class="d-block" ngModelGroup="person">
+          <div class="d-flex" *ngFor="let i of quantidadeCC">
 
+            <p-dropdown
+              [options]="centrosCusto"
+              optionLabel="nome"
+              [(ngModel)]="teste[i]"
+            ></p-dropdown>
+
+            <input type="text" class="mx-3" #cc placeholder="Porcentagem" pInputText />
+          </div>
+          <button class="btn btn-primary" (click)="addRowCC()">+</button>
+        </div>
+      </div>
+        <div class="col-6"></div>
+
+      </div>
+
+      <div class="">
+        <button class="btn btn-primary" (click)="addRowRecurso()">
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </div>
   <h3 class="mt-4" spyTarget="escopo">Escopo</h3>
   <hr />
   <div>
     <div class="infos" style="display: flex; align-items: center; width: 28vw">
-      <label style="font-weight: 500" class="me-2" for="time">Escopo da Demanda:</label>
-      <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
-        pTooltip="Defina e personalize a finalidade da sua proposta" tooltipPosition="top"></i>
+      <label style="font-weight: 500" class="me-2" for="time"
+        >Escopo da Demanda:</label
+      >
+      <i
+        class="bi bi-info-circle me-2"
+        style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+        pTooltip="Defina e personalize a finalidade da sua proposta"
+        tooltipPosition="top"
+      ></i>
     </div>
-    <div class="NgxEditor__Wrapper escopo-demanda ">
+    <div class="NgxEditor__Wrapper escopo-demanda">
       <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-      <ngx-editor [editor]="editor" formControlName="escopoDemanda">
+      <ngx-editor [editor]="editor" formControlName="escopoDemandaProposta">
       </ngx-editor>
     </div>
   </div>
 
   <h3 class="mt-4" spyTarget="dados finais">Dados finais</h3>
   <hr />
-  <div class="union" style="display: flex; justify-content: space-between;">
+  <div class="union" style="display: flex; justify-content: space-between">
     <div class="d-block">
-      <div class="infos" style="display: flex; align-items: center; width: 28vw">
-        <label style="font-weight: 500" class="me-2" for="time">Período de Execução da Demanda:</label>
-        <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
-          pTooltip="Insira a data que irá iniciar sua proposta e data que irá finalizar sua proposta" tooltipPosition="top"></i>
+      <div
+        class="infos"
+        style="display: flex; align-items: center; width: 28vw"
+      >
+        <label style="font-weight: 500" class="me-2" for="time"
+          >Período de Execução da Demanda:</label
+        >
+        <i
+          class="bi bi-info-circle me-2"
+          style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+          pTooltip="Insira a data que irá iniciar sua proposta e data que irá finalizar sua proposta"
+          tooltipPosition="top"
+        ></i>
       </div>
       <div class="d-flex gap-2">
-        <p-calendar formControlName="inicioExDemanda" placeholder="Início" dateFormat="dd/mm/yy"></p-calendar>
-        <p-calendar formControlName="fimExDemanda" [(ngModel)]="fimData" placeholder="Fim" dateFormat="dd/mm/yy"
-          [minDate]="inicioData"></p-calendar>
+        <p-calendar
+          formControlName="inicioExDemandaProposta"
+          placeholder="Início"
+          dateFormat="dd/mm/yy"
+        ></p-calendar>
+        <p-calendar
+          formControlName="fimExDemandaProposta"
+          [(ngModel)]="fimData"
+          placeholder="Fim"
+          dateFormat="dd/mm/yy"
+          [minDate]="inicioData"
+        ></p-calendar>
       </div>
     </div>
-  
+
     <div class="d-flex flex-column">
-      <div class="infos" style="display: flex; align-items: center; width: 28vw">
-        <label style="font-weight: 500" class="me-2" for="time">Payback Simples:</label>
-        <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
-          pTooltip="Insira, em reais, o retorno dos benefícios" tooltipPosition="top"></i>
+      <div
+        class="infos"
+        style="display: flex; align-items: center; width: 28vw"
+      >
+        <label style="font-weight: 500" class="me-2" for="time"
+          >Payback Simples:</label
+        >
+        <i
+          class="bi bi-info-circle me-2"
+          style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+          pTooltip="Insira, em reais, o retorno dos benefícios"
+          tooltipPosition="top"
+        ></i>
       </div>
-      <p-inputNumber formControlName="paybackSimplesDemanda" mode="decimal" [minFractionDigits]="2"
-        [maxFractionDigits]="2"></p-inputNumber>
+      <p-inputNumber
+        formControlName="paybackProposta"
+        mode="decimal"
+        [minFractionDigits]="2"
+        [maxFractionDigits]="2"
+      ></p-inputNumber>
     </div>
   </div>
 
   <div class="infos" style="display: flex; align-items: center; width: 28vw">
-    <label style="font-weight: 500" class="me-2" for="time">Responsáveis pelo Negócio:</label>
-    <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer;"
-      pTooltip="Insira os responsáveis por suceder a proposta" tooltipPosition="top"></i>
+    <label style="font-weight: 500" class="me-2" for="time"
+      >Responsáveis pelo Negócio:</label
+    >
+    <i
+      class="bi bi-info-circle me-2"
+      style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+      pTooltip="Insira os responsáveis por suceder a proposta"
+      tooltipPosition="top"
+    ></i>
   </div>
-  <p-multiSelect [options]="responsaveis" formControlName="responsaveisNegocioDemanda"
-    defaultLabel="Selecione os Responsaveis" optionLabel="nome" display="chip">
-  </p-multiSelect>
+  <p-dropdown
+    [options]="responsaveis"
+    placeholder="Selecione o Responsavel"
+    formControlName="responsavelProposta"
+    optionLabel="nome"
+  ></p-dropdown>
 </form>

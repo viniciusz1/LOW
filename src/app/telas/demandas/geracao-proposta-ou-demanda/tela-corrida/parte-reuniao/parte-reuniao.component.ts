@@ -1,5 +1,8 @@
+import { CentroCustoService } from './../../../../../services/centro-custo.service';
+import { CentroCusto } from './../../../../../models/centro-custo.model';
+import { PropostaService } from './../../../../../services/proposta.service';
 import { DemandaAnalistaService } from './../../../../../services/demanda-analista.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ScrollSpyService } from 'ng-spy';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
@@ -8,59 +11,33 @@ import { Recurso } from 'src/app/models/recurso.model';
 import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
 
 interface Responsavel {
-  nome: string,
-  area: string
+  nome: string;
+  area: string;
 }
 @Component({
   selector: 'app-parte-reuniao',
   templateUrl: './parte-reuniao.component.html',
-  styleUrls: ['./parte-reuniao.component.scss']
+  styleUrls: ['./parte-reuniao.component.scss'],
 })
 export class ParteReuniaoComponent implements OnInit {
-
   constructor(
     private messageService: MessageService,
-    private fb: FormBuilder) {
+    private propostaService: PropostaService,
+    private centroCustoService: CentroCustoService
+  ) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
-  propostaForm = new FormBuilder()
-  recursos: Recurso[] = [
-    {
-      id: '1',
-      nomeRecurso: 'Recurso 1',
-      tipoDespesa: TipoDespesa.EXTERNO,
-      perfilDespesa: 'Perfil 1',
-      quantidadeHoras: 1,
-      valorHora: 1,
-      valorTotalDespesa: 1,
-      periodoExMeses: 1,
-      centrosCustoPagantes: [],
-    },
-  ];
-  onSubmit(){
-    console.log(this.formProposta.value)
-  }
+  @Input() centrosCusto: CentroCusto[] = [];
+  formProposta = this.propostaService.formProposta;
+  recursos = this.propostaService.formRecursos;
+  listaRecursos = this.propostaService.listaRecursos;
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
     { nome: 'Vinicius Bonatti', area: 'Vendas' },
     { nome: 'Camilly Vitoria', area: 'Motores' },
     { nome: 'Kenzo Hedeaky', area: 'Trefilação' },
-    { nome: 'Felipe Viera', area: 'Corpotativo' }
+    { nome: 'Felipe Viera', area: 'Corpotativo' },
   ];
-
-  formProposta = this.fb.group({
-    prazoProposta: [''],
-    codigoPPMProposta: [''],
-    jiraProposta:[''],
-    recursosProposta: [this.recursos],
-    escopoDemanda: [''],
-    inicioExDemanda: [''],
-    fimExDemanda: [''],
-    paybackSimplesDemanda: [''],
-    responsaveisNegocioDemanda: ['']
-
-  })
-
   selectedResponsaveis: any;
   ngOnDestroy(): void {
     this.editor.destroy();
@@ -68,6 +45,7 @@ export class ParteReuniaoComponent implements OnInit {
   formEditor = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
   });
+
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -83,26 +61,36 @@ export class ParteReuniaoComponent implements OnInit {
   fimData: Date | undefined = undefined;
   selectedCoin: any;
   clonedRecursos: { [s: string]: Recurso } = {};
+  tipoDaDespesa = [{ tipo: 'Interna' }, { tipo: 'Externa' }];
 
-  onRowEditInit(product: Recurso) {
-    this.clonedRecursos[product.id] = { ...product };
+  onSubmit() {
+    console.log(this.formProposta.value);
   }
 
-  onRowEditSave(product: Recurso) {
-    delete this.clonedRecursos[product.id];
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Success',
-      detail: 'Recurso is updated',
+  porcentagemCC: [{ porcentagem: string; index: number }] = [
+    { porcentagem: '', index: 0 },
+  ];
+  quantidadeCC = [0];
+
+  //fazer verificações necessárias
+  addRowRecurso() {
+    this.listaRecursos.push(this.recursos.value as unknown as Recurso);
+  }
+  addRowCC() {
+    console.log(this.teste)
+    this.quantidadeCC.push(this.quantidadeCC.length);
+  }
+  teste: string[] = []
+  atualizarCentrosCusto() {
+    this.centroCustoService.getCentrosCusto().subscribe({
+      next: (centrosCusto) => {
+        this.centrosCusto = centrosCusto;
+        console.log(centrosCusto);
+      },
+      error: (err) => console.log(err),
     });
   }
-
-  onRowEditCancel(product: Recurso, index: number) {
-    this.recursos[index] = this.clonedRecursos[product.id];
-    delete this.clonedRecursos[product.id];
-  }
-
   ngOnInit(): void {
+    this.atualizarCentrosCusto();
   }
-
 }

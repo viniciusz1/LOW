@@ -53,7 +53,7 @@ export class CardDemandaComponent implements OnInit {
       this.abrirModal.emit();
     }
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar'){
-      this.verDocumentoProposta.emit(this.dadosDemada)
+      this.verDocumentoProposta.emit(this.dadosDemada.codigoDemanda)
     }
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'){
       this.abrirModalCriarReuniao.emit()

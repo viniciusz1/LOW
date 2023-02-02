@@ -1,3 +1,4 @@
+import { DemandaAnalista } from './../../models/demanda-analista.model';
 import { DemandaAnalistaService } from './../../services/demanda-analista.service';
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
@@ -13,20 +14,28 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 export class ModalDemandaDocumentoComponent implements OnInit {
   user = "gerente"
   constructor(
-    @Inject(DIALOG_DATA) public data: Demanda,
+    @Inject(DIALOG_DATA) public data: string,
+    private demandaAnalistaService: DemandaAnalistaService,
     private demandaService: DemandaService) {
-    this.dadosDemanda = data
+
   }
-  dadosDemanda: Demanda | undefined;
+
+  dadosDemandaAnalista: DemandaAnalista | undefined;
 
   enviarDecisao(decisao: number){
     this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
   }
 
+  buscarDemandaAnalista(){
+    this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(this.data).subscribe((demanda) => {
+      this.dadosDemandaAnalista = demanda;
+      console.log(demanda)
+    });
+  }
+
   download(arquivo: Arquivo): void {
     this.demandaService
     .saveByteArray(arquivo.dadosArquivo, arquivo.tipoArquivo, arquivo.nomeArquivo)
-
   }
 
   event: any[] = [];
@@ -34,7 +43,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   events2: any[] = [];
 
   ngOnInit() {
-
+    this.buscarDemandaAnalista();
     this.events1 = [
       { status: 'Reserva', date: '15/10/2020 10:30', icon: PrimeIcons.HOURGLASS, color: '#00579D', fontWeight: '600' },
       { status: 'Avaliação', date: '15/10/2020 14:00', icon: PrimeIcons.ELLIPSIS_H, color: '#c9c9c9', fontWeight: '100' },

@@ -23,44 +23,44 @@
 <mat-dialog-content class="mat-typography">
   <p-scrollPanel [style]="{width: '100%', height: '65vh'}" styleClass="custombar1">
     <h4 mat-dialog-title class="d-flex justify-content-between">
-      <span><b>SOLICITANTE: </b>{{dadosDemanda?.solicitanteDemanda?.nomeUsuario}}</span>
-      <span><b>DATA:</b> {{dadosDemanda?.inicioExDemanda}}</span>
+      <span><b>SOLICITANTE: </b>{{dadosDemandaAnalista?.demandaDemandaAnalista?.solicitanteDemanda?.nomeUsuario}}</span>
+      <span><b>DATA:</b> {{dadosDemandaAnalista?.demandaDemandaAnalista?.inicioExDemanda}}</span>
     </h4>
-    <h4><b>DEPARTAMENTO:</b> {{dadosDemanda?.solicitanteDemanda?.departamentoUsuario}}</h4>
+    <h4><b>DEPARTAMENTO:</b> {{dadosDemandaAnalista?.demandaDemandaAnalista?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
     <h4 class="d-flex justify-content-center">
       <b
-        >{{dadosDemanda?.tituloDemanda}} –
-        {{dadosDemanda?.codigoDemanda}}</b
+        >{{dadosDemandaAnalista?.demandaDemandaAnalista?.tituloDemanda}} –
+        {{dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda}}</b
       >
     </h4>
 
     <h4><b>Objetivo:</b></h4>
     <p>
-      {{dadosDemanda?.objetivoDemanda}}}
+      {{dadosDemandaAnalista?.demandaDemandaAnalista?.objetivoDemanda}}}
     </p>
 
     <h4><b>Situação Atual:</b></h4>
     <p>
-      {{dadosDemanda?.situacaoAtualDemanda}}
+      {{dadosDemandaAnalista?.demandaDemandaAnalista?.situacaoAtualDemanda}}
     </p>
 
 
-    <h4><b>Beneficio Real:</b>{{dadosDemanda?.beneficioRealDemanda?.valorBeneficio}} mensais</h4>
+    <h4><b>Beneficio Real:</b>{{dadosDemandaAnalista?.demandaDemandaAnalista?.beneficioRealDemanda?.valorBeneficio}} mensais</h4>
     <p>
       <b>Memória de cálculo do benefício real:</b>
     </p>
     <ul>
       <li>
-       {{dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio}}
+       {{dadosDemandaAnalista?.demandaDemandaAnalista?.beneficioRealDemanda?.memoriaDeCalculoBeneficio}}
       </li>
     </ul>
-    <h4><b>Beneficio Potencial:</b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}} mensais</h4>
+    <h4><b>Beneficio Potencial:</b>{{dadosDemandaAnalista?.demandaDemandaAnalista?.beneficioPotencialDemanda?.valorBeneficio}} mensais</h4>
     <p>
       <b>Memória de cálculo do benefício potencial:</b>
     </p>
     <ul>
       <li>
-        {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
+        {{dadosDemandaAnalista?.demandaDemandaAnalista?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
       </li>
     </ul>
     <h4>
@@ -68,17 +68,27 @@
     </h4>
     <ul>
       <li>
-       {{dadosDemanda?.beneficioQualitativoDemanda}}
+       {{dadosDemandaAnalista?.demandaDemandaAnalista?.beneficioQualitativoDemanda}}
       </li>
     </ul>
-    <p><b>Frequência de uso do sistema:</b>{{dadosDemanda?.frequenciaDeUsoSistemaDemanda}}</p>
+    <p><b>Frequência de uso do sistema:</b>{{dadosDemandaAnalista?.demandaDemandaAnalista?.frequenciaDeUsoSistemaDemanda}}</p>
     <h4><b>DOCUMENTOS:</b>
-      <!-- <a *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" [href]="arquivo.dadosArquivo" [download]="arquivo.nomeArquivo">
+      <!-- <a *ngFor="let arquivo of dadosDemandaAnalista?.arquivosDemanda" [href]="arquivo.dadosArquivo" [download]="arquivo.nomeArquivo">
       {{ arquivo.nomeArquivo }}
     </a> -->
 
-    <div *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" (click)="download(arquivo)">DOC</div>
-    <h4>Classificação do analista:</h4>
+    <div *ngFor="let arquivo of dadosDemandaAnalista?.demandaDemandaAnalista?.arquivosDemanda" (click)="download(arquivo)">DOC</div>
+    <hr>
+    <h4><b>CLASSIFICAÇÃO DO ANALISTA:</b></h4>
+    <p><b>Analista Reponsável: </b>{{dadosDemandaAnalista?.analista?.nomeUsuario}}</p>
+    <p><b>Tamanho da Demanda: </b>{{dadosDemandaAnalista?.tamanhoDemandaAnalista}}</p>
+    <p><b>Seção de TI Responsável: </b>{{dadosDemandaAnalista?.secaoDemandaAnalista}}</p>
+    <p><b>BU Solicitante: </b>{{dadosDemandaAnalista?.buSolicitanteDemandaAnalista?.nomeBusinessUnit}}</p>
+    <p><b>BUs Beneficiadas: </b><span *ngFor="let bu of dadosDemandaAnalista?.busBeneficiadasDemandaAnalista">
+      {{bu.nomeBusinessUnit}}
+    </span></p>
+
+
   </h4>
 
 </p-scrollPanel>

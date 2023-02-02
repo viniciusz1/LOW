@@ -28,7 +28,6 @@ export class DemandaService {
       valorBeneficio: ['', [Validators.required]],
     }),
     beneficioQualitativoDemanda: ['', [Validators.required]],
-    anexoDemanda: [''],
     frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
       codigoUsuario: 3

@@ -73,7 +73,13 @@
     </ul>
     <p><b>Frequência de uso do sistema:</b>{{dadosDemanda?.frequenciaDeUsoSistemaDemanda}}</p>
     <h4><b>DOCUMENTOS:</b>
-    {{dadosDemanda?.documentoDemanda}}</h4>
+      <!-- <a *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" [href]="arquivo.dadosArquivo" [download]="arquivo.nomeArquivo">
+      {{ arquivo.nomeArquivo }}
+    </a> -->
+
+    <div *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" (click)="download(arquivo)">DOC</div>
+  </h4>
+
 </p-scrollPanel>
 </mat-dialog-content>
 

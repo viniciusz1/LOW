@@ -1,3 +1,4 @@
+import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
@@ -15,6 +16,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private dialogRef: DialogRef,
     private demandaService: DemandaService) {
      this.dadosDemanda = data
+     console.log(this.dadosDemanda)
 
   }
   dadosDemanda: Demanda | undefined;
@@ -24,18 +26,18 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
   }
 
+  download(arquivo: Arquivo): void {
+    this.demandaService
+    .saveByteArray(arquivo.dadosArquivo, arquivo.tipoArquivo, arquivo.nomeArquivo)
+
+  }
 
   event: any[] = [];
   events1: any[] = [];
   events2: any[] = [];
 
   ngOnInit() {
-    // this.events1 = [
-    //   { status: 'Solicitante', color: 'Pink' },
-    //   { status: 'Analista' },
-    //   { status: 'Gerente' },
-    //   { status: 'Gestor' }
-    // ];
+
     this.events1 = [
       { status: 'Reserva', date: '15/10/2020 10:30', icon: PrimeIcons.HOURGLASS, color: '#00579D', fontWeight: '600' },
       { status: 'Avaliação', date: '15/10/2020 14:00', icon: PrimeIcons.ELLIPSIS_H, color: '#c9c9c9', fontWeight: '100' },

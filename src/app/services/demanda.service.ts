@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,14 @@ export class DemandaService {
   });
 
   public arquivos: File[] = [];
+
+  saveByteArray(bytes : string, type: string, name: string) {
+    var blob = new Blob([bytes],{type:type});
+    var link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = name;
+    link.click();
+  }
 
   getDemandasFiltradas(filtros: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; }){
     return this.http.get<Demanda[]>(
@@ -77,7 +86,7 @@ export class DemandaService {
     );
   }
 
-  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: number) {
+  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number , decisao: number) {
     console.log(codigoDemanda, decisao);
     return this.http.put<any>(`http://localhost:8080/demanda/update/backlog/${codigoDemanda}`, decisao)
     .subscribe();

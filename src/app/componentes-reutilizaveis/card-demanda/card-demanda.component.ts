@@ -42,7 +42,12 @@ export class CardDemandaComponent implements OnInit {
       texto: 'Ver em Ata',
     };
   }
-
+  statusPermitido(){
+    if(this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO || this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA || this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO || this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT || this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE){
+      return true
+    }
+    return false
+  }
   direcionarUsuario() {
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
       this.abrirModal.emit();
@@ -88,10 +93,10 @@ export class CardDemandaComponent implements OnInit {
         texto: 'Adicionar Proposta',
       };
     }
-    else if (this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE || this.dadosDemada.statusDemanda == StatusDemanda.TO_DO || this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD || this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'adicionar a reuniao',
-        texto: 'Adicionar Proposta',
+        rota: 'avancar fase',
+        texto: 'Avançar Fase',
       };
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED) {

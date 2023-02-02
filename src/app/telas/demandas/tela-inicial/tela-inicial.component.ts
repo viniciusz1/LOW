@@ -68,7 +68,7 @@ export class TelaInicialComponent implements OnInit {
   showSidebar = -350;
   listaDemandas: Demanda[] = []
   tipoRascunho = false;
-  listaTituloNaoFiltrado: string[] = []
+  listaTituloNaoFiltrado: {status: string, titulo: string}[] = []
   pesquisaDemanda = ""
   nenhumResultadoEncontrado = false;
   listaDemandasRascunho: Demanda[] = [{
@@ -218,34 +218,34 @@ export class TelaInicialComponent implements OnInit {
 
   exibirFilasDeStatus() {
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')) {
-      this.listaTituloNaoFiltrado.push("Backlog - Classificação")
+      this.listaTituloNaoFiltrado.push({status: "BACKLOG_CLASSIFICACAO",titulo: "Backlog - Classificação"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
-      this.listaTituloNaoFiltrado.push("Backlog - Aprovação")
+      this.listaTituloNaoFiltrado.push({status: "BACKLOG_APROVACAO",titulo: "Backlog - Aprovação"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BACKLOG_PROPOSTA')) {
-      this.listaTituloNaoFiltrado.push("Backlog - Propostas")
+      this.listaTituloNaoFiltrado.push({status: "BACKLOG_PROPOSTA",titulo: "Backlog - Propostas"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'BUSINESS_CASE')) {
-      this.listaTituloNaoFiltrado.push("Business Case")
+      this.listaTituloNaoFiltrado.push({status: "BUSINESS_CASE",titulo: "Business Case"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'ASSESSMENT')) {
-      this.listaTituloNaoFiltrado.push("Assessment")
+      this.listaTituloNaoFiltrado.push({status: "ASSESSMENT",titulo: "Assessment"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'TO_DO')) {
-      this.listaTituloNaoFiltrado.push("To Do")
+      this.listaTituloNaoFiltrado.push({status: "TO_DO",titulo: "To Do"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'DESIGN_AND_BUILD')) {
-      this.listaTituloNaoFiltrado.push("Design and Build")
+      this.listaTituloNaoFiltrado.push({status: "DESIGN_AND_BUILD",titulo: "Design and Build"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'SUPPORT')) {
-      this.listaTituloNaoFiltrado.push("Support")
+      this.listaTituloNaoFiltrado.push({status: "SUPPORT",titulo: "Support"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'CANCELLED')) {
-      this.listaTituloNaoFiltrado.push("Cancelled")
+      this.listaTituloNaoFiltrado.push({status: "CANCELLED",titulo: "Cancelled"})
     }
     if (this.listaDemandas.some(e => e.statusDemanda?.toString() == 'DONE')) {
-      this.listaTituloNaoFiltrado.push("Done")
+      this.listaTituloNaoFiltrado.push({status: "DONE",titulo: "Done"})
     }
   }
 
@@ -272,7 +272,6 @@ export class TelaInicialComponent implements OnInit {
               })
             }
           })
-          console.log(this.listaDemandas[0].statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
           this.exibirFilasDeStatus()
 
         },

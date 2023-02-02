@@ -1,3 +1,4 @@
+import { DemandaAnalistaService } from './../../services/demanda-analista.service';
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
@@ -13,16 +14,12 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   user = "gerente"
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
-    private dialogRef: DialogRef,
     private demandaService: DemandaService) {
-     this.dadosDemanda = data
-     console.log(this.dadosDemanda)
-
+    this.dadosDemanda = data
   }
   dadosDemanda: Demanda | undefined;
 
   enviarDecisao(decisao: number){
-    console.log(decisao)
     this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
   }
 

@@ -46,11 +46,11 @@
         </div>
       </div>
     </div>
-    <div class="col-6" style="margin: 3vh 2vw 3vh 2vw;">
+    <div class="col-5" style="margin: 3vh 2vw 3vh 6vw;">
       <p class="text-end">
         <i role="button" (click)="openModalDemandaDocumento()" class="bi bi-arrows-fullscreen"></i>
       </p>
-      <p-scrollPanel [style]="{height: '70vh'}">
+      <p-scrollPanel [style]="{height: '70vh', width:'42.6vw'}">
         <h4 mat-dialog-title class="d-flex justify-content-between">
           <span><b>SOLICITANTE: </b>{{demanda?.solicitanteDemanda?.nomeUsuario}}</span>
           <span><b>DATA:</b> {{demanda?.inicioExDemanda}}</span>

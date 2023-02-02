@@ -259,26 +259,30 @@ export class TelaInicialComponent implements OnInit {
         this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
       }
   }
+
+  carregarDemandasIniciais(){
+    this.listaDemandas = []
+    this.demandasService.getDemandasTelaInicial()
+    .subscribe({
+      next: (e) => {
+        e.forEach((demandas) => {
+          if(demandas.length > 0){
+            this.listaDemandas.push(...demandas)
+              this.isFiltrado = false;
+          }
+        })
+        this.exibirFilasDeStatus()
+
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
   ngOnInit(): void {
     // this.listaDemandas = listaDemandas
-    this.demandasService.getDemandasTelaInicial()
-      .subscribe({
-        next: (e) => {
-          e.forEach((demandas) => {
-            if(demandas.length > 0){
-              demandas.forEach((demanda) => {
-                this.listaDemandas.push(demanda)
-
-              })
-            }
-          })
-          this.exibirFilasDeStatus()
-
-        },
-        error: (err) => {
-          console.log(err)
-        }
-      })
+   this.carregarDemandasIniciais()
   }
 
 }

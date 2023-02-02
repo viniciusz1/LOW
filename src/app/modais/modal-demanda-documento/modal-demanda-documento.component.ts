@@ -1,3 +1,4 @@
+import { DemandaService } from 'src/app/services/demanda.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
@@ -10,9 +11,18 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   user = ""
   constructor(
     @Inject(DIALOG_DATA) public data: string,
-    private dialogRef: DialogRef) {
+    private dialogRef: DialogRef,
+    private demandaService: DemandaService) {
     this.user = data
   }
+
+
+  enviarDecisao(decisao: number){
+    console.log(decisao)
+    this.demandaService.avaliacaoGerenteDeNegocioDemanda(1, decisao);
+  }
+
+
   event: any[] = [];
   events1: any[] = [];
   events2: any[] = [];

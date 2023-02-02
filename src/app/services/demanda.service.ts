@@ -4,29 +4,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
+import { Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DemandaService {
   public demandaForm = this.fb.group({
-    tituloDemanda: [''],
-    situacaoAtualDemanda: [''],
-    objetivoDemanda: [''],
-    centroCustos: [''],
+    tituloDemanda: ['', [Validators.required]],
+    situacaoAtualDemanda: ['',[Validators.required]],
+    objetivoDemanda: ['', [Validators.required]],
+    centroCustos: ['', [Validators.required]],
     beneficioRealDemanda: this.fb.group({
-      moedaBeneficio: [''],
-      memoriaDeCalculoBeneficio: [''],
-      valorBeneficio: [''],
+      moedaBeneficio: ['', [Validators.required]],
+      memoriaDeCalculoBeneficio: ['', [Validators.required]],
+      valorBeneficio: ['', [Validators.required]],
     }),
     beneficioPotencialDemanda: this.fb.group({
-      moedaBeneficio: [''],
-      memoriaDeCalculoBeneficio: [''],
-      valorBeneficio: [''],
+      moedaBeneficio: ['', [Validators.required]],
+      memoriaDeCalculoBeneficio: ['', [Validators.required]],
+      valorBeneficio: ['', [Validators.required]],
     }),
-    beneficioQualitativoDemanda: [''],
+    beneficioQualitativoDemanda: ['', [Validators.required]],
     anexoDemanda: [''],
-    frequenciaDeUsoDemanda: [''],
+    frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
       codigoUsuario: 1,
       nomeUsuario: '1',
@@ -53,7 +54,6 @@ export class DemandaService {
 
     }
   }
-
   postDemanda() {
     console.log(this.demandaForm.value);
     return this.http.post<Demanda | string>(
@@ -61,6 +61,12 @@ export class DemandaService {
 
       this.demandaForm.value
     );
+  }
+
+  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number, decisao: number) {
+    console.log(codigoDemanda, decisao);
+    return this.http.put<any>(`http://localhost:8080/demanda/update/backlog/${codigoDemanda}`, decisao)
+    .subscribe();
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder) {}

@@ -105,11 +105,18 @@
     <!-- Trocar exibição de lista para card e vice-versa -->
     <div
       *ngIf="!tipoRascunho"
-      [ngClass]="isFiltrado ? 'justify-content-between' : 'justify-content-end container'"
-      style="overflow: auto;"
+      [ngClass]="
+        isFiltrado ? 'justify-content-between' : 'justify-content-end container'
+      "
+      style="overflow: auto"
       class="my-3 d-flex w-100"
     >
-    <i *ngIf="isFiltrado" (click)="carregarDemandasIniciais()" class="bi bi-arrow-left" style="font-size: 25px; cursor: pointer"></i>
+      <i
+        *ngIf="isFiltrado"
+        (click)="carregarDemandasIniciais()"
+        class="bi bi-arrow-left"
+        style="font-size: 25px; cursor: pointer"
+      ></i>
       <div class="d-flex">
         <div
           joyrideStep="tres"

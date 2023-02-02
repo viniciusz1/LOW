@@ -8,7 +8,7 @@
       style="align-items: baseline; justify-content: space-between"
     >
       <div class="d-flex">
-        <label class="me-2" for="">002</label>
+        <label class="me-2" for="">{{dadosDemada.codigoDemanda}}</label>
         <label class="me-2 text-truncate" for="titulo"
           ><b>{{ dadosDemada.tituloDemanda }}</b></label
         >
@@ -30,7 +30,7 @@
       </div>
       <i
         class="bi bi-chat-left-dots me-3"
-        *ngIf="!rascunho"
+        *ngIf="!rascunho  && statusPermitido()"
         (click)="irParaChat.emit()"
         style="cursor: pointer"
       ></i>
@@ -88,7 +88,7 @@
       </span>
     </p>
     <p class="card-text d-flex justify-content-between">
-      <span><b>Autor: </b>{{ dadosDemada.autorDemanda }}</span>
+      <span><b>Autor: </b>{{ dadosDemada.solicitanteDemanda?.nomeUsuario }}</span>
       <span *ngIf="tipoDeAta.length != 0">{{ tipoDeAta }}</span>
     </p>
     <p class="card-text bottom-card">

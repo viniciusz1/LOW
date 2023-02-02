@@ -31,7 +31,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
     this.atualizarComissoes();
     this.atualizarDemandas();
   }
-  
+
   listaReunioes: Reuniao[] = listaReunioes;
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
@@ -126,5 +126,5 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
     return index;
   }
-  
+
 }

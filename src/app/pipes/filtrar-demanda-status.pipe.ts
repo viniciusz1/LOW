@@ -12,7 +12,7 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
       return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
     }
     else if(titulo[0] == "Backlog - Aprovação"){
-      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
+      return demandas.filter(d => d.statusDemanda  == StatusDemanda.BACKLOG_APROVACAO)
     }
     else if(titulo[0] == "Backlog - Propostas"){
       return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA)

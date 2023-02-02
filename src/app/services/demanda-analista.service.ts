@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
+import { RESIZE_TIME_THRESHOLD } from 'ng-spy';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +14,14 @@ export class DemandaAnalistaService {
     tamanhoDemandaAnalista: [''],
     buSolicitanteDemandaAnalista:[''],
     busBeneficiadasDemandaAnalista:[''],
-    demandaDemandaAnalista: { codigoDemanda: 22 },
-    analista: { codigoUsuario: 6 },
+    demandaDemandaAnalista: { codigoDemanda: '' },
+    analista: { codigoUsuario: 3 },
     secaoDemandaAnalista: [''],
   });
-
-  postProposta() {
-    console.log(this.demandaAnalistaForm.value);
+  postProposta(codigoDemanda: string | undefined) {
+    if(codigoDemanda != undefined){
+    this.demandaAnalistaForm.controls.demandaDemandaAnalista.setValue({codigoDemanda: codigoDemanda})
+    }
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demandaAnalista',
 

@@ -1,83 +1,56 @@
-<div
-  class="mt-5 container"
-  [formGroup]="demandaAnalistaForm"
-  (ngSubmit)="onSubmitClassificacaoDemanda()"
->
-  <div
-    class="row d-flex justify-content-between"
-    style="border: 1px solid #bcbaba; border-radius: 5px"
-  >
-    <div class="col-md-5 ps-5 py-5 position-relative">
-      <div style="width: 140%" class="line-top-start"></div>
-      <div class="">
-        <label class="form-label me-2">Tamanho:</label>
-        <br />
-        <p-dropdown
-          formControlName="tamanhoDemandaAnalista"
-          [options]="opcoesDeTamanho"
-          [optionLabel]="'name'"
-          [optionValue]="'value'"
-          placeholder="Selecione um tamanho"
-        ></p-dropdown>
-      </div>
-      <div>
-        <label class="form-label">BU beneficiada:</label>
-        <br />
-        <p-multiSelect
-          [options]="BUs"
-          formControlName="busBeneficiadasDemandaAnalista"
-          defaultLabel="Selecione as BUs"
-          optionLabel="nomeBusinessUnit"
-          display="chip"
-        ></p-multiSelect>
-      </div>
-      <div>
-        <label class="form-label">BU solicitante:</label>
-        <br />
-        <p-dropdown
-          formControlName="buSolicitanteDemandaAnalista"
-          [options]="BUs"
-          optionLabel="nomeBusinessUnit"
-          placeholder="Selecione uma BU"
-        ></p-dropdown>
-      </div>
-      <div>
-        <label class="form-label">Seção de TI Responsável:</label>
-        <br />
-        <p-dropdown
-          formControlName="secaoDemandaAnalista"
-          [options]="secoes"
-          [optionLabel]="'nomeSecao'"
-          placeholder="Selecione uma sessão"
-        ></p-dropdown>
-      </div>
-      <div class="">
-        <label class="form-label">Anexar documento:</label>
-        <p-fileUpload
-          name="myfile[]"
-          url="./upload.php"
-          [multiple]="true"
-        ></p-fileUpload>
+<div class="container-fluid" style="display: flex;">
+  <div class="row">
+    <div class="col-5" style="margin: 3vh 2vw 3vh 2vw;" [formGroup]="demandaAnalistaForm" (ngSubmit)="onSubmitClassificacaoDemanda()">
+      <div style="display: grid; height: 70vh;">
+        <div style="margin-top: 2.5vh;">
+          <h3>
+            Preencha os campos abaixo:
+          </h3>
+        </div>
+        <div class="">
+          <label class="form-label me-2">Tamanho:</label>
+          <br />
+          <p-dropdown formControlName="tamanhoDemandaAnalista" [options]="opcoesDeTamanho" [optionLabel]="'name'"
+            [optionValue]="'value'" placeholder="Selecione um tamanho"></p-dropdown>
+        </div>
+        <div>
+          <label class="form-label">BU beneficiada:</label>
+          <br />
+          <p-multiSelect [options]="BUs" formControlName="busBeneficiadasDemandaAnalista"
+            defaultLabel="Selecione as BUs" optionLabel="nomeBusinessUnit" display="chip"></p-multiSelect>
+        </div>
+        <div>
+          <label class="form-label">BU solicitante:</label>
+          <br />
+          <p-dropdown formControlName="buSolicitanteDemandaAnalista" [options]="BUs" optionLabel="nomeBusinessUnit"
+            placeholder="Selecione uma BU"></p-dropdown>
+        </div>
+        <div>
+          <label class="form-label">Seção de TI Responsável:</label>
+          <br />
+          <p-dropdown formControlName="secaoDemandaAnalista" [options]="secoes" [optionLabel]="'nomeSecao'"
+            placeholder="Selecione uma sessão"></p-dropdown>
+        </div>
+        <div class="">
+          <label class="form-label hei">Anexar documento:</label>
+          <p-fileUpload name="myfile[]" url="./upload.php" [multiple]="true"></p-fileUpload>
+        </div>
+        <div class="d-flex justify-content-between" style="margin-top: 2vh;">
+          <div routerLink="/tela-inicial" class="btn btn-danger">Reprovar</div>
+          <div class="justify-content-end">
+            <div class="btn btn-outline-primary">Contatar Solicitante</div>
+            <div (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">
+              Aprovar
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-1">
-      <div
-        class="w-50"
-        style="border-right: 1px solid #bcbaba; height: 100%"
-      ></div>
-    </div>
-    <div class="col-md-6 position-relative p-0">
-      <div class="line-top-start"></div>
-      <div class="line-top-end"></div>
-
-      <div class="retangulo-container mt-2" style="overflow-y: scroll">
-        <p class="text-end">
-          <i
-            role="button"
-            (click)="openModalDemandaDocumento()"
-            class="bi bi-search"
-          ></i>
-        </p>
+    <div class="col-6" style="margin: 3vh 2vw 3vh 2vw;">
+      <p class="text-end">
+        <i role="button" (click)="openModalDemandaDocumento()" class="bi bi-arrows-fullscreen"></i>
+      </p>
+      <p-scrollPanel [style]="{height: '70vh'}">
         <h4 mat-dialog-title class="d-flex justify-content-between">
           <span><b>SOLICITANTE: </b>{{demanda?.solicitanteDemanda?.nomeUsuario}}</span>
           <span><b>DATA:</b> {{demanda?.inicioExDemanda}}</span>
@@ -127,25 +100,14 @@
            {{demanda?.beneficioQualitativoDemanda}}
           </li>
         </ul>
+
         <p><b>Frequência de uso do sistema:</b>{{demanda?.frequenciaDeUsoSistemaDemanda}}</p>
         <h4><b>DOCUMENTOS:</b>
           <a *ngFor="let arquivo of demanda?.arquivosDemanda" [href]="arquivo.dadosArquivo" [download]="arquivo.dadosArquivo">
             {{ arquivo.nomeArquivo }}
           </a>
         </h4>
-      </div>
-    </div>
-  </div>
-  <div class="d-flex justify-content-between my-3">
-    <div routerLink="/tela-inicial" class="btn btn-danger">Reprovar</div>
-    <div class="justify-content-end">
-      <div class="btn btn-outline-primary">Contatar Solicitante</div>
-      <div
-        (click)="onSubmitClassificacaoDemanda()"
-        class="btn btn-primary ms-3"
-      >
-        Aprovar
-      </div>
+      </p-scrollPanel>
     </div>
   </div>
 </div>

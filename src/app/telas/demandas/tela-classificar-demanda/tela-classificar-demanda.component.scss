@@ -30,9 +30,16 @@ h4{
 }
 
 :host ::ng-deep .p-multiselect {
-    width: 25.5vw;
+    width: 40.75vw;
 }
 
 :host ::ng-deep .p-dropdown {
-    width: 25.5vw;
+    width: 40.75vw;
 }
+
+:host::ng-deep {
+    .p-fileupload-content{
+       height: 18vh;
+    }
+
+  }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
-import { Observable } from 'rxjs';
+import { Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -13,22 +13,23 @@ import { Observable } from 'rxjs';
 export class DemandaService {
 
   public demandaForm = this.fb.group({
-    tituloDemanda: [''],
-    situacaoAtualDemanda: [''],
-    objetivoDemanda: [''],
-    centroCustos: [''],
+    tituloDemanda: ['', [Validators.required]],
+    situacaoAtualDemanda: ['',[Validators.required]],
+    objetivoDemanda: ['', [Validators.required]],
+    centroCustos: ['', [Validators.required]],
     beneficioRealDemanda: this.fb.group({
-      moedaBeneficio: [''],
-      memoriaDeCalculoBeneficio: [''],
-      valorBeneficio: [''],
+      moedaBeneficio: ['', [Validators.required]],
+      memoriaDeCalculoBeneficio: ['', [Validators.required]],
+      valorBeneficio: ['', [Validators.required]],
     }),
     beneficioPotencialDemanda: this.fb.group({
-      moedaBeneficio: [''],
-      memoriaDeCalculoBeneficio: [''],
-      valorBeneficio: [''],
+      moedaBeneficio: ['', [Validators.required]],
+      memoriaDeCalculoBeneficio: ['', [Validators.required]],
+      valorBeneficio: ['', [Validators.required]],
     }),
-    beneficioQualitativoDemanda: [''],
-    frequenciaDeUsoDemanda: [''],
+    beneficioQualitativoDemanda: ['', [Validators.required]],
+    anexoDemanda: [''],
+    frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
       codigoUsuario: 3
     },

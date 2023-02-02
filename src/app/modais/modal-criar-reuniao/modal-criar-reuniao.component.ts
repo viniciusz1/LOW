@@ -8,6 +8,9 @@ import { Reuniao } from 'src/app/models/reuniao.model';
 import { Comissao } from 'src/app/models/comissao.model';
 import { Component, OnInit } from '@angular/core';
 import { listaReunioes } from 'src/app/telas/reunioes/tela-reuniao/listReunioes';
+import { PropostaService } from 'src/app/services/proposta.service';
+import { Proposta } from 'src/app/models/proposta.model';
+import { ReuniaoService } from 'src/app/services/reuniao.service';
 
 @Component({
   selector: 'app-modal-criar-reuniao',
@@ -19,7 +22,9 @@ export class ModalCriarReuniaoComponent implements OnInit {
     public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
     private fb: FormBuilder,
     private comissaoService: ComissaoService,
-    private demandaService: DemandaService
+    private demandaService: DemandaService,
+    private propostaService: PropostaService,
+    private reuniaoService: ReuniaoService
   ) {}
 
   ngOnInit(): void {
@@ -32,20 +37,31 @@ export class ModalCriarReuniaoComponent implements OnInit {
   draggedDemanda: Demanda | undefined = undefined;
   listaDeComissoesReuniao: Comissao[] = [];
   listaDemandas: Demanda[] = [];
+  listaProposta: Proposta[] = [];
 
   dataReuniao: any;
-  comissaoSelecionada: any;
+  comissaoSelecionada: Comissao | undefined = undefined;
 
   onSubmit() {
+         let reuniao: Reuniao = {
+          dataReuniao: this.dataReuniao,
+          comissaoReuniao: this.comissaoSelecionada,
+          demandasReuniao: this.listaDemandasEscolhidas
+         }
+         
+         this.reuniaoService.postReuniao(reuniao).subscribe(e => {
+                console.log(e)
+              })
     console.log(this.listaDemandas)
     console.log(this.listaDeComissoesReuniao)
+    console.log(this.listaProposta)
     console.log(this.novaReuniaoForm.value);
   }
 
   novaReuniaoForm = this.fb.group({
     listaDemandas: [this.listaDemandasEscolhidas],
     dataReuniao: [''],
-    comissaoReuniao: [''],
+    comissaoReuniao: [this.comissaoSelecionada],
   });
   dragStart(demanda: Demanda) {
     this.draggedDemanda = demanda;
@@ -95,7 +111,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
         error: (err) => console.log(err),
       });
   }
-
 
   dragEnd() {
     this.draggedDemanda = undefined;

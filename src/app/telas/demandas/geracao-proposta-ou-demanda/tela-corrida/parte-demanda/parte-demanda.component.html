@@ -12,13 +12,10 @@
           tooltipPosition="top"
         ></i>
       </div>
-      <input
-        placeholder="Ex: Melhoria em Sistemas de Informação"
-        type="text"
-        pInputText
-        formControlName="tituloDemanda"
-        class="input w-100"
-      />
+      <input placeholder="Ex: Melhoria em Sistemas de Informação" type="text" pInputText formControlName="tituloDemanda"
+        class="input w-100 " [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.tituloDemanda.errors && demandaForm.controls.tituloDemanda.touched}" />
+        <small *ngIf="demandaForm.controls.tituloDemanda.errors && demandaForm.controls.tituloDemanda.touched"
+        id="username2-help" class="p-error block">Campo Obrigatório</small>
     </div>
     <div class="situacao-atual" style="display: grid" id="item-1-2">
       <div class="infos" style="display: flex; align-items: center">
@@ -30,14 +27,11 @@
           tooltipPosition="top"
         ></i>
       </div>
-      <div style="display: flex">
-        <textarea
-          placeholder="Ex: Baixa produção, abrangente de atrasos"
-          type="text"
-          formControlName="situacaoAtualDemanda"
-          pInputText
-          class="input w-100"
-        ></textarea>
+      <div style="display: grid">
+        <textarea placeholder="Ex: Baixa produção, abrangente de atrasos" type="text"
+          formControlName="situacaoAtualDemanda" pInputText class="input w-100"
+          [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.situacaoAtualDemanda.errors && demandaForm.controls.situacaoAtualDemanda.touched}"></textarea>
+          <small *ngIf="demandaForm.controls.situacaoAtualDemanda.errors && demandaForm.controls.situacaoAtualDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
       </div>
     </div>
     <div class="objetivo" style="display: grid" id="item-1-3">
@@ -50,14 +44,11 @@
           tooltipPosition="top"
         ></i>
       </div>
-      <div style="display: flex">
-        <textarea
-          type="text"
-          placeholder="Ex: Aumentar a produção com o desenvolvimento de um sistema"
-          formControlName="objetivoDemanda"
-          pInputText
-          class="input w-100"
-        ></textarea>
+      <div style="display: grid">
+        <textarea type="text" placeholder="Ex: Aumentar a produção com o desenvolvimento de um sistema"
+          formControlName="objetivoDemanda" pInputText class="input w-100"
+          [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}"></textarea>
+          <small *ngIf="demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
       </div>
     </div>
     <div class="infos" style="display: flex; align-items: center;" id="item-1-4">
@@ -70,17 +61,11 @@
       ></i>
     </div>
     <span spyTarget="gerais" class="p-float-label">
-      <p-multiSelect
-        class="w-100"
-        [options]="centrosCusto"
-        [(ngModel)]="selectedCentros"
-        placeholder="Selecione os Centros de Custo"
-        defaultLabel="Selecione os centros de custo"
-        optionLabel="nome"
-        display="chip"
-        formControlName="centroCustos"
-      >
+      <p-multiSelect class="w-100"  [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.centroCustos.errors && demandaForm.controls.centroCustos.touched}" [options]="centrosCusto" [(ngModel)]="selectedCentros"
+        placeholder="Selecione os Centros de Custo" defaultLabel="Selecione os centros de custo" optionLabel="nome"
+        display="chip" formControlName="centroCustos">
       </p-multiSelect>
+      <small *ngIf="demandaForm.controls.centroCustos.errors && demandaForm.controls.centroCustos.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
     </span>
   </div>
 
@@ -98,29 +83,16 @@
         ></i>
       </div>
       <div style="display: flex; justify-content: space-between">
-        <div style="width: 90%">
-          <p-inputNumber
-            style="width: 100%"
-            placeholder="Ex: 150.000"
-            class="input"
-            formControlName="valorBeneficio"
-            mode="currency"
-            [currency]="currencyMoedaBeneficio1"
-            [locale]="localMoedaBeneficio1"
-            [minFractionDigits]="2"
-          ></p-inputNumber>
-        </div>
-        <select
-          (change)="mudouMoeda($event, 1)"
-          class="drop"
-          name="plataforma"
-          required="required"
-          formControlName="moedaBeneficio"
-        >
+        <input [ngClass]="{'ng-dirty ng-invalid': demandaForm}" placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
+          formControlName="valorBeneficio" />
+          <small *ngIf="demandaForm.controls.beneficioRealDemanda.errors && demandaForm.controls.beneficioRealDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
+        <select class="drop" name="plataforma" required="required" formControlName="moedaBeneficio"
+        [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.beneficioRealDemanda.errors && demandaForm.controls.beneficioRealDemanda.touched}">
           <option value="Real">BRL</option>
           <option value="Euro">EUR</option>
           <option value="Dollar">DOL</option>
         </select>
+        <small *ngIf="demandaForm.controls.beneficioRealDemanda.errors && demandaForm.controls.beneficioRealDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
       </div>
       <div class="situacao-atual" style="display: grid" id="item-1-2">
         <div class="infos" style="display: flex; align-items: center">
@@ -134,15 +106,10 @@
             tooltipPosition="top"
           ></i>
         </div>
-        <textarea
-          placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
-          style="width: 100%"
-          [rows]="5"
-          [cols]="30"
-          [autoResize]="true"
-          pInputTextarea
-          formControlName="memoriaDeCalculoBeneficio"
-        ></textarea>
+        <textarea placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..." style="width: 100%"
+          [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea formControlName="memoriaDeCalculoBeneficio"
+          [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.beneficioRealDemanda.errors && demandaForm.controls.beneficioRealDemanda.touched}"></textarea>
+          <small *ngIf="demandaForm.controls.beneficioRealDemanda.errors && demandaForm.controls.beneficioRealDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
       </div>
     </div>
     <div formGroupName="beneficioPotencialDemanda">
@@ -159,29 +126,16 @@
           ></i>
         </div>
         <div style="display: flex; justify-content: space-between">
-          <div style="width: 90%">
-            <p-inputNumber
-              style="width: 100%"
-              placeholder="Ex: 20.000"
-              class="input"
-              formControlName="valorBeneficio"
-              mode="currency"
-              [currency]="currencyMoedaBeneficio2"
-              [locale]="localMoedaBeneficio2"
-              [minFractionDigits]="2"
-            ></p-inputNumber>
-          </div>
-          <select
-            (change)="mudouMoeda($event, 2)"
-            class="drop"
-            name="plataforma"
-            required="required"
-            formControlName="moedaBeneficio"
-          >
-            <option value="Real">BRL</option>
-            <option value="Euro">EUR</option>
-            <option value="Dollar">DOL</option>
-          </select>
+          <input placeholder="Ex: 20.000" style="width: 93%;" type="text" pInputText class="input"
+            formControlName="valorBeneficio" [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.beneficioPotencialDemanda.errors && demandaForm.controls.beneficioPotencialDemanda.touched}" />
+            <small *ngIf="demandaForm.controls.beneficioPotencialDemanda.errors && demandaForm.controls.beneficioPotencialDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
+            <select class="drop" name="plataforma" required="required" formControlName="moedaBeneficio"
+            [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.beneficioPotencialDemanda.errors && demandaForm.controls.beneficioPotencialDemanda.touched}">
+              <option value="Real">BRL</option>
+              <option value="Euro">EUR</option>
+              <option value="Dollar">DOL</option>
+            </select>
+            <small *ngIf="demandaForm.controls.beneficioPotencialDemanda.errors && demandaForm.controls.beneficioPotencialDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
         </div>
       </div>
       <div class="ben-real">
@@ -197,15 +151,11 @@
           ></i>
         </div>
         <div style="display: flex">
-          <textarea
-            placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
-            style="width: 100%"
-            [rows]="5"
-            [cols]="30"
-            [autoResize]="true"
-            pInputTextarea
+          <textarea placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
+            style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
             formControlName="memoriaDeCalculoBeneficio"
-          ></textarea>
+            [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.beneficioPotencialDemanda.errors && demandaForm.controls.beneficioPotencialDemanda.touched}"></textarea>
+            <small *ngIf="demandaForm.controls.beneficioPotencialDemanda.errors && demandaForm.controls.beneficioPotencialDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
         </div>
       </div>
     </div>
@@ -221,16 +171,12 @@
           tooltipPosition="top"
         ></i>
       </div>
-      <div style="display: flex">
-        <textarea
-          placeholder="Ex: O benefício se torna qualitativo porque seu retorno..."
-          style="width: 100%"
-          [rows]="5"
-          [cols]="30"
-          [autoResize]="true"
-          pInputTextarea
+      <div style="display: grid">
+        <textarea placeholder="Ex: O benefício se torna qualitativo porque seu retorno..." style="width: 100%"
+          [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
           formControlName="beneficioQualitativoDemanda"
-        ></textarea>
+          [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.beneficioQualitativoDemanda.errors && demandaForm.controls.beneficioQualitativoDemanda.touched}"></textarea>
+          <small *ngIf="demandaForm.controls.beneficioQualitativoDemanda.errors && demandaForm.controls.beneficioQualitativoDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
       </div>
     </div>
   </div>
@@ -249,11 +195,9 @@
           tooltipPosition="top"
         ></i>
       </div>
-      <p-dropdown
-        [options]="opcoesDeTamanho"
-        placeholder="Selecione a frequência"
-        formControlName="frequenciaDeUsoDemanda"
-      ></p-dropdown>
+      <p-dropdown  [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.frequenciaDeUsoDemanda.errors && demandaForm.controls.frequenciaDeUsoDemanda.touched}" [options]="opcoesDeTamanho"  placeholder="Selecione a frequência"
+        formControlName="frequenciaDeUsoDemanda"></p-dropdown>
+        <small *ngIf="demandaForm.controls.frequenciaDeUsoDemanda.errors && demandaForm.controls.frequenciaDeUsoDemanda.touched" id="username2-help" class="p-error block">Campo Obrigatório</small>
     </div>
     <div>
       <div class="infos" style="display: flex; align-items: center">

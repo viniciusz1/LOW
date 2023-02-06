@@ -13,7 +13,7 @@ import { Validators } from '@angular/forms';
 export class DemandaService {
 
   public demandaForm = this.fb.group({
-    tituloDemanda: ['', [Validators.required]],
+    tituloDemanda: ['', [Validators.required], ],
     situacaoAtualDemanda: ['',[Validators.required]],
     objetivoDemanda: ['', [Validators.required]],
     centroCustos: ['', [Validators.required]],
@@ -30,9 +30,13 @@ export class DemandaService {
     beneficioQualitativoDemanda: ['', [Validators.required]],
     frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
-      codigoUsuario: 3
+      codigoUsuario: 4
     },
   });
+
+  resetDemandaForm(){
+    this.demandaForm.reset()
+  }
 
   public arquivos: File[] = [];
 

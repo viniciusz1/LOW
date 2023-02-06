@@ -77,7 +77,6 @@ export class ParteReuniaoComponent implements OnInit {
     this.listaRecursos.push(this.recursos.value as unknown as Recurso);
   }
   addRowCC() {
-    console.log(this.teste)
     this.quantidadeCC.push(this.quantidadeCC.length);
   }
   teste: string[] = []
@@ -85,7 +84,6 @@ export class ParteReuniaoComponent implements OnInit {
     this.centroCustoService.getCentrosCusto().subscribe({
       next: (centrosCusto) => {
         this.centrosCusto = centrosCusto;
-        console.log(centrosCusto);
       },
       error: (err) => console.log(err),
     });

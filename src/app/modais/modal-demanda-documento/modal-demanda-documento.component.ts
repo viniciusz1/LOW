@@ -17,14 +17,14 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     @Inject(DIALOG_DATA) public data: string,
     private demandaAnalistaService: DemandaAnalistaService,
     private demandaService: DemandaService) {
-
+      console.log(data)
   }
 
   dadosDemandaAnalista: DemandaAnalista | undefined;
 
   enviarDecisao(decisao: number){
     if(this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda)
-    this.demandaService.avancarStatusDemandaComDecisao(this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda, decisao).subscribe();
+    this.demandaService.avancarStatusDemandaComDecisao(this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda, decisao).subscribe(e => console.log(e));
   }
 
   buscarDemandaAnalista(){

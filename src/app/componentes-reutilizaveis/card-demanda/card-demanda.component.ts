@@ -17,7 +17,7 @@ export class CardDemandaComponent implements OnInit {
   @Output() verDocumentoProposta = new EventEmitter();
   @Output() clicouEmExcluir = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
-  @Output() abrirModalCriarReuniao = new EventEmitter();
+  @Output() abrirModalCriarReuniao = new EventEmitter<Demanda>();
   @Output() modalHistorico = new EventEmitter();
   @Output() verDocumentoEmAta = new EventEmitter();
   @Output() avancarStatusDemanda = new EventEmitter<{mensagem: string, codigoDemanda: string | undefined, statusDemanda: StatusDemanda | undefined}>();
@@ -57,7 +57,7 @@ export class CardDemandaComponent implements OnInit {
       this.verDocumentoProposta.emit(this.dadosDemada.codigoDemanda)
     }
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'){
-      this.abrirModalCriarReuniao.emit()
+      this.abrirModalCriarReuniao.emit(this.dadosDemada)
     }
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'ver em ata'){
       this.verDocumentoEmAta.emit()

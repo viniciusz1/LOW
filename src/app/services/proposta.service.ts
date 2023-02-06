@@ -1,6 +1,6 @@
 import { TipoDespesa } from './../models/tipoDespesa.enum';
 import { Recurso } from './../models/recurso.model';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -22,6 +22,10 @@ export class PropostaService {
       valorHoraRecurso:  [''],
       periodoExMesesRecurso:  ['']
   });
+
+  addNewControls(): void {
+    // this.formRecursos.addControl('new', new FormControl<string | null>('', Validators.required));
+  }
 
 
   formProposta = this.fb.group({

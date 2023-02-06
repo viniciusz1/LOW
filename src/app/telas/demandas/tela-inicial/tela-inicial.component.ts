@@ -241,10 +241,10 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalCriarReuniao() {
-    console.log('oi');
+  openModalCriarReuniao(demanda: Demanda) {
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
+      data: demanda
     });
   }
 

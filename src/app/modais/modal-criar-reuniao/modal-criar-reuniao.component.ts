@@ -1,12 +1,12 @@
 import { ComissaoService } from './../../services/comissao.service';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { FormBuilder } from '@angular/forms';
-import { DialogRef } from '@angular/cdk/dialog';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { Comissao } from 'src/app/models/comissao.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { listaReunioes } from 'src/app/telas/reunioes/tela-reuniao/listReunioes';
 import { PropostaService } from 'src/app/services/proposta.service';
 import { Proposta } from 'src/app/models/proposta.model';
@@ -19,13 +19,16 @@ import { ReuniaoService } from 'src/app/services/reuniao.service';
 })
 export class ModalCriarReuniaoComponent implements OnInit {
   constructor(
+    @Inject(DIALOG_DATA) public data: Demanda,
     public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
     private fb: FormBuilder,
     private comissaoService: ComissaoService,
     private demandaService: DemandaService,
-    private propostaService: PropostaService,
     private reuniaoService: ReuniaoService
-  ) {}
+  ) {
+
+
+  }
 
   ngOnInit(): void {
     this.atualizarComissoes();
@@ -48,7 +51,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
           comissaoReuniao: this.comissaoSelecionada,
           demandasReuniao: this.listaDemandasEscolhidas
          }
-         
+
          this.reuniaoService.postReuniao(reuniao).subscribe(e => {
                 console.log(e)
               })
@@ -103,11 +106,25 @@ export class ModalCriarReuniaoComponent implements OnInit {
       });
   }
 
+  removerDaListaAdicSecundaria(){
+    if(this.data){
+      this.listaDemandasEscolhidas.push(this.data);
+      for(let i of this.listaDemandas){
+        if(i.codigoDemanda == this.data.codigoDemanda){
+          this.listaDemandas.splice(this.listaDemandas.indexOf(i), 1);
+        }
+      }
+    }
+  }
+
   atualizarDemandas() {
     this.demandaService
       .getDemandas()
       .subscribe({
-        next: (demanda) => (this.listaDemandas = demanda),
+        next: (demanda) => {
+          this.listaDemandas = demanda
+          this.removerDaListaAdicSecundaria()
+        },
         error: (err) => console.log(err),
       });
   }

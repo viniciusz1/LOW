@@ -29,6 +29,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
 
   buscarDemandaAnalista(){
     this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(this.data).subscribe((demanda) => {
+      console.log(demanda)
       this.dadosDemandaAnalista = demanda;
     });
   }

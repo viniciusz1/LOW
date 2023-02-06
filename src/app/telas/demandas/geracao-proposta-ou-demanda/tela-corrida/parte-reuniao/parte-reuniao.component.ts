@@ -77,6 +77,7 @@ export class ParteReuniaoComponent implements OnInit {
     this.listaRecursos.push(this.recursos.value as unknown as Recurso);
   }
   addRowCC() {
+
     this.quantidadeCC.push(this.quantidadeCC.length);
   }
   teste: string[] = []

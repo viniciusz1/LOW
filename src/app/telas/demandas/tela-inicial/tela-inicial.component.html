@@ -185,7 +185,7 @@
             (verDocumentoProposta)="openModalDemandaDocumento($event)"
             (irParaChat)="irParaChat()"
             (modalHistorico)="openModalHistorico()"
-            (abrirModalCriarReuniao)="openModalCriarReuniao()"
+            (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
             (abrirModal)="openModalMotivoDevolucao()"
             class="mb-2"
           >
@@ -203,7 +203,7 @@
                 "
                 (irParaChat)="irParaChat()"
                 (modalHistorico)="openModalHistorico()"
-                (abrirModalCriarReuniao)="openModalCriarReuniao()"
+                (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 [dadosDemada]="demanda"
                 class="mb-2"
               >
@@ -283,7 +283,7 @@
                 (irParaChat)="irParaChat()"
                 (modalHistorico)="openModalHistorico()"
                 (abrirModal)="openModalMotivoDevolucao()"
-                (abrirModalCriarReuniao)="openModalCriarReuniao()"
+                (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 (verDocumentoEmAta)="openModalAtaDocumento()"
               ></app-card-demanda>
             </div>
@@ -317,7 +317,7 @@
           *ngFor="let demanda of listaDemandasRascunho; let i = index"
           [dadosDemada]="demanda"
           (abrirModal)="openModalMotivoDevolucao()"
-          (abrirModalCriarReuniao)="openModalCriarReuniao()"
+          (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           [mudarTamanho]="'100%'"
           (irParaChat)="irParaChat()"
@@ -337,7 +337,7 @@
           [mudarTamanho]="'100%'"
           (irParaChat)="irParaChat()"
           (modalHistorico)="openModalHistorico()"
-          (abrirModalCriarReuniao)="openModalCriarReuniao()"
+          (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoEmAta)="openModalAtaDocumento()"
           class="col-lg-6 col-xl-4 mb-3"
         >

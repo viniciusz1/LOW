@@ -30,7 +30,7 @@ export class DemandaService {
     beneficioQualitativoDemanda: ['', [Validators.required]],
     frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
-      codigoUsuario: 19
+      codigoUsuario: 3
     },
   });
 
@@ -81,10 +81,11 @@ export class DemandaService {
   }
   postDemanda() {
     let demandaFormData = new FormData();
-    let teste = this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;
 
+    this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;
+    this.demandaForm.patchValue({solicitanteDemanda: {codigoUsuario: 3}})
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
-    console.log(demandaFormData.getAll('arquivos'))
+    console.log(this.demandaForm.value)
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demanda', demandaFormData
     );

@@ -103,12 +103,29 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   atualizarDemandas() {
-    this.demandaService
-      .getDemandas()
-      .subscribe({
-        next: (demanda) => (this.listaDemandas = demanda),
-        error: (err) => console.log(err),
-      });
+    let ass: Demanda[] = []
+    let bus: Demanda[] = []
+    this.demandaService.getDemandasFiltradas({solicitante: "",codigoDemanda: "", status: StatusDemanda.ASSESSMENT.toString + "",
+    tamanho: "", tituloDemanda: ""}).subscribe({
+      next: (demanda) => (ass = demanda),
+      error: (err) => console.log(err)
+    })
+    this.demandaService.getDemandasFiltradas({solicitante: "",codigoDemanda: "", status: StatusDemanda.BUSINESS_CASE.toString + "",
+    tamanho: "", tituloDemanda: ""}).subscribe({
+      next: (demanda) => (bus = demanda),
+      error: (err) => console.log(err)
+    })
+    this.listaDemandas = ass;
+    bus.forEach(demanda => {
+      this.listaDemandas.push(demanda);
+    });
+
+    // this.demandaService
+    //   .getDemandas()
+    //   .subscribe({
+    //     next: (demanda) => (this.listaDemandas = demanda),
+    //     error: (err) => console.log(err),
+    //   });
   }
 
   dragEnd() {

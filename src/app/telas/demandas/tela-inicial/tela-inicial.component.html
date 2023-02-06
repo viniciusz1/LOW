@@ -190,6 +190,7 @@
                 *ngFor="
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
+                    | slice : 4 : 20
                 "
                 (irParaChat)="irParaChat()"
                 (modalHistorico)="openModalHistorico()"

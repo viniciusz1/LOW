@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
 import { Validators } from '@angular/forms';
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root',
@@ -41,11 +42,16 @@ export class DemandaService {
   public arquivos: File[] = [];
 
   saveByteArray(bytes : string, type: string, name: string) {
-    var blob = new Blob([bytes],{type:type});
-    var link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = name;
-    link.click();
+    const base64 = bytes;
+    const binary = atob(base64);
+    const len = binary.length;
+    const buffer = new ArrayBuffer(len);
+    const view = new Uint8Array(buffer);
+    for (let i = 0; i < len; i++) {
+      view[i] = binary.charCodeAt(i);
+}
+const blob = new Blob([view], { type: type });
+saveAs(blob, name);
   }
 
   getDemandasFiltradas(filtros: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; }){

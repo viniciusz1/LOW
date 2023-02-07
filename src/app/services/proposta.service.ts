@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { Proposta } from '../models/proposta.model';
+import { Validators } from 'ngx-editor';
 
 @Injectable({
   providedIn: 'root',
@@ -20,13 +21,23 @@ export class PropostaService {
       perfilDespesaRecurso:  [''],
       quantidadeHorasRecurso:  [''],
       valorHoraRecurso:  [''],
-      periodoExMesesRecurso:  ['']
+      periodoExMesesRecurso:  [''],
+      centersOfCost: this.fb.array([
+        this.createCenterOfCost()
+      ])
   });
 
-  addNewControls(): void {
-    // this.formRecursos.addControl('new', new FormControl<string | null>('', Validators.required));
+  createCenterOfCost() {
+    return this.fb.group({
+      percentage: [null, Validators.required],
+      costCenter: [null, Validators.required]
+    });
   }
 
+  addCenterOfCost() {
+    (this.formRecursos.controls.centersOfCost as FormArray).push(this.createCenterOfCost());
+    console.log(this.formRecursos)
+  }
 
   formProposta = this.fb.group({
     prazoProposta: [''],

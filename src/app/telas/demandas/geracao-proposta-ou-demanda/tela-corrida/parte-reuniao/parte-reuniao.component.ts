@@ -71,15 +71,18 @@ export class ParteReuniaoComponent implements OnInit {
     { porcentagem: '', index: 0 },
   ];
   quantidadeCC = [0];
+  costCenters = [ 'Center 1', 'Center 2', 'Center 3' ];
 
   //fazer verificações necessárias
   addRowRecurso() {
     this.listaRecursos.push(this.recursos.value as unknown as Recurso);
   }
-  addRowCC() {
-
-    this.quantidadeCC.push(this.quantidadeCC.length);
+  adicionarCentroCusto(){
+    this.propostaService.addCenterOfCost()
   }
+
+ 
+
   teste: string[] = []
   atualizarCentrosCusto() {
     this.centroCustoService.getCentrosCusto().subscribe({

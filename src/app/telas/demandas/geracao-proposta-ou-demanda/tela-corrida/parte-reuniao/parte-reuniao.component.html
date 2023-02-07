@@ -189,25 +189,17 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-6"><label class="mt-1" for="Recurso Necessário:"
-          >Centros de custos pagantes</label
-        >
-        <div class="d-block">
-          <div class="d-flex" *ngFor="let i of quantidadeCC">
-
-            <p-dropdown
-              [options]="centrosCusto"
-              optionLabel="nome"
-              [formControlName]="'cc'+i"
-            ></p-dropdown>
-
-            <input
-            [formControlName]="'input'+i" type="text" class="mx-3" #cc placeholder="Porcentagem" pInputText />
+        <div formArrayName="centersOfCost">
+          <div *ngFor="let centerOfCost of recursos.controls.centersOfCost.controls; let i = index">
+            <div [formGroupName]="i">
+              <input formControlName="percentage" placeholder="Percentage">
+              <select formControlName="costCenter">
+                <option *ngFor="let option of costCenters">{{ option }}</option>
+              </select>
+            </div>
           </div>
-          <button class="btn btn-primary" (click)="addRowCC()">+</button>
         </div>
-      </div>
-        <div class="col-6"></div>
+        <button (click)="adicionarCentroCusto()">+ Add Center of Cost</button>
 
       </div>
 

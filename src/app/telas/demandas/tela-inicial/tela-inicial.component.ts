@@ -47,6 +47,7 @@ export class TelaInicialComponent implements OnInit {
       this.isFiltrado = true;
     }
   }
+
   ordenarSelect =""
   opcoesOrdenacao=[
     {name: 'Data de criação', value: 'dataCriacao'},
@@ -118,6 +119,8 @@ export class TelaInicialComponent implements OnInit {
   irParaChat() {
     this.confirmationService.confirm({
       dismissableMask: true,
+      key: 'iniciarChat',
+      header:'Iniciar Chat',
       blockScroll: false,
       message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
       accept: () => {
@@ -279,6 +282,19 @@ export class TelaInicialComponent implements OnInit {
       }
     })
   }
+  
+  modalMotivoReprovacao() {
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      key:'motivoReprovacao',
+      header:'Motivo da Reprovação',
+      blockScroll: false,
+      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+      accept: () => {
+        
+      }
+    })
+  };
 
   ngOnInit(): void {
     // this.listaDemandas = listaDemandas

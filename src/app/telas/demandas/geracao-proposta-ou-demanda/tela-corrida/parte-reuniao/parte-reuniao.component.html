@@ -108,7 +108,7 @@
         <td>{{ recursos.nomeRecurso }}</td>
         <td>{{ recursos.tipoDespesaRecurso.tipo }}</td>
         <td>{{ recursos.perfilDespesaRecurso }}</td>
-        <td>{{ recursos.centrosCustoPagantesRecurso.nome }}</td>
+        <td><span *ngFor="let centro of recursos.centrosCusto">{{centro.porcentagem}} - {{centro.centroCusto}}<br></span></td>
         <td>{{ recursos.quantidadeHorasRecurso }}</td>
         <td>{{ recursos.valorHoraRecurso }}</td>
         <td>{{ recursos.periodoExMesesRecurso }}</td>
@@ -189,12 +189,12 @@
         </div>
       </div>
       <div class="row">
-        <div formArrayName="centersOfCost">
-          <div *ngFor="let centerOfCost of recursos.controls.centersOfCost.controls; let i = index">
+        <div formArrayName="centrosCusto">
+          <div *ngFor="let centroCusto of recursos.controls.centrosCusto.controls; let i = index">
             <div [formGroupName]="i">
-              <input formControlName="percentage" placeholder="Percentage">
-              <select formControlName="costCenter">
-                <option *ngFor="let option of costCenters">{{ option }}</option>
+              <input formControlName="porcentagem" placeholder="Percentage">
+              <select formControlName="centroCusto">
+                <option *ngFor="let option of centrosDeCustoOpcoes">{{ option }}</option>
               </select>
             </div>
           </div>

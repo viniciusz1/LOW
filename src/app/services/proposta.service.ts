@@ -22,20 +22,20 @@ export class PropostaService {
       quantidadeHorasRecurso:  [''],
       valorHoraRecurso:  [''],
       periodoExMesesRecurso:  [''],
-      centersOfCost: this.fb.array([
+      centrosCusto: this.fb.array([
         this.createCenterOfCost()
       ])
   });
 
   createCenterOfCost() {
     return this.fb.group({
-      percentage: [null, Validators.required],
-      costCenter: [null, Validators.required]
+      porcentagem: [null, Validators.required],
+      centroCusto: [null, Validators.required]
     });
   }
 
   addCenterOfCost() {
-    (this.formRecursos.controls.centersOfCost as FormArray).push(this.createCenterOfCost());
+    (this.formRecursos.controls.centrosCusto as FormArray).push(this.createCenterOfCost());
     console.log(this.formRecursos)
   }
 
@@ -43,7 +43,7 @@ export class PropostaService {
     prazoProposta: [''],
     codigoPPMProposta: [''],
     jiraProposta: [''],
-    recursosProposta: [this.formRecursos],
+    recursosProposta: [this.listaRecursos],
     escopoDemandaProposta: [''],
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],
@@ -51,8 +51,17 @@ export class PropostaService {
     responsavelProposta: ['3'],
     demandaAnalistaProposta: {'codigoDemandaAnalista': 13}
   });
+
+  arrumarFormularioParaBackend(){
+    let centroDeCustoRecurso: {codigoCentroCusto: number}[] = []
+    
+    this.listaRecursos.forEach(e => {
+    
+    })
+  }
+
   postProposta() {
-    console.log(this.formProposta.value);
+    this.arrumarFormularioParaBackend();
     return this.http.post<Demanda | string>(
       'http://localhost:8080/proposta',
 

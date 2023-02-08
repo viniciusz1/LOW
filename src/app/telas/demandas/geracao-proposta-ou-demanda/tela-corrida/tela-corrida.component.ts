@@ -80,32 +80,33 @@ export class TelaCorridaComponent implements OnInit {
     }
   }
 
-  dadosDemandaAnalista: DemandaAnalista | undefined  
+  dadosDemandaAnalista: DemandaAnalista | undefined
 
   getDemandaAnalistaByCodigoDemanda(){
     this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(this.codigoDemandaRota)
     .subscribe(e => {
       this.dadosDemandaAnalista = e
+      console.log(this.dadosDemandaAnalista)
       if(this.dadosDemandaAnalista?.demandaDemandaAnalista)
-      this.demandaService.demandaForm.patchValue({ 
+      this.demandaService.demandaForm.patchValue({
         tituloDemanda: this.dadosDemandaAnalista?.demandaDemandaAnalista.tituloDemanda,
         situacaoAtualDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.situacaoAtualDemanda,
-        
+
         objetivoDemanda: this.dadosDemandaAnalista?.demandaDemandaAnalista.objetivoDemanda,
         beneficioRealDemanda: {
-          moedaBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.moedaBeneficio, 
+          moedaBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.moedaBeneficio,
           memoriaDeCalculoBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
           valorBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.valorBeneficio.toString()
         },
         beneficioPotencialDemanda: {
-          moedaBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.moedaBeneficio, 
+          moedaBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.moedaBeneficio,
           memoriaDeCalculoBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
           valorBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.valorBeneficio.toString()
         },
         beneficioQualitativoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.beneficioQualitativoDemanda,
         frequenciaDeUsoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.frequenciaDeUsoSistemaDemanda,
       })
-      // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda 
+      // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
       this.demandaService.demandaForm.disable()
     })
   }

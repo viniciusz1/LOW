@@ -101,6 +101,8 @@
         <th>Quantidade de horas</th>
         <th>Valor da hora</th>
         <th>Período de execução (Mensal)</th>
+        <th></th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-recursos>
@@ -112,6 +114,8 @@
         <td>{{ recursos.quantidadeHorasRecurso }}</td>
         <td>{{ recursos.valorHoraRecurso }}</td>
         <td>{{ recursos.periodoExMesesRecurso }}</td>
+        <td><i class="bi bi-pencil"></i></td>
+        <td><i class="bi bi-x"></i></td>
       </tr>
     </ng-template>
   </p-table>
@@ -133,6 +137,7 @@
         <label class="mt-1" for="Recurso Necessário:">Tipo da despesa:</label>
         <p-dropdown
           [options]="tipoDaDespesa"
+          optionValue="value"
           optionLabel="tipo"
           placeholder="Selecione o Tipo"
           formControlName="tipoDespesaRecurso"
@@ -141,13 +146,14 @@
       </div>
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">Perfil da despesa:</label>
-        <input
+        <p-dropdown
           placeholder="Ex: ..."
           type="text"
-          pInputText
-          class="input"
+          [options]="perfilDaDespesa"
+          optionValue="value"
+          optionLabel="tipo"
           formControlName="perfilDespesaRecurso"
-        />
+        ></p-dropdown>
       </div>
     </div>
     <div class="row">
@@ -188,28 +194,28 @@
           ></p-inputNumber>
         </div>
       </div>
-      <div class="row">
-        <div formArrayName="centrosCusto">
-          <div *ngFor="let centroCusto of recursos.controls.centrosCusto.controls; let i = index">
-            <div [formGroupName]="i">
-              <input formControlName="porcentagem" placeholder="Percentage">
-              <select formControlName="centroCusto">
-                <option *ngFor="let option of centrosDeCustoOpcoes">{{ option }}</option>
-              </select>
+    </div>
+        <div formArrayName="centrosCusto" class="row align-items-center">
+          <label class="mt-1" for="Recurso Necessário:"
+          >Centros de Custo</label
+        >
+          <div class="col-3" *ngFor="let centroCusto of recursos.controls.centrosCusto.controls; let i = index">
+            <div [formGroupName]="i" class="d-flex">
+              <input pInputText formControlName="porcentagem" placeholder="Porcentagem">
+              <p-dropdown [options]="centrosCusto" optionLabel="nome" optionValue="codigoCentroCusto" formControlName="centroCusto">
+              </p-dropdown>
             </div>
           </div>
+          <button style="width: 45px" class="btn btn-outline-primary" (click)="adicionarCentroCusto()"><i class="bi bi-plus-lg" style="font-size: 17px;"></i></button>
         </div>
-        <button (click)="adicionarCentroCusto()">+ Add Center of Cost</button>
 
-      </div>
 
       <div class="">
         <button class="btn btn-primary" (click)="addRowRecurso()">
-          Adicionar
+          Adicionar Recurso
         </button>
       </div>
     </div>
-  </div>
   <h3 class="mt-4" spyTarget="escopo">Escopo</h3>
   <hr />
   <div>
@@ -300,10 +306,11 @@
       tooltipPosition="top"
     ></i>
   </div>
+
+  <!-- formControlName="responsavelProposta" -->
   <p-dropdown
     [options]="responsaveis"
     placeholder="Selecione o Responsavel"
-    formControlName="responsavelProposta"
     optionLabel="nome"
   ></p-dropdown>
 </form>

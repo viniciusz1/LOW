@@ -14,6 +14,18 @@ interface Responsavel {
   nome: string;
   area: string;
 }
+interface RecursoDoForm{
+  nomeRecurso: string,
+  tipoDespesaRecurso: TipoDespesa,
+  perfilDespesaRecurso: string,
+  quantidadeHorasRecurso: number,
+  valorHoraRecurso: number,
+  periodoExMesesRecurso: number,
+  centrosCusto?: {porcentagem: number, centroCusto: number}[]
+  porcentagemCustoRecurso: number[],
+  centroDeCustoRecurso: {codigoCentroCusto:number}[]
+}
+
 @Component({
   selector: 'app-parte-reuniao',
   templateUrl: './parte-reuniao.component.html',
@@ -27,7 +39,7 @@ export class ParteReuniaoComponent implements OnInit {
   ) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
-  @Input() centrosCusto: CentroCusto[] = [];
+  centrosCusto: CentroCusto[] = [];
   formProposta = this.propostaService.formProposta;
   recursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
@@ -61,8 +73,8 @@ export class ParteReuniaoComponent implements OnInit {
   fimData: Date | undefined = undefined;
   selectedCoin: any;
   clonedRecursos: { [s: string]: Recurso } = {};
-  tipoDaDespesa = [{ tipo: 'Interna' }, { tipo: 'Externa' }];
-
+  tipoDaDespesa = [{ tipo: 'Interna', value: 'interno' }, { tipo: 'Externa', value: 'externo' }];
+  perfilDaDespesa = [{ tipo: 'Hardware', value: 'hardware' }, { tipo: 'Software', value: 'software' }, { tipo: 'Corporativo', value: 'corporativo' }];
   onSubmit() {
     console.log(this.formProposta.value);
   }
@@ -75,14 +87,14 @@ export class ParteReuniaoComponent implements OnInit {
 
   //fazer verificações necessárias
   addRowRecurso() {
-    this.listaRecursos.push(this.recursos.value as unknown as Recurso);
+    this.listaRecursos.push(this.recursos.value as unknown as RecursoDoForm);
     console.log(this.listaRecursos)
   }
   adicionarCentroCusto(){
     this.propostaService.addCenterOfCost()
   }
 
- 
+
 
   teste: string[] = []
   atualizarCentrosCusto() {

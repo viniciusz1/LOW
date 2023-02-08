@@ -8,11 +8,23 @@ import { Demanda } from '../models/demanda.model';
 import { Proposta } from '../models/proposta.model';
 import { Validators } from 'ngx-editor';
 
+interface RecursoDoForm{
+  nomeRecurso: string,
+  tipoDespesaRecurso: TipoDespesa,
+  perfilDespesaRecurso: string,
+  quantidadeHorasRecurso: number,
+  valorHoraRecurso: number,
+  periodoExMesesRecurso: number,
+  centrosCusto?: {porcentagem: number, centroCusto: number}[]
+  porcentagemCustoRecurso: number[],
+  centroDeCustoRecurso: {codigoCentroCusto:number}[]
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class PropostaService {
-  listaRecursos:Recurso[] = []
+  listaRecursos:RecursoDoForm[] = [ ]
 
   formRecursos = this.fb.group({
       codigoRecurso:[''],
@@ -36,7 +48,6 @@ export class PropostaService {
 
   addCenterOfCost() {
     (this.formRecursos.controls.centrosCusto as FormArray).push(this.createCenterOfCost());
-    console.log(this.formRecursos)
   }
 
   formProposta = this.fb.group({
@@ -48,16 +59,22 @@ export class PropostaService {
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],
     paybackProposta: [''],
-    responsavelProposta: ['3'],
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 13}
+    responsavelProposta: { 'codigoUsuario': 6},
+    demandaAnalistaProposta: {'codigoDemandaAnalista': 47}
   });
 
   arrumarFormularioParaBackend(){
-    let centroDeCustoRecurso: {codigoCentroCusto: number}[] = []
-    
     this.listaRecursos.forEach(e => {
-    
+      e.porcentagemCustoRecurso = [];
+      e.centroDeCustoRecurso = [];
+      if(e.centrosCusto){
+      e.centrosCusto.forEach(centro => {
+        e.porcentagemCustoRecurso.push(centro.porcentagem)
+        e.centroDeCustoRecurso.push({codigoCentroCusto: centro.centroCusto})
+        delete e.centrosCusto;
+      })}
     })
+
   }
 
   postProposta() {

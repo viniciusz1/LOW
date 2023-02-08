@@ -31,11 +31,11 @@ export class DemandaService {
     beneficioQualitativoDemanda: ['', [Validators.required]],
     frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
-      codigoUsuario: 3
+      codigoUsuario: 0
     },
   });
 
-  
+
 
   resetDemandaForm(){
     this.demandaForm.reset()
@@ -91,7 +91,7 @@ saveAs(blob, name);
     let demandaFormData = new FormData();
 
     this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;
-    this.demandaForm.patchValue({solicitanteDemanda: {codigoUsuario: 3}})
+    this.demandaForm.patchValue({solicitanteDemanda: {codigoUsuario: 6}})
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     console.log(this.demandaForm.value)
     return this.http.post<Demanda | string>(

@@ -79,7 +79,7 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
             component: TelaReuniaoComponent
           },
           {
-            path: 'ver-pauta',
+            path: 'ver-pauta/:codigoReuniao',
             component: TelaVerPauta
           },
           {

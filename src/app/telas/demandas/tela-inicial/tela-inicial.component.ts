@@ -36,28 +36,26 @@ export class TelaInicialComponent implements OnInit {
     private readonly joyrideService: JoyrideService,
     private confirmationService: ConfirmationService
   ) {
-    this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
-      this.pesquisarDemandas({
-        solicitante: '',
-        codigoDemanda: '',
-        status: '',
-        tamanho: '',
-        tituloDemanda: this.pesquisaDemanda,
-      });
-    });
+    this.pesquisaAlterada
+      .pipe(
+        debounceTime(500))
+      .subscribe(() => {
+        this.pesquisarDemandas({solicitante: "", codigoDemanda: "", status: "", tamanho: "", analista: "", departamento: "", tituloDemanda: this.pesquisaDemanda})
+  })
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
     }
   }
-  ordenarSelect = '';
-  opcoesOrdenacao = [
-    { name: 'Data de criação', value: 'dataCriacao' },
-    { name: 'Data de atualização', value: 'dataAtualizacao' },
-    { name: 'Maior Score', value: 'autor' },
-    { name: 'A-Z', value: 'autor' },
-    { name: 'Z-A', value: 'autor' },
-  ];
+
+  ordenarSelect =""
+  opcoesOrdenacao=[
+    {name: 'Data de criação', value: 'dataCriacao'},
+    {name: 'Data de atualização', value: 'dataAtualizacao'},
+    {name: 'Maior Score', value: 'autor'},
+    {name: 'A-Z', value: 'autor'},
+    {name: 'Z-A', value: 'autor'},
+  ]
 
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
@@ -105,51 +103,31 @@ export class TelaInicialComponent implements OnInit {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
   //Pesquisa demandas por status, ou por todos os campos, no caso o filtro de muitas informações
-  pesquisarDemandas(
-    event:
-      | {
-          solicitante: string;
-          codigoDemanda: string;
-          status: string;
-          tamanho: string;
-          tituloDemanda: string;
-        }
-      | string
-  ) {
+  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; analista: string; departamento: string; } | string){
     if (typeof event === 'string') {
-      this.demandasService
-        .getDemandasFiltradas({
-          solicitante: '',
-          codigoDemanda: '',
-          status: event,
-          tamanho: '',
-          tituloDemanda: '',
-        })
-        .subscribe((listaDemandas: Demanda[]) => {
-          if (listaDemandas.length > 0) {
-            this.listaDemandas = listaDemandas;
-            this.isFiltrado = true;
-            this.nenhumResultadoEncontrado = false;
-          } else {
-            this.isFiltrado = true;
-            this.listaDemandas = [];
-            this.nenhumResultadoEncontrado = true;
-          }
-        });
-    } else {
-      this.demandasService
-        .getDemandasFiltradas(event)
-        .subscribe((listaDemandas: Demanda[]) => {
-          if (listaDemandas.length > 0) {
-            this.listaDemandas = listaDemandas;
-            this.isFiltrado = true;
-            this.nenhumResultadoEncontrado = false;
-          } else {
-            this.isFiltrado = true;
-            this.listaDemandas = [];
-            this.nenhumResultadoEncontrado = true;
-          }
-        });
+      this.demandasService.getDemandasFiltradas({solicitante: "", codigoDemanda: "", status: event, tamanho: "", tituloDemanda: "", analista: "", departamento: ""}).subscribe((listaDemandas: Demanda[]) => {
+        if(listaDemandas.length > 0){
+          this.listaDemandas = listaDemandas;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        }else{
+          this.isFiltrado = true;
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      })
+    }else{
+      this.demandasService.getDemandasFiltradas(event).subscribe((listaDemandas: Demanda[]) => {
+        if(listaDemandas.length > 0){
+          this.listaDemandas = listaDemandas;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        }else{
+          this.isFiltrado = true;
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      })
     }
   }
 
@@ -157,6 +135,8 @@ export class TelaInicialComponent implements OnInit {
     this.cabecalhoMensagemDeConfirmacao = 'Iniciar conversa';
     this.confirmationService.confirm({
       dismissableMask: true,
+      key: 'iniciarChat',
+      header:'Iniciar Chat',
       blockScroll: false,
       message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
 
@@ -396,6 +376,19 @@ export class TelaInicialComponent implements OnInit {
       },
     });
   }
+
+  modalMotivoReprovacao() {
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      key:'motivoReprovacao',
+      header:'Motivo da Reprovação',
+      blockScroll: false,
+      message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+      accept: () => {
+
+      }
+    })
+  };
 
   ngOnInit(): void {
     // this.listaDemandas = listaDemandas

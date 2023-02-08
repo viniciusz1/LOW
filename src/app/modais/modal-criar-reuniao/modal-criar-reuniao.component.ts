@@ -7,8 +7,6 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { Comissao } from 'src/app/models/comissao.model';
 import { Component, OnInit, Inject } from '@angular/core';
-import { listaReunioes } from 'src/app/telas/reunioes/tela-reuniao/listReunioes';
-import { PropostaService } from 'src/app/services/proposta.service';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 
@@ -35,7 +33,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
     this.atualizarDemandas();
   }
 
-  listaReunioes: Reuniao[] = listaReunioes;
+  listaReunioes: Reuniao[] = [];
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
   listaDeComissoesReuniao: Comissao[] = [];
@@ -119,7 +117,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
 
   atualizarDemandas() {
     this.demandaService
-      .getDemandas()
+      .getDemandasFiltradasStatus({status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + ""})
       .subscribe({
         next: (demanda) => {
           this.listaDemandas = demanda

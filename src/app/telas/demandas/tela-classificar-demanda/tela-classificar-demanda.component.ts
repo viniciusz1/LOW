@@ -11,6 +11,7 @@ import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-doc
 import { ActivatedRoute } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-tela-classificar-demanda',
   templateUrl: './tela-classificar-demanda.component.html',

@@ -12,6 +12,6 @@ export interface Reuniao {
     //enviado para o back
     demandasReuniao?: Demanda[],
     //recebido pelo back
-    propostasReuniao?: Proposta[] | Demanda[],
+    propostasReuniao?: Proposta[],
 
 }

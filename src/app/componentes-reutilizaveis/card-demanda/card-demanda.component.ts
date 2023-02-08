@@ -140,7 +140,7 @@ export class CardDemandaComponent implements OnInit {
     else if (this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '',
-        texto: 'Ver Reprovação',
+        texto: 'Motivo',
       };
     }
   }

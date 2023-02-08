@@ -11,7 +11,7 @@ export interface Proposta {
     fimExDemandaProposta?: Date,
     paybackProposta?: number,
     responsavelProposta?: Usuario,
-    demandaAnalistaProposta?: DemandaAnalista,
+    demandaAnalistaProposta: DemandaAnalista,
     recursosProposta?: Recurso[]
 
 }

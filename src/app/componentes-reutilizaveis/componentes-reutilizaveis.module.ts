@@ -17,6 +17,9 @@ import {InputTextModule} from 'primeng/inputtext';
 import { TimelineModule } from 'primeng/timeline';
 import { CardModule } from 'primeng/card';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
+import { DropdownModule } from "primeng/dropdown";
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
     InputTextModule,
     TimelineModule,
     CardModule,
-    ScrollPanelModule
+    ScrollPanelModule,
+    DropdownModule,
+    FormsModule
   ],
   exports:[
     CardDemandaComponent,

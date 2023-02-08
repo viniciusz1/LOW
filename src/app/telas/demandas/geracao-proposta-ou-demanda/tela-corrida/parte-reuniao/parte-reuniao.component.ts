@@ -87,8 +87,10 @@ export class ParteReuniaoComponent implements OnInit {
 
   //fazer verificações necessárias
   addRowRecurso() {
-    this.listaRecursos.push(this.recursos.value as unknown as RecursoDoForm);
-    console.log(this.listaRecursos)
+    console.log(this.recursos)
+    if(this.recursos.valid){
+      this.listaRecursos.push(this.recursos.value as unknown as RecursoDoForm);
+    }
   }
   adicionarCentroCusto(){
     this.propostaService.addCenterOfCost()

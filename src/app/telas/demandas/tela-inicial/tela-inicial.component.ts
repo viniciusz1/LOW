@@ -19,7 +19,6 @@ import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -33,7 +32,6 @@ export class TelaInicialComponent implements OnInit {
     private matDialog: MatDialog,
     private demandasService: DemandaService,
     private router: Router,
-    private readonly joyrideService: JoyrideService,
     private confirmationService: ConfirmationService
   ) {
     this.pesquisaAlterada

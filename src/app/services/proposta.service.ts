@@ -27,13 +27,13 @@ export class PropostaService {
   listaRecursos:RecursoDoForm[] = [ ]
 
   formRecursos = this.fb.group({
-      codigoRecurso:[''],
-      nomeRecurso:  [''],
-      tipoDespesaRecurso:  [''],
-      perfilDespesaRecurso:  [''],
-      quantidadeHorasRecurso:  [''],
-      valorHoraRecurso:  [''],
-      periodoExMesesRecurso:  [''],
+      codigoRecurso:['', [Validators.required]],
+      nomeRecurso:  ['', [Validators.required]],
+      tipoDespesaRecurso:  ['', [Validators.required]],
+      perfilDespesaRecurso:  ['', [Validators.required]],
+      quantidadeHorasRecurso:  ['', [Validators.required]],
+      valorHoraRecurso:  ['', [Validators.required]],
+      periodoExMesesRecurso:  ['', [Validators.required]],
       centrosCusto: this.fb.array([
         this.createCenterOfCost()
       ])

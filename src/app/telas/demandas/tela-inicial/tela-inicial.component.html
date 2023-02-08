@@ -204,8 +204,17 @@
     <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"></p-paginator>
   </div>
   <div *ngIf="nenhumResultadoEncontrado == true" class="d-flex justify-content-center mt-3 mb-4">
-    <img src="/assets/robo-not-found.png" alt="image">
-    <h2>Nenhuma demanda foi encontrada!</h2>
+    <div style="display: grid; align-items: center; justify-content: center;">
+      <div style="display: flex; align-items: center; justify-content: center;"> 
+        <img style="width: 14vw;" src="/assets/robo-not-found.png" alt="image">
+      </div>
+      <div>
+        <h5 style="font-family: unset; color: grey; text-align: center;">Sinto muito...</h5>
+      </div>
+      <div>
+        <h5 style="font-family: unset; color: grey;">Nenhuma demanda foi encontrada</h5>
+      </div>
+    </div>
   </div>
   <div>
     <p-confirmDialog icon="pi pi-exclamation-triangle" key="iniciarChat" #cd>

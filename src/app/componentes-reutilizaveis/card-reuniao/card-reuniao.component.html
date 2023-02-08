@@ -30,7 +30,7 @@
               dadosReuniao.statusReuniao != 'CANCELADO' &&
               dadosReuniao.statusReuniao != 'CONCLUIDO'" (click)="cancelarReuniao.emit()">Cancelar Reunião</button>
               <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'CANCELADO'" (click)="motivoCancelamento.emit()">Ver motivo do cancelamento</button>
-              <button class="btn btn-primary btn-sm" routerLink="/tela-inicial/ver-pauta" *ngIf="dadosReuniao.statusReuniao != 'CANCELADO'">Detalhes da Reunião</button>
+              <button class="btn btn-primary btn-sm" [routerLink]="['/tela-inicial/ver-pauta/' + dadosReuniao.codigoReuniao]" *ngIf="dadosReuniao.statusReuniao != 'CANCELADO'">Detalhes da Reunião</button>
             </span>
           </p>
     </div>

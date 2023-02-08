@@ -45,10 +45,16 @@ export class DemandaService {
     link.click();
   }
 
-  getDemandasFiltradas(filtros: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; }){
+  getDemandasFiltradas(filtros: {solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; analista: string; departamento: string}){
     return this.http.get<Demanda[]>(
       `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}`
     );
+  }
+
+  getDemandasFiltradasStatus(filtros: {status1: string, status2: string}){
+    return this.http.get<Demanda[]>(
+      `http://localhost:8080/demanda/filtro/status?status1=${filtros.status1}&status2=${filtros.status2}`
+    )
   }
 
   getDemandas() {

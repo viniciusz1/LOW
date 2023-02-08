@@ -6,6 +6,10 @@ import { Demanda } from 'src/app/models/demanda.model';
 
 import { Component, OnInit } from '@angular/core';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
+import { ActivatedRoute } from '@angular/router';
+import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { Reuniao } from 'src/app/models/reuniao.model';
+import { Proposta } from 'src/app/models/proposta.model';
 
 @Component({
   selector: 'app-tela-ver-pauta',
@@ -15,16 +19,26 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 export class TelaVerPauta implements OnInit {
 
   constructor(private demandaService: DemandaService,
-    private matDialog: MatDialog) { }
-  listaDemanda:Demanda[] = []
+    private matDialog: MatDialog,
+    private activatedRoute: ActivatedRoute,
+    private reuniaoService: ReuniaoService) { }
+
+  codigoReuniao = this.activatedRoute.snapshot.params['codigoReuniao']
+  listaProposta:Proposta[] | undefined = [];
+  reuniao: Reuniao | undefined = undefined;
+  listaDemanda:Demanda[] = [];
+
   ngOnInit(): void {
-    this.demandaService.getDemandas()
+    this.reuniaoService.getReuniaoId(this.codigoReuniao)
     .subscribe({next: (x) => {
-      this.listaDemanda = x
-      this.listaDemanda.forEach((demanda) => {
-      demanda.statusDemanda = StatusDemanda.TO_DO
-      })
+      this.reuniao = x
+      this.listaProposta = this.reuniao.propostasReuniao;
+      // this.listaProposta.forEach((demanda) => {
+      // demanda.statusDemanda = StatusDemanda.TO_DO
+      // })
     }})
+
+
   }
 
   openModalAtaDocumento() {

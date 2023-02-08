@@ -7,8 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal-filtro-demandas.component.scss']
 })
 export class ModalFiltroDemandasComponent implements OnInit {
+  tamanhos: any[] = [];
+  value8: any;
 
-  constructor(public dialogRef: DialogRef<ModalFiltroDemandasComponent>) { }
+  constructor(public dialogRef: DialogRef<ModalFiltroDemandasComponent>) {
+    this.tamanhos = [
+      {tam: "Muito Pequeno"},
+      {tam: "Pequeno"},
+      {tam: "Médio"},
+      {tam: "Grande"},
+      {tam: "Muito Grande"},
+    ]
+   }
 
   ngOnInit(): void {
   }

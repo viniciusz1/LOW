@@ -15,18 +15,39 @@
                             <label for="float-input">Título da Demanda:</label>
                         </span>
                         <span class="p-float-label me-2">
-                            <input class="p-inputtext-sm" #codigo placeholder="Ex: 123" pInputText type="text" pInputText>
+                            <input class="p-inputtext-sm" #codigo placeholder="Ex: 123" pInputText type="text"
+                                pInputText>
                             <label for="float-input">Número da Solicitação:</label>
                         </span>
                         <span class="p-float-label me-2">
                             <input class="p-inputtext-sm" #analista placeholder="Ex: Vinícius" pInputText type="text" pInputText>
                             <label for="float-input">Responsável:</label>
+<!-- <<<<<<< HEAD -->
                         </span>
                         <span  class="p-float-label me-2">
                             <input class="p-inputtext-sm" #tamanho placeholder="Ex: Grande" pInputText type="text" pInputText>
                             <label for="float-input">Tamanho da demanda:</label>
                         </span>
 
+<!-- ======= -->
+                        <!-- </span> -->
+                        <!-- <span class="p-float-label">
+                            <p-dropdown inputId="dropdown" [autoDisplayFirst]="false" [options]="tamanho"
+                                [(ngModel)]="value" optionLabel="tamanho"></p-dropdown>
+                            <label for="dropdown">Tamanho da Demanda:</label>
+                        </span> -->
+                        <!-- <span class="p-float-label me-2" >
+                            <p-dropdown
+                            [style]="{height: '37px'}"
+                              inputId="dropdown"
+                              [autoDisplayFirst]="false"
+                              [options]="tamanho"
+                              [(ngModel)]="valorTamanho"
+                              optionLabel="tamanho"
+                            ></p-dropdown>
+                            <label for="dropdown">Tamanho da demanda:</label>
+                          </span> -->
+<!-- >>>>>>> main -->
                     </div>
                 </div>
                 <div class="d-flex mt-3 justify-content-center" [ngClass]="{'reduzir-inputs': filtroReduzidoVertical}">
@@ -35,7 +56,8 @@
                         <label for="float-input">Fórum de aprovação</label>
                     </span> -->
                     <span class="p-float-label me-2">
-                        <input class="p-inputtext-sm" #solicitante placeholder="Ex: Cléber" pInputText type="text" pInputText>
+                        <input class="p-inputtext-sm" #solicitante placeholder="Ex: Cléber" pInputText type="text"
+                            pInputText>
                         <label for="float-input">Solicitante:</label>
                     </span>
                     <!-- <span class="p-float-label  me-2">
@@ -46,11 +68,28 @@
                         <input class="p-inputtext-sm" #departamento placeholder="Ex: Motores" pInputText type="text" pInputText>
                         <label for="float-input">Departamento:</label>
 
+<!-- <<<<<<< HEAD -->
                     </span>
                     <span class="p-float-label me-2">
                       <input class="p-inputtext-sm" #status placeholder="Ex: Backlog" pInputText type="text" pInputText>
                       <label for="float-input">Status de aprovação:</label>
                   </span><div  (click)="filtroAcionado.emit({solicitante: solicitante.value,codigoDemanda: codigo.value,status: status.value, tamanho: tamanho.value, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value})" *ngIf="!filtroReduzidoVertical" class="d-flex justify-content-center">
+
+                    <!-- </span>  -->
+                    <!-- <span class="p-float-label me-2" >
+                        <p-dropdown
+                        [style]="{height: '37px'}"
+                          inputId="dropdown"
+                          [autoDisplayFirst]="false"
+                          [options]="status"
+                          [(ngModel)]="valorStatus"
+                          optionLabel="status"
+                        ></p-dropdown>
+                        <label for="dropdown">Status de Aprovação:</label>
+                      </span>
+                    <div (click)="filtroAcionado.emit({solicitante: solicitante.value,codigoDemanda: codigo.value,status: valorStatus, tamanho: valorTamanho, tituloDemanda: titulo.value  })"
+                        *ngIf="!filtroReduzidoVertical" class="d-flex justify-content-center">
+ --> 
                         <button class="btn btn-primary"><i class="bi bi-search"></i></button>
                     </div>
 
@@ -61,14 +100,15 @@
                         <input class="p-inputtext-sm" placeholder="Ex: Motores" pInputText type="text" pInputText>
                         <label for="float-input">Departamento:</label>
                     </span>
-                    <span  *ngIf="filtroReduzidoVertical" class="p-float-label me-2">
+                    <span *ngIf="filtroReduzidoVertical" class="p-float-label me-2">
                         <input class="p-inputtext-sm" placeholder="Ex: Grande" pInputText type="text" pInputText>
                         <label for="float-input">Tamanho da demanda:</label>
                     </span>
 
                 </div>
-                <div  *ngIf="filtroReduzidoVertical" class="d-flex justify-content-end mt-2">
-                    <button (click)="filtroAcionado.emit()" class="btn btn-primary me-4"><i class="bi bi-search"></i> Pesquisar</button>
+                <div *ngIf="filtroReduzidoVertical" class="d-flex justify-content-end mt-2">
+                    <button (click)="filtroAcionado.emit()" class="btn btn-primary me-4"><i class="bi bi-search"></i>
+                        Pesquisar</button>
                 </div>
             </div>
         </div>

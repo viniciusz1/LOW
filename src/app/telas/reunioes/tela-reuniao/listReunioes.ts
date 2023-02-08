@@ -48,38 +48,38 @@ let propostas: Demanda[] = [
 //     nomeComissao?: string
 //     statusReuniao?: StatusReuniao
 
-export const listaReunioes: Reuniao[] = [
+// export const listaReunioes: Reuniao[] = [
 
-  {
-    propostasReuniao: propostas,
-    dataReuniao: new Date(),
-    comissaoReuniao: {nomeComissao: "Drive"} as Comissao,
-    statusReuniao: StatusReuniao.PROXIMO
-  },
-  {
-    propostasReuniao: propostas,
-    dataReuniao: new Date(),
-    comissaoReuniao: {nomeComissao: "HP"} as Comissao,
-    statusReuniao: StatusReuniao.PENDENTE
-  },
-  {
-    propostasReuniao: propostas,
-    dataReuniao: new Date(),
-    comissaoReuniao: {nomeComissao: "WEG Digital"} as Comissao,
-    statusReuniao: StatusReuniao.AGUARDANDO
-  },
+//   {
+//     propostasReuniao: propostas,
+//     dataReuniao: new Date(),
+//     comissaoReuniao: {nomeComissao: "Drive"} as Comissao,
+//     statusReuniao: StatusReuniao.PROXIMO
+//   },
+//   {
+//     propostasReuniao: propostas,
+//     dataReuniao: new Date(),
+//     comissaoReuniao: {nomeComissao: "HP"} as Comissao,
+//     statusReuniao: StatusReuniao.PENDENTE
+//   },
+//   {
+//     propostasReuniao: propostas,
+//     dataReuniao: new Date(),
+//     comissaoReuniao: {nomeComissao: "WEG Digital"} as Comissao,
+//     statusReuniao: StatusReuniao.AGUARDANDO
+//   },
 
-  {
-    propostasReuniao: propostas,
-    dataReuniao: new Date(),
-    comissaoReuniao: {nomeComissao: "WEG Digital"} as Comissao,
-    statusReuniao: StatusReuniao.CONCLUIDO
-  },
-  {
-    propostasReuniao: propostas,
-    dataReuniao: new Date(),
-    comissaoReuniao: {nomeComissao: "Drive"} as Comissao,
-    statusReuniao: StatusReuniao.CANCELADO
-  }
-
-]
+//   {
+//     propostasReuniao: propostas,
+//     dataReuniao: new Date(),
+//     comissaoReuniao: {nomeComissao: "WEG Digital"} as Comissao,
+//     statusReuniao: StatusReuniao.CONCLUIDO
+//   },
+//   {
+//     propostasReuniao: propostas,
+//     dataReuniao: new Date(),
+//     comissaoReuniao: {nomeComissao: "Drive"} as Comissao,
+//     statusReuniao: StatusReuniao.CANCELADO
+//   }
+// 
+// ]

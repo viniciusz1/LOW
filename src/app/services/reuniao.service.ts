@@ -16,6 +16,10 @@ export class ReuniaoService {
     return this.http.get<Reuniao[]>('http://localhost:8080/reuniao')
   }
 
+  getReuniaoId(codigoReuniao: Number){
+    return this.http.get<Reuniao>('http://localhost:8080/reuniao/' + codigoReuniao)
+  }
+
     postReuniao(reuniao: Reuniao){
       console.log("aqui: ")
         return this.http.post<Reuniao>(

@@ -18,7 +18,6 @@ export class ParteDemandaComponent implements OnInit {
   atualizarCentrosCusto() {
     this.centroCustoService.getCentrosCusto().subscribe({
       next: (centrosCusto) => {(this.centrosCusto = centrosCusto)
-      console.log(centrosCusto)
       },
       error: (err) => console.log(err),
     });
@@ -51,7 +50,6 @@ export class ParteDemandaComponent implements OnInit {
         this.currencyMoedaBeneficio2 = 'EUR'
       }
     }
-    console.log(this.centrosCusto)
   }
   localMoedaBeneficio1='pt-BR'
   localMoedaBeneficio2='pt-BR'

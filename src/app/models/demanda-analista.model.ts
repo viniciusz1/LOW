@@ -9,7 +9,7 @@ export interface DemandaAnalista {
     buSolicitanteDemandaAnalista?: BusinessUnit,
     busBeneficiadasDemandaAnalista?: BusinessUnit[],
     secaoDemandaAnalista?: string,
-    demandaDemandaAnalista?: Demanda,
+    demandaDemandaAnalista: Demanda,
     analista?: Usuario,
     gerenteNegocio?: Usuario 
 }

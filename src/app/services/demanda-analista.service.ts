@@ -1,3 +1,4 @@
+import { DemandaAnalista } from './../models/demanda-analista.model';
 import { FormBuilder } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
@@ -15,7 +16,7 @@ export class DemandaAnalistaService {
     buSolicitanteDemandaAnalista:[''],
     busBeneficiadasDemandaAnalista:[''],
     demandaDemandaAnalista: { codigoDemanda: '' },
-    analista: { codigoUsuario: 3 },
+    analista: { codigoUsuario: 6 },
     secaoDemandaAnalista: [''],
   });
   postProposta(codigoDemanda: string | undefined) {
@@ -26,6 +27,11 @@ export class DemandaAnalistaService {
       'http://localhost:8080/demandaAnalista',
 
       this.demandaAnalistaForm.value
+    );
+  }
+  getDemandaAnalistaByCodigoDemanda(codigoDemanda: string) {
+    return this.http.get<DemandaAnalista>(
+      `http://localhost:8080/demandaAnalista/demanda/${codigoDemanda}`
     );
   }
 

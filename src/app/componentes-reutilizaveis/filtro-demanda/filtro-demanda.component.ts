@@ -7,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class FiltroDemandaComponent implements OnInit {
   @Output() closeFiltro = new EventEmitter();
-  @Output() filtroAcionado = new EventEmitter<{solicitante: string,codigoDemanda:string,status: string, tamanho:string, tituloDemanda: string }>();
+  @Output() filtroAcionado = new EventEmitter<{solicitante: string,codigoDemanda:string,status: string, tamanho:string, tituloDemanda: string, analista: string, departamento: string }>();
   @Input() mostrarIconeDeAbrirFiltro = true;
   @Input() filtroReduzidoVertical = false;
   constructor() { }

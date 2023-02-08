@@ -18,10 +18,10 @@
                             <input class="p-inputtext-sm" #codigo placeholder="Ex: 123" pInputText type="text" pInputText>
                             <label for="float-input">Número da Solicitação:</label>
                         </span>
-                        <!-- <span class="p-float-label me-2">
-                            <input class="p-inputtext-sm" #responsavel placeholder="Ex: Vinícius" pInputText type="text" pInputText>
+                        <span class="p-float-label me-2">
+                            <input class="p-inputtext-sm" #analista placeholder="Ex: Vinícius" pInputText type="text" pInputText>
                             <label for="float-input">Responsável:</label>
-                        </span> -->
+                        </span>
                         <span  class="p-float-label me-2">
                             <input class="p-inputtext-sm" #tamanho placeholder="Ex: Grande" pInputText type="text" pInputText>
                             <label for="float-input">Tamanho da demanda:</label>
@@ -42,15 +42,15 @@
                         <input class="p-inputtext-sm" #ppm placeholder="Ex: 9283" pInputText type="text" pInputText>
                         <label for="float-input">Código PPM:</label>
                     </span> -->
-                    <!-- <span *ngIf="!filtroReduzidoVertical" class="p-float-label me-2">
-                        <input class="p-inputtext-sm" placeholder="Ex: Motores" pInputText type="text" pInputText>
+                    <span class="p-float-label me-2">
+                        <input class="p-inputtext-sm" #departamento placeholder="Ex: Motores" pInputText type="text" pInputText>
                         <label for="float-input">Departamento:</label>
 
-                    </span> -->
+                    </span>
                     <span class="p-float-label me-2">
                       <input class="p-inputtext-sm" #status placeholder="Ex: Backlog" pInputText type="text" pInputText>
                       <label for="float-input">Status de aprovação:</label>
-                  </span><div  (click)="filtroAcionado.emit({solicitante: solicitante.value,codigoDemanda: codigo.value,status: status.value, tamanho: tamanho.value, tituloDemanda: titulo.value  })" *ngIf="!filtroReduzidoVertical" class="d-flex justify-content-center">
+                  </span><div  (click)="filtroAcionado.emit({solicitante: solicitante.value,codigoDemanda: codigo.value,status: status.value, tamanho: tamanho.value, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value})" *ngIf="!filtroReduzidoVertical" class="d-flex justify-content-center">
                         <button class="btn btn-primary"><i class="bi bi-search"></i></button>
                     </div>
 

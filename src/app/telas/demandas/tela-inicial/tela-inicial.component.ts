@@ -40,7 +40,7 @@ export class TelaInicialComponent implements OnInit {
       .pipe(
         debounceTime(500))
       .subscribe(() => {
-        this.pesquisarDemandas({solicitante: "", codigoDemanda: "", status: "", tamanho: "", tituloDemanda: this.pesquisaDemanda})
+        this.pesquisarDemandas({solicitante: "", codigoDemanda: "", status: "", tamanho: "", analista: "", departamento: "", tituloDemanda: this.pesquisaDemanda})
   })
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
@@ -88,9 +88,9 @@ export class TelaInicialComponent implements OnInit {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
   //Pesquisa demandas por status, ou por todos os campos, no caso o filtro de muitas informações
-  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; } | string){
+  pesquisarDemandas(event: { solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; analista: string; departamento: string; } | string){
     if (typeof event === 'string') {
-      this.demandasService.getDemandasFiltradas({solicitante: "", codigoDemanda: "", status: event, tamanho: "", tituloDemanda: ""}).subscribe((listaDemandas: Demanda[]) => {
+      this.demandasService.getDemandasFiltradas({solicitante: "", codigoDemanda: "", status: event, tamanho: "", tituloDemanda: "", analista: "", departamento: ""}).subscribe((listaDemandas: Demanda[]) => {
         if(listaDemandas.length > 0){
           this.listaDemandas = listaDemandas;
           this.isFiltrado = true;

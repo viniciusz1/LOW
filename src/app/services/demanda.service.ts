@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
 import { Validators } from '@angular/forms';
+import { saveAs } from 'file-saver';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ import { Validators } from '@angular/forms';
 export class DemandaService {
 
   public demandaForm = this.fb.group({
-    tituloDemanda: ['', [Validators.required]],
+    tituloDemanda: ['', [Validators.required], ],
     situacaoAtualDemanda: ['',[Validators.required]],
     objetivoDemanda: ['', [Validators.required]],
     centroCustos: ['', [Validators.required]],
@@ -28,21 +29,31 @@ export class DemandaService {
       valorBeneficio: ['', [Validators.required]],
     }),
     beneficioQualitativoDemanda: ['', [Validators.required]],
-    anexoDemanda: [''],
     frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
-      codigoUsuario: 3
+      codigoUsuario: 0
     },
   });
+
+
+
+  resetDemandaForm(){
+    this.demandaForm.reset()
+  }
 
   public arquivos: File[] = [];
 
   saveByteArray(bytes : string, type: string, name: string) {
-    var blob = new Blob([bytes],{type:type});
-    var link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = name;
-    link.click();
+    const base64 = bytes;
+    const binary = atob(base64);
+    const len = binary.length;
+    const buffer = new ArrayBuffer(len);
+    const view = new Uint8Array(buffer);
+    for (let i = 0; i < len; i++) {
+      view[i] = binary.charCodeAt(i);
+}
+const blob = new Blob([view], { type: type });
+saveAs(blob, name);
   }
 
   getDemandasFiltradas(filtros: {solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; analista: string; departamento: string}){
@@ -84,19 +95,18 @@ export class DemandaService {
   }
   postDemanda() {
     let demandaFormData = new FormData();
-    let teste = this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;
 
+    this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;
+    this.demandaForm.patchValue({solicitanteDemanda: {codigoUsuario: 6}})
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
-    console.log(demandaFormData.getAll('arquivos'))
+    console.log(this.demandaForm.value)
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demanda', demandaFormData
     );
   }
 
-  avaliacaoGerenteDeNegocioDemanda(codigoDemanda : number , decisao: number) {
-    console.log(codigoDemanda, decisao);
-    return this.http.put<any>(`http://localhost:8080/demanda/update/backlog/${codigoDemanda}`, decisao)
-    .subscribe();
+  avancarStatusDemandaComDecisao(codigoDemanda : string , decisao: number) {
+    return this.http.put<any>(`http://localhost:8080/demanda/update/status/${codigoDemanda}`, decisao)
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder) {}

@@ -8,5 +8,6 @@ export interface Recurso {
     quantidadeHorasRecurso: number,
     valorHoraRecurso: number,
     periodoExMesesRecurso: number,
-    centrosCustoPagantesRecurso: []
+    porcentagemCustoRecurso: [],
+    centroDeCustoRecurso: []
 }

@@ -57,9 +57,9 @@ saveAs(blob, name);
   }
 
   getDemandasFiltradas(filtros: {solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; analista: string; departamento: string}){
+
     return this.http.get<Demanda[]>(
-      `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}
-      &tituloDemanda=${filtros.tituloDemanda}&analista=${filtros.analista}&departamento=${filtros.departamento}`
+      `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}&analista=${filtros.analista}&departamento=${filtros.departamento}`
     );
   }
 

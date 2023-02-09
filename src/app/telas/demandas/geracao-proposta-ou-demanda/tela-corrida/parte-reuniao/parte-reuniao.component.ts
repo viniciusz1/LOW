@@ -76,17 +76,7 @@ export class ParteReuniaoComponent implements OnInit {
   tipoDaDespesa = [{ tipo: 'Interna', value: 'interno' }, { tipo: 'Externa', value: 'externo' }];
   perfilDaDespesa = [{ tipo: 'Hardware', value: 'hardware' }, { tipo: 'Software', value: 'software' }, { tipo: 'Corporativo', value: 'corporativo' }];
   onSubmit() {
-    console.log(this.formProposta.value);
-  }
-  validateForm() {
-    let formValid = true;
-    for (const control of Object.values(this.formRecursos.controls)) {
-      if (control.invalid) {
-        control.markAsTouched();
-        formValid = false;
-      }
-    }
-    return formValid;
+    // console.log(this.formProposta.value);
   }
 
   porcentagemCC: [{ porcentagem: string; index: number }] = [
@@ -113,6 +103,7 @@ export class ParteReuniaoComponent implements OnInit {
       periodoExMesesRecurso: this.listaRecursos[index].periodoExMesesRecurso.toString(),
       centrosCusto: this.listaRecursos[index].centrosCusto,
     })
+    this.listaRecursos.splice(index, 1)
   }
 
   removerRecurso(index: number){

@@ -4,14 +4,14 @@
         <li class="nav-item">
             <label class="" for="">00{{dadosDemada.codigoDemanda}}</label>
         </li>
-        <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '25%' : '45%'}">
+        <li class="nav-item d-flex justify-content-center" [ngStyle]="{'width': !demandaPequena ? '25%' : '45%'}">
             <label class="text-truncate d-inline-block" for=""><b>{{dadosDemada.tituloDemanda}}</b></label>
         </li>
         <li *ngIf="!demandaPequena"  class="nav-item"  style="width: 20%;">
             <label class="text-truncate d-inline-block">{{dadosDemada.solicitanteDemanda?.nomeUsuario}}</label>
         </li>
         <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '15%' : '50%'}">
-            <label class="text-truncate d-inline-block">{{dadosDemada.departamentoBenDemanda}}</label>
+            <label class="text-truncate d-inline-block">{{dadosDemada.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  5%;">
             <label class="text-truncate d-inline-block">190.8</label>

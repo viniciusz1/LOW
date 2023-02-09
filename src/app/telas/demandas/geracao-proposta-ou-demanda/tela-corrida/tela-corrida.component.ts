@@ -2,10 +2,13 @@ import { CentroCusto } from './../../../../models/centro-custo.model';
 import { CentroCustoService } from './../../../../services/centro-custo.service';
 import { PropostaService } from './../../../../services/proposta.service';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit,  } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { ScrollSpyService } from 'ng-spy';
+import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
+import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
+import { Demanda } from 'src/app/models/demanda.model';
 
 
 
@@ -39,13 +42,15 @@ export class TelaCorridaComponent implements OnInit {
     }
   }
 
-
+  codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
 
   constructor(
     private spyService: ScrollSpyService,
     private router: Router,
     private demandaService: DemandaService,
+    private demandaAnalistaService: DemandaAnalistaService,
     private propostaService: PropostaService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.startSpy();
     this.tipoExibicaoTela();
@@ -58,7 +63,6 @@ export class TelaCorridaComponent implements OnInit {
       document.documentElement.scrollTop ||
       document.body.scrollTop ||
       0;
-    console.log(scrollPosition);
     window.scroll({
       top: top,
       behavior: 'smooth',
@@ -68,9 +72,43 @@ export class TelaCorridaComponent implements OnInit {
   tipoExibicaoTela() {
     if (this.router.url == '/tela-inicial/demanda') {
       this.aparecerProposta = false;
+      this.demandaService.resetDemandaForm()
     } else {
       this.aparecerProposta = true;
+      this.demandaService.resetDemandaForm()
+      this.getDemandaAnalistaByCodigoDemanda()
     }
+  }
+
+  dadosDemandaAnalista: DemandaAnalista | undefined
+
+  getDemandaAnalistaByCodigoDemanda(){
+    this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(this.codigoDemandaRota)
+    .subscribe(e => {
+      this.dadosDemandaAnalista = e
+      console.log(this.dadosDemandaAnalista)
+      if(this.dadosDemandaAnalista?.demandaDemandaAnalista)
+      this.demandaService.demandaForm.patchValue({
+        tituloDemanda: this.dadosDemandaAnalista?.demandaDemandaAnalista.tituloDemanda,
+        situacaoAtualDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.situacaoAtualDemanda,
+
+        objetivoDemanda: this.dadosDemandaAnalista?.demandaDemandaAnalista.objetivoDemanda,
+        beneficioRealDemanda: {
+          moedaBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.valorBeneficio.toString()
+        },
+        beneficioPotencialDemanda: {
+          moedaBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.valorBeneficio.toString()
+        },
+        beneficioQualitativoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.beneficioQualitativoDemanda,
+        frequenciaDeUsoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.frequenciaDeUsoSistemaDemanda,
+      })
+      // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
+      this.demandaService.demandaForm.disable()
+    })
   }
 
   startSpy() {

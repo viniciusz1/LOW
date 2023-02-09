@@ -17,9 +17,10 @@ export class CardDemandaComponent implements OnInit {
   @Output() verDocumentoProposta = new EventEmitter();
   @Output() clicouEmExcluir = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
-  @Output() abrirModalCriarReuniao = new EventEmitter();
+  @Output() abrirModalCriarReuniao = new EventEmitter<Demanda>();
   @Output() modalHistorico = new EventEmitter();
   @Output() verDocumentoEmAta = new EventEmitter();
+  @Output() avancarStatusDemanda = new EventEmitter<{mensagem: string, codigoDemanda: string | undefined, statusDemanda: StatusDemanda | undefined}>();
 
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
@@ -53,19 +54,56 @@ export class CardDemandaComponent implements OnInit {
       this.abrirModal.emit();
     }
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar'){
-      this.verDocumentoProposta.emit(this.dadosDemada)
+      this.verDocumentoProposta.emit(this.dadosDemada.codigoDemanda)
     }
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'){
-      this.abrirModalCriarReuniao.emit()
+      this.abrirModalCriarReuniao.emit(this.dadosDemada)
     }
     else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'ver em ata'){
       this.verDocumentoEmAta.emit()
+    }
+    else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'avancar fase'){
+      this.avancarStatusDemanda.emit({mensagem: "Tem certeza que deseja a fase da demanda?<br>Ela avançará para o Status: " + this.retornaProximoStatusDemanda(this.dadosDemada.statusDemanda), codigoDemanda: this.dadosDemada.codigoDemanda, statusDemanda: this.dadosDemada.statusDemanda})
     }
     else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
 
+  retornaProximoStatusDemanda(statusDemanda: StatusDemanda | undefined){
+    if(statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO){
+      return StatusDemanda.BACKLOG_APROVACAO
+    }else if(statusDemanda == StatusDemanda.BACKLOG_APROVACAO){
+      return StatusDemanda.BACKLOG_PROPOSTA
+    }else if(statusDemanda == StatusDemanda.BACKLOG_PROPOSTA){
+      return StatusDemanda.ASSESSMENT
+    }else if(statusDemanda == StatusDemanda.ASSESSMENT){
+      return StatusDemanda.TO_DO
+    }else if(statusDemanda == StatusDemanda.BUSINESS_CASE){
+      return StatusDemanda.TO_DO
+    }else if(statusDemanda == StatusDemanda.TO_DO){
+      return StatusDemanda.DESIGN_AND_BUILD
+    }else if(statusDemanda == StatusDemanda.DESIGN_AND_BUILD){
+      return StatusDemanda.SUPPORT
+    }else if(statusDemanda == StatusDemanda.SUPPORT){
+      return StatusDemanda.DONE
+    }else if(statusDemanda == StatusDemanda.DONE){
+      return StatusDemanda.DONE
+    }
+    return null
+  }
+
+  existeAta(){
+    if (
+      this.dadosDemada.statusDemanda == StatusDemanda.TO_DO ||
+      this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT ||
+      this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
+      this.dadosDemada.statusDemanda == StatusDemanda.DONE
+    ) {
+      return true;
+    }
+    return false;
+  }
 
 
   exibicaoBotoes() {
@@ -93,7 +131,7 @@ export class CardDemandaComponent implements OnInit {
         texto: 'Adicionar Proposta',
       };
     }
-    else if (this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE || this.dadosDemada.statusDemanda == StatusDemanda.TO_DO || this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD || this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.TO_DO || this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD || this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'avancar fase',
         texto: 'Avançar Fase',

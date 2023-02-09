@@ -54,10 +54,20 @@
     </div>
 
     <!-- Trocar exibição de lista para card e vice-versa -->
-    <div *ngIf="!tipoRascunho" [ngClass]="isFiltrado ? 'justify-content-between' : 'justify-content-end container'"
-      style="overflow: auto;" class="my-3 d-flex w-100">
-      <i *ngIf="isFiltrado" (click)="carregarDemandasIniciais()" class="bi bi-arrow-left"
-        style="font-size: 25px; cursor: pointer"></i>
+    <div
+      *ngIf="!tipoRascunho"
+      [ngClass]="
+        isFiltrado ? 'justify-content-between' : 'justify-content-end container'
+      "
+      style="overflow: auto"
+      class="my-3 d-flex w-100"
+    >
+      <i
+        *ngIf="isFiltrado"
+        (click)="carregarDemandasIniciais()"
+        class="bi bi-arrow-left"
+        style="font-size: 25px; cursor: pointer"
+      ></i>
       <div class="d-flex">
         <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
           [stepContentParams]="{ texto: textoTutorial[2] }" [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
@@ -85,9 +95,18 @@
 
     <div class="" *ngIf="!isFiltrado">
       <div *ngFor="let linha of listaTituloNaoFiltrado; let i = index">
-        <div style="width: 25%">
-          <h5>{{ linha.titulo }}</h5>
-          <hr style="margin: 0; opacity: 1" class="mb-2" />
+        <div class="d-flex justify-content-between">
+          <div style="width: 25%">
+            <h5>{{ linha.titulo }}</h5>
+            <hr style="margin: 0; opacity: 1" class="mb-2" />
+          </div>
+          <div
+            class="me-3"
+            style="align-self: flex-end; cursor: pointer"
+            (click)="pesquisarDemandas(linha.status)"
+          >
+            Ver mais
+          </div>
         </div>
         <div class="d-flex justify-content-center align-items-center flex-column my-2"
           style="margin-left: auto; margin-right: auto">
@@ -97,7 +116,7 @@
                 | slice : 0 : 4
             " [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"
             (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-            (abrirModalCriarReuniao)="openModalCriarReuniao()" (abrirModal)="modalMotivoReprovacao()" class="mb-2">
+            (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (abrirModal)="modalMotivoReprovacao()" class="mb-2">
           </app-list-demanda>
 
           <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
@@ -106,7 +125,7 @@
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                 " (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-                (abrirModalCriarReuniao)="openModalCriarReuniao()" [dadosDemada]="demanda" class="mb-2">
+                (abrirModalCriarReuniao)="openModalCriarReuniao($event)" [dadosDemada]="demanda" class="mb-2">
               </app-list-demanda>
             </div>
           </div>
@@ -157,7 +176,7 @@
                     | filtrarDemandaStatus : linha.titulo
                 " [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"
                 (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-                (abrirModal)="modalMotivoReprovacao()" (abrirModalCriarReuniao)="openModalCriarReuniao()"
+                (abrirModal)="modalMotivoReprovacao()" (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 (verDocumentoEmAta)="openModalAtaDocumento()"></app-card-demanda>
             </div>
             <div *ngIf="positionListCards[i] != 0" class="left-arrow alinhacao" (click)="changeLeft(i)">
@@ -178,19 +197,35 @@
 
     <div class="container">
       <div class="row" *ngIf="tipoRascunho">
-        <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandasRascunho; let i = index"
-          [dadosDemada]="demanda" (abrirModal)="modalMotivoReprovacao()"
-          (abrirModalCriarReuniao)="openModalCriarReuniao()" (verDocumentoProposta)="openModalDemandaDocumento($event)"
-          [mudarTamanho]="'100%'" (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-          (verDocumentoEmAta)="openModalAtaDocumento()" class="col-lg-6 col-xl-4 mb-3">
+        <app-card-demanda
+          [rascunho]="tipoRascunho"
+          *ngFor="let demanda of listaDemandasRascunho; let i = index"
+          [dadosDemada]="demanda"
+          (abrirModal)="openModalMotivoDevolucao()"
+          (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
+          (verDocumentoProposta)="openModalDemandaDocumento($event)"
+          [mudarTamanho]="'100%'"
+          (irParaChat)="irParaChat()"
+          (modalHistorico)="openModalHistorico()"
+          (verDocumentoEmAta)="openModalAtaDocumento()"
+          class="col-lg-6 col-xl-4 mb-3"
+        >
         </app-card-demanda>
       </div>
       <div class="row" *ngIf="!tipoRascunho">
-        <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemada]="demanda"
-          (abrirModal)="openModalMotivoDevolucao()" (verDocumentoProposta)="openModalDemandaDocumento($event)"
-          (clicouEmExcluir)="excluirDemandaRascunho(i)" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()"
-          (modalHistorico)="openModalHistorico()" (abrirModalCriarReuniao)="openModalCriarReuniao()"
-          (verDocumentoEmAta)="openModalAtaDocumento()" class="col-lg-6 col-xl-4 mb-3">
+        <app-card-demanda
+          *ngFor="let demanda of listaDemandas; let i = index"
+          [dadosDemada]="demanda"
+          (abrirModal)="openModalMotivoDevolucao()"
+          (verDocumentoProposta)="openModalDemandaDocumento($event)"
+          (clicouEmExcluir)="excluirDemandaRascunho(i)"
+          [mudarTamanho]="'100%'"
+          (irParaChat)="irParaChat()"
+          (modalHistorico)="openModalHistorico()"
+          (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
+          (verDocumentoEmAta)="openModalAtaDocumento()"
+          class="col-lg-6 col-xl-4 mb-3"
+        >
         </app-card-demanda>
       </div>
     </div>
@@ -204,11 +239,23 @@
     <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"></p-paginator>
   </div>
   <div *ngIf="nenhumResultadoEncontrado == true" class="d-flex justify-content-center mt-3 mb-4">
-    <img src="/assets/robo-not-found.png" alt="image">
-    <h2>Nenhuma demanda foi encontrada!</h2>
+    <div style="display: grid; align-items: center; justify-content: center;">
+      <div style="display: flex; align-items: center; justify-content: center;"> 
+        <img style="width: 14vw;" src="/assets/robo-not-found.png" alt="image">
+      </div>
+      <div>
+        <h5 style="font-family: unset; color: grey; text-align: center;">Sinto muito...</h5>
+      </div>
+      <div>
+        <h5 style="font-family: unset; color: grey;">Nenhuma demanda foi encontrada</h5>
+      </div>
+    </div>
   </div>
   <div>
-    <p-confirmDialog icon="pi pi-exclamation-triangle" key="iniciarChat" #cd>
+    <p-confirmDialog icon="pi pi-exclamation-triangle" #cd>
+      <ng-template pTemplate="header">
+        <h4>{{ cabecalhoMensagemDeConfirmacao }}</h4>
+      </ng-template>
       <ng-template pTemplate="footer">
         <button type="button" (click)="cd.reject()" class="btn btn-outline-primary">
           <i class="pi pi-times me-2"></i>Não

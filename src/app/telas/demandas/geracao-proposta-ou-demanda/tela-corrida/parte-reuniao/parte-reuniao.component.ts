@@ -41,7 +41,7 @@ export class ParteReuniaoComponent implements OnInit {
   }
   centrosCusto: CentroCusto[] = [];
   formProposta = this.propostaService.formProposta;
-  recursos = this.propostaService.formRecursos;
+  formRecursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
@@ -78,6 +78,16 @@ export class ParteReuniaoComponent implements OnInit {
   onSubmit() {
     console.log(this.formProposta.value);
   }
+  validateForm() {
+    let formValid = true;
+    for (const control of Object.values(this.formRecursos.controls)) {
+      if (control.invalid) {
+        control.markAsTouched();
+        formValid = false;
+      }
+    }
+    return formValid;
+  }
 
   porcentagemCC: [{ porcentagem: string; index: number }] = [
     { porcentagem: '', index: 0 },
@@ -87,9 +97,8 @@ export class ParteReuniaoComponent implements OnInit {
 
   //fazer verificações necessárias
   addRowRecurso() {
-    console.log(this.recursos)
-    if(this.recursos.valid){
-      this.listaRecursos.push(this.recursos.value as unknown as RecursoDoForm);
+    if(this.formRecursos.valid){
+      this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
     }
   }
   adicionarCentroCusto(){

@@ -131,20 +131,6 @@
         >
           {{ textoExibidoEmBotaoDependendoRota.texto }}
         </button>
-        <button
-          *ngIf="!isPauta && rascunho"
-          class="btn btn-primary btn-sm"
-          [routerLink]="['../proposta/1']"
-        >
-          Continuar Demanda
-        </button>
-        <button
-          *ngIf="exibirBotaoParecerComissao"
-          class="btn btn-primary btn-sm"
-          (click)="abrirModal.emit()"
-        >
-          Parecer da Comissão
-        </button>
       </span>
       <i
         role="button"

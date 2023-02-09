@@ -44,8 +44,8 @@ export class RotasService {
       if (e == '/tela-inicial/configuracoes/sugestoes') {
         this.titulo.emit('Sugestões');
       }
-      if (e == '/tela-inicial/classificar-demanda') {
-        this.titulo.emit('Classificar Demanda');
+      if (e == '/tela-inicial/classificar-demanda/2') {
+        this.titulo.emit('Classificar');
       }
       if (e == '/tela-inicial/historico-demanda') {
         this.titulo.emit('Histórico');

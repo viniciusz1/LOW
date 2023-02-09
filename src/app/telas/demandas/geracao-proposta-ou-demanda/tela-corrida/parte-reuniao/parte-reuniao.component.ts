@@ -104,16 +104,15 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
   editarRecurso(index: number){
-    // this.formRecursos.patchValue({
-    //   centrosCustoRecurso: this.listaRecursos[index].centroDeCustoRecurso,
-    //   nomeRecurso: this.listaRecursos[index].nomeRecurso,
-    //   perfilDespesaRecurso: this.listaRecursos[index].perfilDespesaRecurso,
-    //   nomeRecurso: this.listaRecursos[index].centroDeCustoRecurso,
-    //   centrosCusto: this.listaRecursos[index].centroDeCustoRecurso,
-    //   nomeRecurso: this.listaRecursos[index].centroDeCustoRecurso,
-    //   centrosCusto: this.listaRecursos[index].centroDeCustoRecurso,
-    //   nomeRecurso: this.listaRecursos[index].centroDeCustoRecurso,
-    // })
+    this.formRecursos.patchValue({
+      nomeRecurso: this.listaRecursos[index].nomeRecurso,
+      tipoDespesaRecurso: this.listaRecursos[index].tipoDespesaRecurso,
+      perfilDespesaRecurso: this.listaRecursos[index].perfilDespesaRecurso,
+      valorHoraRecurso: this.listaRecursos[index].valorHoraRecurso.toString(),
+      quantidadeHorasRecurso: this.listaRecursos[index].quantidadeHorasRecurso.toString(),
+      periodoExMesesRecurso: this.listaRecursos[index].periodoExMesesRecurso.toString(),
+      centrosCusto: this.listaRecursos[index].centrosCusto,
+    })
   }
 
   removerRecurso(index: number){

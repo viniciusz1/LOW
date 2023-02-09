@@ -108,7 +108,7 @@
     <ng-template pTemplate="body" let-recursos let-index="rowIndex">
       <tr>
         <td>{{ recursos.nomeRecurso }}</td>
-        <td>{{ recursos.tipoDespesaRecurso.tipo }}</td>
+        <td>{{ recursos.tipoDespesaRecurso | titlecase }}</td>
         <td>{{ recursos.perfilDespesaRecurso }}</td>
         <td><span *ngFor="let centro of recursos.centrosCusto">{{centro.porcentagem}} - {{centro.centroCusto}}<br></span></td>
         <td>{{ recursos.quantidadeHorasRecurso }}</td>
@@ -142,7 +142,7 @@
           optionValue="value"
           optionLabel="tipo"
           [required]="true"
-          
+
           placeholder="Selecione o Tipo"
           formControlName="tipoDespesaRecurso"
           [showClear]="true"
@@ -210,7 +210,7 @@
           <div class="col-3" *ngFor="let centroCusto of formRecursos.controls.centrosCusto.controls; let i = index">
             <div [formGroupName]="i" class="d-flex">
               <input pInputText [required]="true" formControlName="porcentagem" placeholder="Porcentagem">
-              
+
               <p-dropdown
               [required]="true" [options]="centrosCusto" optionLabel="nome" optionValue="codigoCentroCusto" formControlName="centroCusto" placeholder="Centro Custo">
               </p-dropdown>

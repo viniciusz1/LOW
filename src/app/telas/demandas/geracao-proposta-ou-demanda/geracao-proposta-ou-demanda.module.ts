@@ -88,7 +88,7 @@ import {AccordionModule} from 'primeng/accordion';
   ],
   providers: [
     MessageService,
-    PropostaService
+    PropostaService,
   ]
 })
 export class GeracaoPropostaOuDemandaModule { }

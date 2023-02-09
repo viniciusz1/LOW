@@ -267,7 +267,6 @@ export class TelaInicialComponent implements OnInit {
     codigoDemanda: string | undefined;
     statusDemanda: StatusDemanda | undefined;
   }) {
-    console.log("OI")
     this.cabecalhoMensagemDeConfirmacao = 'Avançar status';
     this.confirmationService.confirm({
       dismissableMask: true,

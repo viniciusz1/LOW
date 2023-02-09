@@ -38,7 +38,7 @@ export class CardDemandaComponent implements OnInit {
   textoExibidoEmBotaoDependendoRota:
     | { rota: string; texto: string }
     | undefined = undefined;
-  nivelAcesso: NivelAcesso = NivelAcesso.GerenteNegocio;
+  nivelAcesso: NivelAcesso = NivelAcesso.Analista;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
 

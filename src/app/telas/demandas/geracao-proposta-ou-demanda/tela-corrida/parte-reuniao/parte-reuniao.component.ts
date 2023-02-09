@@ -99,7 +99,25 @@ export class ParteReuniaoComponent implements OnInit {
   addRowRecurso() {
     if(this.formRecursos.valid){
       this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
+      this.formRecursos.reset()
     }
+  }
+
+  editarRecurso(index: number){
+    // this.formRecursos.patchValue({
+    //   centrosCustoRecurso: this.listaRecursos[index].centroDeCustoRecurso,
+    //   nomeRecurso: this.listaRecursos[index].nomeRecurso,
+    //   perfilDespesaRecurso: this.listaRecursos[index].perfilDespesaRecurso,
+    //   nomeRecurso: this.listaRecursos[index].centroDeCustoRecurso,
+    //   centrosCusto: this.listaRecursos[index].centroDeCustoRecurso,
+    //   nomeRecurso: this.listaRecursos[index].centroDeCustoRecurso,
+    //   centrosCusto: this.listaRecursos[index].centroDeCustoRecurso,
+    //   nomeRecurso: this.listaRecursos[index].centroDeCustoRecurso,
+    // })
+  }
+
+  removerRecurso(index: number){
+    this.listaRecursos.splice(index, 1)
   }
   adicionarCentroCusto(){
     this.propostaService.addCenterOfCost()

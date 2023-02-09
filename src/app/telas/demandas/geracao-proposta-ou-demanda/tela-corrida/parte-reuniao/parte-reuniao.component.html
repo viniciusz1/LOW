@@ -105,7 +105,7 @@
         <th></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-recursos>
+    <ng-template pTemplate="body" let-recursos let-index="rowIndex">
       <tr>
         <td>{{ recursos.nomeRecurso }}</td>
         <td>{{ recursos.tipoDespesaRecurso.tipo }}</td>
@@ -114,8 +114,8 @@
         <td>{{ recursos.quantidadeHorasRecurso }}</td>
         <td>{{ recursos.valorHoraRecurso }}</td>
         <td>{{ recursos.periodoExMesesRecurso }}</td>
-        <td><i class="bi bi-pencil"></i></td>
-        <td><i class="bi bi-x"></i></td>
+        <td (click)="editarRecurso(index)"><i class="bi bi-pencil"></i></td>
+        <td (click)="removerRecurso(index)"><i class="bi bi-x"></i></td>
       </tr>
     </ng-template>
   </p-table>
@@ -216,7 +216,7 @@
               </p-dropdown>
             </div>
           </div>
-          <button style="width: 45px" class="btn btn-outline-primary" [disabled]="! formRecursos.controls.centrosCusto.valid" (click)="adicionarCentroCusto()"><i class="bi bi-plus-lg" style="font-size: 17px;"></i></button>
+          <button style="width: 45px" class="btn btn-outline-primary" [disabled]="!formRecursos.controls.centrosCusto.valid" (click)="adicionarCentroCusto()"><i class="bi bi-plus-lg" style="font-size: 17px;"></i></button>
         </div>
 
 

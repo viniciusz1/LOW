@@ -1,6 +1,6 @@
 import { TipoDespesa } from './../models/tipoDespesa.enum';
 import { Recurso } from './../models/recurso.model';
-import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -24,30 +24,29 @@ interface RecursoDoForm{
   providedIn: 'root',
 })
 export class PropostaService {
-  listaRecursos:RecursoDoForm[] = [ ]
+  public listaRecursos:RecursoDoForm[] = [ ]
 
-  formRecursos = this.fb.group({
-      codigoRecurso:[''],
-      nomeRecurso:  [''],
-      tipoDespesaRecurso:  [''],
-      perfilDespesaRecurso:  [''],
-      quantidadeHorasRecurso:  [''],
-      valorHoraRecurso:  [''],
-      periodoExMesesRecurso:  [''],
-      centrosCusto: this.fb.array([
-        this.createCenterOfCost()
-      ])
+  public formRecursos = this.fb.group({
+  nomeRecurso: [''],
+  tipoDespesaRecurso: [''],
+  perfilDespesaRecurso: [''],
+  quantidadeHorasRecurso: [''],
+  valorHoraRecurso: [''],
+  periodoExMesesRecurso: [''],
+  centrosCusto: this.fb.array([this.createCentroCusto()])
+});
+
+createCentroCusto(): FormGroup {
+  return this.fb.group({
+    porcentagem: [''],
+    centroCusto: ['']
   });
+}
 
-  createCenterOfCost() {
-    return this.fb.group({
-      porcentagem: [null, Validators.required],
-      centroCusto: [null, Validators.required]
-    });
-  }
+
 
   addCenterOfCost() {
-    (this.formRecursos.controls.centrosCusto as FormArray).push(this.createCenterOfCost());
+    (this.formRecursos.controls.centrosCusto as FormArray).push(this.createCentroCusto());
   }
 
   formProposta = this.fb.group({

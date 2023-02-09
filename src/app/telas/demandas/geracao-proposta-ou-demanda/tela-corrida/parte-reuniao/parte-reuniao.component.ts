@@ -41,7 +41,7 @@ export class ParteReuniaoComponent implements OnInit {
   }
   centrosCusto: CentroCusto[] = [];
   formProposta = this.propostaService.formProposta;
-  recursos = this.propostaService.formRecursos;
+  formRecursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
@@ -76,7 +76,7 @@ export class ParteReuniaoComponent implements OnInit {
   tipoDaDespesa = [{ tipo: 'Interna', value: 'interno' }, { tipo: 'Externa', value: 'externo' }];
   perfilDaDespesa = [{ tipo: 'Hardware', value: 'hardware' }, { tipo: 'Software', value: 'software' }, { tipo: 'Corporativo', value: 'corporativo' }];
   onSubmit() {
-    console.log(this.formProposta.value);
+    // console.log(this.formProposta.value);
   }
 
   porcentagemCC: [{ porcentagem: string; index: number }] = [
@@ -87,8 +87,27 @@ export class ParteReuniaoComponent implements OnInit {
 
   //fazer verificações necessárias
   addRowRecurso() {
-    this.listaRecursos.push(this.recursos.value as unknown as RecursoDoForm);
-    console.log(this.listaRecursos)
+    if(this.formRecursos.valid){
+      this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
+      this.formRecursos.reset()
+    }
+  }
+
+  editarRecurso(index: number){
+    this.formRecursos.patchValue({
+      nomeRecurso: this.listaRecursos[index].nomeRecurso,
+      tipoDespesaRecurso: this.listaRecursos[index].tipoDespesaRecurso,
+      perfilDespesaRecurso: this.listaRecursos[index].perfilDespesaRecurso,
+      valorHoraRecurso: this.listaRecursos[index].valorHoraRecurso.toString(),
+      quantidadeHorasRecurso: this.listaRecursos[index].quantidadeHorasRecurso.toString(),
+      periodoExMesesRecurso: this.listaRecursos[index].periodoExMesesRecurso.toString(),
+      centrosCusto: this.listaRecursos[index].centrosCusto,
+    })
+    this.listaRecursos.splice(index, 1)
+  }
+
+  removerRecurso(index: number){
+    this.listaRecursos.splice(index, 1)
   }
   adicionarCentroCusto(){
     this.propostaService.addCenterOfCost()

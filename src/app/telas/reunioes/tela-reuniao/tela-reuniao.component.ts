@@ -29,7 +29,6 @@ export class TelaReuniaoComponent implements OnInit {
   //tipoExibicao = true --> mostrar todas reuniões
   //tipoExibicao = false --> Cria nova pauta
   textoTutorial = textoTutorial
-  showFiltro = false;
   showPesquisaEBotaoFiltro = true;
   dataReuniao: any;
   comissaoSelecionada: any;
@@ -69,20 +68,6 @@ export class TelaReuniaoComponent implements OnInit {
       },
     });
   }
-  changeFilter() {
-    if(this.showFiltro == true){
-      this.showFiltroComponent = false
-      setTimeout(() => {
-        this.showFiltro = false
-      }, 200)
-    }else{
-      this.showFiltro = true
-      setTimeout(() => {
-        this.showFiltroComponent = true
-      }, 200)
-    }
-    
-  }
 
   openModalCriarReuniao() {
     console.log("oi")
@@ -97,17 +82,6 @@ export class TelaReuniaoComponent implements OnInit {
     });
   }
 
-  mudarStatusFiltro() {
-    this.showFiltro = !this.showFiltro
-    if (!this.showFiltro) {
-      setTimeout(() => {
-        this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
-      }, 200)
-    } else {
-      this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro
-    }
-  }
-
   ngOnInit() {
     // this.openModalCriarReuniao();
     this.atualizarReunioes();
@@ -117,6 +91,22 @@ export class TelaReuniaoComponent implements OnInit {
     this.reuniaoService
       .getReuniao()
       .subscribe({
+        next: (reuniao) => (this.listaReunioes = reuniao),
+        error: (err) => console.log(err),
+      });
+  }
+
+  pesquisarReunioes(event: {
+    nomeComissao: string;
+    dataReuniao: string;
+    statusReuniao: string;
+    ppmProposta: string;
+    analista: string;
+    solicitante: string;
+    page: string;
+    size: string
+  }){
+      this.reuniaoService.getReuniaoFiltrada(event).subscribe({
         next: (reuniao) => (this.listaReunioes = reuniao),
         error: (err) => console.log(err),
       });

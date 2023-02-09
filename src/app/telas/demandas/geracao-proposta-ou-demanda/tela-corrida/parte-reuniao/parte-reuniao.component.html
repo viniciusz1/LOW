@@ -105,21 +105,22 @@
         <th></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-recursos>
+    <ng-template pTemplate="body" let-recursos let-index="rowIndex">
       <tr>
         <td>{{ recursos.nomeRecurso }}</td>
-        <td>{{ recursos.tipoDespesaRecurso.tipo }}</td>
+        <td>{{ recursos.tipoDespesaRecurso | titlecase }}</td>
         <td>{{ recursos.perfilDespesaRecurso }}</td>
         <td><span *ngFor="let centro of recursos.centrosCusto">{{centro.porcentagem}} - {{centro.centroCusto}}<br></span></td>
         <td>{{ recursos.quantidadeHorasRecurso }}</td>
         <td>{{ recursos.valorHoraRecurso }}</td>
         <td>{{ recursos.periodoExMesesRecurso }}</td>
-        <td><i class="bi bi-pencil"></i></td>
-        <td><i class="bi bi-x"></i></td>
+        <td (click)="editarRecurso(index)"><i role="button" class="bi bi-pencil"></i></td>
+        <td (click)="removerRecurso(index)"><i role="button" class="bi bi-x"></i></td>
       </tr>
     </ng-template>
   </p-table>
-  <div [formGroup]="recursos">
+
+  <div [formGroup]="formRecursos">
     <div class="row">
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:"
@@ -128,6 +129,7 @@
         <input
           placeholder="Ex: Programador Back-end"
           type="text"
+          required="true"
           pInputText
           class="input"
           formControlName="nomeRecurso"
@@ -139,6 +141,8 @@
           [options]="tipoDaDespesa"
           optionValue="value"
           optionLabel="tipo"
+          [required]="true"
+
           placeholder="Selecione o Tipo"
           formControlName="tipoDespesaRecurso"
           [showClear]="true"
@@ -149,6 +153,7 @@
         <p-dropdown
           placeholder="Ex: ..."
           type="text"
+          [required]="true"
           [options]="perfilDaDespesa"
           optionValue="value"
           optionLabel="tipo"
@@ -166,6 +171,7 @@
             placeholder="Ex: 220"
             type="text"
             class="input"
+            [required]="true"
             formControlName="quantidadeHorasRecurso"
           ></p-inputNumber>
         </div>
@@ -175,6 +181,7 @@
         <div style="width: 100%; display: grid">
           <p-inputNumber
             placeholder="Ex: R$ 55,00"
+            [required]="true"
             type="text"
             class="input"
             formControlName="valorHoraRecurso"
@@ -188,6 +195,7 @@
         <div style="width: 100%; display: grid">
           <p-inputNumber
             placeholder="Ex: 5"
+            [required]="true"
             type="text"
             class="input"
             formControlName="periodoExMesesRecurso"
@@ -199,19 +207,21 @@
           <label class="mt-1" for="Recurso Necessário:"
           >Centros de Custo</label
         >
-          <div class="col-3" *ngFor="let centroCusto of recursos.controls.centrosCusto.controls; let i = index">
+          <div class="col-3" *ngFor="let centroCusto of formRecursos.controls.centrosCusto.controls; let i = index">
             <div [formGroupName]="i" class="d-flex">
-              <input pInputText formControlName="porcentagem" placeholder="Porcentagem">
-              <p-dropdown [options]="centrosCusto" optionLabel="nome" optionValue="codigoCentroCusto" formControlName="centroCusto">
+              <input pInputText [required]="true" formControlName="porcentagem" placeholder="Porcentagem">
+
+              <p-dropdown
+              [required]="true" [options]="centrosCusto" optionLabel="nome" optionValue="codigoCentroCusto" formControlName="centroCusto" placeholder="Centro Custo">
               </p-dropdown>
             </div>
           </div>
-          <button style="width: 45px" class="btn btn-outline-primary" (click)="adicionarCentroCusto()"><i class="bi bi-plus-lg" style="font-size: 17px;"></i></button>
+          <button style="width: 45px" class="btn btn-outline-primary" [disabled]="!formRecursos.controls.centrosCusto.valid" (click)="adicionarCentroCusto()"><i class="bi bi-plus-lg" style="font-size: 17px;"></i></button>
         </div>
 
 
       <div class="">
-        <button class="btn btn-primary" (click)="addRowRecurso()">
+        <button class="btn btn-primary" [disabled]="!formRecursos.valid" (click)="addRowRecurso()">
           Adicionar Recurso
         </button>
       </div>

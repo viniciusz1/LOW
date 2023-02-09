@@ -57,9 +57,9 @@ saveAs(blob, name);
   }
 
   getDemandasFiltradas(filtros: {solicitante: string; codigoDemanda: string; status: string; tamanho: string; tituloDemanda: string; analista: string; departamento: string}){
+
     return this.http.get<Demanda[]>(
-      `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}
-      &tituloDemanda=${filtros.tituloDemanda}&analista=${filtros.analista}&departamento=${filtros.departamento}`
+      `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}&analista=${filtros.analista}&departamento=${filtros.departamento}`
     );
   }
 
@@ -98,7 +98,7 @@ saveAs(blob, name);
     let demandaFormData = new FormData();
 
     this.arquivos.map(item => demandaFormData.append('arquivos', item, item.name)) ;
-    this.demandaForm.patchValue({solicitanteDemanda: {codigoUsuario: 6}})
+    this.demandaForm.patchValue({solicitanteDemanda: {codigoUsuario: 2}})
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     console.log(this.demandaForm.value)
     return this.http.post<Demanda | string>(

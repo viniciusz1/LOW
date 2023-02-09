@@ -18,24 +18,13 @@
             class="btn btn-primary ms-3" (click)="openCalendario()">
             <i class="bi bi-calendar-week me-2"></i>Ver em calendário
           </button>
-        </div>
-        <div class="d-flex p-1">
-          <p-dropdown *ngIf="!showFiltro" [options]="opcoesOrdenacao" [(ngModel)]="ordenarSelect" placeholder="Ordenar"
+            <p-dropdown class="ms-3" [options]="opcoesOrdenacao" [(ngModel)]="ordenarSelect" placeholder="Ordenar"
             optionLabel="name"></p-dropdown>
-          <span *ngIf="!showFiltro" class="p-input-icon-left ms-3">
-            <i class="pi pi-search"></i>
-            <input type="text" class="border" pInputText placeholder="Pesquisar Demanda"
-              [(ngModel)]="pesquisaReuniao" />
-          </span>
-          <div class="d-flex">
-            <button *ngIf="!showFiltro" class="btn btn-primary ms-3" style="width: 150px;  height: 42px;"
-              (click)="changeFilter()">
-              Filtrar Mais
-              <i class="bi bi-chevron-double-down"></i>
-            </button>
-          </div>
-          <app-filtro-reuniao @fadeAnimation *ngIf="showFiltroComponent" (closeFiltro)="changeFilter()" class="me-3">
+        </div>
+        <div class="p-1">
+          <app-filtro-reuniao (filtroAcionado)="pesquisarReunioes($event)" class="me-3">
           </app-filtro-reuniao>
+
         </div>
       </div>
     </div>

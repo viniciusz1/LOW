@@ -1,3 +1,5 @@
+import { UsuarioService } from './../../services/usuario.service';
+import { NivelAcesso } from './../../models/nivel-acesso.enum';
 import { textoTutorial } from '../../shared/textoDoTutorial';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
@@ -12,15 +14,21 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private rotasService: RotasService) { }
+  constructor(private rotasService: RotasService,
+    private usuarioService: UsuarioService) {
+      this.nivelAcessoUsuario = usuarioService.getRole();
+    }
 
   mostrar_modal = false;
   textoTutorial = textoTutorial;
   items: MenuItem[] = [{label: "Home"}, {label: "Demandas"}];
   activeItem: MenuItem | undefined;
   inicial = false;
+  nivelAcessoUsuario: NivelAcesso | undefined
 
   ngOnInit() {
+
+
     this.rotasService.titulo.subscribe((texto) => {
       this.items[0] = {label: "Home"},
       this.items[1] = { label: texto };

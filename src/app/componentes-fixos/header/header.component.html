@@ -16,7 +16,7 @@
         [stepContent]="customContent"
         [stepContentParams]="{'texto': textoTutorial[7]}"
         style="overflow: auto;">
-            <li class="nav-item">
+            <li *ngIf="nivelAcessoUsuario != 'Solicitante'" class="nav-item">
                 <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'" >REUNIÕES</a>
             </li>
             <li class="nav-item" >

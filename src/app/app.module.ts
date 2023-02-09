@@ -1,3 +1,4 @@
+import { UsuarioService } from './services/usuario.service';
 
 import { NgModule  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -36,7 +37,7 @@ import {DialogModule} from 'primeng/dialog';
     HttpClientModule,
     DialogModule
   ],
-  providers: [DemandaService, ConfirmationService],
+  providers: [DemandaService, ConfirmationService, UsuarioService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

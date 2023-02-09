@@ -1,3 +1,4 @@
+import { NivelAcesso } from './../../models/nivel-acesso.enum';
 import { RotasModule } from './../../rotas.module';
 import { StatusDemanda } from './../../models/statusDemanda.enum';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -33,7 +34,7 @@ export class CardDemandaComponent implements OnInit {
   textoExibidoEmBotaoDependendoRota:
     | { rota: string; texto: string }
     | undefined = undefined;
-  usuario = '';
+  nivelAcesso: NivelAcesso = NivelAcesso.Solicitante;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
 
@@ -49,6 +50,7 @@ export class CardDemandaComponent implements OnInit {
     }
     return false
   }
+
   direcionarUsuario() {
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
       this.abrirModal.emit();
@@ -107,42 +109,69 @@ export class CardDemandaComponent implements OnInit {
 
 
   exibicaoBotoes() {
-    if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO) {
+    if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO && this.nivelAcesso == NivelAcesso.Analista) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '/tela-inicial/classificar-demanda/'+this.dadosDemada.codigoDemanda,
         texto: 'Classificar Demanda',
       };
+      return true
     }
-    else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA  && this.nivelAcesso == NivelAcesso.Analista) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '/tela-inicial/proposta/'+this.dadosDemada.codigoDemanda,
         texto: 'Criar Proposta',
       };
+      return true
     }
-    else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO && this.nivelAcesso == NivelAcesso.GerenteNegocio) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'avaliar',
         texto: 'Avaliar Demanda',
       };
+      return true
     }
-    else if (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT && this.nivelAcesso == NivelAcesso.Analista) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'adicionar a reuniao',
         texto: 'Adicionar Proposta',
       };
+      return true
     }
-    else if (this.dadosDemada.statusDemanda == StatusDemanda.TO_DO || this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD || this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT) {
+    else if (this.dadosDemada.statusDemanda == StatusDemanda.TO_DO ||
+      this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
+      this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT && this.nivelAcesso == NivelAcesso.Analista) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'avancar fase',
         texto: 'Avançar Fase',
       };
+      return true
     }
     else if (this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '',
         texto: 'Motivo',
       };
-    }
+      return true
+    }else if(this.exibirBotaoParecerDg){
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: '',
+        texto: 'Parecer da DG',
+      };
+      return true
+    }else if(this.exibirBotaoParecerComissao){
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: '',
+        texto: 'Parecer Comissao',
+      };
+      return true
+    }else if(!this.isPauta &&
+      !this.rascunho &&
+      this.textoExibidoEmBotaoDependendoRota &&
+      !this.exibirBotaoParecerComissao &&
+      !this.exibirBotaoParecerDg){
+        return true
+      }
+    return false
   }
   existePauta() {
     if (

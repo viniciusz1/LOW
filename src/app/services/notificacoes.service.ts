@@ -1,28 +1,38 @@
 import { Injectable } from '@angular/core';
-import { Stomp } from '@stomp/stompjs';
+import { Client, Message, StompHeaders, StompSubscription } from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificacoesService {
-  private stompClient: Stomp;
-
-  constructor() { }
-
-  connect() {
-    const socket = new SockJS('/demand-status-websocket');
-    this.stompClient = Stomp.over(socket);
-    this.stompClient.connect({}, () => {
-      this.stompClient.subscribe(`/topic/demand-status/`, (demandStatus: any) => {
-        console.log(demandStatus);
-      });
-    });
-  }
-
-  disconnect() {
-    if (this.stompClient != null) {
-      this.stompClient.disconnect();
+    private client: Client;
+    private subscription: StompSubscription;
+  
+    constructor() {
+      this.client = new Client();
+      this.client.webSocketFactory = () => {
+        return new SockJS('http://localhost:8080/app/ws');
+      };
     }
-  }
+  
+    public connect() {
+      this.client.connect({}, () => {
+        this.subscription = this.client.subscribe('/topic/demand-status/' + demandId, this.onMessageReceived);
+      });
+    }
+  
+    public disconnect() {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+      this.client.disconnect();
+    }
+  
+    private onMessageReceived = (message: Message) => {
+      // aqui você pode processar a mensagem recebida
+      const demandStatus = JSON.parse(message.body);
+      console.log('Notificação recebida: ', demandStatus);
+    }
 }

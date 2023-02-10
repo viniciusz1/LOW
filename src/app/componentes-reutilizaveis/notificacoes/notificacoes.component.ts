@@ -17,7 +17,7 @@ export class NotificacoesComponent implements OnInit {
   events2: any[] = [];
 
   ngOnInit() {
-    this.notificacoesService.connect()
+    this.notificacoesService.ativarWebSocket()
 
     this.events1 = [
       { message: 'Sua demanda está sendo analisada pelo Gerente de TI', date: '15/10/2020 10:30', icon: PrimeIcons.CHECK, color: 'blue' },

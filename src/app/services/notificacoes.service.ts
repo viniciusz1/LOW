@@ -5,16 +5,16 @@ import * as SockJS from 'sockjs-client';
 @Injectable({
   providedIn: 'root'
 })
-export class DemandStatusNotificationService {
+export class NotificacoesService {
   private stompClient: Stomp;
 
   constructor() { }
 
-  connect(demandId: string) {
+  connect() {
     const socket = new SockJS('/demand-status-websocket');
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, () => {
-      this.stompClient.subscribe(`/topic/demand-status/${demandId}`, (demandStatus: any) => {
+      this.stompClient.subscribe(`/topic/demand-status/`, (demandStatus: any) => {
         console.log(demandStatus);
       });
     });

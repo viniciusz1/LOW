@@ -3,18 +3,18 @@
         <h4>Suas Notificações</h4>
     </div>
     <p-scrollPanel [style]="{width: '100%', height: '50vh'}">
-        <p-timeline [value]="events1">
+        <p-timeline [value]="notificacoes">
 
-            <ng-template pTemplate="marker" let-event>
-                <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-                    <i [ngClass]="event.icon"></i>
+            <ng-template pTemplate="marker" let-notificacoes>
+                <span class="custom-marker shadow-2" [style.backgroundColor]="'blue'">
+                    <i [ngClass]="'bi bi-plus-lg'"></i>
                 </span>
             </ng-template>
 
 
-            <ng-template pTemplate="content" let-event>
-                <p-card [header]="event.status" [subheader]="event.date">
-                    <span>{{event.message}}</span>
+            <ng-template pTemplate="content" let-notificacoes>
+                <p-card [header]="notificacoes.tituloDemandaNotificacao" [subheader]="notificacoes.horaNotificacao">
+                    <span>{{notificacoes.descricaoNotificacao}}</span>
                 </p-card>
             </ng-template>
 

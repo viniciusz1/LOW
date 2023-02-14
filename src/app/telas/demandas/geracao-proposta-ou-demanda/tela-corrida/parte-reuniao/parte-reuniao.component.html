@@ -28,13 +28,15 @@
               tooltipPosition="top"
             ></i>
           </div>
-          <p-calendar
+          <p-calendar  [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.prazoProposta.errors && formProposta.controls.prazoProposta.touched}" 
             placeholder="Clique para Agendar"
             formControlName="prazoProposta"
             [showTime]="true"
             [showSeconds]="true"
             inputId="time"
           ></p-calendar>
+          <small *ngIf="formProposta.controls.prazoProposta.errors && formProposta.controls.prazoProposta.touched"
+        id="username2-help" class="p-error block">Campo Obrigatório</small>
         </div>
         <div class="titulo" style="display: grid; width: 32vw" id="item-1-1">
           <div
@@ -57,7 +59,10 @@
             pInputText
             class="input"
             formControlName="codigoPPMProposta"
+            [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.codigoPPMProposta.errors && formProposta.controls.codigoPPMProposta.touched}"
           />
+          <small *ngIf="formProposta.controls.codigoPPMProposta.errors && formProposta.controls.codigoPPMProposta.touched"
+        id="username2-help" class="p-error block">Campo Obrigatório</small>
         </div>
       </div>
       <div class="titulo" style="display: grid" id="item-1-1">

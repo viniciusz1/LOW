@@ -43,6 +43,7 @@ export class ParteReuniaoComponent implements OnInit {
   formProposta = this.propostaService.formProposta;
   formRecursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
+
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
     { nome: 'Vinicius Bonatti', area: 'Vendas' },

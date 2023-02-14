@@ -10,6 +10,7 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
     styleUrls: ['./notificacoes.component.scss'],
     animations: [fadeAnimation]
 })
+
 export class NotificacoesComponent implements OnInit {
     constructor(private notificacoesService: NotificacoesService) {
         console.log('connected to ws ...');
@@ -54,3 +55,13 @@ export class NotificacoesComponent implements OnInit {
         ];
     }
 }
+
+interface notificacoes {
+    codigoNotificacao: number,
+    tituloDemandaNotificacao: string,
+    codigo: number,
+    tipoNotificacao: string,
+    descricaoNotificacao: string,
+    dataNotificacao: Date,
+    statusNotificacao: string,
+  }

@@ -33,10 +33,11 @@
         {{dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda}}</b
       >
     </h4>
+    <p><b>Tamanho da Demanda: </b>{{dadosDemandaAnalista?.tamanhoDemandaAnalista}}</p>
 
     <h4><b>Objetivo:</b></h4>
     <p>
-      {{dadosDemandaAnalista?.demandaDemandaAnalista?.objetivoDemanda}}}
+      {{dadosDemandaAnalista?.demandaDemandaAnalista?.objetivoDemanda}}
     </p>
 
     <h4><b>Situação Atual:</b></h4>
@@ -72,26 +73,6 @@
       </li>
     </ul>
     <p><b>Frequência de uso do sistema:</b>{{dadosDemandaAnalista?.demandaDemandaAnalista?.frequenciaDeUsoSistemaDemanda}}</p>
-    <h4><b>DOCUMENTOS:</b>
-      <!-- <a *ngFor="let arquivo of dadosDemandaAnalista?.arquivosDemanda" [href]="arquivo.dadosArquivo" [download]="arquivo.nomeArquivo">
-      {{ arquivo.nomeArquivo }}
-    </a> -->
-
-    <div *ngFor="let arquivo of dadosDemandaAnalista?.demandaDemandaAnalista?.arquivosDemanda" (click)="download(arquivo)">
-      <img [src]="arquivo.dadosArquivo" alt="">
-    </div>
-    <hr>
-    <h4><b>CLASSIFICAÇÃO DO ANALISTA:</b></h4>
-    <p><b>Analista Reponsável: </b>{{dadosDemandaAnalista?.analista?.nomeUsuario}}</p>
-    <p><b>Tamanho da Demanda: </b>{{dadosDemandaAnalista?.tamanhoDemandaAnalista}}</p>
-    <p><b>Seção de TI Responsável: </b>{{dadosDemandaAnalista?.secaoDemandaAnalista}}</p>
-    <p><b>BU Solicitante: </b>{{dadosDemandaAnalista?.buSolicitanteDemandaAnalista?.nomeBusinessUnit}}</p>
-    <p><b>BUs Beneficiadas: </b><span *ngFor="let bu of dadosDemandaAnalista?.busBeneficiadasDemandaAnalista">
-      {{bu.nomeBusinessUnit}}
-    </span></p>
-
-
-  </h4>
 
 </p-scrollPanel>
 </mat-dialog-content>

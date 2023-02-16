@@ -53,9 +53,9 @@
       <p-scrollPanel [style]="{height: '70vh', width:'42.6vw'}">
         <h4 mat-dialog-title class="d-flex justify-content-between">
           <span><b>SOLICITANTE: </b>{{demanda?.solicitanteDemanda?.nomeUsuario}}</span>
-          <span><b>DATA:</b> {{demanda?.inicioExDemanda}}</span>
+
         </h4>
-        <h4><b>DEPARTAMENTO:</b> {{demanda?.solicitanteDemanda?.departamentoUsuario}}</h4>
+        <h4><b>DEPARTAMENTO:</b> {{demanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
         <h4 class="d-flex justify-content-center">
           <b
             >{{demanda?.tituloDemanda}} –

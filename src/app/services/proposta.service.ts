@@ -25,6 +25,7 @@ interface RecursoDoForm{
 })
 export class PropostaService {
   public listaRecursos:RecursoDoForm[] = [ ]
+  public paybackProposta: number = 0;
 
   public formRecursos = this.fb.group({
   nomeRecurso: [''],
@@ -57,7 +58,7 @@ createCentroCusto(): FormGroup {
     escopoDemandaProposta: [''],
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],
-    paybackProposta: [''],
+    paybackProposta: [this.paybackProposta],
     responsavelProposta: { 'codigoUsuario': 6},
     demandaAnalistaProposta: {'codigoDemandaAnalista': 47}
   });

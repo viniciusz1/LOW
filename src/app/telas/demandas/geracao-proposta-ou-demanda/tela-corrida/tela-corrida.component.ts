@@ -107,7 +107,6 @@ export class TelaCorridaComponent implements OnInit {
         frequenciaDeUsoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.frequenciaDeUsoSistemaDemanda,
       })
       // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
-      this.demandaService.demandaForm.disable()
     })
   }
 

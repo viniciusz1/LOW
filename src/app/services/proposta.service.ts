@@ -59,8 +59,8 @@ createCentroCusto(): FormGroup {
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],
     paybackProposta: [this.paybackProposta],
-    responsavelProposta: { 'codigoUsuario': 6},
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 47}
+    responsavelProposta: { 'codigoUsuario': 3},
+    demandaAnalistaProposta: {'codigoDemandaAnalista': 13}
   });
 
   arrumarFormularioParaBackend(){
@@ -79,6 +79,7 @@ createCentroCusto(): FormGroup {
 
   postProposta() {
     this.arrumarFormularioParaBackend();
+    console.log(this.formProposta.value)
     return this.http.post<Demanda | string>(
       'http://localhost:8080/proposta',
 

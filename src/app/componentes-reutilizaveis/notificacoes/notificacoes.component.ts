@@ -56,12 +56,3 @@ export class NotificacoesComponent implements OnInit {
     }
 }
 
-interface notificacoes {
-    codigoNotificacao: number,
-    tituloDemandaNotificacao: string,
-    codigo: number,
-    tipoNotificacao: string,
-    descricaoNotificacao: string,
-    dataNotificacao: Date,
-    statusNotificacao: string,
-  }

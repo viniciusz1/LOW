@@ -96,9 +96,11 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
   }
 
-  openModalDemandaDocumento() {
+  openModalDemandaDocumento(event: string | undefined) {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
+      minWidth: '50vw',
+      data: event,
     });
   }
 

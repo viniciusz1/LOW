@@ -51,7 +51,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
       .subscribe((demanda) => {
         if (this.dadosDemandaAnalista != undefined){
           this.dadosDemandaAnalista.demandaDemandaAnalista = demanda;
-        }else{
+        } else {
           this.dadosDemandaAnalista = {
             codigoDemandaAnalista: '0',
             demandaDemandaAnalista: demanda,

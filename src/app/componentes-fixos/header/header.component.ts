@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
   mostrar_modal = false;
   textoTutorial = textoTutorial;
-  items: MenuItem[] = [{label: "Home"}, {label: "Demandas"}];
+  items: MenuItem[] = [{label: "Tela Inicial"}, {label: "Demandas"}];
   activeItem: MenuItem | undefined;
   inicial = false;
   nivelAcessoUsuario: NivelAcesso | undefined
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
 
     this.rotasService.titulo.subscribe((texto) => {
-      this.items[0] = {label: "Home"},
+      this.items[0] = {label: "Tela Inicial"},
       this.items[1] = { label: texto };
     })
 

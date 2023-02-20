@@ -216,7 +216,8 @@ export class TelaInicialComponent implements OnInit {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-    });
+    })
+
   }
 
   openModalReprovacaoDemanda() {
@@ -232,7 +233,11 @@ export class TelaInicialComponent implements OnInit {
       maxWidth: '70vw',
       minWidth: '50vw',
       data: event,
-    });
+    })
+    .afterClosed().subscribe(() => {
+      this.carregarDemandasIniciais();
+
+    })
   }
   openModalHistorico() {
     this.matDialog.open(ModalHistoricoComponent, {

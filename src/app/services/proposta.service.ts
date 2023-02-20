@@ -1,3 +1,4 @@
+import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
 import { TipoDespesa } from './../models/tipoDespesa.enum';
 import { Recurso } from './../models/recurso.model';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -25,6 +26,7 @@ interface RecursoDoForm{
 })
 export class PropostaService {
   public listaRecursos:RecursoDoForm[] = [ ]
+  public paybackProposta: number = 0;
 
   public formRecursos = this.fb.group({
   nomeRecurso: [''],
@@ -57,9 +59,9 @@ createCentroCusto(): FormGroup {
     escopoDemandaProposta: [''],
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],
-    paybackProposta: [''],
-    responsavelProposta: { 'codigoUsuario': 6},
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 47}
+    paybackProposta: [this.paybackProposta],
+    responsavelProposta: { 'codigoUsuario': 3},
+    demandaAnalistaProposta: {'codigoDemandaAnalista': 0}
   });
 
   arrumarFormularioParaBackend(){
@@ -76,14 +78,19 @@ createCentroCusto(): FormGroup {
 
   }
 
-  postProposta() {
+  postProposta(codigoDemandaAnalista: string) {
+    this.formProposta.patchValue({
+      demandaAnalistaProposta: {
+        codigoDemandaAnalista: parseInt(codigoDemandaAnalista)
+      }
+    })
     this.arrumarFormularioParaBackend();
+    console.log(this.formProposta.value)
     return this.http.post<Demanda | string>(
       'http://localhost:8080/proposta',
-
       this.formProposta.value
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {}
+  constructor(private http: HttpClient, private fb: FormBuilder, private demandaAnalistaService: DemandaAnalistaService) {}
 }

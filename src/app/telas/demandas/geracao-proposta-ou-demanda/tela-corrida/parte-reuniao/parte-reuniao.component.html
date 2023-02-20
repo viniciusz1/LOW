@@ -87,11 +87,7 @@
   </div>
   <h3 class="mt-4" spyTarget="recursosTarget">Recursos</h3>
   <hr />
-  <p-table
-    *ngIf="listaRecursos.length != 0"
-    styleClass="p-datatable-gridlines"
-    [value]="listaRecursos"
-  >
+  <p-table *ngIf="listaRecursos.length != 0" [value]="listaRecursos"  [tableStyle]="{'min-width': '60rem'}">
     <ng-template pTemplate="header">
       <tr>
         <th>Recurso Necessário</th>
@@ -110,12 +106,25 @@
         <td>{{ recursos.nomeRecurso }}</td>
         <td>{{ recursos.tipoDespesaRecurso | titlecase }}</td>
         <td>{{ recursos.perfilDespesaRecurso }}</td>
-        <td><span *ngFor="let centro of recursos.centrosCusto">{{centro.porcentagem}} - {{centro.centroCusto}}<br></span></td>
+        <td>
+          <span *ngFor="let centro of recursos.centrosCusto"
+            >{{ centro.porcentagem }} - {{ centro.centroCusto }}<br
+          /></span>
+        </td>
         <td>{{ recursos.quantidadeHorasRecurso }}</td>
         <td>{{ recursos.valorHoraRecurso }}</td>
         <td>{{ recursos.periodoExMesesRecurso }}</td>
-        <td (click)="editarRecurso(index)"><i role="button" class="bi bi-pencil"></i></td>
-        <td (click)="removerRecurso(index)"><i role="button" class="bi bi-x"></i></td>
+        <td (click)="editarRecurso(index)">
+          <i role="button" class="bi bi-pencil"></i>
+        </td>
+        <td (click)="removerRecurso(index)">
+          <i role="button" class="bi bi-x"></i>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <tr>
+        <td class="text-right">Custos Totais:  {{ custosTotais | currency : "BRL" }}</td>
       </tr>
     </ng-template>
   </p-table>
@@ -142,7 +151,6 @@
           optionValue="value"
           optionLabel="tipo"
           [required]="true"
-
           placeholder="Selecione o Tipo"
           formControlName="tipoDespesaRecurso"
           [showClear]="true"
@@ -203,29 +211,54 @@
         </div>
       </div>
     </div>
-        <div formArrayName="centrosCusto" class="row align-items-center">
-          <label class="mt-1" for="Recurso Necessário:"
-          >Centros de Custo</label
-        >
-          <div class="col-3" *ngFor="let centroCusto of formRecursos.controls.centrosCusto.controls; let i = index">
-            <div [formGroupName]="i" class="d-flex">
-              <input pInputText [required]="true" formControlName="porcentagem" placeholder="Porcentagem">
+    <div formArrayName="centrosCusto" class="row align-items-center">
+      <label class="mt-1" for="Recurso Necessário:">Centros de Custo</label>
+      <div
+        class="col-3"
+        *ngFor="
+          let centroCusto of formRecursos.controls.centrosCusto.controls;
+          let i = index
+        "
+      >
+        <div [formGroupName]="i" class="d-flex">
+          <input
+            pInputText
+            [required]="true"
+            formControlName="porcentagem"
+            placeholder="Porcentagem"
+          />
 
-              <p-dropdown
-              [required]="true" [options]="centrosCusto" optionLabel="nome" optionValue="codigoCentroCusto" formControlName="centroCusto" placeholder="Centro Custo">
-              </p-dropdown>
-            </div>
-          </div>
-          <button style="width: 45px" class="btn btn-outline-primary" [disabled]="!formRecursos.controls.centrosCusto.valid" (click)="adicionarCentroCusto()"><i class="bi bi-plus-lg" style="font-size: 17px;"></i></button>
+          <p-dropdown
+            [required]="true"
+            [options]="centrosCusto"
+            optionLabel="nome"
+            optionValue="codigoCentroCusto"
+            formControlName="centroCusto"
+            placeholder="Centro Custo"
+          >
+          </p-dropdown>
         </div>
-
-
-      <div class="">
-        <button class="btn btn-primary" [disabled]="!formRecursos.valid" (click)="addRowRecurso()">
-          Adicionar Recurso
-        </button>
       </div>
+      <button
+        style="width: 45px"
+        class="btn btn-outline-primary"
+        [disabled]="!formRecursos.controls.centrosCusto.valid"
+        (click)="adicionarCentroCusto()"
+      >
+        <i class="bi bi-plus-lg" style="font-size: 17px"></i>
+      </button>
     </div>
+
+    <div class="">
+      <button
+        class="btn btn-primary"
+        [disabled]="!formRecursos.valid"
+        (click)="addRowRecurso()"
+      >
+        Adicionar Recurso
+      </button>
+    </div>
+  </div>
   <h3 class="mt-4" spyTarget="escopo">Escopo</h3>
   <hr />
   <div>
@@ -296,12 +329,7 @@
           tooltipPosition="top"
         ></i>
       </div>
-      <p-inputNumber
-        formControlName="paybackProposta"
-        mode="decimal"
-        [minFractionDigits]="2"
-        [maxFractionDigits]="2"
-      ></p-inputNumber>
+      <input type="text" pInputText [value]="paybackProposta" disabled="true">
     </div>
   </div>
 

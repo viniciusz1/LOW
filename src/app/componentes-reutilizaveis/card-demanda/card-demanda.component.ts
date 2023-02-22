@@ -221,6 +221,7 @@ export class CardDemandaComponent implements OnInit {
     }
     return true;
   }
+  
   existePauta() {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||

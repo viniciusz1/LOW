@@ -5,6 +5,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
+import { Proposta } from '../models/proposta.model';
+import { Validators } from '@angular/forms';
 
 interface RecursoDoForm {
   nomeRecurso: string;
@@ -22,27 +24,40 @@ interface RecursoDoForm {
   providedIn: 'root',
 })
 export class PropostaService {
+  public listaRecursos:RecursoDoForm[] = [ ]
 
-  public listaRecursos: RecursoDoForm[] = [];
+  public formProposta = this.fb.group({
+    prazoProposta: ['', [Validators.required]],
+    codigoPPMProposta: ['', [Validators.required]],
+    jiraProposta: ['', [Validators.required]],
+    recursosProposta: [this.listaRecursos, [Validators.required]],
+    escopoDemandaProposta: ['', [Validators.required]],
+    inicioExDemandaProposta: ['', [Validators.required]],
+    fimExDemandaProposta: ['', [Validators.required]],
+    paybackProposta: ['', [Validators.required]],
+    responsavelProposta: { 'codigoUsuario': 3},
+    demandaAnalistaProposta: {'codigoDemandaAnalista': 0}
+  });
+
   public paybackProposta: number = 0;
   private codigoDemanda = 0;
 
   public formRecursos = this.fb.group({
-    nomeRecurso: [''],
-    tipoDespesaRecurso: [''],
-    perfilDespesaRecurso: [''],
-    quantidadeHorasRecurso: [''],
-    valorHoraRecurso: [''],
-    periodoExMesesRecurso: [''],
-    centrosCusto: this.fb.array([this.createCentroCusto()]),
-  });
+  nomeRecurso: ['', [Validators.required]],
+  tipoDespesaRecurso: ['', [Validators.required]],
+  perfilDespesaRecurso: ['', [Validators.required]],
+  quantidadeHorasRecurso: ['', [Validators.required]],
+  valorHoraRecurso: ['', [Validators.required]],
+  periodoExMesesRecurso: ['', [Validators.required]],
+  centrosCusto: this.fb.array([this.createCentroCusto()])
+});
 
-  createCentroCusto(): FormGroup {
-    return this.fb.group({
-      porcentagem: [''],
-      centroCusto: [''],
-    });
-  }
+createCentroCusto(): FormGroup {
+  return this.fb.group({
+    porcentagem: [''],
+    centroCusto: ['']
+  });
+}
 
   addCenterOfCost() {
     (this.formRecursos.controls.centrosCusto as FormArray).push(
@@ -50,21 +65,8 @@ export class PropostaService {
     );
   }
 
-  formProposta = this.fb.group({
-    prazoProposta: [''],
-    codigoPPMProposta: [''],
-    jiraProposta: [''],
-    recursosProposta: [this.listaRecursos],
-    escopoDemandaProposta: [''],
-    inicioExDemandaProposta: [''],
-    fimExDemandaProposta: [''],
-    paybackProposta: [this.paybackProposta],
-    responsavelProposta: { codigoUsuario: 3 },
-    demandaAnalistaProposta: { codigoDemandaAnalista: '' },
-  });
-
-  arrumarFormularioParaBackend() {
-    this.listaRecursos.forEach((e) => {
+  arrumarFormularioParaBackend(){
+    this.listaRecursos.forEach(e => {
       e.porcentagemCustoRecurso = [];
       e.centroDeCustoRecurso = [];
       if (e.centrosCusto) {
@@ -91,9 +93,11 @@ export class PropostaService {
   postProposta(codigoDemandaAnalista: string) {
     this.formProposta.patchValue({
       demandaAnalistaProposta: {
-        codigoDemandaAnalista: codigoDemandaAnalista
+        codigoDemandaAnalista: parseInt(codigoDemandaAnalista)
       }
     })
+    console.log(this.formProposta.value);
+
     this.arrumarFormularioParaBackend();
     return this.http.post<Demanda | string>(
       'http://localhost:8080/proposta',

@@ -9,6 +9,7 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
     styleUrls: ['./notificacoes.component.scss'],
     animations: [fadeAnimation]
 })
+
 export class NotificacoesComponent implements OnInit {
     constructor(private notificacoesService: NotificacoesService) {
     }
@@ -22,3 +23,4 @@ export class NotificacoesComponent implements OnInit {
       })
     }
 }
+

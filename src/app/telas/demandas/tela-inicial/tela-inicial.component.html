@@ -271,6 +271,9 @@
   <div>
     <p-confirmDialog icon="pi pi-exclamation-triangle" key="motivoReprovacao" #bt [style]="{width: '40vw'}" >
        <ng-template pTemplate="footer">
+        <button type="button" class="btn btn-outline-primary" (click)="bt.accept()">
+          <i class="pi pi-sync me-2"></i>Reformular Demanda
+        </button>
         <button type="button" class="btn btn-outline-primary" (click)="bt.reject()">
           <i class="pi pi-check me-2"></i>Ok
         </button>

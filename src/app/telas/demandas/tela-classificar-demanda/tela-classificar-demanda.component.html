@@ -1,6 +1,6 @@
-<div class="container-fluid" style="display: flex;">
+<div class="container-fluid mt-5" style="display: flex; justify-content: center;">
   <div class="row">
-    <div class="col-5" style="margin: 3vh 2vw 3vh 2vw;" [formGroup]="demandaAnalistaForm" (ngSubmit)="onSubmitClassificacaoDemanda()">
+    <div class="col-lg-6" [formGroup]="demandaAnalistaForm" (ngSubmit)="onSubmitClassificacaoDemanda()">
       <div style="display: grid; height: 70vh;">
         <div style="margin-top: 2.5vh;">
           <h3>
@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="col-5" style="margin: 3vh 2vw 3vh 6vw;">
+    <div class="col-lg-6">
       <p class="text-end">
         <i role="button" (click)="openModalDemandaDocumento(demanda?.codigoDemanda)" class="bi bi-arrows-fullscreen"></i>
       </p>

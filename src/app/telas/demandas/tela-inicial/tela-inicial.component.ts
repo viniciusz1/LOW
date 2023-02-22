@@ -5,7 +5,7 @@ import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
 import { Demanda } from 'src/app/models/demanda.model';
@@ -50,7 +50,7 @@ export class TelaInicialComponent implements OnInit {
       this.isFiltrado = true;
     }
   }
-
+  @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
   ordenarSelect = '';
   opcoesOrdenacao = [
     { name: 'Data de criação', value: 'dataCriacao' },
@@ -178,13 +178,15 @@ export class TelaInicialComponent implements OnInit {
   }
 
   changeRight(index: number) {
-    if (this.positionListCards[index] > -5000) {
-      this.positionListCards[index] -= 700;
+    let tamanhoDaListaCompleta = (document.getElementById(`filaCompleta${index}`) as HTMLElement).offsetWidth;
+
+    if (this.positionListCards[index] > (-tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth)) {
+      this.positionListCards[index] -= 397*2;
     }
   }
   changeLeft(index: number) {
     if (this.positionListCards[index] < 0) {
-      this.positionListCards[index] += 700;
+      this.positionListCards[index] += 397*2;
     }
   }
 
@@ -418,7 +420,7 @@ export class TelaInicialComponent implements OnInit {
       message:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
       accept: () => {
-        
+
       },
     });
   }

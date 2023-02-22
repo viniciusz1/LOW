@@ -26,6 +26,7 @@ interface RecursoDoForm {
 export class PropostaService {
   public listaRecursos:RecursoDoForm[] = [ ]
 
+  public paybackProposta: number = 0;
   public formProposta = this.fb.group({
     prazoProposta: ['', [Validators.required]],
     codigoPPMProposta: ['', [Validators.required]],
@@ -34,12 +35,11 @@ export class PropostaService {
     escopoDemandaProposta: ['', [Validators.required]],
     inicioExDemandaProposta: ['', [Validators.required]],
     fimExDemandaProposta: ['', [Validators.required]],
-    paybackProposta: ['', [Validators.required]],
+    paybackProposta: [this.paybackProposta],
     responsavelProposta: { 'codigoUsuario': 3},
     demandaAnalistaProposta: {'codigoDemandaAnalista': 0}
   });
 
-  public paybackProposta: number = 0;
   private codigoDemanda = 0;
 
   public formRecursos = this.fb.group({

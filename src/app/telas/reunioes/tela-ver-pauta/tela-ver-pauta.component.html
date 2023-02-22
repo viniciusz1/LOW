@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="row">
 
-        <div class="col-9 mb-5" style="overflow: auto; max-height: 70vh;    border: 1px solid #c5c5c5;
+        <div class="col-9 mb-5" style="overflow: auto; height: 70vh;    border: 1px solid #c5c5c5;
         border-radius: 5px;
         padding: 20px;" >
             <div  *ngFor="let proposta of listaProposta" class="mb-2">
@@ -17,8 +17,13 @@
                     <hr>
                     <span class="d-flex">Qtd Propostas: 8</span>
                 </div>
-                <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento()">Visualizar ata publicada</button>
-                <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento()">Visualizar ata não publicada</button>
+                <div class="d-flex w-100 mt-3 flex-column">
+                  <h6>Vizualizar:</h6>
+                  <hr class="my-1">
+
+                </div>
+                <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento()">Ata publicada</button>
+                <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento()">Ata não publicada</button>
             </div>
             <button class="btn btn-primary mb-3">Gerar documentação</button>
         </div>

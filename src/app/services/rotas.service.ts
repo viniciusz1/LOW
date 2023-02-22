@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -15,7 +16,9 @@ export class RotasService {
 
 
 
-  constructor(private location: Location) {
+  constructor(private location: Location, private activatedRoute: ActivatedRoute) {
+    location.subscribe(e => console.log(e))
+
     this.location.onUrlChange(e => {
       if (e == '/tela-inicial/reunioes') {
         this.titulo.emit('Reuniões');

@@ -1,3 +1,4 @@
+import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
 import { TipoDespesa } from './../models/tipoDespesa.enum';
 import { Recurso } from './../models/recurso.model';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
@@ -25,7 +26,7 @@ interface RecursoDoForm{
 })
 export class PropostaService {
   public listaRecursos:RecursoDoForm[] = [ ]
-  
+
   public formProposta = this.fb.group({
     prazoProposta: ['', [Validators.required]],
     codigoPPMProposta: ['', [Validators.required]],
@@ -35,9 +36,11 @@ export class PropostaService {
     inicioExDemandaProposta: ['', [Validators.required]],
     fimExDemandaProposta: ['', [Validators.required]],
     paybackProposta: ['', [Validators.required]],
-    responsavelProposta: { 'codigoUsuario': 6},
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 47}
+    responsavelProposta: { 'codigoUsuario': 3},
+    demandaAnalistaProposta: {'codigoDemandaAnalista': 0}
   });
+  
+  public paybackProposta: number = 0;
 
   public formRecursos = this.fb.group({
   nomeRecurso: ['', [Validators.required]],
@@ -62,7 +65,6 @@ createCentroCusto(): FormGroup {
     (this.formRecursos.controls.centrosCusto as FormArray).push(this.createCentroCusto());
   }
 
-
   arrumarFormularioParaBackend(){
     this.listaRecursos.forEach(e => {
       e.porcentagemCustoRecurso = [];
@@ -77,14 +79,19 @@ createCentroCusto(): FormGroup {
 
   }
 
-  postProposta() {
+  postProposta(codigoDemandaAnalista: string) {
+    this.formProposta.patchValue({
+      demandaAnalistaProposta: {
+        codigoDemandaAnalista: parseInt(codigoDemandaAnalista)
+      }
+    })
     this.arrumarFormularioParaBackend();
+    console.log(this.formProposta.value)
     return this.http.post<Demanda | string>(
       'http://localhost:8080/proposta',
-
       this.formProposta.value
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {}
+  constructor(private http: HttpClient, private fb: FormBuilder, private demandaAnalistaService: DemandaAnalistaService) {}
 }

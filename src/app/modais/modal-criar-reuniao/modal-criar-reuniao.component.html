@@ -29,7 +29,7 @@
           Arraste as Demandas para este campo!
         </div>
         <span *ngFor="let demanda of listaDemandasEscolhidas" style="margin-top:10px ; ">
-          <app-card-demanda pDraggable="products" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()"
+          <app-card-demanda pDraggable="products" [mostrarBotao]="false" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()"
             [dadosDemada]="demanda" [isPauta]="true" (clicouEmExcluir)="excluirDemanda(demanda)"
             [mudarTamanho]="'100%'"></app-card-demanda>
         </span>

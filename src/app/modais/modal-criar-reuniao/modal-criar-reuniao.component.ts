@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ComissaoService } from './../../services/comissao.service';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { FormBuilder } from '@angular/forms';
@@ -22,7 +23,8 @@ export class ModalCriarReuniaoComponent implements OnInit {
     private fb: FormBuilder,
     private comissaoService: ComissaoService,
     private demandaService: DemandaService,
-    private reuniaoService: ReuniaoService
+    private reuniaoService: ReuniaoService,
+    private router: Router
   ) {
 
 
@@ -44,19 +46,16 @@ export class ModalCriarReuniaoComponent implements OnInit {
   comissaoSelecionada: Comissao | undefined = undefined;
 
   onSubmit() {
-         let reuniao: Reuniao = {
-          dataReuniao: this.dataReuniao,
-          comissaoReuniao: this.comissaoSelecionada,
-          demandasReuniao: this.listaDemandasEscolhidas
-         }
+    let reuniao: Reuniao = {
+      dataReuniao: this.dataReuniao,
+      comissaoReuniao: this.comissaoSelecionada,
+      demandasReuniao: this.listaDemandasEscolhidas
+    }
 
-         this.reuniaoService.postReuniao(reuniao).subscribe(e => {
-                console.log(e)
-              })
-    console.log(this.listaDemandas)
-    console.log(this.listaDeComissoesReuniao)
-    console.log(this.listaProposta)
-    console.log(this.novaReuniaoForm.value);
+    this.reuniaoService.postReuniao(reuniao).subscribe(e => {
+      this.router.navigate(['/tela-inicial/ver-pauta/' + e.codigoReuniao])
+      this.dialogRef.close()
+    })
   }
 
   novaReuniaoForm = this.fb.group({
@@ -104,11 +103,11 @@ export class ModalCriarReuniaoComponent implements OnInit {
       });
   }
 
-  removerDaListaAdicSecundaria(){
-    if(this.data){
+  removerDaListaAdicSecundaria() {
+    if (this.data) {
       this.listaDemandasEscolhidas.push(this.data);
-      for(let i of this.listaDemandas){
-        if(i.codigoDemanda == this.data.codigoDemanda){
+      for (let i of this.listaDemandas) {
+        if (i.codigoDemanda == this.data.codigoDemanda) {
           this.listaDemandas.splice(this.listaDemandas.indexOf(i), 1);
         }
       }
@@ -117,7 +116,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
 
   atualizarDemandas() {
     this.demandaService
-      .getDemandasFiltradasStatus({status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + ""})
+      .getDemandasFiltradasStatus({ status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + "" })
       .subscribe({
         next: (demanda) => {
           this.listaDemandas = demanda

@@ -24,19 +24,20 @@ export class TelaCorridaComponent implements OnInit {
     if(!this.aparecerProposta){
       this.demandaService.postDemanda().subscribe({
           next: (response) => {
-            console.log(response)
+            this.router.navigate(['/tela-inicial'])
           },
           error: (err) => {
-            console.error(err)
+            alert("Ocorreu um erro: "+ err.status)
           }
         })
     }else{
-      this.propostaService.postProposta().subscribe({
+      if(this.dadosDemandaAnalista?.codigoDemandaAnalista)
+      this.propostaService.postProposta(this.dadosDemandaAnalista?.codigoDemandaAnalista).subscribe({
         next: (response) => {
-          console.log(response)
+          this.router.navigate(['/tela-inicial'])
         },
         error: (err) => {
-          console.error(err)
+          alert("Ocorreu um erro: "+ err.status)
         }
       })
     }
@@ -50,7 +51,8 @@ export class TelaCorridaComponent implements OnInit {
     private demandaService: DemandaService,
     private demandaAnalistaService: DemandaAnalistaService,
     private propostaService: PropostaService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+
   ) {
     this.startSpy();
     this.tipoExibicaoTela();
@@ -86,7 +88,6 @@ export class TelaCorridaComponent implements OnInit {
     this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(this.codigoDemandaRota)
     .subscribe(e => {
       this.dadosDemandaAnalista = e
-      console.log(this.dadosDemandaAnalista)
       if(this.dadosDemandaAnalista?.demandaDemandaAnalista)
       this.demandaService.demandaForm.patchValue({
         tituloDemanda: this.dadosDemandaAnalista?.demandaDemandaAnalista.tituloDemanda,
@@ -107,7 +108,6 @@ export class TelaCorridaComponent implements OnInit {
         frequenciaDeUsoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.frequenciaDeUsoSistemaDemanda,
       })
       // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
-      this.demandaService.demandaForm.disable()
     })
   }
 

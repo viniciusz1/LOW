@@ -6,37 +6,74 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
+import { Tamanho } from 'src/app/models/tamanho.enum';
 @Component({
   selector: 'app-modal-demanda-documento',
   templateUrl: './modal-demanda-documento.component.html',
-  styleUrls: ['./modal-demanda-documento.component.scss']
+  styleUrls: ['./modal-demanda-documento.component.scss'],
 })
 export class ModalDemandaDocumentoComponent implements OnInit {
-  user = "gerente"
+  user = 'gerente';
   constructor(
     @Inject(DIALOG_DATA) public data: string,
     private demandaAnalistaService: DemandaAnalistaService,
-    private demandaService: DemandaService) {
-      console.log(data)
+    private demandaService: DemandaService,
+    private dialogRef: DialogRef<ModalDemandaDocumentoComponent>
+  ) {
+    this.buscarDemandaAnalista();
   }
 
   dadosDemandaAnalista: DemandaAnalista | undefined;
 
-  enviarDecisao(decisao: number){
-    if(this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda)
-    this.demandaService.avancarStatusDemandaComDecisao(this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda, decisao).subscribe(e => console.log(e));
+  enviarDecisao(decisao: number) {
+    if (this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda)
+      this.demandaService
+        .avancarStatusDemandaComDecisao(
+          this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda,
+          decisao
+        )
+        .subscribe({
+          next: event => {
+            this.dialogRef.close()
+          },
+          error: err => {
+            console.log(err)
+          }
+        });
   }
 
-  buscarDemandaAnalista(){
-    this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(this.data).subscribe((demanda) => {
-      
-      this.dadosDemandaAnalista = demanda;
-    });
+  buscarDemandaAnalista() {
+    this.demandaAnalistaService
+      .getDemandaAnalistaByCodigoDemanda(this.data)
+      .subscribe((demanda) => {
+        if (!demanda) {
+          this.getDemanda();
+        }
+        this.dadosDemandaAnalista = demanda;
+      });
+  }
+
+  getDemanda() {
+    this.demandaService
+      .getDemandaByCodigoDemanda(parseInt(this.data))
+      .subscribe((demanda) => {
+        if (this.dadosDemandaAnalista != undefined) {
+          this.dadosDemandaAnalista.demandaDemandaAnalista = demanda;
+        } else {
+          this.dadosDemandaAnalista = {
+            codigoDemandaAnalista: '0',
+            demandaDemandaAnalista: demanda,
+          }
+        }
+      });
   }
 
   download(arquivo: Arquivo): void {
-    this.demandaService
-    .saveByteArray(arquivo.dadosArquivo, arquivo.tipoArquivo, arquivo.nomeArquivo)
+    this.demandaService.saveByteArray(
+      arquivo.dadosArquivo,
+      arquivo.tipoArquivo,
+      arquivo.nomeArquivo
+    );
   }
 
   event: any[] = [];
@@ -44,23 +81,51 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   events2: any[] = [];
 
   ngOnInit() {
-    this.buscarDemandaAnalista();
     this.events1 = [
-      { status: 'Reserva', date: '15/10/2020 10:30', icon: PrimeIcons.HOURGLASS, color: '#00579D', fontWeight: '600' },
-      { status: 'Avaliação', date: '15/10/2020 14:00', icon: PrimeIcons.ELLIPSIS_H, color: '#c9c9c9', fontWeight: '100' },
-      { status: 'Negociação', date: '15/10/2020 16:15', icon: PrimeIcons.CHART_BAR, color: '#c9c9c9', fontWeight: '100' },
-      { status: 'Execução', date: '16/10/2020 10:00', icon: PrimeIcons.EJECT, color: '#c9c9c9', weigth: '100' },
-      { status: 'Projeção', date: '16/10/2020 10:00', icon: PrimeIcons.CHART_PIE, color: '#c9c9c9', weigth: '100' },
-      { status: 'Concluído', date: '16/10/2020 10:00', icon: PrimeIcons.CHECK, color: '#c9c9c9', weigth: '100' }
+      {
+        status: 'Reserva',
+        date: '15/10/2020 10:30',
+        icon: PrimeIcons.HOURGLASS,
+        color: '#00579D',
+        fontWeight: '600',
+      },
+      {
+        status: 'Avaliação',
+        date: '15/10/2020 14:00',
+        icon: PrimeIcons.ELLIPSIS_H,
+        color: '#c9c9c9',
+        fontWeight: '100',
+      },
+      {
+        status: 'Negociação',
+        date: '15/10/2020 16:15',
+        icon: PrimeIcons.CHART_BAR,
+        color: '#c9c9c9',
+        fontWeight: '100',
+      },
+      {
+        status: 'Execução',
+        date: '16/10/2020 10:00',
+        icon: PrimeIcons.EJECT,
+        color: '#c9c9c9',
+        weigth: '100',
+      },
+      {
+        status: 'Projeção',
+        date: '16/10/2020 10:00',
+        icon: PrimeIcons.CHART_PIE,
+        color: '#c9c9c9',
+        weigth: '100',
+      },
+      {
+        status: 'Concluído',
+        date: '16/10/2020 10:00',
+        icon: PrimeIcons.CHECK,
+        color: '#c9c9c9',
+        weigth: '100',
+      },
     ];
 
-    this.events2 = [
-      "2020", "2021", "2022", "2023"
-    ];
+    this.events2 = ['2020', '2021', '2022', '2023'];
   }
-
-
-
-
-
 }

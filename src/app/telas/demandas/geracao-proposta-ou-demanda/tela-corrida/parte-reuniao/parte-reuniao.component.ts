@@ -1,3 +1,4 @@
+import { DemandaService } from 'src/app/services/demanda.service';
 import { CentroCustoService } from './../../../../../services/centro-custo.service';
 import { CentroCusto } from './../../../../../models/centro-custo.model';
 import { PropostaService } from './../../../../../services/proposta.service';
@@ -33,12 +34,15 @@ interface RecursoDoForm{
 })
 export class ParteReuniaoComponent implements OnInit {
   constructor(
-    private messageService: MessageService,
     private propostaService: PropostaService,
-    private centroCustoService: CentroCustoService
+    private centroCustoService: CentroCustoService,
+    private demandaService: DemandaService
+
   ) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
+  custosTotais: number = 0;
+  paybackProposta = this.propostaService.paybackProposta;
   centrosCusto: CentroCusto[] = [];
   formProposta = this.propostaService.formProposta;
   formRecursos = this.propostaService.formRecursos;
@@ -90,8 +94,16 @@ export class ParteReuniaoComponent implements OnInit {
   addRowRecurso() {
     if(this.formRecursos.valid){
       this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
+      this.mudarCustoTotalProjetoEPayback();
       this.formRecursos.reset()
     }
+  }
+  mudarCustoTotalProjetoEPayback(){
+    this.custosTotais = 0
+    this.listaRecursos.forEach(recurso => {
+      this.custosTotais += recurso.valorHoraRecurso * recurso.quantidadeHorasRecurso;
+    })
+    this.paybackProposta = this.custosTotais / (this.demandaService.getBeneficioReal() + this.demandaService.getBeneficioPotencial());
   }
 
   editarRecurso(index: number){

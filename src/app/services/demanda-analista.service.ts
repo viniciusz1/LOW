@@ -16,7 +16,7 @@ export class DemandaAnalistaService {
     buSolicitanteDemandaAnalista:[''],
     busBeneficiadasDemandaAnalista:[''],
     demandaDemandaAnalista: { codigoDemanda: '' },
-    analista: { codigoUsuario: 2 },
+    analista: { codigoUsuario: 3 },
     secaoDemandaAnalista: [''],
   });
   postProposta(codigoDemanda: string | undefined) {

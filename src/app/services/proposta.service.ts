@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { Proposta } from '../models/proposta.model';
-import { Validators } from 'ngx-editor';
+import { Validators } from '@angular/forms';
 
 interface RecursoDoForm{
   nomeRecurso: string,
@@ -26,15 +26,29 @@ interface RecursoDoForm{
 })
 export class PropostaService {
   public listaRecursos:RecursoDoForm[] = [ ]
+
+  public formProposta = this.fb.group({
+    prazoProposta: ['', [Validators.required]],
+    codigoPPMProposta: ['', [Validators.required]],
+    jiraProposta: ['', [Validators.required]],
+    recursosProposta: [this.listaRecursos, [Validators.required]],
+    escopoDemandaProposta: ['', [Validators.required]],
+    inicioExDemandaProposta: ['', [Validators.required]],
+    fimExDemandaProposta: ['', [Validators.required]],
+    paybackProposta: ['', [Validators.required]],
+    responsavelProposta: { 'codigoUsuario': 3},
+    demandaAnalistaProposta: {'codigoDemandaAnalista': 0}
+  });
+  
   public paybackProposta: number = 0;
 
   public formRecursos = this.fb.group({
-  nomeRecurso: [''],
-  tipoDespesaRecurso: [''],
-  perfilDespesaRecurso: [''],
-  quantidadeHorasRecurso: [''],
-  valorHoraRecurso: [''],
-  periodoExMesesRecurso: [''],
+  nomeRecurso: ['', [Validators.required]],
+  tipoDespesaRecurso: ['', [Validators.required]],
+  perfilDespesaRecurso: ['', [Validators.required]],
+  quantidadeHorasRecurso: ['', [Validators.required]],
+  valorHoraRecurso: ['', [Validators.required]],
+  periodoExMesesRecurso: ['', [Validators.required]],
   centrosCusto: this.fb.array([this.createCentroCusto()])
 });
 
@@ -50,19 +64,6 @@ createCentroCusto(): FormGroup {
   addCenterOfCost() {
     (this.formRecursos.controls.centrosCusto as FormArray).push(this.createCentroCusto());
   }
-
-  formProposta = this.fb.group({
-    prazoProposta: [''],
-    codigoPPMProposta: [''],
-    jiraProposta: [''],
-    recursosProposta: [this.listaRecursos],
-    escopoDemandaProposta: [''],
-    inicioExDemandaProposta: [''],
-    fimExDemandaProposta: [''],
-    paybackProposta: [this.paybackProposta],
-    responsavelProposta: { 'codigoUsuario': 3},
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 0}
-  });
 
   arrumarFormularioParaBackend(){
     this.listaRecursos.forEach(e => {

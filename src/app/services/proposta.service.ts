@@ -1,53 +1,58 @@
+import { DemandaAnalistaService } from './demanda-analista.service';
 import { TipoDespesa } from './../models/tipoDespesa.enum';
-import { Recurso } from './../models/recurso.model';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
-import { Proposta } from '../models/proposta.model';
-import { Validators } from 'ngx-editor';
 
-interface RecursoDoForm{
-  nomeRecurso: string,
-  tipoDespesaRecurso: TipoDespesa,
-  perfilDespesaRecurso: string,
-  quantidadeHorasRecurso: number,
-  valorHoraRecurso: number,
-  periodoExMesesRecurso: number,
-  centrosCusto?: {porcentagem: number, centroCusto: number}[]
-  porcentagemCustoRecurso: number[],
-  centroDeCustoRecurso: {codigoCentroCusto:number}[]
+interface RecursoDoForm {
+  nomeRecurso: string;
+  tipoDespesaRecurso: TipoDespesa;
+  perfilDespesaRecurso: string;
+  quantidadeHorasRecurso: number;
+  valorHoraRecurso: number;
+  periodoExMesesRecurso: number;
+  centrosCusto?: { porcentagem: number; centroCusto: number }[];
+  porcentagemCustoRecurso: number[];
+  centroDeCustoRecurso: { codigoCentroCusto: number }[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class PropostaService {
-  public listaRecursos:RecursoDoForm[] = [ ]
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private demandaAnalistaService: DemandaAnalistaService
+  ) {}
+
+  public listaRecursos: RecursoDoForm[] = [];
   public paybackProposta: number = 0;
+  private codigoDemanda = 0;
 
   public formRecursos = this.fb.group({
-  nomeRecurso: [''],
-  tipoDespesaRecurso: [''],
-  perfilDespesaRecurso: [''],
-  quantidadeHorasRecurso: [''],
-  valorHoraRecurso: [''],
-  periodoExMesesRecurso: [''],
-  centrosCusto: this.fb.array([this.createCentroCusto()])
-});
-
-createCentroCusto(): FormGroup {
-  return this.fb.group({
-    porcentagem: [''],
-    centroCusto: ['']
+    nomeRecurso: [''],
+    tipoDespesaRecurso: [''],
+    perfilDespesaRecurso: [''],
+    quantidadeHorasRecurso: [''],
+    valorHoraRecurso: [''],
+    periodoExMesesRecurso: [''],
+    centrosCusto: this.fb.array([this.createCentroCusto()]),
   });
-}
 
-
+  createCentroCusto(): FormGroup {
+    return this.fb.group({
+      porcentagem: [''],
+      centroCusto: [''],
+    });
+  }
 
   addCenterOfCost() {
-    (this.formRecursos.controls.centrosCusto as FormArray).push(this.createCentroCusto());
+    (this.formRecursos.controls.centrosCusto as FormArray).push(
+      this.createCentroCusto()
+    );
   }
 
   formProposta = this.fb.group({
@@ -59,33 +64,41 @@ createCentroCusto(): FormGroup {
     inicioExDemandaProposta: [''],
     fimExDemandaProposta: [''],
     paybackProposta: [this.paybackProposta],
-    responsavelProposta: { 'codigoUsuario': 3},
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 13}
+    responsavelProposta: { codigoUsuario: 3 },
+    demandaAnalistaProposta: { codigoDemandaAnalista: '' },
   });
 
-  arrumarFormularioParaBackend(){
-    this.listaRecursos.forEach(e => {
+  arrumarFormularioParaBackend() {
+    this.listaRecursos.forEach((e) => {
       e.porcentagemCustoRecurso = [];
       e.centroDeCustoRecurso = [];
-      if(e.centrosCusto){
-      e.centrosCusto.forEach(centro => {
-        e.porcentagemCustoRecurso.push(centro.porcentagem)
-        e.centroDeCustoRecurso.push({codigoCentroCusto: centro.centroCusto})
-        delete e.centrosCusto;
-      })}
-    })
+      if (e.centrosCusto) {
+        e.centrosCusto.forEach((centro) => {
+          e.porcentagemCustoRecurso.push(centro.porcentagem);
+          e.centroDeCustoRecurso.push({
+            codigoCentroCusto: centro.centroCusto,
+          });
+          delete e.centrosCusto;
+        });
+      }
+    });
+  }
+  getDemandaAnalistaByCodigoDemanda() {
+    return this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(
+      this.codigoDemanda.toString()
+    );
+  }
 
+  setCodigoDemanda(codigoDemanda: number) {
+    this.codigoDemanda = codigoDemanda;
   }
 
   postProposta() {
     this.arrumarFormularioParaBackend();
-    console.log(this.formProposta.value)
     return this.http.post<Demanda | string>(
       'http://localhost:8080/proposta',
 
       this.formProposta.value
     );
   }
-
-  constructor(private http: HttpClient, private fb: FormBuilder) {}
 }

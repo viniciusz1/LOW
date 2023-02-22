@@ -31,14 +31,26 @@ export class TelaCorridaComponent implements OnInit {
           }
         })
     }else{
-      this.propostaService.postProposta().subscribe({
-        next: (response) => {
-          console.log(response)
-        },
-        error: (err) => {
-          console.error(err)
-        }
+      this.propostaService.getDemandaAnalistaByCodigoDemanda().
+      subscribe((demandaAnalista) => {
+        if(demandaAnalista.codigoDemandaAnalista)
+        this.propostaService.formProposta.patchValue({
+          demandaAnalistaProposta: {
+            codigoDemandaAnalista: demandaAnalista.codigoDemandaAnalista,
+          },
+        });
+
+        this.propostaService.postProposta().subscribe({
+          next: (response) => {
+            console.log(response)
+          },
+          error: (err) => {
+            console.error(err)
+          }
+        })
       })
+
+
     }
   }
 
@@ -75,6 +87,7 @@ export class TelaCorridaComponent implements OnInit {
       this.demandaService.resetDemandaForm()
     } else {
       this.aparecerProposta = true;
+      this.propostaService.setCodigoDemanda(this.codigoDemandaRota)
       this.demandaService.resetDemandaForm()
       this.getDemandaAnalistaByCodigoDemanda()
     }
@@ -86,7 +99,6 @@ export class TelaCorridaComponent implements OnInit {
     this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(this.codigoDemandaRota)
     .subscribe(e => {
       this.dadosDemandaAnalista = e
-      console.log(this.dadosDemandaAnalista)
       if(this.dadosDemandaAnalista?.demandaDemandaAnalista)
       this.demandaService.demandaForm.patchValue({
         tituloDemanda: this.dadosDemandaAnalista?.demandaDemandaAnalista.tituloDemanda,

@@ -124,6 +124,7 @@
               <app-list-demanda *ngFor="
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
+                    | slice : 4
                 " (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)" [dadosDemada]="demanda" class="mb-2">
               </app-list-demanda>

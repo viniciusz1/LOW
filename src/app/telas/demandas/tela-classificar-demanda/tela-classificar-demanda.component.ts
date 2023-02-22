@@ -8,7 +8,7 @@ import { DemandaAnalistaService } from './../../../services/demanda-analista.ser
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -52,7 +52,8 @@ export class TelaClassificarDemandaComponent implements OnInit {
     private demandaService: DemandaService,
     private businessUnitService: BusinessUnitService,
     private secaoService: SecaoService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
 
     this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota).subscribe({
@@ -87,12 +88,12 @@ export class TelaClassificarDemandaComponent implements OnInit {
 
   onSubmitClassificacaoDemanda() {
     this.demandaAnalistaService.postProposta(this.demanda?.codigoDemanda).subscribe({
-      next(value) {
-        console.log(value);
+      next: e => {
+        this.router.navigate(['/tela-inicial'])
       },
-      error(err) {
-        console.log(err);
-      },
+      error: err => {
+        alert(err)
+      }
     });
   }
 
@@ -104,5 +105,5 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

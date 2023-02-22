@@ -17,7 +17,8 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   constructor(
     @Inject(DIALOG_DATA) public data: string,
     private demandaAnalistaService: DemandaAnalistaService,
-    private demandaService: DemandaService
+    private demandaService: DemandaService,
+    private dialogRef: DialogRef<ModalDemandaDocumentoComponent>
   ) {
     this.buscarDemandaAnalista();
   }
@@ -31,7 +32,14 @@ export class ModalDemandaDocumentoComponent implements OnInit {
           this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda,
           decisao
         )
-        .subscribe((e) => console.log(e));
+        .subscribe({
+          next: event => {
+            this.dialogRef.close()
+          },
+          error: err => {
+            console.log(err)
+          }
+        });
   }
 
   buscarDemandaAnalista() {
@@ -49,13 +57,14 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     this.demandaService
       .getDemandaByCodigoDemanda(parseInt(this.data))
       .subscribe((demanda) => {
-        if (this.dadosDemandaAnalista != undefined){
+        if (this.dadosDemandaAnalista != undefined) {
           this.dadosDemandaAnalista.demandaDemandaAnalista = demanda;
         } else {
           this.dadosDemandaAnalista = {
             codigoDemandaAnalista: '0',
             demandaDemandaAnalista: demanda,
-          }}
+          }
+        }
       });
   }
 

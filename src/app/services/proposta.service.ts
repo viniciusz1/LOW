@@ -1,4 +1,4 @@
-import { DemandaAnalistaService } from './demanda-analista.service';
+import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
 import { TipoDespesa } from './../models/tipoDespesa.enum';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
@@ -22,11 +22,6 @@ interface RecursoDoForm {
   providedIn: 'root',
 })
 export class PropostaService {
-  constructor(
-    private http: HttpClient,
-    private fb: FormBuilder,
-    private demandaAnalistaService: DemandaAnalistaService
-  ) {}
 
   public listaRecursos: RecursoDoForm[] = [];
   public paybackProposta: number = 0;
@@ -93,12 +88,18 @@ export class PropostaService {
     this.codigoDemanda = codigoDemanda;
   }
 
-  postProposta() {
+  postProposta(codigoDemandaAnalista: string) {
+    this.formProposta.patchValue({
+      demandaAnalistaProposta: {
+        codigoDemandaAnalista: codigoDemandaAnalista
+      }
+    })
     this.arrumarFormularioParaBackend();
     return this.http.post<Demanda | string>(
       'http://localhost:8080/proposta',
-
       this.formProposta.value
     );
   }
+
+  constructor(private http: HttpClient, private fb: FormBuilder, private demandaAnalistaService: DemandaAnalistaService) {}
 }

@@ -34,6 +34,7 @@ export class CardDemandaComponent implements OnInit {
   @Input() exibirBotaoParecerComissao: boolean = false;
   @Input() exibirBotaoParecerDg: boolean = false;
   @Input() tipoDeAta: string = '';
+  @Input() mostrarBotao = true
 
   textoExibidoEmBotaoDependendoRota:
     | { rota: string; texto: string }
@@ -148,7 +149,15 @@ export class CardDemandaComponent implements OnInit {
         texto: 'Avaliar Demanda',
       };
       return true;
-    } else if (
+    } else if (this.exibirBotaoParecerComissao) {
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: '',
+        texto: 'Parecer Comissao',
+      };
+      return true;
+    } 
+    
+    else if (
       (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
         this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE) &&
       this.nivelAcesso == NivelAcesso.Analista
@@ -185,12 +194,6 @@ export class CardDemandaComponent implements OnInit {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '',
         texto: 'Parecer da DG',
-      };
-      return true;
-    } else if (this.exibirBotaoParecerComissao) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
-        texto: 'Parecer Comissao',
       };
       return true;
     } else if (

@@ -122,7 +122,7 @@
       </label>
       <span>
         <button
-          *ngIf="textoExibidoEmBotaoDependendoRota && exibicaoBotoes()"
+          *ngIf="textoExibidoEmBotaoDependendoRota && exibicaoBotoes() && mostrarBotao"
           class="btn btn-primary btn-sm"
           style="width: 147px"
           (click)="direcionarUsuario()"

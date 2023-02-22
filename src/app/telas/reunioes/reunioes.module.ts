@@ -1,3 +1,4 @@
+import { PipesModule } from 'src/app/pipes/pipes.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { SharedModule } from './../../shared/shared.module';
 import { RouterModule } from '@angular/router';
@@ -31,7 +32,8 @@ import { JoyrideModule } from 'ngx-joyride';
     CascadeSelectModule,
     SharedModule,
     DropdownModule,
-    JoyrideModule.forRoot()
+    JoyrideModule.forRoot(),
+    PipesModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

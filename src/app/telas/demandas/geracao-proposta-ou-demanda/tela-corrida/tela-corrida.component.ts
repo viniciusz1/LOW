@@ -24,30 +24,21 @@ export class TelaCorridaComponent implements OnInit {
     if(!this.aparecerProposta){
       this.demandaService.postDemanda().subscribe({
           next: (response) => {
-            console.log(response)
+            this.router.navigate(['/tela-inicial'])
           },
           error: (err) => {
-            console.error(err)
+            alert("Ocorreu um erro: "+ err.status)
           }
         })
     }else{
-      this.propostaService.getDemandaAnalistaByCodigoDemanda().
-      subscribe((demandaAnalista) => {
-        if(demandaAnalista.codigoDemandaAnalista)
-        this.propostaService.formProposta.patchValue({
-          demandaAnalistaProposta: {
-            codigoDemandaAnalista: demandaAnalista.codigoDemandaAnalista,
-          },
-        });
-
-        this.propostaService.postProposta().subscribe({
-          next: (response) => {
-            console.log(response)
-          },
-          error: (err) => {
-            console.error(err)
-          }
-        })
+      if(this.dadosDemandaAnalista?.codigoDemandaAnalista)
+      this.propostaService.postProposta(this.dadosDemandaAnalista?.codigoDemandaAnalista).subscribe({
+        next: (response) => {
+          this.router.navigate(['/tela-inicial'])
+        },
+        error: (err) => {
+          alert("Ocorreu um erro: "+ err.status)
+        }
       })
 
 
@@ -62,7 +53,8 @@ export class TelaCorridaComponent implements OnInit {
     private demandaService: DemandaService,
     private demandaAnalistaService: DemandaAnalistaService,
     private propostaService: PropostaService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+
   ) {
     this.startSpy();
     this.tipoExibicaoTela();

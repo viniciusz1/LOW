@@ -1,3 +1,4 @@
+import { OrdenarReuniaoPipe } from './ordenar-reunioes.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FiltrarDemandaStatusPipe } from './filtrar-demanda-status.pipe';
@@ -6,13 +7,16 @@ import { FiltrarDemandaStatusPipe } from './filtrar-demanda-status.pipe';
 
 @NgModule({
   declarations: [
-    FiltrarDemandaStatusPipe
+    FiltrarDemandaStatusPipe,
+    OrdenarReuniaoPipe
   ],
   imports: [
     CommonModule
   ],
   exports:[
-    FiltrarDemandaStatusPipe
+    FiltrarDemandaStatusPipe,
+    OrdenarReuniaoPipe
+    
   ]
 })
 export class PipesModule { }

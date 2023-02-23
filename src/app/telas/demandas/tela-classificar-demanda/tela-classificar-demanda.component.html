@@ -101,7 +101,7 @@
           </li>
         </ul>
 
-        <p><b>Frequência de uso do sistema:</b>{{demanda?.frequenciaDeUsoSistemaDemanda}}</p>
+        <p><b>Frequência de uso do sistema:</b>{{demanda?.frequenciaDeUsoDemanda}}</p>
         <h4><b>DOCUMENTOS:</b>
           <a *ngFor="let arquivo of demanda?.arquivosDemanda" [href]="arquivo.dadosArquivo" [download]="arquivo.dadosArquivo">
             {{ arquivo.nomeArquivo }}

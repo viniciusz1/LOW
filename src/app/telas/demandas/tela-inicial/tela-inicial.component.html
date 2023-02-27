@@ -27,9 +27,8 @@
     <div joyrideStep="dois" [title]="'Filtrar Demandas'" [stepContent]="customContent"
       [stepContentParams]="{ texto: textoTutorial[1] }" class="nav p-1 justify-content-center">
       <div *ngIf="showPesquisaEBotaoFiltro" class="d-flex">
-        <button class="btn btn-primary me-3" *ngIf="isFiltrado" style="width: 225px">
-          <i class="bi bi-filetype-csv me-3" style="font-size: 17px"></i>
-          Exportar Para Excel
+        <button (click)="exportExcel(pesquisaDemanda)" class="btn btn-success me-3" *ngIf="isFiltrado" >
+          <i class="bi bi-filetype-csv " style="font-size: 17px"></i>
         </button>
         <div>
           <p-dropdown class="drop" (onChange)="isFiltrado = !isFiltrado" [options]="opcoesOrdenacao"
@@ -49,7 +48,8 @@
       </div>
 
       <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (filtroAcionado)="pesquisarDemandas($event)"
-        (closeFiltro)="mudarStatusFiltro()" class="me-3">
+        (closeFiltro)="mudarStatusFiltro()" class="me-3"
+        (exportarExcel)="exportExcel($event)">
       </app-filtro-demanda>
     </div>
 

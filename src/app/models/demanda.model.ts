@@ -12,7 +12,7 @@ export interface Demanda {
     statusDemanda?: StatusDemanda,
     situacaoAtualDemanda?: string,
     objetivoDemanda?: string,
-    centroDeCustoDemanda?: CentroCusto[],
+    centroCustos?: CentroCusto[],
     beneficioRealDemanda?: Beneficio,
     beneficioPotencialDemanda?: Beneficio,
     beneficioQualitativoDemanda?: string,

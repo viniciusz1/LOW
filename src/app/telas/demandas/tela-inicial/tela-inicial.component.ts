@@ -1,3 +1,4 @@
+import { DemandaExcel } from './../../../models/demandaExcel.model';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
 import { fadeAnimation } from './../../../shared/app.animation';
@@ -19,6 +20,8 @@ import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -158,6 +161,100 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
+  exportExcel(
+    event:
+      | {
+          solicitante: string;
+          codigoDemanda: string;
+          status: string;
+          tamanho: string;
+          tituloDemanda: string;
+          analista: string;
+          departamento: string;
+        }
+      | string
+  ) {
+    this.demandasService
+      .getTodasAsDemandasFiltradas(
+        !(typeof event == 'string')
+          ? event
+          : {
+              analista: '',
+              codigoDemanda: '',
+              departamento: '',
+              solicitante: '',
+              status: '',
+              tamanho: '',
+              tituloDemanda: event,
+            }
+      )
+      .subscribe((listaDemandas: Demanda[]) => {
+        let listaExport: DemandaExcel[] = [];
+
+        //Converte a demanda em um formato possível de exportar para excel
+        for (let i = 0; i < this.listaDemandas.length; i++) {
+          listaExport.push({
+            codigoDemanda: listaDemandas[i].codigoDemanda,
+            tituloDemanda: listaDemandas[i].tituloDemanda,
+            nomeSolicitante: listaDemandas[i].solicitanteDemanda?.nomeUsuario,
+            situacaoAtualDemanda: listaDemandas[i].situacaoAtualDemanda,
+            objetivoDemanda: listaDemandas[i].objetivoDemanda,
+            codigoBeneficioReal:
+              listaDemandas[i].beneficioRealDemanda?.codigoBeneficio,
+            moedaBeneficioReal:
+              listaDemandas[i].beneficioRealDemanda?.moedaBeneficio,
+            valorBeneficioReal:
+              listaDemandas[i].beneficioRealDemanda?.valorBeneficio,
+            codigoBeneficioPotencial:
+              listaDemandas[i].beneficioPotencialDemanda?.codigoBeneficio,
+            moedaBeneficioPotencial:
+              listaDemandas[i].beneficioPotencialDemanda?.moedaBeneficio,
+            valorBeneficioPotencial:
+              listaDemandas[i].beneficioPotencialDemanda?.valorBeneficio,
+            beneficioQualitativoDemanda:
+              listaDemandas[i].beneficioQualitativoDemanda,
+            frequenciaDeUsoSistemaDemanda:
+              listaDemandas[i].frequenciaDeUsoSistemaDemanda,
+            statusDemanda: listaDemandas[i].statusDemanda,
+            codigoCentroCusto: listaDemandas[i].centroCustos
+              ?.map((cc) => cc.codigoCentroCusto)
+              .join(', '),
+            nomeCentroCusto: listaDemandas[i].centroCustos
+              ?.map((cc) => cc.nome)
+              .join(', '),
+          });
+        }
+
+        //Importa o xlsx e exporta para excel
+        import('xlsx').then((xlsx) => {
+          const worksheet = xlsx.utils.json_to_sheet(listaExport);
+          const workbook = {
+            Sheets: { data: worksheet },
+            SheetNames: ['data'],
+          };
+          const excelBuffer: any = xlsx.write(workbook, {
+            bookType: 'xlsx',
+            type: 'array',
+          });
+          this.saveAsExcelFile(excelBuffer, 'products');
+        });
+      });
+  }
+
+  //Salva o arquivo excel
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE,
+    });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+    );
+  }
+
   irParaChat() {
     this.cabecalhoMensagemDeConfirmacao = 'Iniciar conversa';
     this.confirmationService.confirm({
@@ -178,15 +275,20 @@ export class TelaInicialComponent implements OnInit {
   }
 
   changeRight(index: number) {
-    let tamanhoDaListaCompleta = (document.getElementById(`filaCompleta${index}`) as HTMLElement).offsetWidth;
+    let tamanhoDaListaCompleta = (
+      document.getElementById(`filaCompleta${index}`) as HTMLElement
+    ).offsetWidth;
 
-    if (this.positionListCards[index] > (-tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth)) {
-      this.positionListCards[index] -= 397*2;
+    if (
+      this.positionListCards[index] >
+      -tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth
+    ) {
+      this.positionListCards[index] -= 397 * 2;
     }
   }
   changeLeft(index: number) {
     if (this.positionListCards[index] < 0) {
-      this.positionListCards[index] += 397*2;
+      this.positionListCards[index] += 397 * 2;
     }
   }
 
@@ -218,8 +320,7 @@ export class TelaInicialComponent implements OnInit {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-    })
-
+    });
   }
 
   openModalReprovacaoDemanda() {
@@ -231,15 +332,16 @@ export class TelaInicialComponent implements OnInit {
   }
 
   openModalDemandaDocumento(event: string) {
-    this.matDialog.open(ModalDemandaDocumentoComponent, {
-      maxWidth: '70vw',
-      minWidth: '50vw',
-      data: event,
-    })
-    .afterClosed().subscribe(() => {
-      this.carregarDemandasIniciais();
-
-    })
+    this.matDialog
+      .open(ModalDemandaDocumentoComponent, {
+        maxWidth: '70vw',
+        minWidth: '50vw',
+        data: event,
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.carregarDemandasIniciais();
+      });
   }
   openModalHistorico() {
     this.matDialog.open(ModalHistoricoComponent, {
@@ -419,9 +521,7 @@ export class TelaInicialComponent implements OnInit {
       blockScroll: false,
       message:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-      accept: () => {
-
-      },
+      accept: () => {},
     });
   }
 

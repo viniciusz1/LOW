@@ -40,6 +40,7 @@
     "sockjs-client": "^1.6.1",
     "tslib": "^2.3.0",
     "web-component-essentials": "^0.0.4",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

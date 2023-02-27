@@ -26,6 +26,7 @@ interface RecursoDoForm{
 })
 export class PropostaService {
   public listaRecursos:RecursoDoForm[] = [ ]
+  
 
   public formProposta = this.fb.group({
     prazoProposta: ['', [Validators.required]],
@@ -53,9 +54,11 @@ export class PropostaService {
 });
 
 createCentroCusto(): FormGroup {
+  console.log("entrouu");
+  
   return this.fb.group({
     porcentagem: [''],
-    centroCusto: ['']
+    centroCusto: ['']    
   });
 }
 

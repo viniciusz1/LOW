@@ -191,7 +191,7 @@
       <button
         style="width: 45px"
         class="btn btn-outline-primary"
-        [disabled]="!formRecursos.controls.centrosCusto.valid"
+        [disabled]="!formRecursos.controls.centrosCusto.valid || !resultado"
         (click)="adicionarCentroCusto()"
       >
         <i class="bi bi-plus-lg" style="font-size: 17px"></i>

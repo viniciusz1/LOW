@@ -1,3 +1,4 @@
+import { Filtro } from './../../../models/filtro.model';
 import { DemandaExcel } from './../../../models/demandaExcel.model';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
@@ -69,17 +70,7 @@ export class TelaInicialComponent implements OnInit {
   //true = card
   tipoExibicaoDemanda = true;
   cabecalhoMensagemDeConfirmacao = 'Avançar status';
-  isCollapsed: boolean[] = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-    true,
-  ];
+  isCollapsed: boolean[] = [    true,    true,    true,    true,    true,    true,    true,    true,    true  ];
   isFiltrado = false;
   showFiltro = false;
   showPesquisaEBotaoFiltro = true;
@@ -111,20 +102,11 @@ export class TelaInicialComponent implements OnInit {
   //Pesquisa demandas por status, ou por todos os campos, no caso o filtro de muitas informações
   pesquisarDemandas(
     event:
-      | {
-          solicitante: string;
-          codigoDemanda: string;
-          status: string;
-          tamanho: string;
-          tituloDemanda: string;
-          analista: string;
-          departamento: string;
-        }
+      Filtro
       | string
   ) {
-    if (typeof event === 'string') {
       this.demandasService
-        .getDemandasFiltradas({
+        .getDemandasFiltradas((typeof event == 'string') ?  {
           solicitante: '',
           codigoDemanda: '',
           status: event,
@@ -132,7 +114,7 @@ export class TelaInicialComponent implements OnInit {
           tituloDemanda: '',
           analista: '',
           departamento: '',
-        })
+        } : event)
         .subscribe((listaDemandas: Demanda[]) => {
           if (listaDemandas.length > 0) {
             this.listaDemandas = listaDemandas;
@@ -144,21 +126,11 @@ export class TelaInicialComponent implements OnInit {
             this.nenhumResultadoEncontrado = true;
           }
         });
-    } else {
-      this.demandasService
-        .getDemandasFiltradas(event)
-        .subscribe((listaDemandas: Demanda[]) => {
-          if (listaDemandas.length > 0) {
-            this.listaDemandas = listaDemandas;
-            this.isFiltrado = true;
-            this.nenhumResultadoEncontrado = false;
-          } else {
-            this.isFiltrado = true;
-            this.listaDemandas = [];
-            this.nenhumResultadoEncontrado = true;
-          }
-        });
-    }
+
+  }
+
+  paginate(event: any){
+
   }
 
   exportExcel(
@@ -214,7 +186,7 @@ export class TelaInicialComponent implements OnInit {
             beneficioQualitativoDemanda:
               listaDemandas[i].beneficioQualitativoDemanda,
             frequenciaDeUsoSistemaDemanda:
-              listaDemandas[i].frequenciaDeUsoSistemaDemanda,
+              listaDemandas[i].frequenciaDeUsoDemanda,
             statusDemanda: listaDemandas[i].statusDemanda,
             codigoCentroCusto: listaDemandas[i].centroCustos
               ?.map((cc) => cc.codigoCentroCusto)
@@ -396,6 +368,57 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+
+  //Verifica o status da demanda, adiciona o título e o status na lista de títulos
+
+
+  mudarStatusFiltro() {
+    this.showFiltro = !this.showFiltro;
+    if (!this.showFiltro) {
+      setTimeout(() => {
+        this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro;
+      }, 200);
+    } else {
+      this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro;
+    }
+  }
+
+  carregarDemandasIniciais() {
+    this.listaDemandas = [];
+    this.listaTituloNaoFiltrado = [];
+    this.demandasService.getDemandasTelaInicial().subscribe({
+      next: (e) => {
+        e.forEach((demandas) => {
+          if (demandas.length > 0) {
+            this.listaDemandas.push(...demandas);
+            this.isFiltrado = false;
+          }
+        });
+        this.exibirFilasDeStatus();
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  modalMotivoReprovacao() {
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      key: 'motivoReprovacao',
+      header: 'Motivo da Reprovação',
+      blockScroll: false,
+      message:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
+      accept: () => {},
+    });
+  }
+
+  ngOnInit(): void {
+    // this.listaDemandas = listaDemandas
+    this.carregarDemandasIniciais();
+  }
+
   exibirFilasDeStatus() {
     if (
       this.listaDemandas.some(
@@ -481,52 +504,5 @@ export class TelaInicialComponent implements OnInit {
     if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'DONE')) {
       this.listaTituloNaoFiltrado.push({ status: 'DONE', titulo: 'Done' });
     }
-  }
-
-  mudarStatusFiltro() {
-    this.showFiltro = !this.showFiltro;
-    if (!this.showFiltro) {
-      setTimeout(() => {
-        this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro;
-      }, 200);
-    } else {
-      this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro;
-    }
-  }
-
-  carregarDemandasIniciais() {
-    this.listaDemandas = [];
-    this.listaTituloNaoFiltrado = [];
-    this.demandasService.getDemandasTelaInicial().subscribe({
-      next: (e) => {
-        e.forEach((demandas) => {
-          if (demandas.length > 0) {
-            this.listaDemandas.push(...demandas);
-            this.isFiltrado = false;
-          }
-        });
-        this.exibirFilasDeStatus();
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-
-  modalMotivoReprovacao() {
-    this.confirmationService.confirm({
-      dismissableMask: true,
-      key: 'motivoReprovacao',
-      header: 'Motivo da Reprovação',
-      blockScroll: false,
-      message:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-      accept: () => {},
-    });
-  }
-
-  ngOnInit(): void {
-    // this.listaDemandas = listaDemandas
-    this.carregarDemandasIniciais();
   }
 }

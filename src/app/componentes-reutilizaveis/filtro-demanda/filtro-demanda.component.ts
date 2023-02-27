@@ -16,6 +16,11 @@ export class FiltroDemandaComponent implements OnInit {
   // tamanho: any[] = [];
   valorTamanho: any;
   valorStatus: any;
+
+  atualizarFiltro(){
+
+  }
+
   constructor() {
     this.tamanho = [
       {tamanho: "Muito Pequeno"},

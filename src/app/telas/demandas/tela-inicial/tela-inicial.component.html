@@ -240,7 +240,7 @@
   </div>
 
   <div *ngIf="isFiltrado && nenhumResultadoEncontrado == false" class="d-flex justify-content-center mt-3 mb-4">
-    <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"></p-paginator>
+    <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10" (onPageChange)="paginate($event)"></p-paginator>
   </div>
   <div *ngIf="nenhumResultadoEncontrado == true" class="d-flex justify-content-center mt-3 mb-4">
     <div style="display: grid; align-items: center; justify-content: center;">

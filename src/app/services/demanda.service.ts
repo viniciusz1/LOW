@@ -1,3 +1,4 @@
+import { Filtro } from './../models/filtro.model';
 import { FormBuilder, NumberValueAccessor } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -30,6 +31,8 @@ export class DemandaService {
       codigoUsuario: 2,
     },
   });
+
+  public filtros: Filtro | undefined
 
   resetDemandaForm() {
     this.demandaForm.reset();
@@ -65,29 +68,13 @@ export class DemandaService {
     return 0;
   }
 
-  getDemandasFiltradas(filtros: {
-    solicitante: string;
-    codigoDemanda: string;
-    status: string;
-    tamanho: string;
-    tituloDemanda: string;
-    analista: string;
-    departamento: string;
-  }) {
+  getDemandasFiltradas(filtros: Filtro) {
     return this.http.get<Demanda[]>(
       `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}&analista=${filtros.analista}&departamento=${filtros.departamento}`
     );
   }
 
-  getTodasAsDemandasFiltradas(filtros: {
-    solicitante: string;
-    codigoDemanda: string;
-    status: string;
-    tamanho: string;
-    tituloDemanda: string;
-    analista: string;
-    departamento: string;
-  }){
+  getTodasAsDemandasFiltradas(filtros: Filtro){
     return this.http.get<Demanda[]>(
       `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}&analista=${filtros.analista}&departamento=${filtros.departamento}&page=0&size=1000`
     );

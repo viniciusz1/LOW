@@ -50,7 +50,7 @@
                   <span class="p-float-label me-2">
                     <button (click)="atualizarFiltro({solicitante: solicitante.value,codigoDemanda: codigo.value,status: status.value, tamanho: tamanho.value, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value})" class="btn btn-primary"><i class="bi bi-search"></i></button>
                 </span>
-                <span class="p-float-label me-2">
+                <span class="p-float-label me-2" *ngIf="mostrarExel">
                   <button (click)="exportarExcel.emit({solicitante: solicitante.value,codigoDemanda: codigo.value,status: status.value, tamanho: tamanho.value, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value})" class="btn btn-success"><i class="bi bi-filetype-csv " style="font-size: 17px"></i></button>
               </span>
                 </div>

@@ -91,10 +91,7 @@ export class DemandaService {
     } else if (pesquisaEspecial?.pesquisaCampo) {
       this.link = `http://localhost:8080/demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=`
     }else{
-      this.link = `http://localhost:8080/demanda/filtro?solicitante=${this.filtros?.solicitante}
-      &codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}
-      &tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}
-      &analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}`
+      this.link = `http://localhost:8080/demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}`
     }   
     return this.http.get<Demanda[]>(
       this.link
@@ -102,8 +99,11 @@ export class DemandaService {
   }
 
   getTodasAsDemandasFiltradas() {
+    let linkParaTodasDemandas = this.link
+    linkParaTodasDemandas += '&size=2000'
+    console.log(linkParaTodasDemandas)
     return this.http.get<Demanda[]>(
-      `http://localhost:8080/demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}&page=0&size=1000`
+      linkParaTodasDemandas
     );
   }
 

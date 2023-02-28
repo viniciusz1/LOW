@@ -18,11 +18,11 @@ export class FiltroDemandaComponent implements OnInit {
   // tamanho: any[] = [];
   valorTamanho: any;
   valorStatus: any;
-
+  mostrarExel = false
   atualizarFiltro(dados: Filtro){
     this.demandaService.setFiltroData = dados
     this.filtroAcionado.emit()
-
+    this.mostrarExel = true
   }
 
   constructor(private demandaService: DemandaService) {
@@ -44,5 +44,6 @@ export class FiltroDemandaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.mostrarExel = false
   }
 }

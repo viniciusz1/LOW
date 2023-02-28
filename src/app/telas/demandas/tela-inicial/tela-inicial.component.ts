@@ -91,7 +91,7 @@ export class TelaInicialComponent implements OnInit {
   mudouCampodePesquisa() {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
-  //Pesquisa demandas por status, ou por todos os campos, no caso o filtro de muitas informações
+  //Pesquisa demandas por status, pelo campo de pesquisa pequeno, ou por todos os campos, no caso do filtro especializado
   pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined ) {
       this.demandasService
         .getDemandasFiltradas(pesquisaEspecial)
@@ -133,7 +133,7 @@ export class TelaInicialComponent implements OnInit {
         let listaExport: DemandaExcel[] = [];
 
         //Converte a demanda em um formato possível de exportar para excel
-        for (let i = 0; i < this.listaDemandas.length; i++) {
+        for (let i = 0; i < listaDemandas.length; i++) {
           listaExport.push({
             codigoDemanda: listaDemandas[i].codigoDemanda,
             tituloDemanda: listaDemandas[i].tituloDemanda,

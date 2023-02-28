@@ -70,11 +70,7 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
             component: TelaReuniaoComponent
           },
           {
-            path: 'nova-pauta',
-            component: TelaReuniaoComponent
-          },
-          {
-            path: 'ver-pauta/:codigoReuniao',
+            path: 'ver-reuniao/:codigoReuniao',
             component: TelaVerPauta
           },
           {

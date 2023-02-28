@@ -65,12 +65,39 @@ export class ParteDemandaComponent implements OnInit {
      'Muito Grande'
   ];
   opcoesDeMoeda = [{ name: 'BRL' }, { name: 'EUR' }, { name: 'DOL' }];
-
+  
   ngOnInit(): void {
     this.atualizarCentrosCusto();
   }
   uploadDocumentos(event : any){
     this.demandaService.arquivos = event['files'] as File[];
   }
+
+ 
+listaCentrodeCusto : number[] = [];
+resultado: boolean = true;
+  
+adicionarCentroCusto(){
+    let porcentagemElement: HTMLInputElement = document.getElementById("porcentagemLista") as HTMLInputElement;
+    let porcentagem: string = porcentagemElement.value;
+
+    //Lógica para verificar quando fecha em 100%
+
+    let soma: number = this.listaCentrodeCusto.reduce((total, numero) => total + numero, 0);
+    let total: number = soma + parseInt(porcentagem);
+
+    if(total < 100){
+      this.listaCentrodeCusto.push(parseInt(porcentagem));
+      this.resultado = true;
+    } else if(total == 100){
+      this.listaCentrodeCusto.push(parseInt(porcentagem));
+      alert("Os Centros de Custo fecharam em 100%")
+      this.resultado = false;
+    } else if(total > 100){
+      alert("Este valor vai passar de 100%, escolha um menor")
+      this.resultado = true;
+    }
+
+}
 
 }

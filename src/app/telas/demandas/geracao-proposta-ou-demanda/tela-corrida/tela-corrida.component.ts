@@ -40,6 +40,8 @@ export class TelaCorridaComponent implements OnInit {
           alert("Ocorreu um erro: "+ err.status)
         }
       })
+
+
     }
   }
 
@@ -77,6 +79,7 @@ export class TelaCorridaComponent implements OnInit {
       this.demandaService.resetDemandaForm()
     } else {
       this.aparecerProposta = true;
+      this.propostaService.setCodigoDemanda(this.codigoDemandaRota)
       this.demandaService.resetDemandaForm()
       this.getDemandaAnalistaByCodigoDemanda()
     }
@@ -105,8 +108,9 @@ export class TelaCorridaComponent implements OnInit {
           valorBeneficio: this.dadosDemandaAnalista?.demandaDemandaAnalista.beneficioRealDemanda?.valorBeneficio.toString()
         },
         beneficioQualitativoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.beneficioQualitativoDemanda,
-        frequenciaDeUsoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.frequenciaDeUsoSistemaDemanda,
+        frequenciaDeUsoDemanda: this.dadosDemandaAnalista.demandaDemandaAnalista.frequenciaDeUsoDemanda,
       })
+      console.log(e)
       // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
     })
   }

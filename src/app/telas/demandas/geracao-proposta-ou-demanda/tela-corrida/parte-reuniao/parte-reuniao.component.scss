@@ -1,10 +1,10 @@
-::ng-deep .p-inputtext{
+:host ::ng-deep .p-inputtext{
     width:100%
 }
-::ng-deep .p-inputnumber	{
+:host ::ng-deep .p-inputnumber	{
       width: 100%;
 }
-::ng-deep .p-dropdown{
+:host ::ng-deep .p-dropdown{
     width:100%
 }
 

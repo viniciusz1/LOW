@@ -27,9 +27,8 @@
     <div joyrideStep="dois" [title]="'Filtrar Demandas'" [stepContent]="customContent"
       [stepContentParams]="{ texto: textoTutorial[1] }" class="nav p-1 justify-content-center">
       <div *ngIf="showPesquisaEBotaoFiltro" class="d-flex">
-        <button class="btn btn-primary me-3" *ngIf="isFiltrado" style="width: 225px">
-          <i class="bi bi-filetype-csv me-3" style="font-size: 17px"></i>
-          Exportar Para Excel
+        <button (click)="exportExcel()" class="btn btn-success me-3" *ngIf="isFiltrado">
+          <i class="bi bi-filetype-csv " style="font-size: 17px"></i>
         </button>
         <div>
           <p-dropdown class="drop" (onChange)="isFiltrado = !isFiltrado" [options]="opcoesOrdenacao"
@@ -48,26 +47,17 @@
         </button>
       </div>
 
-      <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (filtroAcionado)="pesquisarDemandas($event)"
-        (closeFiltro)="mudarStatusFiltro()" class="me-3">
+      <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (filtroAcionado)="pesquisarDemandas(undefined)"
+        (closeFiltro)="mudarStatusFiltro()" class="me-3" (exportarExcel)="exportExcel()">
       </app-filtro-demanda>
     </div>
 
     <!-- Trocar exibição de lista para card e vice-versa -->
-    <div
-      *ngIf="!tipoRascunho"
-      [ngClass]="
+    <div *ngIf="!tipoRascunho" [ngClass]="
         isFiltrado ? 'justify-content-between' : 'justify-content-end container'
-      "
-      style="overflow: auto"
-      class="my-3 d-flex w-100"
-    >
-      <i
-        *ngIf="isFiltrado"
-        (click)="carregarDemandasIniciais()"
-        class="bi bi-arrow-left"
-        style="font-size: 25px; cursor: pointer"
-      ></i>
+      " style="overflow: auto" class="my-3 d-flex w-100">
+      <i *ngIf="isFiltrado" (click)="carregarDemandasIniciais()" class="bi bi-arrow-left"
+        style="font-size: 25px; cursor: pointer"></i>
       <div class="d-flex">
         <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
           [stepContentParams]="{ texto: textoTutorial[2] }" [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
@@ -83,7 +73,7 @@
 
   <!-- sidebar -->
   <app-sidebar-demanda [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()"
-    (clicouEmUmStatus)="pesquisarDemandas($event)" style="
+    (clicouEmUmStatus)="pesquisarDemandas({status: $event, pesquisaCampo: undefined})" style="
       position: fixed;
       z-index: 2;
       transition: left 0.3s ease 0s;
@@ -100,11 +90,8 @@
             <h5>{{ linha.titulo }}</h5>
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
-          <div
-            class="me-3"
-            style="align-self: flex-end; cursor: pointer"
-            (click)="pesquisarDemandas(linha.status)"
-          >
+          <div class="me-3" style="align-self: flex-end; cursor: pointer"
+            (click)="pesquisarDemandas({status:linha.status,pesquisaCampo: undefined})">
             Ver mais
           </div>
         </div>
@@ -116,7 +103,8 @@
                 | slice : 0 : 4
             " [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"
             (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-            (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (abrirModal)="modalMotivoReprovacao()" class="mb-2">
+            (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (abrirModal)="modalMotivoReprovacao()"
+            class="mb-2">
           </app-list-demanda>
 
           <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
@@ -124,6 +112,7 @@
               <app-list-demanda *ngFor="
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
+                    | slice : 4
                 " (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)" [dadosDemada]="demanda" class="mb-2">
               </app-list-demanda>
@@ -165,19 +154,21 @@
               <h5>{{ linha.titulo }}</h5>
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
-            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="pesquisarDemandas(linha.status)">
+            <div class="me-3" style="align-self: flex-end; cursor: pointer"
+              (click)="pesquisarDemandas({status:linha.status,pesquisaCampo: undefined})">
               Ver mais
             </div>
           </div>
-          <div class="d-flex position-relative" style="width: 100%">
-            <div [style.left.px]="positionListCards[i]" class="div-cards d-flex position-relative transition-cards">
+          <div class="d-flex position-relative" #tamanhoDaFila style="width: 100%">
+            <div [style.left.px]="positionListCards[i]" [id]="'filaCompleta'+i"
+              class="div-cards d-flex position-relative transition-cards">
               <app-card-demanda *ngFor="
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                 " [dadosDemada]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"
                 (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
-                (avancarStatusDemanda)="avancarStatusDemanda($event)"
-                (abrirModal)="modalMotivoReprovacao()" (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
+                (avancarStatusDemanda)="avancarStatusDemanda($event)" (abrirModal)="modalMotivoReprovacao()"
+                (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 (verDocumentoEmAta)="openModalAtaDocumento()"></app-card-demanda>
             </div>
             <div *ngIf="positionListCards[i] != 0" class="left-arrow alinhacao" (click)="changeLeft(i)">
@@ -198,37 +189,21 @@
 
     <div class="container">
       <div class="row" *ngIf="tipoRascunho">
-        <app-card-demanda
-          [rascunho]="tipoRascunho"
-          *ngFor="let demanda of listaDemandasRascunho; let i = index"
-          [dadosDemada]="demanda"
-          (abrirModal)="openModalMotivoDevolucao()"
+        <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandasRascunho; let i = index"
+          [dadosDemada]="demanda" (abrirModal)="openModalMotivoDevolucao()"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-          (verDocumentoProposta)="openModalDemandaDocumento($event)"
-          [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat()"
-          (avancarStatusDemanda)="avancarStatusDemanda($event)"
-          (modalHistorico)="openModalHistorico()"
-          (verDocumentoEmAta)="openModalAtaDocumento()"
-          class="col-lg-6 col-xl-4 mb-3"
-        >
+          (verDocumentoProposta)="openModalDemandaDocumento($event)" [mudarTamanho]="'100%'" (irParaChat)="irParaChat()"
+          (avancarStatusDemanda)="avancarStatusDemanda($event)" (modalHistorico)="openModalHistorico()"
+          (verDocumentoEmAta)="openModalAtaDocumento()" class="col-lg-6 col-xl-4 mb-3">
         </app-card-demanda>
       </div>
       <div class="row" *ngIf="!tipoRascunho">
-        <app-card-demanda
-          *ngFor="let demanda of listaDemandas; let i = index"
-          [dadosDemada]="demanda"
-          (abrirModal)="openModalMotivoDevolucao()"
-          (verDocumentoProposta)="openModalDemandaDocumento($event)"
-          (clicouEmExcluir)="excluirDemandaRascunho(i)"
-          (avancarStatusDemanda)="avancarStatusDemanda($event)"
-          [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat()"
-          (modalHistorico)="openModalHistorico()"
-          (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-          (verDocumentoEmAta)="openModalAtaDocumento()"
-          class="col-lg-6 col-xl-4 mb-3"
-        >
+        <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemada]="demanda"
+          (abrirModal)="openModalMotivoDevolucao()" (verDocumentoProposta)="openModalDemandaDocumento($event)"
+          (clicouEmExcluir)="excluirDemandaRascunho(i)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
+          [mudarTamanho]="'100%'" (irParaChat)="irParaChat()" (modalHistorico)="openModalHistorico()"
+          (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (verDocumentoEmAta)="openModalAtaDocumento()"
+          class="col-lg-6 col-xl-4 mb-3">
         </app-card-demanda>
       </div>
     </div>
@@ -237,20 +212,22 @@
   <div *ngIf="listaDemandas.length == 0 && nenhumResultadoEncontrado == false">
     <mat-spinner [diameter]="50" class="circle"></mat-spinner>
   </div>
-
-  <div *ngIf="isFiltrado && nenhumResultadoEncontrado == false" class="d-flex justify-content-center mt-3 mb-4">
-    <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"></p-paginator>
-  </div>
-  <div *ngIf="nenhumResultadoEncontrado == true" class="d-flex justify-content-center mt-3 mb-4">
-    <div style="display: grid; align-items: center; justify-content: center;">
-      <div style="display: flex; align-items: center; justify-content: center;">
-        <img style="width: 14vw;" src="/assets/robo-not-found.png" alt="image">
-      </div>
-      <div>
-        <h5 style="font-family: unset; color: grey; text-align: center;">Sinto muito...</h5>
-      </div>
-      <div>
-        <h5 style="font-family: unset; color: grey;">Nenhuma demanda foi encontrada</h5>
+  <div class="d-flex flex-column-reverse">
+    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-3 mb-4">
+      <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false" [totalRecords]="10"
+        (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+    <div *ngIf="nenhumResultadoEncontrado == true" class="d-flex justify-content-center mt-3 mb-4">
+      <div style="display: grid; align-items: center; justify-content: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <img style="width: 14vw;" src="/assets/robo-not-found.png" alt="image">
+        </div>
+        <div>
+          <h5 style="font-family: unset; color: grey; text-align: center;">Sinto muito...</h5>
+        </div>
+        <div>
+          <h5 style="font-family: unset; color: grey;">Nenhuma demanda foi encontrada</h5>
+        </div>
       </div>
     </div>
   </div>
@@ -269,8 +246,8 @@
       </ng-template></p-confirmDialog>
   </div>
   <div>
-    <p-confirmDialog icon="pi pi-exclamation-triangle" key="motivoReprovacao" #bt [style]="{width: '40vw'}" >
-       <ng-template pTemplate="footer">
+    <p-confirmDialog icon="pi pi-exclamation-triangle" key="motivoReprovacao" #bt [style]="{width: '40vw'}">
+      <ng-template pTemplate="footer">
         <button type="button" class="btn btn-outline-primary" (click)="bt.accept()">
           <i class="pi pi-sync me-2"></i>Reformular Demanda
         </button>

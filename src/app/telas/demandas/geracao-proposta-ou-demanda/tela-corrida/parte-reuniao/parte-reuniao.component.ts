@@ -88,13 +88,11 @@ export class ParteReuniaoComponent implements OnInit {
   onSubmit() {
     // console.log(this.formProposta.value);
   }
-
   porcentagemCC: [{ porcentagem: string; index: number }] = [
     { porcentagem: '', index: 0 },
   ];
   quantidadeCC = [0];
   centrosDeCustoOpcoes = [ 'Center 1', 'Center 2', 'Center 3' ];
-
   //fazer verificações necessárias
   addRowRecurso() {
     if(this.formRecursos.valid){
@@ -103,6 +101,7 @@ export class ParteReuniaoComponent implements OnInit {
       this.formRecursos.reset()
     }
   }
+
   mudarCustoTotalProjetoEPayback(){
     this.custosTotais = 0
     this.listaRecursos.forEach(recurso => {
@@ -110,6 +109,8 @@ export class ParteReuniaoComponent implements OnInit {
     })
     this.paybackProposta = this.custosTotais / (this.demandaService.getBeneficioReal() + this.demandaService.getBeneficioPotencial());
   }
+
+
 
   editarRecurso(index: number){
     this.formRecursos.patchValue({
@@ -156,8 +157,6 @@ export class ParteReuniaoComponent implements OnInit {
     }
 
   }
-
-
 
   teste: string[] = []
   atualizarCentrosCusto() {

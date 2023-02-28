@@ -1,6 +1,5 @@
 import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
 import { TipoDespesa } from './../models/tipoDespesa.enum';
-import { Recurso } from './../models/recurso.model';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
@@ -9,16 +8,16 @@ import { Demanda } from '../models/demanda.model';
 import { Proposta } from '../models/proposta.model';
 import { Validators } from '@angular/forms';
 
-interface RecursoDoForm{
-  nomeRecurso: string,
-  tipoDespesaRecurso: TipoDespesa,
-  perfilDespesaRecurso: string,
-  quantidadeHorasRecurso: number,
-  valorHoraRecurso: number,
-  periodoExMesesRecurso: number,
-  centrosCusto?: {porcentagem: number, centroCusto: number}[]
-  porcentagemCustoRecurso: number[],
-  centroDeCustoRecurso: {codigoCentroCusto:number}[]
+interface RecursoDoForm {
+  nomeRecurso: string;
+  tipoDespesaRecurso: TipoDespesa;
+  perfilDespesaRecurso: string;
+  quantidadeHorasRecurso: number;
+  valorHoraRecurso: number;
+  periodoExMesesRecurso: number;
+  centrosCusto?: { porcentagem: number; centroCusto: number }[];
+  porcentagemCustoRecurso: number[];
+  centroDeCustoRecurso: { codigoCentroCusto: number }[];
 }
 
 @Injectable({
@@ -27,6 +26,7 @@ interface RecursoDoForm{
 export class PropostaService {
   public listaRecursos:RecursoDoForm[] = [ ]
 
+  public paybackProposta: number = 0;
   public formProposta = this.fb.group({
     prazoProposta: ['', [Validators.required]],
     codigoPPMProposta: ['', [Validators.required]],
@@ -35,12 +35,12 @@ export class PropostaService {
     escopoDemandaProposta: ['', [Validators.required]],
     inicioExDemandaProposta: ['', [Validators.required]],
     fimExDemandaProposta: ['', [Validators.required]],
-    paybackProposta: ['', [Validators.required]],
+    paybackProposta: [this.paybackProposta],
     responsavelProposta: { 'codigoUsuario': 3},
     demandaAnalistaProposta: {'codigoDemandaAnalista': 0}
   });
-  
-  public paybackProposta: number = 0;
+
+  private codigoDemanda = 0;
 
   public formRecursos = this.fb.group({
   nomeRecurso: ['', [Validators.required]],
@@ -59,24 +59,35 @@ createCentroCusto(): FormGroup {
   });
 }
 
-
-
   addCenterOfCost() {
-    (this.formRecursos.controls.centrosCusto as FormArray).push(this.createCentroCusto());
+    (this.formRecursos.controls.centrosCusto as FormArray).push(
+      this.createCentroCusto()
+    );
   }
 
   arrumarFormularioParaBackend(){
     this.listaRecursos.forEach(e => {
       e.porcentagemCustoRecurso = [];
       e.centroDeCustoRecurso = [];
-      if(e.centrosCusto){
-      e.centrosCusto.forEach(centro => {
-        e.porcentagemCustoRecurso.push(centro.porcentagem)
-        e.centroDeCustoRecurso.push({codigoCentroCusto: centro.centroCusto})
-        delete e.centrosCusto;
-      })}
-    })
+      if (e.centrosCusto) {
+        e.centrosCusto.forEach((centro) => {
+          e.porcentagemCustoRecurso.push(centro.porcentagem);
+          e.centroDeCustoRecurso.push({
+            codigoCentroCusto: centro.centroCusto,
+          });
+          delete e.centrosCusto;
+        });
+      }
+    });
+  }
+  getDemandaAnalistaByCodigoDemanda() {
+    return this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(
+      this.codigoDemanda.toString()
+    );
+  }
 
+  setCodigoDemanda(codigoDemanda: number) {
+    this.codigoDemanda = codigoDemanda;
   }
 
   postProposta(codigoDemandaAnalista: string) {
@@ -85,8 +96,9 @@ createCentroCusto(): FormGroup {
         codigoDemandaAnalista: parseInt(codigoDemandaAnalista)
       }
     })
+    console.log(this.formProposta.value);
+
     this.arrumarFormularioParaBackend();
-    console.log(this.formProposta.value)
     return this.http.post<Demanda | string>(
       'http://localhost:8080/proposta',
       this.formProposta.value

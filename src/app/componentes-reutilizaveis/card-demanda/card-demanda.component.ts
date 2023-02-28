@@ -106,7 +106,7 @@ export class CardDemandaComponent implements OnInit {
     } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avancar fase') {
       this.avancarStatusDemanda.emit({
         mensagem:
-          'Tem certeza que deseja a fase da demanda?<br>Ela avançará para o Status: ' +
+          'Tem certeza que deseja avançar a fase da demanda?<br>Ela avançará para o Status: ' +
           this.retornaProximoStatusDemanda(this.dadosDemada.statusDemanda),
         codigoDemanda: this.dadosDemada.codigoDemanda,
         statusDemanda: this.dadosDemada.statusDemanda,
@@ -155,8 +155,8 @@ export class CardDemandaComponent implements OnInit {
         texto: 'Parecer Comissao',
       };
       return true;
-    } 
-    
+    }
+
     else if (
       (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
         this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE) &&
@@ -221,7 +221,7 @@ export class CardDemandaComponent implements OnInit {
     }
     return true;
   }
-  
+
   existePauta() {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||

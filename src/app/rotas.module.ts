@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
 import { EscopoPrincipalComponent } from './componentes-fixos/escopo-principal/escopo-principal.component';
 import { TelaInicialComponent } from './telas/demandas/tela-inicial/tela-inicial.component';
 import { TelaClassificarDemandaComponent } from './telas/demandas/tela-classificar-demanda/tela-classificar-demanda.component';
-import { TelaHistoricoDemandaComponent } from './telas/demandas/tela-historico-demanda/tela-historico-demanda.component';
 import { TelaChatComponent } from './telas/demandas/chat/tela-chat/tela-chat.component';
 import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.component';
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
@@ -47,10 +46,6 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
           {
             path: 'rascunhos',
             component: TelaInicialComponent
-          },
-          {
-            path: 'historico-demanda',
-            component: TelaHistoricoDemandaComponent
           },
           {
             path: 'chat',

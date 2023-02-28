@@ -39,15 +39,7 @@ export class TelaInicialComponent implements OnInit {
     private confirmationService: ConfirmationService
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
-      this.pesquisarDemandas({
-        solicitante: '',
-        codigoDemanda: '',
-        status: '',
-        tamanho: '',
-        analista: '',
-        departamento: '',
-        tituloDemanda: this.pesquisaDemanda,
-      });
+      this.pesquisarDemandas({  status: undefined ,pesquisaCampo: this.pesquisaDemanda});
     });
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
@@ -100,22 +92,11 @@ export class TelaInicialComponent implements OnInit {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
   //Pesquisa demandas por status, ou por todos os campos, no caso o filtro de muitas informações
-  pesquisarDemandas(
-    event:
-      Filtro
-      | string
-  ) {
+  pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined ) {
       this.demandasService
-        .getDemandasFiltradas((typeof event == 'string') ?  {
-          solicitante: '',
-          codigoDemanda: '',
-          status: event,
-          tamanho: '',
-          tituloDemanda: '',
-          analista: '',
-          departamento: '',
-        } : event)
+        .getDemandasFiltradas(pesquisaEspecial)
         .subscribe((listaDemandas: Demanda[]) => {
+          console.log(listaDemandas)
           if (listaDemandas.length > 0) {
             this.listaDemandas = listaDemandas;
             this.isFiltrado = true;
@@ -129,37 +110,25 @@ export class TelaInicialComponent implements OnInit {
 
   }
 
-  paginate(event: any){
-
+  paginate(event: {page: number}){
+    this.demandasService.avancarPage(event.page)
+    .subscribe((listaDemandas: Demanda[]) => {
+      console.log(listaDemandas)
+      if (listaDemandas.length > 0) {
+        this.listaDemandas = listaDemandas;
+        this.isFiltrado = true;
+        this.nenhumResultadoEncontrado = false;
+      } else {
+        this.isFiltrado = true;
+        this.listaDemandas = [];
+        this.nenhumResultadoEncontrado = true;
+      }
+    });
   }
 
-  exportExcel(
-    event:
-      | {
-          solicitante: string;
-          codigoDemanda: string;
-          status: string;
-          tamanho: string;
-          tituloDemanda: string;
-          analista: string;
-          departamento: string;
-        }
-      | string
-  ) {
+  exportExcel() {
     this.demandasService
-      .getTodasAsDemandasFiltradas(
-        !(typeof event == 'string')
-          ? event
-          : {
-              analista: '',
-              codigoDemanda: '',
-              departamento: '',
-              solicitante: '',
-              status: '',
-              tamanho: '',
-              tituloDemanda: event,
-            }
-      )
+      .getTodasAsDemandasFiltradas()
       .subscribe((listaDemandas: Demanda[]) => {
         let listaExport: DemandaExcel[] = [];
 

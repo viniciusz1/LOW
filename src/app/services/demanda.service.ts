@@ -32,13 +32,30 @@ export class DemandaService {
     },
   });
 
-  public filtros: Filtro | undefined
+  private filtros: Filtro | undefined
+
+  public arquivos: File[] = [];
+
+  public get getFiltroData(): Filtro | undefined {
+    return this.filtros
+  }
+
+  public set setFiltroData(data: Filtro) {
+    this.filtros = data
+  }
+
+  avancarPage(page: number) {
+    let linkComPaginacao = this.link;
+    linkComPaginacao += '&page=' + page
+    return this.http.get<Demanda[]>(
+      linkComPaginacao
+    );
+  }
+
 
   resetDemandaForm() {
     this.demandaForm.reset();
   }
-
-  public arquivos: File[] = [];
 
   saveByteArray(bytes: string, type: string, name: string) {
     const base64 = bytes;
@@ -67,16 +84,26 @@ export class DemandaService {
     }
     return 0;
   }
-
-  getDemandasFiltradas(filtros: Filtro) {
+  link = ''
+  getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
+    if (pesquisaEspecial?.status) {
+      this.link = `http://localhost:8080/demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=`
+    } else if (pesquisaEspecial?.pesquisaCampo) {
+      this.link = `http://localhost:8080/demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=`
+    }else{
+      this.link = `http://localhost:8080/demanda/filtro?solicitante=${this.filtros?.solicitante}
+      &codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}
+      &tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}
+      &analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}`
+    }   
     return this.http.get<Demanda[]>(
-      `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}&analista=${filtros.analista}&departamento=${filtros.departamento}`
+      this.link
     );
   }
 
-  getTodasAsDemandasFiltradas(filtros: Filtro){
+  getTodasAsDemandasFiltradas() {
     return this.http.get<Demanda[]>(
-      `http://localhost:8080/demanda/filtro?solicitante=${filtros.solicitante}&codigoDemanda=${filtros.codigoDemanda}&status=${filtros.status}&tamanho=${filtros.tamanho}&tituloDemanda=${filtros.tituloDemanda}&analista=${filtros.analista}&departamento=${filtros.departamento}&page=0&size=1000`
+      `http://localhost:8080/demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}&page=0&size=1000`
     );
   }
 
@@ -132,5 +159,5 @@ export class DemandaService {
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {}
+  constructor(private http: HttpClient, private fb: FormBuilder) { }
 }

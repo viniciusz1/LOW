@@ -27,7 +27,7 @@
     <div joyrideStep="dois" [title]="'Filtrar Demandas'" [stepContent]="customContent"
       [stepContentParams]="{ texto: textoTutorial[1] }" class="nav p-1 justify-content-center">
       <div *ngIf="showPesquisaEBotaoFiltro" class="d-flex">
-        <button (click)="exportExcel(pesquisaDemanda)" class="btn btn-success me-3" *ngIf="isFiltrado" >
+        <button (click)="exportExcel()" class="btn btn-success me-3" *ngIf="isFiltrado" >
           <i class="bi bi-filetype-csv " style="font-size: 17px"></i>
         </button>
         <div>
@@ -47,9 +47,10 @@
         </button>
       </div>
 
-      <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (filtroAcionado)="pesquisarDemandas($event)"
+      <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" 
+      (filtroAcionado)="pesquisarDemandas(undefined)"
         (closeFiltro)="mudarStatusFiltro()" class="me-3"
-        (exportarExcel)="exportExcel($event)">
+        (exportarExcel)="exportExcel()">
       </app-filtro-demanda>
     </div>
 
@@ -83,7 +84,7 @@
 
   <!-- sidebar -->
   <app-sidebar-demanda [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()"
-    (clicouEmUmStatus)="pesquisarDemandas($event)" style="
+    (clicouEmUmStatus)="pesquisarDemandas({status: $event, pesquisaCampo: undefined})" style="
       position: fixed;
       z-index: 2;
       transition: left 0.3s ease 0s;
@@ -103,7 +104,7 @@
           <div
             class="me-3"
             style="align-self: flex-end; cursor: pointer"
-            (click)="pesquisarDemandas(linha.status)"
+            (click)="pesquisarDemandas({status:linha.status,pesquisaCampo: undefined})"
           >
             Ver mais
           </div>
@@ -166,7 +167,7 @@
               <h5>{{ linha.titulo }}</h5>
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
-            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="pesquisarDemandas(linha.status)">
+            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="pesquisarDemandas({status:linha.status,pesquisaCampo: undefined})">
               Ver mais
             </div>
           </div>

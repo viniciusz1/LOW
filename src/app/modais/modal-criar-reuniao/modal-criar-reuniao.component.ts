@@ -35,6 +35,17 @@ export class ModalCriarReuniaoComponent implements OnInit {
     this.atualizarDemandas();
   }
 
+  listaComissoes = [
+    {codigo: 1, nome:"CPVM – Comissão de Processos de Vendas e Desenvolvimento de produtos"},
+    {codigo: 2, nome:"CPGCI – Comissão de Processos da Cadeia Integrada"},
+    {codigo: 3, nome:"CPGPR – Comissão de Processos de Gestão de Projetos"},
+    {codigo: 4, nome:"CGPN – Comitê de Gestão de Processos de Negócio"},
+    {codigo: 5, nome:"CTI – Comitê de TI"},
+    {codigo: 6, nome:"CWBS – Comitê WEG Business Services"},
+    {codigo: 7, nome:"DTI – Diretoria de TI"},
+  ]
+    
+
   listaReunioes: Reuniao[] = [];
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;

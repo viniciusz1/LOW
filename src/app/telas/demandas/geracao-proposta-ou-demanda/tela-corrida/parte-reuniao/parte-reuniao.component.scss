@@ -8,6 +8,10 @@
     width:100%
 }
 
+:host ::ng-deep .p-chips .p-chips-multiple-container .p-chips-token {
+    background-color: #00579D !important;
+}
+
 label, i{
     margin-top: 20px;
 }

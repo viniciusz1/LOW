@@ -10,8 +10,6 @@ import { ComponentesReutilizaveisModule } from '../componentes-reutilizaveis/com
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { JoyrideModule } from 'ngx-joyride';
 import {TabMenuModule} from 'primeng/tabmenu';
-import {MenuItem} from 'primeng/api';
-import { RotasService } from '../services/rotas.service';
 import { EscopoPerfilComponent } from './escopo-perfil/escopo-perfil.component';
 
 
@@ -36,7 +34,6 @@ import { EscopoPerfilComponent } from './escopo-perfil/escopo-perfil.component';
     HeaderComponent
   ],
   providers: [
-    RotasService
   ]
 })
 export class ComponentesFixosModule { }

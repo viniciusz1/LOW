@@ -4,7 +4,7 @@
       <button joyrideStep="um" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
         [title]="'Criar uma Demanda'" [stepContent]="customContent" [stepContentParams]="{ texto: textoTutorial[0] }"
         class="btn btn-primary" style="height: 42px" routerLink="/tela-inicial/demanda">
-        <i class="bi bi-plus" style="font-size: 17px"></i> Criar Demanda
+        <i class="bi bi-plus" style="font-size: 17px"></i> {{'tela-inicial.botao-criar-demanda' | translate}}
       </button>
 
       <ng-template #prevButton>

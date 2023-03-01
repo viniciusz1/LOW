@@ -6,11 +6,13 @@
         </li>
         <nav aria-label="breadcrumb" style="display: flex; justify-content: center; align-items: center;" >
             <ol class="breadcrumb" style="margin: 0px 0px 0px 2vw !important; ">
-              <li class="breadcrumb-item active" aria-current="page" *ngFor="let item of items">{{item.label}}</li>
+              <li role="button" [ngClass]="{'active': item.disabled}" class="breadcrumb-item" aria-current="page"
+              [routerLink]="'/'+item.url" *ngFor="let item of items">{{item.label | titlecase}}</li>
             </ol>
         </nav>
     </ul>
     <ul class="nav justify-content-end nav-items-center" style="width:60%" >
+
         <div class="d-flex" joyrideStep="oito"
         [title]="'Seções'"
         [stepContent]="customContent"

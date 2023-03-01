@@ -1,3 +1,5 @@
 {
-  "app.hello": "salve"
+  "tela-inicial": {
+    "botao-criar-demanda": "Criar demanda"
+  }
 }

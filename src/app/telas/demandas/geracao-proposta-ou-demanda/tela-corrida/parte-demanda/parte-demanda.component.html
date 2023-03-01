@@ -52,12 +52,12 @@
     <div formArrayName="centrosCusto" class="row align-items-center">
       <div class="col-3 d-flex">
         <div class="d-flex">
-          <div class="p-inputgroup" style="width: 10vw !important;">
+          <div class="p-inputgroup" style="width: 10vw !important; margin-right: 1vw;">
             <input id="porcentagemLista" pInputText [required]="true" formControlName="porcentagem"
               placeholder="Porcentagem" />
             <span class="p-inputgroup-addon">%</span>
           </div>
-          <input id="centroDeCustoLista" pInputText [required]="true" formControlName="centroCusto"
+          <input id="centroDeCustoLista" style="width: 15vw !important; margin-right: 1vw;" pInputText [required]="true" formControlName="centroCusto"
             placeholder="Centro de Custo" />
         </div>
         <button [disabled]="!resultado" style="width: 45px" class="btn btn-outline-primary"

@@ -19,6 +19,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TelaClassificarDemandaComponent implements OnInit {
   BUs: BusinessUnit[] = [];
+
+  listaBUs = [
+    {codigo: 1, nome: 'WMO-I – WEG Motores Industrial'},
+    {codigo: 2, nome: 'WMO-C – WEG Motores Comercial'},
+    {codigo: 3, nome: 'WEN  – WEG Energia'},
+    {codigo: 4, nome: 'WAU – WEG Automação'},
+    {codigo: 5, nome: 'WDS – WEG Digital e Sistemas'},
+    {codigo: 6, nome: 'WDC – WEG Drives e Controls'},
+    {codigo: 7, nome: 'WTI – WEG Tintas'},
+    {codigo: 8, nome: 'WTD – WEG Transmissão e Distribuição'},
+  ]
+
   demanda: Demanda | undefined = undefined
   demandaAnalistaForm = this.demandaAnalistaService.demandaAnalistaForm;
   selectedBUs: any;
@@ -45,6 +57,22 @@ export class TelaClassificarDemandaComponent implements OnInit {
     },
   ];
   secoes: Secao[] = [];
+
+  listaSessoes = [
+    {codigo: 1, nome: 'SVE – Seção Desenvolvimento Sistemas de Vendas e E-commerce'},
+    {codigo: 2, nome: 'SIM – Seção Desenvolvimento Sistemas de manufatura'},
+    {codigo: 3, nome: 'SIE – Seção Desenvolvimento Sistemas de Engenhar'},
+    {codigo: 4, nome: 'SDO – Setor Desenvolvimento Plataforma Orchestra'},
+    {codigo: 5, nome: 'SCO – Seção Desenvolvimento Sistemas Corporativos'},
+    {codigo: 6, nome: 'PTI – Seção Projetos de TI'},
+    {codigo: 7, nome: 'AGD – Seção Arquitetura e Governança de Dados'},
+    {codigo: 8, nome: 'STD – Seção Desenvolvimento Tecnologias Digitais'},
+    {codigo: 9, nome: 'TIN – Seção Tecnologia de Infraestrutura'},
+    {codigo: 10, nome: 'SGI – Seção Suporte Global Infraestrutura'},
+    {codigo: 11, nome: 'SEG – Seção Segurança da Informação e Riscos TI'},
+    {codigo: 12, nome: 'AAS – Atendimento e serviços TI – América do Sul'},
+  ]
+
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
   constructor(
     private matDialog: MatDialog,

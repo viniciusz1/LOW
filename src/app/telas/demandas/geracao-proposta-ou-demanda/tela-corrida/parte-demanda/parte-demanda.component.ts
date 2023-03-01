@@ -67,6 +67,8 @@ export class ParteDemandaComponent implements OnInit {
   opcoesDeMoeda = [{ name: 'BRL' }, { name: 'EUR' }, { name: 'DOL' }];
 
   ngOnInit(): void {
+    let location = new Location;
+    location.reload();
     this.atualizarCentrosCusto();
   }
   uploadDocumentos(event : any){

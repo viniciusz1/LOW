@@ -9,6 +9,7 @@ import { ScrollSpyService } from 'ng-spy';
 import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
 import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
 import { Demanda } from 'src/app/models/demanda.model';
+import { bootstrapApplication } from '@angular/platform-browser';
 
 
 
@@ -48,7 +49,6 @@ export class TelaCorridaComponent implements OnInit {
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
 
   constructor(
-    private spyService: ScrollSpyService,
     private router: Router,
     private demandaService: DemandaService,
     private demandaAnalistaService: DemandaAnalistaService,
@@ -56,12 +56,12 @@ export class TelaCorridaComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
 
   ) {
-    this.startSpy();
     this.tipoExibicaoTela();
+
+
   }
 
   indoPraCima(top: number) {
-    this.startSpy();
     const scrollPosition =
       window.pageYOffset ||
       document.documentElement.scrollTop ||
@@ -115,15 +115,11 @@ export class TelaCorridaComponent implements OnInit {
     })
   }
 
-  startSpy() {
-    this.spyService.spy();
-  }
 
   titulosDemanda: any[] = [];
 
 
   ngOnInit(): void {
-    this.startSpy();
     setInterval(() => {
        let icones = document.getElementsByClassName('nav-scroll');
        for(let i = 0; i < icones.length; i++){

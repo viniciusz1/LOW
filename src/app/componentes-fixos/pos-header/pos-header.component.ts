@@ -18,6 +18,8 @@ export class PosHeaderComponent implements OnInit {
         this.items = []
         if (e.url == '/tela-inicial/reunioes') {
           this.items.push({label: 'Reuniões'});
+        }if (e.url == '/tela-inicial/demanda') {
+          this.items.push({label: 'Criação'});
         }
         if (e.url == '/tela-inicial') {
           this.items.push({label: 'Demandas'});

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'low';
-  constructor(){
+  constructor(translate: TranslateService){
+    translate.setDefaultLang('pt');
+    translate.use('pt');
+
     let htmlRoot:HTMLElement = <HTMLElement> document.getElementsByTagName('html')[0];
     let bodyroot:HTMLElement = <HTMLElement> document.getElementsByTagName('body')[0];
     let fontFamily = window.localStorage.getItem('fontFamily');

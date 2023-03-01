@@ -1,3 +1,4 @@
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -17,7 +18,7 @@ import { ReunioesModule } from './reunioes/reunioes.module';
     DemandasModule,
     LoginModule,
     PerfilModule,
-    ReunioesModule
+    ReunioesModule,
   ],
   providers: [
   ]

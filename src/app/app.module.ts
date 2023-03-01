@@ -1,3 +1,4 @@
+import { SharedModule } from 'src/app/shared/shared.module';
 import { UsuarioService } from './services/usuario.service';
 
 import { NgModule  } from '@angular/core';
@@ -14,9 +15,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemandaService } from './services/demanda.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ConfirmationService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
+import { TranslateModule, TranslateLoader, TranslateService, TranslateStore } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'ngx.translate.config';
 
 
 @NgModule({
@@ -35,9 +38,11 @@ import {DialogModule} from 'primeng/dialog';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    DialogModule
+    DialogModule,
+    SharedModule
+
   ],
-  providers: [DemandaService, ConfirmationService, UsuarioService],
+  providers: [DemandaService, ConfirmationService, UsuarioService, TranslateService, TranslateStore],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

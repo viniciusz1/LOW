@@ -47,6 +47,7 @@ export class ParteReuniaoComponent implements OnInit {
   formProposta = this.propostaService.formProposta;
   formRecursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
+  values: string[] = [];
 
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
@@ -129,26 +130,24 @@ export class ParteReuniaoComponent implements OnInit {
     this.listaRecursos.splice(index, 1)
   }
 
-  listaPorcentagem: number[] = [];
-  resultado: boolean = true;
+  listaCentrodeCusto : number[] = [];
+resultado: boolean = true;
 
-  adicionarCentroCusto(){
-    this.propostaService.addCenterOfCost()
-    
-    let porcentagemElement: HTMLInputElement = document.getElementById("porcentagemLista") as HTMLInputElement;
+  adicionarCentroCusto(index:any){
+    let porcentagemElement: HTMLInputElement = document.getElementById("porcentagemListaReuniao" + (index - 1)) as HTMLInputElement;
     let porcentagem: string = porcentagemElement.value;
 
     //Lógica para verificar quando fecha em 100%
 
-    let soma: number = this.listaPorcentagem.reduce((total, numero) => total + numero, 0);
+    let soma: number = this.listaCentrodeCusto.reduce((total, numero) => total + numero, 0);
     let total: number = soma + parseInt(porcentagem);
 
-    if(total < 100){
-      this.listaPorcentagem.push(parseInt(porcentagem));
-      this.propostaService.addCenterOfCost()
+    if(total <= 99){
+      this.listaCentrodeCusto.push(parseInt(porcentagem));
       this.resultado = true;
+      this.propostaService.addCenterOfCost()
     } else if(total == 100){
-      this.listaPorcentagem.push(parseInt(porcentagem));
+      this.listaCentrodeCusto.push(parseInt(porcentagem));
       alert("Os Centros de Custo fecharam em 100%")
       this.resultado = false;
     } else if(total > 100){

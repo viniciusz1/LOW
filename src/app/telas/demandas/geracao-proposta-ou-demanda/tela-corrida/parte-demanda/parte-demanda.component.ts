@@ -85,7 +85,7 @@ adicionarCentroCusto(){
 
     let soma: number = this.listaCentrodeCusto.reduce((total, numero) => total + numero, 0);
     let total: number = soma + parseInt(porcentagem);
-
+    
     if(total < 100){
       this.listaCentrodeCusto.push(parseInt(porcentagem));
       this.resultado = true;

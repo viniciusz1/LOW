@@ -23,6 +23,8 @@ import { ParteReuniaoComponent } from './tela-corrida/parte-reuniao/parte-reunia
 import {TooltipModule} from 'primeng/tooltip';
 import { TimelineModule } from 'primeng/timeline';
 import {AccordionModule} from 'primeng/accordion';
+import {ChipsModule} from 'primeng/chips';
+
 
 
 @NgModule({
@@ -84,7 +86,8 @@ import {AccordionModule} from 'primeng/accordion';
     TooltipModule,
     TimelineModule,
     AccordionModule,
-    InputNumberModule
+    InputNumberModule,
+    ChipsModule
   ],
   providers: [
     MessageService,

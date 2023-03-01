@@ -58,7 +58,7 @@ export class ParteReuniaoComponent implements OnInit {
   ];
 
   selectedResponsaveis: any;
-  
+
   ngOnDestroy(): void {
     this.editor.destroy();
   }
@@ -97,6 +97,9 @@ export class ParteReuniaoComponent implements OnInit {
   //fazer verificações necessárias
   addRowRecurso() {
     if(this.formRecursos.valid){
+      if(this.resultado){
+        return
+      }
       this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
       this.mudarCustoTotalProjetoEPayback();
       this.formRecursos.reset()
@@ -131,7 +134,7 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
   listaCentrodeCusto : number[] = [];
-resultado: boolean = true;
+  resultado: boolean = true;
 
   adicionarCentroCusto(index:any){
     let porcentagemElement: HTMLInputElement = document.getElementById("porcentagemListaReuniao" + (index - 1)) as HTMLInputElement;
@@ -141,20 +144,27 @@ resultado: boolean = true;
 
     let soma: number = this.listaCentrodeCusto.reduce((total, numero) => total + numero, 0);
     let total: number = soma + parseInt(porcentagem);
+    this.verificaPorcentagemCC(total, parseInt(porcentagem));
 
+
+  }
+
+
+  verificaPorcentagemCC(total: number, porcentagem?:number){
     if(total <= 99){
-      this.listaCentrodeCusto.push(parseInt(porcentagem));
+      if(porcentagem)
+      this.listaCentrodeCusto.push(porcentagem);
       this.resultado = true;
       this.propostaService.addCenterOfCost()
     } else if(total == 100){
-      this.listaCentrodeCusto.push(parseInt(porcentagem));
+      if(porcentagem)
+      this.listaCentrodeCusto.push(porcentagem);
       alert("Os Centros de Custo fecharam em 100%")
       this.resultado = false;
     } else if(total > 100){
       alert("Este valor vai passar de 100%, escolha um menor")
       this.resultado = true;
     }
-
   }
 
   teste: string[] = []

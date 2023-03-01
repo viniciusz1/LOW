@@ -97,9 +97,6 @@ export class ParteReuniaoComponent implements OnInit {
   //fazer verificações necessárias
   addRowRecurso() {
     if(this.formRecursos.valid){
-      if(this.resultado){
-        return
-      }
       this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
       this.mudarCustoTotalProjetoEPayback();
       this.formRecursos.reset()
@@ -138,19 +135,26 @@ export class ParteReuniaoComponent implements OnInit {
 
   adicionarCentroCusto(index:any){
     let porcentagemElement: HTMLInputElement = document.getElementById("porcentagemListaReuniao" + (index - 1)) as HTMLInputElement;
+    let nomeElement: HTMLInputElement = document.getElementById("nomeCentroCusto" + (index - 1)) as HTMLInputElement;
     let porcentagem: string = porcentagemElement.value;
 
     //Lógica para verificar quando fecha em 100%
 
     let soma: number = this.listaCentrodeCusto.reduce((total, numero) => total + numero, 0);
     let total: number = soma + parseInt(porcentagem);
-    this.verificaPorcentagemCC(total, parseInt(porcentagem));
+    this.verificaPorcentagemCCEAdicionaForm(total, parseInt(porcentagem));
+    porcentagemElement.disabled = true;
+    nomeElement.disabled = true;
 
 
   }
 
+  removerCentroDeCusto(index: number){
+    this.propostaService.removeCenterOfCost(index);
+  }
 
-  verificaPorcentagemCC(total: number, porcentagem?:number){
+
+  verificaPorcentagemCCEAdicionaForm(total: number, porcentagem?:number){
     if(total <= 99){
       if(porcentagem)
       this.listaCentrodeCusto.push(porcentagem);

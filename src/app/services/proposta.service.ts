@@ -54,19 +54,20 @@ export class PropostaService {
 });
 
 createCentroCusto(): FormGroup {
-  console.log("entrouu");
-
   return this.fb.group({
     porcentagem: [''],
     centroCusto: ['']
   });
 }
 
+  removeCenterOfCost(index: number) {
+    (this.formRecursos.controls.centrosCusto as FormArray).removeAt(index);
+  }
+
   addCenterOfCost() {
     (this.formRecursos.controls.centrosCusto as FormArray).push(
       this.createCentroCusto()
     );
-    console.log(this.formRecursos.controls.centrosCusto.value)
   }
 
   arrumarFormularioParaBackend(){

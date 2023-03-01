@@ -164,26 +164,26 @@
       <label class="mt-1" for="Recurso Necessário:">Centros de Custo</label>
       <div style="width: 50%; display: -webkit-box;">
         <div class="d-flex flex-column">
-        <div *ngFor="let centroCusto of formRecursos.controls.centrosCusto.controls; let i = index" style="flex-wrap: wrap;">
+        <div *ngFor="let centroCusto of formRecursos.controls.centrosCusto.controls; let i = index" style="flex-wrap: wrap;" class="mb-1">
           <div [formGroupName]="i" class="d-flex" >
             <div class="p-inputgroup" style=" margin-right: 0.5vw;">
               <input style="width: 5vw;" [id]="'porcentagemListaReuniao' + i" pInputText [required]="true" formControlName="porcentagem" placeholder="Porcentagem" />
               <span class="p-inputgroup-addon">%</span>
             </div>
-            <input style="width: 10vw; margin-right: 0.5vw;"  pInputText [required]="true" formControlName="centroCusto"
+            <input style="width: 10vw; margin-right: 0.5vw;"  [id]="'nomeCentroCusto'+i" pInputText [required]="true" formControlName="centroCusto"
               placeholder="Centro de Custo" />
-              <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+              <button (click)="removerCentroDeCusto(i)" [disabled]="this.formRecursos.controls.centrosCusto.length == 1" class="btn btn-danger"><i class="bi bi-trash"></i></button>
           </div>
         </div>
       </div>
-      </div>
         <button
           style=""
-          class="btn btn-outline-primary mt-1 ms-2"
+          class="btn btn-outline-primary ms-2"
           [disabled]="!formRecursos.controls.centrosCusto.valid || !resultado"
           (click)="adicionarCentroCusto(formRecursos.controls.centrosCusto.length)">
           <i class="bi bi-plus-lg" style="font-size: 19px"></i>
         </button>
+      </div>
       </div>
 
     <div class="">

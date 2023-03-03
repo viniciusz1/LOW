@@ -60,6 +60,11 @@ export class TelaCorridaComponent implements OnInit {
 
 
   }
+  posicaoScroll = 0;
+
+  teste(){
+    console.log(window.scrollY)
+  }
 
   indoPraCima(top: number) {
     const scrollPosition =

@@ -1,5 +1,5 @@
 import { Filtro } from './../models/filtro.model';
-import { FormBuilder, NumberValueAccessor } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, NumberValueAccessor } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
@@ -30,8 +30,25 @@ export class DemandaService {
     solicitanteDemanda: {
       codigoUsuario: 2,
     },
-  });
+    centrosCusto: this.fb.array([this.createCentroCusto()])
 
+  });
+  createCentroCusto(): FormGroup {
+    return this.fb.group({
+      porcentagem: [''],
+      centroCusto: ['']
+    });
+  }
+  removeCenterOfCost(index: number) {
+    (this.demandaForm.controls.centrosCusto as FormArray).removeAt(index);
+  }
+
+  addCenterOfCost() {
+    (this.demandaForm.controls.centrosCusto as FormArray).push(
+      this.createCentroCusto()
+    );
+
+  }
   private filtros: Filtro | undefined
 
   public arquivos: File[] = [];

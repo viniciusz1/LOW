@@ -2,6 +2,9 @@
   <div class="col-2" style="padding: 3.5rem !important;">
     <div style="position: fixed; left: 1vw; display: flex;">
       <div style="margin-top: 0.45vh;">
+        <!-- <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-bar" style="width: 100%"></div>
+        </div> -->
         <p-timeline [value]="titulosDemanda">
             <ng-template pTemplate="marker" let-event>
                 <a class="custom-marker shadow-2" [style.backgroundColor]="event.color">
@@ -12,7 +15,7 @@
       </div>
         <nav class="h-100 flex-column align-items-stretch pe-4">
           <nav class="nav nav-pills flex-column" id="scroll" >
-            <a class="nav-link nav-scroll" style="margin-bottom: 3.1vh;" href="#item-1">Dados Gerais</a>
+            <a class="nav-link nav-scroll" style="margin-bottom: 3.1vh;" href="#item-1" (click)="teste()">Dados Gerais</a>
             <a class="nav-link nav-scroll" style="margin-bottom: 3.1vh;" href="#item-2">Benefícios</a>
             <a class="nav-link nav-scroll" href="#item-3">Adicionais</a>
           </nav>

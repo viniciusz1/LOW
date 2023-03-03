@@ -13,5 +13,6 @@ export interface Proposta {
     responsavelProposta?: Usuario,
     demandaAnalistaProposta: DemandaAnalista,
     recursosProposta?: Recurso[]
+    escopoProposta?: string
 
 }

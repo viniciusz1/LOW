@@ -24,8 +24,8 @@ interface RecursoDoForm {
   providedIn: 'root',
 })
 export class PropostaService {
-  public listaRecursos:RecursoDoForm[] = [ ]
-  
+  public listaRecursos: RecursoDoForm[] = []
+
 
   public paybackProposta: number = 0;
   public formProposta = this.fb.group({
@@ -37,38 +37,60 @@ export class PropostaService {
     inicioExDemandaProposta: ['', [Validators.required]],
     fimExDemandaProposta: ['', [Validators.required]],
     paybackProposta: [this.paybackProposta],
-    responsavelProposta: { 'codigoUsuario': 3},
-    demandaAnalistaProposta: {'codigoDemandaAnalista': 0}
+    responsavelProposta: { 'codigoUsuario': 3 },
+    demandaAnalistaProposta: { 'codigoDemandaAnalista': 0 }
   });
 
   private codigoDemanda = 0;
 
   public formRecursos = this.fb.group({
-  nomeRecurso: ['', [Validators.required]],
-  tipoDespesaRecurso: ['', [Validators.required]],
-  perfilDespesaRecurso: ['', [Validators.required]],
-  quantidadeHorasRecurso: ['', [Validators.required]],
-  valorHoraRecurso: ['', [Validators.required]],
-  periodoExMesesRecurso: ['', [Validators.required]],
-  centrosCusto: this.fb.array([this.createCentroCusto()])
-});
-
-createCentroCusto(): FormGroup {
-  console.log("entrouu");
-  
-  return this.fb.group({
-    porcentagem: [''],
-    centroCusto: ['']    
+    nomeRecurso: ['', [Validators.required]],
+    tipoDespesaRecurso: ['', [Validators.required]],
+    perfilDespesaRecurso: ['', [Validators.required]],
+    quantidadeHorasRecurso: ['', [Validators.required]],
+    valorHoraRecurso: ['', [Validators.required]],
+    periodoExMesesRecurso: ['', [Validators.required]],
+    centrosCusto: this.fb.array([this.createCentroCusto()])
   });
-}
+
+  createCentroCusto(): FormGroup {
+    return this.fb.group({
+      porcentagem: [''],
+      centroCusto: ['']
+    });
+  }
+
+  removeCenterOfCost(index: number) {
+    (this.formRecursos.controls.centrosCusto as FormArray).removeAt(index);
+  }
+
+  addRowRecurso() {
+
+    let porcentagem: number = 0
+    if (this.formRecursos.value.centrosCusto)
+      for (let i of this.formRecursos.value.centrosCusto) {
+        porcentagem += parseInt(i.porcentagem)
+      }
+    if (porcentagem == 100) {
+      if (this.formRecursos.valid) {
+        this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
+        this.formRecursos.reset()
+      }
+    } else {
+      throw new Error("A porcentagem dos centros de custo devem fechar 100%")
+    }
+
+  }
+
 
   addCenterOfCost() {
     (this.formRecursos.controls.centrosCusto as FormArray).push(
       this.createCentroCusto()
     );
+
   }
 
-  arrumarFormularioParaBackend(){
+  arrumarFormularioParaBackend() {
     this.listaRecursos.forEach(e => {
       e.porcentagemCustoRecurso = [];
       e.centroDeCustoRecurso = [];
@@ -108,5 +130,5 @@ createCentroCusto(): FormGroup {
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private demandaAnalistaService: DemandaAnalistaService) {}
+  constructor(private http: HttpClient, private fb: FormBuilder, private demandaAnalistaService: DemandaAnalistaService) { }
 }

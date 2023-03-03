@@ -41,6 +41,7 @@ export class ParteReuniaoComponent implements OnInit {
   ) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
+
   custosTotais: number = 0;
   paybackProposta = this.propostaService.paybackProposta;
   centrosCusto: CentroCusto[] = [];
@@ -58,7 +59,7 @@ export class ParteReuniaoComponent implements OnInit {
   ];
 
   selectedResponsaveis: any;
-  
+
   ngOnDestroy(): void {
     this.editor.destroy();
   }
@@ -96,10 +97,11 @@ export class ParteReuniaoComponent implements OnInit {
   centrosDeCustoOpcoes = [ 'Center 1', 'Center 2', 'Center 3' ];
   //fazer verificações necessárias
   addRowRecurso() {
-    if(this.formRecursos.valid){
-      this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
-      this.mudarCustoTotalProjetoEPayback();
-      this.formRecursos.reset()
+    try{
+      this.propostaService.addRowRecurso()
+      this.mudarCustoTotalProjetoEPayback()
+    }catch(err){
+      alert(err)
     }
   }
 
@@ -131,31 +133,22 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
   listaCentrodeCusto : number[] = [];
-resultado: boolean = true;
+  resultado: boolean = true;
 
-  adicionarCentroCusto(index:any){
-    let porcentagemElement: HTMLInputElement = document.getElementById("porcentagemListaReuniao" + (index - 1)) as HTMLInputElement;
-    let porcentagem: string = porcentagemElement.value;
-
-    //Lógica para verificar quando fecha em 100%
-
-    let soma: number = this.listaCentrodeCusto.reduce((total, numero) => total + numero, 0);
-    let total: number = soma + parseInt(porcentagem);
-
-    if(total <= 99){
-      this.listaCentrodeCusto.push(parseInt(porcentagem));
-      this.resultado = true;
+  adicionarCentroCusto(){
+    try{
       this.propostaService.addCenterOfCost()
-    } else if(total == 100){
-      this.listaCentrodeCusto.push(parseInt(porcentagem));
-      alert("Os Centros de Custo fecharam em 100%")
-      this.resultado = false;
-    } else if(total > 100){
-      alert("Este valor vai passar de 100%, escolha um menor")
-      this.resultado = true;
+    }catch(err){
+      alert(err)
     }
-
   }
+
+  removerCentroDeCusto(index: number){
+    this.propostaService.removeCenterOfCost(index);
+  }
+
+
+   
 
   teste: string[] = []
   atualizarCentrosCusto() {

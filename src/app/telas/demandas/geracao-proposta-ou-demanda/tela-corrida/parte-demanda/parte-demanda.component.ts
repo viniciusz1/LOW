@@ -14,6 +14,10 @@ export class ParteDemandaComponent implements OnInit {
     private centroCustoService: CentroCustoService,
   ) {}
 
+  teste(){
+
+  }
+
   centrosCusto: CentroCusto[] = [];
   atualizarCentrosCusto() {
     this.centroCustoService.getCentrosCusto().subscribe({

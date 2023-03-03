@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Proposta } from 'src/app/models/proposta.model';
 
 @Component({
   selector: 'app-modal-proposta-documento',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ModalPropostaDocumentoComponent implements OnInit {
 
   constructor() { }
+  proposta: Proposta | undefined
 
   ngOnInit(): void {
   }

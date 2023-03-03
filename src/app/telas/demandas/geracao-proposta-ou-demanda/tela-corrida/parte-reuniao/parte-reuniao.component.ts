@@ -135,7 +135,7 @@ export class ParteReuniaoComponent implements OnInit {
   listaCentrodeCusto : number[] = [];
   resultado: boolean = true;
 
-  adicionarCentroCusto(index:any){
+  adicionarCentroCusto(){
     try{
       this.propostaService.addCenterOfCost()
     }catch(err){

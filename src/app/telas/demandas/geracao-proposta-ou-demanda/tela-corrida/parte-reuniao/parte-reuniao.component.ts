@@ -41,6 +41,7 @@ export class ParteReuniaoComponent implements OnInit {
   ) {
     // spyService.addTarget(target: 'reuniao', offset: 0)
   }
+
   custosTotais: number = 0;
   paybackProposta = this.propostaService.paybackProposta;
   centrosCusto: CentroCusto[] = [];
@@ -96,10 +97,11 @@ export class ParteReuniaoComponent implements OnInit {
   centrosDeCustoOpcoes = [ 'Center 1', 'Center 2', 'Center 3' ];
   //fazer verificações necessárias
   addRowRecurso() {
-    if(this.formRecursos.valid){
-      this.listaRecursos.push(this.formRecursos.value as unknown as RecursoDoForm);
-      this.mudarCustoTotalProjetoEPayback();
-      this.formRecursos.reset()
+    try{
+      this.propostaService.addRowRecurso()
+      this.mudarCustoTotalProjetoEPayback()
+    }catch(err){
+      alert(err)
     }
   }
 
@@ -134,19 +136,11 @@ export class ParteReuniaoComponent implements OnInit {
   resultado: boolean = true;
 
   adicionarCentroCusto(index:any){
-    let porcentagemElement: HTMLInputElement = document.getElementById("porcentagemListaReuniao" + (index - 1)) as HTMLInputElement;
-    let nomeElement: HTMLInputElement = document.getElementById("nomeCentroCusto" + (index - 1)) as HTMLInputElement;
-    let porcentagem: string = porcentagemElement.value;
-
-    //Lógica para verificar quando fecha em 100%
-
-    let soma: number = this.listaCentrodeCusto.reduce((total, numero) => total + numero, 0);
-    let total: number = soma + parseInt(porcentagem);
-    this.verificaPorcentagemCCEAdicionaForm(total, parseInt(porcentagem));
-    porcentagemElement.disabled = true;
-    nomeElement.disabled = true;
-
-
+    try{
+      this.propostaService.addCenterOfCost()
+    }catch(err){
+      alert(err)
+    }
   }
 
   removerCentroDeCusto(index: number){
@@ -154,22 +148,7 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
 
-  verificaPorcentagemCCEAdicionaForm(total: number, porcentagem?:number){
-    if(total <= 99){
-      if(porcentagem)
-      this.listaCentrodeCusto.push(porcentagem);
-      this.resultado = true;
-      this.propostaService.addCenterOfCost()
-    } else if(total == 100){
-      if(porcentagem)
-      this.listaCentrodeCusto.push(porcentagem);
-      alert("Os Centros de Custo fecharam em 100%")
-      this.resultado = false;
-    } else if(total > 100){
-      alert("Este valor vai passar de 100%, escolha um menor")
-      this.resultado = true;
-    }
-  }
+   
 
   teste: string[] = []
   atualizarCentrosCusto() {

@@ -66,17 +66,7 @@ export class TelaCorridaComponent implements OnInit {
     console.log(window.scrollY)
   }
 
-  indoPraCima(top: number) {
-    const scrollPosition =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop ||
-      0;
-    window.scroll({
-      top: top,
-      behavior: 'smooth',
-    });
-  }
+
 
   tipoExibicaoTela() {
     if (this.router.url == '/tela-inicial/demanda') {
@@ -122,9 +112,35 @@ export class TelaCorridaComponent implements OnInit {
 
 
   titulosDemanda: any[] = [];
+  activeSection: string = "";
 
+  onScroll() {
+    const sections = document.querySelectorAll('section');
+    const scrollPosition = window.pageYOffset;
+
+    sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 50;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollPosition >= sectionTop-200 && scrollPosition < sectionBottom) {
+            this.activeSection = section.id;
+        }
+        if(scrollPosition == 890){
+          this.activeSection = "section3"
+        }
+    });
+}
+indoPraCima(id: string) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 
   ngOnInit(): void {
+
+    window.addEventListener('scroll', this.onScroll.bind(this));
+    this.onScroll();
     setInterval(() => {
        let icones = document.getElementsByClassName('nav-scroll');
        for(let i = 0; i < icones.length; i++){

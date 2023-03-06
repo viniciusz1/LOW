@@ -79,6 +79,7 @@ export class TelaReuniaoComponent implements OnInit {
   openCalendario() {
     this.matDialog.open(TelaCalendarioComponent, {
       minWidth: '60vw',
+      data: this.listaReunioes
     });
   }
 

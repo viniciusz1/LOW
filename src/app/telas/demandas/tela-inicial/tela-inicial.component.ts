@@ -272,17 +272,14 @@ export class TelaInicialComponent implements OnInit {
       };
   }
 
-  openModalDemandaDocumento(event: string) {
+  openModalDemandaDocumento(event: Demanda) {
     this.matDialog
       .open(ModalDemandaDocumentoComponent, {
         maxWidth: '70vw',
         minWidth: '50vw',
         data: event,
       })
-      .afterClosed()
-      .subscribe(() => {
-        this.carregarDemandasIniciais();
-      });
+
   }
   openModalHistorico() {
     this.matDialog.open(ModalHistoricoComponent, {
@@ -364,6 +361,7 @@ export class TelaInicialComponent implements OnInit {
           }
         });
         this.exibirFilasDeStatus();
+        console.log(this.listaDemandas)
       },
       error: (err) => {
         console.log(err);

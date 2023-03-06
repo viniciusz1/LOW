@@ -31,7 +31,7 @@
           <i class="bi bi-filetype-csv " style="font-size: 17px"></i>
         </button>
         <div>
-          <p-dropdown class="drop" (onChange)="isFiltrado = !isFiltrado" [options]="opcoesOrdenacao"
+          <p-dropdown class="drop" [options]="opcoesOrdenacao"
             [(ngModel)]="ordenarSelect" placeholder="Ordenar" optionLabel="name"></p-dropdown>
         </div>
         <span class="p-input-icon-left ms-3">
@@ -145,8 +145,8 @@
   </div>
   <div @fadeAnimation class="d-flex" *ngIf="tipoExibicaoDemanda && !isFiltrado">
     <!-- Parte não Filtrada em card -->
-    <div class="bloco-branco"></div>
-    <div class="tamanho-container">
+    <div class="bloco-branco" style="width:10%"></div>
+    <div class="tamanho-container" style="width:80%">
       <div *ngFor="let linha of listaTituloNaoFiltrado; let i = index">
         <div class="my-4 tamanho-container">
           <div class="ms-3 title-demanda" for="status">
@@ -181,7 +181,7 @@
         </div>
       </div>
     </div>
-    <div class="bloco-branco"></div>
+    <div class="bloco-branco" style="width:10%"></div>
   </div>
   <div *ngIf="isFiltrado && tipoExibicaoDemanda" [ngClass]="{ 'mt-5': tipoRascunho }"
     style="width: -webkit-fill-available">

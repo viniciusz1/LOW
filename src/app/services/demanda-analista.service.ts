@@ -15,23 +15,18 @@ export class DemandaAnalistaService {
     tamanhoDemandaAnalista: [''],
     buSolicitanteDemandaAnalista:[''],
     busBeneficiadasDemandaAnalista:[''],
-    demandaDemandaAnalista: { codigoDemanda: '' },
-    analista: { codigoUsuario: 3 },
+    codigoDemanda: [''],
+    analista: { codigoUsuario: 1 },
     secaoDemandaAnalista: [''],
   });
   postProposta(codigoDemanda: string | undefined) {
     if(codigoDemanda != undefined){
-    this.demandaAnalistaForm.controls.demandaDemandaAnalista.setValue({codigoDemanda: codigoDemanda})
+    this.demandaAnalistaForm.controls.codigoDemanda.setValue(codigoDemanda);
     }
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demandaAnalista',
 
       this.demandaAnalistaForm.value
-    );
-  }
-  getDemandaAnalistaByCodigoDemanda(codigoDemanda: string) {
-    return this.http.get<DemandaAnalista>(
-      `http://localhost:8080/demandaAnalista/demanda/${codigoDemanda}`
     );
   }
 

@@ -41,8 +41,6 @@ export class PropostaService {
     demandaAnalistaProposta: { 'codigoDemandaAnalista': 0 }
   });
 
-  private codigoDemanda = 0;
-
   public formRecursos = this.fb.group({
     nomeRecurso: ['', [Validators.required]],
     tipoDespesaRecurso: ['', [Validators.required]],
@@ -105,15 +103,8 @@ export class PropostaService {
       }
     });
   }
-  getDemandaAnalistaByCodigoDemanda() {
-    return this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(
-      this.codigoDemanda.toString()
-    );
-  }
 
-  setCodigoDemanda(codigoDemanda: number) {
-    this.codigoDemanda = codigoDemanda;
-  }
+
 
   postProposta(codigoDemandaAnalista: string) {
     this.formProposta.patchValue({

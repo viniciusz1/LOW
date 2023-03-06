@@ -109,7 +109,7 @@ export class DemandaService {
       this.link = `http://localhost:8080/demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=`
     }else{
       this.link = `http://localhost:8080/demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}`
-    }   
+    }
     return this.http.get<Demanda[]>(
       this.link
     );
@@ -170,6 +170,7 @@ export class DemandaService {
   }
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
+
     return this.http.put<any>(
       `http://localhost:8080/demanda/update/status/${codigoDemanda}`,
       decisao

@@ -11,5 +11,5 @@ export interface DemandaAnalista {
     secaoDemandaAnalista?: string,
     demandaDemandaAnalista: Demanda,
     analista?: Usuario,
-    gerenteNegocio?: Usuario 
+    gerenteNegocio?: Usuario
 }

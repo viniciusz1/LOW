@@ -30,13 +30,18 @@ import * as FileSaver from 'file-saver';
   styleUrls: ['./tela-inicial.component.scss'],
   animations: [fadeAnimation],
 })
+
+
 export class TelaInicialComponent implements OnInit {
+  value8: any;
+  cities: any[] = [];
+  
   constructor(
     public dialog: Dialog,
     private matDialog: MatDialog,
     private demandasService: DemandaService,
     private router: Router,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       this.pesquisarDemandas({  status: undefined ,pesquisaCampo: this.pesquisaDemanda});
@@ -44,9 +49,18 @@ export class TelaInicialComponent implements OnInit {
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
-    }
+    };
+    this.cities = [
+      { name: "New York", code: "NY" },
+      { name: "Rome", code: "RM" },
+      { name: "London", code: "LDN" },
+      { name: "Istanbul", code: "IST" },
+      { name: "Paris", code: "PRS" }
+    ];
   }
+
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
+
   ordenarSelect = '';
   opcoesOrdenacao = [
     { name: 'Data de criação', value: 'dataCriacao' },
@@ -56,6 +70,7 @@ export class TelaInicialComponent implements OnInit {
     { name: 'Z-A', value: 'autor' },
   ];
 
+ 
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
   positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];

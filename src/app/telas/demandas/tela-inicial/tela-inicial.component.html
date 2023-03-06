@@ -32,7 +32,7 @@
         </button>
         <div>
           <p-dropdown class="drop" (onChange)="isFiltrado = !isFiltrado" [options]="opcoesOrdenacao"
-            [(ngModel)]="ordenarSelect" placeholder="Ordenar" optionLabel="name"></p-dropdown>
+            [(ngModel)]="ordenarSelect" placeholder="Ordenar" optionLabel="name"></p-dropdown> 
         </div>
         <span class="p-input-icon-left ms-3">
           <i class="pi pi-search"></i>
@@ -45,6 +45,7 @@
           Filtrar Mais
           <i class="bi bi-chevron-double-down"></i>
         </button>
+        
       </div>
 
       <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (filtroAcionado)="pesquisarDemandas(undefined)"

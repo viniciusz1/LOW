@@ -2,6 +2,7 @@ import { CentroCustoService } from './../../../../../services/centro-custo.servi
 import { DemandaService } from './../../../../../services/demanda.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-parte-demanda',
@@ -55,6 +56,33 @@ export class ParteDemandaComponent implements OnInit {
       }
     }
   }
+
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+
+  editor: Editor = new Editor();
+
+  toolbarDemanda: Toolbar = [
+    ['bold', 'italic'],
+    ['underline', 'strike'],
+    ['code', 'blockquote'],
+    ['ordered_list', 'bullet_list'],
+    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
+    ['link', 'image'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+
+  editorDemanda: Editor = new Editor();
+
   localMoedaBeneficio1='pt-BR'
   localMoedaBeneficio2='pt-BR'
   currencyMoedaBeneficio1 = 'BRL'

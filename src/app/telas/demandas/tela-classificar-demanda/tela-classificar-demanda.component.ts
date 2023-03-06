@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalReprovacaoDemandaComponent } from 'src/app/modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 
 
 
@@ -18,6 +19,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./tela-classificar-demanda.component.scss'],
 })
 export class TelaClassificarDemandaComponent implements OnInit {
+
+  openModalReprovacao() {    
+    this.matDialog.open(ModalReprovacaoDemandaComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    });
+  }
+
   BUs: BusinessUnit[] = [];
 
   listaBUs = [
@@ -74,6 +83,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
   ]
 
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
+
   constructor(
     private matDialog: MatDialog,
     private demandaAnalistaService: DemandaAnalistaService,

@@ -140,6 +140,32 @@
       "solicitante": "Solicitante",
       "departamento": "Departamento",
       "status": "Status de Aprovação"
-    }
+    },
+    "botao-criar-demanda": "Criar demanda"
+  },
+  "demanda": {
+     "dados-gerais": "Dados Gerais",
+     "titulo":"Título:",
+     "campo-obrigatorio":"Campo Obrigatório",
+     "situacao-atual":"Situação Atual:",
+     "objetivo-final":"Objetivo Final:",
+     "centros-custo":"Centros de Custo:",
+     "beneficios":"Benefícios",
+     "beneficio-real":"Benefício Real:",
+     "memoria-beneficio-real":"Memória de Cálculo do Benefício Real:",
+     "beneficio-potencial":"Benefício Potencial:",
+     "memoria-beneficio-potencial":"Memória de Cálculo do Benefício Potencial:",
+     "beneficio-qualitativo":"Benefício Qualitativo:",
+     "adicionais":"Adicionais",
+     "frequencia-uso-sistema":"Frequencia de Uso do Sistema:",
+     "anexar-documento":"Anexar Documento:",
+     "p-titulo":"Ex: Melhoria em Sistemas de Informação",
+     "p-situacao-atual":"Ex: Baixa produção, abrangente de atrasos",
+     "p-objetivo-final":"Ex: Aumentar a produção com o desenvolvimento de um sistema",
+     "p-centros-custo-porcentagem":"Porcentagem",
+     "p-centros-custo-cc":"Centro de Custo",
+     "p-beneficio-real":"Ex: 150.000",
+     "p-memoria-beneficio-real":"Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
+
   }
 }

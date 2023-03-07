@@ -6,18 +6,22 @@
           <ng-template #customContent let-texto="texto" style="border-radius: 20px">
             <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
           </ng-template>
-          <button joyrideStep="nove" [title]="'Filtrar Demandas'" [stepContent]="customContent"
-            [stepContentParams]="{ texto: textoTutorial[8] }" style="overflow: auto; height: 42px;"
-            (click)="openModalCriarReuniao()" class="btn btn-primary">
-            <i class="bi bi-people me-2"></i>
-            Marcar Reunião
-          </button>
+          <div style="height: 4.4vh;">
+            <button joyrideStep="nove" [title]="'Filtrar Demandas'" [stepContent]="customContent"
+              [stepContentParams]="{ texto: textoTutorial[8] }" style="font-size: 1rem; word-wrap: break-word;"
+              (click)="openModalCriarReuniao()" class="btn btn-primary">
+              <i class="bi bi-people me-2"></i>
+              Marcar Reunião
+            </button>
+          </div>
           <!-- [routerLink]="'/tela-inicial/calendario'" -->
-          <button joyrideStep="dez" [title]="'Filtrar Demandas'" [stepContent]="customContent"
-            [stepContentParams]="{ texto: textoTutorial[9] }" style="overflow: auto; height: 42px;"
-            class="btn btn-primary ms-3" (click)="openCalendario()">
-            <i class="bi bi-calendar-week me-2"></i>Ver em calendário
-          </button>
+          <div style="height: 4.4vh;">
+            <button joyrideStep="dez" [title]="'Filtrar Demandas'" [stepContent]="customContent"
+              [stepContentParams]="{ texto: textoTutorial[9] }" style="font-size: 1rem; word-wrap: break-word;"
+              class="btn btn-primary ms-3" (click)="openCalendario()">
+              <i class="bi bi-calendar-week me-2"></i>Ver em calendário
+            </button>
+          </div>
             <p-dropdown class="ms-3" [options]="opcoesOrdenacao" [(ngModel)]="ordenarSelect" placeholder="Ordenar"
             optionLabel="name"></p-dropdown>
         </div>

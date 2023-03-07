@@ -22,9 +22,12 @@
           pTooltip="Escreva como funciona o sistema atualmente, na empresa" tooltipPosition="top"></i>
       </div>
       <div style="display: grid">
-        <textarea placeholder="Ex: Baixa produção, abrangente de atrasos" type="text"
-          formControlName="situacaoAtualDemanda" pInputText class="input w-100"
-          [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.situacaoAtualDemanda.errors && demandaForm.controls.situacaoAtualDemanda.touched}"></textarea>
+        <div class="NgxEditor__Wrapper editor-demanda"
+          [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}">
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+          <ngx-editor [editor]="editor" formControlName="situacaoAtualDemanda">
+          </ngx-editor>
+        </div>
         <small
           *ngIf="demandaForm.controls.situacaoAtualDemanda.errors && demandaForm.controls.situacaoAtualDemanda.touched"
           id="username2-help" class="p-error block">Campo Obrigatório</small>
@@ -37,16 +40,20 @@
           pTooltip="De que forma sua proposta ajudaria a empresa?" tooltipPosition="top"></i>
       </div>
       <div style="display: grid">
-        <textarea type="text" placeholder="Ex: Aumentar a produção com o desenvolvimento de um sistema"
-          formControlName="objetivoDemanda" pInputText class="input w-100"
-          [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}"></textarea>
+        <div class="NgxEditor__Wrapper editor-demanda"
+          [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}">
+          <ngx-editor-menu [editor]="editorDemanda" [toolbar]="toolbarDemanda"> </ngx-editor-menu>
+          <ngx-editor [editor]="editorDemanda" formControlName="objetivoDemanda">
+          </ngx-editor>
+        </div>
         <small *ngIf="demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched"
           id="username2-help" class="p-error block">Campo Obrigatório</small>
       </div>
     </div>
     <div formArrayName="centrosCusto" class="row align-items-center">
-      <label style="font-weight: 500" class="me-2">Centros de Custo <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
-        pTooltip="Quais sessões se beneficiariam com sua proposta?" tooltipPosition="top"></i></label>
+      <label style="font-weight: 500" class="me-2">Centros de Custo <i class="bi bi-info-circle me-2"
+          style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+          pTooltip="Quais sessões se beneficiariam com sua proposta?" tooltipPosition="top"></i></label>
       <div style="width: 50%; display: -webkit-box;">
         <div class="d-flex flex-column">
           <div *ngFor="let centroCusto of demandaForm.controls.centrosCusto.controls; let i = index"
@@ -59,14 +66,12 @@
               </div>
               <input style="width: 10vw; margin-right: 0.5vw;" [id]="'nomeCentroCusto'+i" pInputText [required]="true"
                 formControlName="centroCusto" placeholder="Centro de Custo" />
-              <button (click)="removerCentroDeCusto(i)" [disabled]="this.demandaForm.controls.centrosCusto.length == 1" class="btn btn-danger"><i
-                  class="bi bi-trash"></i></button>
+              <button (click)="removerCentroDeCusto(i)" [disabled]="this.demandaForm.controls.centrosCusto.length == 1"
+                class="btn btn-danger"><i class="bi bi-trash"></i></button>
             </div>
           </div>
         </div>
-        <button
-          class="btn btn-outline-primary ms-2"
-          [disabled]="!demandaForm.controls.centrosCusto.valid || !resultado"
+        <button class="btn btn-outline-primary ms-2" [disabled]="!demandaForm.controls.centrosCusto.valid || !resultado"
           (click)="adicionarCentroCusto()">
           <i class="bi bi-plus-lg" style="font-size: 19px"></i>
         </button>

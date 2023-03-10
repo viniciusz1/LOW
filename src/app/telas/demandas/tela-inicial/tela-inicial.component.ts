@@ -35,7 +35,7 @@ import * as FileSaver from 'file-saver';
 export class TelaInicialComponent implements OnInit {
   value8: any;
   cities: any[] = [];
-  
+
   constructor(
     public dialog: Dialog,
     private matDialog: MatDialog,
@@ -70,7 +70,7 @@ export class TelaInicialComponent implements OnInit {
     { name: 'Z-A', value: 'autor' },
   ];
 
- 
+
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
   positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -176,7 +176,7 @@ export class TelaInicialComponent implements OnInit {
               ?.map((cc) => cc.codigoCentroCusto)
               .join(', '),
             nomeCentroCusto: listaDemandas[i].centroCustos
-              ?.map((cc) => cc.nome)
+              ?.map((cc) => cc.nomeCentroCusto)
               .join(', '),
           });
         }

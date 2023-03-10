@@ -1,8 +1,8 @@
+import { Demanda } from './../models/demanda.model';
 import { Filtro } from './../models/filtro.model';
 import { FormArray, FormBuilder, FormGroup, NumberValueAccessor } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Demanda } from '../models/demanda.model';
 import { Validators } from '@angular/forms';
 import { saveAs } from 'file-saver';
 
@@ -14,7 +14,6 @@ export class DemandaService {
     tituloDemanda: ['', [Validators.required]],
     situacaoAtualDemanda: ['', [Validators.required]],
     objetivoDemanda: ['', [Validators.required]],
-    centroCustos: ['', [Validators.required]],
     beneficioRealDemanda: this.fb.group({
       moedaBeneficio: ['', [Validators.required]],
       memoriaDeCalculoBeneficio: ['', [Validators.required]],
@@ -30,21 +29,44 @@ export class DemandaService {
     solicitanteDemanda: {
       codigoUsuario: 2,
     },
-    centrosCusto: this.fb.array([this.createCentroCusto()])
+    centroCustos: this.fb.array([this.createCentroCusto()])
 
   });
   createCentroCusto(): FormGroup {
     return this.fb.group({
-      porcentagem: [''],
-      centroCusto: ['']
+      porcentagemCentroCusto: [''],
+      nomeCentroCusto: ['']
     });
   }
   removeCenterOfCost(index: number) {
-    (this.demandaForm.controls.centrosCusto as FormArray).removeAt(index);
+    (this.demandaForm.controls.centroCustos as FormArray).removeAt(index);
   }
 
+  setFormDemandaData(demanda: Demanda){
+      this.demandaForm.patchValue({
+        tituloDemanda: demanda.tituloDemanda,
+        situacaoAtualDemanda: demanda.situacaoAtualDemanda,
+
+        objetivoDemanda: demanda.objetivoDemanda,
+        beneficioRealDemanda: {
+          moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
+        },
+        beneficioPotencialDemanda: {
+          moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
+        },
+        beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
+        frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
+      })
+      // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
+    }
+
+
   addCenterOfCost() {
-    (this.demandaForm.controls.centrosCusto as FormArray).push(
+    (this.demandaForm.controls.centroCustos as FormArray).push(
       this.createCentroCusto()
     );
 

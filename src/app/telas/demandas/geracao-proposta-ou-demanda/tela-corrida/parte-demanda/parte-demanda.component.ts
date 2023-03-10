@@ -78,7 +78,6 @@ export class ParteDemandaComponent implements OnInit {
   currencyMoedaBeneficio1 = 'BRL';
   currencyMoedaBeneficio2 = 'BRL';
   demandaForm = this.demandaService.demandaForm;
-  selectedCentros: any;
   opcoesDeTamanho = [
     'Muito Pequena',
     'Pequena',
@@ -89,8 +88,6 @@ export class ParteDemandaComponent implements OnInit {
   opcoesDeMoeda = [{ name: 'BRL' }, { name: 'EUR' }, { name: 'DOL' }];
 
   ngOnInit(): void {
-    let location = new Location();
-    location.reload();
   }
   uploadDocumentos(event: any) {
     this.demandaService.arquivos = event['files'] as File[];

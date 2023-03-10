@@ -1,29 +1,14 @@
 import { DemandaService } from 'src/app/services/demanda.service';
 import { CentroCusto } from './../../../../../models/centro-custo.model';
 import { PropostaService } from './../../../../../services/proposta.service';
-import { DemandaAnalistaService } from './../../../../../services/demanda-analista.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { ScrollSpyService } from 'ng-spy';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
-import { MessageService } from 'primeng/api';
 import { Recurso } from 'src/app/models/recurso.model';
-import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
 
 interface Responsavel {
   nome: string;
   area: string;
-}
-interface RecursoDoForm{
-  nomeRecurso: string,
-  tipoDespesaRecurso: TipoDespesa,
-  perfilDespesaRecurso: string,
-  quantidadeHorasRecurso: number,
-  valorHoraRecurso: number,
-  periodoExMesesRecurso: number,
-  centroCustos?: {porcentagemCentroCusto: number, nomeCentroCusto: number}[]
-  porcentagemCustoRecurso: number[],
-  centroDeCustoRecurso: {codigoCentroCusto:number}[]
 }
 
 @Component({

@@ -50,13 +50,13 @@
           id="username2-help" class="p-error block">Campo Obrigatório</small>
       </div>
     </div>
-    <div formArrayName="centrosCusto" class="row align-items-center">
+    <div formArrayName="centroCustos" class="row align-items-center">
       <label style="font-weight: 500" class="me-2">Centros de Custo <i class="bi bi-info-circle me-2"
           style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Quais sessões se beneficiariam com sua proposta?" tooltipPosition="top"></i></label>
       <div style="width: 50%; display: -webkit-box;">
         <div class="d-flex flex-column">
-          <div *ngFor="let centroCusto of demandaForm.controls.centroCustos.value; let i = index"
+          <div *ngFor="let centroCusto of demandaForm.controls.centroCustos.controls; let i = index"
             style="flex-wrap: wrap;" class="mb-1">
             <div [formGroupName]="i" class="d-flex">
               <div class="p-inputgroup" style=" margin-right: 0.5vw;">

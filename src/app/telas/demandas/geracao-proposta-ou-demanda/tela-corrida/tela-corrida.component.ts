@@ -56,10 +56,7 @@ export class TelaCorridaComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.tipoExibicaoTela();
-    this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
-    .subscribe(e => {
-      this.demandaService.setFormDemandaData(e);
-    })
+
   }
 
   teste() {
@@ -71,6 +68,10 @@ export class TelaCorridaComponent implements OnInit {
       this.aparecerProposta = false;
       this.demandaService.resetDemandaForm();
     } else {
+      this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
+    .subscribe(e => {
+      this.demandaService.setFormDemandaData(e);
+    })
       this.aparecerProposta = true;
       this.demandaService.resetDemandaForm();
     }

@@ -31,6 +31,7 @@ export class TelaCorridaComponent implements OnInit {
       if(this.dadosDemandaAnalista?.codigoDemandaAnalista)
       this.propostaService.postProposta(this.dadosDemandaAnalista?.codigoDemandaAnalista).subscribe({
         next: (response) => {
+
           this.router.navigate(['/tela-inicial'])
         },
         error: (err) => {

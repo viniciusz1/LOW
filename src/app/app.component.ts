@@ -9,8 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   title = 'low';
   constructor(translate: TranslateService){
-    translate.setDefaultLang('pt');
-    translate.use('pt');
+    // translate.setDefaultLang('pt');
+    // translate.use('pt');
 
     let htmlRoot:HTMLElement = <HTMLElement> document.getElementsByTagName('html')[0];
     let bodyroot:HTMLElement = <HTMLElement> document.getElementsByTagName('body')[0];

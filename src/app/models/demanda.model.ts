@@ -1,3 +1,5 @@
+import { BusinessUnit } from './business-unit.model';
+import { Tamanho } from './tamanho.enum';
 import { Arquivo } from './arquivo.model';
 
 import { CentroCusto } from 'src/app/models/centro-custo.model';
@@ -22,10 +24,17 @@ export interface Demanda {
     inicioExDemanda?: Date,
     fimExDemanda?: Date,
     paybackSimplesDemanda?: string,
-    responsaveisNegocioDemanda?: []
+    responsaveisNegocioDemanda?: [],
     //Não tem nos inputs mas acredito que é necessário
     ppmDemanda?: string
     solicitanteDemanda?: Usuario
     departamentoBenDemanda?: string
-    scoreDemanda?: number
+    scoreDemanda?: number,
+
+    tamanhoDemandaAnalista?: Tamanho,
+    buSolicitanteDemandaAnalista?: BusinessUnit,
+    busBeneficiadasDemandaAnalista?: BusinessUnit[],
+    secaoDemandaAnalista?: string,
+    analista?: Usuario,
+    gerenteNegocio?: Usuario
 }

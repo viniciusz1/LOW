@@ -15,57 +15,33 @@ import { Tamanho } from 'src/app/models/tamanho.enum';
 export class ModalDemandaDocumentoComponent implements OnInit {
   user = 'gerente';
   constructor(
-    @Inject(DIALOG_DATA) public data: string,
-    private demandaAnalistaService: DemandaAnalistaService,
+    @Inject(DIALOG_DATA) public data: Demanda,
     private demandaService: DemandaService,
     private dialogRef: DialogRef<ModalDemandaDocumentoComponent>
   ) {
-    this.buscarDemandaAnalista();
+    this.dadosDemanda = data
   }
+  dadosDemanda: Demanda | undefined;
 
-  dadosDemandaAnalista: DemandaAnalista | undefined;
 
   enviarDecisao(decisao: number) {
-    if (this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda)
+    if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0'){
       this.demandaService
         .avancarStatusDemandaComDecisao(
-          this.dadosDemandaAnalista?.demandaDemandaAnalista?.codigoDemanda,
+          this.dadosDemanda.codigoDemanda,
           decisao
         )
         .subscribe({
           next: event => {
+            console.log(event)
             this.dialogRef.close()
           },
           error: err => {
             console.log(err)
           }
         });
-  }
+    }
 
-  buscarDemandaAnalista() {
-    this.demandaAnalistaService
-      .getDemandaAnalistaByCodigoDemanda(this.data)
-      .subscribe((demanda) => {
-        if (!demanda) {
-          this.getDemanda();
-        }
-        this.dadosDemandaAnalista = demanda;
-      });
-  }
-
-  getDemanda() {
-    this.demandaService
-      .getDemandaByCodigoDemanda(parseInt(this.data))
-      .subscribe((demanda) => {
-        if (this.dadosDemandaAnalista != undefined) {
-          this.dadosDemandaAnalista.demandaDemandaAnalista = demanda;
-        } else {
-          this.dadosDemandaAnalista = {
-            codigoDemandaAnalista: '0',
-            demandaDemandaAnalista: demanda,
-          }
-        }
-      });
   }
 
   download(arquivo: Arquivo): void {

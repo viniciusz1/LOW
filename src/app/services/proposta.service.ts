@@ -15,7 +15,7 @@ interface RecursoDoForm {
   quantidadeHorasRecurso: number;
   valorHoraRecurso: number;
   periodoExMesesRecurso: number;
-  centrosCusto?: { porcentagem: number; centroCusto: number }[];
+  centroCustos?: { porcentagemCentroCusto: number; nomeCentroCusto: number }[];
   porcentagemCustoRecurso: number[];
   centroDeCustoRecurso: { codigoCentroCusto: number }[];
 }
@@ -40,8 +40,6 @@ export class PropostaService {
     responsavelProposta: { 'codigoUsuario': 3 },
     demandaAnalistaProposta: { 'codigoDemandaAnalista': 0 }
   });
-
-  private codigoDemanda = 0;
 
   public formRecursos = this.fb.group({
     nomeRecurso: ['', [Validators.required]],
@@ -94,26 +92,19 @@ export class PropostaService {
     this.listaRecursos.forEach(e => {
       e.porcentagemCustoRecurso = [];
       e.centroDeCustoRecurso = [];
-      if (e.centrosCusto) {
-        e.centrosCusto.forEach((centro) => {
-          e.porcentagemCustoRecurso.push(centro.porcentagem);
+      if (e.centroCustos) {
+        e.centroCustos.forEach((centro) => {
+          e.porcentagemCustoRecurso.push(centro.porcentagemCentroCusto);
           e.centroDeCustoRecurso.push({
-            codigoCentroCusto: centro.centroCusto,
+            codigoCentroCusto: centro.nomeCentroCusto,
           });
-          delete e.centrosCusto;
+          delete e.centroCustos;
         });
       }
     });
   }
-  getDemandaAnalistaByCodigoDemanda() {
-    return this.demandaAnalistaService.getDemandaAnalistaByCodigoDemanda(
-      this.codigoDemanda.toString()
-    );
-  }
 
-  setCodigoDemanda(codigoDemanda: number) {
-    this.codigoDemanda = codigoDemanda;
-  }
+
 
   postProposta(codigoDemandaAnalista: string) {
     this.formProposta.patchValue({

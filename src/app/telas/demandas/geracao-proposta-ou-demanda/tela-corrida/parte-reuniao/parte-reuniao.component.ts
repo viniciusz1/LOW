@@ -1,30 +1,14 @@
 import { DemandaService } from 'src/app/services/demanda.service';
-import { CentroCustoService } from './../../../../../services/centro-custo.service';
 import { CentroCusto } from './../../../../../models/centro-custo.model';
 import { PropostaService } from './../../../../../services/proposta.service';
-import { DemandaAnalistaService } from './../../../../../services/demanda-analista.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
-import { ScrollSpyService } from 'ng-spy';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
-import { MessageService } from 'primeng/api';
 import { Recurso } from 'src/app/models/recurso.model';
-import { TipoDespesa } from 'src/app/models/tipoDespesa.enum';
 
 interface Responsavel {
   nome: string;
   area: string;
-}
-interface RecursoDoForm{
-  nomeRecurso: string,
-  tipoDespesaRecurso: TipoDespesa,
-  perfilDespesaRecurso: string,
-  quantidadeHorasRecurso: number,
-  valorHoraRecurso: number,
-  periodoExMesesRecurso: number,
-  centrosCusto?: {porcentagem: number, centroCusto: number}[]
-  porcentagemCustoRecurso: number[],
-  centroDeCustoRecurso: {codigoCentroCusto:number}[]
 }
 
 @Component({
@@ -35,7 +19,6 @@ interface RecursoDoForm{
 export class ParteReuniaoComponent implements OnInit {
   constructor(
     private propostaService: PropostaService,
-    private centroCustoService: CentroCustoService,
     private demandaService: DemandaService
 
   ) {
@@ -44,7 +27,7 @@ export class ParteReuniaoComponent implements OnInit {
 
   custosTotais: number = 0;
   paybackProposta = this.propostaService.paybackProposta;
-  centrosCusto: CentroCusto[] = [];
+  centroCustos: CentroCusto[] = [];
   formProposta = this.propostaService.formProposta;
   formRecursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
@@ -123,7 +106,7 @@ export class ParteReuniaoComponent implements OnInit {
       valorHoraRecurso: this.listaRecursos[index].valorHoraRecurso.toString(),
       quantidadeHorasRecurso: this.listaRecursos[index].quantidadeHorasRecurso.toString(),
       periodoExMesesRecurso: this.listaRecursos[index].periodoExMesesRecurso.toString(),
-      centrosCusto: this.listaRecursos[index].centrosCusto,
+      centrosCusto: this.listaRecursos[index].centroCustos,
     })
     this.listaRecursos.splice(index, 1)
   }
@@ -148,18 +131,9 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
 
-   
+
 
   teste: string[] = []
-  atualizarCentrosCusto() {
-    this.centroCustoService.getCentrosCusto().subscribe({
-      next: (centrosCusto) => {
-        this.centrosCusto = centrosCusto;
-      },
-      error: (err) => console.log(err),
-    });
-  }
   ngOnInit(): void {
-    this.atualizarCentrosCusto();
   }
 }

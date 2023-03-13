@@ -15,9 +15,9 @@
       </div>
         <nav class="h-100 flex-column align-items-stretch pe-4">
           <nav class="nav nav-pills flex-column" id="scroll" >
-            <a class="nav-link nav-scroll" style="margin-bottom: 3.1vh;" href="#item-1" (click)="teste()">Dados Gerais</a>
-            <a class="nav-link nav-scroll" style="margin-bottom: 3.1vh;" href="#item-2">Benefícios</a>
-            <a class="nav-link nav-scroll" href="#item-3">Adicionais</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCima('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" (click)="teste()">Dados Gerais</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCima('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">Benefícios</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCima('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="cursor:pointer">Adicionais</a>
           </nav>
         </nav>
     </div>

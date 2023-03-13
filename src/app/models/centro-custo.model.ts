@@ -1,4 +1,5 @@
 export interface CentroCusto{
     codigoCentroCusto: number,
-    nome: string
+    nomeCentroCusto: string,
+    porcentagemCentroCusto: number
 }

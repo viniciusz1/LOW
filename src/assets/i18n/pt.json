@@ -1,5 +1,146 @@
 {
   "tela-inicial": {
+    "titulo": "Demandas",
+    "botao-criar-demanda": "Criar demanda",
+    "filtrar-mais": "Filtrar Mais",
+    "pesquisar-demanda": "Pesquisar Demanda",
+    "ordenar": "Ordenar",
+    "ver-mais": "Ver mais"
+  },
+  "marcar-reuniao":{
+    "titulo": "Marcar Reunião",
+    "demandas": "Demandas",
+    "arraste": "Arraste as Demandas para este campo!",
+    "data-hora": "Data e Hora da Reunião:",
+    "p-data-hora": "Clique Aqui",
+    "comissao": "Selecione a Comissão da Reunião:",
+    "p-comissao": "Selecione a Comissão",
+    "b-marcar": "Marcar Reunião"
+  },
+  "tela-reunioes": {
+    "marcar": "Marcar Reunião",
+    "calendario": "Ver em Calendario",
+    "ordenar": "Ordenar"
+  },
+  "filtro-reunioes": {
+    "comissao": "Comissao",
+    "data": "Data",
+    "responsavel": "Responsável",
+    "status": "Status de Aprovação",
+    "solicitante": "Solicitante",
+    "codigoPPM": "Código PPM"
+  },
+  "barra-lateral-configuracoes": {
+    "conta": "Conta",
+    "layout": "Layout",
+    "sugestoes": "Sugestões"
+  },
+  "menu-perfil": {
+    "rascunho": "Rascunho",
+    "config": "Configurações",
+    "sair": "Sair"
+  },
+  "notificacoes": {
+    "suas-notificacoes": "Suas Notificações",
+    "not-found": "Não há Notificações"
+  },
+  "configuracoes-perfil": {
+    "titulo": "Perfil",
+    "subtitulo": "CONFIGURAÇÕES GERAIS DE CONTA",
+    "nome": "Nome",
+    "dataNasc": "Data de Nascimento",
+    "cpf": "CPF",
+    "email": "Email",
+    "telefone": "Telefone",
+    "senha": "Senha",
+    "alterar": "Alterar"
+  },
+  "configuracoes-layout": {
+    "titulo": "Layout",
+    "subtitulo": "CONFIGURAÇÕES GERAIS DE LAYOUT",
+    "temas": "Temas",
+    "fonte": "Fonte",
+    "tamanho": "Tamanho"
+  },
+  "configuracoes-sugestoes": {
+    "titulo": "Sugestões",
+    "subtitulo": "ENVIAR SUGESTÕES",
+    "descricao": "Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento, nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:",
+    "p-input": "Escreva aqui sua sugestão:",
+    "b-enviar": "Enviar"
+  },
+  "configuracoes-ajuda": {
+    "titulo": "Ajuda",
+    "subtitulo": "CENTRAL DE AJUDA",
+    "suprir-titulo": "Não supriu suas dúvidas?",
+    "suprir-desc": "Baixe a documentação do sistema para compreender melhor o LOW",
+    "suprir-titulo2": "Não supriu suas dúvidas?",
+    "suprir-desc2": "Nos envie uma mensagem que assim que possível será respondido...",
+    "descricao": "Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento, nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:",
+    "p-input": "Escreva aqui sua duvida:",
+    "b-enviar": "Enviar"
+  },
+  "tutorial": {
+    "t1": {
+      "titulo": "Bem Vindo!",
+      "desc": "Nesta área você pode sugerir novas melhorias em sistemas."
+    },
+    "t2": {
+      "titulo": "Criar uma Demanda",
+      "desc": "Nesta área você pode sugerir novas melhorias em sistemas."
+    },
+    "t3": {
+      "titulo": "Filtrar Demandas",
+      "desc": "Aqui você pode filtrar suas demandas do jeito que quiser."
+    },
+    "t4": {
+      "titulo": "Trocar Exibição",
+      "desc": "Você também pode alterar a vizualização de suas demandas para lista."
+    },
+    "t5": {
+      "titulo": "Configurações e Rascunho",
+      "desc": "Aqui você pode ver seus rascunhos de demandas, e ir para configurações."
+    },
+    "t6": {
+      "titulo": "Idiomas",
+      "desc": "Você também pode alterar o idioma do sistema."
+    },
+    "t7": {
+      "titulo": "Notificações",
+      "desc": "Suas notificações aparecerão aqui."
+    },
+    "t9": {
+      "titulo": "Suas Mensagens",
+      "desc": "Veja suas conversas sobre demandas aqui."
+    },
+    "t10": {
+      "titulo": "Seções",
+      "desc": "Nosso sistema é dividido em duas seções principais. Você estava em demandas, agora em reuniões."
+    },
+    "t11": {
+      "titulo": "Filtrar Demandas",
+      "desc": "Aqui você pode marcar uma reunião"
+    },
+    "t8": {
+      "titulo": "Filtrar Demandas",
+      "desc": "Tenha uma visão mais ampla com nosso calendário"
+    },
+    "login": {
+      "usuario": "Usuario",
+      "senha": "Senha",
+      "lembra": "Lembrar-me",
+      "esqueceu": "Esqueceu a senha?",
+      "entrar": "Entrar"
+    },
+    "filtro-demandas": {
+      "titulo": "Titulo",
+      "num-solicitacao": "Número da solicitacao",
+      "responsavel": "Responsável",
+      "tamanho": "Tamanho da Demanda",
+      "solicitante": "Solicitante",
+      "departamento": "Departamento",
+      "status": "Status de Aprovação"
+    },
     "botao-criar-demanda": "Criar demanda"
   },
   "demanda": {
@@ -25,6 +166,6 @@
      "p-centros-custo-cc":"Centro de Custo",
      "p-beneficio-real":"Ex: 150.000",
      "p-memoria-beneficio-real":"Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
-     
+
   }
 }

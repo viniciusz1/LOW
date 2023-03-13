@@ -1,11 +1,11 @@
+import { Demanda } from './../models/demanda.model';
 import { Filtro } from './../models/filtro.model';
-import { FormArray, FormBuilder, FormGroup, NumberValueAccessor } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Demanda } from '../models/demanda.model';
 import { Validators } from '@angular/forms';
 import { saveAs } from 'file-saver';
-
+import { FormControl } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +14,6 @@ export class DemandaService {
     tituloDemanda: ['', [Validators.required]],
     situacaoAtualDemanda: ['', [Validators.required]],
     objetivoDemanda: ['', [Validators.required]],
-    centroCustos: ['', [Validators.required]],
     beneficioRealDemanda: this.fb.group({
       moedaBeneficio: ['', [Validators.required]],
       memoriaDeCalculoBeneficio: ['', [Validators.required]],
@@ -30,21 +29,52 @@ export class DemandaService {
     solicitanteDemanda: {
       codigoUsuario: 2,
     },
-    centrosCusto: this.fb.array([this.createCentroCusto()])
+    centroCustos: this.fb.array([this.createCentroCusto()])
 
+  });
+
+  formEditorEspecial = new FormGroup({
+    situacaoAtualDemanda: new FormControl('', Validators.required),
+    objetivoDemanda:new FormControl('', Validators.required),
   });
   createCentroCusto(): FormGroup {
     return this.fb.group({
-      porcentagem: [''],
-      centroCusto: ['']
+      porcentagemCentroCusto: [''],
+      nomeCentroCusto: ['']
     });
   }
   removeCenterOfCost(index: number) {
-    (this.demandaForm.controls.centrosCusto as FormArray).removeAt(index);
+    (this.demandaForm.controls.centroCustos as FormArray).removeAt(index);
   }
 
+  setFormDemandaData(demanda: Demanda){
+      this.demandaForm.patchValue({
+        tituloDemanda: demanda.tituloDemanda,
+        beneficioRealDemanda: {
+          moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
+        },
+        beneficioPotencialDemanda: {
+          moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
+        },
+        beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
+        frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
+        centroCustos: demanda.centroCustos
+      })
+
+      this.formEditorEspecial.patchValue({
+        situacaoAtualDemanda: demanda.situacaoAtualDemanda,
+        objetivoDemanda: demanda.objetivoDemanda
+      })
+      // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
+    }
+
+
   addCenterOfCost() {
-    (this.demandaForm.controls.centrosCusto as FormArray).push(
+    (this.demandaForm.controls.centroCustos as FormArray).push(
       this.createCentroCusto()
     );
 
@@ -109,7 +139,7 @@ export class DemandaService {
       this.link = `http://localhost:8080/demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=`
     }else{
       this.link = `http://localhost:8080/demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}`
-    }   
+    }
     return this.http.get<Demanda[]>(
       this.link
     );
@@ -155,6 +185,12 @@ export class DemandaService {
     }
   }
   postDemanda() {
+    this.demandaForm.patchValue({
+      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
+      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
+    })
+    console.log(this.demandaForm.value)
+
     let demandaFormData = new FormData();
 
     this.arquivos.map((item) =>
@@ -162,7 +198,6 @@ export class DemandaService {
     );
     this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: 3 } });
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
-    console.log(this.demandaForm.value);
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demanda',
       demandaFormData
@@ -170,6 +205,7 @@ export class DemandaService {
   }
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
+
     return this.http.put<any>(
       `http://localhost:8080/demanda/update/status/${codigoDemanda}`,
       decisao

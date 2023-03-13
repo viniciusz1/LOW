@@ -53,7 +53,6 @@
         <i
           class="bi bi-arrows-fullscreen"
           role="button"
-          (click)="verDocumentoProposta.emit('')"
           style="font-size: 20px; margin-left: 1vw"
         ></i>
       </div>
@@ -63,7 +62,7 @@
           <i class="bi bi-arrow-counterclockwise me-3"></i>
           <span>Histórico</span>
         </button>
-        <button (click)="verDocumentoProposta.emit(dadosDemada.codigoDemanda)" mat-menu-item>
+        <button (click)="verDocumentoProposta.emit(dadosDemada)" mat-menu-item>
           <i class="bi bi-arrows-angle-expand me-3"></i>
           <span>Ver demanda</span>
         </button>

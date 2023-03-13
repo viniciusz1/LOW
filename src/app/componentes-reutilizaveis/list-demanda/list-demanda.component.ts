@@ -14,7 +14,7 @@ export class ListDemandaComponent implements OnInit {
   secondaryColorClass?: string = "";
 
   @Output() abrirModal = new EventEmitter();
-  @Output() verDocumentoProposta = new EventEmitter<string>();
+  @Output() verDocumentoProposta = new EventEmitter<Demanda>();
   @Output() clicouAdicionarPauta = new EventEmitter();
   @Output() modalHistorico = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
@@ -34,7 +34,7 @@ export class ListDemandaComponent implements OnInit {
   @Input() mostrarBotao = true;
   @Input() mudarTamanho: string = '68vw';
   @Input('mostrarIconeAdicionar') demandaPequena = false;
-  
+
 
   nivelAcesso: NivelAcesso = NivelAcesso.Analista;
   textoExibidoEmBotaoDependendoRota: {rota: string, texto: string} | undefined = undefined;
@@ -100,12 +100,12 @@ export class ListDemandaComponent implements OnInit {
     }
     return true;
   }
-  
+
   direcionarUsuario(){
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
       this.abrirModal.emit();
     } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar') {
-      this.verDocumentoProposta.emit(this.dadosDemada.codigoDemanda);
+      this.verDocumentoProposta.emit(this.dadosDemada);
     } else if (
       this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'
     ) {
@@ -123,7 +123,7 @@ export class ListDemandaComponent implements OnInit {
     } else if (
       this.textoExibidoEmBotaoDependendoRota?.rota == 'ver documento'
     ) {
-      this.verDocumentoProposta.emit(this.dadosDemada.codigoDemanda);
+      this.verDocumentoProposta.emit(this.dadosDemada);
     } else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }

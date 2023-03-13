@@ -1,11 +1,11 @@
 import { Demanda } from './../models/demanda.model';
 import { Filtro } from './../models/filtro.model';
-import { FormArray, FormBuilder, FormGroup, NumberValueAccessor } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Validators } from '@angular/forms';
 import { saveAs } from 'file-saver';
-
+import { FormControl } from '@angular/forms';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,6 +31,11 @@ export class DemandaService {
     },
     centroCustos: this.fb.array([this.createCentroCusto()])
 
+  });
+
+  formEditorEspecial = new FormGroup({
+    situacaoAtualDemanda: new FormControl('', Validators.required),
+    objetivoDemanda:new FormControl('', Validators.required),
   });
   createCentroCusto(): FormGroup {
     return this.fb.group({
@@ -177,6 +182,12 @@ export class DemandaService {
     }
   }
   postDemanda() {
+    this.demandaForm.patchValue({
+      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
+      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
+    })
+    console.log(this.demandaForm.value)
+    
     let demandaFormData = new FormData();
 
     this.arquivos.map((item) =>
@@ -184,7 +195,6 @@ export class DemandaService {
     );
     this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: 3 } });
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
-    console.log(this.demandaForm.value);
     return this.http.post<Demanda | string>(
       'http://localhost:8080/demanda',
       demandaFormData

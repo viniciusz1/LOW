@@ -50,9 +50,6 @@ export class DemandaService {
   setFormDemandaData(demanda: Demanda){
       this.demandaForm.patchValue({
         tituloDemanda: demanda.tituloDemanda,
-        situacaoAtualDemanda: demanda.situacaoAtualDemanda,
-
-        objetivoDemanda: demanda.objetivoDemanda,
         beneficioRealDemanda: {
           moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
           memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
@@ -65,6 +62,12 @@ export class DemandaService {
         },
         beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
         frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
+        centroCustos: demanda.centroCustos
+      })
+
+      this.formEditorEspecial.patchValue({
+        situacaoAtualDemanda: demanda.situacaoAtualDemanda,
+        objetivoDemanda: demanda.objetivoDemanda
       })
       // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
     }
@@ -187,7 +190,7 @@ export class DemandaService {
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
     })
     console.log(this.demandaForm.value)
-    
+
     let demandaFormData = new FormData();
 
     this.arquivos.map((item) =>

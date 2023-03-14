@@ -158,6 +158,11 @@ export class DemandaService {
     return this.http.get<Demanda[]>(
       `http://localhost:8080/demanda/filtro/status?status1=${filtros.status1}&status2=${filtros.status2}`
     );
+  } 
+  getHistoricoDemandaByCodigo(codigoDemanda: string) {
+    return this.http.get<Demanda[]>(
+      `http://localhost:8080/demanda/versoes/${codigoDemanda}`
+    );
   }
 
   getDemandas() {

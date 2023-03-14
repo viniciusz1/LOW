@@ -30,6 +30,8 @@ export interface Demanda {
     solicitanteDemanda?: Usuario
     departamentoBenDemanda?: string
     scoreDemanda?: number,
+    dataCriacaoDemanda?: Date
+    version?: number
 
     tamanhoDemandaAnalista?: Tamanho,
     buSolicitanteDemandaAnalista?: BusinessUnit,

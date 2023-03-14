@@ -14,7 +14,7 @@ export class ModalHistoricoComponent implements OnInit {
     @Inject(DIALOG_DATA) public data: string, private demandaService: DemandaService) {
       this.demandaService.getHistoricoDemandaByCodigo(data)
       .subscribe({next: e => {
-        console.log(e)
+        this.listaHistoricoDemandas = e 
       }, error: err => {
         console.log(err)
       }})

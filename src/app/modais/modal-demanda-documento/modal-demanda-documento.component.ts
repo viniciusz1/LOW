@@ -1,12 +1,14 @@
-import { DemandaAnalista } from './../../models/demanda-analista.model';
-import { DemandaAnalistaService } from './../../services/demanda-analista.service';
+
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { Tamanho } from 'src/app/models/tamanho.enum';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
+
 @Component({
   selector: 'app-modal-demanda-documento',
   templateUrl: './modal-demanda-documento.component.html',
@@ -23,6 +25,18 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   }
   dadosDemanda: Demanda | undefined;
 
+  gerarPDF() {
+    const data = document.getElementById('html-to-pdf');
+    if(data)
+    html2canvas(data).then(canvas => {
+    const imgWidth = 208;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+    const contentDataURL = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+    pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight);
+    pdf.save('nome-do-arquivo.pdf');
+  });
+  }
 
   enviarDecisao(decisao: number) {
     if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0'){

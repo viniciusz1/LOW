@@ -15,47 +15,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1</th>
-              <td>30/06/08</td>
-              <td>Joaquim da Silva</td>
-              <td><a href="">Versão 1</a></td>
-            </tr>
-            <tr>
-              <th>2</th>
-              <td>30/06/08</td>
-              <td>Joaquim da Silva</td>
-              <td><a href="">Versão 2</a></td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>30/06/08</td>
-              <td>Joaquim da Silva</td>
-              <td><a href="">Versão 3</a></td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>30/06/08</td>
-              <td>Joaquim da Silva</td>
-              <td><a href="">Versão 3</a></td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>30/06/08</td>
-              <td>Joaquim da Silva</td>
-              <td><a href="">Versão 3</a></td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>30/06/08</td>
-              <td>Joaquim da Silva</td>
-              <td><a href="">Versão 3</a></td>
-            </tr>
-            <tr>
-              <th>3</th>
-              <td>30/06/08</td>
-              <td>Joaquim da Silva</td>
-              <td><a href="">Versão 3</a></td>
+            
+            <tr *ngFor="let i of listaHistoricoDemandas">
+              <td>{{i.version}}</td>
+              <td>{{i.dataCriacaoDemanda}}</td>
+              <td>{{i.solicitanteDemanda?.nomeUsuario  }}</td>
+              <td><a href="">clique</a></td>
             </tr>
           </tbody>
     </table>

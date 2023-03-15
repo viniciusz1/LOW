@@ -36,7 +36,7 @@
             [matMenuTriggerFor]="menu"></i>
         <i class="bi bi-plus-lg" *ngIf="demandaPequena" role="button" (click)="clicouAdicionarPauta.emit()"></i>
         <mat-menu #menu="matMenu">
-            <button (click)="modalHistorico.emit()" mat-menu-item>
+            <button (click)="abrirModalHistorico()" mat-menu-item>
                 <i class="bi bi-arrow-counterclockwise me-3"></i>
                 <span>Histórico</span>
             </button>

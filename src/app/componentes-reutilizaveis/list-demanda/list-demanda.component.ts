@@ -52,6 +52,9 @@ export class ListDemandaComponent implements OnInit {
     }
     return false;
   }
+  abrirModalHistorico(){
+    this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
+  }
 
   retornaProximoStatusDemanda(statusDemanda: StatusDemanda | undefined) {
     if (statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO) {

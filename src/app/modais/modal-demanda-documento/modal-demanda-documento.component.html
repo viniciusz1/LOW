@@ -80,7 +80,7 @@
 <mat-dialog-actions class="d-flex justify-content-between">
   <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">Cancelar</button>
   <div>
-    <button class="btn btn-danger me-2" *ngIf="user == 'gerente'" (click)="enviarDecisao(2)">Reprovar demanda</button>
+    <button class="btn btn-danger me-2" *ngIf="user == 'gerente'" (click)="openModalReprovacao()">Reprovar demanda</button>
     <button class="btn btn-primary" *ngIf="user == 'gerente'" (click)="enviarDecisao(1)">Aprovar demanda</button>
   </div>
 </mat-dialog-actions>

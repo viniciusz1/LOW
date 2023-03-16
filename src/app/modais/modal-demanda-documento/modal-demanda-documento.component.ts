@@ -7,6 +7,8 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Tamanho } from 'src/app/models/tamanho.enum';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalReprovacaoDemandaComponent } from '../modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 @Component({
   selector: 'app-modal-demanda-documento',
   templateUrl: './modal-demanda-documento.component.html',
@@ -17,12 +19,20 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
     private demandaService: DemandaService,
-    private dialogRef: DialogRef<ModalDemandaDocumentoComponent>
+    private dialogRef: DialogRef<ModalDemandaDocumentoComponent>,
+    private matDialog: MatDialog
   ) {
     this.dadosDemanda = data
   }
   dadosDemanda: Demanda | undefined;
 
+
+  openModalReprovacao() {    
+    this.matDialog.open(ModalReprovacaoDemandaComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    });
+  }
 
   enviarDecisao(decisao: number) {
     if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0'){

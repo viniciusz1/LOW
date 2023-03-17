@@ -15,12 +15,12 @@
             </tr>
           </thead>
           <tbody>
-            
+
             <tr *ngFor="let i of listaHistoricoDemandas">
               <td>{{i.version}}</td>
               <td>{{i.dataCriacaoDemanda}}</td>
               <td>{{i.solicitanteDemanda?.nomeUsuario  }}</td>
-              <td><a href="">clique</a></td>
+              <td><a (click)="openModalDemandaDocumento(i)">clique</a></td>
             </tr>
           </tbody>
     </table>

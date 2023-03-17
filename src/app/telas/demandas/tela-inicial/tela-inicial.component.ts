@@ -252,9 +252,6 @@ export class TelaInicialComponent implements OnInit {
     this.tipoExibicaoDemanda = false;
   }
 
-  changeExibicao() {
-    this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda;
-  }
 
   changeToCard() {
     this.tipoExibicaoDemanda = true;
@@ -268,9 +265,6 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
-  sortData(sort: Sort) {
-    console.log(sort);
-  }
 
   openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {

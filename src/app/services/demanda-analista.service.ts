@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
 import { RESIZE_TIME_THRESHOLD } from 'ng-spy';
+import { path } from './path/rota-api';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,7 @@ export class DemandaAnalistaService {
     this.demandaAnalistaForm.controls.codigoDemanda.setValue(codigoDemanda);
     }
     return this.http.post<Demanda | string>(
-      'http://localhost:8080/demandaAnalista',
+      path + 'demandaAnalista',
 
       this.demandaAnalistaForm.value
     );

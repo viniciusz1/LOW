@@ -21,6 +21,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private demandaService: DemandaService,
     private dialogRef: DialogRef<ModalDemandaDocumentoComponent>
   ) {
+    console.log(data)
     this.dadosDemanda = data
   }
   dadosDemanda: Demanda | undefined;

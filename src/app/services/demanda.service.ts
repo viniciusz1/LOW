@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Validators } from '@angular/forms';
 import { saveAs } from 'file-saver';
 import { FormControl } from '@angular/forms';
+import { path } from './path/rota-api';
 @Injectable({
   providedIn: 'root',
 })
@@ -37,12 +38,14 @@ export class DemandaService {
     situacaoAtualDemanda: new FormControl('', Validators.required),
     objetivoDemanda:new FormControl('', Validators.required),
   });
+
   createCentroCusto(): FormGroup {
     return this.fb.group({
       porcentagemCentroCusto: [''],
       nomeCentroCusto: ['']
     });
   }
+
   removeCenterOfCost(index: number) {
     (this.demandaForm.controls.centroCustos as FormArray).removeAt(index);
   }
@@ -134,11 +137,11 @@ export class DemandaService {
   link = ''
   getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
     if (pesquisaEspecial?.status) {
-      this.link = `http://localhost:8080/demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=`
+      this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=`
     } else if (pesquisaEspecial?.pesquisaCampo) {
-      this.link = `http://localhost:8080/demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=`
+      this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=`
     }else{
-      this.link = `http://localhost:8080/demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}`
+      this.link = path + `demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}`
     }
     return this.http.get<Demanda[]>(
       this.link
@@ -156,32 +159,31 @@ export class DemandaService {
 
   getDemandasFiltradasStatus(filtros: { status1: string; status2: string }) {
     return this.http.get<Demanda[]>(
-      `http://localhost:8080/demanda/filtro/status?status1=${filtros.status1}&status2=${filtros.status2}`
+      path + `demanda/filtro/status?status1=${filtros.status1}&status2=${filtros.status2}`
     );
-  } 
+  }
   getHistoricoDemandaByCodigo(codigoDemanda: string) {
     return this.http.get<Demanda[]>(
-      `http://localhost:8080/demanda/versoes/${codigoDemanda}`
+      path + `demanda/versoes/${codigoDemanda}`
     );
   }
 
   getDemandas() {
     return this.http.get<Demanda[]>(
-      'http://localhost:8080/demanda'
+      path + 'demanda'
       // 'https://63502d89df22c2af7b65c0d9.mockapi.io/api/demanda'
     );
   }
 
   getDemandasTelaInicial() {
     return this.http.get<[][]>(
-      // 'http://localhost:8080/demanda'
-      'http://localhost:8080/demanda/status'
+      path + 'demanda/status'
     );
   }
 
   getDemandaByCodigoDemanda(codigoDemanda: number) {
     return this.http.get<Demanda>(
-      'http://localhost:8080/demanda/' + codigoDemanda
+      path + 'demanda/' + codigoDemanda
     );
   }
 
@@ -204,7 +206,7 @@ export class DemandaService {
     this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: 3 } });
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     return this.http.post<Demanda | string>(
-      'http://localhost:8080/demanda',
+      path + 'demanda',
       demandaFormData
     );
   }
@@ -212,7 +214,7 @@ export class DemandaService {
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
 
     return this.http.put<any>(
-      `http://localhost:8080/demanda/update/status/${codigoDemanda}`,
+      path + `demanda/update/status/${codigoDemanda}`,
       decisao
     );
   }

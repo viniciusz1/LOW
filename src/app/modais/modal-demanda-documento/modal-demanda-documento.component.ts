@@ -5,7 +5,6 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
 
@@ -26,18 +25,6 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   }
   dadosDemanda: Demanda | undefined;
 
-  gerarPDF() {
-    const data = document.getElementById('html-to-pdf');
-    if(data)
-    html2canvas(data).then(canvas => {
-    const imgWidth = 208;
-    const imgHeight = canvas.height * imgWidth / canvas.width;
-    const contentDataURL = canvas.toDataURL('image/png');
-    const pdf = new jsPDF();
-    pdf.addImage(contentDataURL, 'PNG', 0, 0, imgWidth, imgHeight);
-    pdf.save('nome-do-arquivo.pdf');
-  });
-  }
 
   enviarDecisao(decisao: number) {
     if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0'){

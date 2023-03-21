@@ -74,8 +74,6 @@ export class DemandaService {
       })
       // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
     }
-
-
   addCenterOfCost() {
     (this.demandaForm.controls.centroCustos as FormArray).push(
       this.createCentroCusto()

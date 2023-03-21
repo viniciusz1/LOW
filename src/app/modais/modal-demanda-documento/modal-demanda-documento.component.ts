@@ -9,6 +9,7 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Tamanho } from 'src/app/models/tamanho.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalReprovacaoDemandaComponent } from '../modal-reprovacao-demanda/modal-reprovacao-demanda.component';
+import { Proposta } from 'src/app/models/proposta.model';
 @Component({
   selector: 'app-modal-demanda-documento',
   templateUrl: './modal-demanda-documento.component.html',
@@ -25,9 +26,13 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     this.dadosDemanda = data
   }
   dadosDemanda: Demanda | undefined;
-
+  proposta: Proposta | undefined
 
   openModalReprovacao() {    
+    console.log("codigo", this.dadosDemanda?.codigoDemanda);
+    console.log("status", this.dadosDemanda?.statusDemanda);
+    
+
     this.matDialog.open(ModalReprovacaoDemandaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',

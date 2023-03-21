@@ -24,40 +24,38 @@
   <p-scrollPanel [style]="{width: '100%', height: '65vh'}" styleClass="custombar1">
     <h4 mat-dialog-title class="d-flex justify-content-between">
       <span><b>SOLICITANTE: </b>{{dadosDemanda?.solicitanteDemanda?.nomeUsuario}}</span>
-      <span><b>DATA:</b> {{dadosDemanda?.inicioExDemanda}}</span>
+      <span><b>DATA: </b> {{dadosDemanda?.inicioExDemanda}}</span>
     </h4>
-    <h4><b>DEPARTAMENTO:</b> {{dadosDemanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
+    <h4><b>DEPARTAMENTO: </b> {{dadosDemanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
     <h4 class="d-flex justify-content-center">
-      <b
-        >{{dadosDemanda?.tituloDemanda}} –
-        {{dadosDemanda?.codigoDemanda}}</b
-      >
+      <b>{{dadosDemanda?.tituloDemanda}} –
+        {{dadosDemanda?.codigoDemanda}}</b>
     </h4>
     <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 
-    <h4><b>Objetivo:</b></h4>
+    <h4><b>Objetivo: </b></h4>
     <p>
       {{dadosDemanda?.objetivoDemanda}}
     </p>
 
-    <h4><b>Situação Atual:</b></h4>
+    <h4><b>Situação Atual: </b></h4>
     <p>
       {{dadosDemanda?.situacaoAtualDemanda}}
     </p>
 
 
-    <h4><b>Beneficio Real:</b>{{dadosDemanda?.beneficioRealDemanda?.valorBeneficio}} mensais</h4>
+    <h4><b>Beneficio Real: </b>{{dadosDemanda?.beneficioRealDemanda?.valorBeneficio}} mensais</h4>
     <p>
-      <b>Memória de cálculo do benefício real:</b>
+      <b>Memória de cálculo do benefício real: </b>
     </p>
     <ul>
       <li>
-       {{dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio}}
+        {{dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio}}
       </li>
     </ul>
-    <h4><b>Beneficio Potencial:</b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}} mensais</h4>
+    <h4><b>Beneficio Potencial: </b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}} mensais</h4>
     <p>
-      <b>Memória de cálculo do benefício potencial:</b>
+      <b>Memória de cálculo do benefício potencial: </b>
     </p>
     <ul>
       <li>
@@ -65,22 +63,228 @@
       </li>
     </ul>
     <h4>
-      <b>Beneficio Qualitativo:</b>
+      <b>Beneficio Qualitativo: </b>
     </h4>
     <ul>
       <li>
-       {{dadosDemanda?.beneficioQualitativoDemanda}}
+        {{dadosDemanda?.beneficioQualitativoDemanda}}
       </li>
     </ul>
-    <p><b>Frequência de uso do sistema:</b>{{dadosDemanda?.frequenciaDeUsoDemanda}}</p>
+    <p><b>Frequência de uso do sistema: </b>{{dadosDemanda?.frequenciaDeUsoDemanda}}</p>
+    <div class="fazer ng-if" *ngIf="dadosDemanda?.statusDemanda == 'ASSESSMENT' || dadosDemanda?.statusDemanda == 'BUSINESS_CASE'" >
+      <h4><b>Escopo do Projeto:</b></h4>
 
-</p-scrollPanel>
+      {{proposta?.escopoProposta}}
+      <h4>
+        <b>Resultados Esperados (Qualitativos):</b>
+        {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioQualitativoDemanda}}
+      </h4>
+      <h4>
+        <b>Resultados Esperados (Ganhos
+          potenciais)</b>{{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioPotencialDemanda?.valorBeneficio}}
+        {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
+      </h4>
+      <p><b>Custos totais do projeto: R$50.000,00</b>
+        <br>
+        Total despesas recursos externos (Desembolso): R$30.000,00
+        <br>
+        Total despesa recursos internos: R$20.000,00
+      </p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Despesas (Desembolso)</th>
+            <th scope="col">Esforço</th>
+            <th scope="col">Valor total</th>
+            <th scope="col">CC Pagante</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Investimentos/ recorrentes</th>
+            <th scope="col">Licenças</th>
+            <th scope="col">Valor Unit</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Recursos Internos (Sem Desembolso)</th>
+            <th scope="col">Esforço</th>
+            <th scope="col">Valor total</th>
+            <th scope="col">CC Pagante</th>
+          </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Analista Funcional SAP SD
+            </td>
+            <td>
+              100h
+            </td>
+            <td>
+              R$ 10.000,00
+            </td>
+            <td>
+              10111000 – 50%
+              10102000 – 50%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <b>
+          Período de execução:
+        </b>
+        {{proposta?.inicioExDemandaProposta}} à {{proposta?.fimExDemandaProposta}}
+      </p>
+      <p>
+        <b>
+          Payback:
+        </b> {{proposta?.paybackProposta}}
+      </p>
+    </div>
+  </p-scrollPanel>
 </mat-dialog-content>
 
 <mat-dialog-actions class="d-flex justify-content-between">
   <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">Cancelar</button>
   <div>
-    <button class="btn btn-danger me-2" *ngIf="user == 'gerente'" (click)="openModalReprovacao()">Reprovar demanda</button>
+    <button class="btn btn-danger me-2" *ngIf="user == 'gerente'" (click)="openModalReprovacao()">Reprovar
+      demanda</button>
     <button class="btn btn-primary" *ngIf="user == 'gerente'" (click)="enviarDecisao(1)">Aprovar demanda</button>
   </div>
 </mat-dialog-actions>

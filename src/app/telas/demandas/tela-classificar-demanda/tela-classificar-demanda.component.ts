@@ -20,7 +20,7 @@ import { ModalReprovacaoDemandaComponent } from 'src/app/modais/modal-reprovacao
 })
 export class TelaClassificarDemandaComponent implements OnInit {
 
-  openModalReprovacao() {    
+  openModalReprovacao() {
     this.matDialog.open(ModalReprovacaoDemandaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
@@ -135,11 +135,11 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
   }
 
-  openModalDemandaDocumento(event: string | undefined) {
+  openModalDemandaDocumento() {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      data: event,
+      data: this.demanda,
     });
   }
 

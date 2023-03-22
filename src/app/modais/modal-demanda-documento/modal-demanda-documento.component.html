@@ -1,86 +1,141 @@
-<p-timeline *ngIf="user == 'solicitante'" [value]="events1" align="top" layout="horizontal">
-  <ng-template pTemplate="marker" let-event>
-    <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-      <i [ngClass]="event.icon"></i>
-    </span>
-  </ng-template>
-  <ng-template pTemplate="opposite" let-event>
-    <span [style.fontWeight]="event.fontWeight" class="TitulosRodape">
-      {{event.status}}
-    </span>
-  </ng-template>
-  <!-- <ng-template pTemplate="content" let-event>
-  </ng-template> -->
-</p-timeline>
-
-
-<p class="paragrafo-inicial"><b class="me-2">01</b>
-  <span>
-    <img style="width: 60px;" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt="">
-  </span>
-</p>
-
-<mat-dialog-content class="mat-typography">
-  <p-scrollPanel [style]="{width: '100%', height: '65vh'}" styleClass="custombar1">
-    <h4 mat-dialog-title class="d-flex justify-content-between">
-      <span><b>SOLICITANTE: </b>{{dadosDemanda?.solicitanteDemanda?.nomeUsuario}}</span>
-      <span><b>DATA:</b> {{dadosDemanda?.inicioExDemanda}}</span>
-    </h4>
-    <h4><b>DEPARTAMENTO:</b> {{dadosDemanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
-    <h4 class="d-flex justify-content-center">
-      <b
-        >{{dadosDemanda?.tituloDemanda}} –
-        {{dadosDemanda?.codigoDemanda}}</b
+<div id="html-to-pdf">
+  <p-timeline
+    *ngIf="user == 'solicitante'"
+    [value]="events1"
+    align="top"
+    layout="horizontal"
+  >
+    <ng-template pTemplate="marker" let-event>
+      <span
+        class="custom-marker shadow-2"
+        [style.backgroundColor]="event.color"
       >
-    </h4>
-    <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
+        <i [ngClass]="event.icon"></i>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="opposite" let-event>
+      <span [style.fontWeight]="event.fontWeight" class="TitulosRodape">
+        {{ event.status }}
+      </span>
+    </ng-template>
+    <!-- <ng-template pTemplate="content" let-event>
+  </ng-template> -->
+  </p-timeline>
 
-    <h4><b>Objetivo:</b></h4>
-    <p>
-      {{dadosDemanda?.objetivoDemanda}}
-    </p>
+  <p class="paragrafo-inicial">
+    <b class="me-2">01</b>
+    <span>
+      <div class="d-flex align-items-center justify-content-between">
+        <a [href]="['http://localhost:8081/demanda/pdf/' + dadosDemanda?.codigoDemanda]">
+          <i  class="bi bi-download me-3" style="font-size: 25px;"></i>
+          
+        </a>
+      <img
+        style="width: 60px"
+        src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png"
+        alt=""
+      />
+    </div>
+    </span>
+  </p>
 
-    <h4><b>Situação Atual:</b></h4>
-    <p>
-      {{dadosDemanda?.situacaoAtualDemanda}}
-    </p>
+  <mat-dialog-content class="mat-typography">
+    <p-scrollPanel
+      [style]="{ width: '100%', height: '65vh' }"
+      styleClass="custombar1"
+    >
+      <h4 mat-dialog-title class="d-flex justify-content-between">
+        <span
+          ><b >SOLICITANTE: </b
+          >{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span
+        >
+        <span><b>DATA:</b> {{ dadosDemanda?.inicioExDemanda }}</span>
+      </h4>
+      <h4>
+        <b>DEPARTAMENTO:</b>
+        {{
+          dadosDemanda?.solicitanteDemanda?.departamentoUsuario
+            ?.nomeDepartamento
+        }}
+      </h4>
+      <h4 class="d-flex justify-content-center">
+        <b
+          >{{ dadosDemanda?.tituloDemanda }} –
+          {{ dadosDemanda?.codigoDemanda }}</b
+        >
+      </h4>
+      <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 
+      <h4><b>Objetivo:</b></h4>
+      <p>
+        {{ dadosDemanda?.objetivoDemanda }}
+      </p>
 
-    <h4><b>Beneficio Real:</b>{{dadosDemanda?.beneficioRealDemanda?.valorBeneficio}} mensais</h4>
-    <p>
-      <b>Memória de cálculo do benefício real:</b>
-    </p>
-    <ul>
-      <li>
-       {{dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio}}
-      </li>
-    </ul>
-    <h4><b>Beneficio Potencial:</b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}} mensais</h4>
-    <p>
-      <b>Memória de cálculo do benefício potencial:</b>
-    </p>
-    <ul>
-      <li>
-        {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
-      </li>
-    </ul>
-    <h4>
-      <b>Beneficio Qualitativo:</b>
-    </h4>
-    <ul>
-      <li>
-       {{dadosDemanda?.beneficioQualitativoDemanda}}
-      </li>
-    </ul>
-    <p><b>Frequência de uso do sistema:</b>{{dadosDemanda?.frequenciaDeUsoDemanda}}</p>
+      <h4><b>Situação Atual:</b></h4>
+      <p>
+        {{ dadosDemanda?.situacaoAtualDemanda }}
+      </p>
 
-</p-scrollPanel>
-</mat-dialog-content>
+      <h4>
+        <b>Beneficio Real:</b
+        >{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }} mensais
+      </h4>
+      <p>
+        <b>Memória de cálculo do benefício real:</b>
+      </p>
+      <ul>
+        <li>
+          {{ dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio }}
+        </li>
+      </ul>
+      <h4>
+        <b>Beneficio Potencial:</b
+        >{{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }} mensais
+      </h4>
+      <p>
+        <b>Memória de cálculo do benefício potencial:</b>
+      </p>
+      <ul>
+        <li>
+          {{
+            dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
+          }}
+        </li>
+      </ul>
+      <h4>
+        <b>Beneficio Qualitativo:</b>
+      </h4>
+      <ul>
+        <li>
+          {{ dadosDemanda?.beneficioQualitativoDemanda }}
+        </li>
+      </ul>
+      <p>
+        <b>Frequência de uso do sistema:</b
+        >{{ dadosDemanda?.frequenciaDeUsoDemanda }}
+      </p>
+    </p-scrollPanel>
+  </mat-dialog-content>
 
-<mat-dialog-actions class="d-flex justify-content-between">
-  <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">Cancelar</button>
-  <div>
-    <button class="btn btn-danger me-2" *ngIf="user == 'gerente'" (click)="enviarDecisao(2)">Reprovar demanda</button>
-    <button class="btn btn-primary" *ngIf="user == 'gerente'" (click)="enviarDecisao(1)">Aprovar demanda</button>
-  </div>
-</mat-dialog-actions>
+  <mat-dialog-actions class="d-flex justify-content-between">
+    <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">
+      Cancelar
+    </button>
+    <div>
+      <button
+        class="btn btn-danger me-2"
+        *ngIf="user == 'gerente'"
+        (click)="enviarDecisao(2)"
+      >
+        Reprovar demanda
+      </button>
+      <button
+        class="btn btn-primary"
+        *ngIf="user == 'gerente'"
+        (click)="enviarDecisao(1)"
+      >
+        Aprovar demanda
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>

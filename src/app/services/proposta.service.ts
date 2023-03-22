@@ -1,11 +1,11 @@
+import { path } from './path/rota-api';
 import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
 import { TipoDespesa } from './../models/tipoDespesa.enum';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
-import { Proposta } from '../models/proposta.model';
 import { Validators } from '@angular/forms';
 
 interface RecursoDoForm {
@@ -116,7 +116,7 @@ export class PropostaService {
 
     this.arrumarFormularioParaBackend();
     return this.http.post<Demanda | string>(
-      'http://localhost:8080/proposta',
+      path + 'proposta',
       this.formProposta.value
     );
   }

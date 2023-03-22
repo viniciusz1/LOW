@@ -1,12 +1,13 @@
-import { DemandaAnalista } from './../../models/demanda-analista.model';
-import { DemandaAnalistaService } from './../../services/demanda-analista.service';
+
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
-import { Tamanho } from 'src/app/models/tamanho.enum';
+import html2canvas from 'html2canvas';
+
+
 @Component({
   selector: 'app-modal-demanda-documento',
   templateUrl: './modal-demanda-documento.component.html',
@@ -19,6 +20,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private demandaService: DemandaService,
     private dialogRef: DialogRef<ModalDemandaDocumentoComponent>
   ) {
+    console.log(data)
     this.dadosDemanda = data
   }
   dadosDemanda: Demanda | undefined;

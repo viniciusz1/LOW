@@ -4,8 +4,8 @@
         <div class="col-9 mb-5" style="overflow: auto; height: 70vh;    border: 1px solid #c5c5c5;
         border-radius: 5px;
         padding: 20px;" >
-            <div  *ngFor="let proposta of listaProposta" class="mb-2">
-                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModal)="openModalParecerComissaoProposta()" [dadosDemada]="proposta.demandaAnalistaProposta.demandaDemandaAnalista" [mudarTamanho]="'100%'"></app-card-demanda>
+            <div  *ngFor="let proposta of reuniao?.propostasReuniao" class="mb-2">
+                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModal)="openModalParecerComissaoProposta()" [dadosDemada]="proposta" [mudarTamanho]="'100%'"></app-card-demanda>
             </div>
         </div>
         <div class="col-3 direita-grande">

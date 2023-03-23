@@ -10,8 +10,6 @@ export interface Reuniao {
     statusReuniao?: StatusReuniao,
     codigoReuniao?: number,
     //enviado para o back
-    demandasReuniao?: Demanda[],
-    //recebido pelo back
-    propostasReuniao?: Proposta[],
+    propostasReuniao?: Demanda[]
 
 }

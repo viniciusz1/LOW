@@ -60,7 +60,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
     let reuniao: Reuniao = {
       dataReuniao: this.dataReuniao,
       comissaoReuniao: this.comissaoSelecionada,
-      demandasReuniao: this.listaDemandasEscolhidas
+      propostasReuniao: this.listaDemandasEscolhidas
     }
 
     this.reuniaoService.postReuniao(reuniao).subscribe(e => {

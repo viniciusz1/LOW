@@ -201,7 +201,7 @@ export class DemandaService {
     this.arquivos.map((item) =>
       demandaFormData.append('arquivos', item, item.name)
     );
-    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: 3 } });
+    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: 2 } });
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     return this.http.post<Demanda | string>(
       path + 'demanda',

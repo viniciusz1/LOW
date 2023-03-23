@@ -24,15 +24,13 @@ export class TelaVerPauta implements OnInit {
     private reuniaoService: ReuniaoService) { }
 
   codigoReuniao = this.activatedRoute.snapshot.params['codigoReuniao']
-  listaProposta:Proposta[] | undefined = [];
   reuniao: Reuniao | undefined = undefined;
-  listaDemanda:Demanda[] = [];
 
   ngOnInit(): void {
     this.reuniaoService.getReuniaoId(this.codigoReuniao)
     .subscribe({next: (x) => {
+      console.log(x)
       this.reuniao = x
-      this.listaProposta = this.reuniao.propostasReuniao;
       // this.listaProposta.forEach((demanda) => {
       // demanda.statusDemanda = StatusDemanda.TO_DO
       // })

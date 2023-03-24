@@ -6,10 +6,10 @@
             </span>
             <div class="d-flex justify-content-center align-items-center">
                 <p-dropdown placeholder="Resultado Comissão" class="me-3" [options]="resultadoComissao" 
-                [(ngModel)]="resultadoComissaoSelecionado" (onChange)="selecionaResultado($event)"
+                [(ngModel)]="resultadoComissaoSelecionado" (onChange)="selecionaResultado()"
                  optionLabel="name" optionValue="value"></p-dropdown>
                 <p-dropdown class="me-3" [options]="tipoAtas" [(ngModel)]="tipoAtaSelecionada"
-                    optionLabel="name"></p-dropdown>
+                    optionLabel="name" optionValue="value"></p-dropdown>
                 <div class="rounded low-shadow me-3 ">
                     <button class="btn btn-primary" (click)="openModalPropostaDocumento()">Visualizar Proposta</button>
                 </div>

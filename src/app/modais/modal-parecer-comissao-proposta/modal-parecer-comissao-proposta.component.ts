@@ -21,8 +21,8 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   ) { }
   tipoAtaSelecionada: string = "";
   tipoAtas = [
-    { name: 'Ata Publicada', value: '0' },
-    { name: 'Ata não Publicada', value: '1' },
+    { name: 'Ata Publicada', value: 'PUBLICADA' },
+    { name: 'Ata não Publicada', value: 'NAO_PUBLICADA' },
   ]
   aparecerRecomendacao: boolean = false;
   resultadoComissaoSelecionado: string = "";
@@ -34,9 +34,9 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   ]
   parecerComissaoInput = ""
   recomendacaoInput = ""
-  selecionaResultado(event: { value: { name: string, value: string } }) {
+  selecionaResultado() {
     
-    if (event.value.value == "APROVAR_COM_RECOMENDACAO" || event.value.value == "REAPRESENTAR_COM_RECOMENDACAO") {
+    if (this.resultadoComissaoSelecionado == "APROVAR_COM_RECOMENDACAO" || this.resultadoComissaoSelecionado == "REAPRESENTAR_COM_RECOMENDACAO") {
       this.aparecerRecomendacao = true;
     } else {
       this.aparecerRecomendacao = false;
@@ -51,7 +51,7 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   }
 
   enviarParecerComissao() {
-    this.reuniaoService.enviarParecerComissao({ parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.data)
+    this.reuniaoService.enviarParecerComissao({ tipoAtaProposta: this.tipoAtaSelecionada,parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.data)
       .subscribe({
         next: e => { console.log(e) },
         error: err => {

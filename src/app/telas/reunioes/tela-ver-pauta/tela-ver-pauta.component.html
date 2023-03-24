@@ -5,7 +5,7 @@
         border-radius: 5px;
         padding: 20px;" >
             <div  *ngFor="let proposta of reuniao?.propostasReuniao" class="mb-2">
-                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModal)="openModalParecerComissaoProposta()" [dadosDemada]="proposta" [mudarTamanho]="'100%'"></app-card-demanda>
+                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModal)="openModalParecerComissaoProposta(proposta?.codigoDemanda)" [dadosDemada]="proposta" [mudarTamanho]="'100%'"></app-card-demanda>
             </div>
         </div>
         <div class="col-3 direita-grande">

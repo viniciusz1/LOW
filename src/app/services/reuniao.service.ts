@@ -22,6 +22,11 @@ export class ReuniaoService {
   postReuniao(reuniao: Reuniao) {
     return this.http.post<Reuniao>(path + 'reuniao', reuniao);
   }
+
+  enviarParecerComissao(info: {parecerComissaoProposta: string, decisaoProposta: string, recomendacaoProposta: string}, codigoProposta: string){
+    return this.http.put(path + 'reuniao/parecer/' + codigoProposta, info)
+  }
+
   getReuniaoFiltrada(filtros: {
     nomeComissao: string;
     dataReuniao: string;

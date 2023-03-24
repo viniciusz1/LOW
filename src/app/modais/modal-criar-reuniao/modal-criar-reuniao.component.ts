@@ -1,12 +1,10 @@
 import { Router } from '@angular/router';
-import { ComissaoService } from './../../services/comissao.service';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { FormBuilder } from '@angular/forms';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
-import { Comissao } from 'src/app/models/comissao.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
@@ -21,7 +19,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
     @Inject(DIALOG_DATA) public data: Demanda,
     public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
     private fb: FormBuilder,
-    private comissaoService: ComissaoService,
     private demandaService: DemandaService,
     private reuniaoService: ReuniaoService,
     private router: Router
@@ -31,30 +28,28 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.atualizarComissoes();
     this.atualizarDemandas();
   }
 
   listaComissoes = [
-    {codigo: 1, nome:"CPVM – Comissão de Processos de Vendas e Desenvolvimento de produtos"},
-    {codigo: 2, nome:"CPGCI – Comissão de Processos da Cadeia Integrada"},
-    {codigo: 3, nome:"CPGPR – Comissão de Processos de Gestão de Projetos"},
-    {codigo: 4, nome:"CGPN – Comitê de Gestão de Processos de Negócio"},
-    {codigo: 5, nome:"CTI – Comitê de TI"},
-    {codigo: 6, nome:"CWBS – Comitê WEG Business Services"},
-    {codigo: 7, nome:"DTI – Diretoria de TI"},
+    {value: "CPVM", nome:"CPVM – Comissão de Processos de Vendas e Desenvolvimento de produtos"},
+    {value: "CPGCI", nome:"CPGCI – Comissão de Processos da Cadeia Integrada"},
+    {value: "CPGPR", nome:"CPGPR – Comissão de Processos de Gestão de Projetos"},
+    {value: "CGPN", nome:"CGPN – Comitê de Gestão de Processos de Negócio"},
+    {value: "CTI", nome:"CTI – Comitê de TI"},
+    {value: "CWBS", nome:"CWBS – Comitê WEG Business Services"},
+    {value: "DTI", nome:"DTI – Diretoria de TI"},
   ]
     
 
   listaReunioes: Reuniao[] = [];
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
-  listaDeComissoesReuniao: Comissao[] = [];
   listaDemandas: Demanda[] = [];
   listaProposta: Proposta[] = [];
 
   dataReuniao: any;
-  comissaoSelecionada: Comissao | undefined = undefined;
+  comissaoSelecionada: string | undefined = undefined;
 
   onSubmit() {
     let reuniao: Reuniao = {
@@ -62,18 +57,12 @@ export class ModalCriarReuniaoComponent implements OnInit {
       comissaoReuniao: this.comissaoSelecionada,
       propostasReuniao: this.listaDemandasEscolhidas
     }
-
+    console.log(reuniao)
     this.reuniaoService.postReuniao(reuniao).subscribe(e => {
       this.router.navigate(['/tela-inicial/ver-pauta/' + e.codigoReuniao])
       this.dialogRef.close()
     })
   }
-
-  novaReuniaoForm = this.fb.group({
-    listaDemandas: [this.listaDemandasEscolhidas],
-    dataReuniao: [''],
-    comissaoReuniao: [this.comissaoSelecionada],
-  });
   dragStart(demanda: Demanda) {
     this.draggedDemanda = demanda;
   }
@@ -103,15 +92,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
       );
       this.draggedDemanda = undefined;
     }
-  }
-
-  atualizarComissoes() {
-    this.comissaoService
-      .getComissao()
-      .subscribe({
-        next: (comissao) => (this.listaDeComissoesReuniao = comissao),
-        error: (err) => console.log(err),
-      });
   }
 
   removerDaListaAdicSecundaria() {

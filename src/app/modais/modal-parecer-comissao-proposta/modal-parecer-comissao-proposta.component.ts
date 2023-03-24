@@ -1,7 +1,8 @@
 import { ModalPropostaDocumentoComponent } from './../modal-proposta-documento/modal-proposta-documento.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogRef } from '@angular/cdk/dialog';
-import { Component, OnInit } from '@angular/core';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ReuniaoService } from 'src/app/services/reuniao.service';
 
 @Component({
   selector: 'app-modal-parecer-comissao-proposta',
@@ -10,8 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalParecerComissaoPropostaComponent implements OnInit {
 
-  constructor(public dialogRef: DialogRef<ModalParecerComissaoPropostaComponent>,
-    private matDialog: MatDialog) { }
+  constructor(
+
+    @Inject(DIALOG_DATA) public data: string,
+    public dialogRef: DialogRef<ModalParecerComissaoPropostaComponent>,
+    private matDialog: MatDialog,
+    private reuniaoService: ReuniaoService
+
+  ) { }
   tipoAtaSelecionada: string = "";
   tipoAtas = [
     { name: 'Ata Publicada', value: '0' },
@@ -20,16 +27,16 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   aparecerRecomendacao: boolean = false;
   resultadoComissaoSelecionado: string = "";
   resultadoComissao = [
-    { name: 'Aprovar', value: '0' },
-    { name: 'Aprovar com Recomendação', value: '1' },
-    { name: 'Reapresentar com Recomendação', value: '2' },
-    { name: 'Reprovar', value: '3' },
+    { name: 'Aprovar', value: 'APROVAR' },
+    { name: 'Aprovar com Recomendação', value: 'APROVAR_COM_RECOMENDACAO' },
+    { name: 'Reapresentar com Recomendação', value: 'REAPRESENTAR_COM_RECOMENDACAO' },
+    { name: 'Reprovar', value: 'REPROVAR' },
   ]
-
-
-  selecionaResultado(event: { value: { name: string, value: number }}){
-    console.log(event.value.value);
-    if(event.value.value == 1 || event.value.value == 2){
+  parecerComissaoInput = ""
+  recomendacaoInput = ""
+  selecionaResultado(event: { value: { name: string, value: string } }) {
+    
+    if (event.value.value == "APROVAR_COM_RECOMENDACAO" || event.value.value == "REAPRESENTAR_COM_RECOMENDACAO") {
       this.aparecerRecomendacao = true;
     } else {
       this.aparecerRecomendacao = false;
@@ -42,6 +49,17 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
       minWidth: '50vw',
     });
   }
+
+  enviarParecerComissao() {
+    this.reuniaoService.enviarParecerComissao({ parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.data)
+      .subscribe({
+        next: e => { console.log(e) },
+        error: err => {
+          console.log(err)
+        }
+      })
+  }
+
   ngOnInit(): void {
   }
 

@@ -47,10 +47,11 @@ export class TelaVerPauta implements OnInit {
   }
 
 
-  openModalParecerComissaoProposta() {
+  openModalParecerComissaoProposta(codigoDemanda: string | undefined) {
     this.matDialog.open(ModalParecerComissaoPropostaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: codigoDemanda
     });
   }
 

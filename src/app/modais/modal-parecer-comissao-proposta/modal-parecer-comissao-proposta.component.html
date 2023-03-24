@@ -5,7 +5,9 @@
                 <hr style="margin: 0; margin-bottom: 10px; width: 100%;">
             </span>
             <div class="d-flex justify-content-center align-items-center">
-                <p-dropdown placeholder="Resultado Comissão" class="me-3" [options]="resultadoComissao" [(ngModel)]="resultadoComissaoSelecionado" (onChange)="selecionaResultado($event)" optionLabel="name"></p-dropdown>
+                <p-dropdown placeholder="Resultado Comissão" class="me-3" [options]="resultadoComissao" 
+                [(ngModel)]="resultadoComissaoSelecionado" (onChange)="selecionaResultado($event)"
+                 optionLabel="name" optionValue="value"></p-dropdown>
                 <p-dropdown class="me-3" [options]="tipoAtas" [(ngModel)]="tipoAtaSelecionada"
                     optionLabel="name"></p-dropdown>
                 <div class="rounded low-shadow me-3 ">
@@ -19,16 +21,16 @@
         <label for="subtitulo"  style="margin-top: 5px;">
             Informe o parecer da comissão sobre esta proposta:
         </label>
-        <textarea pInputTextarea style="min-height: 300px;"></textarea>
+        <textarea pInputTextarea style="min-height: 300px;" [(ngModel)]="parecerComissaoInput"></textarea>
     </div>
     <div class="d-flex flex-column" *ngIf="aparecerRecomendacao">
         <label for="subtitulo" style="margin-top: 5px;">
             Recomendações:
         </label>
-        <textarea pInputTextarea style="min-height: 10vh;"></textarea>
+        <textarea pInputTextarea style="min-height: 10vh;" [(ngModel)]="recomendacaoInput"></textarea>
     </div>
     <div class="d-flex justify-content-between mt-3">
         <button (click)="dialogRef.close();" class="btn btn-outline-primary">Cancelar</button>
-        <button class="btn btn-primary">Finalizar Parecer</button>
+        <button class="btn btn-primary" (click)="enviarParecerComissao()">Finalizar Parecer</button>
     </div>
 </div>

@@ -17,7 +17,7 @@ export class TelaCalendarioComponent implements OnInit {
   constructor(private route: Router,public dialogRef: DialogRef,
     @Inject(DIALOG_DATA) public data: Reuniao[]) {
       this.data.forEach(e => {
-        this.events.push({title: e.comissaoReuniao?.nomeComissao, data: e.dataReuniao?.toString().substring(0,10)})
+        this.events.push({title: e.comissaoReuniao, data: e.dataReuniao?.toString().substring(0,10)})
       })
       this.calendarOptions.events = this.events
     }

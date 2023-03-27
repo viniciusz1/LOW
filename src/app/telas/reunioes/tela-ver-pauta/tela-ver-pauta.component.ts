@@ -39,10 +39,11 @@ export class TelaVerPauta implements OnInit {
 
   }
 
-  openModalAtaDocumento() {
+  openModalAtaDocumento(tipoAta: string) {
     this.matDialog.open(ModalAtaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: {reuniao: this.reuniao, tipoAta: tipoAta}
     });
   }
 

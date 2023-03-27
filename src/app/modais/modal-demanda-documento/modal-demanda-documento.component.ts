@@ -2,7 +2,7 @@
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import html2canvas from 'html2canvas';
@@ -20,11 +20,10 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private demandaService: DemandaService,
     private dialogRef: DialogRef<ModalDemandaDocumentoComponent>
   ) {
-    console.log(data)
     this.dadosDemanda = data
   }
-  dadosDemanda: Demanda | undefined;
-
+  @Input() dadosDemanda: Demanda | undefined;
+  @Input() documentoEmAta = false;
 
   enviarDecisao(decisao: number) {
     if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0'){

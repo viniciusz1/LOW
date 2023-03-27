@@ -28,22 +28,43 @@ export class TelaVerPauta implements OnInit {
 
   ngOnInit(): void {
     this.reuniaoService.getReuniaoId(this.codigoReuniao)
-    .subscribe({next: (x) => {
-      console.log(x)
-      this.reuniao = x
-      // this.listaProposta.forEach((demanda) => {
-      // demanda.statusDemanda = StatusDemanda.TO_DO
-      // })
-    }})
+      .subscribe({
+        next: (x) => {
+          console.log(x)
+          this.reuniao = x
+          // this.listaProposta.forEach((demanda) => {
+          // demanda.statusDemanda = StatusDemanda.TO_DO
+          // })
+        }
+      })
+  }
+  finalizarReuniao() {
+    this.reuniaoService.finalizarReuniao(this.reuniao?.codigoReuniao)
+      .subscribe({
+        next: e => {
+          console.log(e)
+        }, error: err => {
+          alert(err)
+        } 
+      })
 
-
+  }
+  cancelarReuniao() {
+    this.reuniaoService.cancelarReuniao(this.reuniao?.codigoReuniao)
+    .subscribe({
+      next: e => {
+        console.log(e)
+      }, error: err => {
+        alert(err)
+      } 
+    })
   }
 
   openModalAtaDocumento(tipoAta: string) {
     this.matDialog.open(ModalAtaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      data: {reuniao: this.reuniao, tipoAta: tipoAta}
+      data: { reuniao: this.reuniao, tipoAta: tipoAta }
     });
   }
 

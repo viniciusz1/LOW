@@ -19,6 +19,14 @@ export class ReuniaoService {
     );
   }
 
+  cancelarReuniao(codigoReuniao: number | undefined){
+    return this.http.get<Reuniao>(path + 'reuniao/' + codigoReuniao);
+
+  }
+  finalizarReuniao(codigoReuniao: number | undefined){
+    return this.http.get<Reuniao>(path + 'reuniao/' + codigoReuniao);
+  }
+
   postReuniao(reuniao: Reuniao) {
     return this.http.post<Reuniao>(path + 'reuniao', reuniao);
   }

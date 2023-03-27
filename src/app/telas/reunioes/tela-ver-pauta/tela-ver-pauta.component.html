@@ -25,7 +25,8 @@
                 <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento('PUBLICADA')">Ata publicada</button>
                 <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento('NAO_PUBLICADA')">Ata não publicada</button>
             </div>
-            <button class="btn btn-primary mb-3 me-4">Gerar documentação</button>
+            <button class="btn btn-primary mb-3 me-4" (click)="finalizarReuniao()">Finalizar Reunião</button>
+            <button class="btn btn-danger" (click)="cancelarReuniao()"></button>
         </div>
     </div>
 </div>

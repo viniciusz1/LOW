@@ -294,50 +294,44 @@
       "b-entrar": "Entrar"
     }
   },
-  "modais":{
-    "modal-ata-documento":{
-
+  "modais": {
+    "modal-ata-documento": {},
+    "modal-proposta-documento": {},
+    "modal-demanda-documento": {},
+    "modal-criar-reuniao": {
+      "marcar-reuniao": "Marcar Reunião",
+      "demandas": "Demandas",
+      "arraste-demandas": "Arraste as demandas para este campo!",
+      "data-hora-reuniao": "Data e Hora da Reunião:",
+      "selecione-comissao": "Selecione a Comissão da Reunião:",
+      "p-data-hora-reuniao": "Clique aqui!",
+      "p-selecione-comissao": "Selecione a comissão:",
+      "b-marcar-reuniao": "Marcar Reunião"
     },
-    "modal-proposta-documento":{
-
+    "modal-historico": {
+      "historico": "Histórico",
+      "data-alteracao": "Data de Alteração",
+      "autor": "Autor",
+      "visualizar": "Visualizar"
     },
-    "modal-demanda-documento":{
-
+    "modal-motivo-devolucao": {
+      "motivo-devolucao": "Motivo Devolução",
+      "i-motivo-devolucao": "Motivo da devolução da demanda:"
     },
-    "modal-criar-reuniao":{
-      "marcar-reuniao":"Marcar Reunião",
-      "demandas":"Demandas",
-      "arraste-demandas":"Arraste as demandas para este campo!",
-      "data-hora-reuniao":"Data e Hora da Reunião:",
-      "selecione-comissao":"Selecione a Comissão da Reunião:",
-      "p-data-hora-reuniao":"Clique aqui!",
-      "p-selecione-comissao":"Selecione a comissão:",
-      "b-marcar-reuniao":"Marcar Reunião"
+    "modal-parecer-comissao-proposta": {
+      "proposta": "Proposta",
+      "p-resultado-comissao": "Resultado Comissão",
+      "b-visualizar-proposta": "Visualizar Proposta",
+      "informe-parecer": "Informe o parecer da comissão sobre esta proposta:",
+      "recomendacoes": "Recomendações:",
+      "b-cancelar": "Cancelar",
+      "b-finalizar": "Finalizar Parecer"
     },
-    "modal-historico":{
-      "historico":"Histórico",
-      "data-alteracao":"Data de Alteração",
-      "autor":"Autor",
-      "visualizar":"Visualizar"
-    },
-    "modal-motivo-devolucao":{
-      "motivo-devolucao":"Motivo Devolução",
-      "i-motivo-devolucao":"Motivo da devolução da demanda:"
-    },
-    "modal-parecer-comissao-proposta":{
-      "proposta":"Proposta",
-      "p-resultado-comissao":"Resultado Comissão",
-      "b-visualizar-proposta":"Visualizar Proposta",
-      "informe-parecer":"Informe o parecer da comissão sobre esta proposta:",
-      "recomendacoes":"Recomendações:",
-      "b-cancelar":"Cancelar",
-      "b-finalizar":"Finalizar Parecer"
-    },
-    "modal-reprovacao-demanda":{
-      "demanda":"Demanda",
-      "motivo-reprovacao":"Motivo de reprovação da demanda:",
-      "b-reprovar":"Reprovar Demanda",
-      "b-cancelar":"Cancelar"
+    "modal-reprovacao-demanda": {
+      "demanda": "Demanda",
+      "motivo-reprovacao": "Motivo de reprovação da demanda:",
+      "b-reprovar": "Reprovar Demanda",
+      "b-cancelar": "Cancelar"
     }
   },
   "documento-pdf": {
@@ -352,91 +346,91 @@
     "beneficio-qualitativo": "Benefício Qualitativo:",
     "frequencia-uso-sistema": "Frequencia de Uso do Sistema:",
     "documentos": "DOCUMENTOS:",
-    "b-cancelar":"Cancelar",
-    "b-reprovar":"Reprovar Demanda",
-    "b-aprovar":"Aprovar Demanda"
+    "b-cancelar": "Cancelar",
+    "b-reprovar": "Reprovar Demanda",
+    "b-aprovar": "Aprovar Demanda"
   },
   "componentes-reutilizaveis": {
-    "card-demanda":{
-      "historico":"Histórico",
-      "ver-demanda":"Ver demanda",
-      "trocar-status":"Trocar status",
-      "ir-reuniao":"Ir para Reunião",
-      "ver-ata":"Ver em Ata",
-      "iniciar-conversa":"Iniciar conversa",
-      "score":"Score:",
-      "autor":"Autor:",
-      "departamento":"Departamento:"
+    "card-demanda": {
+      "historico": "Histórico",
+      "ver-demanda": "Ver demanda",
+      "trocar-status": "Trocar status",
+      "ir-reuniao": "Ir para Reunião",
+      "ver-ata": "Ver em Ata",
+      "iniciar-conversa": "Iniciar conversa",
+      "score": "Score:",
+      "autor": "Autor:",
+      "departamento": "Departamento:"
     },
-    "card-reuniao":{
-      "dia-comissao":"Dia da comissão:",
-      "status":"Status:",
-      "comissao":"Comissão: ",
-      "propostas-adicionadas":"Propostas adicionadas: ",
+    "card-reuniao": {
+      "dia-comissao": "Dia da comissão:",
+      "status": "Status:",
+      "comissao": "Comissão: ",
+      "propostas-adicionadas": "Propostas adicionadas: ",
       "departamentos-beneficiados": "Departamentos Beneficiados: ",
-      "exemplos":"Vendas, Motores, Trefilação",
-      "cancelar-reuniao":"Cancelar Reunião",
-      "motivo-cancelamento":"Ver motivo do cancelamento",
-      "detalhes-reuniao":"Detalhes da Reunião"
+      "exemplos": "Vendas, Motores, Trefilação",
+      "cancelar-reuniao": "Cancelar Reunião",
+      "motivo-cancelamento": "Ver motivo do cancelamento",
+      "detalhes-reuniao": "Detalhes da Reunião"
     },
-    "filtro-reuniao":{
-      "filtrar-reunioes":"Filtrar Reuniões",
-      "comissao":"Comissão: ",
-      "data":"Data:",
-      "responsavel":"Responsável:",
-      "status-aprovacao":"Status de aprovação:",
-      "solicitante":"Solicitante:",
-      "codigo-ppm":"Código PPM:"
+    "filtro-reuniao": {
+      "filtrar-reunioes": "Filtrar Reuniões",
+      "comissao": "Comissão: ",
+      "data": "Data:",
+      "responsavel": "Responsável:",
+      "status-aprovacao": "Status de aprovação:",
+      "solicitante": "Solicitante:",
+      "codigo-ppm": "Código PPM:"
     },
-    "filtro-demanda":{
-      "filtrar-demandas":"Filtrar Demandas",
-      "titulo-demanda":"Título da Demanda:",
-      "s-titulo-demanda":"Título Demanda:",
-      "numero-solicitacao":"Número da Solicitação",
-      "s-numero-solicitacao":"N. da Solicitação:",
-      "responsavel":"Responsável",
-      "tamanho-demanda":"Tamanho da demanda:",
-      "s-tamanho-demanda":"Tam. demanda:",
-      "solicitante":"Solicitante:",
-      "departamento":"Departamento:",
-      "status-aprovacao":"Status de Aprovação",
-      "p-titulo-demanda":"Ex: Sistema de Gerenciamento",
-      "p-departamento":"Ex: Motores"
+    "filtro-demanda": {
+      "filtrar-demandas": "Filtrar Demandas",
+      "titulo-demanda": "Título da Demanda:",
+      "s-titulo-demanda": "Título Demanda:",
+      "numero-solicitacao": "Número da Solicitação",
+      "s-numero-solicitacao": "N. da Solicitação:",
+      "responsavel": "Responsável",
+      "tamanho-demanda": "Tamanho da demanda:",
+      "s-tamanho-demanda": "Tam. demanda:",
+      "solicitante": "Solicitante:",
+      "departamento": "Departamento:",
+      "status-aprovacao": "Status de Aprovação",
+      "p-titulo-demanda": "Ex: Sistema de Gerenciamento",
+      "p-departamento": "Ex: Motores"
     },
-    "list-demanda":{
-      "historico":"Histórico",
-      "ver-demanda":"Ver demanda",
-      "ir-reuniao":"Ir para Reunião",
-      "iniciar-conversa":"Iniciar conversa"
+    "list-demanda": {
+      "historico": "Histórico",
+      "ver-demanda": "Ver demanda",
+      "ir-reuniao": "Ir para Reunião",
+      "iniciar-conversa": "Iniciar conversa"
     },
-    "sidebar-reuniao":{
-      "aguardando":"Aguardando",
-      "proximo":"Próximo",
-      "pendente":"Pendente",
-      "concluido":"Concluído",
-      "cancelado":"Cancelado"
+    "sidebar-reuniao": {
+      "aguardando": "Aguardando",
+      "proximo": "Próximo",
+      "pendente": "Pendente",
+      "concluido": "Concluído",
+      "cancelado": "Cancelado"
     },
-    "sidebar-demanda":{
-      "classificacao":"Classificação",
-      "proposta":"Proposta",
-      "aprovacao":"Aprovação"
+    "sidebar-demanda": {
+      "classificacao": "Classificação",
+      "proposta": "Proposta",
+      "aprovacao": "Aprovação"
     }
   },
-  "componentes-fixos":{
-    "escopo-perfil":{
-      "conta":"Conta",
-      "layout":"Layout",
-      "sugestoes":"Sugestões",
-      "ajuda":"Ajuda",
-      "tutorial":"Tutorial",
-      "notificacoes":"Notificações"
+  "componentes-fixos": {
+    "escopo-perfil": {
+      "conta": "Conta",
+      "layout": "Layout",
+      "sugestoes": "Sugestões",
+      "ajuda": "Ajuda",
+      "tutorial": "Tutorial",
+      "notificacoes": "Notificações"
     },
-    "header":{
-      "reunioes":"REUNIÕES",
-      "demandas":"DEMANDAS",
-      "rascunhos":"Rascunhos",
-      "configuracoes":"Configurações",
-      "sair":"Sair"
+    "header": {
+      "reunioes": "REUNIÕES",
+      "demandas": "DEMANDAS",
+      "rascunhos": "Rascunhos",
+      "configuracoes": "Configurações",
+      "sair": "Sair"
     }
   }
 }

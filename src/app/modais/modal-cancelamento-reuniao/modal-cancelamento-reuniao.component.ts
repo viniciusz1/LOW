@@ -19,8 +19,15 @@ export class ModalCancelamentoReuniaoComponent implements OnInit {
   codigoReuniao: number | undefined
   ngOnInit(): void {
   }
-  cancelarReuniao(){
+  cancelarReuniao() {
     this.reuniaoService.cancelarReuniao(this.codigoReuniao, this.motivoInput)
+      .subscribe({
+        next: e => {
+          console.log(e)
+        }, error: err => {
+          alert(err)
+        }
+      })
   }
 
 }

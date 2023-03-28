@@ -24,13 +24,13 @@
                 <b>
                     Departamentos Beneficiados:
                 </b>
-                Vendas, Motores, Trefiliação
+                RESOLVER
             </label>
             <span class="d-flex">
               <button class="btn btn-outline-danger btn-sm me-2" *ngIf="
               dadosReuniao.statusReuniao != 'CANCELADO' &&
               dadosReuniao.statusReuniao != 'CONCLUIDO'" (click)="cancelarReuniao.emit()">Cancelar Reunião</button>
-              <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'CANCELADO'" (click)="motivoCancelamento.emit()">Ver motivo do cancelamento</button>
+              <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'CANCELADO'" (click)="motivoCancelamento.emit(dadosReuniao)">Ver cancelamento</button>
               <button class="btn btn-primary btn-sm" [routerLink]="['/tela-inicial/ver-reuniao/' + dadosReuniao.codigoReuniao]" *ngIf="dadosReuniao.statusReuniao != 'CANCELADO'">Detalhes da Reunião</button>
             </span>
           </p>

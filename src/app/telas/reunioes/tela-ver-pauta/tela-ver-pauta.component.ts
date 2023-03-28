@@ -1,3 +1,4 @@
+import { ModalCancelamentoReuniaoComponent } from './../../../modais/modal-cancelamento-reuniao/modal-cancelamento-reuniao.component';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -58,14 +59,10 @@ export class TelaVerPauta implements OnInit {
   }
 
   cancelarReuniao() {
-    this.reuniaoService.cancelarReuniao(this.reuniao?.codigoReuniao)
-    .subscribe({
-      next: e => {
-        console.log(e)
-      }, error: err => {
-        alert(err)
-      } 
-    })
+    this.matDialog.open(ModalCancelamentoReuniaoComponent, {
+      minWidth: '300px',
+      data: this.reuniao?.codigoReuniao
+    });
   }
 
   openModalAtaDocumento(tipoAta: string) {

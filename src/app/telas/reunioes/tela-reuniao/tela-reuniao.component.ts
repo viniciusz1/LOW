@@ -47,14 +47,14 @@ export class TelaReuniaoComponent implements OnInit {
     });
   }
 
-  modalMotivoCancelamentoDemanda() {
+  modalMotivoCancelamentoDemanda(reuniao: Reuniao) {
     this.mostrarBotaoModal = true;
     this.confirmationService.confirm({
       blockScroll: false,
       closeOnEscape: false,
       dismissableMask: true,
       header: 'Motivo do Cancelamento',
-      message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, esse labore placeat soluta, eveniet voluptas debitis quod quaerat saepe, architecto recusandae provident repellendus fugiat expedita quos deleniti! Tempora, molestias illum?',
+      message: reuniao.motivoCancelamentoReuniao,
       accept: () => {
         //Actual logic to perform a confirmation
       },

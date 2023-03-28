@@ -16,16 +16,16 @@ export class DemandaService {
     situacaoAtualDemanda: ['', [Validators.required]],
     objetivoDemanda: ['', [Validators.required]],
     beneficioRealDemanda: this.fb.group({
-      moedaBeneficio: ['', [Validators.required]],
-      memoriaDeCalculoBeneficio: ['', [Validators.required]],
-      valorBeneficio: ['', [Validators.required]],
+      moedaBeneficio: [''],
+      memoriaDeCalculoBeneficio: [''],
+      valorBeneficio: [''],
     }),
     beneficioPotencialDemanda: this.fb.group({
-      moedaBeneficio: ['', [Validators.required]],
-      memoriaDeCalculoBeneficio: ['', [Validators.required]],
-      valorBeneficio: ['', [Validators.required]],
+      moedaBeneficio: [''],
+      memoriaDeCalculoBeneficio: [''],
+      valorBeneficio: [''],
     }),
-    beneficioQualitativoDemanda: ['', [Validators.required]],
+    beneficioQualitativoDemanda: [''],
     frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
       codigoUsuario: 2,

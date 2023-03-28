@@ -108,16 +108,16 @@ export class TelaCorridaComponent implements OnInit {
   ngOnInit(): void {
     window.addEventListener('scroll', this.onScroll.bind(this));
     this.onScroll();
-    // setInterval(() => {
-    //   let icones = document.getElementsByClassName('nav-scroll');
-    //   for (let i = 0; i < icones.length; i++) {
-    //     if (icones[i].classList.length > 2) {
-    //       this.titulosDemanda[i].color = '#00579d';
-    //     } else {
-    //       this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
-    //     }
-    //   }
-    // });
+    setInterval(() => {
+      let icones = document.getElementsByClassName('nav-scroll');
+      for (let i = 0; i < icones.length; i++) {
+        if (icones[i].classList.length > 2) {
+          this.titulosDemanda[i].color = '#00579d';
+        } else {
+          this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
+        }
+      }
+    });
 
     this.titulosDemanda = [
       {

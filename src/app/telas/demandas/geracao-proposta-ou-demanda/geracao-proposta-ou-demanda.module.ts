@@ -24,6 +24,7 @@ import {TooltipModule} from 'primeng/tooltip';
 import { TimelineModule } from 'primeng/timeline';
 import {AccordionModule} from 'primeng/accordion';
 import {ChipsModule} from 'primeng/chips';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -87,7 +88,8 @@ import {ChipsModule} from 'primeng/chips';
     TimelineModule,
     AccordionModule,
     InputNumberModule,
-    ChipsModule
+    ChipsModule,
+    SharedModule
   ],
   providers: [
     MessageService,

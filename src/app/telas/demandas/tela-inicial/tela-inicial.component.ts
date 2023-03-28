@@ -14,14 +14,11 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Sort } from '@angular/material/sort';
-import { JoyrideService } from 'ngx-joyride';
 import { textoTutorial } from '../../../shared/textoDoTutorial';
 import { ConfirmationService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -43,7 +40,7 @@ export class TelaInicialComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
   ) {
-    this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
+    this.pesquisaAlterada.pipe(debounceTime(2000)).subscribe(() => {
       this.pesquisarDemandas({  status: undefined ,pesquisaCampo: this.pesquisaDemanda});
     });
     if (router.url == '/tela-inicial/rascunhos') {

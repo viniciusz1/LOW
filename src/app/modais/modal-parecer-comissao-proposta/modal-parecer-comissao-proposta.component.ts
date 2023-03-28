@@ -1,3 +1,4 @@
+import { Demanda } from 'src/app/models/demanda.model';
 import { ModalPropostaDocumentoComponent } from './../modal-proposta-documento/modal-proposta-documento.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
@@ -13,7 +14,7 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
 
   constructor(
 
-    @Inject(DIALOG_DATA) public data: string,
+    @Inject(DIALOG_DATA) public data: Demanda,
     public dialogRef: DialogRef<ModalParecerComissaoPropostaComponent>,
     private matDialog: MatDialog,
     private reuniaoService: ReuniaoService
@@ -34,8 +35,30 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   ]
   parecerComissaoInput = ""
   recomendacaoInput = ""
+
+  bloquearCamposInput(){
+    if(this.data.statusDemanda == "DISCUSSION"){
+      return false
+    }else{
+      this.setInformacoes()
+      return true
+    }
+  }
+
+  
+  setInformacoes(){
+    if(this.data.parecerComissaoProposta && this.data.tipoAtaProposta && this.data.ultimaDecisaoComissao){
+      this.parecerComissaoInput = this.data.parecerComissaoProposta
+      if(this.data.recomendacaoProposta){
+        this.recomendacaoInput = this.data.recomendacaoProposta
+        this.aparecerRecomendacao = true;
+      }
+      this.tipoAtaSelecionada = this.data.tipoAtaProposta
+      this.resultadoComissaoSelecionado = this.data.ultimaDecisaoComissao
+    }
+  }
+
   selecionaResultado() {
-    
     if (this.resultadoComissaoSelecionado == "APROVAR_COM_RECOMENDACAO" || this.resultadoComissaoSelecionado == "REAPRESENTAR_COM_RECOMENDACAO") {
       this.aparecerRecomendacao = true;
     } else {
@@ -51,9 +74,13 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   }
 
   enviarParecerComissao() {
-    this.reuniaoService.enviarParecerComissao({ tipoAtaProposta: this.tipoAtaSelecionada,parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.data)
+    if(this.data.codigoDemanda)
+    this.reuniaoService.enviarParecerComissao({ tipoAtaProposta: this.tipoAtaSelecionada,parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.data.codigoDemanda?.toString())
       .subscribe({
-        next: e => { console.log(e) },
+        next: e => { 
+          this.data = e
+          this.dialogRef.close()
+        },
         error: err => {
           console.log(err)
         }

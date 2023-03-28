@@ -1,5 +1,435 @@
 {
-  "tela-inicial": {
-    "botao-criar-demanda": "Criar demanda"
+  "telas": {
+    "tela-inicial": {
+      "titulo": "Demands",
+      "b-criar-demanda": "Create demand",
+      "filtrar-mais": "Filter More",
+      "pesquisar-demanda": "Search Demand",
+      "ordenar": "Sort",
+      "ver-mais": "See more",
+      "b-anterior": "Previous",
+      "b-proximo": "Next",
+      "b-pronto": "Done",
+      "sinto-muito": "Sorry...",
+      "demanda-nao-encontrada": "No demands were found",
+      "modal-b-sim": "Yes",
+      "modal-b-nao": "No",
+      "modal-b-reformular": "Reformulate Demand",
+      "modal-b-ok": "Ok"
+    },
+    "marcar-reuniao": {
+      "titulo": "Schedule Meeting",
+      "demandas": "Demands",
+      "arraste": "Drag the Demands to this field!",
+      "data-hora": "Meeting Date and Time:",
+      "p-data-hora": "Click Here",
+      "comissao": "Select the Meeting Commission:",
+      "p-comissao": "Select Commission",
+      "b-marcar": "Schedule Meeting"
+    },
+    "tela-reunioes": {
+      "marcar": "Schedule Meeting",
+      "calendario": "View in Calendar",
+      "ordenar": "Sort"
+    },
+    "filtro-reunioes": {
+      "comissao": "Commission",
+      "data": "Date",
+      "responsavel": "Responsible",
+      "status": "Approval Status",
+      "solicitante": "Requester",
+      "codigoPPM": "PPM Code"
+    },
+    "barra-lateral-configuracoes": {
+      "conta": "Account",
+      "layout": "Layout",
+      "sugestoes": "Suggestions"
+    },
+    "menu-perfil": {
+      "rascunho": "Draft",
+      "config": "Settings",
+      "sair": "Log Out"
+    },
+    "notificacoes": {
+      "suas-notificacoes": "Your Notifications",
+      "not-found": "No Notifications"
+    },
+    "configuracoes-perfil": {
+      "titulo": "Profile",
+      "subtitulo": "GENERAL ACCOUNT SETTINGS",
+      "nome": "Name",
+      "dataNasc": "Date of Birth",
+      "cpf": "CPF",
+      "email": "Email",
+      "telefone": "Phone",
+      "senha": "Password",
+      "alterar": "Change"
+    },
+    "configuracoes-layout": {
+      "titulo": "Layout",
+      "subtitulo": "GENERAL LAYOUT SETTINGS",
+      "temas": "Themes",
+      "fonte": "Font",
+      "tamanho": "Size"
+    },
+    "configuracoes-sugestoes": {
+      "titulo": "Suggestions",
+      "subtitulo": "SEND SUGGESTIONS",
+      "descricao": "To improve service, system development, or operation, send us a suggestion in a way that facilitates your navigation through the system:",
+      "p-input": "Write your suggestion here:",
+      "b-enviar": "Send"
+    },
+    "configuracoes-ajuda": {
+      "titulo": "Help",
+      "subtitulo": "HELP CENTER",
+      "suprir-titulo": "Did not answer your questions?",
+      "suprir-desc": "Download the system documentation to better understand the LOW.",
+      "suprir-titulo2": "Did not answer your questions?",
+      "suprir-desc2": "Send us a message and we will respond as soon as possible.",
+      "descricao": "To improve customer service, system development or functionality, send us a suggestion that facilitates your navigation through the system:",
+      "p-input": "Write your question here:",
+      "b-enviar": "Send"
+    },
+    "tutorial": {
+      "t1": {
+        "titulo": "Welcome!",
+        "desc": "In this area, you can suggest new improvements in systems."
+      },
+      "t2": {
+        "titulo": "Create a Demand",
+        "desc": "In this area, you can suggest new improvements in systems."
+      },
+      "t3": {
+        "titulo": "Filter Demands",
+        "desc": "Here, you can filter your demands the way you want."
+      },
+      "t4": {
+        "titulo": "Change View",
+        "desc": "You can also change the display of your demands to a list."
+      },
+      "t5": {
+        "titulo": "Settings and Draft",
+        "desc": "Here, you can see your demand drafts and go to settings."
+      },
+      "t6": {
+        "titulo": "Languages",
+        "desc": "You can also change the system language."
+      },
+      "t7": {
+        "titulo": "Notifications",
+        "desc": "Your notifications will appear here."
+      },
+      "t8": {
+        "titulo": "Filter Demands",
+        "desc": "Have a broader view with our calendar."
+      },
+      "t9": {
+        "titulo": "Your Messages",
+        "desc": "See your conversations about demands here."
+      },
+      "t10": {
+        "titulo": "Sections",
+        "desc": "Our system is divided into two main sections. You were in demands, now in meetings."
+      },
+      "t11": {
+        "titulo": "Filter Demands",
+        "desc": "Here, you can schedule a meeting."
+      },
+      "login": {
+        "usuario": "User",
+        "senha": "Password",
+        "lembra": "Remember me",
+        "esqueceu": "Forgot password?",
+        "entrar": "Login"
+      },
+      "filtro-demandas": {
+        "titulo": "Title",
+        "num-solicitacao": "Request number",
+        "responsavel": "Responsible",
+        "tamanho": "Demand Size",
+        "solicitante": "Requester",
+        "departamento": "Department",
+        "status": "Approval Status"
+      },
+      "botao-criar-demanda": "Create demand"
+    },
+    "demanda": {
+      "dados-gerais": "General Information",
+      "titulo": "Title:",
+      "campo-obrigatorio": "Mandatory Field",
+      "situacao-atual": "Current Situation:",
+      "objetivo-final": "Final Objective:",
+      "centros-custo": "Cost Centers:",
+      "beneficios": "Benefits",
+      "beneficio-real": "Real Benefit:",
+      "memoria-beneficio-real": "Calculation Memory of Real Benefit:",
+      "beneficio-potencial": "Potential Benefit:",
+      "memoria-beneficio-potencial": "Calculation Memory of Potential Benefit:",
+      "beneficio-qualitativo": "Qualitative Benefit:",
+      "adicionais": "Additional Information",
+      "frequencia-uso-sistema": "Frequency of System Use:",
+      "anexar-documento": "Attach Document:",
+      "p-titulo": "Example: Improvement in Information Systems",
+      "p-situacao-atual": "Example: Low production, widespread delays",
+      "p-objetivo-final": "Example: Increase production through the development of a system",
+      "p-centros-custo-porcentagem": "Percentage",
+      "p-centros-custo-cc": "Cost Center",
+      "p-beneficio-real": "Example: 150,000",
+      "p-memoria-beneficio-real": "Example: Hiring a developer or a company costs around...",
+      "p-beneficio-qualitativo": "Example: The benefit becomes qualitative because its return...",
+      "p-frequencia-uso-sistema": "Select frequency",
+      "choose-label-anexar-documento": "Choose",
+      "upload-label-anexar-documento": "Upload",
+      "cancel-label-anexar-documento": "Cancel",
+      "tool-titulo": "Enter a name for this demand",
+      "tool-situacao-atual": "Describe how the current system works in the company",
+      "tool-objetivo-final": "How would your proposal help the company?",
+      "tool-centros-custo": "Which sections would benefit from your proposal?",
+      "tool-beneficio-real": "What would be the minimum profit gained from your proposal?",
+      "tool-memoria-beneficio-real": "How did you calculate the benefit?",
+      "tool-beneficio-potencial": "What would be the maximum profit gained from your proposal?",
+      "tool-memoria-beneficio-potencial": "How did you calculate the benefit?",
+      "tool-beneficio-qualitativo": "What would be the benefit in terms of discipline, control, and planning?",
+      "tool-frequencia-uso-sistema": "What would be the usability of the system?",
+      "tool-anexar-documento": "Do you want to add files (PDF, XML, POM...) related to the proposal, such as research?"
+    },
+    "proposta": {
+      "proposta": "Proposal",
+      "prazo-elaboracao": "Deadline for proposal development",
+      "campo-obrigatorio": "Mandatory field",
+      "codigo-ppm": "PPM code:",
+      "link-jira": "Jira link:",
+      "recursos": "Resources",
+      "recurso-necessario": "Required resource",
+      "tipo-despesa": "Expense type",
+      "perfil-despesa": "Expense profile",
+      "centro-custo-pagante": "Paying cost centers",
+      "quantidade-horas": "Number of hours",
+      "valor-hora": "Hourly rate",
+      "periodo-execucao": "Execution period (Monthly)",
+      "custos-totais": "Total costs:",
+      "centros-custo": "Cost centers",
+      "adicionar-recurso": "Add Resource",
+      "escopo": "Scope",
+      "escopo-demanda": "Demand scope:",
+      "dados-finais": "Final data",
+      "periodo-execucao-demanda": "Demand execution period:",
+      "payback-simples": "Simple Payback:",
+      "responsaveis-negocio": "Business responsibles:",
+      "p-prazo-elaboracao": "Click to schedule",
+      "p-recurso-necessario": "Ex: Backend Programmer",
+      "p-tipo-despesa": "Select Type",
+      "p-perfil-despesa": "Ex: Internal",
+      "p-valor-hora": "Ex: R$55,00",
+      "p-centros-custo-cc": "Cost centers",
+      "p-centros-custo-porcentagem": "Percentage",
+      "p-escopo-demanda": "Write here...",
+      "p-dados-finais": "Final data",
+      "p-periodo-execucao-demanda-inicio": "Start",
+      "p-periodo-execucao-demanda-fim": "End",
+      "p-payback-simples": "Simple Payback:",
+      "tool-prazo-elaboracao": "How long will it take to develop the proposal?",
+      "tool-codigo-ppm": "What is the SAP code?",
+      "tool-link-jira": "Insert the URL that appears at the top of your JIRA page",
+      "tool-escopo-demanda": "Define and personalize the purpose of your proposal",
+      "tool-dados-finais": "Final data",
+      "tool-periodo-execucao-demanda": "Insert the date you will start your proposal and the date you will finish your proposal",
+      "tool-payback-simples": "In reais, this is the return on benefits",
+      "tool-responsaveis-negocio": "Insert those responsible for succeeding the proposal, validating them with commas or by pressing the Enter key"
+    },
+    "tela-corrida": {
+      "scroll-dados-gerais": "General Data",
+      "scroll-beneficios": "Benefits",
+      "scroll-adicionais": "Additional Information",
+      "b-cancelar": "Cancel",
+      "b-finalizar": "Finish"
+    },
+    "tela-classificar-demanda": {
+      "preencha-campos": "Fill in the fields below:",
+      "tamanho": "Size:",
+      "p-tamanho": "Select a size",
+      "bu-beneficiada": "Beneficiary BU:",
+      "p-bu-beneficiada": "Select the BUs",
+      "bu-solicitante": "Requesting BU",
+      "p-bu-solicitante": "Select a BU",
+      "secao-ti-responsavel": "Responsible IT Section",
+      "p-secao-ti-responsavel": "Select a section",
+      "anexar-documento": "Attach document:",
+      "b-reprovar": "Disapprove",
+      "b-contatar-solicitante": "Contact Requester",
+      "b-aprovar": "Approve"
+    },
+    "tela-chat": {
+      "modal-b-sim": "Yes",
+      "modal-b-nao": "No",
+      "p-buscar-demanda": "Search for demands",
+      "visto-por-ultimo": "Last seen by:"
+    },
+    "tela-calendario": {
+      "calendario-reunioes": "Meetings Calendar"
+    },
+    "tela-reuniao": {
+      "b-marcar-reuniao": "Schedule Meeting",
+      "b-ver-calendario": "View in Calendar",
+      "p-ordenar": "Sort",
+      "modal-b-nao": "No",
+      "modal-b-sim": "Yes",
+      "modal-b-ok": "Ok"
+    },
+    "tela-ver-pauta": {
+      "data-comissao": "Commission date:",
+      "comissao": "Commission:",
+      "qtd-propostas": "Number of proposals:",
+      "visualizar": "View",
+      "b-ata-publicada": "Minutes published",
+      "b-ata-nao-publicada": "Minutes not published",
+      "b-gerar-documentacao": "Generate documentation"
+    },
+    "tela-login": {
+      "login": "Login",
+      "usuario": "User",
+      "senha": "Password",
+      "lembrar": "Remember me",
+      "esqueceu-senha": "Forgot Password?",
+      "b-entrar": "Login"
+    }
+  },
+  "modais": {
+    "modal-ata-documento": {},
+    "modal-proposta-documento": {},
+    "modal-demanda-documento": {},
+    "modal-criar-reuniao": {
+      "marcar-reuniao": "Schedule Meeting",
+      "demandas": "Demands",
+      "arraste-demandas": "Drag demands to this field!",
+      "data-hora-reuniao": "Date and Time of Meeting:",
+      "selecione-comissao": "Select the Meeting Commission:",
+      "p-data-hora-reuniao": "Click here!",
+      "p-selecione-comissao": "Select the commission:",
+      "b-marcar-reuniao": "Schedule Meeting"
+    },
+    "modal-historico": {
+      "historico": "History",
+      "data-alteracao": "Date of modification",
+      "autor": "Author",
+      "visualizar": "View"
+    },
+    "modal-motivo-devolucao": {
+      "motivo-devolucao": "Reason for return",
+      "i-motivo-devolucao": "Reason for returning the demand:"
+    },
+    "modal-parecer-comissao-proposta": {
+      "proposta": "Proposal",
+      "p-resultado-comissao": "Committee Result",
+      "b-visualizar-proposta": "View Proposal",
+      "informe-parecer": "Provide an opinion on this proposal:",
+      "recomendacoes": "Recommendations:",
+      "b-cancelar": "Cancel",
+      "b-finalizar": "Finalize Opinion"
+    },
+    "modal-reprovacao-demanda": {
+      "demanda": "Demand",
+      "motivo-reprovacao": "Reason for rejecting the demand:",
+      "b-reprovar": "Reject Demand",
+      "b-cancelar": "Cancel"
+    }
+  },
+  "documento-pdf": {
+    "solicitante": "Requester",
+    "departamento": "Department",
+    "objetivo": "Objective",
+    "situacao-atual": "Current situation",
+    "beneficio-real": "Real benefit",
+    "memoria-calculo-beneficio-real": "Memory of calculation of real benefit",
+    "benefício-potencial": "Potential benefit",
+    "memoria-calculo-beneficio-potencial": "Memory of calculation of potential benefit",
+    "beneficio-qualitativo": "Qualitative benefit",
+    "frequencia-uso-sistema": "Frequency of system use",
+    "documentos": "DOCUMENTS",
+    "b-cancelar": "Cancel",
+    "b-reprovar": "Reject Request",
+    "b-aprovar": "Approve Request"
+  },
+  "componentes-reutilizaveis": {
+    "card-demanda": {
+      "ver-demanda": "View demand",
+      "trocar-status": "Change status",
+      "ir-reuniao": "Go to meeting",
+      "ver-ata": "View in minutes",
+      "iniciar-conversa": "Start conversation",
+      "score": "Score:",
+      "autor": "Author:",
+      "departamento": "Department:"
+    },
+    "card-reuniao": {
+      "dia-comissao": "Commission Day:",
+      "status": "Status:",
+      "comissao": "Commission: ",
+      "propostas-adicionadas": "Added Proposals: ",
+      "departamentos-beneficiados": "Benefited Departments: ",
+      "exemplos": "Sales, Motors, Drawing",
+      "cancelar-reuniao": "Cancel Meeting",
+      "motivo-cancelamento": "See cancellation reason",
+      "detalhes-reuniao": "Meeting Details"
+    },
+    "filtro-reuniao": {
+      "filtrar-reunioes": "Filter Meetings",
+      "comissao": "Commission:",
+      "data": "Date:",
+      "responsavel": "Responsible:",
+      "status-aprovacao": "Approval Status:",
+      "solicitante": "Requester:",
+      "codigo-ppm": "PPM Code:"
+    },
+    "filtro-demanda": {
+      "filtrar-demandas": "Filter Demands",
+      "titulo-demanda": "Demand Title:",
+      "s-titulo-demanda": "Demand Title:",
+      "numero-solicitacao": "Request Number:",
+      "s-numero-solicitacao": "Request Number:",
+      "responsavel": "Responsible:",
+      "tamanho-demanda": "Demand Size:",
+      "s-tamanho-demanda": "Demand Size:",
+      "solicitante": "Applicant:",
+      "departamento": "Department:",
+      "status-aprovacao": "Approval Status:",
+      "p-titulo-demanda": "e.g. Management System",
+      "p-departamento": "e.g. Motors"
+    },
+    "list-demanda": {
+      "historico": "History",
+      "ver-demanda": "View demand",
+      "ir-reuniao": "Go to meeting",
+      "iniciar-conversa": "Start conversation"
+    },
+    "sidebar-reuniao": {
+      "aguardando": "Waiting",
+      "proximo": "Next",
+      "pendente": "Pending",
+      "concluido": "Completed",
+      "cancelado": "Cancelled"
+    },
+    "sidebar-demanda": {
+      "classificacao": "Classification",
+      "proposta": "Proposal",
+      "aprovacao": "Approval"
+    }
+  },
+  "componentes-fixos": {
+    "escopo-perfil": {
+      "conta": "Account",
+      "layout": "Layout",
+      "sugestoes": "Suggestions",
+      "ajuda": "Help",
+      "tutorial": "Tutorial",
+      "notificacoes": "Notifications"
+    },
+    "header": {
+      "reunioes": "MEETINGS",
+      "demandas": "DEMANDS",
+      "rascunhos": "DRAFTS",
+      "configuracoes": "Settings",
+      "sair": "Logout"
+    }
   }
 }

@@ -1,0 +1,436 @@
+{
+    "telas": {
+        "tela-inicial": {
+            "titulo": "Anforderungen",
+            "b-criar-demanda": "Anforderung erstellen",
+            "filtrar-mais": "Weitere Filter",
+            "pesquisar-demanda": "Anforderungen suchen",
+            "ordenar": "Sortieren",
+            "ver-mais": "Mehr anzeigen",
+            "b-anterior": "Zurück",
+            "b-proximo": "Weiter",
+            "b-pronto": "Fertig",
+            "sinto-muito": "Es tut mir leid...",
+            "demanda-nao-encontrada": "Keine Anforderungen gefunden",
+            "modal-b-sim": "Ja",
+            "modal-b-nao": "Nein",
+            "modal-b-reformular": "Anforderung überarbeiten",
+            "modal-b-ok": "OK"
+        },
+        "marcar-reuniao": {
+            "titulo": "Meeting vereinbaren",
+            "demandas": "Anforderungen",
+            "arraste": "Ziehen Sie Anforderungen in dieses Feld!",
+            "data-hora": "Datum und Uhrzeit des Meetings:",
+            "p-data-hora": "Klicken Sie hier",
+            "comissao": "Wählen Sie die Ausschuss des Meetings:",
+            "p-comissao": "Wählen Sie den Ausschuss aus",
+            "b-marcar": "Meeting vereinbaren"
+        },
+        "tela-reunioes": {
+            "marcar": "Meeting vereinbaren",
+            "calendario": "Im Kalender anzeigen",
+            "ordenar": "Sortieren"
+        },
+        "filtro-reunioes": {
+            "comissao": "Ausschuss",
+            "data": "Datum",
+            "responsavel": "Verantwortlicher",
+            "status": "Genehmigungsstatus",
+            "solicitante": "Antragsteller",
+            "codigoPPM": "PPM-Code"
+        },
+        "barra-lateral-configuracoes": {
+            "conta": "Konto",
+            "layout": "Layout",
+            "sugestoes": "Vorschläge"
+        },
+        "menu-perfil": {
+            "rascunho": "Entwurf",
+            "config": "Einstellungen",
+            "sair": "Abmelden"
+        },
+        "notificacoes": {
+            "suas-notificacoes": "Ihre Benachrichtigungen",
+            "not-found": "Keine Benachrichtigungen vorhanden"
+        },
+        "configuracoes-perfil": {
+            "titulo": "Profil",
+            "subtitulo": "ALLGEMEINE KONTOEINSTELLUNGEN",
+            "nome": "Name",
+            "dataNasc": "Geburtsdatum",
+            "cpf": "CPF",
+            "email": "E-Mail",
+            "telefone": "Telefon",
+            "senha": "Passwort",
+            "alterar": "Ändern"
+        },
+        "configuracoes-layout": {
+            "titulo": "Layout",
+            "subtitulo": "ALLGEMEINE LAYOUT-EINSTELLUNGEN",
+            "temas": "Themen",
+            "fonte": "Schriftart",
+            "tamanho": "Größe"
+        },
+        "configuracoes-sugestoes": {
+            "titulo": "Vorschläge",
+            "subtitulo": "VORSCHLÄGE SENDEN",
+            "descricao": "Um den Service, die Systementwicklung oder -funktion zu verbessern, senden Sie uns einen Vorschlag, der Ihre Navigation durch das System erleichtert:",
+            "p-input": "Schreiben Sie hier Ihren Vorschlag:",
+            "b-enviar": "Senden"
+        },
+        "configuracoes-ajuda": {
+            "titulo": "Hilfe",
+            "subtitulo": "HILFECENTER",
+            "suprir-titulo": "Haben Sie Ihre Fragen nicht beantwortet bekommen?",
+            "suprir-desc": "Laden Sie die Systemdokumentation herunter, um das LOW besser zu verstehen",
+            "suprir-titulo2": "Haben Sie Ihre Fragen nicht beantwortet bekommen?",
+            "suprir-desc2": "Senden Sie uns eine Nachricht, die so bald wie möglich beantwortet wird...",
+            "descricao": "Um den Service, die Systementwicklung oder -funktion zu verbessern, senden Sie uns einen Vorschlag, der Ihre Navigation durch das System erleichtert:",
+            "p-input": "Schreiben Sie hier Ihre Frage:",
+            "b-enviar": "Senden"
+        },
+        "tutorial": {
+            "t1": {
+                "titulo": "Willkommen!",
+                "desc": "In diesem Bereich können Sie neue Verbesserungen in Systemen vorschlagen."
+            },
+            "t2": {
+                "titulo": "Eine Anforderung erstellen",
+                "desc": "In diesem Bereich können Sie neue Verbesserungen in Systemen vorschlagen."
+            },
+            "t3": {
+                "titulo": "Anforderungen filtern",
+                "desc": "Hier können Sie Ihre Anforderungen auf die gewünschte Weise filtern."
+            },
+            "t4": {
+                "titulo": "Ansicht ändern",
+                "desc": "Sie können auch die Ansicht Ihrer Anforderungen in eine Liste ändern."
+            },
+            "t5": {
+                "titulo": "Einstellungen und Entwürfe",
+                "desc": "Hier können Sie Ihre Entwürfe von Anforderungen anzeigen und zu den Einstellungen gehen."
+            },
+            "t6": {
+                "titulo": "Sprachen",
+                "desc": "Sie können auch die Sprache des Systems ändern."
+            },
+            "t7": {
+                "titulo": "Benachrichtigungen",
+                "desc": "Ihre Benachrichtigungen werden hier angezeigt."
+            },
+            "t9": {
+                "titulo": "Ihre Nachrichten",
+                "desc": "Sehen Sie hier Ihre Unterhaltungen über Anforderungen."
+            },
+            "t10": {
+                "titulo": "Abschnitte",
+                "desc": "Unser System ist in zwei Hauptabschnitte unterteilt. Sie waren in Anforderungen und jetzt in Meetings."
+            },
+            "t11": {
+                "titulo": "Anforderungen filtern",
+                "desc": "Hier können Sie ein Meeting markieren"
+            },
+            "t8": {
+                "titulo": "Anforderungen filtern",
+                "desc": "Erhalten Sie einen umfassenderen Überblick mit unserem Kalender"
+            },
+            "login": {
+                "usuario": "Benutzername",
+                "senha": "Passwort",
+                "lembra": "Erinnere dich an mich",
+                "esqueceu": "Passwort vergessen?",
+                "entrar": "Anmelden"
+            },
+            "filtro-demandas": {
+                "titulo": "Titel",
+                "num-solicitacao": "Anforderungsnummer",
+                "responsavel": "Verantwortlicher",
+                "tamanho": "Nachfragegröße",
+                "solicitante": "Antragsteller",
+                "departamento": "Abteilung",
+                "status": "Genehmigungsstatus"
+            },
+            "botao-criar-demanda": "Nachfrage erstellen"
+        },
+        "demanda": {
+            "dados-gerais": "Allgemeine Daten",
+            "titulo": "Titel:",
+            "campo-obrigatorio": "Pflichtfeld",
+            "situacao-atual": "Aktuelle Situation:",
+            "objetivo-final": "Endziel:",
+            "centros-custo": "Kostenzentren:",
+            "beneficios": "Vorteile",
+            "beneficio-real": "Tatsächlicher Nutzen:",
+            "memoria-beneficio-real": "Berechnung des tatsächlichen Nutzens:",
+            "beneficio-potencial": "Potenzieller Nutzen:",
+            "memoria-beneficio-potencial": "Berechnung des potenziellen Nutzens:",
+            "beneficio-qualitativo": "Qualitativer Nutzen:",
+            "adicionais": "Zusätzliche Informationen",
+            "frequencia-uso-sistema": "Systemnutzungshäufigkeit:",
+            "anexar-documento": "Dokument anhängen:",
+            "p-titulo": "Beispiel: Verbesserung der Informationssysteme",
+            "p-situacao-atual": "Beispiel: Geringe Produktion, umfassende Verzögerungen",
+            "p-objetivo-final": "Beispiel: Erhöhung der Produktion durch die Entwicklung eines Systems",
+            "p-centros-custo-porcentagem": "Prozentsatz",
+            "p-centros-custo-cc": "Kostenstelle",
+            "p-beneficio-real": "Beispiel: 150.000",
+            "p-memoria-beneficio-real": "Beispiel: Die Einstellung eines Entwicklers oder Unternehmens kostet etwa...",
+            "p-beneficio-qualitativo": "Beispiel: Der Nutzen wird qualitativ, weil die Rendite...",
+            "p-frequencia-uso-sistema": "Frequenz auswählen",
+            "choose-label-anexar-documento": "Auswählen",
+            "upload-label-anexar-documento": "Senden",
+            "cancel-label-anexar-documento": "Abbrechen",
+            "tool-titulo": "Geben Sie einen Namen für diese Anforderung ein",
+            "tool-situacao-atual": "Beschreiben Sie, wie das derzeitige System im Unternehmen funktioniert",
+            "tool-objetivo-final": "Wie würde Ihr Vorschlag dem Unternehmen helfen?",
+            "tool-centros-custo": "Welche Abteilungen würden von Ihrem Vorschlag profitieren?",
+            "tool-beneficio-real": "Was wäre der minimale Gewinn aus Ihrem Vorschlag?",
+            "tool-memoria-beneficio-real": "Wie haben Sie den Nutzen berechnet?",
+            "tool-beneficio-potencial": "Was wäre der maximale Gewinn aus Ihrem Vorschlag?",
+            "tool-memoria-beneficio-potencial": "Wie haben Sie den Nutzen berechnet?",
+            "tool-beneficio-qualitativo": "Was wäre der Nutzen in Bezug auf Disziplin, Kontrolle und Planung?",
+            "tool-frequencia-uso-sistema": "Wie oft würde das System genutzt werden?",
+            "tool-anexar-documento": "Möchten Sie Dateien (PDF, XML, POM...) anhängen, die sich auf Ihren Vorschlag beziehen, wie z. B. Untersuchungen?"
+        },
+        "proposta": {
+            "proposta": "Vorschlag",
+            "prazo-elaboracao": "Frist für die Erstellung des Vorschlags",
+            "campo-obrigatorio": "Pflichtfeld",
+            "codigo-ppm": "PPM-Code:",
+            "link-jira": "Jira-Link:",
+            "recursos": "Ressourcen",
+            "recurso-necessario": "Benötigte Ressource",
+            "tipo-despesa": "Art der Ausgaben",
+            "perfil-despesa": "Ausgabenprofil",
+            "centro-custo-pagante": "Zahlende Kostenstellen",
+            "quantidade-horas": "Anzahl der Stunden",
+            "valor-hora": "Stundenlohn",
+            "periodo-execucao": "Ausführungszeitraum (monatlich)",
+            "custos-totais": "Gesamtkosten:",
+            "centros-custo": "Kostenstellen",
+            "adicionar-recurso": "Ressource hinzufügen",
+            "escopo": "Umfang",
+            "escopo-demanda": "Umfang der Anforderung:",
+            "dados-finais": "Enddaten",
+            "periodo-execucao-demanda": "Zeitraum für die Ausführung der Anforderung:",
+            "payback-simples": "Einfache Amortisation:",
+            "responsaveis-negocio": "Verantwortliche für das Geschäft:",
+            "p-prazo-elaboracao": "Klicken Sie hier, um einen Termin zu vereinbaren",
+            "p-recurso-necessario": "z.B. Back-End-Programmierer",
+            "p-tipo-despesa": "Wählen Sie den Typ aus",
+            "p-perfil-despesa": "z.B. intern",
+            "p-valor-hora": "z.B. R$55,00",
+            "p-centros-custo-cc": "Kostenstellen",
+            "p-centros-custo-porcentagem": "Prozentsatz",
+            "p-escopo-demanda": "Hier schreiben...",
+            "p-dados-finais": "Enddaten",
+            "p-periodo-execucao-demanda-inicio": "Start",
+            "p-periodo-execucao-demanda-fim": "Ende",
+            "p-payback-simples": "Einfache Amortisation:",
+            "tool-prazo-elaboracao": "Wie lange wird es dauern, bis der Vorschlag fertig ist?",
+            "tool-codigo-ppm": "Was ist der SAP-Code?",
+            "tool-link-jira": "Geben Sie die URL ein, die oben auf Ihrer JIRA-Seite angezeigt wird.",
+            "tool-escopo-demanda": "Definieren und personalisieren Sie den Zweck Ihres Vorschlags.",
+            "tool-dados-finais": "Enddaten",
+            "tool-periodo-execucao-demanda": "Geben Sie das Datum ein, an dem Ihr Vorschlag beginnen wird, und das Datum, an dem Ihr Vorschlag enden wird.",
+            "tool-payback-simples": "Dies ist der monetäre Nutzen aus den Vorteilen",
+            "tool-responsaveis-negocio": "Geben Sie die Verantwortlichen für den Erfolg des Vorschlags ein, indem Sie sie durch Kommas trennen oder die Eingabetaste drücken."
+        },
+        "tela-corrida": {
+            "scroll-dados-gerais": "Allgemeine Daten",
+            "scroll-beneficios": "Vorteile",
+            "scroll-adicionais": "Zusätzliche Informationen",
+            "b-cancelar": "Abbrechen",
+            "b-finalizar": "Beenden"
+        },
+        "tela-classificar-demanda": {
+            "preencha-campos": "Füllen Sie die folgenden Felder aus:",
+            "tamanho": "Größe:",
+            "p-tamanho": "Wählen Sie eine Größe",
+            "bu-beneficiada": "Vorteilhafte BU:",
+            "p-bu-beneficiada": "Wählen Sie die BUs",
+            "bu-solicitante": "Anfordernde BU",
+            "p-bu-solicitante": "Wählen Sie eine BU",
+            "secao-ti-responsavel": "Verantwortliche IT-Abteilung",
+            "p-secao-ti-responsavel": "Wählen Sie eine Abteilung",
+            "anexar-documento": "Dokument anhängen:",
+            "b-reprovar": "Ablehnen",
+            "b-contatar-solicitante": "Anfordernden kontaktieren",
+            "b-aprovar": "Genehmigen"
+        },
+        "tela-chat": {
+            "modal-b-sim": "Ja",
+            "modal-b-nao": "Nein",
+            "p-buscar-demanda": "Suchen Sie nach Anfragen",
+            "visto-por-ultimo": "Zuletzt gesehen von:"
+        },
+        "tela-calendario": {
+            "calendario-reunioes": "Kalender der Meetings"
+        },
+        "tela-reuniao": {
+            "b-marcar-reuniao": "Meeting vereinbaren",
+            "b-ver-calendario": "Im Kalender anzeigen",
+            "p-ordenar": "Sortieren",
+            "modal-b-nao": "Nein",
+            "modal-b-sim": "Ja",
+            "modal-b-ok": "Ok"
+        },
+        "tela-ver-pauta": {
+            "data-comissao": "Datum der Kommission:",
+            "comissao": "Kommission:",
+            "qtd-propostas": "Anzahl Vorschläge:",
+            "visualizar": "Anzeigen",
+            "b-ata-publicada": "Protokoll veröffentlicht",
+            "b-ata-nao-publicada": "Protokoll nicht veröffentlicht",
+            "b-gerar-documentacao": "Dokumentation generieren"
+        },
+        "tela-login": {
+            "login": "Anmeldung",
+            "usuario": "Benutzer",
+            "senha": "Passwort",
+            "lembrar": "Erinnere mich",
+            "esqueceu-senha": "Passwort vergessen?",
+            "b-entrar": "Einloggen"
+        }
+    },
+    "modais": {
+        "modal-ata-documento": {},
+        "modal-proposta-documento": {},
+        "modal-demanda-documento": {},
+        "modal-criar-reuniao": {
+            "marcar-reuniao": "Besprechung planen",
+            "demandas": "Anforderungen",
+            "arraste-demandas": "Ziehen Sie Anforderungen in dieses Feld!",
+            "data-hora-reuniao": "Datum und Uhrzeit der Besprechung:",
+            "selecione-comissao": "Wählen Sie den Ausschuss für die Besprechung aus:",
+            "p-data-hora-reuniao": "Klicken Sie hier!",
+            "p-selecione-comissao": "Wählen Sie den Ausschuss aus:",
+            "b-marcar-reuniao": "Besprechung planen"
+        },
+        "modal-historico": {
+            "historico": "Verlauf",
+            "data-alteracao": "Änderungsdatum",
+            "autor": "Autor",
+            "visualizar": "Anzeigen"
+        },
+        "modal-motivo-devolucao": {
+            "motivo-devolucao": "Rücksendegrund",
+            "i-motivo-devolucao": "Grund für die Zurücksendung der Anforderung:"
+        },
+        "modal-parecer-comissao-proposta": {
+            "proposta": "Vorschlag",
+            "p-resultado-comissao": "Ausschussergebnis",
+            "b-visualizar-proposta": "Vorschlag anzeigen",
+            "informe-parecer": "Geben Sie das Ausschussurteil zu diesem Vorschlag ein:",
+            "recomendacoes": "Empfehlungen:",
+            "b-cancelar": "Abbrechen",
+            "b-finalizar": "Urteil abschließen"
+        },
+        "modal-reprovacao-demanda": {
+            "demanda": "Anforderung",
+            "motivo-reprovacao": "Grund für die Ablehnung der Anforderung:",
+            "b-reprovar": "Anforderung ablehnen",
+            "b-cancelar": "Abbrechen"
+        }
+    },
+    "documento-pdf": {
+        "solicitante": "ANTRAGSTELLER",
+        "departamento": "ABTEILUNG",
+        "objetivo": "Ziel:",
+        "situacao-atual": "Aktuelle Situation:",
+        "beneficio-real": "Tatsächlicher Nutzen:",
+        "memoria-calculo-beneficio-real": "Berechnungserinnerung des tatsächlichen Nutzens:",
+        "benefício-potencial": "Potenzieller Nutzen:",
+        "memoria-calculo-beneficio-potencial": "Berechnungserinnerung des potenziellen Nutzens:",
+        "beneficio-qualitativo": "Qualitativer Nutzen:",
+        "frequencia-uso-sistema": "Systemnutzungshäufigkeit:",
+        "documentos": "UNTERLAGEN:",
+        "b-cancelar": "Stornieren",
+        "b-reprovar": "Anforderung ablehnen",
+        "b-aprovar": "Anforderung genehmigen"
+    },
+    "componentes-reutilizaveis": {
+        "card-demanda": {
+            "historico": "Historie",
+            "ver-demanda": "Nachfrage ansehen",
+            "trocar-status": "Status ändern",
+            "ir-reuniao": "Zur Sitzung gehen",
+            "ver-ata": "In der Aufzeichnung ansehen",
+            "iniciar-conversa": "Konversation beginnen",
+            "score": "Score:",
+            "autor": "Autor:",
+            "departamento": "Abteilung:"
+        },
+        "card-reuniao": {
+            "dia-comissao": "Tag der Kommission:",
+            "status": "Status:",
+            "comissao": "Kommission: ",
+            "propostas-adicionadas": "Hinzugefügte Vorschläge: ",
+            "departamentos-beneficiados": "Betroffene Abteilungen: ",
+            "exemplos": "Verkäufe, Motoren, Drahtziehen",
+            "cancelar-reuniao": "Sitzung abbrechen",
+            "motivo-cancelamento": "Grund für die Stornierung anzeigen",
+            "detalhes-reuniao": "Details der Sitzung"
+        },
+        "filtro-reuniao": {
+            "filtrar-reunioes": "Sitzungen filtern",
+            "comissao": "Kommission: ",
+            "data": "Datum:",
+            "responsavel": "Verantwortlicher:",
+            "status-aprovacao": "Genehmigungsstatus:",
+            "solicitante": "Antragsteller:",
+            "codigo-ppm": "PPM-Code:"
+        },
+        "filtro-demanda": {
+            "filtrar-demandas": "Nachfragen filtern",
+            "titulo-demanda": "Titel der Nachfrage:",
+            "s-titulo-demanda": "Nachfragetitel:",
+            "numero-solicitacao": "Anfrage-Nummer",
+            "s-numero-solicitacao": "Anfrage-Nummer:",
+            "responsavel": "Verantwortlicher",
+            "tamanho-demanda": "Nachfragengröße:",
+            "s-tamanho-demanda": "Größe der Nachfrage:",
+            "solicitante": "Antragsteller:",
+            "departamento": "Abteilung:",
+            "status-aprovacao": "Genehmigungsstatus",
+            "p-titulo-demanda": "z.B.: Verwaltungssystem",
+            "p-departamento": "z.B.: Motoren"
+        },
+        "list-demanda": {
+            "historico": "Verlauf",
+            "ver-demanda": "Anforderung anzeigen",
+            "ir-reuniao": "Zur Besprechung gehen",
+            "iniciar-conversa": "Gespräch starten"
+        },
+        "sidebar-reuniao": {
+            "aguardando": "Warten auf",
+            "proximo": "Nächster",
+            "pendente": "Ausstehend",
+            "concluido": "Abgeschlossen",
+            "cancelado": "Abgebrochen"
+        },
+        "sidebar-demanda": {
+            "classificacao": "Klassifizierung",
+            "proposta": "Vorschlag",
+            "aprovacao": "Genehmigung"
+        }
+    },
+    "componentes-fixos": {
+        "escopo-perfil": {
+            "conta": "Konto",
+            "layout": "Layout",
+            "sugestoes": "Vorschläge",
+            "ajuda": "Hilfe",
+            "tutorial": "Tutorial",
+            "notificacoes": "Benachrichtigungen"
+        },
+        "header": {
+            "reunioes": "SITZUNGEN",
+            "demandas": "ANFORDERUNGEN",
+            "rascunhos": "Entwürfe",
+            "configuracoes": "Einstellungen",
+            "sair": "Ausloggen"
+        }
+    }
+}

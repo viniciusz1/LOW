@@ -36,6 +36,7 @@ export interface Demanda {
     dataCriacaoDemanda?: Date
     version?: number
 
+    recomendacaoProposta?: string,
     tamanhoDemandaAnalista?: Tamanho,
     buSolicitanteDemandaAnalista?: BusinessUnit,
     busBeneficiadasDemandaAnalista?: BusinessUnit[],

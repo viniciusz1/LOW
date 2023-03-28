@@ -19,8 +19,8 @@ export class ReuniaoService {
     );
   }
 
-  cancelarReuniao(codigoReuniao: number | undefined){
-    return this.http.put<Reuniao>(path + 'reuniao/cancelar/' + codigoReuniao, null);
+  cancelarReuniao(codigoReuniao: number | undefined, motivoReuniao: string){
+    return this.http.put<Reuniao>(path + 'reuniao/cancelar/' + codigoReuniao, motivoReuniao);
 
   }
   finalizarReuniao(codigoReuniao: number | undefined){

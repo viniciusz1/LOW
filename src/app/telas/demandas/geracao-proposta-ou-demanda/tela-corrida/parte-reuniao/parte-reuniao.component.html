@@ -120,7 +120,7 @@
       </div>
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">Perfil da despesa:</label>
-        <p-dropdown placeholder="Ex: ..." type="text" [required]="true" [options]="perfilDaDespesa" optionValue="value"
+        <p-dropdown placeholder="Ex: Interna" type="text" [required]="true" [options]="perfilDaDespesa" optionValue="value"
           optionLabel="tipo" formControlName="perfilDespesaRecurso"
           [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.perfilDespesaRecurso.errors && formRecursos.controls.perfilDespesaRecurso.touched}" ></p-dropdown>
           <small *ngIf="formRecursos.controls.perfilDespesaRecurso.errors && formRecursos.controls.perfilDespesaRecurso.touched"
@@ -142,7 +142,7 @@
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:"> Valor da hora</label>
         <div style="width: 100%; display: grid">
-          <p-inputNumber placeholder="Ex: R$ 55,00" [required]="true" type="text" class="input"
+          <p-inputNumber placeholder="Ex: R$55,00" [required]="true" type="text" class="input"
             formControlName="valorHoraRecurso"
             [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.valorHoraRecurso.errors && formRecursos.controls.valorHoraRecurso.touched}"></p-inputNumber>
             <small *ngIf="formRecursos.controls.valorHoraRecurso.errors && formRecursos.controls.valorHoraRecurso.touched"
@@ -206,7 +206,7 @@
     <div class="NgxEditor__Wrapper escopo-demanda"
       [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.escopoDemandaProposta.errors && formProposta.controls.escopoDemandaProposta.touched}">
       <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-      <ngx-editor [editor]="editor" formControlName="escopoDemandaProposta">
+      <ngx-editor [editor]="editor" formControlName="escopoDemandaProposta" placeholder="Escreva aqui...">
       </ngx-editor>
     </div>
     <small
@@ -247,7 +247,7 @@
       <div class="infos" style="display: flex; align-items: center; width: 28vw">
         <label style="font-weight: 500" class="me-2" for="time">Payback Simples:</label>
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
-          pTooltip="Insira, em reais, o retorno dos benefícios" tooltipPosition="top"></i>
+          pTooltip="Em reais, este é o retorno dos benefícios" tooltipPosition="top"></i>
       </div>
       <input type="text" pInputText [value]="paybackProposta" disabled="true">
     </div>

@@ -1,171 +1,436 @@
 {
-  "tela-inicial": {
-    "titulo": "Demandas",
-    "botao-criar-demanda": "Criar demanda",
-    "filtrar-mais": "Filtrar Mais",
-    "pesquisar-demanda": "Pesquisar Demanda",
-    "ordenar": "Ordenar",
-    "ver-mais": "Ver mais"
-  },
-  "marcar-reuniao":{
-    "titulo": "Marcar Reunião",
-    "demandas": "Demandas",
-    "arraste": "Arraste as Demandas para este campo!",
-    "data-hora": "Data e Hora da Reunião:",
-    "p-data-hora": "Clique Aqui",
-    "comissao": "Selecione a Comissão da Reunião:",
-    "p-comissao": "Selecione a Comissão",
-    "b-marcar": "Marcar Reunião"
-  },
-  "tela-reunioes": {
-    "marcar": "Marcar Reunião",
-    "calendario": "Ver em Calendario",
-    "ordenar": "Ordenar"
-  },
-  "filtro-reunioes": {
-    "comissao": "Comissao",
-    "data": "Data",
-    "responsavel": "Responsável",
-    "status": "Status de Aprovação",
-    "solicitante": "Solicitante",
-    "codigoPPM": "Código PPM"
-  },
-  "barra-lateral-configuracoes": {
-    "conta": "Conta",
-    "layout": "Layout",
-    "sugestoes": "Sugestões"
-  },
-  "menu-perfil": {
-    "rascunho": "Rascunho",
-    "config": "Configurações",
-    "sair": "Sair"
-  },
-  "notificacoes": {
-    "suas-notificacoes": "Suas Notificações",
-    "not-found": "Não há Notificações"
-  },
-  "configuracoes-perfil": {
-    "titulo": "Perfil",
-    "subtitulo": "CONFIGURAÇÕES GERAIS DE CONTA",
-    "nome": "Nome",
-    "dataNasc": "Data de Nascimento",
-    "cpf": "CPF",
-    "email": "Email",
-    "telefone": "Telefone",
-    "senha": "Senha",
-    "alterar": "Alterar"
-  },
-  "configuracoes-layout": {
-    "titulo": "Layout",
-    "subtitulo": "CONFIGURAÇÕES GERAIS DE LAYOUT",
-    "temas": "Temas",
-    "fonte": "Fonte",
-    "tamanho": "Tamanho"
-  },
-  "configuracoes-sugestoes": {
-    "titulo": "Sugestões",
-    "subtitulo": "ENVIAR SUGESTÕES",
-    "descricao": "Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento, nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:",
-    "p-input": "Escreva aqui sua sugestão:",
-    "b-enviar": "Enviar"
-  },
-  "configuracoes-ajuda": {
-    "titulo": "Ajuda",
-    "subtitulo": "CENTRAL DE AJUDA",
-    "suprir-titulo": "Não supriu suas dúvidas?",
-    "suprir-desc": "Baixe a documentação do sistema para compreender melhor o LOW",
-    "suprir-titulo2": "Não supriu suas dúvidas?",
-    "suprir-desc2": "Nos envie uma mensagem que assim que possível será respondido...",
-    "descricao": "Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento, nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:",
-    "p-input": "Escreva aqui sua duvida:",
-    "b-enviar": "Enviar"
-  },
-  "tutorial": {
-    "t1": {
-      "titulo": "Bem Vindo!",
-      "desc": "Nesta área você pode sugerir novas melhorias em sistemas."
+  "telas": {
+    "tela-inicial": {
+      "titulo": "Demandas",
+      "b-criar-demanda": "Criar demanda",
+      "filtrar-mais": "Filtrar Mais",
+      "pesquisar-demanda": "Pesquisar Demanda",
+      "ordenar": "Ordenar",
+      "ver-mais": "Ver mais",
+      "b-anterior": "Anterior",
+      "b-proximo": "Próximo",
+      "b-pronto": "Pronto",
+      "sinto-muito": "Sinto Muito...",
+      "demanda-nao-encontrada": "Nenhuma demanda foi encontrada",
+      "modal-b-sim": "Sim",
+      "modal-b-nao": "Não",
+      "modal-b-reformular": "Reformular Demanda",
+      "modal-b-ok": "Ok"
     },
-    "t2": {
-      "titulo": "Criar uma Demanda",
-      "desc": "Nesta área você pode sugerir novas melhorias em sistemas."
+    "marcar-reuniao": {
+      "titulo": "Marcar Reunião",
+      "demandas": "Demandas",
+      "arraste": "Arraste as Demandas para este campo!",
+      "data-hora": "Data e Hora da Reunião:",
+      "p-data-hora": "Clique Aqui",
+      "comissao": "Selecione a Comissão da Reunião:",
+      "p-comissao": "Selecione a Comissão",
+      "b-marcar": "Marcar Reunião"
     },
-    "t3": {
-      "titulo": "Filtrar Demandas",
-      "desc": "Aqui você pode filtrar suas demandas do jeito que quiser."
+    "tela-reunioes": {
+      "marcar": "Marcar Reunião",
+      "calendario": "Ver em Calendario",
+      "ordenar": "Ordenar"
     },
-    "t4": {
-      "titulo": "Trocar Exibição",
-      "desc": "Você também pode alterar a vizualização de suas demandas para lista."
+    "filtro-reunioes": {
+      "comissao": "Comissao",
+      "data": "Data",
+      "responsavel": "Responsável",
+      "status": "Status de Aprovação",
+      "solicitante": "Solicitante",
+      "codigoPPM": "Código PPM"
     },
-    "t5": {
-      "titulo": "Configurações e Rascunho",
-      "desc": "Aqui você pode ver seus rascunhos de demandas, e ir para configurações."
+    "barra-lateral-configuracoes": {
+      "conta": "Conta",
+      "layout": "Layout",
+      "sugestoes": "Sugestões"
     },
-    "t6": {
-      "titulo": "Idiomas",
-      "desc": "Você também pode alterar o idioma do sistema."
+    "menu-perfil": {
+      "rascunho": "Rascunho",
+      "config": "Configurações",
+      "sair": "Sair"
     },
-    "t7": {
-      "titulo": "Notificações",
-      "desc": "Suas notificações aparecerão aqui."
+    "notificacoes": {
+      "suas-notificacoes": "Suas Notificações",
+      "not-found": "Não há Notificações"
     },
-    "t9": {
-      "titulo": "Suas Mensagens",
-      "desc": "Veja suas conversas sobre demandas aqui."
+    "configuracoes-perfil": {
+      "titulo": "Perfil",
+      "subtitulo": "CONFIGURAÇÕES GERAIS DE CONTA",
+      "nome": "Nome",
+      "dataNasc": "Data de Nascimento",
+      "cpf": "CPF",
+      "email": "Email",
+      "telefone": "Telefone",
+      "senha": "Senha",
+      "alterar": "Alterar"
     },
-    "t10": {
-      "titulo": "Seções",
-      "desc": "Nosso sistema é dividido em duas seções principais. Você estava em demandas, agora em reuniões."
+    "configuracoes-layout": {
+      "titulo": "Layout",
+      "subtitulo": "CONFIGURAÇÕES GERAIS DE LAYOUT",
+      "temas": "Temas",
+      "fonte": "Fonte",
+      "tamanho": "Tamanho"
     },
-    "t11": {
-      "titulo": "Filtrar Demandas",
-      "desc": "Aqui você pode marcar uma reunião"
+    "configuracoes-sugestoes": {
+      "titulo": "Sugestões",
+      "subtitulo": "ENVIAR SUGESTÕES",
+      "descricao": "Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento, nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:",
+      "p-input": "Escreva aqui sua sugestão:",
+      "b-enviar": "Enviar"
     },
-    "t8": {
-      "titulo": "Filtrar Demandas",
-      "desc": "Tenha uma visão mais ampla com nosso calendário"
+    "configuracoes-ajuda": {
+      "titulo": "Ajuda",
+      "subtitulo": "CENTRAL DE AJUDA",
+      "suprir-titulo": "Não supriu suas dúvidas?",
+      "suprir-desc": "Baixe a documentação do sistema para compreender melhor o LOW",
+      "suprir-titulo2": "Não supriu suas dúvidas?",
+      "suprir-desc2": "Nos envie uma mensagem que assim que possível será respondido...",
+      "descricao": "Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento, nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:",
+      "p-input": "Escreva aqui sua duvida:",
+      "b-enviar": "Enviar"
     },
-    "login": {
+    "tutorial": {
+      "t1": {
+        "titulo": "Bem Vindo!",
+        "desc": "Nesta área você pode sugerir novas melhorias em sistemas."
+      },
+      "t2": {
+        "titulo": "Criar uma Demanda",
+        "desc": "Nesta área você pode sugerir novas melhorias em sistemas."
+      },
+      "t3": {
+        "titulo": "Filtrar Demandas",
+        "desc": "Aqui você pode filtrar suas demandas do jeito que quiser."
+      },
+      "t4": {
+        "titulo": "Trocar Exibição",
+        "desc": "Você também pode alterar a vizualização de suas demandas para lista."
+      },
+      "t5": {
+        "titulo": "Configurações e Rascunho",
+        "desc": "Aqui você pode ver seus rascunhos de demandas, e ir para configurações."
+      },
+      "t6": {
+        "titulo": "Idiomas",
+        "desc": "Você também pode alterar o idioma do sistema."
+      },
+      "t7": {
+        "titulo": "Notificações",
+        "desc": "Suas notificações aparecerão aqui."
+      },
+      "t9": {
+        "titulo": "Suas Mensagens",
+        "desc": "Veja suas conversas sobre demandas aqui."
+      },
+      "t10": {
+        "titulo": "Seções",
+        "desc": "Nosso sistema é dividido em duas seções principais. Você estava em demandas, agora em reuniões."
+      },
+      "t11": {
+        "titulo": "Filtrar Demandas",
+        "desc": "Aqui você pode marcar uma reunião"
+      },
+      "t8": {
+        "titulo": "Filtrar Demandas",
+        "desc": "Tenha uma visão mais ampla com nosso calendário"
+      },
+      "login": {
+        "usuario": "Usuario",
+        "senha": "Senha",
+        "lembra": "Lembrar-me",
+        "esqueceu": "Esqueceu a senha?",
+        "entrar": "Entrar"
+      },
+      "filtro-demandas": {
+        "titulo": "Titulo",
+        "num-solicitacao": "Número da solicitacao",
+        "responsavel": "Responsável",
+        "tamanho": "Tamanho da Demanda",
+        "solicitante": "Solicitante",
+        "departamento": "Departamento",
+        "status": "Status de Aprovação"
+      },
+      "botao-criar-demanda": "Criar demanda"
+    },
+    "demanda": {
+      "dados-gerais": "Dados Gerais",
+      "titulo": "Título:",
+      "campo-obrigatorio": "Campo Obrigatório",
+      "situacao-atual": "Situação Atual:",
+      "objetivo-final": "Objetivo Final:",
+      "centros-custo": "Centros de Custo:",
+      "beneficios": "Benefícios",
+      "beneficio-real": "Benefício Real:",
+      "memoria-beneficio-real": "Memória de Cálculo do Benefício Real:",
+      "beneficio-potencial": "Benefício Potencial:",
+      "memoria-beneficio-potencial": "Memória de Cálculo do Benefício Potencial:",
+      "beneficio-qualitativo": "Benefício Qualitativo:",
+      "adicionais": "Adicionais",
+      "frequencia-uso-sistema": "Frequencia de Uso do Sistema:",
+      "anexar-documento": "Anexar Documento:",
+      "p-titulo": "Ex: Melhoria em Sistemas de Informação",
+      "p-situacao-atual": "Ex: Baixa produção, abrangente de atrasos",
+      "p-objetivo-final": "Ex: Aumentar a produção com o desenvolvimento de um sistema",
+      "p-centros-custo-porcentagem": "Porcentagem",
+      "p-centros-custo-cc": "Centro de Custo",
+      "p-beneficio-real": "Ex: 150.000",
+      "p-memoria-beneficio-real": "Ex: Para contratar um desenvolvedor ou uma empresa custa em torno...",
+      "p-beneficio-qualitativo": "Ex: O benefício se torna qualitativo porque seu retorno...",
+      "p-frequencia-uso-sistema": "Selecione a frequência",
+      "choose-label-anexar-documento": "Escolher",
+      "upload-label-anexar-documento": "Enviar",
+      "cancel-label-anexar-documento": "Cancelar",
+      "tool-titulo": "Insira um nome para essa demanda",
+      "tool-situacao-atual": "Escreva como funciona o sistema atualmente, na empresa",
+      "tool-objetivo-final": "De que forma sua proposta ajudaria a empresa?",
+      "tool-centros-custo": "Quais sessões se beneficiariam com sua proposta?",
+      "tool-beneficio-real": "Qual seria o lucro mínimo adquirido pela sua proposta?",
+      "tool-memoria-beneficio-real": "Como você calculou o benefício?",
+      "tool-beneficio-potencial": "Qual seria o lucro máximo adquirido pela sua proposta?",
+      "tool-memoria-beneficio-potencial": "Como você calculou o benefício?",
+      "tool-beneficio-qualitativo": "Qual seria o benefício em questão de disciplina, controle e planejamento?",
+      "tool-frequencia-uso-sistema": "Qual seria a usabilidade do sistema?",
+      "tool-anexar-documento": "Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"
+    },
+    "proposta": {
+      "proposta": "Proposta",
+      "prazo-elaboracao": "Prazo para elaboração da proposta",
+      "campo-obrigatorio": "Campo Obrigatório",
+      "codigo-ppm": "Código PPM:",
+      "link-jira": "Link Jira:",
+      "recursos": "Recursos",
+      "recurso-necessario": "Recurso Necessário",
+      "tipo-despesa": "Tipo da despesa",
+      "perfil-despesa": "Perfil da despesa",
+      "centro-custo-pagante": "Centros de custos pagantes",
+      "quantidade-horas": "Quantidade de horas",
+      "valor-hora": "Valor da hora",
+      "periodo-execucao": "Período de execução (Mensal)",
+      "custos-totais": "Custos totais:",
+      "centros-custo": "Centros de custo",
+      "adicionar-recurso": "Adicionar Recurso",
+      "escopo": "Escopo",
+      "escopo-demanda": "Escopo da Demanda:",
+      "dados-finais": "Dados finais",
+      "periodo-execucao-demanda": "Período de Execução da Demanda:",
+      "payback-simples": "Payback Simples:",
+      "responsaveis-negocio": "Responsáveis pelo Negócio:",
+      "p-prazo-elaboracao": "Clique para Agendar",
+      "p-recurso-necessario": "Ex: Programador Back-end",
+      "p-tipo-despesa": "Selecione o Tipo",
+      "p-perfil-despesa": "Ex: Interna",
+      "p-valor-hora": "Ex: R$55,00",
+      "p-centros-custo-cc": "Centros de custo",
+      "p-centros-custo-porcentagem": "Porcentagem",
+      "p-escopo-demanda": "Escreva aqui...",
+      "p-dados-finais": "Dados finais",
+      "p-periodo-execucao-demanda-inicio": "Início",
+      "p-periodo-execucao-demanda-fim": "Fim",
+      "p-payback-simples": "Payback Simples:",
+      "tool-prazo-elaboracao": "Em quanto tempo a proposta ficará pronta?",
+      "tool-codigo-ppm": "Qual o código do SAP?",
+      "tool-link-jira": "Insira a URL que aparece ao topo da sua página do JIRA",
+      "tool-escopo-demanda": "Defina e personalize a finalidade da sua proposta",
+      "tool-dados-finais": "Dados finais",
+      "tool-periodo-execucao-demanda": "Insira a data que irá iniciar sua proposta e data que irá finalizar sua proposta",
+      "tool-payback-simples": "Em reais, este é o retorno dos benefícios",
+      "tool-responsaveis-negocio": "Insira os responsáveis por suceder a proposta, validando-os por vírgulas ou acionando a tecla Enter"
+    },
+    "tela-corrida": {
+      "scroll-dados-gerais": "Dados Gerais",
+      "scroll-beneficios": "Benefícios",
+      "scroll-adicionais": "Adicionais",
+      "b-cancelar": "Cancelar",
+      "b-finalizar": "Finalizar"
+    },
+    "tela-classificar-demanda": {
+      "preencha-campos": "Preencha os campos abaixo:",
+      "tamanho": "Tamanho:",
+      "p-tamanho": "Selecione um tamanho",
+      "bu-beneficiada": "BU beneficiada:",
+      "p-bu-beneficiada": "Selecione as BUs",
+      "bu-solicitante": "BU Solicitante",
+      "p-bu-solicitante": "Selecione uma BU",
+      "secao-ti-responsavel": "Seção de TI Responsável",
+      "p-secao-ti-responsavel": "Selecione uma seção",
+      "anexar-documento": "Anexar documento:",
+      "b-reprovar": "Reprovar",
+      "b-contatar-solicitante": "Contatar Solicitante",
+      "b-aprovar": "Aprovar"
+    },
+    "tela-chat": {
+      "modal-b-sim": "Sim",
+      "modal-b-nao": "Não",
+      "p-buscar-demanda": "Busque por demandas",
+      "visto-por-ultimo": "Visto por último:"
+    },
+    "tela-calendario": {
+      "calendario-reunioes": "Calendário de Reuniões"
+    },
+    "tela-reuniao": {
+      "b-marcar-reuniao": "Marcar Reunião",
+      "b-ver-calendario": "Ver em Calendário",
+      "p-ordenar": "Ordenar",
+      "modal-b-nao": "Não",
+      "modal-b-sim": "Sim",
+      "modal-b-ok": "Ok"
+    },
+    "tela-ver-pauta": {
+      "data-comissao": "Data da comissão:",
+      "comissao": "Comissao:",
+      "qtd-propostas": "Qtd Propostas:",
+      "visualizar": "Visualizar",
+      "b-ata-publicada": "Ata publicada",
+      "b-ata-nao-publicada": "Ata não publicada",
+      "b-gerar-documentacao": "Gerar documentação"
+    },
+    "tela-login": {
+      "login": "Login",
       "usuario": "Usuario",
       "senha": "Senha",
-      "lembra": "Lembrar-me",
-      "esqueceu": "Esqueceu a senha?",
-      "entrar": "Entrar"
-    },
-    "filtro-demandas": {
-      "titulo": "Titulo",
-      "num-solicitacao": "Número da solicitacao",
-      "responsavel": "Responsável",
-      "tamanho": "Tamanho da Demanda",
-      "solicitante": "Solicitante",
-      "departamento": "Departamento",
-      "status": "Status de Aprovação"
-    },
-    "botao-criar-demanda": "Criar demanda"
+      "lembrar": "Lembrar-me",
+      "esqueceu-senha": "Esqueceu a senha?",
+      "b-entrar": "Entrar"
+    }
   },
-  "demanda": {
-     "dados-gerais": "Dados Gerais",
-     "titulo":"Título:",
-     "campo-obrigatorio":"Campo Obrigatório",
-     "situacao-atual":"Situação Atual:",
-     "objetivo-final":"Objetivo Final:",
-     "centros-custo":"Centros de Custo:",
-     "beneficios":"Benefícios",
-     "beneficio-real":"Benefício Real:",
-     "memoria-beneficio-real":"Memória de Cálculo do Benefício Real:",
-     "beneficio-potencial":"Benefício Potencial:",
-     "memoria-beneficio-potencial":"Memória de Cálculo do Benefício Potencial:",
-     "beneficio-qualitativo":"Benefício Qualitativo:",
-     "adicionais":"Adicionais",
-     "frequencia-uso-sistema":"Frequencia de Uso do Sistema:",
-     "anexar-documento":"Anexar Documento:",
-     "p-titulo":"Ex: Melhoria em Sistemas de Informação",
-     "p-situacao-atual":"Ex: Baixa produção, abrangente de atrasos",
-     "p-objetivo-final":"Ex: Aumentar a produção com o desenvolvimento de um sistema",
-     "p-centros-custo-porcentagem":"Porcentagem",
-     "p-centros-custo-cc":"Centro de Custo",
-     "p-beneficio-real":"Ex: 150.000",
-     "p-memoria-beneficio-real":"Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
-
+  "modais": {
+    "modal-ata-documento": {},
+    "modal-proposta-documento": {},
+    "modal-demanda-documento": {},
+    "modal-criar-reuniao": {
+      "marcar-reuniao": "Marcar Reunião",
+      "demandas": "Demandas",
+      "arraste-demandas": "Arraste as demandas para este campo!",
+      "data-hora-reuniao": "Data e Hora da Reunião:",
+      "selecione-comissao": "Selecione a Comissão da Reunião:",
+      "p-data-hora-reuniao": "Clique aqui!",
+      "p-selecione-comissao": "Selecione a comissão:",
+      "b-marcar-reuniao": "Marcar Reunião"
+    },
+    "modal-historico": {
+      "historico": "Histórico",
+      "data-alteracao": "Data de Alteração",
+      "autor": "Autor",
+      "visualizar": "Visualizar"
+    },
+    "modal-motivo-devolucao": {
+      "motivo-devolucao": "Motivo Devolução",
+      "i-motivo-devolucao": "Motivo da devolução da demanda:"
+    },
+    "modal-parecer-comissao-proposta": {
+      "proposta": "Proposta",
+      "p-resultado-comissao": "Resultado Comissão",
+      "b-visualizar-proposta": "Visualizar Proposta",
+      "informe-parecer": "Informe o parecer da comissão sobre esta proposta:",
+      "recomendacoes": "Recomendações:",
+      "b-cancelar": "Cancelar",
+      "b-finalizar": "Finalizar Parecer"
+    },
+    "modal-reprovacao-demanda": {
+      "demanda": "Demanda",
+      "motivo-reprovacao": "Motivo de reprovação da demanda:",
+      "b-reprovar": "Reprovar Demanda",
+      "b-cancelar": "Cancelar"
+    }
+  },
+  "documento-pdf": {
+    "solicitante": "SOLICITANTE",
+    "departamento": "DEPARTAMENTO",
+    "objetivo": "Objetivo:",
+    "situacao-atual": "Situação Atual:",
+    "beneficio-real": "Benefício Real:",
+    "memoria-calculo-beneficio-real": "Memória de cálculo do benefício real:",
+    "benefício-potencial": "Benefício Potencial:",
+    "memoria-calculo-beneficio-potencial": "Memória de cálculo do benefício potencial:",
+    "beneficio-qualitativo": "Benefício Qualitativo:",
+    "frequencia-uso-sistema": "Frequencia de Uso do Sistema:",
+    "documentos": "DOCUMENTOS:",
+    "b-cancelar": "Cancelar",
+    "b-reprovar": "Reprovar Demanda",
+    "b-aprovar": "Aprovar Demanda"
+  },
+  "componentes-reutilizaveis": {
+    "card-demanda": {
+      "historico": "Histórico",
+      "ver-demanda": "Ver demanda",
+      "trocar-status": "Trocar status",
+      "ir-reuniao": "Ir para Reunião",
+      "ver-ata": "Ver em Ata",
+      "iniciar-conversa": "Iniciar conversa",
+      "score": "Score:",
+      "autor": "Autor:",
+      "departamento": "Departamento:"
+    },
+    "card-reuniao": {
+      "dia-comissao": "Dia da comissão:",
+      "status": "Status:",
+      "comissao": "Comissão: ",
+      "propostas-adicionadas": "Propostas adicionadas: ",
+      "departamentos-beneficiados": "Departamentos Beneficiados: ",
+      "exemplos": "Vendas, Motores, Trefilação",
+      "cancelar-reuniao": "Cancelar Reunião",
+      "motivo-cancelamento": "Ver motivo do cancelamento",
+      "detalhes-reuniao": "Detalhes da Reunião"
+    },
+    "filtro-reuniao": {
+      "filtrar-reunioes": "Filtrar Reuniões",
+      "comissao": "Comissão: ",
+      "data": "Data:",
+      "responsavel": "Responsável:",
+      "status-aprovacao": "Status de aprovação:",
+      "solicitante": "Solicitante:",
+      "codigo-ppm": "Código PPM:"
+    },
+    "filtro-demanda": {
+      "filtrar-demandas": "Filtrar Demandas",
+      "titulo-demanda": "Título da Demanda:",
+      "s-titulo-demanda": "Título Demanda:",
+      "numero-solicitacao": "Número da Solicitação",
+      "s-numero-solicitacao": "N. da Solicitação:",
+      "responsavel": "Responsável",
+      "tamanho-demanda": "Tamanho da demanda:",
+      "s-tamanho-demanda": "Tam. demanda:",
+      "solicitante": "Solicitante:",
+      "departamento": "Departamento:",
+      "status-aprovacao": "Status de Aprovação",
+      "p-titulo-demanda": "Ex: Sistema de Gerenciamento",
+      "p-departamento": "Ex: Motores"
+    },
+    "list-demanda": {
+      "historico": "Histórico",
+      "ver-demanda": "Ver demanda",
+      "ir-reuniao": "Ir para Reunião",
+      "iniciar-conversa": "Iniciar conversa"
+    },
+    "sidebar-reuniao": {
+      "aguardando": "Aguardando",
+      "proximo": "Próximo",
+      "pendente": "Pendente",
+      "concluido": "Concluído",
+      "cancelado": "Cancelado"
+    },
+    "sidebar-demanda": {
+      "classificacao": "Classificação",
+      "proposta": "Proposta",
+      "aprovacao": "Aprovação"
+    }
+  },
+  "componentes-fixos": {
+    "escopo-perfil": {
+      "conta": "Conta",
+      "layout": "Layout",
+      "sugestoes": "Sugestões",
+      "ajuda": "Ajuda",
+      "tutorial": "Tutorial",
+      "notificacoes": "Notificações"
+    },
+    "header": {
+      "reunioes": "REUNIÕES",
+      "demandas": "DEMANDAS",
+      "rascunhos": "Rascunhos",
+      "configuracoes": "Configurações",
+      "sair": "Sair"
+    }
   }
 }

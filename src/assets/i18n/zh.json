@@ -1,0 +1,436 @@
+{
+    "telas": {
+        "tela-inicial": {
+            "titulo": "需求",
+            "b-criar-demanda": "创建需求",
+            "filtrar-mais": "更多筛选",
+            "pesquisar-demanda": "搜索需求",
+            "ordenar": "排序",
+            "ver-mais": "查看更多",
+            "b-anterior": "上一页",
+            "b-proximo": "下一页",
+            "b-pronto": "完成",
+            "sinto-muito": "非常抱歉……",
+            "demanda-nao-encontrada": "未找到任何需求",
+            "modal-b-sim": "是",
+            "modal-b-nao": "否",
+            "modal-b-reformular": "修改需求",
+            "modal-b-ok": "确定"
+        },
+        "marcar-reuniao": {
+            "titulo": "安排会议",
+            "demandas": "需求",
+            "arraste": "将需求拖到此字段中！",
+            "data-hora": "会议日期和时间：",
+            "p-data-hora": "点击此处",
+            "comissao": "选择委员会：",
+            "p-comissao": "选择委员会",
+            "b-marcar": "安排会议"
+        },
+        "tela-reunioes": {
+            "marcar": "安排会议",
+            "calendario": "在日历中查看",
+            "ordenar": "排序"
+        },
+        "filtro-reunioes": {
+            "comissao": "委员会",
+            "data": "日期",
+            "responsavel": "负责人",
+            "status": "批准状态",
+            "solicitante": "申请人",
+            "codigoPPM": "PPM 编码"
+        },
+        "barra-lateral-configuracoes": {
+            "conta": "账户",
+            "layout": "布局",
+            "sugestoes": "建议"
+        },
+        "menu-perfil": {
+            "rascunho": "草稿",
+            "config": "设置",
+            "sair": "退出"
+        },
+        "notificacoes": {
+            "suas-notificacoes": "您的通知",
+            "not-found": "无通知"
+        },
+        "configuracoes-perfil": {
+            "titulo": "个人资料",
+            "subtitulo": "账户常规设置",
+            "nome": "姓名",
+            "dataNasc": "出生日期",
+            "cpf": "身份证号",
+            "email": "电子邮件",
+            "telefone": "电话号码",
+            "senha": "密码",
+            "alterar": "更改"
+        },
+        "configuracoes-layout": {
+            "titulo": "布局",
+            "subtitulo": "C布局常规设置",
+            "temas": "主题",
+            "fonte": "字体",
+            "tamanho": "大小"
+        },
+        "configuracoes-sugestoes": {
+            "titulo": "建议",
+            "subtitulo": "发送建议",
+            "descricao": "为了改善服务、开发系统或运作，您可以通过以下方式发送建议，以便更轻松地使用系统:",
+            "p-input": "在这里写下您的建议：",
+            "b-enviar": "发送"
+        },
+        "configuracoes-ajuda": {
+            "titulo": "帮助",
+            "subtitulo": "帮助中心",
+            "suprir-titulo": "没有解决您的问题？",
+            "suprir-desc": "下载系统文档以更好地了解LOW",
+            "suprir-titulo2": "没有解决您的问题？",
+            "suprir-desc2": "发送消息给我们，我们将尽快回复...",
+            "descricao": "为了改善服务、开发系统或运作，您可以通过以下方式发送建议，以便更轻松地使用系统:",
+            "p-input": "在这里写下您的问题：",
+            "b-enviar": "发送"
+        },
+        "tutorial": {
+            "t1": {
+                "titulo": "欢迎！",
+                "desc": "在此区域，您可以建议系统的新改进。"
+            },
+            "t2": {
+                "titulo": "创建需求",
+                "desc": "在此区域，您可以建议系统的新改进。"
+            },
+            "t3": {
+                "titulo": "筛选需求",
+                "desc": "在这里，您可以按自己的方式筛选需求。"
+            },
+            "t4": {
+                "titulo": "更改显示方式",
+                "desc": "您还可以将需求的显示方式更改为列表。"
+            },
+            "t5": {
+                "titulo": "设置和草稿",
+                "desc": "在这里，您可以查看需求的草稿，并进入设置。"
+            },
+            "t6": {
+                "titulo": "语言",
+                "desc": "您还可以更改系统的语言。"
+            },
+            "t7": {
+                "titulo": "通知",
+                "desc": "您的通知将显示在此处。"
+            },
+            "t9": {
+                "titulo": "您的消息",
+                "desc": "在这里查看与需求相关的对话。"
+            },
+            "t10": {
+                "titulo": "部分",
+                "desc": "我们的系统分为两个主要部分。您现在在需求中，现在在会议中。"
+            },
+            "t11": {
+                "titulo": "筛选需求",
+                "desc": "在这里，您可以标记一个会议"
+            },
+            "t8": {
+                "titulo": "筛选需求",
+                "desc": "通过我们的日历，您可以获得更广泛的视野"
+            },
+            "login": {
+                "usuario": "用户",
+                "senha": "密码",
+                "lembra": "记住我",
+                "esqueceu": "忘记密码？",
+                "entrar": "登录"
+            },
+            "filtro-demandas": {
+                "titulo": "标题",
+                "num-solicitacao": "申请编号",
+                "responsavel": "负责人",
+                "tamanho": "需求大小",
+                "solicitante": "申请人",
+                "departamento": "部门",
+                "status": "批准状态"
+            },
+            "botao-criar-demanda": "创建需求"
+        },
+        "demanda": {
+            "dados-gerais": "一般数据",
+            "titulo": "标题：",
+            "campo-obrigatorio": "必填字段",
+            "situacao-atual": "当前状态：",
+            "objetivo-final": "最终目标：",
+            "centros-custo": "成本中心：",
+            "beneficios": "收益",
+            "beneficio-real": "实际收益：",
+            "memoria-beneficio-real": "实际收益计算记录：",
+            "beneficio-potencial": "潜在收益：",
+            "memoria-beneficio-potencial": "潜在收益计算记录：",
+            "beneficio-qualitativo": "定性收益：",
+            "adicionais": "附加",
+            "frequencia-uso-sistema": "系统使用频率：",
+            "anexar-documento": "附加文件：",
+            "p-titulo": "例如：信息系统改进",
+            "p-situacao-atual": "例如：低生产率，普遍延迟",
+            "p-objetivo-final": "例如：通过开发一个系统来增加生产力",
+            "p-centros-custo-porcentagem": "百分比",
+            "p-centros-custo-cc": "成本中心",
+            "p-beneficio-real": "例如：150,000",
+            "p-memoria-beneficio-real": "例如：雇佣开发者或公司的成本约为...",
+            "p-beneficio-qualitativo": "例如：由于您的提案获得了回报，因此它变得定性化...",
+            "p-frequencia-uso-sistema": "请选择使用频率",
+            "choose-label-anexar-documento": "选择",
+            "upload-label-anexar-documento": "上传",
+            "cancel-label-anexar-documento": "取消",
+            "tool-titulo": "为此需求命名",
+            "tool-situacao-atual": "描述当前的公司系统运作方式",
+            "tool-objetivo-final": "您的提议将如何帮助公司？",
+            "tool-centros-custo": "哪些部门将受益于您的提议？",
+            "tool-beneficio-real": "您的提议至少会获得多少收益？",
+            "tool-memoria-beneficio-real": "您如何计算收益？",
+            "tool-beneficio-potencial": "您的提议最多会获得多少收益？",
+            "tool-memoria-beneficio-potencial": "您如何计算收益？",
+            "tool-beneficio-qualitativo": "在纪律、控制和规划方面，该提案将产生哪些好处？",
+            "tool-frequencia-uso-sistema": "该系统的可用性是什么？",
+            "tool-anexar-documento": "是否要添加与提案相关的文件（PDF、XML、POM...），例如研究资料"
+        },
+        "proposta": {
+            "proposta": "提案",
+            "prazo-elaboracao": "制定提案的期限",
+            "campo-obrigatorio": "必填字段",
+            "codigo-ppm": "PPM代码：",
+            "link-jira": "Jira链接：",
+            "recursos": "资源",
+            "recurso-necessario": "所需资源",
+            "tipo-despesa": "支出类型",
+            "perfil-despesa": "支出概况",
+            "centro-custo-pagante": "支付成本中心",
+            "quantidade-horas": "工时数量",
+            "valor-hora": "每小时费用",
+            "periodo-execucao": "执行期间（按月计）",
+            "custos-totais": "总成本：",
+            "centros-custo": "成本中心",
+            "adicionar-recurso": "添加资源",
+            "escopo": "范围",
+            "escopo-demanda": "需求范围：",
+            "dados-finais": "最终数据",
+            "periodo-execucao-demanda": "需求执行期间：",
+            "payback-simples": "简单回报：",
+            "responsaveis-negocio": "业务负责人：",
+            "p-prazo-elaboracao": "点击安排",
+            "p-recurso-necessario": "例如：后端程序员",
+            "p-tipo-despesa": "选择类型",
+            "p-perfil-despesa": "例如：内部",
+            "p-valor-hora": "例如：R$55,00",
+            "p-centros-custo-cc": "成本中心",
+            "p-centros-custo-porcentagem": "百分比",
+            "p-escopo-demanda": "在此处编写...",
+            "p-dados-finais": "最终数据",
+            "p-periodo-execucao-demanda-inicio": "开始",
+            "p-periodo-execucao-demanda-fim": "结束",
+            "p-payback-simples": "简单回报：",
+            "tool-prazo-elaboracao": "提案完成所需的时间？",
+            "tool-codigo-ppm": "SAP代码是什么？",
+            "tool-link-jira": "插入在JIRA页面顶部显示的URL",
+            "tool-escopo-demanda": "定义和个性化您的提案目的",
+            "tool-dados-finais": "最终数据",
+            "tool-periodo-execucao-demanda": "插入开始您的提案和结束您的提案的日期",
+            "tool-payback-simples": "以美元计算，这是回报的利益",
+            "tool-responsaveis-negocio": "通过逗号将负责人分隔开来或按Enter键进行验证"
+        },
+        "tela-corrida": {
+            "scroll-dados-gerais": "数据总览",
+            "scroll-beneficios": "福利",
+            "scroll-adicionais": "额外",
+            "b-cancelar": "取消",
+            "b-finalizar": "完成"
+        },
+        "tela-classificar-demanda": {
+            "preencha-campos": "请填写以下字段：",
+            "tamanho": "尺寸：",
+            "p-tamanho": "选择尺寸",
+            "bu-beneficiada": "受益业务单元：",
+            "p-bu-beneficiada": "选择业务单元",
+            "bu-solicitante": "申请业务单元：",
+            "p-bu-solicitante": "选择业务单元",
+            "secao-ti-responsavel": "负责 IT 部门：",
+            "p-secao-ti-responsavel": "选择 IT 部门",
+            "anexar-documento": "附加文件：",
+            "b-reprovar": "拒绝",
+            "b-contatar-solicitante": "联系申请人",
+            "b-aprovar": "批准"
+        },
+        "tela-chat": {
+            "modal-b-sim": "是",
+            "modal-b-nao": "否",
+            "p-buscar-demanda": "搜索需求",
+            "visto-por-ultimo": "最后查看："
+        },
+        "tela-calendario": {
+            "calendario-reunioes": "会议日历"
+        },
+        "tela-reuniao": {
+            "b-marcar-reuniao": "预约会议",
+            "b-ver-calendario": "在日历中查看",
+            "p-ordenar": "排序",
+            "modal-b-nao": "否",
+            "modal-b-sim": "是",
+            "modal-b-ok": "确定"
+        },
+        "tela-ver-pauta": {
+            "data-comissao": "委员会日期：",
+            "comissao": "委员会：",
+            "qtd-propostas": "提议数量：",
+            "visualizar": "查看",
+            "b-ata-publicada": "公开记录",
+            "b-ata-nao-publicada": "未公开记录",
+            "b-gerar-documentacao": "生成文档"
+        },
+        "tela-login": {
+            "login": "登录",
+            "usuario": "用户名",
+            "senha": "密码",
+            "lembrar": "记住我",
+            "esqueceu-senha": "忘记密码？",
+            "b-entrar": "进入"
+        }
+    },
+    "modais": {
+        "modal-ata-documento": {},
+        "modal-proposta-documento": {},
+        "modal-demanda-documento": {},
+        "modal-criar-reuniao": {
+            "marcar-reuniao": "安排会议",
+            "demandas": "需求",
+            "arraste-demandas": "将需求拖放到此处！",
+            "data-hora-reuniao": "会议日期和时间：",
+            "selecione-comissao": "选择会议委员会：",
+            "p-data-hora-reuniao": "单击此处！",
+            "p-selecione-comissao": "选择委员会：",
+            "b-marcar-reuniao": "安排会议"
+        },
+        "modal-historico": {
+            "historico": "历史",
+            "data-alteracao": "修改日期",
+            "autor": "作者",
+            "visualizar": "查看"
+        },
+        "modal-motivo-devolucao": {
+            "motivo-devolucao": "退回原因",
+            "i-motivo-devolucao": "退回需求的原因："
+        },
+        "modal-parecer-comissao-proposta": {
+            "proposta": "建议",
+            "p-resultado-comissao": "委员会意见",
+            "b-visualizar-proposta": "查看建议",
+            "informe-parecer": "提供委员会对此建议的意见：",
+            "recomendacoes": "建议：",
+            "b-cancelar": "取消",
+            "b-finalizar": "完成意见"
+        },
+        "modal-reprovacao-demanda": {
+            "demanda": "需求",
+            "motivo-reprovacao": "需求被拒绝的原因：",
+            "b-reprovar": "拒绝需求",
+            "b-cancelar": "取消"
+        }
+    },
+    "documento-pdf": {
+        "solicitante": "申请人",
+        "departamento": "部门",
+        "objetivo": "目标：",
+        "situacao-atual": "当前状态：",
+        "beneficio-real": "实际收益：",
+        "memoria-calculo-beneficio-real": "实际收益计算记忆：",
+        "benefício-potencial": "潜在收益：",
+        "memoria-calculo-beneficio-potencial": "潜在收益计算记忆：",
+        "beneficio-qualitativo": "质量收益：",
+        "frequencia-uso-sistema": "系统使用频率：",
+        "documentos": "文件：",
+        "b-cancelar": "取消",
+        "b-reprovar": "拒绝需求",
+        "b-aprovar": "批准需求"
+    },
+    "componentes-reutilizaveis": {
+        "card-demanda": {
+            "historico": "历史",
+            "ver-demanda": "查看需求",
+            "trocar-status": "更改状态",
+            "ir-reuniao": "前往会议",
+            "ver-ata": "在记录中查看",
+            "iniciar-conversa": "开始对话",
+            "score": "评分：",
+            "autor": "作者：",
+            "departamento": "部门："
+        },
+        "card-reuniao": {
+            "dia-comissao": "委员会日期：",
+            "status": "状态：",
+            "comissao": "委员会：",
+            "propostas-adicionadas": "已添加的建议：",
+            "departamentos-beneficiados": "受益部门：",
+            "exemplos": "销售、发动机、拉拔",
+            "cancelar-reuniao": "取消会议",
+            "motivo-cancelamento": "查看取消原因",
+            "detalhes-reuniao": "会议详情"
+        },
+        "filtro-reuniao": {
+            "filtrar-reunioes": "筛选会议",
+            "comissao": "委员会：",
+            "data": "日期：",
+            "responsavel": "负责人：",
+            "status-aprovacao": "批准状态：",
+            "solicitante": "申请人：",
+            "codigo-ppm": "PPM代码："
+        },
+        "filtro-demanda": {
+            "filtrar-demandas": "筛选需求",
+            "titulo-demanda": "需求标题：",
+            "s-titulo-demanda": "需求标题：",
+            "numero-solicitacao": "申请号",
+            "s-numero-solicitacao": "申请号：",
+            "responsavel": "负责人",
+            "tamanho-demanda": "需求大小：",
+            "s-tamanho-demanda": "需求大小：",
+            "solicitante": "申请人：",
+            "departamento": "部门：",
+            "status-aprovacao": "批准状态",
+            "p-titulo-demanda": "例如：管理系统",
+            "p-departamento": "例如：发动机"
+        },
+        "list-demanda": {
+            "historico": "历史",
+            "ver-demanda": "查看需求",
+            "ir-reuniao": "前往会议",
+            "iniciar-conversa": "开始对话"
+        },
+        "sidebar-reuniao": {
+            "aguardando": "等待中",
+            "proximo": "下一个",
+            "pendente": "待定",
+            "concluido": "已完成",
+            "cancelado": "已取消"
+        },
+        "sidebar-demanda": {
+            "classificacao": "分类",
+            "proposta": "建议",
+            "aprovacao": "批准"
+        }
+    },
+    "componentes-fixos": {
+        "escopo-perfil": {
+            "conta": "账户",
+            "layout": "布局",
+            "sugestoes": "建议",
+            "ajuda": "帮助",
+            "tutorial": "教程",
+            "notificacoes": "通知"
+        },
+        "header": {
+            "reunioes": "会议",
+            "demandas": "需求",
+            "rascunhos": "草稿",
+            "configuracoes": "设置",
+            "sair": "退出"
+        }
+    }
+}

@@ -51,6 +51,7 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
       this.parecerComissaoInput = this.data.parecerComissaoProposta
       if(this.data.recomendacaoProposta){
         this.recomendacaoInput = this.data.recomendacaoProposta
+        this.aparecerRecomendacao = true;
       }
       this.tipoAtaSelecionada = this.data.tipoAtaProposta
       this.resultadoComissaoSelecionado = this.data.ultimaDecisaoComissao

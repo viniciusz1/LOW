@@ -23,10 +23,10 @@
 
                 </div>
                 <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento('PUBLICADA')">Ata publicada</button>
-                <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento('NAO_PUBLICADA')">Ata não publicada</button>
+                <button class="btn btn-primary mt-2" (click)="openModalAtaDocumento('NAO_PUBLICADA')">Ata não publicada</button>
             </div>
-            <div *ngIf="mostrarBotoesReuniao()">
-                <button class="btn btn-primary mb-3 me-4" (click)="finalizarReuniao()">Finalizar Reunião</button>
+            <div *ngIf="mostrarBotoesReuniao()" class="mb-5 d-flex flex-column " style="margin-right: 20px;">
+                <button class="btn btn-primary mb-2" (click)="finalizarReuniao()">Finalizar Reunião</button>
                 <button class="btn btn-danger" (click)="cancelarReuniao()">Cancelar Reunião</button>
             </div>
         </div>

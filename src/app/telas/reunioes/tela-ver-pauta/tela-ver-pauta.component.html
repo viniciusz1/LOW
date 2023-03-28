@@ -5,9 +5,10 @@
         border-radius: 5px;
         padding: 20px;" >
             <div  *ngFor="let proposta of reuniao?.propostasReuniao" class="mb-2">
-                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModal)="openModalParecerComissaoProposta(proposta?.codigoDemanda)" [dadosDemada]="proposta" [mudarTamanho]="'100%'"></app-card-demanda>
+                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModal)="openModalParecerComissaoProposta(proposta)" [dadosDemada]="proposta" [mudarTamanho]="'100%'"></app-card-demanda>
             </div>
         </div>
+      
         <div class="col-3 direita-grande">
             <div class="alinhar-direita">
                 <div class="d-flex flex-column p-3 rounded" style="border: 1px solid rgb(112, 110, 110); width: fit-content;">
@@ -26,9 +27,19 @@
                 <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento('NAO_PUBLICADA')">Ata não publicada</button>
             </div>
             <div *ngIf="mostrarBotoesReuniao()">
-                <button class="btn btn-primary mb-3 me-4" (click)="finalizarReuniao()">Finalizar Reunião</button>
+                <button class="btn btn-primary mb-3 me-4" (click)="modalConfirmacaoFinalizar()">Finalizar Reunião</button>
                 <button class="btn btn-danger" (click)="cancelarReuniao()">Cancelar Reunião</button>
             </div>
         </div>
+        <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{width: '40vw'}">  
+            <ng-template pTemplate="footer">
+              <button type="button" (click)="cd.reject()" class="btn btn-outline-danger">
+                <i class="pi pi-times me-2"></i>
+                Não
+              </button>
+              <button type="button" class="btn btn-danger" (click)="cd.accept()">
+                <i class="pi pi-check me-2"></i>Sim</button>
+            </ng-template>
+          </p-confirmDialog>
     </div>
 </div>

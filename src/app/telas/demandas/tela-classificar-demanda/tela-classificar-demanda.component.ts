@@ -103,25 +103,6 @@ export class TelaClassificarDemandaComponent implements OnInit {
         console.log(err);
       },
     });
-
-    this.businessUnitService.getBusinessUnits().subscribe({
-      next: (value) => {
-        this.BUs = value;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-
-    this.secaoService.getSecao().subscribe({
-      next: (value) => {
-        this.secoes = value;
-        console.log(this.secoes)
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
   }
 
   onSubmitClassificacaoDemanda() {

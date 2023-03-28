@@ -80,6 +80,10 @@ export class CardDemandaComponent implements OnInit {
     return null;
   }
 
+  abrirModalHistorico(){
+    this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
+  }
+
   existeAta() {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.TO_DO ||

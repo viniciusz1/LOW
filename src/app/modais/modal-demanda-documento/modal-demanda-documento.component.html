@@ -1,48 +1,75 @@
-<p-timeline *ngIf="user == 'solicitante'" [value]="events1" align="top" layout="horizontal">
-  <ng-template pTemplate="marker" let-event>
-    <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-      <i [ngClass]="event.icon"></i>
-    </span>
-  </ng-template>
-  <ng-template pTemplate="opposite" let-event>
-    <span [style.fontWeight]="event.fontWeight" class="TitulosRodape">
-      {{event.status}}
-    </span>
-  </ng-template>
-  <!-- <ng-template pTemplate="content" let-event>
+<div id="html-to-pdf">
+  <p-timeline
+    *ngIf="user == 'solicitante'"
+    [value]="events1"
+    align="top"
+    layout="horizontal"
+  >
+    <ng-template pTemplate="marker" let-event>
+      <span
+        class="custom-marker shadow-2"
+        [style.backgroundColor]="event.color"
+      >
+        <i [ngClass]="event.icon"></i>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="opposite" let-event>
+      <span [style.fontWeight]="event.fontWeight" class="TitulosRodape">
+        {{ event.status }}
+      </span>
+    </ng-template>
+    <!-- <ng-template pTemplate="content" let-event>
   </ng-template> -->
-</p-timeline>
+  </p-timeline>
 
+  <p class="paragrafo-inicial">
+    <b class="me-2">01</b>
+    <span>
+      <div class="d-flex align-items-center justify-content-between">
+        <a [href]="['http://localhost:8081/demanda/pdf/' + dadosDemanda?.codigoDemanda]">
+          <i  class="bi bi-download me-3" style="font-size: 25px;"></i>
+          
+        </a>
+      <img
+        style="width: 60px"
+        src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png"
+        alt=""
+      />
+    </div>
+    </span>
+  </p>
 
-<p class="paragrafo-inicial"><b class="me-2">01</b>
-  <span>
-    <img style="width: 60px;" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt="">
-  </span>
-</p>
+  <mat-dialog-content class="mat-typography">
+    <p-scrollPanel
+      [style]="{ width: '100%', height: '65vh' }"
+      styleClass="custombar1"
+    >
+      <h4 mat-dialog-title class="d-flex justify-content-between">
+        <span
+          ><b >SOLICITANTE: </b
+          >{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span
+        >
+        <span><b>DATA:</b> {{ dadosDemanda?.inicioExDemanda }}</span>
+      </h4>
+      <h4>
+        <b>DEPARTAMENTO:</b>
+        {{
+          dadosDemanda?.solicitanteDemanda?.departamentoUsuario
+            ?.nomeDepartamento
+        }}
+      </h4>
+      <h4 class="d-flex justify-content-center">
+        <b
+          >{{ dadosDemanda?.tituloDemanda }} –
+          {{ dadosDemanda?.codigoDemanda }}</b
+        >
+      </h4>
+      <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 
-<mat-dialog-content class="mat-typography">
-  <p-scrollPanel [style]="{width: '100%', height: '65vh'}" styleClass="custombar1">
-    <h4 mat-dialog-title class="d-flex justify-content-between">
-      <span><b>SOLICITANTE: </b>{{dadosDemanda?.solicitanteDemanda?.nomeUsuario}}</span>
-      <span><b>DATA: </b> {{dadosDemanda?.inicioExDemanda}}</span>
-    </h4>
-    <h4><b>DEPARTAMENTO: </b> {{dadosDemanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
-    <h4 class="d-flex justify-content-center">
-      <b>{{dadosDemanda?.tituloDemanda}} –
-        {{dadosDemanda?.codigoDemanda}}</b>
-    </h4>
-    <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
-
-    <h4><b>Objetivo: </b></h4>
-    <p>
-      {{dadosDemanda?.objetivoDemanda}}
-    </p>
-
-    <h4><b>Situação Atual: </b></h4>
-    <p>
-      {{dadosDemanda?.situacaoAtualDemanda}}
-    </p>
-
+      <h4><b>Objetivo:</b></h4>
+      <p>
+        {{ dadosDemanda?.objetivoDemanda }}
+      </p>
 
     <h4><b>Beneficio Real: </b>{{dadosDemanda?.beneficioRealDemanda?.valorBeneficio}} mensais</h4>
     <p>

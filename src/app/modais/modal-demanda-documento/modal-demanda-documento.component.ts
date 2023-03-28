@@ -1,9 +1,8 @@
-import { DemandaAnalista } from './../../models/demanda-analista.model';
-import { DemandaAnalistaService } from './../../services/demanda-analista.service';
+
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Tamanho } from 'src/app/models/tamanho.enum';
@@ -23,6 +22,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private dialogRef: DialogRef<ModalDemandaDocumentoComponent>,
     private matDialog: MatDialog
   ) {
+    console.log(data)
     this.dadosDemanda = data
   }
   dadosDemanda: Demanda | undefined;

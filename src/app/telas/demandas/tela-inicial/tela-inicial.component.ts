@@ -252,9 +252,6 @@ export class TelaInicialComponent implements OnInit {
     this.tipoExibicaoDemanda = false;
   }
 
-  changeExibicao() {
-    this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda;
-  }
 
   changeToCard() {
     this.tipoExibicaoDemanda = true;
@@ -268,9 +265,6 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
-  sortData(sort: Sort) {
-    console.log(sort);
-  }
 
   openModalPropostaDocumento() {
     this.matDialog.open(ModalPropostaDocumentoComponent, {
@@ -296,10 +290,11 @@ export class TelaInicialComponent implements OnInit {
       })
 
   }
-  openModalHistorico() {
+  openModalHistorico(codigoDemanda: string) {
     this.matDialog.open(ModalHistoricoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: codigoDemanda
     });
   }
 

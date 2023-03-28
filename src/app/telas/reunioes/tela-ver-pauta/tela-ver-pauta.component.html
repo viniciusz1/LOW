@@ -11,11 +11,11 @@
         <div class="col-3 direita-grande">
             <div class="alinhar-direita">
                 <div class="d-flex flex-column p-3 rounded" style="border: 1px solid rgb(112, 110, 110); width: fit-content;">
-                    <span class="d-flex">Data da comissão: 27/08/2022</span>
+                    <span class="d-flex">Data da comissão: {{reuniao?.dataReuniao | date:'dd/MM/YYYY'}}</span>
                     <hr>
-                    <span class="d-flex">Comissão: 007</span>
+                    <span class="d-flex">Comissão: {{reuniao?.comissaoReuniao}}</span>
                     <hr>
-                    <span class="d-flex">Qtd Propostas: 8</span>
+                    <span class="d-flex">Qtd Propostas:  {{reuniao?.propostasReuniao?.length}}</span>
                 </div>
                 <div class="d-flex w-100 mt-3 flex-column">
                   <h6>Vizualizar:</h6>
@@ -25,8 +25,10 @@
                 <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento('PUBLICADA')">Ata publicada</button>
                 <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento('NAO_PUBLICADA')">Ata não publicada</button>
             </div>
-            <button class="btn btn-primary mb-3 me-4" (click)="finalizarReuniao()">Finalizar Reunião</button>
-            <button class="btn btn-danger" (click)="cancelarReuniao()"></button>
+            <div *ngIf="mostrarBotoesReuniao()">
+                <button class="btn btn-primary mb-3 me-4" (click)="finalizarReuniao()">Finalizar Reunião</button>
+                <button class="btn btn-danger" (click)="cancelarReuniao()">Cancelar Reunião</button>
+            </div>
         </div>
     </div>
 </div>

@@ -49,6 +49,14 @@ export class TelaVerPauta implements OnInit {
       })
 
   }
+
+  mostrarBotoesReuniao(){
+    if(this.reuniao?.statusReuniao == 'CONCLUIDO' || this.reuniao?.statusReuniao == 'CANCELADO'){
+      return false
+    }
+    return true
+  }
+
   cancelarReuniao() {
     this.reuniaoService.cancelarReuniao(this.reuniao?.codigoReuniao)
     .subscribe({

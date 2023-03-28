@@ -20,11 +20,11 @@ export class ReuniaoService {
   }
 
   cancelarReuniao(codigoReuniao: number | undefined){
-    return this.http.get<Reuniao>(path + 'reuniao/' + codigoReuniao);
+    return this.http.put<Reuniao>(path + 'reuniao/cancelar/' + codigoReuniao, null);
 
   }
   finalizarReuniao(codigoReuniao: number | undefined){
-    return this.http.get<Reuniao>(path + 'reuniao/' + codigoReuniao);
+    return this.http.put<Reuniao>(path + 'reuniao/finalizar/' + codigoReuniao, null);
   }
 
   postReuniao(reuniao: Reuniao) {

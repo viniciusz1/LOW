@@ -55,6 +55,10 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
             path: 'demanda',
             component: TelaCorridaComponent
           },
+          {
+            path: 'reformular-demanda/:codigoDemanda',
+            component: TelaCorridaComponent
+          },
 
           {
             path: 'proposta/:codigoDemanda',

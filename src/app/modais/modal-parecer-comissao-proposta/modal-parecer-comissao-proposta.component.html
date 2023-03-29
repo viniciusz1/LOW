@@ -5,11 +5,11 @@
                 <hr style="margin: 0; margin-bottom: 10px; width: 100%;">
             </span>
             <div class="d-flex justify-content-center align-items-center">
-                <p-dropdown [disabled]="bloquearCamposInput()" placeholder="Resultado Comissão" class="me-3" [options]="resultadoComissao" 
-                [(ngModel)]="resultadoComissaoSelecionado" (onChange)="selecionaResultado()"
-                 optionLabel="name" optionValue="value"></p-dropdown>
-                <p-dropdown [disabled]="bloquearCamposInput()" class="me-3" [options]="tipoAtas" [(ngModel)]="tipoAtaSelecionada"
-                    optionLabel="name" optionValue="value"></p-dropdown>
+                <p-dropdown [disabled]="bloquearCamposInput()" placeholder="Resultado Comissão" class="me-3"
+                    [options]="resultadoComissao" [(ngModel)]="resultadoComissaoSelecionado"
+                    (onChange)="selecionaResultado()" optionLabel="name" optionValue="value"></p-dropdown>
+                <p-dropdown [disabled]="bloquearCamposInput()" class="me-3" [options]="tipoAtas"
+                    [(ngModel)]="tipoAtaSelecionada" optionLabel="name" optionValue="value"></p-dropdown>
                 <div class="rounded low-shadow me-3 ">
                     <button class="btn btn-primary" (click)="openModalPropostaDocumento()">Visualizar Proposta</button>
                 </div>
@@ -18,19 +18,22 @@
         </div>
     </div>
     <div class="d-flex flex-column">
-        <label for="subtitulo"  style="margin-top: 5px;">
+        <label for="subtitulo" style="margin-top: 5px;">
             Informe o parecer da comissão sobre esta proposta:
         </label>
-        <textarea [disabled]="bloquearCamposInput()" pInputTextarea style="min-height: 300px;" [(ngModel)]="parecerComissaoInput"></textarea>
+        <textarea [disabled]="bloquearCamposInput()" pInputTextarea style="min-height: 300px;"
+            [(ngModel)]="parecerComissaoInput"></textarea>
     </div>
     <div class="d-flex flex-column" *ngIf="aparecerRecomendacao">
         <label for="subtitulo" style="margin-top: 5px;">
             Recomendações:
         </label>
-        <textarea [disabled]="bloquearCamposInput()" pInputTextarea style="min-height: 10vh;" [(ngModel)]="recomendacaoInput"></textarea>
+        <textarea [disabled]="bloquearCamposInput()" pInputTextarea style="min-height: 10vh;"
+            [(ngModel)]="recomendacaoInput"></textarea>
     </div>
     <div class="d-flex justify-content-between mt-3">
-        <button [disabled]="bloquearCamposInput()" (click)="dialogRef.close();" class="btn btn-outline-primary">Cancelar</button>
-        <button [disabled]="bloquearCamposInput()" class="btn btn-primary" (click)="enviarParecerComissao()">Finalizar Parecer</button>
+        <button [disabled]="bloquearCamposInput()" (click)="dialogRef.close();"
+            class="btn btn-outline-primary">Cancelar</button>
+        <button [disabled]="bloquearCamposInput()" class="btn btn-primary" (click)="enviarParecerComissao()">{{textoBotaoParecer}}</button>
     </div>
 </div>

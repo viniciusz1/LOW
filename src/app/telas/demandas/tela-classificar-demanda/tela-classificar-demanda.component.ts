@@ -1,3 +1,4 @@
+import { Arquivo } from './../../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Secao } from '../../../models/secao.model';
@@ -10,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalReprovacaoDemandaComponent } from 'src/app/modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
+import { FileUpload } from 'primeng/fileupload';
 
 
 
@@ -24,6 +26,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
     this.matDialog.open(ModalReprovacaoDemandaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: this.demanda
     });
   }
 
@@ -114,6 +117,10 @@ export class TelaClassificarDemandaComponent implements OnInit {
         alert(err)
       }
     });
+  }
+
+  download(arquivo: Arquivo){
+    this.demandaService.saveByteArray(arquivo.dadosArquivo, arquivo.tipoArquivo, arquivo.nomeArquivo)
   }
 
   openModalDemandaDocumento() {

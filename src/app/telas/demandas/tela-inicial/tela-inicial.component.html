@@ -194,7 +194,7 @@
             (irParaChat)="irParaChat()"
             (modalHistorico)="openModalHistorico($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-            (abrirModal)="modalMotivoReprovacao()"
+            (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
             class="mb-2"
           >
           </app-list-demanda>
@@ -210,6 +210,7 @@
                     | slice : 4
                 "
                 (irParaChat)="irParaChat()"
+            (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
                 (modalHistorico)="openModalHistorico($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 [dadosDemada]="demanda"
@@ -300,7 +301,7 @@
                 (irParaChat)="irParaChat()"
                 (modalHistorico)="openModalHistorico($event)"
                 (avancarStatusDemanda)="avancarStatusDemanda($event)"
-                (abrirModal)="modalMotivoReprovacao()"
+                (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 (verDocumentoEmAta)="openModalAtaDocumento()"
               ></app-card-demanda>
@@ -334,7 +335,7 @@
           [rascunho]="tipoRascunho"
           *ngFor="let demanda of listaDemandasRascunho; let i = index"
           [dadosDemada]="demanda"
-          (abrirModal)="openModalMotivoDevolucao()"
+          (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           [mudarTamanho]="'100%'"
@@ -350,7 +351,7 @@
         <app-card-demanda
           *ngFor="let demanda of listaDemandas; let i = index"
           [dadosDemada]="demanda"
-          (abrirModal)="openModalMotivoDevolucao()"
+          (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           (clicouEmExcluir)="excluirDemandaRascunho(i)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)"

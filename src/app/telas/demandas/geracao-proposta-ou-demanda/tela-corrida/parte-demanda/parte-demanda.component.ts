@@ -4,6 +4,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { FormControl, FormGroup } from '@angular/forms';
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-parte-demanda',
@@ -15,7 +16,11 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     private demandaService: DemandaService,
   ) {}
 
-
+  listaFiles: File[]= []
+converterArquivoToFile(){
+  // for(this.demandaForm.value.)
+  // this.demandaService.saveByteArrayFile
+}
 
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [

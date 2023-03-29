@@ -27,17 +27,6 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   @Input() dadosDemanda: Demanda | undefined;
   @Input() documentoEmAta = false;
 
-  openModalReprovacao() {    
-    console.log("codigo", this.dadosDemanda?.codigoDemanda);
-    console.log("status", this.dadosDemanda?.statusDemanda);
-    
-
-    this.matDialog.open(ModalReprovacaoDemandaComponent, {
-      maxWidth: '70vw',
-      minWidth: '50vw',
-    });
-  }
-
   enviarDecisao(decisao: number) {
     if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0'){
       this.demandaService
@@ -55,7 +44,14 @@ export class ModalDemandaDocumentoComponent implements OnInit {
           }
         });
     }
+  }
 
+  openModalReprovacao() {
+    this.matDialog.open(ModalReprovacaoDemandaComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      data: this.dadosDemanda
+    });
   }
 
   download(arquivo: Arquivo): void {

@@ -30,6 +30,7 @@ export class DemandaService {
     solicitanteDemanda: {
       codigoUsuario: 2,
     },
+    statusDemanda: [''],
     centroCustos: this.fb.array([this.createCentroCusto()])
 
   });
@@ -48,6 +49,25 @@ export class DemandaService {
 
   removeCenterOfCost(index: number) {
     (this.demandaForm.controls.centroCustos as FormArray).removeAt(index);
+  }
+
+  reformularDemanda(){
+    this.demandaForm.patchValue({
+      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
+      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda,
+      statusDemanda: 'BACKLOG_CLASSIFICACAO'
+    })
+    let demandaFormData = new FormData();
+    this.arquivos.map((item) =>
+      demandaFormData.append('arquivos', item, item.name)
+    );
+
+    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: 2 } });
+    demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+    return this.http.put<Demanda | string>(
+      path + 'demanda/update',
+      demandaFormData
+    );
   }
 
   setFormDemandaData(demanda: Demanda){
@@ -73,6 +93,10 @@ export class DemandaService {
         objetivoDemanda: demanda.objetivoDemanda
       })
       // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
+    }
+
+    reprovarDemanda(codigoDemanda: number, motivoReprovacao: string){
+      return this.http.put(path + 'demanda/cancell/' + codigoDemanda, motivoReprovacao)
     }
   addCenterOfCost() {
     (this.demandaForm.controls.centroCustos as FormArray).push(
@@ -105,6 +129,8 @@ export class DemandaService {
     this.demandaForm.reset();
   }
 
+
+  //função usada para permitir que o usuário baixe arquivos que vem do backend em base64
   saveByteArray(bytes: string, type: string, name: string) {
     const base64 = bytes;
     const binary = atob(base64);
@@ -117,6 +143,20 @@ export class DemandaService {
     const blob = new Blob([view], { type: type });
     saveAs(blob, name);
   }
+
+
+  saveByteArrayFile(bytes: string, type: string, name: string) {
+    const base64 = bytes;
+    const binary = atob(base64);
+    const len = binary.length;
+    const buffer = new ArrayBuffer(len);
+    const view = new Uint8Array(buffer);
+    for (let i = 0; i < len; i++) {
+      view[i] = binary.charCodeAt(i);
+    }
+    return  new File([view], name, {type:type});
+  }
+
   getBeneficioReal(): number {
     if (this.demandaForm.value.beneficioRealDemanda?.valorBeneficio) {
       return parseInt(
@@ -194,10 +234,7 @@ export class DemandaService {
       situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
     })
-    console.log(this.demandaForm.value)
-
     let demandaFormData = new FormData();
-
     this.arquivos.map((item) =>
       demandaFormData.append('arquivos', item, item.name)
     );

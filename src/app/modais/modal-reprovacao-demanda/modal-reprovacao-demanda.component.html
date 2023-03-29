@@ -11,11 +11,11 @@
         <label for="subtitulo" style="margin-bottom: 0.5vh;">
             Motivo de reprovação da demanda:
         </label>
-        <textarea pInputTextarea style="height: 300px;"></textarea>
+        <textarea pInputTextarea style="height: 300px;" [(ngModel)]="motivoReprovacao"></textarea>
 
     </div>
     <div class="d-flex justify-content-end mt-3">
         <button  class="btn btn-outline-primary me-3" (click)="dialogRef.close()">Cancelar</button>
-        <button routerLink="/tela-inicial" class="btn btn-primary" (click)="dialogRef.close()">Reprovar demanda</button>
+        <button routerLink="/tela-inicial" class="btn btn-primary" (click)="reprovarDemanda()">Reprovar demanda</button>
     </div>
 </div>

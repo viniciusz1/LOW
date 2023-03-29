@@ -35,6 +35,7 @@ export interface Demanda {
     scoreDemanda?: number,
     dataCriacaoDemanda?: Date
     version?: number
+    motivoReprovacaoDemanda?: string,
 
     recomendacaoProposta?: string,
     tamanhoDemandaAnalista?: Tamanho,

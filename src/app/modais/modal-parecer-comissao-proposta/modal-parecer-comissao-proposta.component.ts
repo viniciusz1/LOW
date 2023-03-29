@@ -1,3 +1,4 @@
+import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { ModalPropostaDocumentoComponent } from './../modal-proposta-documento/modal-proposta-documento.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,12 +15,18 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
 
   constructor(
 
-    @Inject(DIALOG_DATA) public data: Demanda,
+    @Inject(DIALOG_DATA) public data: { demanda: Demanda, statusReuniao: StatusReuniao },
     public dialogRef: DialogRef<ModalParecerComissaoPropostaComponent>,
     private matDialog: MatDialog,
     private reuniaoService: ReuniaoService
 
-  ) { }
+  ) {
+
+    this.demanda = this.data.demanda
+    this.setInformacoes()
+
+  }
+  demanda: Demanda | undefined
   tipoAtaSelecionada: string = "";
   tipoAtas = [
     { name: 'Ata Publicada', value: 'PUBLICADA' },
@@ -36,25 +43,26 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   parecerComissaoInput = ""
   recomendacaoInput = ""
 
-  bloquearCamposInput(){
-    if(this.data.statusDemanda == "DISCUSSION"){
-      return false
-    }else{
-      this.setInformacoes()
+  bloquearCamposInput() {
+    if (this.data.statusReuniao == "CONCLUIDO" ||
+      this.data.statusReuniao == "CANCELADO") {
       return true
     }
+    return false
   }
 
-  
-  setInformacoes(){
-    if(this.data.parecerComissaoProposta && this.data.tipoAtaProposta && this.data.ultimaDecisaoComissao){
-      this.parecerComissaoInput = this.data.parecerComissaoProposta
-      if(this.data.recomendacaoProposta){
-        this.recomendacaoInput = this.data.recomendacaoProposta
-        this.aparecerRecomendacao = true;
+  textoBotaoParecer = "Finalizar Parecer"
+
+  setInformacoes() {
+    if (this.demanda?.parecerComissaoProposta && this.demanda?.tipoAtaProposta && (this.demanda?.ultimaDecisaoComissao)) {
+      this.textoBotaoParecer = "Editar Parecer"
+      this.parecerComissaoInput = this.demanda?.parecerComissaoProposta
+      if (this.demanda?.recomendacaoProposta) {
+        this.recomendacaoInput = this.demanda?.recomendacaoProposta
+        this.aparecerRecomendacao = true
       }
-      this.tipoAtaSelecionada = this.data.tipoAtaProposta
-      this.resultadoComissaoSelecionado = this.data.ultimaDecisaoComissao
+      this.tipoAtaSelecionada = this.demanda?.tipoAtaProposta
+      this.resultadoComissaoSelecionado = this.demanda?.ultimaDecisaoComissao
     }
   }
 
@@ -74,17 +82,16 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   }
 
   enviarParecerComissao() {
-    if(this.data.codigoDemanda)
-    this.reuniaoService.enviarParecerComissao({ tipoAtaProposta: this.tipoAtaSelecionada,parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.data.codigoDemanda?.toString())
-      .subscribe({
-        next: e => { 
-          this.data = e
-          this.dialogRef.close()
-        },
-        error: err => {
-          console.log(err)
-        }
-      })
+    if (this.demanda?.codigoDemanda)
+      this.reuniaoService.enviarParecerComissao({ tipoAtaProposta: this.tipoAtaSelecionada, parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.demanda.codigoDemanda?.toString())
+        .subscribe({
+          next: e => {
+            this.dialogRef.close()
+          },
+          error: err => {
+            console.log(err)
+          }
+        })
   }
 
   ngOnInit(): void {

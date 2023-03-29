@@ -34,11 +34,11 @@ export class TelaVerPauta implements OnInit {
     this.reuniaoService.getReuniaoId(this.codigoReuniao)
       .subscribe({
         next: (x) => {
-          console.log(x)
           this.reuniao = x
         }
       })
   }
+
   finalizarReuniao() {
     this.reuniaoService.finalizarReuniao(this.reuniao?.codigoReuniao)
       .subscribe({
@@ -48,7 +48,6 @@ export class TelaVerPauta implements OnInit {
           alert(err)
         } 
       })
-
   }
 
   mostrarBotoesReuniao(){
@@ -92,7 +91,7 @@ export class TelaVerPauta implements OnInit {
     this.matDialog.open(ModalParecerComissaoPropostaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      data: proposta
+      data: {demanda: proposta, statusReuniao: this.reuniao?.statusReuniao}
     });
   }
 

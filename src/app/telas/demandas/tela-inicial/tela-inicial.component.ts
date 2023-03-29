@@ -41,7 +41,7 @@ export class TelaInicialComponent implements OnInit {
     private confirmationService: ConfirmationService,
   ) {
     this.pesquisaAlterada.pipe(debounceTime(2000)).subscribe(() => {
-      this.pesquisarDemandas({  status: undefined ,pesquisaCampo: this.pesquisaDemanda});
+      this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
     });
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
@@ -74,7 +74,7 @@ export class TelaInicialComponent implements OnInit {
   //true = card
   tipoExibicaoDemanda = true;
   cabecalhoMensagemDeConfirmacao = 'Avançar status';
-  isCollapsed: boolean[] = [    true,    true,    true,    true,    true,    true,    true,    true,    true  ];
+  isCollapsed: boolean[] = [true, true, true, true, true, true, true, true, true];
   isFiltrado = false;
   showFiltro = false;
   showPesquisaEBotaoFiltro = true;
@@ -104,38 +104,38 @@ export class TelaInicialComponent implements OnInit {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
   //Pesquisa demandas por status, pelo campo de pesquisa pequeno, ou por todos os campos, no caso do filtro especializado
-  pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined ) {
-      this.demandasService
-        .getDemandasFiltradas(pesquisaEspecial)
-        .subscribe((listaDemandas: Demanda[]) => {
-          console.log(listaDemandas)
-          if (listaDemandas.length > 0) {
-            this.listaDemandas = listaDemandas;
-            this.isFiltrado = true;
-            this.nenhumResultadoEncontrado = false;
-          } else {
-            this.isFiltrado = true;
-            this.listaDemandas = [];
-            this.nenhumResultadoEncontrado = true;
-          }
-        });
+  pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
+    this.demandasService
+      .getDemandasFiltradas(pesquisaEspecial)
+      .subscribe((listaDemandas: Demanda[]) => {
+        console.log(listaDemandas)
+        if (listaDemandas.length > 0) {
+          this.listaDemandas = listaDemandas;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        } else {
+          this.isFiltrado = true;
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      });
 
   }
 
-  paginate(event: {page: number}){
+  paginate(event: { page: number }) {
     this.demandasService.avancarPage(event.page)
-    .subscribe((listaDemandas: Demanda[]) => {
-      console.log(listaDemandas)
-      if (listaDemandas.length > 0) {
-        this.listaDemandas = listaDemandas;
-        this.isFiltrado = true;
-        this.nenhumResultadoEncontrado = false;
-      } else {
-        this.isFiltrado = true;
-        this.listaDemandas = [];
-        this.nenhumResultadoEncontrado = true;
-      }
-    });
+      .subscribe((listaDemandas: Demanda[]) => {
+        console.log(listaDemandas)
+        if (listaDemandas.length > 0) {
+          this.listaDemandas = listaDemandas;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        } else {
+          this.isFiltrado = true;
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      });
   }
 
   exportExcel() {
@@ -272,10 +272,10 @@ export class TelaInicialComponent implements OnInit {
 
   openModalReprovacaoDemanda() {
     this.matDialog.open(ModalReprovacaoDemandaComponent),
-      {
-        maxWidth: '70vw',
-        minWidth: '50vw',
-      };
+    {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+    };
   }
 
   openModalDemandaDocumento(event: Demanda) {
@@ -292,13 +292,6 @@ export class TelaInicialComponent implements OnInit {
       maxWidth: '70vw',
       minWidth: '50vw',
       data: codigoDemanda
-    });
-  }
-
-  openModalMotivoDevolucao() {
-    this.matDialog.open(ModalMotivoDevolucaoComponent, {
-      maxWidth: '70vw',
-      minWidth: '50vw',
     });
   }
 
@@ -334,7 +327,7 @@ export class TelaInicialComponent implements OnInit {
               next: () => {
                 this.carregarDemandasIniciais();
               },
-              error: () => {},
+              error: () => { },
             });
         }
       },
@@ -376,15 +369,18 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  modalMotivoReprovacao() {
+  modalMotivoReprovacao(demanda: Demanda) {
     this.confirmationService.confirm({
       dismissableMask: true,
       key: 'motivoReprovacao',
       header: 'Motivo da Reprovação',
       blockScroll: false,
       message:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.',
-      accept: () => {},
+        demanda.motivoReprovacaoDemanda,
+      accept: () => {
+
+        this.router.navigate(['/tela-inicial/reformular-demanda/' + demanda.codigoDemanda])
+      },
     });
   }
 

@@ -28,21 +28,53 @@ export class TelaClassificarDemandaComponent implements OnInit {
   }
 
   BUs: BusinessUnit[] = [];
-
-  listaBUs = [
-    {codigo: 1, nome: 'WMO-I – WEG Motores Industrial'},
-    {codigo: 2, nome: 'WMO-C – WEG Motores Comercial'},
-    {codigo: 3, nome: 'WEN  – WEG Energia'},
-    {codigo: 4, nome: 'WAU – WEG Automação'},
-    {codigo: 5, nome: 'WDS – WEG Digital e Sistemas'},
-    {codigo: 6, nome: 'WDC – WEG Drives e Controls'},
-    {codigo: 7, nome: 'WTI – WEG Tintas'},
-    {codigo: 8, nome: 'WTD – WEG Transmissão e Distribuição'},
-  ]
-
   demanda: Demanda | undefined = undefined
   demandaAnalistaForm = this.demandaAnalistaService.demandaAnalistaForm;
   selectedBUs: any;
+
+  listaBUs = [
+    {
+      codigo: 0,
+      name: 'WMO-I – WEG Motores Industrial',
+      valueBu: 'WMOI'
+    },
+    {
+      codigo: 1,
+      name: 'WMO-C – WEG Motores Comercial',
+      valueBu: 'WMOC'
+    },
+    {
+      codigo: 2,
+      name: 'WEN  – WEG Energia',
+      valueBu: 'WEN'
+    },
+    {
+      codigo: 3,
+      name: 'WAU – WEG Automação',
+      valueBu: 'WAU'
+    },
+    {
+      codigo: 4,
+      name: 'WDS – WEG Digital e Sistemas',
+      valueBu: 'WDS'
+    },
+    {
+      codigo: 5,
+      name: 'WDC – WEG Drives e Controls',
+      valueBu: 'WDC'
+    },
+    {
+      codigo: 6,
+      name: 'WTI – WEG Tintas',
+      valueBu: 'WTI'
+    },
+    {
+      codigo: 7,
+      name: 'WTD – WEG Transmissão e Distribuição',
+      valueBu: 'WTD'
+    },
+  ];
+
   opcoesDeTamanho = [
     {
       name: 'Muito Pequena',
@@ -68,18 +100,66 @@ export class TelaClassificarDemandaComponent implements OnInit {
   secoes: Secao[] = [];
 
   listaSessoes = [
-    {codigo: 1, nome: 'SVE – Seção Desenvolvimento Sistemas de Vendas e E-commerce'},
-    {codigo: 2, nome: 'SIM – Seção Desenvolvimento Sistemas de manufatura'},
-    {codigo: 3, nome: 'SIE – Seção Desenvolvimento Sistemas de Engenhar'},
-    {codigo: 4, nome: 'SDO – Setor Desenvolvimento Plataforma Orchestra'},
-    {codigo: 5, nome: 'SCO – Seção Desenvolvimento Sistemas Corporativos'},
-    {codigo: 6, nome: 'PTI – Seção Projetos de TI'},
-    {codigo: 7, nome: 'AGD – Seção Arquitetura e Governança de Dados'},
-    {codigo: 8, nome: 'STD – Seção Desenvolvimento Tecnologias Digitais'},
-    {codigo: 9, nome: 'TIN – Seção Tecnologia de Infraestrutura'},
-    {codigo: 10, nome: 'SGI – Seção Suporte Global Infraestrutura'},
-    {codigo: 11, nome: 'SEG – Seção Segurança da Informação e Riscos TI'},
-    {codigo: 12, nome: 'AAS – Atendimento e serviços TI – América do Sul'},
+    {
+      codigo: 1,
+      name: 'SVE – Seção Desenvolvimento Sistemas de Vendas e E-commerce',
+      valueSessao:'SVE'
+    },
+    {
+      codigo: 2,
+      name: 'SIM – Seção Desenvolvimento Sistemas de manufatura',
+      valueSessao:'SIM'
+    },
+    {
+      codigo: 3,
+      name: 'SIE – Seção Desenvolvimento Sistemas de Engenhar',
+      valueSessao:'SIE'
+    },
+    {
+      codigo: 4,
+      name: 'SDO – Setor Desenvolvimento Plataforma Orchestra',
+      valueSessao:'SDO'
+    },
+    {
+      codigo: 5,
+      name: 'SCO – Seção Desenvolvimento Sistemas Corporativos',
+      valueSessao:'SCO'
+    },
+    {
+      codigo: 6,
+      name: 'PTI – Seção Projetos de TI',
+      valueSessao:'PTI'
+    },
+    {
+      codigo: 7,
+      name: 'AGD – Seção Arquitetura e Governança de Dados',
+      valueSessao:'AGD'
+    },
+    {
+      codigo: 8,
+      name: 'STD – Seção Desenvolvimento Tecnologias Digitais',
+      valueSessao:'STD'
+    },
+    {
+      codigo: 9,
+      name: 'TIN – Seção Tecnologia de Infraestrutura',
+      valueSessao:'TIN'
+    },
+    {
+      codigo: 10,
+      name: 'SGI – Seção Suporte Global Infraestrutura',
+      valueSessao:'SGI'
+    },
+    {
+      codigo: 11,
+      name: 'SEG – Seção Segurança da Informação e Riscos TI',
+      valueSessao:'SEG'
+    },
+    {
+      codigo: 12,
+      name: 'AAS – Atendimento e serviços TI – América do Sul',
+      valueSessao:'AAS'
+    },
   ]
 
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];

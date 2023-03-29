@@ -33,6 +33,17 @@ export class ParteReuniaoComponent implements OnInit {
   listaRecursos = this.propostaService.listaRecursos;
   values: string[] = [];
 
+  status = [
+    {
+      name:'Business Case', 
+      value: 'Business Case'
+    },
+    {
+      name:'Assessment', 
+      value: 'Assessment'
+    }
+  ]
+
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
     { nome: 'Vinicius Bonatti', area: 'Vendas' },

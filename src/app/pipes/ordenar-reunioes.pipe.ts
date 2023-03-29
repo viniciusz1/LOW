@@ -7,6 +7,11 @@ import { StatusReuniao } from '../models/statusReuniao.enum';
 @Pipe({
   name: 'ordenarReuniaoPipe'
 })
+
+/*
+  Pipe utilizado para reordenar a lista de reuniões da tela de reuniões, para que elas apa
+  reçam de acordo com sua prioridade.
+*/
 export class OrdenarReuniaoPipe implements PipeTransform {
 
   transform(reuniao: Reuniao[]): Reuniao[] {

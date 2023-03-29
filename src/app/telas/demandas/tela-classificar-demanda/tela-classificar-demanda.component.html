@@ -16,20 +16,20 @@
         <div>
           <label class="form-label">BU beneficiada:</label>
           <br />
-          <p-multiSelect [options]="BUs" formControlName="busBeneficiadasDemandaAnalista"
-            defaultLabel="Selecione as BUs" optionLabel="nomeBusinessUnit" display="chip"></p-multiSelect>
+          <p-multiSelect formControlName="busBeneficiadasDemandaAnalista" [options]="listaBUs" [optionLabel]="'name'"
+            [optionValue]="'valueBu'"  defaultLabel="Selecione as BUs" display="chip"></p-multiSelect>
         </div>
         <div>
           <label class="form-label">BU solicitante:</label>
           <br />
-          <p-dropdown formControlName="buSolicitanteDemandaAnalista" [options]="BUs" optionLabel="nomeBusinessUnit"
-            placeholder="Selecione uma BU"></p-dropdown>
+          <p-dropdown formControlName="buSolicitanteDemandaAnalista" [options]="listaBUs" [optionLabel]="'name'"
+            [optionValue]="'valueBu'" placeholder="Selecione uma BU"></p-dropdown>
         </div>
         <div>
           <label class="form-label">Seção de TI Responsável:</label>
           <br />
-          <p-dropdown formControlName="secaoDemandaAnalista" [options]="secoes" [optionLabel]="'nomeSecao'"
-            placeholder="Selecione uma sessão"></p-dropdown>
+          <p-dropdown formControlName="secaoDemandaAnalista" [options]="listaSessoes" [optionLabel]="'name'"
+            [optionValue]="'valueSessao'" placeholder="Selecione uma sessão"></p-dropdown>
         </div>
         <div class="">
           <label class="form-label hei">Anexar documento:</label>

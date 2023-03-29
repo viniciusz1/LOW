@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 import { saveAs } from 'file-saver';
 import { FormControl } from '@angular/forms';
 import { path } from './path/rota-api';
+import { Arquivo } from '../models/arquivo.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -34,6 +35,8 @@ export class DemandaService {
     centroCustos: this.fb.array([this.createCentroCusto()])
 
   });
+
+  public listaArquivosDemanda: File[] = [] 
 
   formEditorEspecial = new FormGroup({
     situacaoAtualDemanda: new FormControl('', Validators.required),
@@ -92,7 +95,8 @@ export class DemandaService {
         situacaoAtualDemanda: demanda.situacaoAtualDemanda,
         objetivoDemanda: demanda.objetivoDemanda
       })
-      // this.demandaService.arquivos = this.dadosDemandaAnalista.demandaDemandaAnalista?.arquivosDemanda
+      this.listaArquivosDemanda = this.saveByteArrayFile(demanda.arquivosDemanda)
+      console.log(this.listaArquivosDemanda)
     }
 
     reprovarDemanda(codigoDemanda: number, motivoReprovacao: string){
@@ -145,16 +149,22 @@ export class DemandaService {
   }
 
 
-  saveByteArrayFile(bytes: string, type: string, name: string) {
-    const base64 = bytes;
-    const binary = atob(base64);
-    const len = binary.length;
-    const buffer = new ArrayBuffer(len);
-    const view = new Uint8Array(buffer);
-    for (let i = 0; i < len; i++) {
-      view[i] = binary.charCodeAt(i);
+  saveByteArrayFile(arquivo: Arquivo[] | undefined) {
+    let listToReturn = []
+    if(arquivo)
+    for(let i of arquivo){
+      const base64 = i.dadosArquivo;
+      const binary = atob(base64);
+      const len = binary.length;
+      const buffer = new ArrayBuffer(len);
+      const view = new Uint8Array(buffer);
+      for (let i = 0; i < len; i++) {
+        view[i] = binary.charCodeAt(i);
+      }
+      listToReturn.push(new File([view], i.nomeArquivo, {type:i.tipoArquivo}));
     }
-    return  new File([view], name, {type:type});
+    
+    return  listToReturn;
   }
 
   getBeneficioReal(): number {

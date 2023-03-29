@@ -14,14 +14,9 @@ import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 export class ParteDemandaComponent implements OnInit, OnDestroy {
   constructor(
     private demandaService: DemandaService,
-  ) {}
+  ) { }
 
-  listaFiles: File[]= []
-converterArquivoToFile(){
-  // for(this.demandaForm.value.)
-  // this.demandaService.saveByteArrayFile
-}
-
+  listaFiles: File[] = this.demandaService.listaArquivosDemanda
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -83,7 +78,8 @@ converterArquivoToFile(){
   }
 
   teste() {
-    console.log(this.formEditorEspecial.value)
+    console.log(this.listaFiles  )
+    console.log(this.demandaForm)
   }
 
   ngOnDestroy(): void {

@@ -197,13 +197,13 @@
     </div>
     <div>
       <div class="infos" style="display: flex; align-items: center">
-        <label style="font-weight: 500" class="me-2"> Anexar Documento: </label>
+        <label style="font-weight: 500" class="me-2" (click)="teste()"> Anexar Documento: </label>
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"
           tooltipPosition="top"></i>
       </div>
       <p-fileUpload [chooseLabel]="'Escolher'" [uploadLabel]="'Enviar'" [cancelLabel]="'Cancelar'" [multiple]="true"
-        [auto]="true" [customUpload]="true" (uploadHandler)="uploadDocumentos($event)" ></p-fileUpload>
+        [auto]="true" [customUpload]="true" [files]="listaFiles" (uploadHandler)="uploadDocumentos($event)" ></p-fileUpload>
     </div>
   </section>
 </form>

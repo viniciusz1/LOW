@@ -89,11 +89,13 @@ export class TelaCorridaComponent implements OnInit {
       }
       this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
         .subscribe(e => {
+          // console.log(e)
           this.demandaService.setFormDemandaData(e);
         })
       this.demandaService.resetDemandaForm();
     }
   }
+
 
 
   onScroll() {

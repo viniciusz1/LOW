@@ -10,6 +10,8 @@ export class ReuniaoService {
   constructor(private http: HttpClient) {}
 
   getReuniao() {
+   
+
     return this.http.get<Reuniao[]>(path + 'reuniao');
   }
 

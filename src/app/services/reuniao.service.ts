@@ -11,8 +11,10 @@ export class ReuniaoService {
 
   getReuniao() {
    
-
-    return this.http.get<Reuniao[]>(path + 'reuniao');
+    const cred = {
+      withCredentials: true
+    }
+    return this.http.get<Reuniao[]>(path + 'reuniao', cred);
   }
 
   getReuniaoId(codigoReuniao: Number) {

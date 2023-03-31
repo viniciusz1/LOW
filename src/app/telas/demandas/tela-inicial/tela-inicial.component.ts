@@ -386,7 +386,7 @@ export class TelaInicialComponent implements OnInit {
 
   ngOnInit(): void {
     // this.listaDemandas = listaDemandas
-    // this.carregarDemandasIniciais();
+    this.carregarDemandasIniciais();
   }
 
   exibirFilasDeStatus() {

@@ -8,6 +8,8 @@ import { saveAs } from 'file-saver';
 import { FormControl } from '@angular/forms';
 import { path } from './path/rota-api';
 import { Arquivo } from '../models/arquivo.model';
+import { UsuarioService } from './usuario.service';
+import { TestScheduler } from 'rxjs/testing';
 @Injectable({
   providedIn: 'root',
 })
@@ -29,18 +31,17 @@ export class DemandaService {
     beneficioQualitativoDemanda: [''],
     frequenciaDeUsoDemanda: ['', [Validators.required]],
     solicitanteDemanda: {
-      codigoUsuario: 2,
+      codigoUsuario: 0,
     },
-    statusDemanda: [''],
     centroCustos: this.fb.array([this.createCentroCusto()])
 
   });
 
-  public listaArquivosDemanda: File[] = [] 
+  public listaArquivosDemanda: File[] = []
 
   formEditorEspecial = new FormGroup({
     situacaoAtualDemanda: new FormControl('', Validators.required),
-    objetivoDemanda:new FormControl('', Validators.required),
+    objetivoDemanda: new FormControl('', Validators.required),
   });
 
   createCentroCusto(): FormGroup {
@@ -54,11 +55,10 @@ export class DemandaService {
     (this.demandaForm.controls.centroCustos as FormArray).removeAt(index);
   }
 
-  reformularDemanda(){
+  reformularDemanda() {
     this.demandaForm.patchValue({
       situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda,
-      statusDemanda: 'BACKLOG_CLASSIFICACAO'
     })
     let demandaFormData = new FormData();
     this.arquivos.map((item) =>
@@ -73,35 +73,35 @@ export class DemandaService {
     );
   }
 
-  setFormDemandaData(demanda: Demanda){
-      this.demandaForm.patchValue({
-        tituloDemanda: demanda.tituloDemanda,
-        beneficioRealDemanda: {
-          moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
-          memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
-          valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
-        },
-        beneficioPotencialDemanda: {
-          moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
-          memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
-          valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
-        },
-        beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
-        frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
-        centroCustos: demanda.centroCustos
-      })
+  setFormDemandaData(demanda: Demanda) {
+    this.demandaForm.patchValue({
+      tituloDemanda: demanda.tituloDemanda,
+      beneficioRealDemanda: {
+        moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
+        memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+        valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
+      },
+      beneficioPotencialDemanda: {
+        moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
+        memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+        valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
+      },
+      beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
+      frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
+      centroCustos: demanda.centroCustos
+    })
 
-      this.formEditorEspecial.patchValue({
-        situacaoAtualDemanda: demanda.situacaoAtualDemanda,
-        objetivoDemanda: demanda.objetivoDemanda
-      })
-      this.listaArquivosDemanda = this.saveByteArrayFile(demanda.arquivosDemanda)
-      console.log(this.listaArquivosDemanda)
-    }
+    this.formEditorEspecial.patchValue({
+      situacaoAtualDemanda: demanda.situacaoAtualDemanda,
+      objetivoDemanda: demanda.objetivoDemanda
+    })
+    this.listaArquivosDemanda = this.saveByteArrayFile(demanda.arquivosDemanda)
+    console.log(this.listaArquivosDemanda)
+  }
 
-    reprovarDemanda(codigoDemanda: number, motivoReprovacao: string){
-      return this.http.put(path + 'demanda/cancell/' + codigoDemanda, motivoReprovacao)
-    }
+  reprovarDemanda(codigoDemanda: number, motivoReprovacao: string) {
+    return this.http.put(path + 'demanda/cancell/' + codigoDemanda, motivoReprovacao)
+  }
   addCenterOfCost() {
     (this.demandaForm.controls.centroCustos as FormArray).push(
       this.createCentroCusto()
@@ -151,20 +151,20 @@ export class DemandaService {
 
   saveByteArrayFile(arquivo: Arquivo[] | undefined) {
     let listToReturn = []
-    if(arquivo)
-    for(let i of arquivo){
-      const base64 = i.dadosArquivo;
-      const binary = atob(base64);
-      const len = binary.length;
-      const buffer = new ArrayBuffer(len);
-      const view = new Uint8Array(buffer);
-      for (let i = 0; i < len; i++) {
-        view[i] = binary.charCodeAt(i);
+    if (arquivo)
+      for (let i of arquivo) {
+        const base64 = i.dadosArquivo;
+        const binary = atob(base64);
+        const len = binary.length;
+        const buffer = new ArrayBuffer(len);
+        const view = new Uint8Array(buffer);
+        for (let i = 0; i < len; i++) {
+          view[i] = binary.charCodeAt(i);
+        }
+        listToReturn.push(new File([view], i.nomeArquivo, { type: i.tipoArquivo }));
       }
-      listToReturn.push(new File([view], i.nomeArquivo, {type:i.tipoArquivo}));
-    }
-    
-    return  listToReturn;
+
+    return listToReturn;
   }
 
   getBeneficioReal(): number {
@@ -188,7 +188,7 @@ export class DemandaService {
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=`
     } else if (pesquisaEspecial?.pesquisaCampo) {
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=`
-    }else{
+    } else {
       this.link = path + `demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}`
     }
     return this.http.get<Demanda[]>(
@@ -248,7 +248,13 @@ export class DemandaService {
     this.arquivos.map((item) =>
       demandaFormData.append('arquivos', item, item.name)
     );
-    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: 2 } });
+    try {
+      this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser } });
+    } catch (err) {
+      let user = this.usuarioService.getUser("user")
+      // this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: user.codigousuario?>> } });
+
+    }
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     return this.http.post<Demanda | string>(
       path + 'demanda',
@@ -264,5 +270,5 @@ export class DemandaService {
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) { }
 }

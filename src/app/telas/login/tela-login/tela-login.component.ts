@@ -18,8 +18,8 @@ export class TelaLoginComponent implements OnInit {
   autenticar() {
     this.usuarioService.autenticar(this.usuario, this.senha)
       .subscribe({
-        next: e => {
-          console.log(e)
+        next: user => {
+          this.usuarioService.setUser(user)
           this.router.navigate(['/tela-inicial'])
         }, error: err => {
           console.log(err)

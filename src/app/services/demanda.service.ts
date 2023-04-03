@@ -24,7 +24,7 @@ export class DemandaService {
       valorBeneficio: [''],
     }),
     beneficioPotencialDemanda: this.fb.group({
-      moedaBeneficio: [''],
+      moedaBeneficio: ['Real'],
       memoriaDeCalculoBeneficio: [''],
       valorBeneficio: [''],
     }),
@@ -66,7 +66,7 @@ export class DemandaService {
       demandaFormData.append('arquivos', item, item.name)
     );
 
-    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: 2 } });
+    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     return this.http.put<Demanda | string>(
       path + 'demanda/update',
@@ -74,6 +74,9 @@ export class DemandaService {
     );
   }
 
+
+  //função utilizada para pré-definir informações da demanda quando estamos em proposta
+  //ou até mesmo em modo rascunho
   setFormDemandaData(demanda: Demanda) {
     this.demandaForm.patchValue({
       tituloDemanda: demanda.tituloDemanda,
@@ -102,7 +105,7 @@ export class DemandaService {
   reprovarDemanda(codigoDemanda: number, motivoReprovacao: string) {
     return this.http.put(path + 'demanda/cancell/' + codigoDemanda, motivoReprovacao)
   }
-  addCenterOfCost() {
+  public addCenterOfCost() {
     (this.demandaForm.controls.centroCustosDemanda as FormArray).push(
       this.createCentroCusto()
     );
@@ -149,6 +152,7 @@ export class DemandaService {
   }
 
 
+  //função usada para inserir no p-fileUpload alguns arquivos
   saveByteArrayFile(arquivo: Arquivo[] | undefined) {
     let listToReturn = []
     if (arquivo)
@@ -235,28 +239,39 @@ export class DemandaService {
     );
   }
 
-  formatarStatusDemanda(demandas: Demanda[]) {
-    for (let i of demandas) {
-    }
-  }
   postDemanda() {
-    this.demandaForm.patchValue({
-      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
-      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
-    })
+    //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
     let demandaFormData = new FormData();
     this.arquivos.map((item) =>
       demandaFormData.append('arquivos', item, item.name)
     );
-    try {
-      this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
-    } catch (err) {
-      let user = this.usuarioService.getUser("user")
-      // this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: user.codigousuario?>> } });
 
+    //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
+    //ou até mesmo o número do código de usuário
+    try {
+      if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == undefined) {
+        this.demandaForm.patchValue({
+          beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
+        })
+      }
+
+      if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == undefined) {
+        this.demandaForm.patchValue({
+          beneficioRealDemanda: { moedaBeneficio: 'Real' }
+        })
+      }
+      this.demandaForm.patchValue({
+        solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
+        situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
+        objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
+      })
+    } catch (err) {
+      alert("Ocorreu um erro ao cadastrar: " + err);
     }
-    console.log(this.demandaForm.value)
+    //Inserindo o form da demanda em si
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+
+    //Retornando a requisição
     return this.http.post<Demanda | string>(
       path + 'demanda',
       demandaFormData

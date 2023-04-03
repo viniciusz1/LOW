@@ -54,7 +54,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     'Grande',
     'Muito Grande',
   ];
-  opcoesDeMoeda = [{ name: 'BRL' }, { name: 'EUR' }, { name: 'DOL' }];
+  opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
 
@@ -78,7 +78,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   }
 
   teste() {
-    console.log(this.listaFiles  )
+    console.log(this.listaFiles)
     console.log(this.demandaForm)
   }
 

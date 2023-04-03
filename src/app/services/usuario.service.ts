@@ -25,6 +25,7 @@ export class UsuarioService {
     return this.nivelAcesso;
   }
 
+  //Não deve de jeito nenhum retornar 0, verificar isso posteriormente
   getCodigoUser(): number {
     try {
       let user = this.getUser('user')

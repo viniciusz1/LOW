@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
-import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
+import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
 
 @Component({
   selector: 'app-tela-corrida',

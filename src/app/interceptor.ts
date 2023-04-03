@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
 export class LogInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): 
       Observable<HttpEvent<any>> {
-        console.log(req)
-        const authReq = req.clone({
-            headers: req.headers.set('withCredentials', 'true')
-          });
+        
+        req = req.clone({
+          withCredentials: true
+        });
           
 
-        return next.handle(authReq);
+        return next.handle(req);
     }
 }

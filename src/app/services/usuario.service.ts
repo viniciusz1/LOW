@@ -25,11 +25,15 @@ export class UsuarioService {
     return this.nivelAcesso;
   }
 
-  get getCodigoUser(): number {
-    if (this.usuario){
-      return this.usuario?.codigoUsuario
+  getCodigoUser(): number {
+    try {
+      let user = this.getUser('user')
+      if (user?.codigoUsuario)
+        return user?.codigoUsuario
+      return 0
+    } catch (err) {
+      return 0
     }
-    throw Error("Usuario não encontrado")
   }
 
   setUser(usuario: Usuario) {
@@ -37,8 +41,12 @@ export class UsuarioService {
     localStorage.setItem("user", JSON.stringify(usuario))
   }
 
-  getUser(key: string) {
-    return localStorage.getItem(key)
+  getUser(key: string): Usuario | undefined {
+    let user = localStorage.getItem(key)
+    if (user) {
+      return JSON.parse(user)
+    }
+    throw Error("Usuario não encontrado")
   }
 
   autenticar(usuario: string, senha: string) {

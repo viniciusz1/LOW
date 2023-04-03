@@ -52,13 +52,13 @@
         </div>
       </div>
     </div>
-    <div formArrayName="centroCustos" class="row align-items-center">
+    <div formArrayName="centroCustosDemanda" class="row align-items-center">
       <label style="font-weight: 500" class="me-2">Centros de Custo <i class="bi bi-info-circle me-2"
           style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Quais sessões se beneficiariam com sua proposta?" tooltipPosition="top"></i></label>
       <div style="width: 50%; display: -webkit-box;">
         <div class="d-flex flex-column">
-          <div *ngFor="let centroCusto of demandaForm.controls.centroCustos.controls; let i = index"
+          <div *ngFor="let centroCusto of demandaForm.controls.centroCustosDemanda.controls; let i = index"
             style="flex-wrap: wrap;" class="mb-1">
             <div [formGroupName]="i" class="d-flex">
               <div class="p-inputgroup" style=" margin-right: 0.5vw;">
@@ -68,12 +68,12 @@
               </div>
               <input style="width: 10vw; margin-right: 0.5vw;" [id]="'nomeCentroCusto'+i" pInputText [required]="true"
                 formControlName="nomeCentroCusto" placeholder="Centro de Custo" />
-              <button (click)="removerCentroDeCusto(i)" [disabled]="this.demandaForm.controls.centroCustos.length == 1"
+              <button (click)="removerCentroDeCusto(i)" [disabled]="this.demandaForm.controls.centroCustosDemanda.length == 1"
                 class="btn btn-danger"><i class="bi bi-trash"></i></button>
             </div>
           </div>
         </div>
-        <button class="btn btn-outline-primary ms-2" [disabled]="!demandaForm.controls.centroCustos.valid || !resultado"
+        <button class="btn btn-outline-primary ms-2" [disabled]="!demandaForm.controls.centroCustosDemanda.valid || !resultado"
           (click)="adicionarCentroCusto()">
           <i class="bi bi-plus-lg" style="font-size: 19px"></i>
         </button>

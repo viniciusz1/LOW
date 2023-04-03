@@ -33,7 +33,7 @@ export class DemandaService {
     solicitanteDemanda: {
       codigoUsuario: 0,
     },
-    centroCustos: this.fb.array([this.createCentroCusto()])
+    centroCustosDemanda: this.fb.array([this.createCentroCusto()])
 
   });
 
@@ -52,13 +52,14 @@ export class DemandaService {
   }
 
   removeCenterOfCost(index: number) {
-    (this.demandaForm.controls.centroCustos as FormArray).removeAt(index);
+    (this.demandaForm.controls.centroCustosDemanda as FormArray).removeAt(index);
   }
 
   reformularDemanda() {
     this.demandaForm.patchValue({
       situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda,
+      // statusDemanda: 'BACKLOG_CLASSIFICACAO'
     })
     let demandaFormData = new FormData();
     this.arquivos.map((item) =>
@@ -88,7 +89,7 @@ export class DemandaService {
       },
       beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
       frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
-      centroCustos: demanda.centroCustos
+      centroCustosDemanda: demanda.centroCustos
     })
 
     this.formEditorEspecial.patchValue({
@@ -96,14 +97,13 @@ export class DemandaService {
       objetivoDemanda: demanda.objetivoDemanda
     })
     this.listaArquivosDemanda = this.saveByteArrayFile(demanda.arquivosDemanda)
-    console.log(this.listaArquivosDemanda)
   }
 
   reprovarDemanda(codigoDemanda: number, motivoReprovacao: string) {
     return this.http.put(path + 'demanda/cancell/' + codigoDemanda, motivoReprovacao)
   }
   addCenterOfCost() {
-    (this.demandaForm.controls.centroCustos as FormArray).push(
+    (this.demandaForm.controls.centroCustosDemanda as FormArray).push(
       this.createCentroCusto()
     );
 
@@ -249,12 +249,13 @@ export class DemandaService {
       demandaFormData.append('arquivos', item, item.name)
     );
     try {
-      this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser } });
+      this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
     } catch (err) {
       let user = this.usuarioService.getUser("user")
       // this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: user.codigousuario?>> } });
 
     }
+    console.log(this.demandaForm.value)
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     return this.http.post<Demanda | string>(
       path + 'demanda',

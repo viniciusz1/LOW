@@ -16,7 +16,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     private demandaService: DemandaService,
   ) { }
 
-  listaFiles: File[] = this.demandaService.listaArquivosDemanda
+  listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -59,6 +59,9 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   resultado: boolean = true;
 
   ngOnInit(): void {
+    this.demandaService.listaArquivosDemanda.subscribe(arquivos =>{
+      this.listaFiles = arquivos
+    })
   }
   uploadDocumentos(event: any) {
     this.demandaService.arquivos = event['files'] as File[];

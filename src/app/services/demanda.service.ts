@@ -1,7 +1,7 @@
 import { Demanda } from './../models/demanda.model';
 import { Filtro } from './../models/filtro.model';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Validators } from '@angular/forms';
 import { saveAs } from 'file-saver';
@@ -38,7 +38,7 @@ export class DemandaService {
 
   });
 
-  public listaArquivosDemanda: File[] = []
+  public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
 
   formEditorEspecial = new FormGroup({
     situacaoAtualDemanda: new FormControl('', Validators.required),
@@ -105,7 +105,8 @@ export class DemandaService {
       situacaoAtualDemanda: demanda.situacaoAtualDemanda,
       objetivoDemanda: demanda.objetivoDemanda
     })
-    this.listaArquivosDemanda = this.saveByteArrayFile(demanda.arquivosDemanda)
+    
+    this.listaArquivosDemanda.emit(this.saveByteArrayFile(demanda.arquivosDemanda)) 
   }
 
   reprovarDemanda(codigoDemanda: number, motivoReprovacao: string) {

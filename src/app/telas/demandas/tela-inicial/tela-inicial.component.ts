@@ -169,10 +169,10 @@ export class TelaInicialComponent implements OnInit {
             frequenciaDeUsoSistemaDemanda:
               listaDemandas[i].frequenciaDeUsoDemanda,
             statusDemanda: listaDemandas[i].statusDemanda,
-            codigoCentroCusto: listaDemandas[i].centroCustos
+            codigoCentroCusto: listaDemandas[i].centroCustosDemanda
               ?.map((cc) => cc.codigoCentroCusto)
               .join(', '),
-            nomeCentroCusto: listaDemandas[i].centroCustos
+            nomeCentroCusto: listaDemandas[i].centroCustosDemanda
               ?.map((cc) => cc.nomeCentroCusto)
               .join(', '),
           });

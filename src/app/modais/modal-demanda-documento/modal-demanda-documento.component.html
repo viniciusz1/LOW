@@ -93,7 +93,10 @@
           {{ dadosDemanda?.beneficioQualitativoDemanda }}
         </li>
       </ul>
-      <p><b>Frequência de uso do sistema: </b>{{dadosDemanda?.frequenciaDeUsoDemanda}}</p>
+      <p>
+        <b>Frequência de uso do sistema: </b>
+        {{dadosDemanda?.frequenciaDeUsoDemanda}}
+      </p>
       <div class="fazer ng-if"
         *ngIf="dadosDemanda?.statusDemanda == 'ASSESSMENT' || dadosDemanda?.statusDemanda == 'BUSINESS_CASE'">
         <h4><b>Escopo do Projeto:</b></h4>
@@ -108,7 +111,8 @@
             potenciais)</b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
           {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
         </h4>
-        <p><b>Custos totais do projeto: </b>
+        
+        <p><b>Custos totais do projeto:</b>
           <br>
           Total despesas recursos externos (Desembolso): R$30.000,00
           <br>
@@ -118,173 +122,40 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Despesas (Desembolso)</th>
-              <th scope="col">Esforço</th>
-              <th scope="col">Valor total</th>
+              <th scope="col">Recursos Necessários</th>
+              <th scope="col">Tipo da Despesa</th>
+              <th scope="col">Perfil da Despesa</th>
               <th scope="col">CC Pagante</th>
+              <th scope="col">Qtd de Horas</th>
+              <th scope="col">Valor da Hora</th>
+              <th scope="col">Período de Execução (Mensal)</th>
             </tr>
           </thead>
 
-          <tbody class="table-group-divider">
+          <tbody *ngFor="let itemRecurso of dadosDemanda?.recursosProposta" class="table-group-divider">
             <tr>
               <td>
-                Analista Funcional SAP SD
+                {{itemRecurso.nomeRecurso}}
               </td>
               <td>
-                100h
+                {{itemRecurso.tipoDespesaRecurso}}
               </td>
               <td>
-                R$ 10.000,00
+                {{itemRecurso.perfilDespesaRecurso}}
               </td>
               <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
+                <p *ngFor="let centroCustoPagante of itemRecurso.centroDeCustoRecurso">
+                  {{centroCustoPagante}}: {{itemRecurso.porcentagemCustoRecurso}}
+                </p>
               </td>
               <td>
-                100h
+                {{itemRecurso.quantidadeHorasRecurso}}
               </td>
               <td>
-                R$ 10.000,00
+                {{itemRecurso.valorHoraRecurso}}
               </td>
               <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Investimentos/ recorrentes</th>
-              <th scope="col">Licenças</th>
-              <th scope="col">Valor Unit</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-
-          <tbody class="table-group-divider">
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Recursos Internos (Sem Desembolso)</th>
-              <th scope="col">Esforço</th>
-              <th scope="col">Valor total</th>
-              <th scope="col">CC Pagante</th>
-            </tr>
-          </thead>
-
-          <tbody class="table-group-divider">
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
+                {{itemRecurso.periodoExMesesRecurso}}
               </td>
             </tr>
           </tbody>

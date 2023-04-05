@@ -19,7 +19,7 @@ export interface Demanda {
     beneficioPotencialDemanda?: Beneficio,
     beneficioQualitativoDemanda?: string,
     frequenciaDeUsoDemanda?: string,
-    recursosNecessariosDemanda?:  [[Recurso], {'custoInterno': number, 'custoExterno': number, 'custoTotal': number}],
+    recursosProposta?:  Recurso[],
     escopoDemanda?: string,
     inicioExDemanda?: Date,
     fimExDemanda?: Date,

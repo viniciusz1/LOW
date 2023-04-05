@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
-import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
+import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
 
 @Component({
   selector: 'app-tela-corrida',
@@ -24,14 +24,28 @@ export class TelaCorridaComponent implements OnInit {
 
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
-      this.demandaService.postDemanda().subscribe({
-        next: (response) => {
-          this.router.navigate(['/tela-inicial']);
-        },
-        error: (err) => {
-          alert('Ocorreu um erro: ' + err.status);
-        },
-      });
+
+      if (this.router.url.includes('reformular-demanda')) {
+        this.demandaService.reformularDemanda().subscribe({
+          next: (response) => {
+            this.router.navigate(['/tela-inicial']);
+          },
+          error: (err) => {
+            alert('Ocorreu um erro: ' + err.status);
+          },
+        });
+      }else{
+        this.demandaService.postDemanda().subscribe({
+          next: (response) => {
+            this.router.navigate(['/tela-inicial']);
+          },
+          error: (err) => {
+            alert('Ocorreu um erro: ' + err.status);
+          },
+        });
+      }
+
+      
     } else {
       if (this.dadosDemandaAnalista?.codigoDemandaAnalista)
         this.propostaService
@@ -51,7 +65,6 @@ export class TelaCorridaComponent implements OnInit {
   constructor(
     private router: Router,
     private demandaService: DemandaService,
-    private demandaAnalistaService: DemandaAnalistaService,
     private propostaService: PropostaService,
     private activatedRoute: ActivatedRoute
   ) {
@@ -67,16 +80,22 @@ export class TelaCorridaComponent implements OnInit {
     if (this.router.url == '/tela-inicial/demanda') {
       this.aparecerProposta = false;
       this.demandaService.resetDemandaForm();
-    } else {
+    } 
+    else {
+      if (this.router.url.includes('reformular-demanda')) {
+        this.aparecerProposta = false;
+      }else{
+        this.aparecerProposta = true;
+      }
       this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
-    .subscribe(e => {
-      console.log(e)
-      this.demandaService.setFormDemandaData(e);
-    })
-      this.aparecerProposta = true;
+        .subscribe(e => {
+          console.log(e)
+          this.demandaService.setFormDemandaData(e);
+        })
       this.demandaService.resetDemandaForm();
     }
   }
+
 
 
   onScroll() {

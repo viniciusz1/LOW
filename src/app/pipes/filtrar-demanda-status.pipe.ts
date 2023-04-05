@@ -5,6 +5,14 @@ import { StatusDemanda } from '../models/statusDemanda.enum';
 @Pipe({
   name: 'filtrarDemandaStatus'
 })
+
+/*
+  Pipe utilizado para realizar a tela principal do sistema. Ele basicamente recebe uma lista 
+  com todas as demandas que devem ser exibidas na tela inicial, e também uma lista com os tí
+  tulos que são exibidos. Após isso, ela filtra as demandas que devem ser exibidas para cada
+  título e então, retorna uma fileira de demandas de status correspondentes.
+*/
+
 export class FiltrarDemandaStatusPipe implements PipeTransform {
 
   transform(demandas: Demanda[], ...titulo: string[]): Demanda[] {

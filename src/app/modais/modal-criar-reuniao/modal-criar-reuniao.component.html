@@ -3,7 +3,7 @@
   <i class="bi bi-x-lg" role="button" (click)="dialogRef.close()"></i>
 </div>
 <hr class="mt-0" style="overflow: auto;">
-<div [formGroup]="novaReuniaoForm" (onSubmit)="onSubmit()"class="row m-3" >
+<div (onSubmit)="onSubmit()"class="row m-3" >
   <div class="col-sm-6 drag-column d-flex flex-column">
     <div class="d-flex">
       <app-filtro-demanda class="mb-2 w-100" [filtroReduzidoVertical]="true" [mostrarIconeDeAbrirFiltro]="false">
@@ -38,13 +38,13 @@
     <div class=" mt-1 p-3 border rounded low-shadow">
       <div class="">
         <label for="time">Data e Hora da Reunião:</label>
-        <p-calendar placeholder="Clique aqui!" formControlName="dataReuniao" [showTime]="true" [showSeconds]="true"
+        <p-calendar placeholder="Clique aqui!" [showTime]="true" [showSeconds]="true"
           inputId="time" [(ngModel)]="dataReuniao"></p-calendar>
       </div>
       <div class="mt-1 d-grid">
         <label for="time">Selecione a Comissão da Reunião:</label>
-        <p-dropdown placeholder="Selecione a Comissão:" [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada" optionLabel="nomeComissao"  formControlName="comissaoReuniao"></p-dropdown>
-        <!-- <p-dropdown [options]="listaDeComissoesReuniao" [(ngModel)]="comissaoSelecionada" optionLabel="nomeComissao" [showClear]="true" ></p-dropdown> -->
+        <p-dropdown placeholder="Selecione a Comissão:" [options]="listaComissoes" optionValue="value" [(ngModel)]="comissaoSelecionada" optionLabel="nome" ></p-dropdown>
+
       </div>
       <div class=" mt-1 d-flex justify-content-end">
         <button type="submit" class="btn btn-primary" (click)="onSubmit()">Marcar Reunião</button>

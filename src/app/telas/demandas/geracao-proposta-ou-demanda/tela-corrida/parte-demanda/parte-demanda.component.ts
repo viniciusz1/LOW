@@ -4,6 +4,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { FormControl, FormGroup } from '@angular/forms';
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-parte-demanda',
@@ -13,10 +14,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class ParteDemandaComponent implements OnInit, OnDestroy {
   constructor(
     private demandaService: DemandaService,
-  ) {}
+  ) { }
 
-
-
+  listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -54,11 +54,14 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     'Grande',
     'Muito Grande',
   ];
-  opcoesDeMoeda = [{ name: 'BRL' }, { name: 'EUR' }, { name: 'DOL' }];
+  opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
 
   ngOnInit(): void {
+    this.demandaService.listaArquivosDemanda.subscribe(arquivos =>{
+      this.listaFiles = arquivos
+    })
   }
   uploadDocumentos(event: any) {
     this.demandaService.arquivos = event['files'] as File[];
@@ -78,7 +81,8 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   }
 
   teste() {
-    console.log(this.formEditorEspecial.value)
+    console.log(this.listaFiles)
+    console.log(this.demandaForm)
   }
 
   ngOnDestroy(): void {

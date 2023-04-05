@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ModalMotivoDevolucaoComponent } from './../modal-motivo-devolucao/modal-motivo-devolucao.component';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
@@ -16,31 +17,32 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
   constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
     @Inject(DIALOG_DATA) public data: Demanda,
+    private router: Router
   ) {
     this.dadosDemanda = data
   }
 
   ngOnInit(): void {
   }
-
-  // enviarDecisao(decisao: number) {
-  //   if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0') {
-  //     console.log("ENTROU");
-  //     this.demandaService
-  //       .avancarStatusDemandaComDecisao(
-  //         this.dadosDemanda.codigoDemanda,
-  //         decisao
-  //       )
-  //       .subscribe({
-  //         next: event => {
-  //           console.log(event)
-  //           this.dialogRef.close()
-  //         },
-  //         error: err => {
-  //           console.log(err)
-  //         }
-  //       });
-  //   }
-  // }
+  motivoReprovacao = ""
+  reprovarDemanda() {
+    console.log(this.dadosDemanda)
+    if(this.dadosDemanda?.codigoDemanda)
+    //Parâmetro 0 na decisão significa que a demand é reprovada
+    this.demandaService
+      .reprovarDemanda(
+        parseInt(this.dadosDemanda.codigoDemanda),
+        this.motivoReprovacao
+      )
+      .subscribe({
+        next: event => {
+          this.router.navigate(['/tela-inicial'])
+          this.dialogRef.close()
+        },
+        error: err => {
+          alert(err)
+        }
+      });
+  }
 
 }

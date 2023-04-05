@@ -1,5 +1,4 @@
 import { Secao } from '../models/secao.model';
-import { Comissao } from '../models/comissao.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 

@@ -14,7 +14,7 @@ export interface Demanda {
     statusDemanda?: StatusDemanda,
     situacaoAtualDemanda?: string,
     objetivoDemanda?: string,
-    centroCustos?: CentroCusto[],
+    centroCustosDemanda?: CentroCusto[],
     beneficioRealDemanda?: Beneficio,
     beneficioPotencialDemanda?: Beneficio,
     beneficioQualitativoDemanda?: string,
@@ -25,6 +25,9 @@ export interface Demanda {
     fimExDemanda?: Date,
     paybackSimplesDemanda?: string,
     responsaveisNegocioDemanda?: [],
+    parecerComissaoProposta?: string,
+    ultimaDecisaoComissao?: string,
+    tipoAtaProposta?: string,
     //Não tem nos inputs mas acredito que é necessário
     ppmDemanda?: string
     solicitanteDemanda?: Usuario
@@ -32,7 +35,9 @@ export interface Demanda {
     scoreDemanda?: number,
     dataCriacaoDemanda?: Date
     version?: number
+    motivoReprovacaoDemanda?: string,
 
+    recomendacaoProposta?: string,
     tamanhoDemandaAnalista?: Tamanho,
     buSolicitanteDemandaAnalista?: BusinessUnit,
     busBeneficiadasDemandaAnalista?: BusinessUnit[],

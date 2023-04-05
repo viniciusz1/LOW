@@ -27,6 +27,10 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   }
   dadosDemanda: Demanda | undefined;
   proposta: Proposta | undefined
+  
+
+  custostotaisprojeto(){
+  }
 
   openModalReprovacao() {    
     console.log("codigo", this.dadosDemanda?.codigoDemanda);

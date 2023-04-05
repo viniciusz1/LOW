@@ -13,7 +13,7 @@ import { DemandaAnalistaService } from 'src/app/services/demanda-analista.servic
   styleUrls: ['./tela-corrida.component.scss'],
 })
 export class TelaCorridaComponent implements OnInit {
-
+serviceCalled = false;
   aparecerProposta = false;
   centroCustos: CentroCusto[] = [];
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
@@ -71,6 +71,7 @@ export class TelaCorridaComponent implements OnInit {
       this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
     .subscribe(e => {
       console.log(e)
+      this.serviceCalled = true;
       this.demandaService.setFormDemandaData(e);
     })
       this.aparecerProposta = true;

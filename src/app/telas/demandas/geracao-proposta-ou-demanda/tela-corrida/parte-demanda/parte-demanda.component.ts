@@ -4,6 +4,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { FormControl, FormGroup } from '@angular/forms';
+import { TelaCorridaComponent } from '../tela-corrida.component';
 
 @Component({
   selector: 'app-parte-demanda',
@@ -14,8 +15,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   constructor(
     private demandaService: DemandaService,
   ) {}
-
-
 
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [
@@ -60,11 +59,10 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
   }
+
   uploadDocumentos(event: any) {
     this.demandaService.arquivos = event['files'] as File[];
   }
-
-
 
   removerCentroDeCusto(index: number) {
     this.demandaService.removeCenterOfCost(index);

@@ -4,7 +4,7 @@ export let PermissoesDeRotas = [
         authorities: ["*"]
     },
     {
-        path: '/tela-inicial/classificar-demanda/:codigoDemanda',
+        path: '/tela-inicial/classificar-demanda',
         authorities: ["Analista", "GestorTI"]
     },
     {
@@ -20,11 +20,11 @@ export let PermissoesDeRotas = [
         authorities: ["*"]
     },
     {
-        path: '/tela-inicial/reformular-demanda/:codigoDemanda',
+        path: '/tela-inicial/reformular-demanda',
         authorities: ["*"]
     },
     {
-        path: '/tela-inicial/proposta/:codigoDemanda',
+        path: '/tela-inicial/proposta',
         authorities: ["Analista", "GestorTI"]
     },
     {
@@ -32,7 +32,7 @@ export let PermissoesDeRotas = [
         authorities: ["Analista", "GestorTI"]
     },
     {
-        path: '/tela-inicial/ver-reuniao/:codigoReuniao',
+        path: '/tela-inicial/ver-reuniao',
         authorities: ["Analista", "GestorTI"]
     },
     {

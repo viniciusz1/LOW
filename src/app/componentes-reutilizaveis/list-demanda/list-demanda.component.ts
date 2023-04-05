@@ -9,6 +9,8 @@ import { NivelAcesso } from 'src/app/models/nivel-acesso.enum';
   templateUrl: './list-demanda.component.html',
   styleUrls: ['./list-demanda.component.scss']
 })
+
+
 export class ListDemandaComponent implements OnInit {
   primaryColorClass?: string = "";
   secondaryColorClass?: string = "";
@@ -36,8 +38,9 @@ export class ListDemandaComponent implements OnInit {
   @Input('mostrarIconeAdicionar') demandaPequena = false;
 
 
+
   nivelAcesso: NivelAcesso = NivelAcesso.Analista;
-  textoExibidoEmBotaoDependendoRota: {rota: string, texto: string} | undefined = undefined;
+  textoExibidoEmBotaoDependendoRota: { rota: string, texto: string } | undefined = undefined;
 
   constructor(private route: Router) { }
   statusPermitido() {
@@ -52,7 +55,7 @@ export class ListDemandaComponent implements OnInit {
     }
     return false;
   }
-  abrirModalHistorico(){
+  abrirModalHistorico() {
     this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
   }
 
@@ -104,7 +107,7 @@ export class ListDemandaComponent implements OnInit {
     return true;
   }
 
-  direcionarUsuario(){
+  direcionarUsuario() {
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
       this.abrirModal.emit();
     } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar') {
@@ -132,7 +135,7 @@ export class ListDemandaComponent implements OnInit {
     }
   }
 
-  exibicaoBotoes(){
+  exibicaoBotoes() {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO &&
       this.nivelAcesso == NivelAcesso.Analista

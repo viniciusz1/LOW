@@ -98,15 +98,15 @@
         *ngIf="dadosDemanda?.statusDemanda == 'ASSESSMENT' || dadosDemanda?.statusDemanda == 'BUSINESS_CASE'">
         <h4><b>Escopo do Projeto:</b></h4>
 
-        {{proposta?.escopoProposta}}
+        {{dadosDemanda?.escopoDemanda}}
         <h4>
           <b>Resultados Esperados (Qualitativos):</b>
-          {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioQualitativoDemanda}}
+          {{dadosDemanda?.beneficioQualitativoDemanda}}
         </h4>
         <h4>
           <b>Resultados Esperados (Ganhos
-            potenciais)</b>{{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioPotencialDemanda?.valorBeneficio}}
-          {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
+            potenciais)</b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
+          {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
         </h4>
         <p><b>Custos totais do projeto: </b>
           <br>
@@ -293,12 +293,12 @@
           <b>
             Período de execução:
           </b>
-          {{proposta?.inicioExDemandaProposta}} à {{proposta?.fimExDemandaProposta}}
+          {{dadosDemanda?.inicioExDemanda}} à {{dadosDemanda?.fimExDemanda}}
         </p>
         <p>
           <b>
             Payback:
-          </b> {{proposta?.paybackProposta}}
+          </b> {{dadosDemanda?.paybackSimplesDemanda}}
         </p>
       </div>
       <p>

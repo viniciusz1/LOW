@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Demanda } from '../models/demanda.model';
 import { Validators } from '@angular/forms';
+import { DemandaService } from './demanda.service';
+import { UsuarioService } from './usuario.service';
 
 interface RecursoDoForm {
   nomeRecurso: string;
@@ -15,7 +17,7 @@ interface RecursoDoForm {
   quantidadeHorasRecurso: number;
   valorHoraRecurso: number;
   periodoExMesesRecurso: number;
-  centroCustos?: { porcentagemCentroCusto: number; nomeCentroCusto: number }[];
+  centroCustoRecurso?: { porcentagemCentroCusto: number; nomeCentroCusto: number }[];
   porcentagemCustoRecurso: number[];
   centroDeCustoRecurso: { codigoCentroCusto: number }[];
 }
@@ -37,8 +39,8 @@ export class PropostaService {
     inicioExDemandaProposta: ['', [Validators.required]],
     fimExDemandaProposta: ['', [Validators.required]],
     paybackProposta: [this.paybackProposta],
-    responsavelProposta: { 'codigoUsuario': 3 },
-    demandaAnalistaProposta: { 'codigoDemandaAnalista': 0 }
+    responsavelProposta: { 'codigoUsuario': 0 },
+    statusDemanda: ['']
   });
 
   public formRecursos = this.fb.group({
@@ -48,26 +50,26 @@ export class PropostaService {
     quantidadeHorasRecurso: ['', [Validators.required]],
     valorHoraRecurso: ['', [Validators.required]],
     periodoExMesesRecurso: ['', [Validators.required]],
-    centrosCusto: this.fb.array([this.createCentroCusto()])
+    centroCustoRecurso: this.fb.array([this.createCentroCusto()])
   });
 
   createCentroCusto(): FormGroup {
     return this.fb.group({
-      porcentagem: [''],
-      centroCusto: ['']
+      porcentagemCentroCusto: [''],
+      nomeCentroCusto: ['']
     });
   }
 
   removeCenterOfCost(index: number) {
-    (this.formRecursos.controls.centrosCusto as FormArray).removeAt(index);
+    (this.formRecursos.controls.centroCustoRecurso as FormArray).removeAt(index);
   }
 
   addRowRecurso() {
 
     let porcentagem: number = 0
-    if (this.formRecursos.value.centrosCusto)
-      for (let i of this.formRecursos.value.centrosCusto) {
-        porcentagem += parseInt(i.porcentagem)
+    if (this.formRecursos.value.centroCustoRecurso)
+      for (let i of this.formRecursos.value.centroCustoRecurso) {
+        porcentagem += parseInt(i.porcentagemCentroCusto)
       }
     if (porcentagem == 100) {
       if (this.formRecursos.valid) {
@@ -82,44 +84,44 @@ export class PropostaService {
 
 
   addCenterOfCost() {
-    (this.formRecursos.controls.centrosCusto as FormArray).push(
+    (this.formRecursos.controls.centroCustoRecurso as FormArray).push(
       this.createCentroCusto()
     );
 
   }
 
-  arrumarFormularioParaBackend() {
-    this.listaRecursos.forEach(e => {
-      e.porcentagemCustoRecurso = [];
-      e.centroDeCustoRecurso = [];
-      if (e.centroCustos) {
-        e.centroCustos.forEach((centro) => {
-          e.porcentagemCustoRecurso.push(centro.porcentagemCentroCusto);
-          e.centroDeCustoRecurso.push({
-            codigoCentroCusto: centro.nomeCentroCusto,
-          });
-          delete e.centroCustos;
-        });
-      }
-    });
-  }
 
 
+  postProposta() {
 
-  postProposta(codigoDemandaAnalista: string) {
+    let propostaFormData = new FormData();
+
     this.formProposta.patchValue({
-      demandaAnalistaProposta: {
-        codigoDemandaAnalista: parseInt(codigoDemandaAnalista)
-      }
+      responsavelProposta: { 'codigoUsuario': this.usuarioService.getCodigoUser() }
     })
-    console.log(this.formProposta.value);
 
-    this.arrumarFormularioParaBackend();
+
+    try {
+      this.demandaService.insertsBeforePostDemanda()
+    } catch (err) {
+      alert("Ocorreu um erro ao cadastrar: " + err);
+    }
+    
+    const demandaEPropostaJuntos = Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value);
+    propostaFormData.append('proposta', JSON.stringify(demandaEPropostaJuntos));
+
+    this.demandaService.getArquivos.map((item) =>
+      propostaFormData.append('arquivos', item, item.name)
+    );
+
+
     return this.http.post<Demanda | string>(
       path + 'proposta',
-      this.formProposta.value
+      propostaFormData
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private demandaClassificadaService: DemandaClassificadaService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private demandaService: DemandaService, private usuarioService: UsuarioService) {
+
+  }
 }

@@ -18,7 +18,6 @@ serviceCalled = false;
   centroCustos: CentroCusto[] = [];
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
   posicaoScroll = 0;
-  dadosDemandaAnalista: DemandaAnalista | undefined;
   titulosDemanda: any[] = [];
   activeSection: string = '';
 
@@ -47,9 +46,8 @@ serviceCalled = false;
 
       
     } else {
-      if (this.dadosDemandaAnalista?.codigoDemandaAnalista)
         this.propostaService
-          .postProposta(this.dadosDemandaAnalista?.codigoDemandaAnalista)
+          .postProposta()
           .subscribe({
             next: (response) => {
               this.router.navigate(['/tela-inicial']);

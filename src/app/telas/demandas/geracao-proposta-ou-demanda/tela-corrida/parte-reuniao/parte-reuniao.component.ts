@@ -33,14 +33,14 @@ export class ParteReuniaoComponent implements OnInit {
   listaRecursos = this.propostaService.listaRecursos;
   values: string[] = [];
 
-  status = [
+  statusDemanda = [
     {
       name:'Business Case', 
-      value: 'Business Case'
+      value: 'BUSINESS_CASE'
     },
     {
       name:'Assessment', 
-      value: 'Assessment'
+      value: 'ASSESSMENT'
     }
   ]
 
@@ -117,7 +117,7 @@ export class ParteReuniaoComponent implements OnInit {
       valorHoraRecurso: this.listaRecursos[index].valorHoraRecurso.toString(),
       quantidadeHorasRecurso: this.listaRecursos[index].quantidadeHorasRecurso.toString(),
       periodoExMesesRecurso: this.listaRecursos[index].periodoExMesesRecurso.toString(),
-      centrosCusto: this.listaRecursos[index].centroCustos,
+      centroCustoRecurso: this.listaRecursos[index].centroCustoRecurso,
     })
     this.listaRecursos.splice(index, 1)
   }

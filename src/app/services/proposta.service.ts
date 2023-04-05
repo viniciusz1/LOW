@@ -40,6 +40,7 @@ export class PropostaService {
     fimExDemandaProposta: ['', [Validators.required]],
     paybackProposta: [this.paybackProposta],
     responsavelProposta: { 'codigoUsuario': 0 },
+    statusDemanda: ['']
   });
 
   public formRecursos = this.fb.group({
@@ -109,7 +110,6 @@ export class PropostaService {
     const demandaEPropostaJuntos = Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value);
     propostaFormData.append('proposta', JSON.stringify(demandaEPropostaJuntos));
 
-    console.log(demandaEPropostaJuntos)
     this.demandaService.getArquivos.map((item) =>
       propostaFormData.append('arquivos', item, item.name)
     );

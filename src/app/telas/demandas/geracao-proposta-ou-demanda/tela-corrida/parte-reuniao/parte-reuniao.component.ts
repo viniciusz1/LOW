@@ -33,14 +33,14 @@ export class ParteReuniaoComponent implements OnInit {
   listaRecursos = this.propostaService.listaRecursos;
   values: string[] = [];
 
-  status = [
+  statusDemanda = [
     {
       name:'Business Case', 
-      value: 'Business Case'
+      value: 'BUSINESS_CASE'
     },
     {
       name:'Assessment', 
-      value: 'Assessment'
+      value: 'ASSESSMENT'
     }
   ]
 

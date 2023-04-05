@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="container">
-      <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{width: '40vw'}">
+      <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{width: '40vw'}">  
         <ng-template pTemplate="footer">
           <button *ngIf="!mostrarBotaoModal" type="button" (click)="cd.reject()" class="btn btn-outline-danger">
             <i class="pi pi-times me-2"></i>
@@ -50,7 +50,7 @@
       <div>
         <app-card-reuniao class="m-1" *ngFor="let reuniao of listaReunioes | ordenarReuniaoPipe" [dadosReuniao]="reuniao"
           (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda(reuniao)"
-          (motivoCancelamento)="modalMotivoCancelamentoDemanda()">
+          (motivoCancelamento)="modalMotivoCancelamentoDemanda($event)">
         </app-card-reuniao>
       </div>
     </div>

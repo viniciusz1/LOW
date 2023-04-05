@@ -14,7 +14,7 @@
   </ng-template> -->
   </p-timeline>
 
-  <p class="paragrafo-inicial">
+  <p class="paragrafo-inicial" *ngIf="documentoEmAta == false">
     <b class="me-2">01</b>
     <span>
       <div class="d-flex align-items-center justify-content-between">
@@ -27,8 +27,11 @@
     </span>
   </p>
 
-  <mat-dialog-content class="mat-typography">
-    <p-scrollPanel [style]="{ width: '100%', height: '65vh' }" styleClass="custombar1">
+  <mat-dialog-content class="mat-typography" [ngStyle]="{ 'overflow': (documentoEmAta ? 'hidden' : 'hidden') }">
+    <p-scrollPanel
+      [style]="{ width: '100%', height: '70vh' }"
+      styleClass="custombar1"
+    >
       <h4 mat-dialog-title class="d-flex justify-content-between">
         <span><b>SOLICITANTE: </b>{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span>
         <span><b>DATA:</b> {{ dadosDemanda?.inicioExDemanda }}</span>
@@ -51,30 +54,43 @@
         {{ dadosDemanda?.objetivoDemanda }}
       </p>
 
-      <h4><b>Beneficio Real: </b>{{dadosDemanda?.beneficioRealDemanda?.valorBeneficio}} mensais</h4>
+      <h4><b>Situação Atual:</b></h4>
       <p>
-        <b>Memória de cálculo do benefício real: </b>
+        {{ dadosDemanda?.situacaoAtualDemanda }}
+      </p>
+
+      <h4>
+        <b>Beneficio Real:</b
+        >{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }} mensais
+      </h4>
+      <p>
+        <b>Memória de cálculo do benefício real:</b>
       </p>
       <ul>
         <li>
-          {{dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio}}
-        </li>
-      </ul>
-      <h4><b>Beneficio Potencial: </b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}} mensais</h4>
-      <p>
-        <b>Memória de cálculo do benefício potencial: </b>
-      </p>
-      <ul>
-        <li>
-          {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
+          {{ dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio }}
         </li>
       </ul>
       <h4>
-        <b>Beneficio Qualitativo: </b>
+        <b>Beneficio Potencial:</b
+        >{{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }} mensais
+      </h4>
+      <p>
+        <b>Memória de cálculo do benefício potencial:</b>
+      </p>
+      <ul>
+        <li>
+          {{
+            dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
+          }}
+        </li>
+      </ul>
+      <h4>
+        <b>Beneficio Qualitativo:</b>
       </h4>
       <ul>
         <li>
-          {{dadosDemanda?.beneficioQualitativoDemanda}}
+          {{ dadosDemanda?.beneficioQualitativoDemanda }}
         </li>
       </ul>
       <p><b>Frequência de uso do sistema: </b>{{dadosDemanda?.frequenciaDeUsoDemanda}}</p>
@@ -285,14 +301,37 @@
           </b> {{proposta?.paybackProposta}}
         </p>
       </div>
+      <p>
+        <b>Frequência de uso do sistema:</b
+        >{{ dadosDemanda?.frequenciaDeUsoDemanda }}
+      </p>
+      <h4><b>DOCUMENTOS:</b>
+        <a *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" role="button" (click)="download(arquivo)">
+          {{ arquivo.nomeArquivo }}
+        </a>
+      </h4>
     </p-scrollPanel>
   </mat-dialog-content>
 
-  <mat-dialog-actions class="d-flex justify-content-between">
-    <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">Cancelar</button>
+  <mat-dialog-actions class="d-flex justify-content-between" *ngIf="documentoEmAta == false">
+    <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">
+      Cancelar
+    </button>
     <div>
-      <button class="btn btn-danger me-2" *ngIf="user == 'gerente'" (click)="openModalReprovacao()">Reprovar
-        demanda</button>
-      <button class="btn btn-primary" *ngIf="user == 'gerente'" (click)="enviarDecisao(1)">Aprovar demanda</button>
+      <button
+        class="btn btn-danger me-2"
+        *ngIf="user == 'gerente'"
+        (click)="openModalReprovacao()"
+      >
+        Reprovar demanda
+      </button>
+      <button
+        class="btn btn-primary"
+        *ngIf="user == 'gerente'"
+        (click)="enviarDecisao(1)"
+      >
+        Aprovar demanda
+      </button>
     </div>
   </mat-dialog-actions>
+</div>

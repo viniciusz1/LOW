@@ -13,7 +13,7 @@ import { Route, Router } from '@angular/router';
   providers: [NgbDropdownConfig],
 })
 export class CardDemandaComponent implements OnInit {
-  @Output() abrirModal = new EventEmitter();
+  @Output() abrirModalMotivoReprovacao = new EventEmitter<Demanda>();
   @Output() abrirModalAvaliarDemanda = new EventEmitter();
   @Output() verDocumentoProposta = new EventEmitter<Demanda>();
   @Output() clicouEmExcluir = new EventEmitter();
@@ -98,7 +98,7 @@ export class CardDemandaComponent implements OnInit {
 
   direcionarUsuario() {
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
-      this.abrirModal.emit();
+      this.abrirModalMotivoReprovacao.emit(this.dadosDemada);
     } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar') {
       this.verDocumentoProposta.emit(this.dadosDemada);
     } else if (

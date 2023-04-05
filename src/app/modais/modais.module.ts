@@ -21,6 +21,7 @@ import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ModalHistoricoComponent } from './modal-historico/modal-historico.component';
 import { ModalCriarReuniaoComponent } from './modal-criar-reuniao/modal-criar-reuniao.component';
 import {CalendarModule} from 'primeng/calendar';
+import { ModalCancelamentoReuniaoComponent } from './modal-cancelamento-reuniao/modal-cancelamento-reuniao.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {CalendarModule} from 'primeng/calendar';
     ModalReprovacaoDemandaComponent,
     ModalHistoricoComponent,
     ModalCriarReuniaoComponent,
+    ModalCancelamentoReuniaoComponent,
   ],
   imports: [
     CommonModule,

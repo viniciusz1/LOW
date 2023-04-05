@@ -52,13 +52,13 @@
         </div>
       </div>
     </div>
-    <div formArrayName="centroCustos" class="row align-items-center">
+    <div formArrayName="centroCustosDemanda" class="row align-items-center">
       <label style="font-weight: 500" class="me-2">Centros de Custo <i class="bi bi-info-circle me-2"
           style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Quais sessões se beneficiariam com sua proposta?" tooltipPosition="top"></i></label>
       <div style="width: 50%; display: -webkit-box;">
         <div class="d-flex flex-column">
-          <div *ngFor="let centroCusto of demandaForm.controls.centroCustos.controls; let i = index"
+          <div *ngFor="let centroCusto of demandaForm.controls.centroCustosDemanda.controls; let i = index"
             style="flex-wrap: wrap;" class="mb-1">
             <div [formGroupName]="i" class="d-flex">
               <div class="p-inputgroup" style=" margin-right: 0.5vw;">
@@ -68,13 +68,14 @@
               </div>
               <input style="width: 10vw; margin-right: 0.5vw;" [id]="'nomeCentroCusto'+i" pInputText [required]="true"
                 formControlName="nomeCentroCusto" placeholder="Centro de Custo" />
-              <button (click)="removerCentroDeCusto(i)" [disabled]="this.demandaForm.controls.centroCustos.length == 1"
-                class="btn btn-danger"><i class="bi bi-trash"></i></button>
+              <button (click)="removerCentroDeCusto(i)"
+                [disabled]="this.demandaForm.controls.centroCustosDemanda.length == 1" class="btn btn-danger"><i
+                  class="bi bi-trash"></i></button>
             </div>
           </div>
         </div>
-        <button class="btn btn-outline-primary ms-2" [disabled]="!demandaForm.controls.centroCustos.valid || !resultado"
-          (click)="adicionarCentroCusto()">
+        <button class="btn btn-outline-primary ms-2"
+          [disabled]="!demandaForm.controls.centroCustosDemanda.valid || !resultado" (click)="adicionarCentroCusto()">
           <i class="bi bi-plus-lg" style="font-size: 19px"></i>
         </button>
       </div>
@@ -97,11 +98,8 @@
             <div style="display: flex; justify-content: space-between">
               <input placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
                 formControlName="valorBeneficio" />
-              <select class="drop" name="plataforma" required="required" formControlName="moedaBeneficio">
-                <option value="Real" [selected]="true">BRL</option>
-                <option value="Euro">EUR</option>
-                <option value="Dollar">DOL</option>
-              </select>
+              <p-dropdown [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
+                optionValue="value"></p-dropdown>
             </div>
             <div class="situacao-atual" style="display: grid" id="item-1-2">
               <div class="infos" style="display: flex; align-items: center">
@@ -131,11 +129,8 @@
               <div style="display: flex; justify-content: space-between">
                 <input placeholder="Ex: 20.000" style="width: 93%;" type="text" pInputText class="input"
                   formControlName="valorBeneficio" />
-                <select class="drop" name="plataforma" required="required" formControlName="moedaBeneficio">
-                  <option value="Real" [selected]="true">BRL</option>
-                  <option value="Euro">EUR</option>
-                  <option value="Dollar">DOL</option>
-                </select>
+                <p-dropdown [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
+                  optionValue="value"></p-dropdown>
               </div>
             </div>
             <div class="ben-real">
@@ -189,21 +184,22 @@
       </div>
       <p-dropdown
         [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.frequenciaDeUsoDemanda.errors && demandaForm.controls.frequenciaDeUsoDemanda.touched}"
-        [options]="opcoesDeTamanho" placeholder="Selecione a frequência"
-        formControlName="frequenciaDeUsoDemanda"></p-dropdown>
+        [options]="opcoesDeTamanho" placeholder="Selecione a frequência" formControlName="frequenciaDeUsoDemanda">
+      </p-dropdown>
       <small
         *ngIf="demandaForm.controls.frequenciaDeUsoDemanda.errors && demandaForm.controls.frequenciaDeUsoDemanda.touched"
         id="username2-help" class="p-error block">Campo Obrigatório</small>
     </div>
     <div>
       <div class="infos" style="display: flex; align-items: center">
-        <label style="font-weight: 500" class="me-2"> Anexar Documento: </label>
+        <label style="font-weight: 500" class="me-2" (click)="teste()"> Anexar Documento: </label>
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"
           tooltipPosition="top"></i>
       </div>
       <p-fileUpload [chooseLabel]="'Escolher'" [uploadLabel]="'Enviar'" [cancelLabel]="'Cancelar'" [multiple]="true"
-        [auto]="true" [customUpload]="true" (uploadHandler)="uploadDocumentos($event)"></p-fileUpload>
+        [auto]="true" [customUpload]="true" [files]="listaFiles" (uploadHandler)="uploadDocumentos($event)">
+      </p-fileUpload>
     </div>
   </section>
 </form>

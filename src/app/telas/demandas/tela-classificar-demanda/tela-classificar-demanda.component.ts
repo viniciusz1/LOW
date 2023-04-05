@@ -1,15 +1,17 @@
+import { Arquivo } from './../../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Secao } from '../../../models/secao.model';
 import { SecaoService } from '../../../services/secao.service';
 import { BusinessUnitService } from './../../../services/business-unit.service';
 import { BusinessUnit } from './../../../models/business-unit.model';
-import { DemandaAnalistaService } from './../../../services/demanda-analista.service';
+import { DemandaClassificadaService } from '../../../services/demanda-classificada.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalReprovacaoDemandaComponent } from 'src/app/modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
+import { FileUpload } from 'primeng/fileupload';
 
 
 
@@ -24,56 +26,26 @@ export class TelaClassificarDemandaComponent implements OnInit {
     this.matDialog.open(ModalReprovacaoDemandaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: this.demanda
     });
   }
 
-  BUs: BusinessUnit[] = [];
-  demanda: Demanda | undefined = undefined
-  demandaAnalistaForm = this.demandaAnalistaService.demandaAnalistaForm;
-  selectedBUs: any;
 
   listaBUs = [
-    {
-      codigo: 0,
-      name: 'WMO-I – WEG Motores Industrial',
-      valueBu: 'WMOI'
-    },
-    {
-      codigo: 1,
-      name: 'WMO-C – WEG Motores Comercial',
-      valueBu: 'WMOC'
-    },
-    {
-      codigo: 2,
-      name: 'WEN  – WEG Energia',
-      valueBu: 'WEN'
-    },
-    {
-      codigo: 3,
-      name: 'WAU – WEG Automação',
-      valueBu: 'WAU'
-    },
-    {
-      codigo: 4,
-      name: 'WDS – WEG Digital e Sistemas',
-      valueBu: 'WDS'
-    },
-    {
-      codigo: 5,
-      name: 'WDC – WEG Drives e Controls',
-      valueBu: 'WDC'
-    },
-    {
-      codigo: 6,
-      name: 'WTI – WEG Tintas',
-      valueBu: 'WTI'
-    },
-    {
-      codigo: 7,
-      name: 'WTD – WEG Transmissão e Distribuição',
-      valueBu: 'WTD'
-    },
-  ];
+    {value: 'WMOI', nome: 'WMO-I – WEG Motores Industrial'},
+    {value: 'WMOC', nome: 'WMO-C – WEG Motores Comercial'},
+    {value: 'WEN', nome: 'WEN  – WEG Energia'},
+    {value: 'WAU', nome: 'WAU – WEG Automação'},
+    {value: 'WDS', nome: 'WDS – WEG Digital e Sistemas'},
+    {value: 'WDC', nome: 'WDC – WEG Drives e Controls'},
+    {value: 'WTI', nome: 'WTI – WEG Tintas'},
+    {value: 'WTD', nome: 'WTD – WEG Transmissão e Distribuição'},
+  ]
+
+
+  demanda: Demanda | undefined = undefined
+  demandaClassificadaForm = this.demandaClassificadaService.demandaClassificadaForm;
+  selectedBUs: any;
 
   opcoesDeTamanho = [
     {
@@ -97,76 +69,27 @@ export class TelaClassificarDemandaComponent implements OnInit {
       value: 'MuitoGrande',
     },
   ];
-  secoes: Secao[] = [];
 
-  listaSessoes = [
-    {
-      codigo: 1,
-      name: 'SVE – Seção Desenvolvimento Sistemas de Vendas e E-commerce',
-      valueSessao:'SVE'
-    },
-    {
-      codigo: 2,
-      name: 'SIM – Seção Desenvolvimento Sistemas de manufatura',
-      valueSessao:'SIM'
-    },
-    {
-      codigo: 3,
-      name: 'SIE – Seção Desenvolvimento Sistemas de Engenhar',
-      valueSessao:'SIE'
-    },
-    {
-      codigo: 4,
-      name: 'SDO – Setor Desenvolvimento Plataforma Orchestra',
-      valueSessao:'SDO'
-    },
-    {
-      codigo: 5,
-      name: 'SCO – Seção Desenvolvimento Sistemas Corporativos',
-      valueSessao:'SCO'
-    },
-    {
-      codigo: 6,
-      name: 'PTI – Seção Projetos de TI',
-      valueSessao:'PTI'
-    },
-    {
-      codigo: 7,
-      name: 'AGD – Seção Arquitetura e Governança de Dados',
-      valueSessao:'AGD'
-    },
-    {
-      codigo: 8,
-      name: 'STD – Seção Desenvolvimento Tecnologias Digitais',
-      valueSessao:'STD'
-    },
-    {
-      codigo: 9,
-      name: 'TIN – Seção Tecnologia de Infraestrutura',
-      valueSessao:'TIN'
-    },
-    {
-      codigo: 10,
-      name: 'SGI – Seção Suporte Global Infraestrutura',
-      valueSessao:'SGI'
-    },
-    {
-      codigo: 11,
-      name: 'SEG – Seção Segurança da Informação e Riscos TI',
-      valueSessao:'SEG'
-    },
-    {
-      codigo: 12,
-      name: 'AAS – Atendimento e serviços TI – América do Sul',
-      valueSessao:'AAS'
-    },
+  listaSecoes = [
+    {value: 'SVE', nome: 'SVE – Seção Desenvolvimento Sistemas de Vendas e E-commerce'},
+    {value: 'SIM', nome: 'SIM – Seção Desenvolvimento Sistemas de manufatura'},
+    {value: 'SIE', nome: 'SIE – Seção Desenvolvimento Sistemas de Engenhar'},
+    {value: 'SDO', nome: 'SDO – Setor Desenvolvimento Plataforma Orchestra'},
+    {value: 'SCO', nome: 'SCO – Seção Desenvolvimento Sistemas Corporativos'},
+    {value: 'PTI', nome: 'PTI – Seção Projetos de TI'},
+    {value: 'AGD', nome: 'AGD – Seção Arquitetura e Governança de Dados'},
+    {value: 'STD', nome: 'STD – Seção Desenvolvimento Tecnologias Digitais'},
+    {value: 'TIN', nome: 'TIN – Seção Tecnologia de Infraestrutura'},
+    {value: 'SGI', nome: 'SGI – Seção Suporte Global Infraestrutura'},
+    {value: 'SEG', nome: 'SEG – Seção Segurança da Informação e Riscos TI'},
+    {value: 'AAS', nome: 'AAS – Atendimento e serviços TI – América do Sul'},
   ]
 
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
 
   constructor(
     private matDialog: MatDialog,
-    private demandaAnalistaService: DemandaAnalistaService,
+    private demandaClassificadaService: DemandaClassificadaService,
     private demandaService: DemandaService,
     private businessUnitService: BusinessUnitService,
     private secaoService: SecaoService,
@@ -183,29 +106,10 @@ export class TelaClassificarDemandaComponent implements OnInit {
         console.log(err);
       },
     });
-
-    this.businessUnitService.getBusinessUnits().subscribe({
-      next: (value) => {
-        this.BUs = value;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-
-    this.secaoService.getSecao().subscribe({
-      next: (value) => {
-        this.secoes = value;
-        console.log(this.secoes)
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
   }
 
   onSubmitClassificacaoDemanda() {
-    this.demandaAnalistaService.postProposta(this.demanda?.codigoDemanda).subscribe({
+    this.demandaClassificadaService.postProposta(this.demanda?.codigoDemanda).subscribe({
       next: e => {
         this.router.navigate(['/tela-inicial'])
       },
@@ -213,6 +117,10 @@ export class TelaClassificarDemandaComponent implements OnInit {
         alert(err)
       }
     });
+  }
+
+  download(arquivo: Arquivo){
+    this.demandaService.saveByteArray(arquivo.dadosArquivo, arquivo.tipoArquivo, arquivo.nomeArquivo)
   }
 
   openModalDemandaDocumento() {

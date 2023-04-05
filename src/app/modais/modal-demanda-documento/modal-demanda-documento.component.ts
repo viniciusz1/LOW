@@ -2,7 +2,7 @@
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Tamanho } from 'src/app/models/tamanho.enum';
@@ -22,26 +22,10 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private dialogRef: DialogRef<ModalDemandaDocumentoComponent>,
     private matDialog: MatDialog
   ) {
-    console.log(data)
     this.dadosDemanda = data
   }
-  dadosDemanda: Demanda | undefined;
-  proposta: Proposta | undefined
-  
-
-  custostotaisprojeto(){
-  }
-
-  openModalReprovacao() {    
-    console.log("codigo", this.dadosDemanda?.codigoDemanda);
-    console.log("status", this.dadosDemanda?.statusDemanda);
-    
-
-    this.matDialog.open(ModalReprovacaoDemandaComponent, {
-      maxWidth: '70vw',
-      minWidth: '50vw',
-    });
-  }
+  @Input() dadosDemanda: Demanda | undefined;
+  @Input() documentoEmAta = false;
 
   enviarDecisao(decisao: number) {
     if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0'){
@@ -60,7 +44,14 @@ export class ModalDemandaDocumentoComponent implements OnInit {
           }
         });
     }
+  }
 
+  openModalReprovacao() {
+    this.matDialog.open(ModalReprovacaoDemandaComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      data: this.dadosDemanda
+    });
   }
 
   download(arquivo: Arquivo): void {

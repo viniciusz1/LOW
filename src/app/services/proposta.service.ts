@@ -1,5 +1,5 @@
 import { path } from './path/rota-api';
-import { DemandaAnalistaService } from 'src/app/services/demanda-analista.service';
+import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
 import { TipoDespesa } from './../models/tipoDespesa.enum';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -121,5 +121,5 @@ export class PropostaService {
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private demandaAnalistaService: DemandaAnalistaService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private demandaClassificadaService: DemandaClassificadaService) { }
 }

@@ -1,7 +1,10 @@
+import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
+import { Demanda } from 'src/app/models/demanda.model';
 import { ModalPropostaDocumentoComponent } from './../modal-proposta-documento/modal-proposta-documento.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogRef } from '@angular/cdk/dialog';
-import { Component, OnInit } from '@angular/core';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { ReuniaoService } from 'src/app/services/reuniao.service';
 
 @Component({
   selector: 'app-modal-parecer-comissao-proposta',
@@ -10,26 +13,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalParecerComissaoPropostaComponent implements OnInit {
 
-  constructor(public dialogRef: DialogRef<ModalParecerComissaoPropostaComponent>,
-    private matDialog: MatDialog) { }
+  constructor(
+
+    @Inject(DIALOG_DATA) public data: { demanda: Demanda, statusReuniao: StatusReuniao },
+    public dialogRef: DialogRef<ModalParecerComissaoPropostaComponent>,
+    private matDialog: MatDialog,
+    private reuniaoService: ReuniaoService
+
+  ) {
+
+    this.demanda = this.data.demanda
+    this.setInformacoes()
+
+  }
+  demanda: Demanda | undefined
   tipoAtaSelecionada: string = "";
   tipoAtas = [
-    { name: 'Ata Publicada', value: '0' },
-    { name: 'Ata não Publicada', value: '1' },
+    { name: 'Ata Publicada', value: 'PUBLICADA' },
+    { name: 'Ata não Publicada', value: 'NAO_PUBLICADA' },
   ]
   aparecerRecomendacao: boolean = false;
   resultadoComissaoSelecionado: string = "";
   resultadoComissao = [
-    { name: 'Aprovar', value: '0' },
-    { name: 'Aprovar com Recomendação', value: '1' },
-    { name: 'Reapresentar com Recomendação', value: '2' },
-    { name: 'Reprovar', value: '3' },
+    { name: 'Aprovar', value: 'APROVAR' },
+    { name: 'Aprovar com Recomendação', value: 'APROVAR_COM_RECOMENDACAO' },
+    { name: 'Reapresentar com Recomendação', value: 'REAPRESENTAR_COM_RECOMENDACAO' },
+    { name: 'Reprovar', value: 'REPROVAR' },
   ]
+  parecerComissaoInput = ""
+  recomendacaoInput = ""
 
+  bloquearCamposInput() {
+    if (this.data.statusReuniao == "CONCLUIDO" ||
+      this.data.statusReuniao == "CANCELADO") {
+      return true
+    }
+    return false
+  }
 
-  selecionaResultado(event: { value: { name: string, value: number }}){
-    console.log(event.value.value);
-    if(event.value.value == 1 || event.value.value == 2){
+  textoBotaoParecer = "Finalizar Parecer"
+
+  setInformacoes() {
+    if (this.demanda?.parecerComissaoProposta && this.demanda?.tipoAtaProposta && (this.demanda?.ultimaDecisaoComissao)) {
+      this.textoBotaoParecer = "Editar Parecer"
+      this.parecerComissaoInput = this.demanda?.parecerComissaoProposta
+      if (this.demanda?.recomendacaoProposta) {
+        this.recomendacaoInput = this.demanda?.recomendacaoProposta
+        this.aparecerRecomendacao = true
+      }
+      this.tipoAtaSelecionada = this.demanda?.tipoAtaProposta
+      this.resultadoComissaoSelecionado = this.demanda?.ultimaDecisaoComissao
+    }
+  }
+
+  selecionaResultado() {
+    if (this.resultadoComissaoSelecionado == "APROVAR_COM_RECOMENDACAO" || this.resultadoComissaoSelecionado == "REAPRESENTAR_COM_RECOMENDACAO") {
       this.aparecerRecomendacao = true;
     } else {
       this.aparecerRecomendacao = false;
@@ -42,6 +80,20 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
       minWidth: '50vw',
     });
   }
+
+  enviarParecerComissao() {
+    if (this.demanda?.codigoDemanda)
+      this.reuniaoService.enviarParecerComissao({ tipoAtaProposta: this.tipoAtaSelecionada, parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.demanda.codigoDemanda?.toString())
+        .subscribe({
+          next: e => {
+            this.dialogRef.close()
+          },
+          error: err => {
+            console.log(err)
+          }
+        })
+  }
+
   ngOnInit(): void {
   }
 

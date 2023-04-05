@@ -15,11 +15,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemandaService } from './services/demanda.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ConfirmationService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
 import { TranslateModule, TranslateLoader, TranslateService, TranslateStore } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'ngx.translate.config';
+import { LogInterceptor } from './interceptor';
 
 
 @NgModule({
@@ -42,7 +43,12 @@ import { HttpLoaderFactory } from 'ngx.translate.config';
     SharedModule
 
   ],
-  providers: [DemandaService, ConfirmationService, UsuarioService, TranslateService, TranslateStore],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: LogInterceptor,
+    multi: true   
+  },
+    DemandaService, ConfirmationService, UsuarioService, TranslateService, TranslateStore],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

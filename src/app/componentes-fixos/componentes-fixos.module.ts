@@ -12,6 +12,11 @@ import { JoyrideModule } from 'ngx-joyride';
 import {TabMenuModule} from 'primeng/tabmenu';
 import { EscopoPerfilComponent } from './escopo-perfil/escopo-perfil.component';
 
+/*
+  Módulo do sistema onde ficam componentes em que são usados em múltiplas telas e não necessitam 
+  de muitas alterações de valores, como cabeçalhos, pós cabeçalhos e escopos, ou seja a parte fixa
+  de algumas telas que se encontram no sistema
+*/
 
 @NgModule({
   declarations: [

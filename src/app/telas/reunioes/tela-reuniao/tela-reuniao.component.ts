@@ -1,3 +1,4 @@
+import { ModalCancelamentoReuniaoComponent } from './../../../modais/modal-cancelamento-reuniao/modal-cancelamento-reuniao.component';
 import { Demanda } from './../../../models/demanda.model';
 import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,31 +39,22 @@ export class TelaReuniaoComponent implements OnInit {
   pesquisaReuniao = "";
   mostrarBotaoModal = false;
   showFiltroComponent = false;
+
   modalDeConfirmacaoCancelamentoDemanda(reuniao: Reuniao) {
-    this.mostrarBotaoModal = false;
-    this.confirmationService.confirm({
-      blockScroll: false,
-      closeOnEscape: false,
-      dismissableMask: true,
-      header: 'Cancelar Reunião',
-      message: 'Você tem certeza que deseja cancelar esta reunião no dia 22/11/2022 as 16:40?',
-      accept: () => {
-        reuniao.statusReuniao = StatusReuniao.CANCELADO
-        this.reuniaoService.putReuniao(reuniao).subscribe(e => {
-          console.log(e)
-        })
-      },
+    this.matDialog.open(ModalCancelamentoReuniaoComponent, {
+      minWidth: '300px',
+      data: reuniao.codigoReuniao
     });
   }
 
-  modalMotivoCancelamentoDemanda() {
+  modalMotivoCancelamentoDemanda(reuniao: Reuniao) {
     this.mostrarBotaoModal = true;
     this.confirmationService.confirm({
       blockScroll: false,
       closeOnEscape: false,
       dismissableMask: true,
       header: 'Motivo do Cancelamento',
-      message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, esse labore placeat soluta, eveniet voluptas debitis quod quaerat saepe, architecto recusandae provident repellendus fugiat expedita quos deleniti! Tempora, molestias illum?',
+      message: reuniao.motivoCancelamentoReuniao,
       accept: () => {
         //Actual logic to perform a confirmation
       },

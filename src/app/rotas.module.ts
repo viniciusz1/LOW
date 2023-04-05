@@ -16,6 +16,8 @@ import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.comp
 import { SidebarDemandaComponent } from './componentes-reutilizaveis/sidebar-demanda/sidebar-demanda.component';
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
 import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-corrida/tela-corrida.component';
+import { AuthenticationGuard } from './security/authentication.guard';
+import { AuthenticationChildGuard } from './security/authentication-child.guard';
 
 
 @NgModule({
@@ -26,10 +28,13 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
       {
         path: '',
         component: TelaLoginComponent,
+        
       },
       {
         path: 'tela-inicial',
         component: EscopoPrincipalComponent,
+        canActivateChild: [AuthenticationChildGuard],
+
         children: [
           {
             path: '',
@@ -38,10 +43,6 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
           {
             path: 'classificar-demanda/:codigoDemanda',
             component: TelaClassificarDemandaComponent
-          },
-          {
-            path: 'calendario',
-            component: TelaCalendarioComponent
           },
           {
             path: 'rascunhos',
@@ -55,15 +56,14 @@ import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-deman
             path: 'demanda',
             component: TelaCorridaComponent
           },
+          {
+            path: 'reformular-demanda/:codigoDemanda',
+            component: TelaCorridaComponent
+          },
 
           {
             path: 'proposta/:codigoDemanda',
             component: TelaCorridaComponent
-          },
-          {
-            path: 'sidebar',
-            component: SidebarDemandaComponent
-
           },
           {
             path: 'reunioes',

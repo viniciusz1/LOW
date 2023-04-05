@@ -1,6 +1,6 @@
 import { PropostaService } from './../../services/proposta.service';
 import { SecaoService } from '../../services/secao.service';
-import { DemandaAnalistaService } from './../../services/demanda-analista.service';
+import { DemandaClassificadaService } from '../../services/demanda-classificada.service';
 import { ChatModule } from './chat/chat.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { MatButtonModule } from '@angular/material/button';
@@ -62,6 +62,6 @@ import { BusinessUnitService } from 'src/app/services/business-unit.service';
     SharedModule,
 
   ],
-  providers:[DemandaAnalistaService,BusinessUnitService, SecaoService]
+  providers:[DemandaClassificadaService,BusinessUnitService, SecaoService]
 })
 export class DemandasModule { }

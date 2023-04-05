@@ -1,3 +1,5 @@
+import { ConfirmationService } from 'primeng/api';
+import { ModalCancelamentoReuniaoComponent } from './../../../modais/modal-cancelamento-reuniao/modal-cancelamento-reuniao.component';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
 import { ModalParecerComissaoPropostaComponent } from './../../../modais/modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,10 +8,11 @@ import { Demanda } from 'src/app/models/demanda.model';
 
 import { Component, OnInit } from '@angular/core';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { Proposta } from 'src/app/models/proposta.model';
+import { routerModuleForChild } from 'ngx-joyride';
 
 @Component({
   selector: 'app-tela-ver-pauta',
@@ -18,41 +21,77 @@ import { Proposta } from 'src/app/models/proposta.model';
 })
 export class TelaVerPauta implements OnInit {
 
-  constructor(private demandaService: DemandaService,
+  constructor(private confirmationService:ConfirmationService,
     private matDialog: MatDialog,
     private activatedRoute: ActivatedRoute,
-    private reuniaoService: ReuniaoService) { }
+    private reuniaoService: ReuniaoService,
+    private router: Router) { }
 
   codigoReuniao = this.activatedRoute.snapshot.params['codigoReuniao']
-  listaProposta:Proposta[] | undefined = [];
   reuniao: Reuniao | undefined = undefined;
-  listaDemanda:Demanda[] = [];
 
   ngOnInit(): void {
     this.reuniaoService.getReuniaoId(this.codigoReuniao)
-    .subscribe({next: (x) => {
-      this.reuniao = x
-      this.listaProposta = this.reuniao.propostasReuniao;
-      // this.listaProposta.forEach((demanda) => {
-      // demanda.statusDemanda = StatusDemanda.TO_DO
-      // })
-    }})
-
-
+      .subscribe({
+        next: (x) => {
+          this.reuniao = x
+        }
+      })
   }
 
-  openModalAtaDocumento() {
-    this.matDialog.open(ModalAtaDocumentoComponent, {
-      maxWidth: '70vw',
-      minWidth: '50vw',
+  finalizarReuniao() {
+    this.reuniaoService.finalizarReuniao(this.reuniao?.codigoReuniao)
+      .subscribe({
+        next: e => {
+          this.router.navigate(['/tela-inicial/reunioes'])
+        }, error: err => {
+          alert(err)
+        } 
+      })
+  }
+
+  mostrarBotoesReuniao(){
+    if(this.reuniao?.statusReuniao == 'CONCLUIDO' || this.reuniao?.statusReuniao == 'CANCELADO'){
+      return false
+    }
+    return true
+  }
+
+  cancelarReuniao() {
+    this.matDialog.open(ModalCancelamentoReuniaoComponent, {
+      minWidth: '300px',
+      data: this.reuniao?.codigoReuniao
+    });
+  }
+
+  modalConfirmacaoFinalizar() {
+    this.confirmationService.confirm({
+      blockScroll: false,
+      closeOnEscape: false,
+      dismissableMask: true,
+      header: 'Finalizar Reunião',
+      message: 'Tem certeza que deseja finalizar a reunião? Verifique se colocou todos os devidos pareceres. Caso um parecer não for preenchido, a demanda retorna para seu status anterior',
+      accept: () => {
+        this.finalizarReuniao()
+      },
     });
   }
 
 
-  openModalParecerComissaoProposta() {
+  openModalAtaDocumento(tipoAta: string) {
+    this.matDialog.open(ModalAtaDocumentoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      data: { reuniao: this.reuniao, tipoAta: tipoAta }
+    });
+  }
+
+
+  openModalParecerComissaoProposta(proposta: Demanda | undefined) {
     this.matDialog.open(ModalParecerComissaoPropostaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: {demanda: proposta, statusReuniao: this.reuniao?.statusReuniao}
     });
   }
 

@@ -34,6 +34,8 @@ export class DemandaService {
     solicitanteDemanda: {
       codigoUsuario: 0,
     },
+    codigoDemanda: [''],
+    version: [0],
     centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
 
   });
@@ -97,7 +99,9 @@ export class DemandaService {
       },
       beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
       frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
-      centroCustosDemanda: demanda.centroCustosDemanda  
+      centroCustosDemanda: demanda.centroCustosDemanda,
+      codigoDemanda: demanda.codigoDemanda, 
+      version: demanda.version
     })
    
     
@@ -120,7 +124,14 @@ export class DemandaService {
   }
   private filtros: Filtro | undefined
 
-  public arquivos: File[] = [];
+  private arquivos: File[] = [];
+
+  public get getArquivos(){
+    return this.arquivos
+  }
+  public set setArquivos(arq: File[]){
+    this.arquivos = arq
+  }
 
   public get getFiltroData(): Filtro | undefined {
     return this.filtros
@@ -193,7 +204,7 @@ export class DemandaService {
     }
     return 0;
   }
-  link = ''
+  private link = ''
   getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
     if (pesquisaEspecial?.status) {
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=`
@@ -246,32 +257,35 @@ export class DemandaService {
     );
   }
 
+  //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
+  //ou até mesmo o número do código de usuário
+  insertsBeforePostDemanda(){
+    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == undefined) {
+      this.demandaForm.patchValue({
+        beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
+      })
+    }
+
+    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == undefined) {
+      this.demandaForm.patchValue({
+        beneficioRealDemanda: { moedaBeneficio: 'Real' }
+      })
+    }
+    this.demandaForm.patchValue({
+      solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
+      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
+      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
+    })
+  }
+
   postDemanda() {
     //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
     let demandaFormData = new FormData();
     this.arquivos.map((item) =>
       demandaFormData.append('arquivos', item, item.name)
     );
-
-    //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
-    //ou até mesmo o número do código de usuário
     try {
-      if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == undefined) {
-        this.demandaForm.patchValue({
-          beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
-        })
-      }
-
-      if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == undefined) {
-        this.demandaForm.patchValue({
-          beneficioRealDemanda: { moedaBeneficio: 'Real' }
-        })
-      }
-      this.demandaForm.patchValue({
-        solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-        situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
-        objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
-      })
+      this.insertsBeforePostDemanda()
     } catch (err) {
       alert("Ocorreu um erro ao cadastrar: " + err);
     }
@@ -293,5 +307,12 @@ export class DemandaService {
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) { }
+  constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) {
+    
+    
+    this.listaArquivosDemanda.subscribe(arquivos => {
+      console.log("hey")
+      this.arquivos = arquivos
+    })
+   }
 }

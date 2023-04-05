@@ -91,8 +91,6 @@ export class TelaClassificarDemandaComponent implements OnInit {
     private matDialog: MatDialog,
     private demandaClassificadaService: DemandaClassificadaService,
     private demandaService: DemandaService,
-    private businessUnitService: BusinessUnitService,
-    private secaoService: SecaoService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {

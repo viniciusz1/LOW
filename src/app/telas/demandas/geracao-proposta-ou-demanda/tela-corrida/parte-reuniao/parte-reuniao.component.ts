@@ -117,7 +117,7 @@ export class ParteReuniaoComponent implements OnInit {
       valorHoraRecurso: this.listaRecursos[index].valorHoraRecurso.toString(),
       quantidadeHorasRecurso: this.listaRecursos[index].quantidadeHorasRecurso.toString(),
       periodoExMesesRecurso: this.listaRecursos[index].periodoExMesesRecurso.toString(),
-      centrosCusto: this.listaRecursos[index].centroCustos,
+      centroCustoRecurso: this.listaRecursos[index].centroCustoRecurso,
     })
     this.listaRecursos.splice(index, 1)
   }

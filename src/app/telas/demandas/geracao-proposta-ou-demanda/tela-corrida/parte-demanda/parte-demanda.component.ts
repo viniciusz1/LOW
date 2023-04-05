@@ -59,12 +59,12 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   resultado: boolean = true;
 
   ngOnInit(): void {
-    this.demandaService.listaArquivosDemanda.subscribe(arquivos =>{
+    this.demandaService.listaArquivosDemanda.subscribe(arquivos => {
       this.listaFiles = arquivos
     })
   }
   uploadDocumentos(event: any) {
-    this.demandaService.arquivos = event['files'] as File[];
+    this.demandaService.setArquivos = event['files'] as File[];
   }
 
 

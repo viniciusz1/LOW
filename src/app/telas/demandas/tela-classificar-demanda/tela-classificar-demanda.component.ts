@@ -46,6 +46,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
   demanda: Demanda | undefined = undefined
   demandaClassificadaForm = this.demandaClassificadaService.demandaClassificadaForm;
   selectedBUs: any;
+
   opcoesDeTamanho = [
     {
       name: 'Muito Pequena',

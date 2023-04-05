@@ -1,15 +1,7 @@
 <div id="html-to-pdf">
-  <p-timeline
-    *ngIf="user == 'solicitante'"
-    [value]="events1"
-    align="top"
-    layout="horizontal"
-  >
+  <p-timeline *ngIf="user == 'solicitante'" [value]="events1" align="top" layout="horizontal">
     <ng-template pTemplate="marker" let-event>
-      <span
-        class="custom-marker shadow-2"
-        [style.backgroundColor]="event.color"
-      >
+      <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
         <i [ngClass]="event.icon"></i>
       </span>
     </ng-template>
@@ -27,15 +19,11 @@
     <span>
       <div class="d-flex align-items-center justify-content-between">
         <a [href]="['http://localhost:8081/demanda/pdf/' + dadosDemanda?.codigoDemanda]">
-          <i  class="bi bi-download me-3" style="font-size: 25px;"></i>
-          
+          <i class="bi bi-download me-3" style="font-size: 25px;"></i>
+
         </a>
-      <img
-        style="width: 60px"
-        src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png"
-        alt=""
-      />
-    </div>
+        <img style="width: 60px" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt="" />
+      </div>
     </span>
   </p>
 
@@ -45,24 +33,19 @@
       styleClass="custombar1"
     >
       <h4 mat-dialog-title class="d-flex justify-content-between">
-        <span
-          ><b >SOLICITANTE: </b
-          >{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span
-        >
+        <span><b>SOLICITANTE: </b>{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span>
         <span><b>DATA:</b> {{ dadosDemanda?.inicioExDemanda }}</span>
       </h4>
       <h4>
         <b>DEPARTAMENTO:</b>
         {{
-          dadosDemanda?.solicitanteDemanda?.departamentoUsuario
-            ?.nomeDepartamento
+        dadosDemanda?.solicitanteDemanda?.departamentoUsuario
+        ?.nomeDepartamento
         }}
       </h4>
       <h4 class="d-flex justify-content-center">
-        <b
-          >{{ dadosDemanda?.tituloDemanda }} –
-          {{ dadosDemanda?.codigoDemanda }}</b
-        >
+        <b>{{ dadosDemanda?.tituloDemanda }} –
+          {{ dadosDemanda?.codigoDemanda }}</b>
       </h4>
       <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 

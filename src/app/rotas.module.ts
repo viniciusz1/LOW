@@ -45,10 +45,6 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
             component: TelaClassificarDemandaComponent
           },
           {
-            path: 'calendario',
-            component: TelaCalendarioComponent
-          },
-          {
             path: 'rascunhos',
             component: TelaInicialComponent
           },
@@ -68,11 +64,6 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
           {
             path: 'proposta/:codigoDemanda',
             component: TelaCorridaComponent
-          },
-          {
-            path: 'sidebar',
-            component: SidebarDemandaComponent
-
           },
           {
             path: 'reunioes',

@@ -34,10 +34,10 @@
     >
       <h4 mat-dialog-title class="d-flex justify-content-between">
         <span><b>SOLICITANTE: </b>{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span>
-        <span><b>DATA:</b> {{ dadosDemanda?.inicioExDemanda }}</span>
+        <span><b>DATA: </b> {{ dadosDemanda?.inicioExDemandaProposta }}</span>
       </h4>
       <h4>
-        <b>DEPARTAMENTO:</b>
+        <b>DEPARTAMENTO: </b>
         {{
         dadosDemanda?.solicitanteDemanda?.departamentoUsuario
         ?.nomeDepartamento
@@ -49,22 +49,22 @@
       </h4>
       <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 
-      <h4><b>Objetivo:</b></h4>
+      <h4><b>Objetivo: </b></h4>
       <p>
         {{ dadosDemanda?.objetivoDemanda }}
       </p>
 
-      <h4><b>Situação Atual:</b></h4>
+      <h4><b>Situação Atual: </b></h4>
       <p>
         {{ dadosDemanda?.situacaoAtualDemanda }}
       </p>
 
       <h4>
-        <b>Beneficio Real:</b
+        <b>Beneficio Real: </b
         >{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }} mensais
       </h4>
       <p>
-        <b>Memória de cálculo do benefício real:</b>
+        <b>Memória de cálculo do benefício real: </b>
       </p>
       <ul>
         <li>
@@ -72,11 +72,11 @@
         </li>
       </ul>
       <h4>
-        <b>Beneficio Potencial:</b
+        <b>Beneficio Potencial: </b
         >{{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }} mensais
       </h4>
       <p>
-        <b>Memória de cálculo do benefício potencial:</b>
+        <b>Memória de cálculo do benefício potencial: </b>
       </p>
       <ul>
         <li>
@@ -86,7 +86,7 @@
         </li>
       </ul>
       <h4>
-        <b>Beneficio Qualitativo:</b>
+        <b>Beneficio Qualitativo: </b>
       </h4>
       <ul>
         <li>
@@ -99,26 +99,31 @@
       </p>
       <div class="fazer ng-if"
         *ngIf="dadosDemanda?.statusDemanda == 'ASSESSMENT' || dadosDemanda?.statusDemanda == 'BUSINESS_CASE'">
-        <h4><b>Escopo do Projeto:</b></h4>
+        <h4><b>Escopo do Projeto: </b></h4>
 
         {{dadosDemanda?.escopoDemanda}}
         <h4>
-          <b>Resultados Esperados (Qualitativos):</b>
+          <b>Resultados Esperados (Qualitativos): </b>
           {{dadosDemanda?.beneficioQualitativoDemanda}}
         </h4>
         <h4>
-          <b>Resultados Esperados (Ganhos
-            potenciais)</b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
+          <b>Resultados Esperados (Ganhos potenciais): </b>
+          {{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
           {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
         </h4>
         
-        <p><b>Custos totais do projeto:</b>
-          <br>
-          Total despesas recursos externos (Desembolso): R$30.000,00
-          <br>
-          Total despesa recursos internos: R$20.000,00
+        <!-- <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
+          <b >
+            Custos totais do projeto: R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}</b> 
+          <span *ngIf="calcularDados.tipoDespesaRecurso == 'externo'">
+          <br> Total despesas recursos externos (Desembolso): R$30.000,00 </span>
+          <span *ngIf="calcularDados.tipoDespesaRecurso == 'interno'">
+          <br> Total despesa recursos internos: R$20.000,00</span>
+        </p> -->
+        <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
+          <b >
+            Custos totais do projeto:</b>  R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}
         </p>
-
         <table class="table">
           <thead>
             <tr>
@@ -144,8 +149,8 @@
                 {{itemRecurso.perfilDespesaRecurso}}
               </td>
               <td>
-                <p *ngFor="let centroCustoPagante of itemRecurso.centroDeCustoRecurso">
-                  {{centroCustoPagante}}: {{itemRecurso.porcentagemCustoRecurso}}
+                <p *ngFor="let centroCustoPagante of itemRecurso.centroCustoRecurso">
+                  {{centroCustoPagante.nomeCentroCusto}}: {{centroCustoPagante.porcentagemCentroCusto}}% 
                 </p>
               </td>
               <td>
@@ -160,23 +165,20 @@
             </tr>
           </tbody>
         </table>
+         
         <p>
           <b>
-            Período de execução:
+            Período de execução: 
           </b>
-          {{dadosDemanda?.inicioExDemanda}} à {{dadosDemanda?.fimExDemanda}}
+          {{dadosDemanda?.inicioExDemandaProposta}} à {{dadosDemanda?.fimExDemandaProposta}}
         </p>
         <p>
           <b>
-            Payback:
-          </b> {{dadosDemanda?.paybackSimplesDemanda}}
+            Payback: 
+          </b> {{dadosDemanda?.paybackProposta}}
         </p>
       </div>
-      <p>
-        <b>Frequência de uso do sistema:</b
-        >{{ dadosDemanda?.frequenciaDeUsoDemanda }}
-      </p>
-      <h4><b>DOCUMENTOS:</b>
+      <h4><b>DOCUMENTOS: </b>
         <a *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" role="button" (click)="download(arquivo)">
           {{ arquivo.nomeArquivo }}
         </a>

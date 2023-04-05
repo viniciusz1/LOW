@@ -1,3 +1,4 @@
+import { CentroCusto } from "./centro-custo.model";
 import { TipoDespesa } from "./tipoDespesa.enum";
 
 export interface Recurso {
@@ -8,6 +9,5 @@ export interface Recurso {
     quantidadeHorasRecurso: number,
     valorHoraRecurso: number,
     periodoExMesesRecurso: number,
-    porcentagemCustoRecurso: [],
-    centroDeCustoRecurso: []
+    centroCustoRecurso: CentroCusto[]
 }

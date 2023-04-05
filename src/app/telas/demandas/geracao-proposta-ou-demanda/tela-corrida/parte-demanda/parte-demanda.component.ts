@@ -1,10 +1,8 @@
 
 import { DemandaService } from './../../../../../services/demanda.service';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
-import { Editor, Toolbar, Validators } from 'ngx-editor';
-import { FormControl, FormGroup } from '@angular/forms';
-import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-parte-demanda',
@@ -63,11 +61,10 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
       this.listaFiles = arquivos
     })
   }
+
   uploadDocumentos(event: any) {
     this.demandaService.arquivos = event['files'] as File[];
   }
-
-
 
   removerCentroDeCusto(index: number) {
     this.demandaService.removeCenterOfCost(index);

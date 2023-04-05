@@ -93,6 +93,214 @@
           {{ dadosDemanda?.beneficioQualitativoDemanda }}
         </li>
       </ul>
+      <p><b>Frequência de uso do sistema: </b>{{dadosDemanda?.frequenciaDeUsoDemanda}}</p>
+      <div class="fazer ng-if"
+        *ngIf="dadosDemanda?.statusDemanda == 'ASSESSMENT' || dadosDemanda?.statusDemanda == 'BUSINESS_CASE'">
+        <h4><b>Escopo do Projeto:</b></h4>
+
+        {{dadosDemanda?.escopoDemanda}}
+        <h4>
+          <b>Resultados Esperados (Qualitativos):</b>
+          {{dadosDemanda?.beneficioQualitativoDemanda}}
+        </h4>
+        <h4>
+          <b>Resultados Esperados (Ganhos
+            potenciais)</b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
+          {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
+        </h4>
+        <p><b>Custos totais do projeto: </b>
+          <br>
+          Total despesas recursos externos (Desembolso): R$30.000,00
+          <br>
+          Total despesa recursos internos: R$20.000,00
+        </p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Despesas (Desembolso)</th>
+              <th scope="col">Esforço</th>
+              <th scope="col">Valor total</th>
+              <th scope="col">CC Pagante</th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Investimentos/ recorrentes</th>
+              <th scope="col">Licenças</th>
+              <th scope="col">Valor Unit</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Recursos Internos (Sem Desembolso)</th>
+              <th scope="col">Esforço</th>
+              <th scope="col">Valor total</th>
+              <th scope="col">CC Pagante</th>
+            </tr>
+          </thead>
+
+          <tbody class="table-group-divider">
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Analista Funcional SAP SD
+              </td>
+              <td>
+                100h
+              </td>
+              <td>
+                R$ 10.000,00
+              </td>
+              <td>
+                10111000 – 50%
+                10102000 – 50%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <b>
+            Período de execução:
+          </b>
+          {{dadosDemanda?.inicioExDemanda}} à {{dadosDemanda?.fimExDemanda}}
+        </p>
+        <p>
+          <b>
+            Payback:
+          </b> {{dadosDemanda?.paybackSimplesDemanda}}
+        </p>
+      </div>
       <p>
         <b>Frequência de uso do sistema:</b
         >{{ dadosDemanda?.frequenciaDeUsoDemanda }}

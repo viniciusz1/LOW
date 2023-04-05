@@ -4,6 +4,7 @@ import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
 import { Injectable } from '@angular/core';
 import { path } from './path/rota-api';
 import { Usuario } from '../models/usuario.model';
+import { UserDetails } from '../models/userDetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,9 @@ export class UsuarioService {
     } catch (err) {
       return 0
     }
+  }
+  verificarTokenUserDetailsReturn(){
+    return this.http.get<UserDetails>(path + "login/verify-token")
   }
 
   setUser(usuario: Usuario) {

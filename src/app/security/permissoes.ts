@@ -1,54 +1,54 @@
 export let PermissoesDeRotas = [
     {
-        path: 'tela-inicial',
+        path: '/tela-inicial',
         authorities: ["*"]
     },
     {
-        path: 'classificar-demanda/:codigoDemanda',
+        path: '/tela-inicial/classificar-demanda',
         authorities: ["Analista", "GestorTI"]
     },
     {
-        path: 'rascunhos',
+        path: '/tela-inicial/rascunhos',
         authorities: ["*"]
     },
     {
-        path: 'chat',
+        path: '/tela-inicial/chat',
         authorities: ["*"]
     },
     {
-        path: 'demanda',
+        path: '/tela-inicial/demanda',
         authorities: ["*"]
     },
     {
-        path: 'reformular-demanda/:codigoDemanda',
+        path: '/tela-inicial/reformular-demanda',
         authorities: ["*"]
     },
     {
-        path: 'proposta/:codigoDemanda',
+        path: '/tela-inicial/proposta',
         authorities: ["Analista", "GestorTI"]
     },
     {
-        path: 'reunioes',
+        path: '/tela-inicial/reunioes',
         authorities: ["Analista", "GestorTI"]
     },
     {
-        path: 'ver-reuniao/:codigoReuniao',
+        path: '/tela-inicial/ver-reuniao',
         authorities: ["Analista", "GestorTI"]
     },
     {
-        path: 'configuracoes/perfil',
+        path: '/tela-inicial/configuracoes/perfil',
         authorities: ["*"]
     },
     {
-        path: 'configuracoes/layout',
+        path: '/tela-inicial/configuracoes/layout',
         authorities: ["*"]
     },
     {
-        path: 'configuracoes/sugestoes',
+        path: '/tela-inicial/configuracoes/sugestoes',
         authorities: ["*"]
     },
     {
-        path: 'configuracoes/ajuda',
+        path: '/tela-inicial/configuracoes/ajuda',
         authorities: ["*"]
     }
 ]

@@ -57,9 +57,8 @@ export class ModalCriarReuniaoComponent implements OnInit {
       comissaoReuniao: this.comissaoSelecionada,
       propostasReuniao: this.listaDemandasEscolhidas
     }
-    console.log(reuniao)
     this.reuniaoService.postReuniao(reuniao).subscribe(e => {
-      this.router.navigate(['/tela-inicial/ver-pauta/' + e.codigoReuniao])
+      this.router.navigate(['/tela-inicial/reunioes'])
       this.dialogRef.close()
     })
   }

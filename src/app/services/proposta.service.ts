@@ -108,6 +108,7 @@ export class PropostaService {
     }
     
     const demandaEPropostaJuntos = Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value);
+    console.log(demandaEPropostaJuntos)
     propostaFormData.append('proposta', JSON.stringify(demandaEPropostaJuntos));
 
     this.demandaService.getArquivos.map((item) =>

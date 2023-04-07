@@ -1,5 +1,5 @@
 <div id="html-to-pdf">
-  <p-timeline *ngIf="user == 'solicitante'" [value]="events1" align="top" layout="horizontal">
+  <p-timeline *ngIf="showTimeline" [value]="timeline" align="top" layout="horizontal">
     <ng-template pTemplate="marker" let-event>
       <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
         <i [ngClass]="event.icon"></i>
@@ -193,14 +193,14 @@
     <div>
       <button
         class="btn btn-danger me-2"
-        *ngIf="user == 'gerente'"
+        *ngIf="showbotoesAprovarDemanda"
         (click)="openModalReprovacao()"
       >
         Reprovar demanda
       </button>
       <button
         class="btn btn-primary"
-        *ngIf="user == 'gerente'"
+        *ngIf="showbotoesAprovarDemanda"
         (click)="enviarDecisao(1)"
       >
         Aprovar demanda

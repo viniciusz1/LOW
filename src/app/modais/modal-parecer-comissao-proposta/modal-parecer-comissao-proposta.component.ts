@@ -1,8 +1,8 @@
 import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { ModalPropostaDocumentoComponent } from './../modal-proposta-documento/modal-proposta-documento.component';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 
@@ -15,8 +15,8 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
 
   constructor(
 
-    @Inject(DIALOG_DATA) public data: { demanda: Demanda, statusReuniao: StatusReuniao },
-    public dialogRef: DialogRef<ModalParecerComissaoPropostaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { demanda: Demanda, statusReuniao: StatusReuniao },
+    public dialogRef: MatDialogRef<ModalParecerComissaoPropostaComponent>,
     private matDialog: MatDialog,
     private reuniaoService: ReuniaoService
 
@@ -86,7 +86,7 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
       this.reuniaoService.enviarParecerComissao({ tipoAtaProposta: this.tipoAtaSelecionada, parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.demanda.codigoDemanda?.toString())
         .subscribe({
           next: e => {
-            this.dialogRef.close()
+            this.dialogRef.close(e)
           },
           error: err => {
             console.log(err)

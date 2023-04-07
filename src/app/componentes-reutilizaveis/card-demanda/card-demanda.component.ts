@@ -15,6 +15,7 @@ import { Route, Router } from '@angular/router';
 export class CardDemandaComponent implements OnInit {
   @Output() abrirModalMotivoReprovacao = new EventEmitter<Demanda>();
   @Output() abrirModalAvaliarDemanda = new EventEmitter();
+  @Output() abrirModalParecerComissao = new EventEmitter<Demanda>();
   @Output() verDocumentoProposta = new EventEmitter<Demanda>();
   @Output() clicouEmExcluir = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
@@ -119,7 +120,9 @@ export class CardDemandaComponent implements OnInit {
       this.textoExibidoEmBotaoDependendoRota?.rota == 'ver documento'
     ) {
       this.verDocumentoProposta.emit(this.dadosDemada);
-    } else {
+    } else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'parecer comissao'){
+      this.abrirModalParecerComissao.emit(this.dadosDemada) 
+    }else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
@@ -155,7 +158,7 @@ export class CardDemandaComponent implements OnInit {
       return true;
     } else if (this.exibirBotaoParecerComissao) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
+        rota: 'parecer comissao',
         texto: 'Parecer Comissao',
       };
       return true;

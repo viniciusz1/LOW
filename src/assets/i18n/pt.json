@@ -16,21 +16,14 @@
       "modal-b-nao": "Não",
       "modal-b-reformular": "Reformular Demanda",
       "modal-b-ok": "Ok"
-    },
-    "marcar-reuniao": {
-      "titulo": "Marcar Reunião",
-      "demandas": "Demandas",
-      "arraste": "Arraste as Demandas para este campo!",
-      "data-hora": "Data e Hora da Reunião:",
-      "p-data-hora": "Clique Aqui",
-      "comissao": "Selecione a Comissão da Reunião:",
-      "p-comissao": "Selecione a Comissão",
-      "b-marcar": "Marcar Reunião"
-    },
+    },  
     "tela-reunioes": {
       "marcar": "Marcar Reunião",
       "calendario": "Ver em Calendario",
-      "ordenar": "Ordenar"
+      "ordenar": "Ordenar",
+      "modal-b-sim": "Sim",
+      "modal-b-nao": "Não",
+      "modal-b-ok": "Ok"
     },
     "filtro-reunioes": {
       "comissao": "Comissao",
@@ -68,9 +61,11 @@
     "configuracoes-layout": {
       "titulo": "Layout",
       "subtitulo": "CONFIGURAÇÕES GERAIS DE LAYOUT",
+      "padrao":"Padrão (Claro)",
+      "preto":"Preto",
       "temas": "Temas",
       "fonte": "Fonte",
-      "tamanho": "Tamanho"
+      "tamanho": "Tamanho da Fonte"
     },
     "configuracoes-sugestoes": {
       "titulo": "Sugestões",
@@ -88,7 +83,8 @@
       "suprir-desc2": "Nos envie uma mensagem que assim que possível será respondido...",
       "descricao": "Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento, nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:",
       "p-input": "Escreva aqui sua duvida:",
-      "b-enviar": "Enviar"
+      "b-enviar": "Enviar",
+      "b-baixar":"Baixar"
     },
     "tutorial": {
       "t1": {
@@ -135,12 +131,13 @@
         "titulo": "Filtrar Demandas",
         "desc": "Tenha uma visão mais ampla com nosso calendário"
       },
-      "login": {
+      "tela-login": {
+        "login":"Login",
         "usuario": "Usuario",
         "senha": "Senha",
-        "lembra": "Lembrar-me",
-        "esqueceu": "Esqueceu a senha?",
-        "entrar": "Entrar"
+        "lembrar-senha": "Lembrar-me",
+        "esqueceu-senha": "Esqueceu a senha?",
+        "b-entrar": "Entrar"
       },
       "filtro-demandas": {
         "titulo": "Titulo",
@@ -216,6 +213,7 @@
       "periodo-execucao-demanda": "Período de Execução da Demanda:",
       "payback-simples": "Payback Simples:",
       "responsaveis-negocio": "Responsáveis pelo Negócio:",
+      "selecione-status":"Selecione o status para direcionar a demanda:",
       "p-prazo-elaboracao": "Clique para Agendar",
       "p-recurso-necessario": "Ex: Programador Back-end",
       "p-tipo-despesa": "Selecione o Tipo",

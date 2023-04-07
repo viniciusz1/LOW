@@ -59,7 +59,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
         this.timeline[0].color == "#00579D"
         this.timeline[1].color == "#00579D"
       }
-      
+
     }
   }
   enviarDecisao(decisao: number) {

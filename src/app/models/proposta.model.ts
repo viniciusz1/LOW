@@ -14,5 +14,4 @@ export interface Proposta {
     demandaAnalistaProposta: DemandaAnalista,
     recursosProposta?: Recurso[]
     escopoProposta?: string
-
 }

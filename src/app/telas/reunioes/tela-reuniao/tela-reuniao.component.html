@@ -11,7 +11,7 @@
               [stepContentParams]="{ texto: textoTutorial[8] }" style="font-size: 1rem; word-wrap: break-word;"
               (click)="openModalCriarReuniao()" class="btn btn-primary">
               <i class="bi bi-people me-2"></i>
-              Marcar Reunião
+              {{ "telas.tela-reunioes.marcar" | translate }}
             </button>
           </div>
           <!-- [routerLink]="'/tela-inicial/calendario'" -->
@@ -19,7 +19,7 @@
             <button joyrideStep="dez" [title]="'Filtrar Demandas'" [stepContent]="customContent"
               [stepContentParams]="{ texto: textoTutorial[9] }" style="font-size: 1rem; word-wrap: break-word;"
               class="btn btn-primary ms-3" (click)="openCalendario()">
-              <i class="bi bi-calendar-week me-2"></i>Ver em calendário
+              <i class="bi bi-calendar-week me-2"></i> {{ "telas.tela-reunioes.calendario" | translate }}
             </button>
           </div>
             <p-dropdown class="ms-3" [options]="opcoesOrdenacao" [(ngModel)]="ordenarSelect" placeholder="Ordenar"
@@ -37,13 +37,13 @@
         <ng-template pTemplate="footer">
           <button *ngIf="!mostrarBotaoModal" type="button" (click)="cd.reject()" class="btn btn-outline-danger">
             <i class="pi pi-times me-2"></i>
-            Não
+            {{ "telas.tela-reunioes.modal-b-nao" | translate }}
           </button>
           <button *ngIf="!mostrarBotaoModal" type="button" class="btn btn-danger" (click)="cd.accept()">
-            <i class="pi pi-check me-2"></i>Sim</button>
+            <i class="pi pi-check me-2"></i>{{ "telas.tela-reunioes.modal-b-sim" | translate }}</button>
           <button *ngIf="mostrarBotaoModal" type="button" class="btn btn-outline-primary" (click)="cd.accept()">
             <i class="pi pi-check me-2"></i>
-            Ok
+            {{ "telas.tela-reunioes.modal-b-ok" | translate }}
           </button>
         </ng-template>
       </p-confirmDialog>

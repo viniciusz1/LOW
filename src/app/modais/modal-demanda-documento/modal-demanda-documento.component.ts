@@ -67,6 +67,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   events2: any[] = [];
 
   ngOnInit() {
+    console.log(this.data);
     this.events1 = [
       {
         status: 'Reserva',

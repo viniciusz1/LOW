@@ -34,10 +34,10 @@
     >
       <h4 mat-dialog-title class="d-flex justify-content-between">
         <span><b>SOLICITANTE: </b>{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span>
-        <span><b>DATA:</b> {{ dadosDemanda?.inicioExDemanda }}</span>
+        <span><b>DATA: </b> {{ dadosDemanda?.inicioExDemandaProposta }}</span>
       </h4>
       <h4>
-        <b>DEPARTAMENTO:</b>
+        <b>DEPARTAMENTO: </b>
         {{
         dadosDemanda?.solicitanteDemanda?.departamentoUsuario
         ?.nomeDepartamento
@@ -49,22 +49,22 @@
       </h4>
       <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 
-      <h4><b>Objetivo:</b></h4>
+      <h4><b>Objetivo: </b></h4>
       <p>
         {{ dadosDemanda?.objetivoDemanda }}
       </p>
 
-      <h4><b>Situação Atual:</b></h4>
+      <h4><b>Situação Atual: </b></h4>
       <p>
         {{ dadosDemanda?.situacaoAtualDemanda }}
       </p>
 
       <h4>
-        <b>Beneficio Real:</b
+        <b>Beneficio Real: </b
         >{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }} mensais
       </h4>
       <p>
-        <b>Memória de cálculo do benefício real:</b>
+        <b>Memória de cálculo do benefício real: </b>
       </p>
       <ul>
         <li>
@@ -72,11 +72,11 @@
         </li>
       </ul>
       <h4>
-        <b>Beneficio Potencial:</b
+        <b>Beneficio Potencial: </b
         >{{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }} mensais
       </h4>
       <p>
-        <b>Memória de cálculo do benefício potencial:</b>
+        <b>Memória de cálculo do benefício potencial: </b>
       </p>
       <ul>
         <li>
@@ -86,226 +86,99 @@
         </li>
       </ul>
       <h4>
-        <b>Beneficio Qualitativo:</b>
+        <b>Beneficio Qualitativo: </b>
       </h4>
       <ul>
         <li>
           {{ dadosDemanda?.beneficioQualitativoDemanda }}
         </li>
       </ul>
-      <p><b>Frequência de uso do sistema: </b>{{dadosDemanda?.frequenciaDeUsoDemanda}}</p>
+      <p>
+        <b>Frequência de uso do sistema: </b>
+        {{dadosDemanda?.frequenciaDeUsoDemanda}}
+      </p>
       <div class="fazer ng-if"
         *ngIf="dadosDemanda?.statusDemanda == 'ASSESSMENT' || dadosDemanda?.statusDemanda == 'BUSINESS_CASE'">
-        <h4><b>Escopo do Projeto:</b></h4>
+        <h4><b>Escopo do Projeto: </b></h4>
 
         {{dadosDemanda?.escopoDemanda}}
         <h4>
-          <b>Resultados Esperados (Qualitativos):</b>
+          <b>Resultados Esperados (Qualitativos): </b>
           {{dadosDemanda?.beneficioQualitativoDemanda}}
         </h4>
         <h4>
-          <b>Resultados Esperados (Ganhos
-            potenciais)</b>{{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
+          <b>Resultados Esperados (Ganhos potenciais): </b>
+          {{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
           {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
         </h4>
-        <p><b>Custos totais do projeto: </b>
-          <br>
-          Total despesas recursos externos (Desembolso): R$30.000,00
-          <br>
-          Total despesa recursos internos: R$20.000,00
+        
+        <!-- <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
+          <b >
+            Custos totais do projeto: R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}</b> 
+          <span *ngIf="calcularDados.tipoDespesaRecurso == 'externo'">
+          <br> Total despesas recursos externos (Desembolso): R$30.000,00 </span>
+          <span *ngIf="calcularDados.tipoDespesaRecurso == 'interno'">
+          <br> Total despesa recursos internos: R$20.000,00</span>
+        </p> -->
+        <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
+          <b >
+            Custos totais do projeto:</b>  R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}
         </p>
-
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Despesas (Desembolso)</th>
-              <th scope="col">Esforço</th>
-              <th scope="col">Valor total</th>
+              <th scope="col">Recursos Necessários</th>
+              <th scope="col">Tipo da Despesa</th>
+              <th scope="col">Perfil da Despesa</th>
               <th scope="col">CC Pagante</th>
+              <th scope="col">Qtd de Horas</th>
+              <th scope="col">Valor da Hora</th>
+              <th scope="col">Período de Execução (Mensal)</th>
             </tr>
           </thead>
 
-          <tbody class="table-group-divider">
+          <tbody *ngFor="let itemRecurso of dadosDemanda?.recursosProposta" class="table-group-divider">
             <tr>
               <td>
-                Analista Funcional SAP SD
+                {{itemRecurso.nomeRecurso}}
               </td>
               <td>
-                100h
+                {{itemRecurso.tipoDespesaRecurso}}
               </td>
               <td>
-                R$ 10.000,00
+                {{itemRecurso.perfilDespesaRecurso}}
               </td>
               <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
+                <p *ngFor="let centroCustoPagante of itemRecurso.centroCustoRecurso">
+                  {{centroCustoPagante.nomeCentroCusto}}: {{centroCustoPagante.porcentagemCentroCusto}}% 
+                </p>
               </td>
               <td>
-                100h
+                {{itemRecurso.quantidadeHorasRecurso}}
               </td>
               <td>
-                R$ 10.000,00
+                {{itemRecurso.valorHoraRecurso}}
               </td>
               <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
+                {{itemRecurso.periodoExMesesRecurso}}
               </td>
             </tr>
           </tbody>
         </table>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Investimentos/ recorrentes</th>
-              <th scope="col">Licenças</th>
-              <th scope="col">Valor Unit</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-
-          <tbody class="table-group-divider">
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Recursos Internos (Sem Desembolso)</th>
-              <th scope="col">Esforço</th>
-              <th scope="col">Valor total</th>
-              <th scope="col">CC Pagante</th>
-            </tr>
-          </thead>
-
-          <tbody class="table-group-divider">
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Analista Funcional SAP SD
-              </td>
-              <td>
-                100h
-              </td>
-              <td>
-                R$ 10.000,00
-              </td>
-              <td>
-                10111000 – 50%
-                10102000 – 50%
-              </td>
-            </tr>
-          </tbody>
-        </table>
+         
         <p>
           <b>
-            Período de execução:
+            Período de execução: 
           </b>
-          {{dadosDemanda?.inicioExDemanda}} à {{dadosDemanda?.fimExDemanda}}
+          {{dadosDemanda?.inicioExDemandaProposta}} à {{dadosDemanda?.fimExDemandaProposta}}
         </p>
         <p>
           <b>
-            Payback:
-          </b> {{dadosDemanda?.paybackSimplesDemanda}}
+            Payback: 
+          </b> {{dadosDemanda?.paybackProposta}}
         </p>
       </div>
-      <p>
-        <b>Frequência de uso do sistema:</b
-        >{{ dadosDemanda?.frequenciaDeUsoDemanda }}
-      </p>
-      <h4><b>DOCUMENTOS:</b>
+      <h4><b>DOCUMENTOS: </b>
         <a *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" role="button" (click)="download(arquivo)">
           {{ arquivo.nomeArquivo }}
         </a>

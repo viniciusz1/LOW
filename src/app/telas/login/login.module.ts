@@ -4,6 +4,7 @@ import { TelaLoginComponent } from './tela-login/tela-login.component';
 import { ComponentesFixosModule } from 'src/app/componentes-fixos/componentes-fixos.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ComponentesFixosModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class LoginModule { }

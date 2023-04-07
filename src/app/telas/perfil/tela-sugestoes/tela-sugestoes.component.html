@@ -4,7 +4,7 @@
                 <div class="desc-incial"
                     style="display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
                     <h5 style="margin: 0px;">
-                        ENVIAR SUGESTÕES
+                        {{ "telas.configuracoes-sugestoes.subtitulo" | translate }}
                     </h5>
                 </div>
                 <div class="confDados" style="display: grid;
@@ -12,17 +12,16 @@
                 margin: 10px;">
                     <div class="caracteristica" style="margin-bottom: 1vh;">
                         <span style="font-size: 1.2rem;">
-                            Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento,
-                            nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:
+                            {{ "telas.configuracoes-sugestoes.descricao" | translate }}
                         </span>
                     </div>
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                             style="height: 200px"></textarea>
-                        <label for="floatingTextarea2">Escreva aqui sua sugestão...</label>
+                        <label for="floatingTextarea2">{{ "telas.configuracoes-sugestoes.p-input" | translate }}</label>
                     </div>
                     <div style="display: flex; justify-content: flex-end; margin-top: 1vh;">
-                        <button class="btn btn-primary">Enviar</button>
+                        <button class="btn btn-primary">{{ "telas.configuracoes-sugestoes.b-enviar" | translate }}</button>
                     </div>
                 </div>
             </div>

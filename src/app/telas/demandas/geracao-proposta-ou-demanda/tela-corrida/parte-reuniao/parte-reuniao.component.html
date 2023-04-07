@@ -1,5 +1,5 @@
 <form class="container" [formGroup]="formProposta" (onSubmit)="onSubmit()">
-  <h3 class="mt-4" spyTarget="proposta">Proposta</h3>
+  <h3 class="mt-4" spyTarget="proposta">{{ "telas.proposta.proposta" | translate }}</h3>
   <hr />
 
   <div class="campo" style="
@@ -12,7 +12,7 @@
       <div class="d-flex justify-content-between">
         <div class="titulo" style="display: grid" id="item-1-1">
           <div class="infos" style="display: flex; align-items: center; width: 28vw">
-            <label style="font-weight: 500" class="me-2" for="time">Prazo para elaboração da proposta:</label>
+            <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.prazo-elaboracao" | translate }}</label>
             <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
               pTooltip="Em quanto tempo a proposta ficará pronta?" tooltipPosition="top"></i>
           </div>
@@ -21,11 +21,11 @@
             placeholder="Clique para Agendar" formControlName="prazoProposta" [showTime]="true" [showSeconds]="true"
             inputId="time"></p-calendar>
           <small *ngIf="formProposta.controls.prazoProposta.errors && formProposta.controls.prazoProposta.touched"
-            id="username2-help" class="p-error block">Campo Obrigatório</small>
+            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
         <div class="titulo" style="display: grid; width: 32vw" id="item-1-1">
           <div class="infos" style="display: flex; align-items: center; width: 28vw">
-            <label style="font-weight: 500" class="me-2" for="time">Código PPM:</label>
+            <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.codigo-ppm" | translate }}</label>
             <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
               pTooltip="Qual o código do SAP?" tooltipPosition="top"></i>
           </div>
@@ -33,12 +33,12 @@
             [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.codigoPPMProposta.errors && formProposta.controls.codigoPPMProposta.touched}" />
           <small
             *ngIf="formProposta.controls.codigoPPMProposta.errors && formProposta.controls.codigoPPMProposta.touched"
-            id="username2-help" class="p-error block">Campo Obrigatório</small>
+            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
       </div>
       <div class="titulo" style="display: grid" id="item-1-1">
         <div class="infos" style="display: flex; align-items: center; width: 28vw">
-          <label style="font-weight: 500" class="me-2" for="time">Link Jira:</label>
+          <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.link-jira" | translate }}</label>
           <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
             pTooltip="Insira a URL que aparece ao topo da sua página do JIRA" tooltipPosition="top"></i>
         </div>
@@ -46,22 +46,22 @@
           pInputText class="input" formControlName="jiraProposta"
           [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.jiraProposta.errors && formProposta.controls.jiraProposta.touched}" />
         <small *ngIf="formProposta.controls.jiraProposta.errors && formProposta.controls.jiraProposta.touched"
-          id="username2-help" class="p-error block">Campo Obrigatório</small>
+          id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
     </div>
   </div>
-  <h3 class="mt-4" spyTarget="recursosTarget">Recursos</h3>
+  <h3 class="mt-4" spyTarget="recursosTarget">{{ "telas.proposta.recursos" | translate }}</h3>
   <hr />
   <p-table *ngIf="listaRecursos.length != 0" [value]="listaRecursos" [tableStyle]="{'min-width': '60rem'}">
     <ng-template pTemplate="header">
       <tr>
-        <th>Recurso Necessário</th>
-        <th>Tipo da despesa</th>
-        <th>Perfil da despesa</th>
-        <th>Centros de custos pagantes</th>
-        <th>Quantidade de horas</th>
-        <th>Valor da hora</th>
-        <th>Período de execução (Mensal)</th>
+        <th>{{ "telas.proposta.recurso-necessario" | translate }}</th>
+        <th>{{ "telas.proposta.tipo-despesa" | translate }}</th>
+        <th>{{ "telas.proposta.perfil-despesa" | translate }}</th>
+        <th>{{ "telas.proposta.centro-custo-pagante" | translate }}</th>
+        <th>{{ "telas.proposta.quantidade-horas" | translate }}</th>
+        <th>{{ "telas.proposta.valor-hora" | translate }}</th>
+        <th>{{ "telas.proposta.periodo-execucao" | translate }}</th>
         <th></th>
         <th></th>
       </tr>
@@ -88,7 +88,7 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <tr>
-        <td class="text-right">Custos Totais: {{ custosTotais | currency : "BRL" }}</td>
+        <td class="text-right">{{ "telas.proposta.custos-totais" | translate }} {{ custosTotais | currency : "BRL" }}</td>
       </tr>
     </ng-template>
   </p-table>
@@ -96,69 +96,69 @@
   <div [formGroup]="formRecursos">
     <div class="row">
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">Recurso Necessário:</label>
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.recurso-necessario" | translate }}:</label>
         <input placeholder="Ex: Programador Back-end" type="text" required="true" pInputText class="input"
           formControlName="nomeRecurso"
           [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.nomeRecurso.errors && formRecursos.controls.nomeRecurso.touched}" />
         <small *ngIf="formRecursos.controls.nomeRecurso.errors && formRecursos.controls.nomeRecurso.touched"
-          id="username2-help" class="p-error block">Campo Obrigatório</small>
+          id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">Tipo da despesa:</label>
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.tipo-despesa" | translate }}</label>
         <p-dropdown [options]="tipoDaDespesa" optionValue="value" optionLabel="tipo" [required]="true"
           placeholder="Selecione o Tipo" formControlName="tipoDespesaRecurso" [showClear]="true"
           [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.tipoDespesaRecurso.errors && formRecursos.controls.tipoDespesaRecurso.touched}"></p-dropdown>
         <small
           *ngIf="formRecursos.controls.tipoDespesaRecurso.errors && formRecursos.controls.tipoDespesaRecurso.touched"
-          id="username2-help" class="p-error block">Campo Obrigatório</small>
+          id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">Perfil da despesa:</label>
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.perfil-despesa" | translate }}:</label>
         <p-dropdown placeholder="Ex: Interna" type="text" [required]="true" [options]="perfilDaDespesa"
           optionValue="value" optionLabel="tipo" formControlName="perfilDespesaRecurso"
           [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.perfilDespesaRecurso.errors && formRecursos.controls.perfilDespesaRecurso.touched}"></p-dropdown>
         <small
           *ngIf="formRecursos.controls.perfilDespesaRecurso.errors && formRecursos.controls.perfilDespesaRecurso.touched"
-          id="username2-help" class="p-error block">Campo Obrigatório</small>
+          id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
     </div>
     <div class="row">
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">
-          Quantidade de horas</label>
+          {{ "telas.proposta.quantidade-horas" | translate }}</label>
         <div style="width: 100%; display: grid">
           <p-inputNumber placeholder="Ex: 220" type="text" class="input" [required]="true"
             formControlName="quantidadeHorasRecurso"
             [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.quantidadeHorasRecurso.errors && formRecursos.controls.quantidadeHorasRecurso.touched}"></p-inputNumber>
           <small
             *ngIf="formRecursos.controls.quantidadeHorasRecurso.errors && formRecursos.controls.quantidadeHorasRecurso.touched"
-            id="username2-help" class="p-error block">Campo Obrigatório</small>
+            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
       </div>
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:"> Valor da hora</label>
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.valor-hora" | translate }}</label>
         <div style="width: 100%; display: grid">
           <p-inputNumber placeholder="Ex: R$55,00" [required]="true" type="text" class="input"
             formControlName="valorHoraRecurso"
             [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.valorHoraRecurso.errors && formRecursos.controls.valorHoraRecurso.touched}"></p-inputNumber>
           <small *ngIf="formRecursos.controls.valorHoraRecurso.errors && formRecursos.controls.valorHoraRecurso.touched"
-            id="username2-help" class="p-error block">Campo Obrigatório</small>
+            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
       </div>
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">Período de execução (Mensal)</label>
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.periodo-execucao" | translate }}</label>
         <div style="width: 100%; display: grid">
           <p-inputNumber placeholder="Ex: 5" [required]="true" type="text" class="input"
             formControlName="periodoExMesesRecurso"
             [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.periodoExMesesRecurso.errors && formRecursos.controls.periodoExMesesRecurso.touched}"></p-inputNumber>
           <small
             *ngIf="formRecursos.controls.periodoExMesesRecurso.errors && formRecursos.controls.periodoExMesesRecurso.touched"
-            id="username2-help" class="p-error block">Campo Obrigatório</small>
+            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
       </div>
     </div>
     <div formArrayName="centroCustoRecurso" class="row align-items-center">
-      <label class="mt-1" for="Recurso Necessário:">Centros de Custo</label>
+      <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.centros-custo" | translate }}o</label>
       <div style="width: 50%; display: -webkit-box;">
         <div class="d-flex flex-column">
           <div *ngFor="let centroCusto of formRecursos.controls.centroCustoRecurso.controls; let i = index"
@@ -185,15 +185,15 @@
 
     <div class="">
       <button class="btn btn-primary mt-3" [disabled]="!formRecursos.valid" (click)="addRowRecurso()">
-        Adicionar Recurso
+        {{ "telas.proposta.adicionar-recurso" | translate }}
       </button>
     </div>
   </div>
-  <h3 class="mt-4" spyTarget="escopo">Escopo</h3>
+  <h3 class="mt-4" spyTarget="escopo">{{ "telas.proposta.escopo" | translate }}</h3>
   <hr />
   <div>
     <div class="infos" style="display: flex; align-items: center; width: 28vw">
-      <label style="font-weight: 500" class="me-2" for="time">Escopo da Demanda:</label>
+      <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.escopo-demanda" | translate }}</label>
       <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
         pTooltip="Defina e personalize a finalidade da sua proposta" tooltipPosition="top"></i>
     </div>
@@ -205,15 +205,15 @@
     </div>
     <small
       *ngIf="formProposta.controls.escopoDemandaProposta.errors && formProposta.controls.escopoDemandaProposta.touched"
-      id="username2-help" class="p-error block">Campo Obrigatório</small>
+      id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
   </div>
 
-  <h3 class="mt-4" spyTarget="dados finais">Dados finais</h3>
+  <h3 class="mt-4" spyTarget="dados finais">{{ "telas.proposta.dados-finais" | translate }}</h3>
   <hr />
   <div class="union" style="display: flex; justify-content: space-between">
     <div class="d-block">
       <div class="infos" style="display: flex; align-items: center; width: 28vw">
-        <label style="font-weight: 500" class="me-2" for="time">Período de Execução da Demanda:</label>
+        <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.periodo-execucao-demanda" | translate }}</label>
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Insira a data que irá iniciar sua proposta e data que irá finalizar sua proposta"
           tooltipPosition="top"></i>
@@ -224,7 +224,7 @@
             [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.inicioExDemandaProposta.errors && formProposta.controls.inicioExDemandaProposta.touched}"></p-calendar>
           <small
             *ngIf="formProposta.controls.inicioExDemandaProposta.errors && formProposta.controls.inicioExDemandaProposta.touched"
-            id="username2-help" class="p-error block">Campo Obrigatório</small>
+            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
         <div style="display: grid;">
           <p-calendar formControlName="fimExDemandaProposta" placeholder="Fim" dateFormat="dd/mm/yy"
@@ -232,14 +232,14 @@
             [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.fimExDemandaProposta.errors && formProposta.controls.fimExDemandaProposta.touched}"></p-calendar>
           <small
             *ngIf="formProposta.controls.fimExDemandaProposta.errors && formProposta.controls.fimExDemandaProposta.touched"
-            id="username2-help" class="p-error block">Campo Obrigatório</small>
+            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
       </div>
     </div>
 
     <div class="d-flex flex-column">
       <div class="infos" style="display: flex; align-items: center; width: 28vw">
-        <label style="font-weight: 500" class="me-2" for="time">Payback Simples:</label>
+        <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.payback-simples" | translate }}</label>
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Em reais, este é o retorno dos benefícios" tooltipPosition="top"></i>
       </div>
@@ -248,7 +248,7 @@
   </div>
 
   <div class="infos" style="display: flex; align-items: center; width: 28vw">
-    <label style="font-weight: 500" class="me-2" for="time">Responsáveis pelo Negócio:</label>
+    <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.responsaveis-negocio" | translate }}</label>
     <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
       pTooltip="Insira os responsáveis por suceder a proposta, validando-os por vírgulas ou acionando a tecla Enter"
       tooltipPosition="top"></i>
@@ -261,10 +261,10 @@
     [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched}">
   </p-chips>
   <small *ngIf="formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched"
-    id="username2-help" class="p-error block">Campo Obrigatório</small>
+    id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
   
     <div class="infos" style="display: flex; align-items: center; width: 28vw">
-    <label style="font-weight: 500" class="me-2" for="time">Selecione o status para direcionar a demanda:</label>
+    <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.selecione-status" | translate }}</label>
     <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
       pTooltip="Insira os responsáveis por suceder a proposta, validando-os por vírgulas ou acionando a tecla Enter"
       tooltipPosition="top"></i>

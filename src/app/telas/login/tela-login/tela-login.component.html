@@ -5,29 +5,29 @@
         <img src="../../../../assets/images/Frame 6 (2).jpg" class="low-shadow rounded" style="width: 35vw; min-width: 13vh;" alt="" srcset="">
         <div class="bloco low-shadow">
             <div class="d-flex justify-content-center">
-                <div class="titulo low-shadow">Login</div>
+                <div class="titulo low-shadow">{{ "telas.tela-login.login" | translate }}</div>
             </div>
             <div class="d-flex flex-column" style="margin-bottom: 3vh;">
                 <span class="p-float-label">
                     <input type="text" pInputText [(ngModel)]="usuario" class="inputs">
-                    <label>Usuario</label>
+                    <label>{{ "telas.tela-login.usuario" | translate }}</label>
                 </span>
             </div>
             <div class="d-flex flex-column" style="margin-bottom: 3vh;">
                 <span class="p-float-label">
                     <input type="password" pInputText [(ngModel)]="senha" class="inputs">
-                    <label>Senha</label>
+                    <label>{{ "telas.tela-login.senha" | translate }}</label>
                 </span>
             </div>
             <div class="d-flex mb-3 align-items-center justify-content-center">
                 <div class="me-3 d-flex align-items-center justify-content-center">
-                    <input type="checkbox" class="me-1"><label for="">Lembrar-me</label>
+                    <input type="checkbox" class="me-1"><label for="">{{ "telas.tela-login.lembrar-senha" | translate }}</label>
                 </div>
-                <a href="">Esqueceu a senha?</a>
+                <a href="">{{ "telas.tela-login.esqueceu-senha" | translate }}</a>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="low-shadow rounded" style="margin-top: 3vh;">
-                    <button class="btn btn-primary"  style="width: 8vw;" (click)="autenticar()">Entrar</button>
+                    <button class="btn btn-primary"  style="width: 8vw;" (click)="autenticar()">{{ "telas.tela-login.b-entrar" | translate }}</button>
                 </div>
             </div>
         </div>

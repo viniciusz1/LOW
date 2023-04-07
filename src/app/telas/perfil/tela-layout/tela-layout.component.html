@@ -4,7 +4,7 @@
                 <div class="desc-incial"
                     style="display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
                     <h5 style="margin: 0px;">
-                        CONFIGURAÇÕES GERAIS DE LAYOUT
+                        {{ "telas.configuracoes-layout.subtitulo" | translate }}
                     </h5>
                 </div>
                 <div class="confDados" style="margin: 10px;">
@@ -14,14 +14,14 @@
                                 <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
                                     <div class="caracteristica" style="margin-right: 10px;">
                                         <span>
-                                            Temas:
+                                            {{ "telas.configuracoes-layout.temas" | translate }}:
                                         </span>
                                     </div>
                                     <div class="nome-dado">
                                         <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <!-- <option selected>Selecione a opção:</option> -->
-                                            <option value="1">Padrão (Claro)</option>
-                                            <option value="2">Preto</option>
+                                            <option value="1">{{ "telas.configuracoes-layout.padrao" | translate }}</option>
+                                            <option value="2">{{ "telas.configuracoes-layout.preto" | translate }}</option>
                                           </select>
                                     </div>
                                 </div>
@@ -30,7 +30,7 @@
                                 <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
                                     <div class="caracteristica" style="margin-right: 10px;">
                                         <span>
-                                            Fonte:
+                                            {{ "telas.configuracoes-layout.fonte" | translate }}:
                                         </span>
                                     </div>
                                     <div class="nome-dado">
@@ -48,8 +48,7 @@
                                 <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
                                     <div class="caracteristica" style="margin-right: 10px;">
                                         <span>
-                                            Tamanho da Fonte:
-                                        </span>
+                                            {{ "telas.configuracoes-layout.tamanho" | translate }}:                                     </span>
                                     </div>
                                     <div class="nome-dado">
                                         <select #fontes (change)="setFontSize(fontes.value)" class="form-select form-select-sm" aria-label=".form-select-sm example">

@@ -72,7 +72,7 @@ serviceCalled = false;
   }
 
   teste() {
-    console.log(window.scrollY);
+    console.log(this.demandaService.getFormDemandaValid)    
   }
 
   tipoExibicaoTela() {

@@ -16,9 +16,9 @@ import { CentroCusto } from '../models/centro-custo.model';
 })
 export class DemandaService {
   public demandaForm = this.fb.group({
-    tituloDemanda: ['', [Validators.required]],
-    situacaoAtualDemanda: ['', [Validators.required]],
-    objetivoDemanda: ['', [Validators.required]],
+    tituloDemanda: ['', Validators.required],
+    situacaoAtualDemanda: [''],
+    objetivoDemanda: [''],
     beneficioRealDemanda: this.fb.group({
       moedaBeneficio: [''],
       memoriaDeCalculoBeneficio: [''],
@@ -30,7 +30,7 @@ export class DemandaService {
       valorBeneficio: [''],
     }),
     beneficioQualitativoDemanda: [''],
-    frequenciaDeUsoDemanda: ['', [Validators.required]],
+    frequenciaDeUsoDemanda: ['', Validators.required],
     solicitanteDemanda: {
       codigoUsuario: 0,
     },
@@ -38,6 +38,10 @@ export class DemandaService {
     centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
 
   });
+
+  public get getFormDemandaValid(){
+    return this.formEditorEspecial
+  }
 
   public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
 
@@ -60,8 +64,6 @@ export class DemandaService {
 
   reformularDemanda() {
 
-    console.log(this.formEditorEspecial.value.situacaoAtualDemanda)
-    console.log(this.formEditorEspecial.value.objetivoDemanda)
     this.demandaForm.patchValue({
       situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda,
@@ -283,8 +285,6 @@ export class DemandaService {
       situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda.replace('<br>', '<br />'),
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda.replace('<br>', '<br />')
     })
-    console.log("oi")
-    console.log(this.demandaForm.value)
   }
 
   postDemanda() {

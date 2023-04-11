@@ -30,9 +30,6 @@ import * as FileSaver from 'file-saver';
 
 
 export class TelaInicialComponent implements OnInit {
-  value8: any;
-  cities: any[] = [];
-
   constructor(
     public dialog: Dialog,
     private matDialog: MatDialog,
@@ -40,20 +37,13 @@ export class TelaInicialComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
   ) {
-    this.pesquisaAlterada.pipe(debounceTime(2000)).subscribe(() => {
+    this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
     });
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
     };
-    this.cities = [
-      { name: "New York", code: "NY" },
-      { name: "Rome", code: "RM" },
-      { name: "London", code: "LDN" },
-      { name: "Istanbul", code: "IST" },
-      { name: "Paris", code: "PRS" }
-    ];
   }
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
@@ -285,6 +275,17 @@ export class TelaInicialComponent implements OnInit {
         minWidth: '50vw',
         data: event,
       })
+      .afterClosed().subscribe({next: e => {
+        console.log(e)
+        let indice: number | undefined = -1
+        if (this.listaDemandas) {
+          indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+          console.log(indice)
+          if (indice !== -1) {
+            this.listaDemandas.splice(indice, 1, e);
+          }
+        }
+      }})
 
   }
   openModalHistorico(codigoDemanda: string) {

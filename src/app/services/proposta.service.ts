@@ -107,7 +107,7 @@ export class PropostaService {
       alert("Ocorreu um erro ao cadastrar: " + err);
     }
     
-    const demandaEPropostaJuntos = Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value);
+    const demandaEPropostaJuntos = Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value, this.demandaService.formEditorEspecial.value);
     console.log(demandaEPropostaJuntos)
     propostaFormData.append('proposta', JSON.stringify(demandaEPropostaJuntos));
 

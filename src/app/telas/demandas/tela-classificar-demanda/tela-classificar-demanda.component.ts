@@ -112,7 +112,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
         this.router.navigate(['/tela-inicial'])
       },
       error: err => {
-        alert(err)
+        alert(err.message)
       }
     });
   }

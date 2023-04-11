@@ -197,12 +197,17 @@
       <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
         pTooltip="Defina e personalize a finalidade da sua proposta" tooltipPosition="top"></i>
     </div>
+
     <div class="NgxEditor__Wrapper escopo-demanda"
       [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.escopoDemandaProposta.errors && formProposta.controls.escopoDemandaProposta.touched}">
       <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
       <ngx-editor [editor]="editor" formControlName="escopoDemandaProposta" placeholder="Escreva aqui...">
       </ngx-editor>
     </div>
+
+
+
+    
     <small
       *ngIf="formProposta.controls.escopoDemandaProposta.errors && formProposta.controls.escopoDemandaProposta.touched"
       id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
@@ -256,7 +261,7 @@
 
 
   <!-- formControlName="responsavelProposta" -->
-  <p-chips [(ngModel)]="values" styleClass="w-100" defaultLabel="Selecione os Responsaveis" optionLabel="nome"
+  <p-chips styleClass="w-100" defaultLabel="Selecione os Responsaveis" optionLabel="nome"
     display="chip" separator=","
     [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched}">
   </p-chips>

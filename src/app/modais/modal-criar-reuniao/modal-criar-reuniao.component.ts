@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../services/usuario.service';
 import { Router } from '@angular/router';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { FormBuilder } from '@angular/forms';
@@ -8,6 +9,7 @@ import { Reuniao } from 'src/app/models/reuniao.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-criar-reuniao',
@@ -17,13 +19,23 @@ import { ReuniaoService } from 'src/app/services/reuniao.service';
 export class ModalCriarReuniaoComponent implements OnInit {
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
-    public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
-    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<ModalCriarReuniaoComponent>,
     private demandaService: DemandaService,
     private reuniaoService: ReuniaoService,
+    private usuarioService: UsuarioService,
     private router: Router
   ) {
+    this.usuarioService.verificarTokenUserDetailsReturn()
+      .subscribe(
+        {
+          next: e => { 
+            // FAZER VERIFICAÇÃO DE QUEM PODE USAR
+          },
+          error: err => {
 
+          }
+        }
+      )
 
   }
 
@@ -32,15 +44,15 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   listaComissoes = [
-    {value: "CPVM", nome:"CPVM – Comissão de Processos de Vendas e Desenvolvimento de produtos"},
-    {value: "CPGCI", nome:"CPGCI – Comissão de Processos da Cadeia Integrada"},
-    {value: "CPGPR", nome:"CPGPR – Comissão de Processos de Gestão de Projetos"},
-    {value: "CGPN", nome:"CGPN – Comitê de Gestão de Processos de Negócio"},
-    {value: "CTI", nome:"CTI – Comitê de TI"},
-    {value: "CWBS", nome:"CWBS – Comitê WEG Business Services"},
-    {value: "DTI", nome:"DTI – Diretoria de TI"},
+    { value: "CPVM", nome: "CPVM – Comissão de Processos de Vendas e Desenvolvimento de produtos" },
+    { value: "CPGCI", nome: "CPGCI – Comissão de Processos da Cadeia Integrada" },
+    { value: "CPGPR", nome: "CPGPR – Comissão de Processos de Gestão de Projetos" },
+    { value: "CGPN", nome: "CGPN – Comitê de Gestão de Processos de Negócio" },
+    { value: "CTI", nome: "CTI – Comitê de TI" },
+    { value: "CWBS", nome: "CWBS – Comitê WEG Business Services" },
+    { value: "DTI", nome: "DTI – Diretoria de TI" },
   ]
-    
+
 
   listaReunioes: Reuniao[] = [];
   listaDemandasEscolhidas: Demanda[] = [];
@@ -57,8 +69,9 @@ export class ModalCriarReuniaoComponent implements OnInit {
       comissaoReuniao: this.comissaoSelecionada,
       propostasReuniao: this.listaDemandasEscolhidas
     }
+    console.log(reuniao)
     this.reuniaoService.postReuniao(reuniao).subscribe(e => {
-      this.router.navigate(['/tela-inicial/reunioes'])
+      this.router.navigate(['/tela-inicial/ver-pauta/' + e.codigoReuniao])
       this.dialogRef.close()
     })
   }

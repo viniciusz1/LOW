@@ -65,6 +65,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
         background_color: 'Background Color',
 
         // popups, forms, others...
+        
         url: 'URL',
         text: 'Text',
         openInNewTab: 'Open in new tab',

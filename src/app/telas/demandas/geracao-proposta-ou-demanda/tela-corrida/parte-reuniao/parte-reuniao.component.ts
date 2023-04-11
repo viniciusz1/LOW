@@ -31,7 +31,6 @@ export class ParteReuniaoComponent implements OnInit {
   formProposta = this.propostaService.formProposta;
   formRecursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
-  values: string[] = [];
 
   statusDemanda = [
     {
@@ -141,10 +140,6 @@ export class ParteReuniaoComponent implements OnInit {
     this.propostaService.removeCenterOfCost(index);
   }
 
-
-
-
-  teste: string[] = []
   ngOnInit(): void {
   }
 }

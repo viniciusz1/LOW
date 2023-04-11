@@ -35,7 +35,6 @@ export class DemandaService {
       codigoUsuario: 0,
     },
     codigoDemanda: [''],
-    version: [0],
     centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
 
   });
@@ -45,6 +44,7 @@ export class DemandaService {
   formEditorEspecial = new FormGroup({
     situacaoAtualDemanda: new FormControl('', Validators.required),
     objetivoDemanda: new FormControl('', Validators.required),
+    version: new FormControl(0),
   });
 
   createCentroCusto(cc: CentroCusto | undefined): FormGroup {
@@ -101,13 +101,14 @@ export class DemandaService {
       frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
       centroCustosDemanda: demanda.centroCustosDemanda,
       codigoDemanda: demanda.codigoDemanda, 
-      version: demanda.version
     })
+
    
     
     this.formEditorEspecial.patchValue({
       situacaoAtualDemanda: demanda.situacaoAtualDemanda,
-      objetivoDemanda: demanda.objetivoDemanda
+      objetivoDemanda: demanda.objetivoDemanda,
+      version: demanda.version
     })
     
     this.listaArquivosDemanda.emit(this.saveByteArrayFile(demanda.arquivosDemanda)) 

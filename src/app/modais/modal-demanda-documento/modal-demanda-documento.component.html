@@ -50,13 +50,11 @@
       <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 
       <h4><b>Objetivo: </b></h4>
-      <p>
-        {{ dadosDemanda?.objetivoDemanda }}
+      <p [innerHTML]="dadosDemanda?.objetivoDemanda">
       </p>
 
       <h4><b>Situação Atual: </b></h4>
-      <p>
-        {{ dadosDemanda?.situacaoAtualDemanda }}
+      <p  [innerHTML]="dadosDemanda?.situacaoAtualDemanda">
       </p>
 
       <h4>

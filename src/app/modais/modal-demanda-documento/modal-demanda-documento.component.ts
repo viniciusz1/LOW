@@ -72,7 +72,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
         .subscribe({
           next: event => {
             console.log(event)
-            this.dialogRef.close()
+            this.dialogRef.close(event)
           },
           error: err => {
             console.log(err)

@@ -285,6 +285,15 @@ export class TelaInicialComponent implements OnInit {
         minWidth: '50vw',
         data: event,
       })
+      .afterClosed().subscribe({next: e => {
+        let indice: number | undefined = -1
+        if (this.listaDemandas) {
+          indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+          if (indice !== -1) {
+            this.listaDemandas.splice(indice, 1, e);
+          }
+        }
+      }})
 
   }
   openModalHistorico(codigoDemanda: string) {

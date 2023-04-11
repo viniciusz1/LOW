@@ -59,6 +59,9 @@ export class DemandaService {
   }
 
   reformularDemanda() {
+
+    console.log(this.formEditorEspecial.value.situacaoAtualDemanda)
+    console.log(this.formEditorEspecial.value.objetivoDemanda)
     this.demandaForm.patchValue({
       situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda,
@@ -272,11 +275,16 @@ export class DemandaService {
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
+
+   
+    if(this.formEditorEspecial.value.situacaoAtualDemanda && this.formEditorEspecial.value.objetivoDemanda)
     this.demandaForm.patchValue({
       solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
-      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
+      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda.replace('<br>', '<br />'),
+      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda.replace('<br>', '<br />')
     })
+    console.log("oi")
+    console.log(this.demandaForm.value)
   }
 
   postDemanda() {
@@ -290,6 +298,8 @@ export class DemandaService {
     } catch (err) {
       alert("Ocorreu um erro ao cadastrar: " + err);
     }
+
+    console.log(this.demandaForm.value)
     //Inserindo o form da demanda em si
     
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));

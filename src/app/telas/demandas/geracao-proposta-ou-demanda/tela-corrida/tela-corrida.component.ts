@@ -36,6 +36,7 @@ serviceCalled = false;
       }else{
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
+            console.log(response)
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {

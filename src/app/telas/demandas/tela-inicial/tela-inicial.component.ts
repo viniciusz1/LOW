@@ -98,7 +98,6 @@ export class TelaInicialComponent implements OnInit {
     this.demandasService
       .getDemandasFiltradas(pesquisaEspecial)
       .subscribe((listaDemandas: Demanda[]) => {
-        console.log(listaDemandas)
         if (listaDemandas.length > 0) {
           this.listaDemandas = listaDemandas;
           this.isFiltrado = true;
@@ -115,7 +114,6 @@ export class TelaInicialComponent implements OnInit {
   paginate(event: { page: number }) {
     this.demandasService.avancarPage(event.page)
       .subscribe((listaDemandas: Demanda[]) => {
-        console.log(listaDemandas)
         if (listaDemandas.length > 0) {
           this.listaDemandas = listaDemandas;
           this.isFiltrado = true;
@@ -276,11 +274,9 @@ export class TelaInicialComponent implements OnInit {
         data: event,
       })
       .afterClosed().subscribe({next: e => {
-        console.log(e)
         let indice: number | undefined = -1
         if (this.listaDemandas) {
           indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-          console.log(indice)
           if (indice !== -1) {
             this.listaDemandas.splice(indice, 1, e);
           }
@@ -362,7 +358,6 @@ export class TelaInicialComponent implements OnInit {
           }
         });
         this.exibirFilasDeStatus();
-        console.log(this.listaDemandas)
       },
       error: (err) => {
         console.log(err);

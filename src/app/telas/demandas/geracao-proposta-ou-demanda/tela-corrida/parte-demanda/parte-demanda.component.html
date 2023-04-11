@@ -22,6 +22,7 @@
           <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
             pTooltip="Escreva como funciona o sistema atualmente, na empresa" tooltipPosition="top"></i>
         </div>
+
         <div style="display: grid">
           <div class="NgxEditor__Wrapper editor-demanda"
             [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}">
@@ -33,6 +34,8 @@
             *ngIf="demandaForm.controls.situacaoAtualDemanda.errors && demandaForm.controls.situacaoAtualDemanda.touched"
             id="username2-help" class="p-error block">{{ "telas.demanda.campo-obrigatorio" | translate }}</small>
         </div>
+
+        
       </div>
       <div class="objetivo" style="display: grid" id="item-1-3">
         <div class="infos" style="display: flex; align-items: center">

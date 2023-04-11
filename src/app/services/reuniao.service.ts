@@ -2,6 +2,7 @@ import { path } from './path/rota-api';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Reuniao } from '../models/reuniao.model';
+import { Demanda } from '../models/demanda.model';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,7 @@ export class ReuniaoService {
   }
 
   enviarParecerComissao(info: {tipoAtaProposta: string, parecerComissaoProposta: string, decisaoProposta: string, recomendacaoProposta: string}, codigoProposta: string){
-    return this.http.put(path + 'reuniao/parecer/' + codigoProposta, info)
+    return this.http.put<Demanda>(path + 'reuniao/parecer/' + codigoProposta, info)
   }
 
   getReuniaoFiltrada(filtros: {

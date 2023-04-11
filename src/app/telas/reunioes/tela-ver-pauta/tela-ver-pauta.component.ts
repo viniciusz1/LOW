@@ -21,7 +21,7 @@ import { routerModuleForChild } from 'ngx-joyride';
 })
 export class TelaVerPauta implements OnInit {
 
-  constructor(private confirmationService:ConfirmationService,
+  constructor(private confirmationService: ConfirmationService,
     private matDialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private reuniaoService: ReuniaoService,
@@ -46,12 +46,12 @@ export class TelaVerPauta implements OnInit {
           this.router.navigate(['/tela-inicial/reunioes'])
         }, error: err => {
           alert(err)
-        } 
+        }
       })
   }
 
-  mostrarBotoesReuniao(){
-    if(this.reuniao?.statusReuniao == 'CONCLUIDO' || this.reuniao?.statusReuniao == 'CANCELADO'){
+  mostrarBotoesReuniao() {
+    if (this.reuniao?.statusReuniao == 'CONCLUIDO' || this.reuniao?.statusReuniao == 'CANCELADO') {
       return false
     }
     return true
@@ -88,11 +88,20 @@ export class TelaVerPauta implements OnInit {
 
 
   openModalParecerComissaoProposta(proposta: Demanda | undefined) {
-    this.matDialog.open(ModalParecerComissaoPropostaComponent, {
+    const dialog = this.matDialog.open(ModalParecerComissaoPropostaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      data: {demanda: proposta, statusReuniao: this.reuniao?.statusReuniao}
+      data: { demanda: proposta, statusReuniao: this.reuniao?.statusReuniao }
     });
+    
+    dialog.afterClosed().subscribe({next: e => {let indice: number | undefined = -1
+      if (this.reuniao?.propostasReuniao) {
+        indice = this.reuniao?.propostasReuniao.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+        if (indice !== -1) {
+          this.reuniao?.propostasReuniao.splice(indice, 1, e);
+        }
+      }
+    }});
   }
 
 }

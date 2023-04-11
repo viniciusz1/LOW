@@ -6,7 +6,7 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Tamanho } from 'src/app/models/tamanho.enum';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalReprovacaoDemandaComponent } from '../modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Proposta } from 'src/app/models/proposta.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -22,7 +22,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
     private demandaService: DemandaService,
-    private dialogRef: DialogRef<ModalDemandaDocumentoComponent>,
+    private dialogRef: MatDialogRef<ModalDemandaDocumentoComponent>,
     private matDialog: MatDialog,
     private usuarioService: UsuarioService) {
     this.dadosDemanda = data
@@ -71,7 +71,6 @@ export class ModalDemandaDocumentoComponent implements OnInit {
         )
         .subscribe({
           next: event => {
-            console.log(event)
             this.dialogRef.close(event)
           },
           error: err => {

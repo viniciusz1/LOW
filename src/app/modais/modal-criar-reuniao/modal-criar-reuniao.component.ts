@@ -9,6 +9,7 @@ import { Reuniao } from 'src/app/models/reuniao.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-criar-reuniao',
@@ -18,7 +19,7 @@ import { ReuniaoService } from 'src/app/services/reuniao.service';
 export class ModalCriarReuniaoComponent implements OnInit {
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
-    public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
+    public dialogRef: MatDialogRef<ModalCriarReuniaoComponent>,
     private demandaService: DemandaService,
     private reuniaoService: ReuniaoService,
     private usuarioService: UsuarioService,
@@ -28,7 +29,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
       .subscribe(
         {
           next: e => { 
-            // if(e.usuario.nivelAcessoUsuario != "Analista" || )
+            // FAZER VERIFICAÇÃO DE QUEM PODE USAR
           },
           error: err => {
 

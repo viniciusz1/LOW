@@ -2,7 +2,6 @@ import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { ModalPropostaDocumentoComponent } from './../modal-proposta-documento/modal-proposta-documento.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogRef } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 

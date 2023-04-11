@@ -21,8 +21,6 @@ export class LogInterceptor implements HttpInterceptor {
     req = req.clone({
       withCredentials: true
     });
-    console.log(next)
-    console.log(req)
 
 
     return next.handle(req).pipe(

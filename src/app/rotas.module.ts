@@ -23,10 +23,10 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
     CommonModule,
     RouterModule.forRoot([
       {
-        path: '',
+        path: 'login',
         component: TelaLoginComponent,
-        
       },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
         path: 'tela-inicial',
         component: EscopoPrincipalComponent,

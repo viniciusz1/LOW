@@ -25,6 +25,7 @@ import { TimelineModule } from 'primeng/timeline';
 import {AccordionModule} from 'primeng/accordion';
 import {ChipsModule} from 'primeng/chips';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AccordionComponent } from './tela-corrida/accordion/accordion.component';
 
 
 
@@ -33,6 +34,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     TelaCorridaComponent,
     ParteDemandaComponent,
     ParteReuniaoComponent,
+    AccordionComponent,
   ],
   imports: [
     CommonModule,

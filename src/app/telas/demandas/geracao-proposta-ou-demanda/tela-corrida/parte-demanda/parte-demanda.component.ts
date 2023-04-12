@@ -4,6 +4,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar } from 'ngx-editor';
 
+interface Tab {
+  title: string;
+  content: string;
+}
+
 @Component({
   selector: 'app-parte-demanda',
   templateUrl: './parte-demanda.component.html',
@@ -55,6 +60,15 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
+  abrirSegundoAccordion: boolean = false;
+  
+  tabs1: Tab[] = [
+    { title: 'Tab 1', content: 'Conteúdo da Tab 1' },
+    { title: 'Tab 2', content: 'Conteúdo da Tab 2' },
+    { title: 'Tab 3', content: 'Conteúdo da Tab 3' }
+  ];
+
+  activeIndex = 0;
 
   ngOnInit(): void {
     this.demandaService.listaArquivosDemanda.subscribe(arquivos => {

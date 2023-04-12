@@ -26,7 +26,7 @@
   <div class="tela-corrida col-10 border-start">
     <div>
       <div style="margin: 0 10vw" class="mt-5">
-        <p-accordion *ngIf="aparecerProposta">
+        <p-accordion *ngIf="aparecerProposta" id="accordion-proposta" [activeIndex]="[0]">
           <p-accordionTab header="Demanda">
             <app-parte-demanda></app-parte-demanda>
           </p-accordionTab>

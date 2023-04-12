@@ -158,6 +158,7 @@ export class DemandaService {
 
   resetDemandaForm() {
     this.demandaForm.reset();
+    this.formEditorEspecial.reset();
   }
 
 

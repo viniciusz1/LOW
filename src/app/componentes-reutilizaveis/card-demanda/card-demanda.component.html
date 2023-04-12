@@ -66,10 +66,6 @@
           <i class="bi bi-arrows-angle-expand me-3"></i>
           <span>Ver demanda</span>
         </button>
-        <button (click)="verDocumentoProposta.emit()" mat-menu-item>
-          <i class="bi bi-arrow-repeat me-3"></i>
-          <span>Trocar Status</span>
-        </button>
         <button
           *ngIf="existePauta()"
           routerLink="/tela-inicial/ver-pauta"

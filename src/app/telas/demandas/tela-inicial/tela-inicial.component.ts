@@ -288,6 +288,7 @@ export class TelaInicialComponent implements OnInit {
     this.matDialog.open(ModalHistoricoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      minHeight: '70vh',
       data: codigoDemanda
     });
   }

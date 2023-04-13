@@ -28,7 +28,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   ];
 
   editor: Editor = new Editor();
-  formEditorEspecial = this.demandaService.formEditorEspecial
   toolbarDemanda: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],

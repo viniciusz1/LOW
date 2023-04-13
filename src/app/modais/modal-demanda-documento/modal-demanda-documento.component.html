@@ -28,10 +28,7 @@
   </p>
 
   <mat-dialog-content class="mat-typography" [ngStyle]="{ 'overflow': (documentoEmAta ? 'hidden' : 'hidden') }">
-    <p-scrollPanel
-      [style]="{ width: '100%', height: '70vh' }"
-      styleClass="custombar1"
-    >
+    <p-scrollPanel [style]="{ width: '100%', height: '70vh' }" styleClass="custombar1">
       <h4 mat-dialog-title class="d-flex justify-content-between">
         <span><b>SOLICITANTE: </b>{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span>
         <span><b>DATA: </b> {{ dadosDemanda?.inicioExDemandaProposta }}</span>
@@ -54,43 +51,42 @@
       </p>
 
       <h4><b>Situação Atual: </b></h4>
-      <p  [innerHTML]="dadosDemanda?.situacaoAtualDemanda">
+      <p [innerHTML]="dadosDemanda?.situacaoAtualDemanda">
       </p>
-
-      <h4>
-        <b>Beneficio Real: </b
-        >{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }} mensais
-      </h4>
-      <p>
-        <b>Memória de cálculo do benefício real: </b>
-      </p>
-      <ul>
-        <li>
-          {{ dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio }}
-        </li>
-      </ul>
-      <h4>
-        <b>Beneficio Potencial: </b
-        >{{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }} mensais
-      </h4>
-      <p>
-        <b>Memória de cálculo do benefício potencial: </b>
-      </p>
-      <ul>
-        <li>
-          {{
+      <div *ngIf="dadosDemanda?.beneficioRealDemanda != null">
+        <h4>
+          <b>Beneficio Real: </b>{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }} mensais
+        </h4>
+        <p>
+          <b>Memória de cálculo do benefício real: </b>
+        </p>
+        <ul>
+          <li>
+            {{ dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio }}
+          </li>
+        </ul>
+        <h4>
+          <b>Beneficio Potencial: </b>{{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }} mensais
+        </h4>
+        <p>
+          <b>Memória de cálculo do benefício potencial: </b>
+        </p>
+        <ul>
+          <li>
+            {{
             dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
-          }}
-        </li>
-      </ul>
-      <h4>
-        <b>Beneficio Qualitativo: </b>
-      </h4>
-      <ul>
-        <li>
-          {{ dadosDemanda?.beneficioQualitativoDemanda }}
-        </li>
-      </ul>
+            }}
+          </li>
+        </ul>
+        <h4>
+          <b>Beneficio Qualitativo: </b>
+        </h4>
+        <ul>
+          <li>
+            {{ dadosDemanda?.beneficioQualitativoDemanda }}
+          </li>
+        </ul>
+      </div>
       <p>
         <b>Frequência de uso do sistema: </b>
         {{dadosDemanda?.frequenciaDeUsoDemanda}}
@@ -109,7 +105,7 @@
           {{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
           {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
         </h4>
-        
+
         <!-- <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
           <b >
             Custos totais do projeto: R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}</b> 
@@ -119,8 +115,8 @@
           <br> Total despesa recursos internos: R$20.000,00</span>
         </p> -->
         <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
-          <b >
-            Custos totais do projeto:</b>  R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}
+          <b>
+            Custos totais do projeto:</b> R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}
         </p>
         <table class="table">
           <thead>
@@ -148,7 +144,7 @@
               </td>
               <td>
                 <p *ngFor="let centroCustoPagante of itemRecurso.centroCustoRecurso">
-                  {{centroCustoPagante.nomeCentroCusto}}: {{centroCustoPagante.porcentagemCentroCusto}}% 
+                  {{centroCustoPagante.nomeCentroCusto}}: {{centroCustoPagante.porcentagemCentroCusto}}%
                 </p>
               </td>
               <td>
@@ -163,16 +159,16 @@
             </tr>
           </tbody>
         </table>
-         
+
         <p>
           <b>
-            Período de execução: 
+            Período de execução:
           </b>
           {{dadosDemanda?.inicioExDemandaProposta}} à {{dadosDemanda?.fimExDemandaProposta}}
         </p>
         <p>
           <b>
-            Payback: 
+            Payback:
           </b> {{dadosDemanda?.paybackProposta}}
         </p>
       </div>
@@ -189,18 +185,10 @@
       Cancelar
     </button>
     <div>
-      <button
-        class="btn btn-danger me-2"
-        *ngIf="showbotoesAprovarDemanda"
-        (click)="openModalReprovacao()"
-      >
+      <button class="btn btn-danger me-2" *ngIf="showbotoesAprovarDemanda" (click)="openModalReprovacao()">
         Reprovar demanda
       </button>
-      <button
-        class="btn btn-primary"
-        *ngIf="showbotoesAprovarDemanda"
-        (click)="enviarDecisao(1)"
-      >
+      <button class="btn btn-primary" *ngIf="showbotoesAprovarDemanda" (click)="enviarDecisao(1)">
         Aprovar demanda
       </button>
     </div>

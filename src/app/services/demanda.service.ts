@@ -11,14 +11,18 @@ import { Arquivo } from '../models/arquivo.model';
 import { UsuarioService } from './usuario.service';
 import { TestScheduler } from 'rxjs/testing';
 import { CentroCusto } from '../models/centro-custo.model';
+import { toHTML } from 'ngx-editor';
+import { Validators as ValidatorsEditor } from 'ngx-editor';
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class DemandaService {
   public demandaForm = this.fb.group({
     tituloDemanda: ['', Validators.required],
-    situacaoAtualDemanda: [''],
-    objetivoDemanda: [''],
+    situacaoAtualDemanda: ['', ValidatorsEditor.required],
+    objetivoDemanda: ['', ValidatorsEditor.required],
     beneficioRealDemanda: this.fb.group({
       moedaBeneficio: [''],
       memoriaDeCalculoBeneficio: [''],
@@ -35,21 +39,62 @@ export class DemandaService {
       codigoUsuario: 0,
     },
     codigoDemanda: [''],
-    centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
+    centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)]),
+    // version: [0],
 
   });
 
   public get getFormDemandaValid(){
-    return this.formEditorEspecial
+    return this.demandaForm
   }
 
   public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
 
-  formEditorEspecial = new FormGroup({
-    situacaoAtualDemanda: new FormControl('', Validators.required),
-    objetivoDemanda: new FormControl('', Validators.required),
-    version: new FormControl(0),
-  });
+   //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
+  //ou até mesmo o número do código de usuário
+  insertsBeforePostDemanda(){
+    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == undefined) {
+      this.demandaForm.patchValue({
+        beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
+      })
+    }
+
+    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == undefined) {
+      this.demandaForm.patchValue({
+        beneficioRealDemanda: { moedaBeneficio: 'Real' }
+      })
+    }
+
+    this.demandaForm.patchValue({
+      solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
+      objetivoDemanda: toHTML(this.demandaForm.value.objetivoDemanda as unknown as Record<string, any>).replace('<br>', '<br/ >'),
+      situacaoAtualDemanda: toHTML(this.demandaForm.value.situacaoAtualDemanda as unknown as Record<string, any>).replace('<br>', '<br/ >')
+    })
+  }
+
+  postDemanda() {
+    //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
+    let demandaFormData = new FormData();
+    this.arquivos.map((item) =>
+      demandaFormData.append('arquivos', item, item.name)
+    );
+    try {
+      this.insertsBeforePostDemanda()
+    } catch (err) {
+      alert("Ocorreu um erro ao cadastrar: sim " + err);
+    }
+
+    console.log(this.demandaForm.value)
+    //Inserindo o form da demanda em si
+    
+    demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+
+    //Retornando a requisição
+    return this.http.post<Demanda | string>(
+      path + 'demanda',
+      demandaFormData
+    );
+  }
 
   createCentroCusto(cc: CentroCusto | undefined): FormGroup {
     return this.fb.group({
@@ -65,8 +110,8 @@ export class DemandaService {
   reformularDemanda() {
 
     this.demandaForm.patchValue({
-      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
-      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda,
+      situacaoAtualDemanda:  toHTML(this.demandaForm.value.situacaoAtualDemanda as unknown as Record<string, any>),
+      objetivoDemanda:  toHTML(this.demandaForm.value.objetivoDemanda as unknown as Record<string, any>),
       // statusDemanda: 'BACKLOG_CLASSIFICACAO'
     })
     let demandaFormData = new FormData();
@@ -106,15 +151,12 @@ export class DemandaService {
       frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
       centroCustosDemanda: demanda.centroCustosDemanda,
       codigoDemanda: demanda.codigoDemanda, 
-    })
-
-   
-    
-    this.formEditorEspecial.patchValue({
       situacaoAtualDemanda: demanda.situacaoAtualDemanda,
       objetivoDemanda: demanda.objetivoDemanda,
-      version: demanda.version
+      // version: demanda.version
     })
+
+  
     
     this.listaArquivosDemanda.emit(this.saveByteArrayFile(demanda.arquivosDemanda)) 
   }
@@ -158,7 +200,6 @@ export class DemandaService {
 
   resetDemandaForm() {
     this.demandaForm.reset();
-    this.formEditorEspecial.reset();
   }
 
 
@@ -264,53 +305,7 @@ export class DemandaService {
     );
   }
 
-  //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
-  //ou até mesmo o número do código de usuário
-  insertsBeforePostDemanda(){
-    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == undefined) {
-      this.demandaForm.patchValue({
-        beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
-      })
-    }
-
-    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == undefined) {
-      this.demandaForm.patchValue({
-        beneficioRealDemanda: { moedaBeneficio: 'Real' }
-      })
-    }
-
-   
-    if(this.formEditorEspecial.value.situacaoAtualDemanda && this.formEditorEspecial.value.objetivoDemanda)
-    this.demandaForm.patchValue({
-      solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda.replace('<br>', '<br />'),
-      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda.replace('<br>', '<br />')
-    })
-  }
-
-  postDemanda() {
-    //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
-    let demandaFormData = new FormData();
-    this.arquivos.map((item) =>
-      demandaFormData.append('arquivos', item, item.name)
-    );
-    try {
-      this.insertsBeforePostDemanda()
-    } catch (err) {
-      alert("Ocorreu um erro ao cadastrar: " + err);
-    }
-
-    console.log(this.demandaForm.value)
-    //Inserindo o form da demanda em si
-    
-    demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
-
-    //Retornando a requisição
-    return this.http.post<Demanda | string>(
-      path + 'demanda',
-      demandaFormData
-    );
-  }
+ 
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
 

@@ -1,6 +1,6 @@
 
 import { DemandaService } from './../../../../../services/demanda.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar } from 'ngx-editor';
 
@@ -18,6 +18,8 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   constructor(
     private demandaService: DemandaService,
   ) { }
+
+  @Input() aparecerProposta = false;
 
   listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];

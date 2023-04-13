@@ -72,8 +72,8 @@
         <td>{{ recursos.tipoDespesaRecurso | titlecase }}</td>
         <td>{{ recursos.perfilDespesaRecurso }}</td>
         <td>
-          <span *ngFor="let centro of recursos.centroCustoRecurso">{{ centro.porcentagem }} - {{ centro.centroCusto
-            }}<br /></span>
+          <span *ngFor="let centro of recursos.centroCustoRecurso">{{ centro.nomeCentroCusto
+            }} - {{ centro.porcentagemCentroCusto }}%<br /></span>
         </td>
         <td>{{ recursos.quantidadeHorasRecurso }}</td>
         <td>{{ recursos.valorHoraRecurso }}</td>

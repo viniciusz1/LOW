@@ -60,6 +60,8 @@
       "nome": "Name",
       "dataNasc": "Date of Birth",
       "cpf": "CPF",
+      "username":"Username",
+      "departamento": "Department",
       "email": "Email",
       "telefone": "Phone",
       "senha": "Password",

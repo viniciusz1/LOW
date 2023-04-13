@@ -1,5 +1,7 @@
 import { JoyrideService } from 'ngx-joyride';
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-tela-perfil',
@@ -8,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TelaPerfilComponent implements OnInit {
 
-  constructor(private joyrideService: JoyrideService) { }
-
+  constructor(private joyrideService: JoyrideService,
+    private usuarioService: UsuarioService) { }
+  usuario: Usuario | undefined
   ngOnInit(): void {
+    this.usuario = this.usuarioService.getUser('user')
   }
 
   onClick() {

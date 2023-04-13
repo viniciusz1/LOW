@@ -276,9 +276,9 @@ export class TelaInicialComponent implements OnInit {
       .afterClosed().subscribe({next: e => {
         let indice: number | undefined = -1
         if (this.listaDemandas) {
-          this.listaTituloNaoFiltrado = [];
           indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
           if (indice !== -1) {
+            this.listaTituloNaoFiltrado = [];
             this.listaDemandas.splice(indice, 1, e);
             this.exibirFilasDeStatus()
           }

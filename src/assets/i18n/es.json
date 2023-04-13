@@ -60,6 +60,8 @@
             "nome": "Nombre",
             "dataNasc": "Fecha de Nacimiento",
             "cpf": "CPF",
+            "username":"Nombre de usuario",
+            "departamento": "Departamento",
             "email": "Email",
             "telefone": "Teléfono",
             "senha": "Contraseña",

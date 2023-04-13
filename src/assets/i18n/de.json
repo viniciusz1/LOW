@@ -58,6 +58,8 @@
             "titulo": "Profil",
             "subtitulo": "ALLGEMEINE KONTOEINSTELLUNGEN",
             "nome": "Name",
+            "username":"Nutzername",
+            "departamento": "Abteilung",
             "dataNasc": "Geburtsdatum",
             "cpf": "CPF",
             "email": "E-Mail",

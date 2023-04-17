@@ -13,6 +13,7 @@ import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { Proposta } from 'src/app/models/proposta.model';
 import { routerModuleForChild } from 'ngx-joyride';
+import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 
 @Component({
   selector: 'app-tela-ver-pauta',
@@ -77,6 +78,14 @@ export class TelaVerPauta implements OnInit {
     });
   }
 
+  openModalHistorico(codigoDemanda: string) {
+    this.matDialog.open(ModalHistoricoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      minHeight: '70vh',
+      data: codigoDemanda
+    });
+  }
 
   openModalAtaDocumento(tipoAta: string) {
     this.matDialog.open(ModalAtaDocumentoComponent, {

@@ -16,6 +16,15 @@ import { StatusDemanda } from '../models/statusDemanda.enum';
 export class FiltrarDemandaStatusPipe implements PipeTransform {
 
   transform(demandas: Demanda[], ...titulo: string[]): Demanda[] {
+    if(titulo[0] == "Draft"){
+      let list: any = localStorage.getItem('rascunhos')
+      if(list)
+      list = JSON.parse(list)
+      for(let i of list){
+        i.statusDemanda = StatusDemanda.DRAFT
+      }
+      return list
+    }
     if(titulo[0] == "Backlog - Classificação"){
       return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
     }

@@ -44,15 +44,52 @@ export class DemandaService {
 
   });
 
-  public get getFormDemandaValid(){
+  public get getFormDemandaValid() {
     return this.demandaForm
   }
+  public get getFormDemanda() {
+    return this.demandaForm.value
+  }
+
+  setFormDemandaRascunho(codigoDemanda: number) {
+    let i: any = localStorage.getItem('rascunhos')
+    let listaRascunho = JSON.parse(i)
+    console.log(listaRascunho)
+    for (let demanda of listaRascunho) {
+      console.log('n for')
+      console.log(demanda.codigoDemanda)
+      console.log(demanda.codigoDemanda == codigoDemanda)
+
+      if (demanda.codigoDemanda == codigoDemanda) {
+        this.demandaForm.patchValue({
+          tituloDemanda: demanda.tituloDemanda,
+          beneficioRealDemanda: {
+            moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
+            memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+            valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio
+          },
+          beneficioPotencialDemanda: {
+            moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
+            memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+            valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio
+          },
+          beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
+          frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
+          centroCustosDemanda: demanda.centroCustosDemanda,
+          codigoDemanda: demanda.codigoDemanda,
+          situacaoAtualDemanda: demanda.situacaoAtualDemanda,
+          objetivoDemanda: demanda.objetivoDemanda,
+        })
+      }
+    }
+  }
+
 
   public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
 
-   //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
+  //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
   //ou até mesmo o número do código de usuário
-  insertsBeforePostDemanda(){
+  insertsBeforePostDemanda() {
     if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == undefined) {
       this.demandaForm.patchValue({
         beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
@@ -86,7 +123,7 @@ export class DemandaService {
 
     console.log(this.demandaForm.value)
     //Inserindo o form da demanda em si
-    
+
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
 
     //Retornando a requisição
@@ -110,8 +147,8 @@ export class DemandaService {
   reformularDemanda() {
 
     this.demandaForm.patchValue({
-      situacaoAtualDemanda:  toHTML(this.demandaForm.value.situacaoAtualDemanda as unknown as Record<string, any>),
-      objetivoDemanda:  toHTML(this.demandaForm.value.objetivoDemanda as unknown as Record<string, any>),
+      situacaoAtualDemanda: toHTML(this.demandaForm.value.situacaoAtualDemanda as unknown as Record<string, any>),
+      objetivoDemanda: toHTML(this.demandaForm.value.objetivoDemanda as unknown as Record<string, any>),
       // statusDemanda: 'BACKLOG_CLASSIFICACAO'
     })
     let demandaFormData = new FormData();
@@ -131,10 +168,10 @@ export class DemandaService {
   //função utilizada para pré-definir informações da demanda quando estamos em proposta
   //ou até mesmo em modo rascunho
   setFormDemandaData(demanda: Demanda) {
-    if(demanda.centroCustosDemanda)
-    for(let i = 0; i < demanda.centroCustosDemanda.length -1; i++){
-      this.addCenterOfCost()
-    }
+    if (demanda.centroCustosDemanda)
+      for (let i = 0; i < demanda.centroCustosDemanda.length - 1; i++) {
+        this.addCenterOfCost()
+      }
     this.demandaForm.patchValue({
       tituloDemanda: demanda.tituloDemanda,
       beneficioRealDemanda: {
@@ -150,15 +187,15 @@ export class DemandaService {
       beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
       frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
       centroCustosDemanda: demanda.centroCustosDemanda,
-      codigoDemanda: demanda.codigoDemanda, 
+      codigoDemanda: demanda.codigoDemanda,
       situacaoAtualDemanda: demanda.situacaoAtualDemanda,
       objetivoDemanda: demanda.objetivoDemanda,
       // version: demanda.version
     })
 
-  
-    
-    this.listaArquivosDemanda.emit(this.saveByteArrayFile(demanda.arquivosDemanda)) 
+
+
+    this.listaArquivosDemanda.emit(this.saveByteArrayFile(demanda.arquivosDemanda))
   }
 
   reprovarDemanda(codigoDemanda: number, motivoReprovacao: string) {
@@ -174,10 +211,10 @@ export class DemandaService {
 
   private arquivos: File[] = [];
 
-  public get getArquivos(){
+  public get getArquivos() {
     return this.arquivos
   }
-  public set setArquivos(arq: File[]){
+  public set setArquivos(arq: File[]) {
     this.arquivos = arq
   }
 
@@ -305,7 +342,7 @@ export class DemandaService {
     );
   }
 
- 
+
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
 
@@ -316,11 +353,11 @@ export class DemandaService {
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) {
-    
-    
+
+
     this.listaArquivosDemanda.subscribe(arquivos => {
       console.log("hey")
       this.arquivos = arquivos
     })
-   }
+  }
 }

@@ -1,3 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
+import { RascunhoService } from './../../../../../services/rascunho.service';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { DemandaService } from './../../../../../services/demanda.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -12,8 +16,21 @@ import { Editor, Toolbar } from 'ngx-editor';
 export class ParteDemandaComponent implements OnInit, OnDestroy {
   constructor(
     private demandaService: DemandaService,
-  ) { }
+    private rascunhoService: RascunhoService,
+    private route: ActivatedRoute
+  ) {
+    let codigoRascunho = route.snapshot.params['codigoRascunho']
+    this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
+      rascunhoService.atualizarRascunho(undefined ? codigoRascunho: codigoRascunho)
+    });
+   }
 
+   onInputChange() {
+    // Em vez de chamar diretamente o método, envie um evento ao Subject
+    this.inputSubject.next("");
+  }
+
+  inputSubject = new Subject<string>();
   listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [

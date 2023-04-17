@@ -38,7 +38,11 @@ export class TelaInicialComponent implements OnInit {
     private confirmationService: ConfirmationService,
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
-      this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
+      if(this.pesquisaDemanda == ""){
+        this.carregarDemandasIniciais()
+      }else{
+        this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
+      }
     });
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
@@ -197,7 +201,6 @@ export class TelaInicialComponent implements OnInit {
   }
 
   irParaChat(event: Event) {
-    console.log("hehe")
     // this.cabecalhoMensagemDeConfirmacao = 'Iniciar conversa';
     // this.confirmationService.confirm({
     //   dismissableMask: true,
@@ -216,6 +219,7 @@ export class TelaInicialComponent implements OnInit {
         target: event.target,
         message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
         icon: 'pi pi-exclamation-triangle',
+        blockScroll: false,
         accept: () => {
           this.router.navigate(['/tela-inicial/chat']);
         },
@@ -372,6 +376,7 @@ export class TelaInicialComponent implements OnInit {
           if (demandas.length > 0) {
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
+            this.nenhumResultadoEncontrado = false;
           }
         });
         this.exibirFilasDeStatus();
@@ -403,6 +408,13 @@ export class TelaInicialComponent implements OnInit {
   }
 
   exibirFilasDeStatus() {
+
+    
+    
+      this.listaTituloNaoFiltrado.push({
+        status: 'DRAFT',
+        titulo: 'Draft',
+      });
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'

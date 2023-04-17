@@ -1,6 +1,7 @@
-@import '../../../styles.scss';
-@import '../../../themes.scss';
-
+.principal:hover{
+    opacity: 0.8;
+    cursor:pointer;
+}
 .progress{
     width: 39%;
     height: 12px;

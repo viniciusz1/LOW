@@ -1,3 +1,4 @@
+import { RascunhoService } from './../../../services/rascunho.service';
 import { PropostaService } from './../../../services/proposta.service';
 
 import { MessageService } from 'primeng/api';
@@ -95,6 +96,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   providers: [
     MessageService,
     PropostaService,
+    RascunhoService
   ]
 })
 export class GeracaoPropostaOuDemandaModule { }

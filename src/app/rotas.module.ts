@@ -42,8 +42,8 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
             component: TelaClassificarDemandaComponent
           },
           {
-            path: 'rascunhos',
-            component: TelaInicialComponent
+            path: 'rascunho/:codigoRascunho',
+            component: TelaCorridaComponent
           },
           {
             path: 'chat',

@@ -13,7 +13,7 @@ import { DemandaClassificadaService } from 'src/app/services/demanda-classificad
   styleUrls: ['./tela-corrida.component.scss'],
 })
 export class TelaCorridaComponent implements OnInit {
-serviceCalled = false;
+  serviceCalled = false;
   aparecerProposta = false;
   centroCustos: CentroCusto[] = [];
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
@@ -33,7 +33,7 @@ serviceCalled = false;
             alert('Ocorreu um erro: ' + err.status);
           },
         });
-      }else{
+      } else {
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
             console.log(response)
@@ -45,18 +45,18 @@ serviceCalled = false;
         });
       }
 
-      
+
     } else {
-        this.propostaService
-          .postProposta()
-          .subscribe({
-            next: (response) => {
-              this.router.navigate(['/tela-inicial']);
-            },
-            error: (err) => {
-              alert('Ocorreu um erro: ' + err.status);
-            },
-          });
+      this.propostaService
+        .postProposta()
+        .subscribe({
+          next: (response) => {
+            this.router.navigate(['/tela-inicial']);
+          },
+          error: (err) => {
+            alert('Ocorreu um erro: ' + err.status);
+          },
+        });
     }
   }
 
@@ -65,38 +65,44 @@ serviceCalled = false;
     private router: Router,
     private demandaService: DemandaService,
     private propostaService: PropostaService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.tipoExibicaoTela();
 
   }
 
   teste() {
-    console.log(this.demandaService.getFormDemandaValid)    
+    console.log(this.demandaService.getFormDemandaValid)
   }
 
   tipoExibicaoTela() {
     if (this.router.url == '/tela-inicial/demanda') {
       this.aparecerProposta = false;
       this.demandaService.resetDemandaForm();
-    } 
+    }
     else {
       if (this.router.url.includes('reformular-demanda')) {
         this.aparecerProposta = false;
-      }else{
+      } else if (this.router.url.includes('rascunho')) {
+        this.aparecerProposta = false;
+        this.activatedRoute.params.subscribe(
+          e => {
+            this.demandaService.setFormDemandaRascunho(e['codigoRascunho'])
+          }
+        )
+      } else {
         this.aparecerProposta = true;
       }
       this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
-    .subscribe(e => {
-      console.log(e)
-      this.serviceCalled = true;
-      this.demandaService.setFormDemandaData(e);
-    })
-      this.aparecerProposta = true;
-      this.demandaService.resetDemandaForm();
+        .subscribe(e => {
+          console.log(e)
+          this.serviceCalled = true;
+          this.demandaService.setFormDemandaData(e);
+        })
+      // this.aparecerProposta = true;
     }
   }
-
 
 
   onScroll() {

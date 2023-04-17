@@ -9,7 +9,7 @@
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Insira um nome para essa demanda" tooltipPosition="top"></i>
       </div>
-      <input placeholder="Ex: Melhoria em Sistemas de Informação" type="text" pInputText formControlName="tituloDemanda"
+      <input (input)="onInputChange()" placeholder="Ex: Melhoria em Sistemas de Informação" type="text" pInputText formControlName="tituloDemanda"
         class="input w-100 "
         [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.tituloDemanda.errors && demandaForm.controls.tituloDemanda.touched}" />
       <small *ngIf="demandaForm.controls.tituloDemanda.errors && demandaForm.controls.tituloDemanda.touched"
@@ -27,7 +27,7 @@
           <div class="NgxEditor__Wrapper editor-demanda"
             [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}">
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-            <ngx-editor [editor]="editor" formControlName="situacaoAtualDemanda">
+            <ngx-editor (input)="onInputChange()" [editor]="editor" formControlName="situacaoAtualDemanda">
             </ngx-editor>
           </div>
           <small
@@ -47,7 +47,7 @@
           <div class="NgxEditor__Wrapper editor-demanda"
             [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}">
             <ngx-editor-menu [editor]="editorDemanda" [toolbar]="toolbarDemanda"> </ngx-editor-menu>
-            <ngx-editor [editor]="editorDemanda" formControlName="objetivoDemanda">
+            <ngx-editor (input)="onInputChange()" [editor]="editorDemanda" formControlName="objetivoDemanda">
             </ngx-editor>
           </div>
           <small *ngIf="demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched"
@@ -65,11 +65,11 @@
             style="flex-wrap: wrap;" class="mb-1">
             <div [formGroupName]="i" class="d-flex">
               <div class="p-inputgroup" style=" margin-right: 0.5vw;">
-                <input style="width: 5vw;" [id]="'porcentagemListaReuniao' + i" pInputText [required]="true"
+                <input (input)="onInputChange()" style="width: 5vw;" [id]="'porcentagemListaReuniao' + i" pInputText [required]="true"
                   formControlName="porcentagemCentroCusto" placeholder="Porcentagem" />
                 <span class="p-inputgroup-addon">%</span>
               </div>
-              <input style="width: 10vw; margin-right: 0.5vw;" [id]="'nomeCentroCusto'+i" pInputText [required]="true"
+              <input (input)="onInputChange()" style="width: 10vw; margin-right: 0.5vw;" [id]="'nomeCentroCusto'+i" pInputText [required]="true"
                 formControlName="nomeCentroCusto" placeholder="Centro de Custo" />
               <button (click)="removerCentroDeCusto(i)"
                 [disabled]="this.demandaForm.controls.centroCustosDemanda.length == 1" class="btn btn-danger"><i
@@ -99,9 +99,9 @@
                 pTooltip="Qual seria o lucro mínimo adquirido pela sua proposta?" tooltipPosition="top"></i>
             </div>
             <div style="display: flex; justify-content: space-between">
-              <input placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
+              <input (input)="onInputChange()" placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
                 formControlName="valorBeneficio" />
-              <p-dropdown [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
+              <p-dropdown (onChange)="onInputChange()" [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
                 optionValue="value"></p-dropdown>
             </div>
             <div class="situacao-atual" style="display: grid" id="item-1-2">
@@ -112,7 +112,7 @@
                 <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
                   pTooltip="Como você calculou o benefício?" tooltipPosition="top"></i>
               </div>
-              <textarea placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
+              <textarea (input)="onInputChange()" placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
                 style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
                 formControlName="memoriaDeCalculoBeneficio"></textarea>
             </div>
@@ -130,9 +130,9 @@
                   pTooltip="Qual seria o lucro máximo adquirido pela sua proposta?" tooltipPosition="top"></i>
               </div>
               <div style="display: flex; justify-content: space-between">
-                <input placeholder="Ex: 20.000" style="width: 93%;" type="text" pInputText class="input"
+                <input (input)="onInputChange()" placeholder="Ex: 20.000" style="width: 93%;" type="text" pInputText class="input"
                   formControlName="valorBeneficio" />
-                <p-dropdown [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
+                <p-dropdown (onChange)="onInputChange()" [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
                   optionValue="value"></p-dropdown>
               </div>
             </div>
@@ -145,7 +145,7 @@
                   pTooltip="Como você calculou o benefício?" tooltipPosition="top"></i>
               </div>
               <div style="display: flex">
-                <textarea placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
+                <textarea (input)="onInputChange()" placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
                   style="width: 100%" [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
                   formControlName="memoriaDeCalculoBeneficio"></textarea>
               </div>
@@ -164,7 +164,7 @@
                 tooltipPosition="top"></i>
             </div>
             <div style="display: grid">
-              <textarea placeholder="Ex: O benefício se torna qualitativo porque seu retorno..." style="width: 100%"
+              <textarea (input)="onInputChange()" placeholder="Ex: O benefício se torna qualitativo porque seu retorno..." style="width: 100%"
                 [rows]="5" [cols]="30" [autoResize]="true" pInputTextarea
                 formControlName="beneficioQualitativoDemanda"></textarea>
             </div>
@@ -185,7 +185,7 @@
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Qual seria a usabilidade do sistema?" tooltipPosition="top"></i>
       </div>
-      <p-dropdown
+      <p-dropdown (onChange)="onInputChange()"
         [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.frequenciaDeUsoDemanda.errors && demandaForm.controls.frequenciaDeUsoDemanda.touched}"
         [options]="opcoesDeTamanho" placeholder="Selecione a frequência" formControlName="frequenciaDeUsoDemanda">
       </p-dropdown>
@@ -200,7 +200,7 @@
           pTooltip="Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"
           tooltipPosition="top"></i>
       </div>
-      <p-fileUpload [chooseLabel]="'Escolher'" [uploadLabel]="'Enviar'" [cancelLabel]="'Cancelar'" [multiple]="true"
+      <p-fileUpload (input)="onInputChange()" [chooseLabel]="'Escolher'" [uploadLabel]="'Enviar'" [cancelLabel]="'Cancelar'" [multiple]="true"
         [auto]="true" [customUpload]="true" [files]="listaFiles" (uploadHandler)="uploadDocumentos($event)">
       </p-fileUpload>
     </div>

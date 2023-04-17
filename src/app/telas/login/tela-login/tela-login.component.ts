@@ -3,6 +3,7 @@ import { UsuarioService } from './../../../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 
+
 @Component({
   selector: 'app-tela-login',
   templateUrl: './tela-login.component.html',

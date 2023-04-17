@@ -1,53 +1,44 @@
 <nav class="nav low-shadow" style="background-color: white;">
     <ul class="nav nav-pills nav-items-center" style="width: 40%;">
-        <li class="nav-item " routerLink="/tela-inicial" style="cursor: pointer;">
+        <li class="nav-item" *ngIf="!telaLogin" routerLink="/tela-inicial" style="cursor: pointer;">
             <img class="my-2 ms-5" style="width: 70px;"
                 src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="">
         </li>
-        <nav aria-label="breadcrumb" style="display: flex; justify-content: center; align-items: center;" >
+        <li class="nav-item" *ngIf="telaLogin" style="cursor: pointer;">
+            <img class="my-2 ms-5" style="width: 70px;"
+                src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="">
+        </li>
+        <nav aria-label="breadcrumb" style="display: flex; justify-content: center; align-items: center;" *ngIf="!telaLogin">
             <ol class="breadcrumb" style="margin: 0px 0px 0px 2vw !important; ">
-              <li role="button" [ngClass]="{'active': item.disabled}" class="breadcrumb-item" aria-current="page"
-              [routerLink]="'/'+item.url" *ngFor="let item of items">{{item.label | titlecase}}</li>
+                <li role="button" [ngClass]="{'active': item.disabled}" class="breadcrumb-item" aria-current="page"
+                    [routerLink]="'/'+item.url" *ngFor="let item of items">{{item.label | titlecase}}</li>
             </ol>
         </nav>
     </ul>
-    <ul class="nav justify-content-end nav-items-center" style="width:60%" >
-
-        <div class="d-flex" joyrideStep="oito"
-        [title]="'Seções'"
-        [stepContent]="customContent"
-        [stepContentParams]="{'texto': textoTutorial[7]}"
-        style="overflow: auto;">
+    <ul class="nav justify-content-end nav-items-center" style="width:60%" *ngIf="!telaLogin">
+        <div class="d-flex" joyrideStep="oito" [title]="'Seções'" [stepContent]="customContent"
+            [stepContentParams]="{'texto': textoTutorial[7]}" style="overflow: auto;">
             <li *ngIf="nivelAcessoUsuario != 'Solicitante'" class="nav-item">
-                <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'" >REUNIÕES</a>
+                <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'">REUNIÕES</a>
             </li>
-            <li class="nav-item" >
-                <a role="button" class="nav-link" routerLink="/tela-inicial"  [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">DEMANDAS</a>
+            <li class="nav-item">
+                <a role="button" class="nav-link" routerLink="/tela-inicial" [routerLinkActive]="'active'"
+                    [routerLinkActiveOptions]="{exact: true}">DEMANDAS</a>
             </li>
         </div>
-        <li role="button" class="nav-item" routerLink="/tela-inicial/chat" *ngIf="!inicial"
-        joyrideStep="sete"
-        [title]="'Suas Mensagens'"
-        [stepContent]="customContent"
-        [stepContentParams]="{'texto': textoTutorial[6]}"
-        style="overflow: auto;">
+        <li role="button" class="nav-item" routerLink="/tela-inicial/chat" *ngIf="!inicial" joyrideStep="sete"
+            [title]="'Suas Mensagens'" [stepContent]="customContent" [stepContentParams]="{'texto': textoTutorial[6]}"
+            style="overflow: auto;">
             <a class="nav-link"><i class="bi bi-chat-left-dots icon"></i></a>
         </li>
-        <li role="button" class="nav-item" (click)="mostrar_modal = !mostrar_modal" *ngIf="!inicial"
-        joyrideStep="seis"
-        [title]="'Notificações'"
-        [stepContent]="customContent"
-        [stepContentParams]="{'texto': textoTutorial[5]}"
-        style="overflow: auto;">
+        <li role="button" class="nav-item" (click)="mostrar_modal = !mostrar_modal" *ngIf="!inicial" joyrideStep="seis"
+            [title]="'Notificações'" [stepContent]="customContent" [stepContentParams]="{'texto': textoTutorial[5]}"
+            style="overflow: auto;">
             <a class="nav-link"><i class="bi bi-bell icon"></i></a>
             <app-notificacoes class="" *ngIf="mostrar_modal"></app-notificacoes>
         </li>
-        <li role="button" class="nav-item" [matMenuTriggerFor]="idiomaMenu"
-        joyrideStep="cinco"
-        [title]="'Idiomas'"
-        [stepContent]="customContent"
-        [stepContentParams]="{'texto': textoTutorial[4]}"
-        style="overflow: auto;">
+        <li role="button" class="nav-item" [matMenuTriggerFor]="idiomaMenu" joyrideStep="cinco" [title]="'Idiomas'"
+            [stepContent]="customContent" [stepContentParams]="{'texto': textoTutorial[4]}" style="overflow: auto;">
             <a class="nav-link"><img style="width: 30px; margin-right: 10px"
                     src="https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png">
                 <i class="bi bi-chevron-down">
@@ -81,12 +72,9 @@
             <div [innerHTML]="texto" style="max-width: 300px; padding: 20px;"></div>
         </ng-template>
 
-        <li [matMenuTriggerFor]="menu" role="button" class="nav-item" *ngIf="!inicial"
-        joyrideStep="quatro"
-        [title]="'Configurações e Rascunho'"
-        [stepContent]="customContent"
-        [stepContentParams]="{'texto': textoTutorial[3]}"
-        style="overflow: auto;">
+        <li [matMenuTriggerFor]="menu" role="button" class="nav-item" *ngIf="!inicial" joyrideStep="quatro"
+            [title]="'Configurações e Rascunho'" [stepContent]="customContent"
+            [stepContentParams]="{'texto': textoTutorial[3]}" style="overflow: auto;">
             <a class="nav-link"><i class="bi bi-person-square icon"></i></a>
         </li>
         <mat-menu #menu="matMenu">

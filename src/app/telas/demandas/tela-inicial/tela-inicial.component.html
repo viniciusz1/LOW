@@ -191,7 +191,7 @@
             "
             [dadosDemada]="demanda"
             (verDocumentoProposta)="openModalDemandaDocumento($event)"
-            (irParaChat)="irParaChat()"
+            (irParaChat)="irParaChat($event)"
             (modalHistorico)="openModalHistorico($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
             (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
@@ -209,7 +209,7 @@
                     | filtrarDemandaStatus : linha.titulo
                     | slice : 4
                 "
-                (irParaChat)="irParaChat()"
+                (irParaChat)="irParaChat($event)"
             (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
                 (modalHistorico)="openModalHistorico($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
@@ -247,7 +247,7 @@
       <div style="padding: 10px; margin-left: 6px"></div>
       <div class="container d-flex flex-column align-items-center">
         <app-list-demanda
-          (irParaChat)="irParaChat()"
+          (irParaChat)="irParaChat($event)"
           (modalHistorico)="openModalHistorico($event)"
           *ngFor="let demanda of listaDemandas"
           [dadosDemada]="demanda"
@@ -298,7 +298,7 @@
                 "
                 [dadosDemada]="demanda"
                 (verDocumentoProposta)="openModalDemandaDocumento($event)"
-                (irParaChat)="irParaChat()"
+                (irParaChat)="irParaChat($event)"
                 (modalHistorico)="openModalHistorico($event)"
                 (avancarStatusDemanda)="avancarStatusDemanda($event)"
                 (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
@@ -339,7 +339,7 @@
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat()"
+          (irParaChat)="irParaChat($event)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)"
           (modalHistorico)="openModalHistorico($event)"
           (verDocumentoEmAta)="openModalAtaDocumento()"
@@ -356,7 +356,7 @@
           (clicouEmExcluir)="excluirDemandaRascunho(i)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)"
           [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat()"
+          (irParaChat)="irParaChat($event)"
           (modalHistorico)="openModalHistorico($event)"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoEmAta)="openModalAtaDocumento()"

@@ -196,18 +196,32 @@ export class TelaInicialComponent implements OnInit {
     );
   }
 
-  irParaChat() {
-    this.cabecalhoMensagemDeConfirmacao = 'Iniciar conversa';
-    this.confirmationService.confirm({
-      dismissableMask: true,
-      key: 'iniciarChat',
-      header: 'Iniciar Chat',
-      blockScroll: false,
-      message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+  irParaChat(event: Event) {
+    console.log("hehe")
+    // this.cabecalhoMensagemDeConfirmacao = 'Iniciar conversa';
+    // this.confirmationService.confirm({
+    //   dismissableMask: true,
+    //   key: 'iniciarChat',
+    //   header: 'Iniciar Chat',
+    //   blockScroll: false,
+    //   message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
 
-      accept: () => {
-        this.router.navigate(['/tela-inicial/chat']);
-      },
+    //   // accept: () => {
+    //   //   this.router.navigate(['/tela-inicial/chat']);
+    //   // },
+    // });
+    
+      if(event.target)
+      this.confirmationService.confirm({
+        target: event.target,
+        message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+        icon: 'pi pi-exclamation-triangle',
+        accept: () => {
+          this.router.navigate(['/tela-inicial/chat']);
+        },
+        reject: () => {
+            // this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+        }
     });
   }
 

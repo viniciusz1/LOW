@@ -34,7 +34,7 @@
       <i
         class="bi bi-chat-left-dots me-3"
         *ngIf="!rascunho && statusPermitido()"
-        (click)="irParaChat.emit()"
+        (click)="irParaChat.emit($event)"
         style="cursor: pointer"
       ></i>
       <i

@@ -93,11 +93,15 @@ export class DemandaService {
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
-
+    console.log("oi")
+    let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
+    let situacaoAtualDemanda: any =  this.demandaForm.value.situacaoAtualDemanda
+let teste =toHTML(objetivoDemanda)
+    // toHTML(
     this.demandaForm.patchValue({
       solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-      objetivoDemanda: toHTML(this.demandaForm.value.objetivoDemanda as unknown as Record<string, any>).replace('<br>', '<br/ >'),
-      situacaoAtualDemanda: toHTML(this.demandaForm.value.situacaoAtualDemanda as unknown as Record<string, any>).replace('<br>', '<br/ >')
+      // objetivoDemanda: toHTML(this.demandaForm.value.objetivoDemanda as unknown as Record<string, any>).replace('<br>', '<br/ >'),
+      // situacaoAtualDemanda:.replace('<br>', '<br/ >')
     })
   }
 

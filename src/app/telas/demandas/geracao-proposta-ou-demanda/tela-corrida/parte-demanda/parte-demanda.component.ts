@@ -7,6 +7,7 @@ import { DemandaService } from './../../../../../services/demanda.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar } from 'ngx-editor';
+import Locals from 'ngx-editor/lib/Locals';
 
 @Component({
   selector: 'app-parte-demanda',
@@ -19,9 +20,13 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     private rascunhoService: RascunhoService,
     private route: ActivatedRoute
   ) {
-    let codigoRascunho = route.snapshot.params['codigoRascunho']
+    let indiceRascunho = route.snapshot.params['indiceRascunho']
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
-      rascunhoService.atualizarRascunho(undefined ? codigoRascunho: codigoRascunho)
+      if(indiceRascunho){
+        rascunhoService.atualizarRascunho(indiceRascunho)
+      }else{
+        rascunhoService.atualizarRascunho(-1)
+      }
     });
    }
 

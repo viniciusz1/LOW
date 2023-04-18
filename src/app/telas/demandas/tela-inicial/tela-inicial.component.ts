@@ -1,3 +1,4 @@
+import { RascunhoService } from './../../../services/rascunho.service';
 import { Filtro } from './../../../models/filtro.model';
 import { DemandaExcel } from './../../../models/demandaExcel.model';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
@@ -36,11 +37,12 @@ export class TelaInicialComponent implements OnInit {
     private demandasService: DemandaService,
     private router: Router,
     private confirmationService: ConfirmationService,
+    private rascunhoService: RascunhoService
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
-      if(this.pesquisaDemanda == ""){
+      if (this.pesquisaDemanda == "") {
         this.carregarDemandasIniciais()
-      }else{
+      } else {
         this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
       }
     });
@@ -213,8 +215,8 @@ export class TelaInicialComponent implements OnInit {
     //   //   this.router.navigate(['/tela-inicial/chat']);
     //   // },
     // });
-    
-      if(event.target)
+
+    if (event.target)
       this.confirmationService.confirm({
         target: event.target,
         message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
@@ -224,9 +226,9 @@ export class TelaInicialComponent implements OnInit {
           this.router.navigate(['/tela-inicial/chat']);
         },
         reject: () => {
-            // this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+          // this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
         }
-    });
+      });
   }
 
   excluirDemandaRascunho(index: number) {
@@ -291,17 +293,19 @@ export class TelaInicialComponent implements OnInit {
         minWidth: '50vw',
         data: event,
       })
-      .afterClosed().subscribe({next: e => {
-        let indice: number | undefined = -1
-        if (this.listaDemandas) {
-          indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-          if (indice !== -1) {
-            this.listaTituloNaoFiltrado = [];
-            this.listaDemandas.splice(indice, 1, e);
-            this.exibirFilasDeStatus()
+      .afterClosed().subscribe({
+        next: e => {
+          let indice: number | undefined = -1
+          if (this.listaDemandas) {
+            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+            if (indice !== -1) {
+              this.listaTituloNaoFiltrado = [];
+              this.listaDemandas.splice(indice, 1, e);
+              this.exibirFilasDeStatus()
+            }
           }
         }
-      }})
+      })
 
   }
   openModalHistorico(codigoDemanda: string) {
@@ -407,14 +411,23 @@ export class TelaInicialComponent implements OnInit {
     this.carregarDemandasIniciais();
   }
 
+  criarUmaNovaDemanda() {
+    let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
+    if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
+      this.router.navigate(['tela-inicial/rascunho/' + 0])
+    } else {
+      this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
+    }
+  }
+
   exibirFilasDeStatus() {
 
-    
-    
-      this.listaTituloNaoFiltrado.push({
-        status: 'DRAFT',
-        titulo: 'Draft',
-      });
+
+
+    this.listaTituloNaoFiltrado.push({
+      status: 'DRAFT',
+      titulo: 'Draft',
+    });
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'

@@ -17,7 +17,7 @@
         [stepContentParams]="{ texto: textoTutorial[0] }"
         class="btn btn-primary"
         style="height: 42px"
-        routerLink="/tela-inicial/demanda"
+        (click)="criarUmaNovaDemanda()"
       >
         <i class="bi bi-plus" style="font-size: 17px"></i>
         {{ "telas.tela-inicial.b-criar-demanda" | translate }}

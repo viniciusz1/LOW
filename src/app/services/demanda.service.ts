@@ -51,37 +51,29 @@ export class DemandaService {
     return this.demandaForm.value
   }
 
-  setFormDemandaRascunho(codigoDemanda: number) {
+  setFormDemandaRascunho(indiceDemanda: number) {
     let i: any = localStorage.getItem('rascunhos')
     let listaRascunho = JSON.parse(i)
-    console.log(listaRascunho)
-    for (let demanda of listaRascunho) {
-      console.log('n for')
-      console.log(demanda.codigoDemanda)
-      console.log(demanda.codigoDemanda == codigoDemanda)
 
-      if (demanda.codigoDemanda == codigoDemanda) {
-        this.demandaForm.patchValue({
-          tituloDemanda: demanda.tituloDemanda,
-          beneficioRealDemanda: {
-            moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
-            memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
-            valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio
-          },
-          beneficioPotencialDemanda: {
-            moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
-            memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
-            valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio
-          },
-          beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
-          frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
-          centroCustosDemanda: demanda.centroCustosDemanda,
-          codigoDemanda: demanda.codigoDemanda,
-          situacaoAtualDemanda: demanda.situacaoAtualDemanda,
-          objetivoDemanda: demanda.objetivoDemanda,
-        })
-      }
-    }
+    this.demandaForm.patchValue({
+      tituloDemanda: listaRascunho[indiceDemanda].tituloDemanda,
+      beneficioRealDemanda: {
+        moedaBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.moedaBeneficio,
+        memoriaDeCalculoBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+        valorBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.valorBeneficio
+      },
+      beneficioPotencialDemanda: {
+        moedaBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.moedaBeneficio,
+        memoriaDeCalculoBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+        valorBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.valorBeneficio
+      },
+      beneficioQualitativoDemanda: listaRascunho[indiceDemanda].beneficioQualitativoDemanda,
+      frequenciaDeUsoDemanda: listaRascunho[indiceDemanda].frequenciaDeUsoDemanda,
+      centroCustosDemanda: listaRascunho[indiceDemanda].centroCustosDemanda,
+      codigoDemanda: indiceDemanda.toString(),
+      situacaoAtualDemanda: listaRascunho[indiceDemanda].situacaoAtualDemanda,
+      objetivoDemanda: listaRascunho[indiceDemanda].objetivoDemanda,
+    })
   }
 
 

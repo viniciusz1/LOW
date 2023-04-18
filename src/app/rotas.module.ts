@@ -42,7 +42,7 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
             component: TelaClassificarDemandaComponent
           },
           {
-            path: 'rascunho/:codigoRascunho',
+            path: 'rascunho/:indiceRascunho',
             component: TelaCorridaComponent
           },
           {

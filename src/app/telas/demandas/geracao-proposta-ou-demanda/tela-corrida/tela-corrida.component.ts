@@ -88,7 +88,7 @@ export class TelaCorridaComponent implements OnInit {
         this.aparecerProposta = false;
         this.activatedRoute.params.subscribe(
           e => {
-            this.demandaService.setFormDemandaRascunho(e['codigoRascunho'])
+            this.demandaService.setFormDemandaRascunho(e['indiceRascunho'])
           }
         )
       } else {

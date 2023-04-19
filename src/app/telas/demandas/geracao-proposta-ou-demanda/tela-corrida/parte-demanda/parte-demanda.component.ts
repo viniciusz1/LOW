@@ -22,10 +22,12 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   ) {
     let indiceRascunho = route.snapshot.params['indiceRascunho']
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
-      if(indiceRascunho){
-        rascunhoService.atualizarRascunho(indiceRascunho)
-      }else{
-        rascunhoService.atualizarRascunho(-1)
+      if(route.snapshot.url){
+        if(indiceRascunho){
+          rascunhoService.atualizarRascunhoDemanda = indiceRascunho
+        }else{
+          rascunhoService.atualizarRascunhoProposta = route.snapshot.params['codigoDemanda']
+        }
       }
     });
    }

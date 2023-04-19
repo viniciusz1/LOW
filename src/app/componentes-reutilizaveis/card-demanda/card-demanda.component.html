@@ -11,7 +11,7 @@
       style="align-items: baseline; justify-content: space-between"
     >
       <div class="d-flex" style="width: 80%">
-        <label class="me-2" for="">{{ dadosDemada.codigoDemanda }}</label>
+        <label class="me-2" for="" *ngIf="!rascunho">{{ dadosDemada.codigoDemanda }}</label>
         <label class="me-2 text-truncate" for="titulo">
           <b>{{ dadosDemada.tituloDemanda }}</b>
         </label>

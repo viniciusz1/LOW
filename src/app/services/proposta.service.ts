@@ -90,7 +90,9 @@ export class PropostaService {
 
   }
 
-
+  get valueDemandaProposta(){
+    return Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value);
+  }
 
   postProposta() {
 
@@ -107,9 +109,7 @@ export class PropostaService {
       alert("Ocorreu um erro ao cadastrar: " + err);
     }
     
-    const demandaEPropostaJuntos = Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value);
-    console.log(demandaEPropostaJuntos)
-    propostaFormData.append('proposta', JSON.stringify(demandaEPropostaJuntos));
+    propostaFormData.append('proposta', JSON.stringify(this.valueDemandaProposta));
 
     this.demandaService.getArquivos.map((item) =>
       propostaFormData.append('arquivos', item, item.name)

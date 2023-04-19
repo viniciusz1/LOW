@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DemandaService } from './demanda.service';
 import { UsuarioService } from './usuario.service';
+import { Demanda } from '../models/demanda.model';
 @Injectable({
     providedIn: 'root',
 })
@@ -13,7 +14,7 @@ export class RascunhoService {
         if(indice == -1){
             let rascunhos = this.getRascunhos
             let valueFormDemanda = this.demandaService.getFormDemanda
-            valueFormDemanda.codigoDemanda = rascunhos.length + 1
+            valueFormDemanda.codigoDemanda =rascunhos.length + 1
             rascunhos.push(valueFormDemanda)
             localStorage.setItem('rascunhos', JSON.stringify(rascunhos))
         }else{
@@ -43,7 +44,13 @@ export class RascunhoService {
         //     localStorage.setItem('rascunhos', JSON.stringify(listaRascunhos))
         // }
     }
-    get getRascunhos() {
+
+    deleteRascunho(codigo: string){
+        let rascunhos = this.getRascunhos
+        rascunhos.splice(parseInt(codigo),1)
+        localStorage.setItem('rascunhos', JSON.stringify(rascunhos))
+    }
+    get getRascunhos(){
         let rasc = localStorage.getItem('rascunhos')
         if (rasc)
             return JSON.parse(rasc)
@@ -62,7 +69,7 @@ export class RascunhoService {
             return -1
         }
     }
-    constructor(private http: HttpClient, private fb: FormBuilder, private demandaService: DemandaService, private usuarioService: UsuarioService) {
+    constructor(private demandaService: DemandaService) {
 
     }
 }

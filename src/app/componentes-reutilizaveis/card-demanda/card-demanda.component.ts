@@ -5,6 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Route, Router } from '@angular/router';
+import { RascunhoService } from 'src/app/services/rascunho.service';
 
 @Component({
   selector: 'app-card-demanda',
@@ -44,7 +45,8 @@ export class CardDemandaComponent implements OnInit {
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
 
-  constructor(private route: Router) { }
+  constructor(private route: Router,
+    private rascunhoService: RascunhoService) { }
   statusPermitido() {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -204,6 +206,7 @@ export class CardDemandaComponent implements OnInit {
       };
       return true;
     } else if (this.dadosDemada.statusDemanda == StatusDemanda.DRAFT) {
+      this.rascunho = true
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'tela-inicial/rascunho/' + this.dadosDemada.codigoDemanda,
         texto: 'Continuar Demanda',
@@ -227,6 +230,11 @@ export class CardDemandaComponent implements OnInit {
       };
     }
     return true;
+  }
+
+  deleteRascunhoFromLocalStorage(){
+    if(this.dadosDemada.codigoDemanda)
+    this.rascunhoService.deleteRascunho(this.dadosDemada.codigoDemanda)
   }
 
   existePauta() {

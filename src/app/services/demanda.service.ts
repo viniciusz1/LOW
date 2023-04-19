@@ -93,15 +93,13 @@ export class DemandaService {
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
-    console.log("oi")
     let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
     let situacaoAtualDemanda: any =  this.demandaForm.value.situacaoAtualDemanda
-let teste =toHTML(objetivoDemanda)
     // toHTML(
     this.demandaForm.patchValue({
       solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-      // objetivoDemanda: toHTML(this.demandaForm.value.objetivoDemanda as unknown as Record<string, any>).replace('<br>', '<br/ >'),
-      // situacaoAtualDemanda:.replace('<br>', '<br/ >')
+      objetivoDemanda:objetivoDemanda,
+      situacaoAtualDemanda: situacaoAtualDemanda
     })
   }
 
@@ -114,10 +112,9 @@ let teste =toHTML(objetivoDemanda)
     try {
       this.insertsBeforePostDemanda()
     } catch (err) {
-      alert("Ocorreu um erro ao cadastrar: sim " + err);
+      alert("Ocorreu um erronos inserts " + err);
     }
 
-    console.log(this.demandaForm.value)
     //Inserindo o form da demanda em si
 
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));

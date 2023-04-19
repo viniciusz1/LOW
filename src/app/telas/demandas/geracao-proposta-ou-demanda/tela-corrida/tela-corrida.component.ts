@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
 import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
 import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
+import { RascunhoService } from 'src/app/services/rascunho.service';
 
 @Component({
   selector: 'app-tela-corrida',
@@ -36,7 +37,8 @@ export class TelaCorridaComponent implements OnInit {
       } else {
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
-            console.log(response)
+            let codigo = this.route.snapshot.params['indiceRascunho']
+            this.rascunhoService.deleteRascunho(codigo)
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
@@ -44,8 +46,6 @@ export class TelaCorridaComponent implements OnInit {
           },
         });
       }
-
-
     } else {
       this.propostaService
         .postProposta()
@@ -66,7 +66,8 @@ export class TelaCorridaComponent implements OnInit {
     private demandaService: DemandaService,
     private propostaService: PropostaService,
     private activatedRoute: ActivatedRoute,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private rascunhoService: RascunhoService
   ) {
     this.tipoExibicaoTela();
 

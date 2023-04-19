@@ -78,29 +78,29 @@ export class TelaCorridaComponent implements OnInit {
   }
 
   tipoExibicaoTela() {
-    if (this.router.url == '/tela-inicial/demanda') {
+    if (this.router.url.includes('reformular-demanda')) {
       this.aparecerProposta = false;
-      this.demandaService.resetDemandaForm();
-    }
-    else {
-      if (this.router.url.includes('reformular-demanda')) {
-        this.aparecerProposta = false;
-      } else if (this.router.url.includes('rascunho')) {
-        this.aparecerProposta = false;
-        this.activatedRoute.params.subscribe(
-          e => {
-            this.demandaService.setFormDemandaRascunho(e['indiceRascunho'])
-          }
-        )
-      } else {
-        this.aparecerProposta = true;
-      }
+      this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
+        .subscribe(e => {
+          this.serviceCalled = true;
+          this.demandaService.setFormDemandaData(e);
+        })
+    } else if (this.router.url.includes('rascunho')) {
+      this.aparecerProposta = false;
+      this.activatedRoute.params.subscribe(
+        e => {
+          this.demandaService.setFormDemandaRascunho(e['indiceRascunho'])
+        }
+      )
+    } else {
+      this.aparecerProposta = true;
       this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
         .subscribe(e => {
           this.serviceCalled = true;
           this.demandaService.setFormDemandaData(e);
         })
     }
+
   }
 
 

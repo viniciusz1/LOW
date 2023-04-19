@@ -54,26 +54,29 @@ export class DemandaService {
   setFormDemandaRascunho(indiceDemanda: number) {
     let i: any = localStorage.getItem('rascunhos')
     let listaRascunho = JSON.parse(i)
+    if (listaRascunho[indiceDemanda]) {
+      this.demandaForm.patchValue({
+        tituloDemanda: listaRascunho[indiceDemanda].tituloDemanda,
+        beneficioRealDemanda: {
+          moedaBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.valorBeneficio
+        },
+        beneficioPotencialDemanda: {
+          moedaBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.valorBeneficio
+        },
+        beneficioQualitativoDemanda: listaRascunho[indiceDemanda].beneficioQualitativoDemanda,
+        frequenciaDeUsoDemanda: listaRascunho[indiceDemanda].frequenciaDeUsoDemanda,
+        centroCustosDemanda: listaRascunho[indiceDemanda].centroCustosDemanda,
+        codigoDemanda: indiceDemanda.toString(),
+        situacaoAtualDemanda: listaRascunho[indiceDemanda].situacaoAtualDemanda,
+        objetivoDemanda: listaRascunho[indiceDemanda].objetivoDemanda,
+      })
+    }
 
-    this.demandaForm.patchValue({
-      tituloDemanda: listaRascunho[indiceDemanda].tituloDemanda,
-      beneficioRealDemanda: {
-        moedaBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.moedaBeneficio,
-        memoriaDeCalculoBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.memoriaDeCalculoBeneficio,
-        valorBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.valorBeneficio
-      },
-      beneficioPotencialDemanda: {
-        moedaBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.moedaBeneficio,
-        memoriaDeCalculoBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.memoriaDeCalculoBeneficio,
-        valorBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.valorBeneficio
-      },
-      beneficioQualitativoDemanda: listaRascunho[indiceDemanda].beneficioQualitativoDemanda,
-      frequenciaDeUsoDemanda: listaRascunho[indiceDemanda].frequenciaDeUsoDemanda,
-      centroCustosDemanda: listaRascunho[indiceDemanda].centroCustosDemanda,
-      codigoDemanda: indiceDemanda.toString(),
-      situacaoAtualDemanda: listaRascunho[indiceDemanda].situacaoAtualDemanda,
-      objetivoDemanda: listaRascunho[indiceDemanda].objetivoDemanda,
-    })
+
   }
 
 
@@ -94,11 +97,11 @@ export class DemandaService {
       })
     }
     let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
-    let situacaoAtualDemanda: any =  this.demandaForm.value.situacaoAtualDemanda
+    let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
     // toHTML(
     this.demandaForm.patchValue({
       solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-      objetivoDemanda:objetivoDemanda,
+      objetivoDemanda: objetivoDemanda,
       situacaoAtualDemanda: situacaoAtualDemanda
     })
   }

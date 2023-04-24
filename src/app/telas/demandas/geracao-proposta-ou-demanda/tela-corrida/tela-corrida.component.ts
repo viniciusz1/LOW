@@ -74,7 +74,7 @@ export class TelaCorridaComponent implements OnInit {
   }
 
   teste() {
-    console.log(this.demandaService.getFormDemandaValid)
+    return this.demandaService.getFormDemandaInvalid
   }
 
   tipoExibicaoTela() {
@@ -98,11 +98,9 @@ export class TelaCorridaComponent implements OnInit {
         .subscribe(e => {
           this.serviceCalled = true;
           this.demandaService.setFormDemandaData(e);
-          console.log("osiadjf")
           this.propostaService.setFormDemandaRascunho(this.codigoDemandaRota)
         })
     }
-
   }
 
 

@@ -24,7 +24,7 @@ export class DemandaService {
     situacaoAtualDemanda: ['', ValidatorsEditor.required],
     objetivoDemanda: ['', ValidatorsEditor.required],
     beneficioRealDemanda: this.fb.group({
-      moedaBeneficio: [''],
+      moedaBeneficio: ['', this.beneficioValidator.bind(this)],
       memoriaDeCalculoBeneficio: [''],
       valorBeneficio: [''],
     }),
@@ -39,13 +39,47 @@ export class DemandaService {
       codigoUsuario: 0,
     },
     codigoDemanda: [''],
-    centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)]),
-    // version: [0],
-
+    centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
   });
 
-  public get getFormDemandaValid() {
-    return this.demandaForm
+  private link = '';
+  public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
+  private filtros: Filtro | undefined
+  private arquivos: File[] = [];
+
+  beneficioValidator(formGroup: FormGroup) {
+    const beneficioReal = formGroup.get('beneficioRealDemanda');
+    const beneficioPotencial = formGroup.get('beneficioPotencialDemanda');
+
+    if (beneficioReal?.get('moedaBeneficio')?.value ||
+      beneficioReal?.get('memoriaDeCalculoBeneficio')?.value ||
+      beneficioReal?.get('valorBeneficio')?.value) {
+
+      if (!beneficioReal.get('moedaBeneficio')?.value ||
+        !beneficioReal.get('memoriaDeCalculoBeneficio')?.value ||
+        !beneficioReal.get('valorBeneficio')?.value) {
+        beneficioReal.setErrors({ beneficioIncomplete: true });
+      } else {
+        beneficioReal.setErrors(null);
+      }
+    }
+
+    if (beneficioPotencial?.get('moedaBeneficio')?.value ||
+      beneficioPotencial?.get('memoriaDeCalculoBeneficio')?.value ||
+      beneficioPotencial?.get('valorBeneficio')?.value) {
+
+      if (!beneficioPotencial?.get('moedaBeneficio')?.value ||
+        !beneficioPotencial?.get('memoriaDeCalculoBeneficio')?.value ||
+        !beneficioPotencial?.get('valorBeneficio')?.value) {
+        beneficioPotencial.setErrors({ beneficioIncomplete: true });
+      } else {
+        beneficioPotencial.setErrors(null);
+      }
+    }
+  }
+
+  public get getFormDemandaInvalid() {
+    return this.demandaForm.invalid
   }
   public get getFormDemanda() {
     return this.demandaForm.value
@@ -80,18 +114,17 @@ export class DemandaService {
   }
 
 
-  public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
 
   //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
   //ou até mesmo o número do código de usuário
   insertsBeforePostDemanda() {
-    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == undefined) {
+    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == '') {
       this.demandaForm.patchValue({
         beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
       })
     }
 
-    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == undefined) {
+    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == '') {
       this.demandaForm.patchValue({
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
@@ -108,10 +141,17 @@ export class DemandaService {
 
   postDemanda() {
     //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
+
+
+
     let demandaFormData = new FormData();
-    this.arquivos.map((item) =>
-      demandaFormData.append('arquivos', item, item.name)
-    );
+    if (this.arquivos.length != 0) {
+      this.arquivos.map((item) =>
+        demandaFormData.append('arquivos', item, item.name)
+      );
+    } else {
+      demandaFormData.append('arquivos', new File([], ''));
+    }
     try {
       this.insertsBeforePostDemanda()
     } catch (err) {
@@ -120,6 +160,7 @@ export class DemandaService {
 
     //Inserindo o form da demanda em si
 
+    console.log(this.demandaForm.value)
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
 
     //Retornando a requisição
@@ -137,7 +178,7 @@ export class DemandaService {
   }
 
   removeCenterOfCost(index: number) {
-    (this.demandaForm.controls.centroCustosDemanda as FormArray).removeAt(index);
+    (this.demandaForm.controls['centroCustosDemanda'] as FormArray).removeAt(index);
   }
 
   reformularDemanda() {
@@ -198,14 +239,11 @@ export class DemandaService {
     return this.http.put(path + 'demanda/cancell/' + codigoDemanda, motivoReprovacao)
   }
   public addCenterOfCost() {
-    (this.demandaForm.controls.centroCustosDemanda as FormArray).push(
+    (this.demandaForm.controls['centroCustosDemanda'] as FormArray).push(
       this.createCentroCusto(undefined)
     );
 
   }
-  private filtros: Filtro | undefined
-
-  private arquivos: File[] = [];
 
   public get getArquivos() {
     return this.arquivos
@@ -285,7 +323,6 @@ export class DemandaService {
     }
     return 0;
   }
-  private link = ''
   getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
     if (pesquisaEspecial?.status) {
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=`
@@ -338,10 +375,7 @@ export class DemandaService {
     );
   }
 
-
-
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
-
     return this.http.put<any>(
       path + `demanda/update/status/${codigoDemanda}`,
       decisao
@@ -349,10 +383,7 @@ export class DemandaService {
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) {
-
-
     this.listaArquivosDemanda.subscribe(arquivos => {
-      console.log("hey")
       this.arquivos = arquivos
     })
   }

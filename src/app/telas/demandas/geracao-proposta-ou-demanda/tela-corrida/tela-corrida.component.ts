@@ -7,6 +7,11 @@ import { PrimeIcons } from 'primeng/api';
 import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
 import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
 
+interface Tab {
+  title: string;
+  content: string;
+}
+
 @Component({
   selector: 'app-tela-corrida',
   templateUrl: './tela-corrida.component.html',
@@ -20,6 +25,13 @@ serviceCalled = false;
   posicaoScroll = 0;
   titulosDemanda: any[] = [];
   activeSection: string = '';
+  tabs2: Tab[] = [
+    { title: 'Aba 1', content: 'Conteúdo da Aba 1' },
+    { title: 'Aba 2', content: 'Conteúdo da Aba 2' },
+    { title: 'Aba 3', content: 'Conteúdo da Aba 3' }
+  ];
+
+  activeIndex = 1;
 
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
@@ -36,6 +48,7 @@ serviceCalled = false;
       }else{
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
+            console.log(response)
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
@@ -71,7 +84,7 @@ serviceCalled = false;
   }
 
   teste() {
-    console.log(window.scrollY);
+    console.log(this.demandaService.getFormDemandaValid)    
   }
 
   tipoExibicaoTela() {

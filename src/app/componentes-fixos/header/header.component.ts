@@ -1,7 +1,7 @@
 import { NavigationEnd, Router } from '@angular/router';
 import { NivelAcesso } from './../../models/nivel-acesso.enum';
 import { textoTutorial } from '../../shared/textoDoTutorial';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { filter } from 'rxjs';
@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
         }
       });
   }
+  @Input() telaLogin = false;
   //?
   mostrar_modal = false;
   //Variável em que recebe o texto do tutorial

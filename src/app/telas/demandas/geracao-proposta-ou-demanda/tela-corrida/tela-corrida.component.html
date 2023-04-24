@@ -15,7 +15,7 @@
       </div>
         <nav class="h-100 flex-column align-items-stretch pe-4">
           <nav class="nav nav-pills flex-column" id="scroll" >
-            <a class="nav-link nav-scroll" (click)="indoPraCima('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" (click)="teste()">Dados Gerais</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCima('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" >Dados Gerais</a>
             <a class="nav-link nav-scroll" (click)="indoPraCima('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">Benefícios</a>
             <a class="nav-link nav-scroll" (click)="indoPraCima('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="cursor:pointer">Adicionais</a>
           </nav>
@@ -26,12 +26,12 @@
   <div class="tela-corrida col-10 border-start">
     <div>
       <div style="margin: 0 10vw" class="mt-5">
-        <p-accordion *ngIf="aparecerProposta">
+        <p-accordion *ngIf="aparecerProposta" id="accordion-proposta" [activeIndex]="[0]">
           <p-accordionTab header="Demanda">
-            <app-parte-demanda></app-parte-demanda>
+            <app-parte-demanda [aparecerProposta]="aparecerProposta"></app-parte-demanda>
           </p-accordionTab>
         </p-accordion>
-        <app-parte-demanda *ngIf="!aparecerProposta"></app-parte-demanda>
+        <app-parte-demanda *ngIf="!aparecerProposta" [aparecerProposta]="aparecerProposta"></app-parte-demanda>
         <app-parte-reuniao *ngIf="aparecerProposta"></app-parte-reuniao>
         <div
           class="d-flex justify-content-between"
@@ -40,6 +40,7 @@
           <button class="btn btn-danger ms-2" routerLink="/tela-inicial">
             Cancelar
           </button>
+          <div (click)="teste()">kkkj</div>
           <button class="btn btn-primary me-2" (click)="onSubmitDemanda()">
             Finalizar
           </button>

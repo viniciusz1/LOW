@@ -135,7 +135,7 @@
         "login":"Login",
         "usuario": "Usuario",
         "senha": "Senha",
-        "lembrar-senha": "Lembrar-me",
+        "lembrar": "Lembrar-me",
         "esqueceu-senha": "Esqueceu a senha?",
         "b-entrar": "Entrar"
       },

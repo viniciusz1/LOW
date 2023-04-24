@@ -16,9 +16,9 @@ import { CentroCusto } from '../models/centro-custo.model';
 })
 export class DemandaService {
   public demandaForm = this.fb.group({
-    tituloDemanda: ['', [Validators.required]],
-    situacaoAtualDemanda: ['', [Validators.required]],
-    objetivoDemanda: ['', [Validators.required]],
+    tituloDemanda: ['', Validators.required],
+    situacaoAtualDemanda: [''],
+    objetivoDemanda: [''],
     beneficioRealDemanda: this.fb.group({
       moedaBeneficio: [''],
       memoriaDeCalculoBeneficio: [''],
@@ -30,7 +30,7 @@ export class DemandaService {
       valorBeneficio: [''],
     }),
     beneficioQualitativoDemanda: [''],
-    frequenciaDeUsoDemanda: ['', [Validators.required]],
+    frequenciaDeUsoDemanda: ['', Validators.required],
     solicitanteDemanda: {
       codigoUsuario: 0,
     },
@@ -38,6 +38,10 @@ export class DemandaService {
     centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
 
   });
+
+  public get getFormDemandaValid(){
+    return this.formEditorEspecial
+  }
 
   public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
 
@@ -59,6 +63,7 @@ export class DemandaService {
   }
 
   reformularDemanda() {
+
     this.demandaForm.patchValue({
       situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda,
@@ -272,10 +277,13 @@ export class DemandaService {
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
+
+   
+    if(this.formEditorEspecial.value.situacaoAtualDemanda && this.formEditorEspecial.value.objetivoDemanda)
     this.demandaForm.patchValue({
       solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
-      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda
+      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda.replace('<br>', '<br />'),
+      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda.replace('<br>', '<br />')
     })
   }
 
@@ -290,6 +298,8 @@ export class DemandaService {
     } catch (err) {
       alert("Ocorreu um erro ao cadastrar: " + err);
     }
+
+    console.log(this.demandaForm.value)
     //Inserindo o form da demanda em si
     
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));

@@ -11,24 +11,26 @@ import { PropostaService } from './proposta.service';
     providedIn: 'root',
 })
 export class RascunhoService {
+    
     set atualizarRascunhoDemanda(indice: number) {
         let rascunhos = this.getRascunhosDemanda
         rascunhos[indice] = this.demandaService.getFormDemanda
         rascunhos[indice].codigoDemanda = indice
         localStorage.setItem('rascunhos', JSON.stringify(rascunhos))
     }
+
+    //Função inutilizada. Rascunho só para criação de demanda
     set atualizarRascunhoProposta(codigoDemanda: number){
-        let rascunhos: any[] = this.getRascunhosProposta
-        let indiceProposta: any = rascunhos.findIndex(e => e.codigoDemanda == codigoDemanda.toString())
-        if(indiceProposta != -1){
-            rascunhos[indiceProposta] = this.propostaService.valueDemandaProposta
-        }else{
-            rascunhos.push(this.propostaService.valueDemandaProposta)
-        }
-        console.log("atualizando rascunho")
-        localStorage.setItem('rascunhosProposta', JSON.stringify(rascunhos))
+        // let rascunhos: any[] = this.getRascunhosProposta
+        // let indiceProposta: any = rascunhos.findIndex(e => e.codigoDemanda == codigoDemanda.toString())
+        // if(indiceProposta != -1){
+        //     rascunhos[indiceProposta] = this.propostaService.valueDemandaProposta
+        // }else{
+        //     rascunhos.push(this.propostaService.valueDemandaProposta)
+        // }
+        // console.log("atualizando rascunho")
+        // localStorage.setItem('rascunhosProposta', JSON.stringify(rascunhos))
     }
-    
 
     deleteRascunho(codigo: string) {
         let rascunhos = this.getRascunhosDemanda
@@ -64,6 +66,7 @@ export class RascunhoService {
             return -1
         }
     }
+    
     constructor(private demandaService: DemandaService, private propostaService: PropostaService) {
 
     }

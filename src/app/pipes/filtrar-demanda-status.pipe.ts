@@ -16,21 +16,21 @@ import { StatusDemanda } from '../models/statusDemanda.enum';
 export class FiltrarDemandaStatusPipe implements PipeTransform {
 
   transform(demandas: Demanda[], ...titulo: string[]): Demanda[] {
-    if (titulo[0] == "Draft") {
+    if (titulo[0] == "Seus Rascunhos") {
       let list: any = localStorage.getItem('rascunhos')
-      let listProposta: any = localStorage.getItem('rascunhosProposta')
-      if (list)
-        listProposta = JSON.parse(listProposta)
+      // let listProposta: any = localStorage.getItem('rascunhosProposta')
+      // if (list)
+      //   listProposta = JSON.parse(listProposta)
       list = JSON.parse(list)
       for (let i of list) {
         i.statusDemanda = StatusDemanda.DRAFT
       }
-      for (let i of listProposta) {
-        i.statusDemanda = StatusDemanda.DRAFT_PROPOSTA
-      }
-      for (let i of listProposta) {
-        list.push(i)
-      }
+      // for (let i of listProposta) {
+      //   i.statusDemanda = StatusDemanda.DRAFT_PROPOSTA
+      // }
+      // for (let i of listProposta) {
+      //   list.push(i)
+      // }
       
       return list
     }

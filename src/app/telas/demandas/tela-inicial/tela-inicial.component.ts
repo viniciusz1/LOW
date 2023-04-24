@@ -410,11 +410,12 @@ export class TelaInicialComponent implements OnInit {
   exibirFilasDeStatus() {
 
 
-
-    this.listaTituloNaoFiltrado.push({
-      status: 'DRAFT',
-      titulo: 'Draft',
-    });
+    if(this.rascunhoService.getRascunhosDemanda.length > 0){
+      this.listaTituloNaoFiltrado.push({
+        status: 'DRAFT',
+        titulo: 'Seus Rascunhos',
+      });
+    }
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'

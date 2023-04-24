@@ -297,6 +297,7 @@
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                 "
+                (clicouEmExcluir)="carregarDemandasIniciais()"
                 [dadosDemada]="demanda"
                 (verDocumentoProposta)="openModalDemandaDocumento($event)"
                 (irParaChat)="irParaChat($event)"

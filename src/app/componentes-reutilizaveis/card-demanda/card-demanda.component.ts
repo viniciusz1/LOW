@@ -211,7 +211,7 @@ export class CardDemandaComponent implements OnInit {
         rota: 'tela-inicial/rascunho/' + this.dadosDemada.codigoDemanda,
         texto: 'Continuar Demanda',
       };
-    }else if(this.dadosDemada.statusDemanda == StatusDemanda.DRAFT_PROPOSTA){
+    } else if (this.dadosDemada.statusDemanda == StatusDemanda.DRAFT_PROPOSTA) {
       this.rascunho = true
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'tela-inicial/proposta/' + this.dadosDemada.codigoDemanda,
@@ -238,13 +238,15 @@ export class CardDemandaComponent implements OnInit {
     return true;
   }
 
-  deleteRascunhoFromLocalStorage(){
-    if(this.dadosDemada.codigoDemanda){
-
+  deleteRascunhoFromLocalStorage() {
+    if (this.dadosDemada.codigoDemanda) {
       this.rascunhoService.deleteRascunho(this.dadosDemada.codigoDemanda)
-    }alert(
-      "Código demanda is null: card-demanda"
-    )
+      this.clicouEmExcluir.emit()
+    } else {
+      alert(
+        "Código demanda is null: card-demanda"
+      )
+    }
   }
 
   existePauta() {

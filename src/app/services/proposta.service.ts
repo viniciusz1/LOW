@@ -1,5 +1,4 @@
 import { path } from './path/rota-api';
-import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
 import { TipoDespesa } from './../models/tipoDespesa.enum';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -59,7 +58,27 @@ export class PropostaService {
       nomeCentroCusto: ['']
     });
   }
-
+  setFormDemandaRascunho(codigoDemanda: number) {
+    let i: any = localStorage.getItem('rascunhosProposta')
+    let listaRascunho: any[] = JSON.parse(i)
+    let proposta =listaRascunho.find(e=> e.codigoDemanda == codigoDemanda)
+    console.log(proposta)
+    console.log(proposta.prazoProposta)
+    if (proposta) {
+      this.formProposta.patchValue({
+        prazoProposta: proposta.prazoProposta,
+        codigoPPMProposta: proposta.codigoPPMProposta,
+        jiraProposta: proposta.jiraProposta,
+        recursosProposta: proposta.recursosProposta,
+        escopoDemandaProposta: proposta.escopoDemandaProposta,
+        inicioExDemandaProposta: proposta.inicioExDemandaProposta,
+        fimExDemandaProposta: proposta.fimExDemandaProposta,
+        paybackProposta: proposta.paybackProposta,
+        responsavelProposta: proposta.responsavelProposta,
+        statusDemanda:proposta.statusDemanda
+      })
+    }
+  }
   removeCenterOfCost(index: number) {
     (this.formRecursos.controls.centroCustoRecurso as FormArray).removeAt(index);
   }
@@ -90,7 +109,7 @@ export class PropostaService {
 
   }
 
-  get valueDemandaProposta(){
+  get valueDemandaProposta() {
     return Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value);
   }
 
@@ -108,7 +127,7 @@ export class PropostaService {
     } catch (err) {
       alert("Ocorreu um erro ao cadastrar: " + err);
     }
-    
+
     propostaFormData.append('proposta', JSON.stringify(this.valueDemandaProposta));
 
     this.demandaService.getArquivos.map((item) =>

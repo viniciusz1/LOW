@@ -203,19 +203,6 @@ export class TelaInicialComponent implements OnInit {
   }
 
   irParaChat(event: Event) {
-    // this.cabecalhoMensagemDeConfirmacao = 'Iniciar conversa';
-    // this.confirmationService.confirm({
-    //   dismissableMask: true,
-    //   key: 'iniciarChat',
-    //   header: 'Iniciar Chat',
-    //   blockScroll: false,
-    //   message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
-
-    //   // accept: () => {
-    //   //   this.router.navigate(['/tela-inicial/chat']);
-    //   // },
-    // });
-
     if (event.target)
       this.confirmationService.confirm({
         target: event.target,
@@ -226,7 +213,7 @@ export class TelaInicialComponent implements OnInit {
           this.router.navigate(['/tela-inicial/chat']);
         },
         reject: () => {
-          // this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+          
         }
       });
   }

@@ -18,15 +18,14 @@ export class RascunhoService {
         localStorage.setItem('rascunhos', JSON.stringify(rascunhos))
     }
     set atualizarRascunhoProposta(codigoDemanda: number){
-        console.log("codigoDemanda "+codigoDemanda)
         let rascunhos: any[] = this.getRascunhosProposta
-        console.log(rascunhos)
         let indiceProposta: any = rascunhos.findIndex(e => e.codigoDemanda == codigoDemanda.toString())
         if(indiceProposta != -1){
             rascunhos[indiceProposta] = this.propostaService.valueDemandaProposta
         }else{
             rascunhos.push(this.propostaService.valueDemandaProposta)
         }
+        console.log("atualizando rascunho")
         localStorage.setItem('rascunhosProposta', JSON.stringify(rascunhos))
     }
     

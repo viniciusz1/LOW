@@ -211,6 +211,12 @@ export class CardDemandaComponent implements OnInit {
         rota: 'tela-inicial/rascunho/' + this.dadosDemada.codigoDemanda,
         texto: 'Continuar Demanda',
       };
+    }else if(this.dadosDemada.statusDemanda == StatusDemanda.DRAFT_PROPOSTA){
+      this.rascunho = true
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: 'tela-inicial/proposta/' + this.dadosDemada.codigoDemanda,
+        texto: 'Continuar Demanda',
+      };
     } else if (
       !this.isPauta &&
       !this.rascunho &&
@@ -233,8 +239,12 @@ export class CardDemandaComponent implements OnInit {
   }
 
   deleteRascunhoFromLocalStorage(){
-    if(this.dadosDemada.codigoDemanda)
-    this.rascunhoService.deleteRascunho(this.dadosDemada.codigoDemanda)
+    if(this.dadosDemada.codigoDemanda){
+
+      this.rascunhoService.deleteRascunho(this.dadosDemada.codigoDemanda)
+    }alert(
+      "Código demanda is null: card-demanda"
+    )
   }
 
   existePauta() {

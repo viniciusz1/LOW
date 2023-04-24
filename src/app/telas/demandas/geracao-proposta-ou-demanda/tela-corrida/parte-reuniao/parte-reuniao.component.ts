@@ -33,6 +33,7 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
   onInputChange() {
+    console.log("change")
     this.inputSubject.next("");
   }
 

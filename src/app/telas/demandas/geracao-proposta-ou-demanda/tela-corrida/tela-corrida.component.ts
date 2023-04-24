@@ -98,6 +98,8 @@ export class TelaCorridaComponent implements OnInit {
         .subscribe(e => {
           this.serviceCalled = true;
           this.demandaService.setFormDemandaData(e);
+          console.log("osiadjf")
+          this.propostaService.setFormDemandaRascunho(this.codigoDemandaRota)
         })
     }
 

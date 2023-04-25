@@ -376,10 +376,10 @@ export class DemandaService {
   }
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
-    return this.http.put<any>(
-      path + `demanda/update/status/${codigoDemanda}`,
-      decisao
-    );
+    let data = new FormData();
+    data.append('codigo', codigoDemanda);
+    data.append('decisao', decisao.toString());
+    return this.http.put<any>(path + `demanda/update/status`, data);
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) {

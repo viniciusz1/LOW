@@ -42,7 +42,7 @@ export class TelaCorridaComponent implements OnInit {
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
-            alert('Ocorreu um erro: ' + err.status);
+            alert('Ocorreu um erro: ' + err.message);
           },
         });
       }
@@ -54,7 +54,7 @@ export class TelaCorridaComponent implements OnInit {
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
-            alert('Ocorreu um erro: ' + err.status);
+            alert('Ocorreu um erro: ' + err.message);
           },
         });
     }

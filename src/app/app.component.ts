@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { WebSocketConnector } from './websocket/websocket-connector';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'low';
-  constructor(translate: TranslateService){
+  private webSocketConnector: WebSocketConnector | undefined
+  constructor(translate: TranslateService, private http: HttpClient){
+
+
     translate.setDefaultLang('pt');
     translate.use('pt');
 
@@ -25,6 +30,15 @@ export class AppComponent {
         window.localStorage.setItem('fontSize', fontSize);
       }
     }
-
+    ngOnInit(): void {
+      this.webSocketConnector = new WebSocketConnector('http://localhost:8085/low', 'teste', this.onMessage.bind(this))
+    }
+    start(){
+      this.http.put('http://localhost:8085/', {})
+      .subscribe(response => console.log(response))
+    }
+    onMessage(message: any){
+      console.log(message)
+    }
 
 }

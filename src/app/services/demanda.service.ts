@@ -45,7 +45,7 @@ export class DemandaService {
   private link = '';
   public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
   private filtros: Filtro | undefined
-  private arquivos: File[] = [];
+  public arquivos: File[] = [];
 
   beneficioValidator(formGroup: FormGroup) {
     const beneficioReal = formGroup.get('beneficioRealDemanda');

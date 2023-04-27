@@ -123,6 +123,9 @@ export class PropostaService {
 
 
     try {
+
+     
+
       this.demandaService.insertsBeforePostDemanda()
     } catch (err) {
       alert("Ocorreu um erro ao cadastrar: " + err);
@@ -130,10 +133,13 @@ export class PropostaService {
 
     propostaFormData.append('proposta', JSON.stringify(this.valueDemandaProposta));
 
-    this.demandaService.getArquivos.map((item) =>
-      propostaFormData.append('arquivos', item, item.name)
-    );
-
+    if ( this.demandaService.getArquivos.length != 0) {
+      this.demandaService.getArquivos.map((item) =>
+        propostaFormData.append('arquivos', item, item.name)
+      );
+    } else {
+      propostaFormData.append('arquivos', new File([], ''));
+    }
 
     return this.http.post<Demanda | string>(
       path + 'proposta',

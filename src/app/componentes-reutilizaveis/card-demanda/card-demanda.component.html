@@ -33,6 +33,7 @@
       </div>
       <i
         class="bi bi-chat-left-dots me-3"
+        routerLink="/tela-inicial/chat"
         *ngIf="!rascunho && statusPermitido()"
         (click)="irParaChat.emit()"
         style="cursor: pointer"

@@ -30,8 +30,8 @@
                         <span class="p-float-label me-2">
                             <p-dropdown [style]="{height: '37px'}" inputId="dropdown" [autoDisplayFirst]="false"
                                 [options]="tamanho" [(ngModel)]="valorTamanho" optionLabel="tamanho"></p-dropdown>
-                            <label for="float-input" *ngIf="!filtroReduzidoVertical">Tamanho da demanda:</label>
-                            <label for="float-input" *ngIf="filtroReduzidoVertical">Tam. demanda:</label>
+                            <label for="float-input" *ngIf="!filtroReduzidoVertical">Tamanho:</label>
+                            <label for="float-input" *ngIf="filtroReduzidoVertical">Tamanho:</label>
                         </span>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <span class="p-float-label me-2">
                         <p-dropdown [style]="{height: '37px'}" inputId="dropdown" [autoDisplayFirst]="false"
                             [options]="status" [(ngModel)]="valorStatus" optionLabel="status"></p-dropdown>
-                        <label for="dropdown">Status de Aprovação:</label>
+                        <label for="dropdown">Status:</label>
                     </span>
                     <span class="p-float-label me-2">
                         <button

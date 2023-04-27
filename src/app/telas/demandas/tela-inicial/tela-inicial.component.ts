@@ -50,11 +50,11 @@ export class TelaInicialComponent implements OnInit {
 
   ordenarSelect = '';
   opcoesOrdenacao = [
-    { name: 'Data de criação', value: 'dataCriacao' },
-    { name: 'Data de atualização', value: 'dataAtualizacao' },
-    { name: 'Maior Score', value: 'autor' },
-    { name: 'A-Z', value: 'autor' },
-    { name: 'Z-A', value: 'autor' },
+    { name: 'Data de criação ↑', value: '1' },
+    { name: 'Data de criação ↓', value: '2' },
+    { name: 'Maior Score', value: '3' },
+    { name: 'A-Z', value: '4' },
+    { name: 'Z-A', value: '5' },
   ];
 
 
@@ -109,6 +109,29 @@ export class TelaInicialComponent implements OnInit {
         }
       });
 
+  }
+
+  ordenar(sort: { name: string, value: number }) {
+    console.log(this.demandasService.getFiltroData)
+    let filtro: Filtro;
+    if(this.demandasService.getFiltroData){
+      filtro = this.demandasService.getFiltroData;
+      filtro.sort = sort.value;
+    }else{
+      filtro = 
+    {
+      solicitante: "",
+      codigoDemanda: "",
+      status: "",
+      tamanho: "",
+      tituloDemanda: "",
+      analista: "",
+      departamento: "",
+      sort: sort.value,
+    };
+  }
+    this.demandasService.setFiltroData = filtro;
+    this.pesquisarDemandas(undefined);
   }
 
   paginate(event: { page: number }) {
@@ -273,15 +296,17 @@ export class TelaInicialComponent implements OnInit {
         minWidth: '50vw',
         data: event,
       })
-      .afterClosed().subscribe({next: e => {
-        let indice: number | undefined = -1
-        if (this.listaDemandas) {
-          indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-          if (indice !== -1) {
-            this.listaDemandas.splice(indice, 1, e);
+      .afterClosed().subscribe({
+        next: e => {
+          let indice: number | undefined = -1
+          if (this.listaDemandas) {
+            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+            if (indice !== -1) {
+              this.listaDemandas.splice(indice, 1, e);
+            }
           }
         }
-      }})
+      })
 
   }
   openModalHistorico(codigoDemanda: string) {

@@ -39,19 +39,19 @@
         <mat-menu #menu="matMenu">
             <button (click)="abrirModalHistorico()" mat-menu-item>
                 <i class="bi bi-arrow-counterclockwise me-3"></i>
-                <span>Histórico</span>
+                <span>{{ "componentes-reutilizaveis.list-demanda.historico" | translate }}</span>
             </button>
             <button (click)="verDocumentoProposta.emit(dadosDemada)" mat-menu-item>
                 <i class="bi bi-arrows-angle-expand me-3"></i>
-                <span>Ver demanda</span>
+                <span>{{ "componentes-reutilizaveis.list-demanda.ver-demanda" | translate }}</span>
             </button>
             <button *ngIf="existePauta()" routerLink="/tela-inicial/reunioes" mat-menu-item>
                 <i class="bi bi-person-lines-fill me-3"></i>
-                <span>Ir para Reunião</span>
+                <span>{{ "componentes-reutilizaveis.list-demanda.ir-reuniao" | translate }}</span>
             </button>
             <button routerLink="/tela-inicial/chat" mat-menu-item>
                 <i class="bi bi-chat-left-quote me-3"></i>
-                <span>Iniciar conversa</span>
+                <span>{{ "componentes-reutilizaveis.list-demanda.iniciar-conversa" | translate }}</span>
             </button>
         </mat-menu>
     </div>

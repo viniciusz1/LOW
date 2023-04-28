@@ -19,11 +19,11 @@
         <div class="d-flex" joyrideStep="oito" [title]="'Seções'" [stepContent]="customContent"
             [stepContentParams]="{'texto': textoTutorial[7]}" style="overflow: auto;">
             <li *ngIf="nivelAcessoUsuario != 'Solicitante'" class="nav-item">
-                <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'">REUNIÕES</a>
+                <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'">{{ "componentes-fixos.header.reunioes" | translate }}</a>
             </li>
             <li class="nav-item">
                 <a role="button" class="nav-link" routerLink="/tela-inicial" [routerLinkActive]="'active'"
-                    [routerLinkActiveOptions]="{exact: true}">DEMANDAS</a>
+                    [routerLinkActiveOptions]="{exact: true}">{{ "componentes-fixos.header.demandas" | translate }}</a>
             </li>
         </div>
         <li role="button" class="nav-item" routerLink="/tela-inicial/chat" *ngIf="!inicial" joyrideStep="sete"
@@ -79,13 +79,13 @@
         </li>
         <mat-menu #menu="matMenu">
             <button routerLink="/tela-inicial/rascunhos" mat-menu-item>
-                <span><i class="bi bi-clipboard-plus me-3" style="font-size: 20px;"></i>Rascunhos</span>
+                <span><i class="bi bi-clipboard-plus me-3" style="font-size: 20px;"></i>{{ "componentes-fixos.header.rascunhos" | translate }}</span>
             </button>
             <button mat-menu-item routerLink="/tela-inicial/configuracoes/perfil">
-                <span><i class="bi bi-gear me-3" style="font-size: 20px;"></i>Configurações</span>
+                <span><i class="bi bi-gear me-3" style="font-size: 20px;"></i>{{ "componentes-fixos.header.configuracoes" | translate }}</span>
             </button>
             <button routerLink="/" mat-menu-item>
-                <span><i class="bi bi-box-arrow-right me-3" style="font-size: 20px;"></i>Sair</span>
+                <span><i class="bi bi-box-arrow-right me-3" style="font-size: 20px;"></i>{{ "componentes-fixos.header.sair" | translate }}</span>
             </button>
         </mat-menu>
     </ul>

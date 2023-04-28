@@ -17,20 +17,13 @@
             "modal-b-reformular": "修改需求",
             "modal-b-ok": "确定"
         },
-        "marcar-reuniao": {
-            "titulo": "安排会议",
-            "demandas": "需求",
-            "arraste": "将需求拖到此字段中！",
-            "data-hora": "会议日期和时间：",
-            "p-data-hora": "点击此处",
-            "comissao": "选择委员会：",
-            "p-comissao": "选择委员会",
-            "b-marcar": "安排会议"
-        },
         "tela-reunioes": {
             "marcar": "安排会议",
             "calendario": "在日历中查看",
-            "ordenar": "排序"
+            "ordenar": "排序",
+            "modal-b-sim": "是",
+            "modal-b-nao": "否",
+            "modal-b-ok": "确定"
         },
         "filtro-reunioes": {
             "comissao": "委员会",
@@ -68,6 +61,8 @@
         "configuracoes-layout": {
             "titulo": "布局",
             "subtitulo": "C布局常规设置",
+            "padrao": "標準（透明）",
+            "preto": "黑色的",
             "temas": "主题",
             "fonte": "字体",
             "tamanho": "大小"
@@ -88,7 +83,8 @@
             "suprir-desc2": "发送消息给我们，我们将尽快回复...",
             "descricao": "为了改善服务、开发系统或运作，您可以通过以下方式发送建议，以便更轻松地使用系统:",
             "p-input": "在这里写下您的问题：",
-            "b-enviar": "发送"
+            "b-enviar": "发送",
+            "b-baixar":"往下走"
         },
         "tutorial": {
             "t1": {
@@ -134,22 +130,6 @@
             "t8": {
                 "titulo": "筛选需求",
                 "desc": "通过我们的日历，您可以获得更广泛的视野"
-            },
-            "login": {
-                "usuario": "用户",
-                "senha": "密码",
-                "lembra": "记住我",
-                "esqueceu": "忘记密码？",
-                "entrar": "登录"
-            },
-            "filtro-demandas": {
-                "titulo": "标题",
-                "num-solicitacao": "申请编号",
-                "responsavel": "负责人",
-                "tamanho": "需求大小",
-                "solicitante": "申请人",
-                "departamento": "部门",
-                "status": "批准状态"
             },
             "botao-criar-demanda": "创建需求"
         },
@@ -216,6 +196,7 @@
             "periodo-execucao-demanda": "需求执行期间：",
             "payback-simples": "简单回报：",
             "responsaveis-negocio": "业务负责人：",
+            "selecione-status":"選擇狀態以推動需求：",
             "p-prazo-elaboracao": "点击安排",
             "p-recurso-necessario": "例如：后端程序员",
             "p-tipo-despesa": "选择类型",
@@ -283,7 +264,11 @@
             "visualizar": "查看",
             "b-ata-publicada": "公开记录",
             "b-ata-nao-publicada": "未公开记录",
-            "b-gerar-documentacao": "生成文档"
+            "b-gerar-documentacao": "生成文档",
+            "b-finalizar-reuniao":"結束會議",
+            "b-cancelar-reuniao":"取消會議",
+            "b-nao":"否",
+            "b-sim":"是"
         },
         "tela-login": {
             "login": "登录",
@@ -305,8 +290,7 @@
             "data-hora-reuniao": "会议日期和时间：",
             "selecione-comissao": "选择会议委员会：",
             "p-data-hora-reuniao": "单击此处！",
-            "p-selecione-comissao": "选择委员会：",
-            "b-marcar-reuniao": "安排会议"
+            "p-selecione-comissao": "选择委员会："
         },
         "modal-historico": {
             "historico": "历史",
@@ -348,7 +332,8 @@
         "documentos": "文件：",
         "b-cancelar": "取消",
         "b-reprovar": "拒绝需求",
-        "b-aprovar": "批准需求"
+        "b-aprovar": "批准需求",
+        "mensais": " 每月"
     },
     "componentes-reutilizaveis": {
         "card-demanda": {

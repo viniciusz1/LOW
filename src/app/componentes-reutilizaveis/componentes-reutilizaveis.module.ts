@@ -19,6 +19,8 @@ import { CardModule } from 'primeng/card';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { DropdownModule } from "primeng/dropdown";
 import { FormsModule } from '@angular/forms';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { FormsModule } from '@angular/forms';
     CardModule,
     ScrollPanelModule,
     DropdownModule,
-    FormsModule
+    FormsModule,
+    ConfirmDialogModule,
+    SharedModule
   ],
   exports:[
     CardDemandaComponent,

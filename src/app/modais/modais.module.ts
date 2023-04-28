@@ -22,6 +22,7 @@ import { ModalHistoricoComponent } from './modal-historico/modal-historico.compo
 import { ModalCriarReuniaoComponent } from './modal-criar-reuniao/modal-criar-reuniao.component';
 import {CalendarModule} from 'primeng/calendar';
 import { ModalCancelamentoReuniaoComponent } from './modal-cancelamento-reuniao/modal-cancelamento-reuniao.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { ModalCancelamentoReuniaoComponent } from './modal-cancelamento-reuniao/
     InputTextModule,
     CalendarModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    SharedModule
   ],
   exports: [
     ModalDemandaDocumentoComponent

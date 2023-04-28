@@ -7,11 +7,12 @@
         <li class="nav-item d-flex justify-content-center" [ngStyle]="{'width': !demandaPequena ? '25%' : '45%'}">
             <label class="text-truncate d-inline-block" for=""><b>{{dadosDemada.tituloDemanda}}</b></label>
         </li>
-        <li *ngIf="!demandaPequena"  class="nav-item"  style="width: 20%;">
+        <li *ngIf="!demandaPequena" class="nav-item" style="width: 20%;">
             <label class="text-truncate d-inline-block">{{dadosDemada.solicitanteDemanda?.nomeUsuario}}</label>
         </li>
         <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '15%' : '50%'}">
-            <label class="text-truncate d-inline-block">{{dadosDemada.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
+            <label
+                class="text-truncate d-inline-block">{{dadosDemada.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  5%;">
             <label class="text-truncate d-inline-block">190.8</label>
@@ -38,19 +39,19 @@
         <mat-menu #menu="matMenu">
             <button (click)="abrirModalHistorico()" mat-menu-item>
                 <i class="bi bi-arrow-counterclockwise me-3"></i>
-                <span>Histórico</span>
+                <span>{{ "componentes-reutilizaveis.list-demanda.historico" | translate }}</span>
             </button>
-            <button (click)="verDocumentoProposta.emit()" mat-menu-item>
+            <button (click)="verDocumentoProposta.emit(dadosDemada)" mat-menu-item>
                 <i class="bi bi-arrows-angle-expand me-3"></i>
-                <span>Ver demanda</span>
+                <span>{{ "componentes-reutilizaveis.list-demanda.ver-demanda" | translate }}</span>
             </button>
-            <button *ngIf="existePauta()" routerLink="/tela-inicial/ver-pauta" mat-menu-item>
+            <button *ngIf="existePauta()" routerLink="/tela-inicial/reunioes" mat-menu-item>
                 <i class="bi bi-person-lines-fill me-3"></i>
-                <span>Ir para Reunião</span>
+                <span>{{ "componentes-reutilizaveis.list-demanda.ir-reuniao" | translate }}</span>
             </button>
             <button routerLink="/tela-inicial/chat" mat-menu-item>
                 <i class="bi bi-chat-left-quote me-3"></i>
-                <span>Iniciar conversa</span>
+                <span>{{ "componentes-reutilizaveis.list-demanda.iniciar-conversa" | translate }}</span>
             </button>
         </mat-menu>
     </div>

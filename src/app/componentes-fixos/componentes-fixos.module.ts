@@ -11,6 +11,7 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { JoyrideModule } from 'ngx-joyride';
 import {TabMenuModule} from 'primeng/tabmenu';
 import { EscopoPerfilComponent } from './escopo-perfil/escopo-perfil.component';
+import { SharedModule } from '../shared/shared.module';
 
 /*
   Módulo do sistema onde ficam componentes em que são usados em múltiplas telas e não necessitam 
@@ -33,7 +34,8 @@ import { EscopoPerfilComponent } from './escopo-perfil/escopo-perfil.component';
     MatMenuModule,
     BreadcrumbModule,
     JoyrideModule.forRoot(),
-    TabMenuModule
+    TabMenuModule,
+    SharedModule
   ],
   exports: [
     HeaderComponent

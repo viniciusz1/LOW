@@ -1,13 +1,14 @@
 <p class="paragrafo-inicial text-end"><img style="width: 60px;"
         src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt=""></p>
 <mat-dialog-content class="mat-typography">
-    <h3 mat-dialog-title class="d-flex justify-content-center"><span><b>ATA REUNIÃO COMISSÃO PROCESSOS DE VENDAS E
-                DESENVOLVIMENTO DE PRODUTO</b></span>
+    <h3 mat-dialog-title class="d-flex justify-content-center"><span><b>
+        {{ "documento-pdf.ata-reuniao-comissao-processos" | translate }}
+    </b></span>
     </h3>
     <p>
-        <span><b>ATA Nº:</b> 10/2021</span>
+        <span><b>{{ "documento-pdf.ata-n" | translate }}</b> 10/2021</span>
         <br>
-        <span><b>DATA:</b> {{reuniao?.dataReuniao | date:'dd/MM/YYYY'}}</span>
+        <span><b>{{ "documento-pdf.data" | translate }}</b> {{reuniao?.dataReuniao | date:'dd/MM/YYYY'}}</span>
     </p>
 
     <div *ngFor="let i of reuniao?.propostasReuniao">
@@ -15,12 +16,12 @@
             <app-modal-demanda-documento [documentoEmAta]="true" [dadosDemanda]="i"></app-modal-demanda-documento>
 
             <b>
-                RESPONSÁVEIS NEGÓCIO:
+                {{ "documento-pdf.responsaveis-negocio" | translate }}
             </b><span *ngFor="let responsavel of i.responsaveisNegocioDemanda">{{responsavel}}</span>
 
             <p>
-                <b>PARECER COMISSÃO:</b> {{i.parecerComissaoProposta}}<br>
-                <b>DECISÃO: </b> {{i.ultimaDecisaoComissao}}
+                <b>{{ "documento-pdf.parecer-comissao" | translate }}</b> {{i.parecerComissaoProposta}}<br>
+                <b>{{ "documento-pdf.decisao" | translate }}</b> {{i.ultimaDecisaoComissao}}
             </p>
 
         </div>
@@ -30,5 +31,5 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{ "documento-pdf.b-fechar" | translate }}</button>
 </mat-dialog-actions>

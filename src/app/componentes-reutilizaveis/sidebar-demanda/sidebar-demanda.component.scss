@@ -1,28 +1,39 @@
-
-.barra-nav-item{
+.barra-nav-item {
     width: 7px;
 }
-.nav-item{
+
+.nav-item {
     background-color: #4889B8;
     cursor: pointer;
 }
-.nav-item:hover{
+
+.nav-item:hover {
     background-color: #4281ac;
     transition: 0.3s;
 }
-.barra-nav-item{
+
+.barra-nav-item {
     border-right: 1px solid white;
 }
-.nav-link{
-    color:white
+
+.nav-link {
+    color: white
 }
-.barra-direita{
-    display:flex; align-items:center; justify-content:center; color: white; width: 25px; background-color: rgba(0, 0, 0, 0.349)
+
+.barra-direita {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    width: 25px;
+    background-color: rgba(0, 0, 0, 0.349)
 }
-.barra-direita:hover{
+
+.barra-direita:hover {
     background-color: rgba(0, 0, 0, 0.596);
-     transition: 0.3s;
+    transition: 0.3s;
 }
+
 .inverte {
     transform: rotate(180deg);
     transition: 0.5s;
@@ -31,4 +42,16 @@
 .naoinverte {
     transform: rotate(0);
     transition: 0.5s;
+}
+
+@media screen and (max-width: 1250px) {
+    a {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 1251px) {
+    a {
+        font-size: 14px;
+    }
 }

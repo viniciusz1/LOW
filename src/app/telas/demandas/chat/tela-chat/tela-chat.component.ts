@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
 
 @Component({
   selector: 'app-tela-chat',
@@ -11,9 +14,14 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 export class TelaChatComponent implements OnInit {
   messageService: any;
   items: MenuItem[] = [];
+  codigoRota = ""
 
-  constructor(private confirmationService: ConfirmationService) { }
+  private webSocketConnector: WebSocketConnector | undefined
+
+  constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService) { }
   @ViewChild('mensagemDigitada') private mensagem: any;
+
+
   mensagens: Mensagem[] = [{
     mensagem: "Olá, tudo bem?",
     rementente: "analista"
@@ -24,7 +32,43 @@ export class TelaChatComponent implements OnInit {
   },
   ]
 
+  onMessage(message: any) {
+    console.log(message)
+  }
+  enviarMensagem(event: KeyboardEvent | Event) {
+    if (this.mensagem.nativeElement.value == "") {
+      return
+    }
+
+    if (event instanceof KeyboardEvent) {
+      if (event.key === "Enter") {
+        this.mensagens.push({
+          mensagem: this.mensagem.nativeElement.value,
+          rementente: "solicitante"
+        })
+        this.webSocketConnector?.send("/low/demanda/"+this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
+        this.mensagem.nativeElement.value = "";
+      }
+    } else {
+      this.mensagens.push({
+        mensagem: this.mensagem.nativeElement.value,
+        rementente: "solicitante"
+      })
+      this.webSocketConnector?.send("/low/demanda/"+this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
+      this.mensagem.nativeElement.value = ""
+    }
+  }
+
   ngOnInit(): void {
+    this.route.params.subscribe(e => {
+      this.webSocketConnector = new WebSocketConnector('/demanda/'+e['codigoDemanda']+'/chat', this.onMessage.bind(this))
+      this.codigoRota = e['codigoDemanda']
+    })
+
+
+
+    
+
     this.items = [
       {
         icon: 'pi pi-pencil',
@@ -79,27 +123,7 @@ export class TelaChatComponent implements OnInit {
     })
   };
 
-  enviarMensagem(event: KeyboardEvent | Event) {
-    if (this.mensagem.nativeElement.value == "") {
-      return
-    }
 
-    if (event instanceof KeyboardEvent) {
-      if (event.key === "Enter") {
-        this.mensagens.push({
-          mensagem: this.mensagem.nativeElement.value,
-          rementente: "solicitante"
-        })
-        this.mensagem.nativeElement.value = "";
-      }
-    } else {
-      this.mensagens.push({
-        mensagem: this.mensagem.nativeElement.value,
-        rementente: "solicitante"
-      })
-      this.mensagem.nativeElement.value = ""
-    }
-  }
 }
 interface Mensagem {
   rementente: string,

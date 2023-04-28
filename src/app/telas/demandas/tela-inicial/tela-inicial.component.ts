@@ -367,6 +367,7 @@ export class TelaInicialComponent implements OnInit {
           if (demandas.length > 0) {
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
+            console.log(demandas)
             this.nenhumResultadoEncontrado = false;
           }
         });
@@ -408,8 +409,6 @@ export class TelaInicialComponent implements OnInit {
   }
 
   exibirFilasDeStatus() {
-
-
     if(this.rascunhoService.getRascunhosDemanda.length > 0){
       this.listaTituloNaoFiltrado.push({
         status: 'DRAFT',

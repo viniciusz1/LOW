@@ -46,7 +46,7 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
             component: TelaCorridaComponent
           },
           {
-            path: 'chat',
+            path: 'chat/:codigoDemanda',
             component: TelaChatComponent
           },
           {

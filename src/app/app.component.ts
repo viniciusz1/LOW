@@ -10,7 +10,6 @@ import { WebSocketConnector } from './websocket/websocket-connector';
 })
 export class AppComponent implements OnInit{
   title = 'low';
-  private webSocketConnector: WebSocketConnector | undefined
   constructor(translate: TranslateService, private http: HttpClient){
 
 
@@ -31,14 +30,9 @@ export class AppComponent implements OnInit{
       }
     }
     ngOnInit(): void {
-      this.webSocketConnector = new WebSocketConnector('http://localhost:8085/low', 'teste', this.onMessage.bind(this))
     }
-    start(){
-      this.http.put('http://localhost:8085/', {})
-      .subscribe(response => console.log(response))
-    }
+    
     onMessage(message: any){
-      console.log(message)
     }
 
 }

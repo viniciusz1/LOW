@@ -46,6 +46,10 @@ export class MessagesService {
     });
   }
 
+  getDemandasRelacionadas(){
+    return this.http.get<any>('http://localhost:8085/low/mensagens/demandasDiscutidas/' + 2)
+  }
+
   getMessages(codigoDemanda: string) {
     return this.http.get<Mensagem[]>('http://localhost:8085/low/mensagens/' + codigoDemanda)
   }

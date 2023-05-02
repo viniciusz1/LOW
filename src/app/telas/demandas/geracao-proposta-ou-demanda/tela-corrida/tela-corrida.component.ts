@@ -4,8 +4,6 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
-import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
-import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
 import { RascunhoService } from 'src/app/services/rascunho.service';
 
 interface Tab {

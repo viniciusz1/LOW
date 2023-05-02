@@ -21,6 +21,7 @@ export class TelaChatComponent implements OnInit {
   items: MenuItem[] = [];
   codigoRota = ""
   mensagens: Mensagem[] = []
+  conversasDemandas: any = []
 
   constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService, private messagesService: MessagesService) {
     if (this.codigoRota != "") {
@@ -39,11 +40,14 @@ export class TelaChatComponent implements OnInit {
         this.mensagens.push(...mensagens)
       })  
     }
-
+    this.setarConversas()
   }
   @ViewChild('mensagemDigitada') private mensagem: any;
 
-
+  setarConversas(){
+    this.messagesService.getDemandasRelacionadas()
+    .subscribe(e=> console.log(e))
+  }
 
   enviarMensagem(event: KeyboardEvent | Event) {
     if (this.mensagem.nativeElement.value == "") {

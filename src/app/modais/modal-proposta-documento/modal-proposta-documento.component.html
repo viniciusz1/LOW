@@ -1,49 +1,49 @@
 <p class="paragrafo-inicial text-end"><img style="width: 60px;"
         src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt=""></p>
 <mat-dialog-content class="mat-typography">
-    <h3 mat-dialog-title class="d-flex justify-content-center"><span><b>PROPOSTA PARA COMITÊ/COMISSÃO DE PROCESSOS</b></span>
+    <h3 mat-dialog-title class="d-flex justify-content-center"><span><b>{{ "documento-pdf.proposta-comite" | translate }}</b></span>
     </h3>
 
 
 
     <h4 class="d-flex justify-content-center"><b>{{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.tituloDemanda}} - {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.codigoDemanda}}</b></h4>
     <p>
-        <span><b>Solicitante:</b> {{proposta?.recursosProposta}}</span>
+        <span><b>{{ "documento-pdf.solicitante-menor" | translate }}</b> {{proposta?.recursosProposta}}</span>
     </p>
 
-    <h4><b>Situação Atual - Problema a ser tratado/ resolvido:</b></h4>
+    <h4><b>{{ "documento-pdf.situacao-problema" | translate }}</b></h4>
     <p>
     {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.situacaoAtualDemanda}}   
     </p>
 
-    <h4><b>Objetivo:</b></h4>
+    <h4><b>{{ "documento-pdf.objetivo" | translate }}</b></h4>
     <p>
         {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.objetivoDemanda}} </p>
 
-    <h4><b>Escopo do Projeto:</b></h4>
+    <h4><b>{{ "documento-pdf.escopo-projeto" | translate }}</b></h4>
 
     {{proposta?.escopoProposta}}
     <h4>
-        <b>Resultados Esperados (Qualitativos):</b> {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioQualitativoDemanda}}
+        <b>{{ "documento-pdf.resultados-esperados-qualitativos" | translate }}</b> {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioQualitativoDemanda}}
     </h4>
     <h4>
-        <b>Resultados Esperados (Ganhos potenciais)</b>{{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioPotencialDemanda?.valorBeneficio}}
+        <b>{{ "documento-pdf.resultados-esperados-potenciais" | translate }}</b>{{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioPotencialDemanda?.valorBeneficio}}
         {{proposta?.demandaAnalistaProposta?.demandaDemandaAnalista?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
     </h4>
-    <p><b>Custos totais do projeto: R$50.000,00</b>
+    <p><b>{{ "documento-pdf.custos-totais" | translate }} R$50.000,00</b>
         <br>
-        Total despesas recursos externos (Desembolso): R$30.000,00
+        {{ "documento-pdf.total-despesas-externas" | translate }} R$30.000,00
         <br>
-        Total despesa recursos internos: R$20.000,00
+        {{ "documento-pdf.total-despesas-internas" | translate }} R$20.000,00
     </p>
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Despesas (Desembolso)</th>
-                <th scope="col">Esforço</th>
-                <th scope="col">Valor total</th>
-                <th scope="col">CC Pagante</th>
+                <th scope="col">{{ "documento-pdf.despesas" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.esforco" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.valor-total" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.cc-pagante" | translate }}</th>
             </tr>
         </thead>
 
@@ -98,10 +98,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Investimentos/ recorrentes</th>
-                <th scope="col">Licenças</th>
-                <th scope="col">Valor Unit</th>
-                <th scope="col">Total</th>
+                <th scope="col">{{ "documento-pdf.investimentos" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.licencas" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.valor-unit" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.total" | translate }}</th>
             </tr>
         </thead>
 
@@ -156,10 +156,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Recursos Internos (Sem Desembolso)</th>
-                <th scope="col">Esforço</th>
-                <th scope="col">Valor total</th>
-                <th scope="col">CC Pagante</th>
+                <th scope="col">{{ "documento-pdf.recursos-internos" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.esforco" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.valor-total" | translate }}</th>
+                <th scope="col">{{ "documento-pdf.cc-pagante" | translate }}</th>
             </tr>
         </thead>
 
@@ -213,16 +213,16 @@
     </table>
     <p>
         <b>
-            Período de execução:
+            {{ "documento-pdf.periodo-execucao" | translate }}
         </b>
-        {{proposta?.inicioExDemandaProposta}} à {{proposta?.fimExDemandaProposta}}
+        {{proposta?.inicioExDemandaProposta}} {{ "documento-pdf.a" | translate }} {{proposta?.fimExDemandaProposta}}
     </p>
     <p>
         <b>
-            Payback:
+            {{ "documento-pdf.payback" | translate }}
         </b> {{proposta?.paybackProposta}}
     </p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{ "documento-pdf.b-fechar" | translate }}</button>
 </mat-dialog-actions>

@@ -6,7 +6,7 @@ export class WebSocketConnector {
 
     private stompClient: Stomp.Client | undefined;
 
-    constructor(private topic: string, private onMessage: Function, private callbackError?: Function, private http?: HttpClient) {
+    constructor(private onMessage: Function, private callbackError?: Function, private http?: HttpClient) {
         const errorCallback = callbackError || this.onError;
         this.connect(errorCallback);
     }
@@ -15,15 +15,24 @@ export class WebSocketConnector {
         console.log("Starting a WebSocket connection");
         const ws = new SockJS("http://localhost:8085/low/ws/info");
         const stomp = Stomp.over(ws);
-        stomp.connect({}, () => {
+        stomp.connect({}, fram => {
+            stomp.subscribe("http://localhost:8085/low/demanda/1/chat", );
+            
             this.stompClient = stomp
         }, errorCallback.bind(this));
     };
 
-    inscrever() {
-        this.stompClient?.subscribe(this.topic, (event: any) => {
-            console.log("event");
-        });
+    teste(event: any){
+
+        console.log("event");
+        console.log("event");
+        console.log("event");
+        console.log("event");
+        console.log("event");
+    }
+
+    getMensagens(codigoDemanda: string){
+        return this.http?.get("http://localhost:8085/low/mensagens/" +codigoDemanda)
     }
 
 
@@ -40,10 +49,8 @@ export class WebSocketConnector {
 
         if (this.stompClient) {
             this.stompClient.send(
-
-
-
-                destino, {}, JSON.stringify(mensagemDTO))
+                destino, {}, JSON.stringify(mensagemDTO)
+                )
         } else {
             console.log("Conexão não estabelecida!")
         }

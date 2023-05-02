@@ -1,8 +1,14 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
+import { MessagesService } from 'src/app/websocket/messages.service';
+import { Message } from '@stomp/stompjs';
+import { Demanda } from 'src/app/models/demanda.model';
+import { Usuario } from 'src/app/models/usuario.model';
+import { Mensagem } from 'src/app/models/message.model';
 
 @Component({
   selector: 'app-tela-chat',
@@ -10,31 +16,33 @@ import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
   styleUrls: ['./tela-chat.component.scss']
 })
 
-
 export class TelaChatComponent implements OnInit {
   messageService: any;
   items: MenuItem[] = [];
   codigoRota = ""
+  mensagens: Mensagem[] = []
 
-  private webSocketConnector: WebSocketConnector | undefined
+  constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService, private messagesService: MessagesService) {
+    // messagesService.inscrever()
+    messagesService.$mensagesEmmiter.subscribe(mensagens => {
+      this.mensagens = []
+      let usuarioLogado = localStorage.getItem('user')
+      for(let i of mensagens){
+        if(usuarioLogado && i.usuarioMensagens)
+        if(i.usuarioMensagens.codigoUsuario == JSON.parse(usuarioLogado).codigoUsuario){
+          i.ladoMensagem = true
+        }else{
+          i.ladoMensagem = false
+        }
+      }
 
-  constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService) { }
+      this.mensagens.push(...mensagens)
+    })
+   }
   @ViewChild('mensagemDigitada') private mensagem: any;
 
 
-  mensagens: Mensagem[] = [{
-    mensagem: "Olá, tudo bem?",
-    rementente: "analista"
-  },
-  {
-    mensagem: "Sim. tudo bem",
-    rementente: "solicitante"
-  },
-  ]
 
-  onMessage(message: any) {
-    console.log(message)
-  }
   enviarMensagem(event: KeyboardEvent | Event) {
     if (this.mensagem.nativeElement.value == "") {
       return
@@ -43,62 +51,27 @@ export class TelaChatComponent implements OnInit {
     if (event instanceof KeyboardEvent) {
       if (event.key === "Enter") {
         this.mensagens.push({
-          mensagem: this.mensagem.nativeElement.value,
-          rementente: "solicitante"
+          textoMensagens: this.mensagem.nativeElement.value,
+          ladoMensagem: false
         })
-        this.webSocketConnector?.send("/low/demanda/"+this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
+        this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
         this.mensagem.nativeElement.value = "";
       }
     } else {
       this.mensagens.push({
-        mensagem: this.mensagem.nativeElement.value,
-        rementente: "solicitante"
+        textoMensagens: this.mensagem.nativeElement.value,
+        ladoMensagem: false
       })
-      this.webSocketConnector?.send("/low/demanda/"+this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
+      this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
       this.mensagem.nativeElement.value = ""
     }
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(e => {
-      this.webSocketConnector = new WebSocketConnector('/low/demanda/'+e['codigoDemanda']+'/chat', this.onMessage.bind(this))
-      this.webSocketConnector.inscrever()
-      this.codigoRota = e['codigoDemanda']
+        this.codigoRota = e['codigoDemanda']
+      this.messagesService.codigoRota = this.codigoRota
     })
-
-
-
-    
-
-    this.items = [
-      {
-        icon: 'pi pi-pencil',
-        command: () => {
-          this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-        }
-      },
-      {
-        icon: 'pi pi-refresh',
-        command: () => {
-          this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-        }
-      },
-      {
-        icon: 'pi pi-trash',
-        command: () => {
-          this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-        }
-      },
-      {
-        icon: 'pi pi-upload',
-        routerLink: ['/fileupload']
-      },
-      {
-        icon: 'pi pi-external-link',
-        url: 'http://angular.io'
-
-      }
-    ];
 
   }
 
@@ -125,8 +98,4 @@ export class TelaChatComponent implements OnInit {
   };
 
 
-}
-interface Mensagem {
-  rementente: string,
-  mensagem: string
 }

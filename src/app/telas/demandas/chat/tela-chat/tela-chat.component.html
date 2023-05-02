@@ -50,10 +50,10 @@
                 <div style="width: 100%;">
                     <div class="mensagens">
                         <div *ngFor="let mensagem of mensagens" class="row"
-                        [ngStyle]="{'justify-content': mensagem.rementente == 'solicitante' ? 'flex-end' : 'flex-start'}">
-                          <div  [ngClass]="[mensagem.rementente == 'solicitante' ? 'balao-chat-solicitante' : 'balao-chat-analista']">
+                        [ngStyle]="{'justify-content': mensagem.ladoMensagem ? 'flex-end' : 'flex-start'}">
+                          <div  [ngClass]="[mensagem.ladoMensagem ? 'balao-chat-solicitante' : 'balao-chat-analista']">
                                 <span>
-                                    {{mensagem.mensagem}}
+                                    {{mensagem.textoMensagens}}
                                 </span>
                             </div>
                         </div>

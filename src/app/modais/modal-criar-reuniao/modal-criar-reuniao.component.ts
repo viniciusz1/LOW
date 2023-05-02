@@ -6,10 +6,13 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input, EventEmitter } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalHistoricoComponent } from '../modal-historico/modal-historico.component';
+import { ModalDemandaDocumentoComponent } from '../modal-demanda-documento/modal-demanda-documento.component';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-modal-criar-reuniao',
@@ -20,15 +23,17 @@ export class ModalCriarReuniaoComponent implements OnInit {
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
     public dialogRef: MatDialogRef<ModalCriarReuniaoComponent>,
+    private matDialog: MatDialog,
     private demandaService: DemandaService,
     private reuniaoService: ReuniaoService,
     private usuarioService: UsuarioService,
+    private confirmationService: ConfirmationService,
     private router: Router
   ) {
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe(
         {
-          next: e => { 
+          next: e => {
             // FAZER VERIFICAÇÃO DE QUEM PODE USAR
           },
           error: err => {
@@ -36,9 +41,13 @@ export class ModalCriarReuniaoComponent implements OnInit {
           }
         }
       )
-
   }
 
+
+  fecharModal(){
+    this.dialogRef.close();
+  }
+  
   ngOnInit(): void {
     this.atualizarDemandas();
   }
@@ -53,12 +62,46 @@ export class ModalCriarReuniaoComponent implements OnInit {
     { value: "DTI", nome: "DTI – Diretoria de TI" },
   ]
 
+  openModalHistorico(codigoDemanda: string) {
+    this.matDialog.open(ModalHistoricoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      minHeight: '70vh',
+      data: codigoDemanda
+    });
+  }
+
+  openModalDemandaDocumento(event: Demanda) {
+    this.matDialog
+      .open(ModalDemandaDocumentoComponent, {
+        maxWidth: '70vw',
+        minWidth: '50vw',
+        data: event,
+      })
+      .afterClosed().subscribe({
+        next: e => {
+          let indice: number | undefined = -1
+          if (this.listaDemandas) {
+            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+            if (indice !== -1) {
+              this.listaDemandas.splice(indice, 1, e);
+            }
+          }
+        }
+      })
+  }
+
+  // irParaChat() {
+  //   this.dialogRef.close();
+  //   this.router.navigate(['/tela-inicial/chat']);
+  // }
 
   listaReunioes: Reuniao[] = [];
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
   listaDemandas: Demanda[] = [];
   listaProposta: Proposta[] = [];
+  cabecalhoMensagemDeConfirmacao = 'Avançar status';
 
   dataReuniao: any;
   comissaoSelecionada: string | undefined = undefined;

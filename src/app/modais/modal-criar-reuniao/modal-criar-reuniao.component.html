@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between">
-  <h5>Marcar Reunião</h5>
+  <h5>{{ "modais.modal-criar-reuniao.marcar-reuniao" | translate }}</h5>
   <i class="bi bi-x-lg" role="button" (click)="dialogRef.close()"></i>
 </div>
 <hr class="mt-0" style="overflow: auto;">
@@ -11,12 +11,12 @@
     </div>
     <div  style="height: -webkit-fill-available;" class="drop-column d-table border p-3 rounded low-shadow w-100" pDroppable="demandas" (onDrop)="drop()">
       <p-scrollPanel [style]="{ width: '100%', height: '40vh' }">
-        <h6>Demandas</h6>
+        <h6>{{ "modais.modal-criar-reuniao.demandas" | translate }}</h6>
         <div *ngFor="let demanda of listaDemandas" class="mt-2">
           <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas" [dadosDemada]="demanda"
             [mostrarIconeAdicionar]="true" (clicouAdicionarPauta)="adicionarDemanda(demanda)"
-            [mudarTamanho]="'100%'"
-            (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()">
+            [mudarTamanho]="'100%'" (modalHistorico)="openModalHistorico($event)" (verDocumentoProposta)="openModalDemandaDocumento($event)"
+            (fechouModal)="fecharModal()" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()">
           </app-list-demanda>
         </div>
       </p-scrollPanel>
@@ -26,7 +26,7 @@
     <div class="border rounded drop-column p-1 mb-2 low-shadow h-100">
       <p-scrollPanel [style]="{ width: '100%', height: '47vh' }" styleClass="scroll">
         <div class="text-center h5 mt-3" *ngIf="listaDemandasEscolhidas.length == 0">
-          Arraste as Demandas para este campo!
+          {{ "modais.modal-criar-reuniao.arraste-demandas" | translate }}
         </div>
         <span *ngFor="let demanda of listaDemandasEscolhidas" style="margin-top:10px ; ">
           <app-card-demanda pDraggable="products" [mostrarBotao]="false" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()"
@@ -37,17 +37,17 @@
     </div>
     <div class=" mt-1 p-3 border rounded low-shadow">
       <div class="">
-        <label for="time">Data e Hora da Reunião:</label>
+        <label for="time">{{ "modais.modal-criar-reuniao.data-hora-reuniao" | translate }}</label>
         <p-calendar placeholder="Clique aqui!" [showTime]="true" [showSeconds]="true"
           inputId="time" [(ngModel)]="dataReuniao"></p-calendar>
       </div>
       <div class="mt-1 d-grid">
-        <label for="time">Selecione a Comissão da Reunião:</label>
+        <label for="time">{{ "modais.modal-criar-reuniao.selecione-comissao" | translate }}</label>
         <p-dropdown placeholder="Selecione a Comissão:" [options]="listaComissoes" optionValue="value" [(ngModel)]="comissaoSelecionada" optionLabel="nome" ></p-dropdown>
 
       </div>
       <div class=" mt-1 d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Marcar Reunião</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">{{ "modais.modal-criar-reuniao.marcar-reuniao" | translate }}</button>
       </div>
     </div>
   </div>

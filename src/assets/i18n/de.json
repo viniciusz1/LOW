@@ -17,20 +17,13 @@
             "modal-b-reformular": "Anforderung überarbeiten",
             "modal-b-ok": "OK"
         },
-        "marcar-reuniao": {
-            "titulo": "Meeting vereinbaren",
-            "demandas": "Anforderungen",
-            "arraste": "Ziehen Sie Anforderungen in dieses Feld!",
-            "data-hora": "Datum und Uhrzeit des Meetings:",
-            "p-data-hora": "Klicken Sie hier",
-            "comissao": "Wählen Sie die Ausschuss des Meetings:",
-            "p-comissao": "Wählen Sie den Ausschuss aus",
-            "b-marcar": "Meeting vereinbaren"
-        },
         "tela-reunioes": {
             "marcar": "Meeting vereinbaren",
             "calendario": "Im Kalender anzeigen",
-            "ordenar": "Sortieren"
+            "ordenar": "Sortieren",
+            "modal-b-sim": "Ja",
+            "modal-b-nao": "Nein",
+            "modal-b-ok": "OK"
         },
         "filtro-reunioes": {
             "comissao": "Ausschuss",
@@ -70,6 +63,8 @@
         "configuracoes-layout": {
             "titulo": "Layout",
             "subtitulo": "ALLGEMEINE LAYOUT-EINSTELLUNGEN",
+            "padrao": "Standard (klar)",
+            "preto": "Schwarz",
             "temas": "Themen",
             "fonte": "Schriftart",
             "tamanho": "Größe"
@@ -90,7 +85,8 @@
             "suprir-desc2": "Senden Sie uns eine Nachricht, die so bald wie möglich beantwortet wird...",
             "descricao": "Um den Service, die Systementwicklung oder -funktion zu verbessern, senden Sie uns einen Vorschlag, der Ihre Navigation durch das System erleichtert:",
             "p-input": "Schreiben Sie hier Ihre Frage:",
-            "b-enviar": "Senden"
+            "b-enviar": "Senden",
+            "b-baixar": "Runter gehen"
         },
         "tutorial": {
             "t1": {
@@ -136,22 +132,6 @@
             "t8": {
                 "titulo": "Anforderungen filtern",
                 "desc": "Erhalten Sie einen umfassenderen Überblick mit unserem Kalender"
-            },
-            "login": {
-                "usuario": "Benutzername",
-                "senha": "Passwort",
-                "lembra": "Erinnere dich an mich",
-                "esqueceu": "Passwort vergessen?",
-                "entrar": "Anmelden"
-            },
-            "filtro-demandas": {
-                "titulo": "Titel",
-                "num-solicitacao": "Anforderungsnummer",
-                "responsavel": "Verantwortlicher",
-                "tamanho": "Nachfragegröße",
-                "solicitante": "Antragsteller",
-                "departamento": "Abteilung",
-                "status": "Genehmigungsstatus"
             },
             "botao-criar-demanda": "Nachfrage erstellen"
         },
@@ -218,6 +198,7 @@
             "periodo-execucao-demanda": "Zeitraum für die Ausführung der Anforderung:",
             "payback-simples": "Einfache Amortisation:",
             "responsaveis-negocio": "Verantwortliche für das Geschäft:",
+            "selecione-status":"Wählen Sie den Status aus, um die Nachfrage zu steigern:",
             "p-prazo-elaboracao": "Klicken Sie hier, um einen Termin zu vereinbaren",
             "p-recurso-necessario": "z.B. Back-End-Programmierer",
             "p-tipo-despesa": "Wählen Sie den Typ aus",
@@ -285,7 +266,11 @@
             "visualizar": "Anzeigen",
             "b-ata-publicada": "Protokoll veröffentlicht",
             "b-ata-nao-publicada": "Protokoll nicht veröffentlicht",
-            "b-gerar-documentacao": "Dokumentation generieren"
+            "b-gerar-documentacao": "Dokumentation generieren",
+            "b-finalizar-reuniao":"Besprechung beenden",
+            "b-cancelar-reuniao":"Treffen absagen",
+            "b-nao":"Nein",
+            "b-sim":"Ja"
         },
         "tela-login": {
             "login": "Anmeldung",
@@ -308,7 +293,6 @@
             "selecione-comissao": "Wählen Sie den Ausschuss für die Besprechung aus:",
             "p-data-hora-reuniao": "Klicken Sie hier!",
             "p-selecione-comissao": "Wählen Sie den Ausschuss aus:",
-            "b-marcar-reuniao": "Besprechung planen"
         },
         "modal-historico": {
             "historico": "Verlauf",
@@ -350,7 +334,8 @@
         "documentos": "UNTERLAGEN:",
         "b-cancelar": "Stornieren",
         "b-reprovar": "Anforderung ablehnen",
-        "b-aprovar": "Anforderung genehmigen"
+        "b-aprovar": "Anforderung genehmigen",
+        "mensais":" monatlich"
     },
     "componentes-reutilizaveis": {
         "card-demanda": {

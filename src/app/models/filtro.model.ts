@@ -8,4 +8,5 @@ export interface Filtro {
   departamento: string;
   page?: number;
   size?: number;
+  sort: number | string;
 }

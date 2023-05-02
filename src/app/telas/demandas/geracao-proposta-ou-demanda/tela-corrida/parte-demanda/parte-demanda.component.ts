@@ -4,10 +4,15 @@ import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { DemandaService } from './../../../../../services/demanda.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar } from 'ngx-editor';
 import Locals from 'ngx-editor/lib/Locals';
+
+interface Tab {
+  title: string;
+  content: string;
+}
 
 @Component({
   selector: 'app-parte-demanda',
@@ -38,6 +43,8 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   }
 
   inputSubject = new Subject<string>();
+  @Input() aparecerProposta = false;
+
   listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [
@@ -78,6 +85,15 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
+  abrirSegundoAccordion: boolean = false;
+  
+  tabs1: Tab[] = [
+    { title: 'Tab 1', content: 'Conteúdo da Tab 1' },
+    { title: 'Tab 2', content: 'Conteúdo da Tab 2' },
+    { title: 'Tab 3', content: 'Conteúdo da Tab 3' }
+  ];
+
+  activeIndex = 0;
 
   ngOnInit(): void {
     this.demandaService.listaArquivosDemanda.subscribe(arquivos => {

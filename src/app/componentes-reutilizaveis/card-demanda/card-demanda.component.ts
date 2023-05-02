@@ -6,6 +6,7 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Route, Router } from '@angular/router';
 import { RascunhoService } from 'src/app/services/rascunho.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-card-demanda',
@@ -45,8 +46,7 @@ export class CardDemandaComponent implements OnInit {
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
 
-  constructor(private route: Router,
-    private rascunhoService: RascunhoService) { }
+  constructor(private route: Router, private confirmationService: ConfirmationService, private rascunhoService: RascunhoService) {}
   statusPermitido() {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -86,6 +86,17 @@ export class CardDemandaComponent implements OnInit {
   abrirModalHistorico() {
     this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
   }
+
+  confirmarChat() {
+    this.confirmationService.confirm({
+      message: 'Deseja realmente iniciar esta conversa?',
+      dismissableMask: true,
+      header: 'Iniciar Chat',
+      accept: () => {
+        this.route.navigate(["/tela-inicial/chat"]);
+      }
+    })
+  };
 
   existeAta() {
     if (

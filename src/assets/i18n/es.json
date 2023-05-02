@@ -17,20 +17,13 @@
             "modal-b-reformular": "Reformular demanda",
             "modal-b-ok": "Ok"
         },
-        "marcar-reuniao": {
-            "titulo": "Agendar Reunión",
-            "demandas": "Demandas",
-            "arraste": "¡Arrastre las demandas a este campo!",
-            "data-hora": "Fecha y Hora de la Reunión:",
-            "p-data-hora": "Haga clic aquí",
-            "comissao": "Seleccione la Comisión de la Reunión:",
-            "p-comissao": "Seleccione la Comisión",
-            "b-marcar": "Agendar Reunión"
-        },
         "tela-reunioes": {
             "marcar": "Agendar Reunión",
             "calendario": "Ver en Calendario",
-            "ordenar": "Ordenar"
+            "ordenar": "Ordenar",
+            "modal-b-sim": "Sí",
+            "modal-b-nao": "No",
+            "modal-b-ok": "Ok"
         },
         "filtro-reunioes": {
             "comissao": "Comisión",
@@ -70,6 +63,8 @@
         "configuracoes-layout": {
             "titulo": "Diseño",
             "subtitulo": "CONFIGURACIONES GENERALES DE DISEÑO",
+            "padrao": "Estándar (claro)",
+            "preto": "Negro",
             "temas": "Temas",
             "fonte": "Fuente",
             "tamanho": "Tamaño"
@@ -90,7 +85,8 @@
             "suprir-desc2": "Envíenos un mensaje y le responderemos lo antes posible...",
             "descricao": "Para mejorar la atención, el desarrollo del sistema o el funcionamiento, envíenos una sugerencia que facilite su navegación por el sistema:",
             "p-input": "Escriba aquí su pregunta:",
-            "b-enviar": "Enviar"
+            "b-enviar": "Enviar",
+            "b-baixar": "Bajar"
         },
         "tutorial": {
             "t1": {
@@ -136,22 +132,6 @@
             "t8": {
                 "titulo": "Filtrar Demandas",
                 "desc": "Obtén una visión más amplia con nuestro calendario."
-            },
-            "login": {
-                "usuario": "Usuario",
-                "senha": "Contraseña",
-                "lembra": "Recuérdame",
-                "esqueceu": "¿Olvidaste tu contraseña?",
-                "entrar": "Ingresar"
-            },
-            "filtro-demandas": {
-                "titulo": "Título",
-                "num-solicitacao": "Número de solicitud",
-                "responsavel": "Responsable",
-                "tamanho": "Tamaño de la demanda",
-                "solicitante": "Solicitante",
-                "departamento": "Departamento",
-                "status": "Estado de aprobación"
             },
             "botao-criar-demanda": "Crear demanda"
         },
@@ -218,6 +198,7 @@
             "periodo-execucao-demanda": "Periodo de Ejecución de la Demanda:",
             "payback-simples": "Payback Simple:",
             "responsaveis-negocio": "Responsables del Negocio:",
+            "selecione-status":"Seleccione el estado para impulsar la demanda:",
             "p-prazo-elaboracao": "Haga clic para programar",
             "p-recurso-necessario": "Ej: Programador Back-end",
             "p-tipo-despesa": "Seleccione el tipo",
@@ -285,7 +266,11 @@
             "visualizar": "Visualizar",
             "b-ata-publicada": "Acta Publicada",
             "b-ata-nao-publicada": "Acta No Publicada",
-            "b-gerar-documentacao": "Generar Documentación"
+            "b-gerar-documentacao": "Generar Documentación",
+            "b-finalizar-reuniao":"Finalizar reunión",
+            "b-cancelar-reuniao":"Cancelar reunión",
+            "b-nao":"No",
+            "b-sim":"Sí"
         },
         "tela-login": {
             "login": "Inicio de Sesión",

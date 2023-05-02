@@ -17,20 +17,13 @@
       "modal-b-reformular": "Reformulate Demand",
       "modal-b-ok": "Ok"
     },
-    "marcar-reuniao": {
-      "titulo": "Schedule Meeting",
-      "demandas": "Demands",
-      "arraste": "Drag the Demands to this field!",
-      "data-hora": "Meeting Date and Time:",
-      "p-data-hora": "Click Here",
-      "comissao": "Select the Meeting Commission:",
-      "p-comissao": "Select Commission",
-      "b-marcar": "Schedule Meeting"
-    },
     "tela-reunioes": {
       "marcar": "Schedule Meeting",
       "calendario": "View in Calendar",
-      "ordenar": "Sort"
+      "ordenar": "Sort",
+      "modal-b-sim": "Yes",
+      "modal-b-nao": "No",
+      "modal-b-ok": "Ok"
     },
     "filtro-reunioes": {
       "comissao": "Commission",
@@ -70,6 +63,8 @@
     "configuracoes-layout": {
       "titulo": "Layout",
       "subtitulo": "GENERAL LAYOUT SETTINGS",
+      "padrao":"Standart (Light)",
+      "preto":"Black",
       "temas": "Themes",
       "fonte": "Font",
       "tamanho": "Size"
@@ -90,7 +85,8 @@
       "suprir-desc2": "Send us a message and we will respond as soon as possible.",
       "descricao": "To improve customer service, system development or functionality, send us a suggestion that facilitates your navigation through the system:",
       "p-input": "Write your question here:",
-      "b-enviar": "Send"
+      "b-enviar": "Send",
+      "b-baixar": "Download"
     },
     "tutorial": {
       "t1": {
@@ -136,22 +132,6 @@
       "t11": {
         "titulo": "Filter Demands",
         "desc": "Here, you can schedule a meeting."
-      },
-      "login": {
-        "usuario": "User",
-        "senha": "Password",
-        "lembra": "Remember me",
-        "esqueceu": "Forgot password?",
-        "entrar": "Login"
-      },
-      "filtro-demandas": {
-        "titulo": "Title",
-        "num-solicitacao": "Request number",
-        "responsavel": "Responsible",
-        "tamanho": "Demand Size",
-        "solicitante": "Requester",
-        "departamento": "Department",
-        "status": "Approval Status"
       },
       "botao-criar-demanda": "Create demand"
     },
@@ -218,6 +198,7 @@
       "periodo-execucao-demanda": "Demand execution period:",
       "payback-simples": "Simple Payback:",
       "responsaveis-negocio": "Business responsibles:",
+      "selecione-status":"Select status to drive demand:",
       "p-prazo-elaboracao": "Click to schedule",
       "p-recurso-necessario": "Ex: Backend Programmer",
       "p-tipo-despesa": "Select Type",
@@ -285,7 +266,11 @@
       "visualizar": "View",
       "b-ata-publicada": "Minutes published",
       "b-ata-nao-publicada": "Minutes not published",
-      "b-gerar-documentacao": "Generate documentation"
+      "b-gerar-documentacao": "Generate documentation",
+      "b-finalizar-reuniao":"End Meeting",
+      "b-cancelar-reuniao":"Cancel Meeting",
+      "b-nao":"No",
+      "b-sim":"Yes"
     },
     "tela-login": {
       "login": "Login",
@@ -308,7 +293,6 @@
       "selecione-comissao": "Select the Meeting Commission:",
       "p-data-hora-reuniao": "Click here!",
       "p-selecione-comissao": "Select the commission:",
-      "b-marcar-reuniao": "Schedule Meeting"
     },
     "modal-historico": {
       "historico": "History",
@@ -350,10 +334,12 @@
     "documentos": "DOCUMENTS",
     "b-cancelar": "Cancel",
     "b-reprovar": "Reject Request",
-    "b-aprovar": "Approve Request"
+    "b-aprovar": "Approve Request",
+    "mensais": " monthly"
   },
   "componentes-reutilizaveis": {
     "card-demanda": {
+      "historico":"History",
       "ver-demanda": "View demand",
       "trocar-status": "Change status",
       "ir-reuniao": "Go to meeting",

@@ -67,6 +67,7 @@
             [(ngModel)]="ordenarSelect"
             placeholder="Ordenar"
             optionLabel="name"
+            (onChange)="ordenar($event.value)"
           ></p-dropdown>
         </div>
         <span class="p-input-icon-left ms-3">

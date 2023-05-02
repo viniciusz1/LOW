@@ -7,6 +7,7 @@ import { Mensagem } from '../models/message.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class MessagesService {
   constructor(private http: HttpClient) {
     this.initializeWebSocketConnection();
@@ -26,7 +27,16 @@ export class MessagesService {
     });
   }
 
-  inscrever(){
+  inscrever(codigoRota?: string) {
+    if (codigoRota) {
+      this.codigoRota = codigoRota
+    }
+    
+    if (this.codigoRota)
+      this.getMessages(this.codigoRota).subscribe(e => {
+        this.$mensagesEmmiter.emit(e);
+      })
+
     this.stompClient.subscribe('/demanda/' + this.codigoRota + '/chat', (message: any) => {
       if (message.body && this.codigoRota) {
         this.getMessages(this.codigoRota).subscribe(e => {

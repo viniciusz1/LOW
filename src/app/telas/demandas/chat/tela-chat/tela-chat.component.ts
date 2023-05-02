@@ -23,22 +23,21 @@ export class TelaChatComponent implements OnInit {
   mensagens: Mensagem[] = []
 
   constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService, private messagesService: MessagesService) {
-    // messagesService.inscrever()
+    this.messagesService.initializeWebSocketConnection()
     messagesService.$mensagesEmmiter.subscribe(mensagens => {
       this.mensagens = []
       let usuarioLogado = localStorage.getItem('user')
-      for(let i of mensagens){
-        if(usuarioLogado && i.usuarioMensagens)
-        if(i.usuarioMensagens.codigoUsuario == JSON.parse(usuarioLogado).codigoUsuario){
+      for (let i of mensagens) {
+        if ((usuarioLogado && i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == JSON.parse(usuarioLogado).codigoUsuario) {
           i.ladoMensagem = true
-        }else{
+        } else {
           i.ladoMensagem = false
         }
       }
 
       this.mensagens.push(...mensagens)
     })
-   }
+  }
   @ViewChild('mensagemDigitada') private mensagem: any;
 
 
@@ -69,7 +68,7 @@ export class TelaChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(e => {
-        this.codigoRota = e['codigoDemanda']
+      this.codigoRota = e['codigoDemanda']
       this.messagesService.codigoRota = this.codigoRota
     })
 

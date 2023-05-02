@@ -20,29 +20,31 @@ export class WebSocketConnector {
         }, errorCallback.bind(this));
     };
 
-    inscrever(){
+    inscrever() {
+        console.log("1");
         this.stompClient.subscribe(this.topic, (event: any) => {
+            console.log("event");
             this.onMessage(event);
         });
     }
 
-   
-    send(destino: string, mensagem: string, codigoDemanda:string, codigoUsuario: string){
-        let mensagemDTO  = {
+
+    send(destino: string, mensagem: string, codigoDemanda: string, codigoUsuario: string) {
+        let mensagemDTO = {
             textoMensagens: mensagem,
-        demandaMensagens: {
-            'codigoDemanda': codigoDemanda
-        },
-        usuarioMensagens: {
-            'codigoUsuario': codigoUsuario
-        }
+            demandaMensagens: {
+                codigoDemanda: codigoDemanda
+            },
+            usuarioMensagens: {
+                codigoUsuario: codigoUsuario
+            }
         }
 
         if (this.stompClient) {
             this.stompClient.send(
-                
-                
-                
+
+
+
                 destino, {}, JSON.stringify(mensagemDTO))
         } else {
             console.log("Conexão não estabelecida!")

@@ -61,7 +61,7 @@ export class TelaChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(e => {
-      this.webSocketConnector = new WebSocketConnector('/demanda/'+e['codigoDemanda']+'/chat', this.onMessage.bind(this))
+      this.webSocketConnector = new WebSocketConnector('/low/demanda/'+e['codigoDemanda']+'/chat', this.onMessage.bind(this))
       this.codigoRota = e['codigoDemanda']
     })
 

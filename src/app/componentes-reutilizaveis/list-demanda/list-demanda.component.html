@@ -49,7 +49,7 @@
                 <i class="bi bi-person-lines-fill me-3"></i>
                 <span>{{ "componentes-reutilizaveis.list-demanda.ir-reuniao" | translate }}</span>
             </button>
-            <button routerLink="/tela-inicial/chat" mat-menu-item>
+            <button routerLink="/tela-inicial/chat" (click)="fechouModal.emit()"  mat-menu-item>
                 <i class="bi bi-chat-left-quote me-3"></i>
                 <span>{{ "componentes-reutilizaveis.list-demanda.iniciar-conversa" | translate }}</span>
             </button>

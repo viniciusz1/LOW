@@ -31,7 +31,7 @@ export class ModalHistoricoComponent implements OnInit {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      data: event,
+      data: event
     });
   }
   ngOnInit(): void {}

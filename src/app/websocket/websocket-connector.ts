@@ -4,7 +4,7 @@ import * as Stomp from 'stompjs';
 
 export class WebSocketConnector {
 
-    private stompClient: any;
+    private stompClient: Stomp.Client | undefined;
 
     constructor(private topic: string, private onMessage: Function, private callbackError?: Function, private http?: HttpClient) {
         const errorCallback = callbackError || this.onError;
@@ -14,17 +14,15 @@ export class WebSocketConnector {
     private connect(errorCallback: Function) {
         console.log("Starting a WebSocket connection");
         const ws = new SockJS("http://localhost:8085/low/ws/info");
-        this.stompClient = Stomp.over(ws);
-        this.stompClient.connect({}, () => {
-            this.inscrever();
+        const stomp = Stomp.over(ws);
+        stomp.connect({}, () => {
+            this.stompClient = stomp
         }, errorCallback.bind(this));
     };
 
     inscrever() {
-        console.log("1");
-        this.stompClient.subscribe(this.topic, (event: any) => {
+        this.stompClient?.subscribe(this.topic, (event: any) => {
             console.log("event");
-            this.onMessage(event);
         });
     }
 

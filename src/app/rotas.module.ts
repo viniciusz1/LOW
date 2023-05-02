@@ -50,6 +50,10 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
             component: TelaChatComponent
           },
           {
+            path: 'chat',
+            component: TelaChatComponent
+          },
+          {
             path: 'demanda',
             component: TelaCorridaComponent
           },

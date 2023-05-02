@@ -23,20 +23,23 @@ export class TelaChatComponent implements OnInit {
   mensagens: Mensagem[] = []
 
   constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService, private messagesService: MessagesService) {
-    this.messagesService.initializeWebSocketConnection()
-    messagesService.$mensagesEmmiter.subscribe(mensagens => {
-      this.mensagens = []
-      let usuarioLogado = localStorage.getItem('user')
-      for (let i of mensagens) {
-        if ((usuarioLogado && i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == JSON.parse(usuarioLogado).codigoUsuario) {
-          i.ladoMensagem = true
-        } else {
-          i.ladoMensagem = false
+    if (this.codigoRota != "") {
+      this.messagesService.initializeWebSocketConnection()
+      messagesService.$mensagesEmmiter.subscribe(mensagens => {
+        this.mensagens = []
+        let usuarioLogado = localStorage.getItem('user')
+        for (let i of mensagens) {
+          if ((usuarioLogado && i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == JSON.parse(usuarioLogado).codigoUsuario) {
+            i.ladoMensagem = true
+          } else {
+            i.ladoMensagem = false
+          }
         }
-      }
 
-      this.mensagens.push(...mensagens)
-    })
+        this.mensagens.push(...mensagens)
+      })  
+    }
+
   }
   @ViewChild('mensagemDigitada') private mensagem: any;
 

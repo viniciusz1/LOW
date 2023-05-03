@@ -205,10 +205,11 @@ export class DemandaService {
   //função utilizada para pré-definir informações da demanda quando estamos em proposta
   //ou até mesmo em modo rascunho
   setFormDemandaData(demanda: Demanda) {
-    if (demanda.centroCustosDemanda)
-      for (let i = 0; i < demanda.centroCustosDemanda.length - 1; i++) {
-        this.addCenterOfCost()
-      }
+    if(demanda.centroCustosDemanda)
+    for(let i = 0; i < demanda.centroCustosDemanda.length -1; i++){
+      this.addCenterOfCost()
+    }
+
     this.demandaForm.patchValue({
       tituloDemanda: demanda.tituloDemanda,
       beneficioRealDemanda: {
@@ -217,9 +218,9 @@ export class DemandaService {
         valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
       },
       beneficioPotencialDemanda: {
-        moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
-        memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
-        valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
+        moedaBeneficio: demanda.beneficioPotencialDemanda?.moedaBeneficio,
+        memoriaDeCalculoBeneficio: demanda.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio,
+        valorBeneficio: demanda.beneficioPotencialDemanda?.valorBeneficio.toString()
       },
       beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
       frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,

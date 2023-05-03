@@ -20,6 +20,7 @@ import {DialogModule} from 'primeng/dialog';
 import {  TranslateService, TranslateStore } from '@ngx-translate/core';
 import { LogInterceptor } from './interceptor';
 import { TelasModule } from './telas/telas.module';
+import { MessagesModule } from 'primeng/messages';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { TelasModule } from './telas/telas.module';
     BrowserAnimationsModule,
     HttpClientModule,
     DialogModule,
-    SharedModule
+    SharedModule,
+    MessagesModule
 
   ],
   providers: [{

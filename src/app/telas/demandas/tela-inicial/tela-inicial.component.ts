@@ -1,3 +1,4 @@
+import { RascunhoService } from './../../../services/rascunho.service';
 import { Filtro } from './../../../models/filtro.model';
 import { DemandaExcel } from './../../../models/demandaExcel.model';
 import { ModalAtaDocumentoComponent } from './../../../modais/modal-ata-documento/modal-ata-documento.component';
@@ -36,9 +37,14 @@ export class TelaInicialComponent implements OnInit {
     private demandasService: DemandaService,
     private router: Router,
     private confirmationService: ConfirmationService,
+    private rascunhoService: RascunhoService
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
-      this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
+      if (this.pesquisaDemanda == "") {
+        this.carregarDemandasIniciais()
+      } else {
+        this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
+      }
     });
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
@@ -219,19 +225,20 @@ export class TelaInicialComponent implements OnInit {
     );
   }
 
-  irParaChat() {
-    this.cabecalhoMensagemDeConfirmacao = 'Iniciar conversa';
-    this.confirmationService.confirm({
-      dismissableMask: true,
-      key: 'iniciarChat',
-      header: 'Iniciar Chat',
-      blockScroll: false,
-      message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
-
-      accept: () => {
-        this.router.navigate(['/tela-inicial/chat']);
-      },
-    });
+  irParaChat(event: Event) {
+    if (event.target)
+      this.confirmationService.confirm({
+        target: event.target,
+        message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+        icon: 'pi pi-exclamation-triangle',
+        blockScroll: false,
+        accept: () => {
+          this.router.navigate(['/tela-inicial/chat']);
+        },
+        reject: () => {
+          
+        }
+      });
   }
 
   excluirDemandaRascunho(index: number) {
@@ -302,7 +309,9 @@ export class TelaInicialComponent implements OnInit {
           if (this.listaDemandas) {
             indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
             if (indice !== -1) {
+              this.listaTituloNaoFiltrado = [];
               this.listaDemandas.splice(indice, 1, e);
+              this.exibirFilasDeStatus()
             }
           }
         }
@@ -383,6 +392,8 @@ export class TelaInicialComponent implements OnInit {
           if (demandas.length > 0) {
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
+            console.log(demandas)
+            this.nenhumResultadoEncontrado = false;
           }
         });
         this.exibirFilasDeStatus();
@@ -413,7 +424,22 @@ export class TelaInicialComponent implements OnInit {
     this.carregarDemandasIniciais();
   }
 
+  criarUmaNovaDemanda() {
+    let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
+    if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
+      this.router.navigate(['tela-inicial/rascunho/' + 0])
+    } else {
+      this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
+    }
+  }
+
   exibirFilasDeStatus() {
+    if(this.rascunhoService.getRascunhosDemanda.length > 0){
+      this.listaTituloNaoFiltrado.push({
+        status: 'DRAFT',
+        titulo: 'Seus Rascunhos',
+      });
+    }
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'

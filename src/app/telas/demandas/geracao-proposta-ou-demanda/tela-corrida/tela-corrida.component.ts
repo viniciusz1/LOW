@@ -4,8 +4,7 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PrimeIcons } from 'primeng/api';
-import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
-import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
+import { RascunhoService } from 'src/app/services/rascunho.service';
 
 interface Tab {
   title: string;
@@ -18,7 +17,7 @@ interface Tab {
   styleUrls: ['./tela-corrida.component.scss'],
 })
 export class TelaCorridaComponent implements OnInit {
-serviceCalled = false;
+  serviceCalled = false;
   aparecerProposta = false;
   centroCustos: CentroCusto[] = [];
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
@@ -45,30 +44,29 @@ serviceCalled = false;
             alert('Ocorreu um erro: ' + err.status);
           },
         });
-      }else{
+      } else {
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
-            console.log(response)
+            let codigo = this.route.snapshot.params['indiceRascunho']
+            this.rascunhoService.deleteRascunho(codigo)
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
-            alert('Ocorreu um erro: ' + err.status);
+            alert('Ocorreu um erro: ' + err.message);
           },
         });
       }
-
-      
     } else {
-        this.propostaService
-          .postProposta()
-          .subscribe({
-            next: (response) => {
-              this.router.navigate(['/tela-inicial']);
-            },
-            error: (err) => {
-              alert('Ocorreu um erro: ' + err.status);
-            },
-          });
+      this.propostaService
+        .postProposta()
+        .subscribe({
+          next: (response) => {
+            this.router.navigate(['/tela-inicial']);
+          },
+          error: (err) => {
+            alert('Ocorreu um erro: ' + err.message);
+          },
+        });
     }
   }
 
@@ -77,38 +75,43 @@ serviceCalled = false;
     private router: Router,
     private demandaService: DemandaService,
     private propostaService: PropostaService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
+    private rascunhoService: RascunhoService
   ) {
     this.tipoExibicaoTela();
 
   }
 
   teste() {
-    console.log(this.demandaService.getFormDemandaValid)    
+    return this.demandaService.getFormDemandaInvalid
   }
 
   tipoExibicaoTela() {
-    if (this.router.url == '/tela-inicial/demanda') {
+    if (this.router.url.includes('reformular-demanda')) {
       this.aparecerProposta = false;
-      this.demandaService.resetDemandaForm();
-    } 
-    else {
-      if (this.router.url.includes('reformular-demanda')) {
-        this.aparecerProposta = false;
-      }else{
-        this.aparecerProposta = true;
-      }
       this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
-    .subscribe(e => {
-      console.log(e)
-      this.serviceCalled = true;
-      this.demandaService.setFormDemandaData(e);
-    })
+        .subscribe(e => {
+          this.serviceCalled = true;
+          this.demandaService.setFormDemandaData(e);
+        })
+    } else if (this.router.url.includes('rascunho')) {
+      this.aparecerProposta = false;
+      this.activatedRoute.params.subscribe(
+        e => {
+          this.demandaService.setFormDemandaRascunho(e['indiceRascunho'])
+        }
+      )
+    } else {
       this.aparecerProposta = true;
-      this.demandaService.resetDemandaForm();
+      this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
+        .subscribe(e => {
+          this.serviceCalled = true;
+          this.demandaService.setFormDemandaData(e);
+          this.propostaService.setFormDemandaRascunho(this.codigoDemandaRota)
+        })
     }
   }
-
 
 
   onScroll() {

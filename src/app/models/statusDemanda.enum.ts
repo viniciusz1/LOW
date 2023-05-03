@@ -10,5 +10,6 @@ export enum StatusDemanda{
     SUPPORT = "SUPPORT",
     CANCELLED = "CANCELLED",
     DONE = "DONE",
-    DRAFT = "DRAFT"
+    DRAFT = "DRAFT",
+    DRAFT_PROPOSTA = "DRAFT_PROPOSTA"
 }

@@ -17,7 +17,7 @@
         [stepContentParams]="{ texto: textoTutorial[0] }"
         class="btn btn-primary"
         style="height: 42px"
-        routerLink="/tela-inicial/demanda"
+        (click)="criarUmaNovaDemanda()"
       >
         <i class="bi bi-plus" style="font-size: 17px"></i>
         {{ "telas.tela-inicial.b-criar-demanda" | translate }}
@@ -56,6 +56,7 @@
           (click)="exportExcel()"
           class="btn btn-success me-3"
           *ngIf="isFiltrado"
+          [disabled]="nenhumResultadoEncontrado"
         >
           <i class="bi bi-filetype-csv" style="font-size: 17px"></i>
         </button>
@@ -192,7 +193,7 @@
             "
             [dadosDemada]="demanda"
             (verDocumentoProposta)="openModalDemandaDocumento($event)"
-            (irParaChat)="irParaChat()"
+            (irParaChat)="irParaChat($event)"
             (modalHistorico)="openModalHistorico($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
             (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
@@ -210,7 +211,7 @@
                     | filtrarDemandaStatus : linha.titulo
                     | slice : 4
                 "
-                (irParaChat)="irParaChat()"
+                (irParaChat)="irParaChat($event)"
             (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
                 (modalHistorico)="openModalHistorico($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
@@ -248,7 +249,7 @@
       <div style="padding: 10px; margin-left: 6px"></div>
       <div class="container d-flex flex-column align-items-center">
         <app-list-demanda
-          (irParaChat)="irParaChat()"
+          (irParaChat)="irParaChat($event)"
           (modalHistorico)="openModalHistorico($event)"
           *ngFor="let demanda of listaDemandas"
           [dadosDemada]="demanda"
@@ -297,9 +298,10 @@
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                 "
+                (clicouEmExcluir)="carregarDemandasIniciais()"
                 [dadosDemada]="demanda"
                 (verDocumentoProposta)="openModalDemandaDocumento($event)"
-                (irParaChat)="irParaChat()"
+                (irParaChat)="irParaChat($event)"
                 (modalHistorico)="openModalHistorico($event)"
                 (avancarStatusDemanda)="avancarStatusDemanda($event)"
                 (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
@@ -340,7 +342,7 @@
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat()"
+          (irParaChat)="irParaChat($event)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)"
           (modalHistorico)="openModalHistorico($event)"
           (verDocumentoEmAta)="openModalAtaDocumento()"
@@ -357,7 +359,7 @@
           (clicouEmExcluir)="excluirDemandaRascunho(i)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)"
           [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat()"
+          (irParaChat)="irParaChat($event)"
           (modalHistorico)="openModalHistorico($event)"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoEmAta)="openModalAtaDocumento()"
@@ -372,7 +374,7 @@
     <mat-spinner [diameter]="50" class="circle"></mat-spinner>
   </div>
   <div class="d-flex flex-column-reverse">
-    <div *ngIf="isFiltrado" class="d-flex justify-content-center mt-3 mb-4">
+    <div *ngIf="isFiltrado && nenhumResultadoEncontrado == false" class="d-flex justify-content-center mt-3 mb-4">
       <p-paginator
         [rows]="1"
         [showJumpToPageDropdown]="true"

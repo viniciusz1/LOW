@@ -1,8 +1,13 @@
+import { ActivatedRoute } from '@angular/router';
+import { RascunhoService } from './../../../../../services/rascunho.service';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { DemandaService } from './../../../../../services/demanda.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar } from 'ngx-editor';
+import Locals from 'ngx-editor/lib/Locals';
 
 interface Tab {
   title: string;
@@ -17,8 +22,27 @@ interface Tab {
 export class ParteDemandaComponent implements OnInit, OnDestroy {
   constructor(
     private demandaService: DemandaService,
-  ) { }
+    private rascunhoService: RascunhoService,
+    private route: ActivatedRoute
+  ) {
+    let indiceRascunho = route.snapshot.params['indiceRascunho']
+    this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
+      if(route.snapshot.url){
+        if(indiceRascunho){
+          rascunhoService.atualizarRascunhoDemanda = indiceRascunho
+        }else{
+          rascunhoService.atualizarRascunhoProposta = route.snapshot.params['codigoDemanda']
+        }
+      }
+    });
+   }
 
+   onInputChange() {
+    // Em vez de chamar diretamente o método, envie um evento ao Subject
+    this.inputSubject.next("");
+  }
+
+  inputSubject = new Subject<string>();
   @Input() aparecerProposta = false;
 
   listaFiles: File[] = []
@@ -35,7 +59,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   ];
 
   editor: Editor = new Editor();
-  formEditorEspecial = this.demandaService.formEditorEspecial
   toolbarDemanda: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],

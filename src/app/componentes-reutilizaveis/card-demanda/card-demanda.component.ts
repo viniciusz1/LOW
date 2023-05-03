@@ -5,6 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Route, Router } from '@angular/router';
+import { RascunhoService } from 'src/app/services/rascunho.service';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
@@ -45,7 +46,7 @@ export class CardDemandaComponent implements OnInit {
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
 
-  constructor(private route: Router, private confirmationService: ConfirmationService) {}
+  constructor(private route: Router, private confirmationService: ConfirmationService, private rascunhoService: RascunhoService) {}
   statusPermitido() {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -82,7 +83,7 @@ export class CardDemandaComponent implements OnInit {
     return null;
   }
 
-  abrirModalHistorico(){
+  abrirModalHistorico() {
     this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
   }
 
@@ -132,9 +133,9 @@ export class CardDemandaComponent implements OnInit {
       this.textoExibidoEmBotaoDependendoRota?.rota == 'ver documento'
     ) {
       this.verDocumentoProposta.emit(this.dadosDemada);
-    } else if(this.textoExibidoEmBotaoDependendoRota?.rota == 'parecer comissao'){
-      this.abrirModalParecerComissao.emit(this.dadosDemada) 
-    }else {
+    } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'parecer comissao') {
+      this.abrirModalParecerComissao.emit(this.dadosDemada)
+    } else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
@@ -215,6 +216,18 @@ export class CardDemandaComponent implements OnInit {
         texto: 'Parecer da DG',
       };
       return true;
+    } else if (this.dadosDemada.statusDemanda == StatusDemanda.DRAFT) {
+      this.rascunho = true
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: 'tela-inicial/rascunho/' + this.dadosDemada.codigoDemanda,
+        texto: 'Continuar Demanda',
+      };
+    } else if (this.dadosDemada.statusDemanda == StatusDemanda.DRAFT_PROPOSTA) {
+      this.rascunho = true
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: 'tela-inicial/proposta/' + this.dadosDemada.codigoDemanda,
+        texto: 'Continuar Demanda',
+      };
     } else if (
       !this.isPauta &&
       !this.rascunho &&
@@ -227,11 +240,6 @@ export class CardDemandaComponent implements OnInit {
         texto: 'Ver Demanda',
       };
       return true;
-    } else if (!this.isPauta && this.rascunho) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
-        texto: 'Continuar Demanda',
-      };
     } else {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'ver documento',
@@ -239,6 +247,17 @@ export class CardDemandaComponent implements OnInit {
       };
     }
     return true;
+  }
+
+  deleteRascunhoFromLocalStorage() {
+    if (this.dadosDemada.codigoDemanda) {
+      this.rascunhoService.deleteRascunho(this.dadosDemada.codigoDemanda)
+      this.clicouEmExcluir.emit()
+    } else {
+      alert(
+        "Código demanda is null: card-demanda"
+      )
+    }
   }
 
   existePauta() {

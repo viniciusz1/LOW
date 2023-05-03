@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+;
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
@@ -21,62 +21,61 @@ export class TelaChatComponent implements OnInit {
   items: MenuItem[] = [];
   codigoRota = ""
   mensagens: Mensagem[] = []
-  conversasDemandas: any = []
+  conversasDemandas: Demanda[] = []
+  mostrarConversas = false;
 
   constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService, private messagesService: MessagesService) {
     if (this.codigoRota != "") {
-      this.messagesService.initializeWebSocketConnection()
-      messagesService.$mensagesEmmiter.subscribe(mensagens => {
-        this.mensagens = []
-        let usuarioLogado = localStorage.getItem('user')
-        for (let i of mensagens) {
-          if ((usuarioLogado && i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == JSON.parse(usuarioLogado).codigoUsuario) {
-            i.ladoMensagem = true
-          } else {
-            i.ladoMensagem = false
-          }
-        }
-
-        this.mensagens.push(...mensagens)
-      })  
+      this.iniciarWebSocketChat()
     }
     this.setarConversas()
   }
-  @ViewChild('mensagemDigitada') private mensagem: any;
 
-  setarConversas(){
-    this.messagesService.getDemandasRelacionadas()
-    .subscribe(e=> console.log(e))
+
+  iniciarWebSocketChat() {
+    this.messagesService.initializeWebSocketConnection()
+    this.messagesService.$mensagesEmmiter.subscribe(mensagens => {
+      this.mensagens = []
+      for (let i of mensagens) {
+        if ((i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == this.usuarioService.getCodigoUser()) {
+          i.ladoMensagem = true
+        } else {
+          i.ladoMensagem = false
+        }
+      }
+      this.mostrarConversas = true
+      this.mensagens.push(...mensagens)
+    })
   }
 
-  enviarMensagem(event: KeyboardEvent | Event) {
-    if (this.mensagem.nativeElement.value == "") {
-      return
-    }
+  @ViewChild('mensagemDigitada') private mensagem: any;
 
-    if (event instanceof KeyboardEvent) {
-      if (event.key === "Enter") {
-        this.mensagens.push({
-          textoMensagens: this.mensagem.nativeElement.value,
-          ladoMensagem: false
-        })
-        this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
-        this.mensagem.nativeElement.value = "";
+  setarConversas() {
+    this.messagesService.getDemandasRelacionadas()
+      .subscribe(e => {
+        e.filter
+        this.conversasDemandas = e
       }
-    } else {
-      this.mensagens.push({
-        textoMensagens: this.mensagem.nativeElement.value,
-        ladoMensagem: false
-      })
+      )
+  }
+
+  enviarMensagemPorTeclado(event: KeyboardEvent){
+    if (event.key === "Enter") {
+      this.enviarMensagem()
+    }
+  }
+
+  enviarMensagem() {
       this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
       this.mensagem.nativeElement.value = ""
-    }
+    
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(e => {
       this.codigoRota = e['codigoDemanda']
       this.messagesService.codigoRota = this.codigoRota
+      this.iniciarWebSocketChat()
     })
 
   }

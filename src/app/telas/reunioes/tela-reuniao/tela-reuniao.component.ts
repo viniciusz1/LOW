@@ -2,7 +2,7 @@ import { ModalCancelamentoReuniaoComponent } from './../../../modais/modal-cance
 import { Demanda } from './../../../models/demanda.model';
 import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { TelaCalendarioComponent } from './../tela-calendario/tela-calendario.component';
 import { Component, OnInit } from '@angular/core';
 import { Reuniao } from 'src/app/models/reuniao.model';
@@ -23,6 +23,7 @@ export class TelaReuniaoComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
     public matDialog: MatDialog,
+    private messageService: MessageService,
     private reuniaoService: ReuniaoService
   ) { }
   opcoesOrdenacao = [{ name: 'Data', value: 'data' }, { name: 'Comissão', value: 'comissao' }]
@@ -84,11 +85,24 @@ export class TelaReuniaoComponent implements OnInit {
     this.reuniaoService
       .getReuniao()
       .subscribe({
-        next: (reuniao) => (this.listaReunioes = reuniao),
-        error: (err) => console.log(err),
+        next: reuniao => {
+          this.showSuccess("Reunião Atualizada!")
+          this.listaReunioes = reuniao
+        }, error: err => {
+          this.showError("Não foi possível atualizar esta reunião")
+        }
       });
   }
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
 
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
+
+  
   pesquisarReunioes(event: {
     nomeComissao: string;
     dataReuniao: string;
@@ -100,8 +114,11 @@ export class TelaReuniaoComponent implements OnInit {
     size: string
   }){
       this.reuniaoService.getReuniaoFiltrada(event).subscribe({
-        next: (reuniao) => (this.listaReunioes = reuniao),
-        error: (err) => console.log(err),
+        next: reuniao => {
+          this.listaReunioes = reuniao
+        }, error: err => {
+          this.showError("Não foi possível mostrar as reuniões!")
+        }
       });
   }
 

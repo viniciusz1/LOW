@@ -16,7 +16,7 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
 import { textoTutorial } from '../../../shared/textoDoTutorial';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -37,7 +37,8 @@ export class TelaInicialComponent implements OnInit {
     private demandasService: DemandaService,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private rascunhoService: RascunhoService
+    private rascunhoService: RascunhoService,
+    private messageService: MessageService
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {
@@ -357,16 +358,26 @@ export class TelaInicialComponent implements OnInit {
             .avancarStatusDemandaComDecisao(info.codigoDemanda, 1)
             .subscribe({
               next: () => {
+                this.showSuccess("Status avançado com Sucesso!")
                 this.carregarDemandasIniciais();
               },
               error: () => {
-                
+                this.showError("Não foi possível avançar o status da demanda!")
                },
             });
         }
       },
     });
   }
+
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
 
 
   //Verifica o status da demanda, adiciona o título e o status na lista de títulos
@@ -399,7 +410,7 @@ export class TelaInicialComponent implements OnInit {
         this.exibirFilasDeStatus();
       },
       error: (err) => {
-        console.log(err);
+        this.showError("Não foi possível carregar as demandas!")
       },
     });
   }
@@ -413,7 +424,6 @@ export class TelaInicialComponent implements OnInit {
       message:
         demanda.motivoReprovacaoDemanda,
       accept: () => {
-
         this.router.navigate(['/tela-inicial/reformular-demanda/' + demanda.codigoDemanda])
       },
     });

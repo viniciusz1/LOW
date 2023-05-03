@@ -22,7 +22,6 @@ import { LogInterceptor } from './interceptor';
 import { TelasModule } from './telas/telas.module';
 import { MessagesModule } from 'primeng/messages';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,8 +40,7 @@ import { MessagesModule } from 'primeng/messages';
     HttpClientModule,
     DialogModule,
     SharedModule,
-    MessagesModule
-
+    MessagesModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

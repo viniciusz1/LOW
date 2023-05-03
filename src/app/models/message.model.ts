@@ -7,5 +7,7 @@ export interface Mensagem {
     textoMensagens: string
     usuarioMensagens?: Usuario
     ladoMensagem: boolean
+    dataMensagens?: Date
+    statusMensagens?: string
   }
   

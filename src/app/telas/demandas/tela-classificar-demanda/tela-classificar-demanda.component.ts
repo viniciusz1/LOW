@@ -109,6 +109,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
   onSubmitClassificacaoDemanda() {
     this.demandaClassificadaService.postProposta(this.demanda?.codigoDemanda).subscribe({
       next: e => {
+        
         this.router.navigate(['/tela-inicial'])
       },
       error: err => {

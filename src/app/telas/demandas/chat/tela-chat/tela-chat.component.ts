@@ -5,9 +5,7 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
 import { MessagesService } from 'src/app/websocket/messages.service';
-import { Message } from '@stomp/stompjs';
 import { Demanda } from 'src/app/models/demanda.model';
-import { Usuario } from 'src/app/models/usuario.model';
 import { Mensagem } from 'src/app/models/message.model';
 
 @Component({
@@ -76,7 +74,7 @@ export class TelaChatComponent implements OnInit {
       this.codigoRota = e['codigoDemanda']
       this.messagesService.codigoRota = this.codigoRota
       this.iniciarWebSocketChat()
-    })
+     })
 
   }
 

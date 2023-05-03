@@ -7,6 +7,7 @@ import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
 import { MessagesService } from 'src/app/websocket/messages.service';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Mensagem } from 'src/app/models/message.model';
+import { ScrollPanel } from 'primeng/scrollpanel';
 
 @Component({
   selector: 'app-tela-chat',
@@ -30,6 +31,17 @@ export class TelaChatComponent implements OnInit {
   }
 
 
+  @ViewChild('scrollPanel') scrollPanel: ScrollPanel | undefined;
+
+  scrollToBottom() {
+    if(this.scrollPanel){
+      console.log(this.scrollPanel.containerViewChild.nativeElement.scrollHeight)
+      console.log(this.scrollPanel)
+      this.scrollPanel.scrollTop(819)
+
+    }
+  }
+
   iniciarWebSocketChat() {
     this.messagesService.initializeWebSocketConnection()
     this.messagesService.$mensagesEmmiter.subscribe(mensagens => {
@@ -43,6 +55,7 @@ export class TelaChatComponent implements OnInit {
       }
       this.mostrarConversas = true
       this.mensagens.push(...mensagens)
+      this.scrollToBottom()
     })
   }
 

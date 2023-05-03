@@ -14,7 +14,7 @@
                 <input type="text" placeholder="Busque por demandas">
             </div>
             <div class="list-group">
-                <a [routerLink]="['/tela-inicial/chat/' + conversa.codigoDemanda]" routerLinkActive="router-link-active"
+                <a [routerLink]="['/tela-inicial/chat/' + conversa.codigoDemanda]" routerLinkActive="na-rota"
                     *ngFor="let conversa of conversasDemandas"
                     class="list-group-item list-group-item-action d-flex align-items-center"
                     style="border-left: 4px solid #00579d; border-bottom: #dbdbdb 1px solid;">
@@ -23,8 +23,8 @@
                         <small>{{conversa?.solicitanteDemanda?.nomeUsuario}}</small>
                     </div>
                     <div class="d-flex flex-column align-items-center">
-                        <span class="timeago">19:14</span>
-                        <span class="badge text-bg-primary badge-pill">1</span>
+                        <span class="timeago">{{conversa?.horaUltimaMensagem | date : 'HH:mm'}}</span>
+                        <span class="badge text-bg-primary badge-pill">{{conversa?.qtdMensagensNaoLidas}}</span>
                     </div>
                 </a>
             </div>
@@ -32,7 +32,7 @@
         <section class="col-md-8 px-0 d-flex flex-column">
             <header class="d-flex align-items-center border-bottom">
                 <div class="d-flex flex-column flex-fill ms-3">
-                    <h6>Sistema de Entrega de Demandas de TI</h6>
+                    <h6>{{demandaDiscutida?.tituloDemanda}}</h6>
                     <small class="timeago">{{ "telas.tela-chat.visto-por-ultimo" | translate }} Segunda-feira às
                         12:34</small>
                 </div>

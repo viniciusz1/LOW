@@ -1,3 +1,4 @@
+import { Demanda } from 'src/app/models/demanda.model';
 import { UsuarioService } from './../services/usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
@@ -33,7 +34,7 @@ export class MessagesService {
     if (codigoRota) {
       this.codigoRota = codigoRota
     }
-    
+
     if (this.codigoRota)
       this.getMessages(this.codigoRota).subscribe(e => {
         this.$mensagesEmmiter.emit(e);
@@ -48,39 +49,59 @@ export class MessagesService {
     });
   }
 
-  getDemandasRelacionadas(){
+  getDemandasRelacionadas() {
     return this.http.get<any>('http://localhost:8085/low/mensagens/demandasDiscutidas/' + this.usuarioService.getCodigoUser())
-    .pipe(map((response: any) => {
-      // Transforma o corpo da resposta em um objeto JavaScript
-      // const uniqueDemands = response.demands.filter((demand, index, self) =>
-      //     index === self.findIndex((d) => d.code === demand.code)
-      //   );
-      return response;
-    }))
-  }
+    .pipe(map((demandas: any) => {
+      console.log(demandas)
 
-  getMessages(codigoDemanda: string) {
-    return this.http.get<Mensagem[]>('http://localhost:8085/low/mensagens/' + codigoDemanda)
-   
-  }
-
-  send(destino: string, mensagem: string, codigoDemanda: string, codigoUsuario: string) {
-    let mensagemDTO = {
-      textoMensagens: mensagem,
-      demandaMensagens: {
-        codigoDemanda: codigoDemanda
-      },
-      usuarioMensagens: {
-        codigoUsuario: codigoUsuario
+      for(let demanda of demandas.demandas){
+        let infoExtras = demandas.infoCard.find((e: { codigoDemanda: any; }) => e.codigoDemanda == demanda.codigoDemanda)
+        demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem
+        demanda.qtdMensagensNaoLidas = infoExtras.qtdMensagensNaoLidas
       }
-    }
 
-    if (this.stompClient) {
-      this.stompClient.send(
-        destino, {}, JSON.stringify(mensagemDTO)
-      )
-    } else {
-      // console.log("Conexão não estabelecida!")
+      const mapaDemanda = new Map();
+      demandas.demandas.forEach((demanda: Demanda) => {
+        if (!mapaDemanda.has(demanda.codigoDemanda)) {
+          mapaDemanda.set(demanda.codigoDemanda, demanda);
+        } else {
+          const demandaExistente = mapaDemanda.get(demanda.codigoDemanda);
+          if ((demanda.version) && demanda.version > demandaExistente.version) {
+            mapaDemanda.set(demanda.codigoDemanda, demanda);
+          }
+        }
+      });
+      return [...mapaDemanda.values()];
+    }))
+      // .pipe(map((demandas: Demanda[]) => {
+      
+      // })
+      // );
+  }
+
+
+getMessages(codigoDemanda: string) {
+  return this.http.get<Mensagem[]>('http://localhost:8085/low/mensagens/' + codigoDemanda)
+
+}
+
+send(destino: string, mensagem: string, codigoDemanda: string, codigoUsuario: string) {
+  let mensagemDTO = {
+    textoMensagens: mensagem,
+    demandaMensagens: {
+      codigoDemanda: codigoDemanda
+    },
+    usuarioMensagens: {
+      codigoUsuario: codigoUsuario
     }
   }
+
+  if (this.stompClient) {
+    this.stompClient.send(
+      destino, {}, JSON.stringify(mensagemDTO)
+    )
+  } else {
+    // console.log("Conexão não estabelecida!")
+  }
+}
 }

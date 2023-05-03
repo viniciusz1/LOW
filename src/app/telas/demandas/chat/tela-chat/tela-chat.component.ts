@@ -22,6 +22,7 @@ export class TelaChatComponent implements OnInit {
   mensagens: Mensagem[] = []
   conversasDemandas: Demanda[] = []
   mostrarConversas = false;
+  demandaDiscutida: Demanda | undefined
 
   constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService, private messagesService: MessagesService) {
     if (this.codigoRota != "") {
@@ -35,11 +36,23 @@ export class TelaChatComponent implements OnInit {
 
   scrollToBottom() {
     if(this.scrollPanel){
-      console.log(this.scrollPanel.containerViewChild.nativeElement.scrollHeight)
-      console.log(this.scrollPanel)
-      this.scrollPanel.scrollTop(819)
+      this.scrollPanel.scrollTop(99999)
 
     }
+  }
+
+  verificarMensagemMaisAtual(){
+    const mensagemMaisAtual = this.mensagens.reduce((mensagemMaisRecente: Mensagem | undefined, mensagemAtual: Mensagem) => {
+      if (!mensagemMaisRecente) {
+        return mensagemAtual;
+      }
+      if(mensagemAtual.dataMensagens && mensagemMaisRecente.dataMensagens){
+        return mensagemAtual.dataMensagens > mensagemMaisRecente.dataMensagens ? mensagemAtual : mensagemMaisRecente;
+      }
+      return 
+    }, undefined);
+    
+    console.log('A mensagem mais atual é:', mensagemMaisAtual);
   }
 
   iniciarWebSocketChat() {
@@ -64,7 +77,7 @@ export class TelaChatComponent implements OnInit {
   setarConversas() {
     this.messagesService.getDemandasRelacionadas()
       .subscribe(e => {
-        e.filter
+        console.log(e)
         this.conversasDemandas = e
       }
       )
@@ -86,6 +99,8 @@ export class TelaChatComponent implements OnInit {
     this.route.params.subscribe(e => {
       this.codigoRota = e['codigoDemanda']
       this.messagesService.codigoRota = this.codigoRota
+      this.demandaDiscutida = this.conversasDemandas.find(e => e.codigoDemanda == this.codigoRota)
+      console.log("demandaDiscutida", this.demandaDiscutida)
       this.iniciarWebSocketChat()
      })
 

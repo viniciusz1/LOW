@@ -21,6 +21,7 @@ import { TranslateModule, TranslateLoader, TranslateService, TranslateStore } fr
 import { HttpLoaderFactory } from 'ngx.translate.config';
 import { LogInterceptor } from './interceptor';
 import { TelasModule } from './telas/telas.module';
+import { MessagesModule } from 'primeng/messages';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { TelasModule } from './telas/telas.module';
     BrowserAnimationsModule,
     HttpClientModule,
     DialogModule,
-    SharedModule
+    SharedModule,
+    MessagesModule
 
   ],
   providers: [{

@@ -12,6 +12,10 @@ export let PermissoesDeRotas = [
         authorities: ["*"]
     },
     {
+        path: '/tela-inicial/not-found',
+        authorities: ["*"]
+    },
+    {
         path: '/tela-inicial/chat',
         authorities: ["*"]
     },

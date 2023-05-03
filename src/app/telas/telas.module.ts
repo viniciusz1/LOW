@@ -7,11 +7,14 @@ import { DemandasModule } from './demandas/demandas.module';
 import { LoginModule } from './login/login.module';
 import { PerfilModule } from './perfil/perfil.module';
 import { ReunioesModule } from './reunioes/reunioes.module';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
 @NgModule({
   declarations: [
+  
+    NotFoundComponent
   ],
   imports: [
     CommonModule,

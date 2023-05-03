@@ -19,7 +19,7 @@ export class DemandaClassificadaService {
     analista: { codigoUsuario: this.usuarioService.getCodigoUser() },
     secaoDemandaClassificada: [''],
   });
-  postProposta(codigoDemanda: string | undefined) {
+  postClassificacaoDemanda(codigoDemanda: string | undefined) {
     if(codigoDemanda != undefined){
     this.demandaClassificadaForm.controls.codigoDemanda.setValue(codigoDemanda);
     }

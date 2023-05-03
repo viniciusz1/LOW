@@ -4,6 +4,7 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-modal-historico',
@@ -15,14 +16,15 @@ export class ModalHistoricoComponent implements OnInit {
     public dialogRef: DialogRef<ModalHistoricoComponent>,
     @Inject(DIALOG_DATA) public data: string,
     private demandaService: DemandaService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private messageService: MessageService
   ) {
     this.demandaService.getHistoricoDemandaByCodigo(data).subscribe({
       next: (e) => {
         this.listaHistoricoDemandas = e;
       },
       error: (err) => {
-        console.log(err);
+        this.showError("Código não encontrado")
       },
     });
   }
@@ -34,5 +36,10 @@ export class ModalHistoricoComponent implements OnInit {
       data: event
     });
   }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
   ngOnInit(): void {}
 }

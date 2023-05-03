@@ -18,49 +18,53 @@ export class PosHeaderComponent implements OnInit {
         this.items = []
         if (e.url == '/tela-inicial/reunioes') {
           this.items.push({label: 'Reuniões'});
-        }if (e.url == '/tela-inicial/demanda') {
+        } 
+        else if (e.url == '/tela-inicial/demanda') {
           this.items.push({label: 'Criação'});
         }
-        if (e.url == '/tela-inicial') {
+        else if (e.url == '/tela-inicial') {
           this.items.push({label: 'Demandas'});
         }
-        if (e.url == '/tela-inicial/chat') {
+        else  if (e.url.startsWith('/tela-inicial/chat')) {
           this.items.push({label: 'Chat'});
         }
-        if (e.url == '/tela-inicial/proposta') {
+        else if (e.url == '/tela-inicial/proposta') {
           this.items.push({label: 'Propostas'});
         }
-        if (e.url == '/tela-inicial/rascunhos') {
+        else if (e.url == '/tela-inicial/rascunhos') {
           this.items.push({label: 'Rascunhos'});
         }
-        if (e.url == '/tela-inicial/configuracoes/layout') {
+        else if (e.url.startsWith('/tela-inicial/rascunho')) {
+          this.items.push({label: 'Rascunho'});
+        }
+        else if (e.url == '/tela-inicial/configuracoes/layout') {
           this.items.push({label: 'Layout'});
         }
-        if (e.url == '/tela-inicial/configuracoes/perfil') {
+        else if (e.url == '/tela-inicial/configuracoes/perfil') {
           this.items.push({label: 'Perfil'});
         }
-        if (e.url == '/tela-inicial/configuracoes/ajuda') {
+        else if (e.url == '/tela-inicial/configuracoes/ajuda') {
           this.items.push({label: 'Ajuda'});
         }
-        if (e.url == '/tela-inicial/configuracoes/sugestoes') {
+        else if (e.url == '/tela-inicial/configuracoes/sugestoes') {
           this.items.push({label: 'Sugestões'});
         }
-        if (e.url.includes('/tela-inicial/classificar-demanda')) {
+        else if (e.url.includes('/tela-inicial/classificar-demanda')) {
           this.items.push({label: 'Classificar'});
         }
-        if (e.url == '/tela-inicial/historico-demanda') {
+        else if (e.url == '/tela-inicial/historico-demanda') {
           this.items.push({label: 'Histórico'});
         }
-        if (e.url == '/tela-inicial/nova-pauta') {
+        else if (e.url == '/tela-inicial/nova-pauta') {
           this.items.push({label: 'Nova Pauta'});
         }
-        if (e.url.includes('/tela-inicial/ver-reuniao') ) {
+        else if (e.url.includes('/tela-inicial/ver-reuniao') ) {
           this.items.push({label: 'Ver Reuniao'});
         }
-        if (e.url == '/tela-inicial/historico') {
+        else if (e.url == '/tela-inicial/historico') {
           this.items.push({label: 'Histórico'});
         }
-        if (e.url == '/tela-inicial/not-found') {
+        else {
           this.items.push({label: 'Not Found'});
         }
       });

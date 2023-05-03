@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { InputTextModule } from 'primeng/inputtext';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MessageService } from 'primeng/api';
 
 
 @NgModule({
@@ -18,7 +20,11 @@ import { InputTextModule } from 'primeng/inputtext';
     RouterModule,
     FormsModule,
     SharedModule,
-    InputTextModule
+    InputTextModule,
+    MatDialogModule
+  ],
+  providers: [
+    MessageService
   ]
 })
 export class LoginModule { }

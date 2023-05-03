@@ -43,8 +43,12 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
             component: TelaClassificarDemandaComponent
           },
           {
-            path: 'rascunhos',
-            component: TelaInicialComponent
+            path: 'rascunho/:indiceRascunho',
+            component: TelaCorridaComponent
+          },
+          {
+            path: 'chat/:codigoDemanda',
+            component: TelaChatComponent
           },
           {
             path: 'chat',
@@ -96,6 +100,10 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
               }
             ]
           },
+          {
+            path: '**',
+            component: NotFoundComponent
+          }
         ]
       }
     ])

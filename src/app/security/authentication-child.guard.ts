@@ -17,26 +17,26 @@ export class AuthenticationChildGuard implements CanActivateChild {
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     this.http.get<UserDetails>(path + "login/verify-token").subscribe({
       next: userDetails => {
-        let rota = this.permissoes.find(e => state.url.includes(e.path))
-        if (rota) {
-          for (let nivelAcesso of rota.authorities) {
-            if (nivelAcesso == userDetails.usuario.nivelAcessoUsuario) {
+        // console.log(state.url)
+        
+        for(let permissao of this.permissoes){
+
+          if(state.url.startsWith(permissao.path)){
+            console.log("Permissão: " + permissao.path)
+            if(permissao.authorities.includes(userDetails.usuario.nivelAcessoUsuario)){
               return true;
-            } else if (nivelAcesso == "*") {
+            }else if(permissao.authorities.includes("*")){
               return true;
+            }else{
+              alert("Você não tem permissão para acessar esta rota!")
+              this.router.navigate(['/tela-inicial'])
+              return false;
             }
           }
-        } else {
-          alert("Rota não encontrada")
-          this.router.navigate([''])
-          return false;
         }
-        alert("Você não tem permissão para acessar esta rota!")
-        this.router.navigate([''])
         return false;
       }, error: err => {
         alert(err)
-        this.router.navigate([''])
         return false;
       },
     })

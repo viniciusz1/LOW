@@ -1,5 +1,12 @@
+;
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
+import { MessagesService } from 'src/app/websocket/messages.service';
+import { Demanda } from 'src/app/models/demanda.model';
+import { Mensagem } from 'src/app/models/message.model';
 
 @Component({
   selector: 'app-tela-chat',
@@ -7,53 +14,67 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
   styleUrls: ['./tela-chat.component.scss']
 })
 
-
 export class TelaChatComponent implements OnInit {
   messageService: any;
   items: MenuItem[] = [];
+  codigoRota = ""
+  mensagens: Mensagem[] = []
+  conversasDemandas: Demanda[] = []
+  mostrarConversas = false;
 
-  constructor(private confirmationService: ConfirmationService) { }
+  constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService, private messagesService: MessagesService) {
+    if (this.codigoRota != "") {
+      this.iniciarWebSocketChat()
+    }
+    this.setarConversas()
+  }
+
+
+  iniciarWebSocketChat() {
+    this.messagesService.initializeWebSocketConnection()
+    this.messagesService.$mensagesEmmiter.subscribe(mensagens => {
+      this.mensagens = []
+      for (let i of mensagens) {
+        if ((i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == this.usuarioService.getCodigoUser()) {
+          i.ladoMensagem = true
+        } else {
+          i.ladoMensagem = false
+        }
+      }
+      this.mostrarConversas = true
+      this.mensagens.push(...mensagens)
+    })
+  }
+
   @ViewChild('mensagemDigitada') private mensagem: any;
-  mensagens: Mensagem[] = [{
-    mensagem: "Olá, tudo bem?",
-    rementente: "analista"
-  },
-  {
-    mensagem: "Sim. tudo bem",
-    rementente: "solicitante"
-  },
-  ]
+
+  setarConversas() {
+    this.messagesService.getDemandasRelacionadas()
+      .subscribe(e => {
+        e.filter
+        this.conversasDemandas = e
+      }
+      )
+  }
+
+  enviarMensagemPorTeclado(event: KeyboardEvent){
+    if (event.key === "Enter") {
+      this.enviarMensagem()
+    }
+  }
+
+  enviarMensagem() {
+      this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
+      this.mensagem.nativeElement.value = ""
+    
+  }
 
   ngOnInit(): void {
-    this.items = [
-      {
-        icon: 'pi pi-pencil',
-        command: () => {
-          this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-        }
-      },
-      {
-        icon: 'pi pi-refresh',
-        command: () => {
-          this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
-        }
-      },
-      {
-        icon: 'pi pi-trash',
-        command: () => {
-          this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-        }
-      },
-      {
-        icon: 'pi pi-upload',
-        routerLink: ['/fileupload']
-      },
-      {
-        icon: 'pi pi-external-link',
-        url: 'http://angular.io'
-
-      }
-    ];
+    this.route.params.subscribe(e => {
+      this.codigoRota = e['codigoDemanda']
+      this.messagesService.codigoRota = this.codigoRota
+      this.iniciarWebSocketChat()
+     })
 
   }
 
@@ -79,29 +100,5 @@ export class TelaChatComponent implements OnInit {
     })
   };
 
-  enviarMensagem(event: KeyboardEvent | Event) {
-    if (this.mensagem.nativeElement.value == "") {
-      return
-    }
 
-    if (event instanceof KeyboardEvent) {
-      if (event.key === "Enter") {
-        this.mensagens.push({
-          mensagem: this.mensagem.nativeElement.value,
-          rementente: "solicitante"
-        })
-        this.mensagem.nativeElement.value = "";
-      }
-    } else {
-      this.mensagens.push({
-        mensagem: this.mensagem.nativeElement.value,
-        rementente: "solicitante"
-      })
-      this.mensagem.nativeElement.value = ""
-    }
-  }
-}
-interface Mensagem {
-  rementente: string,
-  mensagem: string
 }

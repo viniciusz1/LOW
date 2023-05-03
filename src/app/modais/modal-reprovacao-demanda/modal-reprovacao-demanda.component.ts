@@ -5,6 +5,7 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-modal-reprovacao-demanda',
@@ -17,7 +18,8 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
   constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
     @Inject(DIALOG_DATA) public data: Demanda,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {
     this.dadosDemanda = data
   }
@@ -36,13 +38,23 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
       )
       .subscribe({
         next: event => {
+          this.showSuccess("Demanda reprovada com sucesso!")
           this.router.navigate(['/tela-inicial'])
           this.dialogRef.close()
         },
         error: err => {
-          alert(err)
+          this.showError("Não foi possivel reprovar a demanda!")
         }
       });
   }
+
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
 
 }

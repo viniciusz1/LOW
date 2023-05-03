@@ -1,9 +1,5 @@
 export let PermissoesDeRotas = [
     {
-        path: '/tela-inicial',
-        authorities: ["*"]
-    },
-    {
         path: '/tela-inicial/classificar-demanda',
         authorities: ["Analista", "GestorTI"]
     },

@@ -47,8 +47,13 @@
                                 [ngStyle]="{'justify-content': mensagem.ladoMensagem ? 'flex-end' : 'flex-start'}">
                                 <div
                                     [ngClass]="[mensagem.ladoMensagem ? 'balao-chat-solicitante' : 'balao-chat-analista']">
-                                    <span>
-                                        {{mensagem.textoMensagens}}
+                                    <span >
+                                        {{mensagem.textoMensagens}}<br>
+                                        <div style="width: 100%; display: flex; justify-content: end">
+                                            <small class="pe-2">{{mensagem.statusMensagens}}</small>
+                                            <small>{{mensagem.dataMensagens | date : 'dd/MM/yyyy HH:mm'}}</small>
+
+                                        </div>
                                     </span>
                                 </div>
                             </div>
@@ -61,7 +66,7 @@
                 </p-speedDial>
                 <div class="border rounded">
                     <input type="text" #mensagemDigitada (keydown)="enviarMensagemPorTeclado($event)"
-                        placeholder="Escreva sua Mensagem">
+                        placeholder="Escreva sua Mensagem" maxlength="255">
                     <i class="bi bi-send" (click)="enviarMensagem()"></i>
                 </div>
             </div>

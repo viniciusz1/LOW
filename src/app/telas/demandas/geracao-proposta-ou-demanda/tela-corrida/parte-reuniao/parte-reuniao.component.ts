@@ -8,6 +8,7 @@ import { Recurso } from 'src/app/models/recurso.model';
 import { Subject, debounceTime } from 'rxjs';
 import { RascunhoService } from 'src/app/services/rascunho.service';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 interface Responsavel {
   nome: string;
@@ -24,7 +25,8 @@ export class ParteReuniaoComponent implements OnInit {
     private propostaService: PropostaService,
     private demandaService: DemandaService,
     private rascunhoService: RascunhoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {
 
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
@@ -107,9 +109,18 @@ export class ParteReuniaoComponent implements OnInit {
       this.propostaService.addRowRecurso()
       this.mudarCustoTotalProjetoEPayback()
     } catch (err) {
-      alert(err)
+      this.showError("Não foi possível adicionar recurso")
     }
   }
+
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
 
   mudarCustoTotalProjetoEPayback() {
     this.custosTotais = 0
@@ -145,7 +156,7 @@ export class ParteReuniaoComponent implements OnInit {
     try {
       this.propostaService.addCenterOfCost()
     } catch (err) {
-      alert(err)
+      this.showError("Não foi possível adicionar o centro de custo")
     }
   }
 

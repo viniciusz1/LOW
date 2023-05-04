@@ -3,7 +3,7 @@ import { PropostaService } from './../../../../services/proposta.service';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { PrimeIcons } from 'primeng/api';
+import { MessageService, PrimeIcons } from 'primeng/api';
 import { RascunhoService } from 'src/app/services/rascunho.service';
 
 interface Tab {
@@ -32,15 +32,20 @@ export class TelaCorridaComponent implements OnInit {
 
   activeIndex = 1;
 
+  
+
+
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
 
       if (this.router.url.includes('reformular-demanda')) {
         this.demandaService.reformularDemanda().subscribe({
           next: (response) => {
+            this.showSuccess("Demanda reformulada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
+            this.showError("Não foi possível reformular a demanda!")
             alert('Ocorreu um erro: ' + err.status);
           },
         });
@@ -49,10 +54,11 @@ export class TelaCorridaComponent implements OnInit {
           next: (response) => {
             let codigo = this.route.snapshot.params['indiceRascunho']
             this.rascunhoService.deleteRascunho(codigo)
+            this.showSuccess("Demanda criada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
-            alert('Ocorreu um erro: ' + err.message);
+            this.showError("Certifique-se do preenchimento de todos os campos!")
           },
         });
       }
@@ -61,10 +67,11 @@ export class TelaCorridaComponent implements OnInit {
         .postProposta()
         .subscribe({
           next: (response) => {
+            this.showSuccess("Proposta criada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
-            alert('Ocorreu um erro: ' + err.message);
+           this.showError("Não foi possível criar proposta")
           },
         });
     }
@@ -77,7 +84,8 @@ export class TelaCorridaComponent implements OnInit {
     private propostaService: PropostaService,
     private activatedRoute: ActivatedRoute,
     private route: ActivatedRoute,
-    private rascunhoService: RascunhoService
+    private rascunhoService: RascunhoService,
+    private messageService: MessageService
   ) {
     this.tipoExibicaoTela();
 
@@ -86,6 +94,15 @@ export class TelaCorridaComponent implements OnInit {
   teste() {
     return this.demandaService.getFormDemandaInvalid
   }
+
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
 
   tipoExibicaoTela() {
     if (this.router.url.includes('reformular-demanda')) {

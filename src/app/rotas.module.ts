@@ -100,6 +100,10 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
               }
             ]
           },
+          {
+            path: '**',
+            component: NotFoundComponent
+          }
         ]
       }
     ])

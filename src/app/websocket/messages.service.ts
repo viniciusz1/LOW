@@ -51,65 +51,61 @@ export class MessagesService {
 
   getDemandasRelacionadas() {
     return this.http.get<any>('http://localhost:8085/low/mensagens/demandasDiscutidas/' + this.usuarioService.getCodigoUser())
-      .pipe(map((demandas: any) => {
-        //console.log(demandas)
+    .pipe(map((demandas: any) => {
+      //console.log(demandas)
 
-        for (let demanda of demandas.demandas) {
-          let infoExtras = demandas.infoCard.find((e: { codigoDemanda: any; }) => e.codigoDemanda == demanda.codigoDemanda)
-          demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem
-          demanda.qtdMensagensNaoLidas = infoExtras.qtdMensagensNaoLidas
-        }
+      for(let demanda of demandas.demandas){
+        let infoExtras = demandas.infoCard.find((e: { codigoDemanda: any; }) => e.codigoDemanda == demanda.codigoDemanda)
+        demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem
+        demanda.qtdMensagensNaoLidas = infoExtras.qtdMensagensNaoLidas
+      }
 
-        const mapaDemanda = new Map();
-        demandas.demandas.forEach((demanda: Demanda) => {
-          if (!mapaDemanda.has(demanda.codigoDemanda)) {
+      const mapaDemanda = new Map();
+      demandas.demandas.forEach((demanda: Demanda) => {
+        if (!mapaDemanda.has(demanda.codigoDemanda)) {
+          mapaDemanda.set(demanda.codigoDemanda, demanda);
+        } else {
+          const demandaExistente = mapaDemanda.get(demanda.codigoDemanda);
+          if ((demanda.version) && demanda.version > demandaExistente.version) {
             mapaDemanda.set(demanda.codigoDemanda, demanda);
-          } else {
-            const demandaExistente = mapaDemanda.get(demanda.codigoDemanda);
-            if ((demanda.version) && demanda.version > demandaExistente.version) {
-              mapaDemanda.set(demanda.codigoDemanda, demanda);
-            }
           }
-        });
-        return [...mapaDemanda.values()];
-      }))
-    // .pipe(map((demandas: Demanda[]) => {
-
-    // })
-    // );
+        }
+      });
+      return [...mapaDemanda.values()];
+    }))
+      // .pipe(map((demandas: Demanda[]) => {
+      
+      // })
+      // );
   }
 
 
-  getMessages(codigoDemanda: string) {
-    return this.http.get<Mensagem[]>('http://localhost:8085/low/mensagens/' + codigoDemanda)
+getMessages(codigoDemanda: string) {
+  return this.http.get<Mensagem[]>('http://localhost:8085/low/mensagens/' + codigoDemanda)
 
+}
+
+send(destino: string, mensagem: string, codigoDemanda: string, codigoUsuario: string) {
+  let file = new File([new Blob()], 'filename.jpg', { type: 'image/jpeg' })
+  const formData = new FormData();
+  formData.append('file', file, 'filename.jpg');
+  let mensagemDTO = {
+    textoMensagens: mensagem,
+    demandaMensagens: {
+      codigoDemanda: codigoDemanda
+    },
+    usuarioMensagens: {
+      codigoUsuario: codigoUsuario
+    },
+    multipartFile: formData
   }
 
-  send(destino: string, mensagem: string, codigoDemanda: string, codigoUsuario: string) {
-
-    let file = new File([new Blob()], 'filename.jpg', { type: 'image/jpeg' })
-    const formData = new FormData();
-    formData.append('file', file, 'filename.jpg');
-
-    let mensagemDTO = {
-      textoMensagens: mensagem,
-      demandaMensagens: {
-        codigoDemanda: codigoDemanda
-      },
-      usuarioMensagens: {
-        codigoUsuario: codigoUsuario
-      },
-      // multipartFile: formData
-    }
-    // formData.append('mensagemDTO', JSON.stringify(mensagemDTO));
-
-
-    if (this.stompClient) {
-      this.stompClient.send(
-        destino, {}, mensagemDTO)
-
-    } else {
-      // console.log("Conexão não estabelecida!")
-    }
+  if (this.stompClient) {
+    this.stompClient.send(
+      destino, {},JSON.stringify(mensagemDTO) 
+    )
+  } else {
+    // console.log("Conexão não estabelecida!")
   }
+}
 }

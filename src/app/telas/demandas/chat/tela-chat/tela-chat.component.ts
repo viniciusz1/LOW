@@ -35,24 +35,22 @@ export class TelaChatComponent implements OnInit {
   @ViewChild('scrollPanel') scrollPanel: ScrollPanel | undefined;
 
   scrollToBottom() {
-    if(this.scrollPanel){
+    if (this.scrollPanel) {
       this.scrollPanel.scrollTop(99999)
 
     }
   }
 
-  verificarMensagemMaisAtual(){
+  verificarMensagemMaisAtual() {
     const mensagemMaisAtual = this.mensagens.reduce((mensagemMaisRecente: Mensagem | undefined, mensagemAtual: Mensagem) => {
       if (!mensagemMaisRecente) {
         return mensagemAtual;
       }
-      if(mensagemAtual.dataMensagens && mensagemMaisRecente.dataMensagens){
+      if (mensagemAtual.dataMensagens && mensagemMaisRecente.dataMensagens) {
         return mensagemAtual.dataMensagens > mensagemMaisRecente.dataMensagens ? mensagemAtual : mensagemMaisRecente;
       }
-      return 
+      return
     }, undefined);
-    
-    console.log('A mensagem mais atual é:', mensagemMaisAtual);
   }
 
   iniciarWebSocketChat() {
@@ -77,32 +75,30 @@ export class TelaChatComponent implements OnInit {
   setarConversas() {
     this.messagesService.getDemandasRelacionadas()
       .subscribe(e => {
-        console.log(e)
         this.conversasDemandas = e
+        this.demandaDiscutida = this.conversasDemandas.find(e => e.codigoDemanda == this.codigoRota)
       }
       )
   }
 
-  enviarMensagemPorTeclado(event: KeyboardEvent){
+  enviarMensagemPorTeclado(event: KeyboardEvent) {
     if (event.key === "Enter") {
       this.enviarMensagem()
     }
   }
 
   enviarMensagem() {
-      this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
-      this.mensagem.nativeElement.value = ""
-    
+    this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
+    this.mensagem.nativeElement.value = ""
+
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(e => {
       this.codigoRota = e['codigoDemanda']
       this.messagesService.codigoRota = this.codigoRota
-      this.demandaDiscutida = this.conversasDemandas.find(e => e.codigoDemanda == this.codigoRota)
-      console.log("demandaDiscutida", this.demandaDiscutida)
       this.iniciarWebSocketChat()
-     })
+    })
 
   }
 

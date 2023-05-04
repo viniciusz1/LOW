@@ -10,10 +10,11 @@ import { Reuniao } from 'src/app/models/reuniao.model';
 export class ModalAtaDocumentoComponent implements OnInit {
 
   constructor(
-    @Inject(DIALOG_DATA) public data: {reuniao: Reuniao, tipoAta: string},) {
-      this.reuniao = data.reuniao;
-      this.tipoAta = data.tipoAta;
-     }
+    @Inject(DIALOG_DATA) public data: { reuniao: Reuniao, tipoAta: string },) {
+      console.log(data)
+    this.reuniao = data.reuniao;
+    this.tipoAta = data.tipoAta;
+  }
 
 
   ngOnInit(): void {

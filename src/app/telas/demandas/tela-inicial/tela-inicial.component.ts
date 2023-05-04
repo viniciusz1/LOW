@@ -121,22 +121,22 @@ export class TelaInicialComponent implements OnInit {
   ordenar(sort: { name: string, value: number }) {
     console.log(this.demandasService.getFiltroData)
     let filtro: Filtro;
-    if(this.demandasService.getFiltroData){
+    if (this.demandasService.getFiltroData) {
       filtro = this.demandasService.getFiltroData;
       filtro.sort = sort.value;
-    }else{
-      filtro = 
-    {
-      solicitante: "",
-      codigoDemanda: "",
-      status: "",
-      tamanho: "",
-      tituloDemanda: "",
-      analista: "",
-      departamento: "",
-      sort: sort.value,
-    };
-  }
+    } else {
+      filtro =
+      {
+        solicitante: "",
+        codigoDemanda: "",
+        status: "",
+        tamanho: "",
+        tituloDemanda: "",
+        analista: "",
+        departamento: "",
+        sort: sort.value,
+      };
+    }
     this.demandasService.setFiltroData = filtro;
     this.pesquisarDemandas(undefined);
   }
@@ -237,7 +237,7 @@ export class TelaInicialComponent implements OnInit {
           this.router.navigate(['/tela-inicial/chat']);
         },
         reject: () => {
-          
+
         }
       });
   }
@@ -363,7 +363,7 @@ export class TelaInicialComponent implements OnInit {
               },
               error: () => {
                 this.showError("Não foi possível avançar o status da demanda!")
-               },
+              },
             });
         }
       },
@@ -399,11 +399,11 @@ export class TelaInicialComponent implements OnInit {
     this.listaTituloNaoFiltrado = [];
     this.demandasService.getDemandasTelaInicial().subscribe({
       next: (e) => {
+        console.log(e)
         e.forEach((demandas) => {
           if (demandas.length > 0) {
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
-            console.log(demandas)
             this.nenhumResultadoEncontrado = false;
           }
         });
@@ -444,7 +444,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   exibirFilasDeStatus() {
-    if(this.rascunhoService.getRascunhosDemanda.length > 0){
+    if (this.rascunhoService.getRascunhosDemanda.length > 0) {
       this.listaTituloNaoFiltrado.push({
         status: 'DRAFT',
         titulo: 'Seus Rascunhos',
@@ -500,16 +500,13 @@ export class TelaInicialComponent implements OnInit {
         titulo: 'Assessment',
       });
     }
-    if (
-      this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'TO_DO')
-    ) {
+    if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'DISCUSSION')) {
+      this.listaTituloNaoFiltrado.push({ status: 'DISCUSSION', titulo: 'Discussion' });
+    }
+    if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'TO_DO')) {
       this.listaTituloNaoFiltrado.push({ status: 'TO_DO', titulo: 'To Do' });
     }
-    if (
-      this.listaDemandas.some(
-        (e) => e.statusDemanda?.toString() == 'DESIGN_AND_BUILD'
-      )
-    ) {
+    if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'DESIGN_AND_BUILD')) {
       this.listaTituloNaoFiltrado.push({
         status: 'DESIGN_AND_BUILD',
         titulo: 'Design and Build',

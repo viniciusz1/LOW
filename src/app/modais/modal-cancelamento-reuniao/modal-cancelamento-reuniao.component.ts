@@ -26,6 +26,7 @@ export class ModalCancelamentoReuniaoComponent implements OnInit {
       .subscribe({
         next: e => {
           this.showSuccess("Reunião Cancelada")
+          this.dialogRef.close()
         }, error: err => {
           this.showError("Não foi possível cancelar a reunião")
         }

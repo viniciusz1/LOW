@@ -86,7 +86,6 @@ export class TelaReuniaoComponent implements OnInit {
       .getReuniao()
       .subscribe({
         next: reuniao => {
-          this.showSuccess("Reunião Atualizada!")
           this.listaReunioes = reuniao
         }, error: err => {
           this.showError("Não foi possível atualizar esta reunião")

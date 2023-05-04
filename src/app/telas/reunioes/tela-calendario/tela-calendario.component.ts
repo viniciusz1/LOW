@@ -1,3 +1,4 @@
+import { StatusReuniao } from './../../../models/statusReuniao.enum';
 import { Reuniao } from './../../../models/reuniao.model';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Router } from '@angular/router';
@@ -14,38 +15,53 @@ defineFullCalendarElement();
 })
 export class TelaCalendarioComponent implements OnInit {
 
-  constructor(private route: Router,public dialogRef: DialogRef,
+  defineColorReuniao(status: StatusReuniao | undefined) {
+    if (status == StatusReuniao.CANCELADO) return 'red';
+    else if (status == StatusReuniao.CONCLUIDO) return 'green';
+    else if (status == StatusReuniao.PROXIMO) return 'yellow';
+    else if (status == StatusReuniao.PENDENTE) return 'orange';
+    else if (status == StatusReuniao.AGUARDANDO) return 'blue';
+    return 'blue';
+  }
+
+  constructor(private route: Router, public dialogRef: DialogRef,
     @Inject(DIALOG_DATA) public data: Reuniao[]) {
-      this.data.forEach(e => {
-        this.events.push({title: e.comissaoReuniao, data: e.dataReuniao?.toString().substring(0,10)})
-      })
-      this.calendarOptions.events = this.events
-    }
+    let events: { title?: string, date?: Date, url?: string, color: string }[] = []
+    data.forEach(reuniao => {
+      events.push({ title: reuniao.comissaoReuniao, date: reuniao.dataReuniao, url: '/tela-inicial/ver-reuniao/' + reuniao.codigoReuniao, color: this.defineColorReuniao(reuniao.statusReuniao) })
+    })
+
+    this.calendarOptions = {
+      locales: [brasil],
+      locale: 'pt-br',
+      plugins: [dayGridPlugin],
+      headerToolbar: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,dayGridWeek,dayGridDay'
+      }, events: events,
+      titleFormat: { year: 'numeric', month: 'long' },
+      eventClick: (arg) => {
+        console.log(arg)
+        // this.route.navigate(['/tela-inicial/ver-reuniao']);
+        // this.dialogRef.close()
+      },
+
+      eventsSet: this.handleEvents.bind(this)
+    };
+
+  }
 
   ngOnInit(): void {
 
   }
-  events: {title?: string, data?: string}[] = []
 
 
+  calendarOptions: CalendarOptions | undefined;
+  ngAfterViewInit() {
 
-  calendarOptions: CalendarOptions = {
-    locales: [brasil],
-    locale: 'pt-br',
-    plugins: [dayGridPlugin],
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,dayGridWeek,dayGridDay'
-    },
-    titleFormat: { year: 'numeric', month: 'long' },
-    eventClick: (arg) => {
-      this.route.navigate(['/tela-inicial/ver-pauta']);
-      this.dialogRef.close()
-    },
-    eventsSet: this.handleEvents.bind(this)
-  };
-  handleDateClick(arg : any) {
+  }
+  handleDateClick(arg: any) {
     alert('date click! ' + arg.dateStr)
   }
   currentEvents: EventApi[] = []

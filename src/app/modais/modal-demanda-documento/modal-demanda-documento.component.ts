@@ -1,3 +1,4 @@
+import { path } from './../../services/path/rota-api';
 
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
@@ -20,6 +21,7 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 export class ModalDemandaDocumentoComponent implements OnInit {
   showbotoesAprovarDemanda = false;
   showTimeline = false;
+  path = path
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
     private demandaService: DemandaService,

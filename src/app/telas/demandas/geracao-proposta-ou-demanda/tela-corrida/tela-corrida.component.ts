@@ -1,3 +1,4 @@
+import { Demanda } from './../../../../models/demanda.model';
 import { CentroCusto } from './../../../../models/centro-custo.model';
 import { PropostaService } from './../../../../services/proposta.service';
 import { DemandaService } from 'src/app/services/demanda.service';
@@ -31,9 +32,14 @@ export class TelaCorridaComponent implements OnInit {
   ];
 
   activeIndex = 1;
-
+  dadosDemanda: Demanda | undefined;
   
-
+  verificaSeTemParecerOuRecomendacao(){
+    if(this.dadosDemanda?.parecerComissaoProposta || this.dadosDemanda?.recomendacaoProposta){
+      return true;
+    }
+    return false;
+  }
 
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
@@ -46,7 +52,6 @@ export class TelaCorridaComponent implements OnInit {
           },
           error: (err) => {
             this.showError("Não foi possível reformular a demanda!")
-            alert('Ocorreu um erro: ' + err.status);
           },
         });
       } else {
@@ -124,6 +129,9 @@ export class TelaCorridaComponent implements OnInit {
       this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
         .subscribe(e => {
           this.serviceCalled = true;
+          this.dadosDemanda = e;
+          console.log(e)
+          this.verificaSeTemParecerOuRecomendacao()
           this.demandaService.setFormDemandaData(e);
           this.propostaService.setFormDemandaRascunho(this.codigoDemandaRota)
         })

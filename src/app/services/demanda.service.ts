@@ -186,9 +186,13 @@ export class DemandaService {
     this.insertsBeforePostDemanda()
     
     let demandaFormData = new FormData();
-    this.arquivos.map((item) =>
-      demandaFormData.append('arquivos', item, item.name)
-    );
+    if (this.arquivos.length != 0) {
+      this.arquivos.map((item) =>
+        demandaFormData.append('arquivos', item, item.name)
+      );
+    } else {
+      demandaFormData.append('arquivos', new File([], ''));
+    }
 
     this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
     let demandaFormValue: any = this.demandaForm.value

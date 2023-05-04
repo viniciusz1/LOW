@@ -101,7 +101,7 @@ send(destino: string, mensagem: string, codigoDemanda: string, codigoUsuario: st
       destino, {},JSON.stringify(mensagemDTO) 
     )
   } else {
-    // console.log("Conexão não estabelecida!")
+    // console.lo("Conexão não estabelecida!")
   }
 }
 }

@@ -53,7 +53,7 @@ export class MessagesService {
     return this.http.get<any>('http://localhost:8085/low/mensagens/demandasDiscutidas/' + this.usuarioService.getCodigoUser())
     .pipe(map((demandas: any) => {
       //console.log(demandas)
-
+      console.log(demandas)
       for(let demanda of demandas.demandas){
         let infoExtras = demandas.infoCard.find((e: { codigoDemanda: any; }) => e.codigoDemanda == demanda.codigoDemanda)
         demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem
@@ -73,10 +73,6 @@ export class MessagesService {
       });
       return [...mapaDemanda.values()];
     }))
-      // .pipe(map((demandas: Demanda[]) => {
-      
-      // })
-      // );
   }
 
 

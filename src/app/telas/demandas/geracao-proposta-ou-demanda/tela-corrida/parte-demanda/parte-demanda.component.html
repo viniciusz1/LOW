@@ -195,7 +195,8 @@
         <label style="font-weight: 500" class="me-2" (click)="teste()"> {{ "telas.demanda.anexar-documento" | translate }} </label>
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"
-          tooltipPosition="top"></i>
+          tooltipPosition="top"> 100MB </i>
+         
       </div>
       <p-fileUpload [chooseLabel]="'Escolher'" [uploadLabel]="'Enviar'" [cancelLabel]="'Cancelar'" [multiple]="true"
         [auto]="true" [customUpload]="true" [files]="listaFiles" (uploadHandler)="uploadDocumentos($event)">

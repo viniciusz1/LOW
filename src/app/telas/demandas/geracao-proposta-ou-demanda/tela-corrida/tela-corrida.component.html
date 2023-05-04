@@ -26,6 +26,14 @@
   <div class="tela-corrida col-10 border-start">
     <div>
       <div style="margin: 0 10vw" class="mt-5">
+        <div class="border rounded p-3 mb-4" *ngIf="verificaSeTemParecerOuRecomendacao()">
+          <h5>Parecer da Comissão:</h5>
+          
+          <p>{{dadosDemanda?.parecerComissaoProposta}}</p>
+          <br>
+          <h5>Recomendações da Comissão:</h5>
+          <p>{{dadosDemanda?.recomendacaoProposta}}</p>
+        </div>
         <p-accordion *ngIf="aparecerProposta" id="accordion-proposta" [activeIndex]="[0]">
           <p-accordionTab header="Demanda">
             <app-parte-demanda [aparecerProposta]="aparecerProposta"></app-parte-demanda>

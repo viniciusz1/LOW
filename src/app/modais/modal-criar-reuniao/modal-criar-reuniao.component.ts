@@ -115,7 +115,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
     console.log(reuniao)
     this.reuniaoService.postReuniao(reuniao).subscribe(e => {
-      this.router.navigate(['/tela-inicial/ver-pauta/' + e.codigoReuniao])
+      this.router.navigate(['/tela-inicial/ver-reuniao/' + e.codigoReuniao])
       this.dialogRef.close()
     })
   }

@@ -41,6 +41,15 @@ export class TelaVerPauta implements OnInit {
         }
       })
   }
+  mostrarAtaPublicada(){
+    
+    return this.reuniao?.propostasReuniao?.some(p => p.tipoAtaProposta == 'PUBLICADA')
+  }
+
+  mostrarAtaNaoPublicada(){
+    this.reuniao?.propostasReuniao?.some(p => p.tipoAtaProposta == 'NAO_PUBLICADA')
+    return true;
+  }
 
   finalizarReuniao() {
     this.reuniaoService.finalizarReuniao(this.reuniao?.codigoReuniao)

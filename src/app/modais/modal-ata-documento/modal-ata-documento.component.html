@@ -1,4 +1,8 @@
-<p class="paragrafo-inicial text-end"><img style="width: 60px;"
+<p class="paragrafo-inicial text-end">
+  <!-- <a [href]="[path + 'reuniao/ata/' + reuniao?.codigoReuniao]">
+    <i class="bi bi-download me-3" style="font-size: 25px"></i>
+  </a> -->
+  <img style="width: 60px;"
         src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt=""></p>
 <mat-dialog-content class="mat-typography">
     <h3 mat-dialog-title class="d-flex justify-content-center"><span><b>
@@ -6,7 +10,7 @@
             </b></span>
     </h3>
     <p>
-        <span><b>{{ "documento-pdf.ata-n" | translate }}</b> 10/2021</span>
+        <span><b>{{ "documento-pdf.ata-n" | translate }}</b>  {{reuniao?.codigoReuniao}}/{{reuniao?.dataReuniao | date:'YYYY'}}</span>
         <br>
         <span><b>{{ "documento-pdf.data" | translate }}</b> {{reuniao?.dataReuniao | date:'dd/MM/YYYY'}}</span>
     </p>
@@ -14,12 +18,15 @@
     <div *ngFor="let proposta of reuniao?.propostasReuniao; let i = index">
         <div>
             <hr *ngIf="i != 0">
-            <app-modal-demanda-documento [documentoEmAta]="true" [dadosDemanda]="proposta"></app-modal-demanda-documento>
+            <div  *ngIf="tipoAta == proposta.tipoAtaProposta">
+              ok
+            </div>
+            <app-modal-demanda-documento [documentoEmAta]="true" [dadosDemanda]="proposta"></app-modal-demanda-documento> -->
 
             <b>
                 {{ "documento-pdf.responsaveis-negocio" | translate }}
             </b>
-            <!-- <span *ngFor="let responsavel of proposta.responsaveisNegocioDemanda">{{responsavel}}</span> -->
+            <span *ngFor="let responsavel of proposta.responsaveisNegocioDemanda">{{responsavel}}</span>
 
             <p>
                 <b>{{ "documento-pdf.parecer-comissao" | translate }}</b> {{proposta.parecerComissaoProposta}}<br>

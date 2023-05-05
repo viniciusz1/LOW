@@ -250,15 +250,13 @@
       </h4>
     </p-scrollPanel>
   </mat-dialog-content>
+  
   <div *ngIf="documentoEmAta">
-    <h4 mat-dialog-title class="d-flex justify-content-between">
+
+    <h4 mat-dialog-title class="d-flex">
       <span
         ><b>{{ "documento-pdf.solicitante" | translate }}: </b
         >{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span
-      >
-      <span
-        ><b>{{ "documento-pdf.data" | translate }} </b>
-        {{ dadosDemanda?.inicioExDemandaProposta }}</span
       >
     </h4>
     <h4>

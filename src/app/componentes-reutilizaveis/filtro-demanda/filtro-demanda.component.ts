@@ -13,11 +13,11 @@ export class FiltroDemandaComponent implements OnInit {
   @Output() exportarExcel = new EventEmitter<Filtro>();
   @Input() mostrarIconeDeAbrirFiltro = true;
   @Input() filtroReduzidoVertical = false;
-  tamanho: {tamanho: string}[] = [];
-  status: {status: string}[] = [];
+  tamanho: string[] = [];
+  status: string[] = [];
   // tamanho: any[] = [];
-  valorTamanho: any;
-  valorStatus: any;
+  valorTamanho: any = "";
+  valorStatus: any = "";
   mostrarExel = false
   atualizarFiltro(dados: Filtro){
     this.demandaService.setFiltroData = dados
@@ -27,19 +27,19 @@ export class FiltroDemandaComponent implements OnInit {
 
   constructor(private demandaService: DemandaService) {
     this.tamanho = [
-      {tamanho: "Muito Pequeno"},
-      {tamanho: "Pequeno"},
-      {tamanho: "Médio"},
-      {tamanho: "Grande"},
-      {tamanho: "Muito Grande"},
+      "Muito Pequeno",
+      "Pequeno",
+      "Médio",
+      "Grande",
+      "Muito Grande",
     ]
 
     this.status = [
-      {status: "Backlog"},
-      {status: "Assessment"},
-      {status: "To-Do"},
-      {status: "Cancelled"},
-      {status: "Done"},
+      "Backlog",
+      "Assessment",
+      "To-Do",
+      "Cancelled",
+      "Done",
     ]
   }
 

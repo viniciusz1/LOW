@@ -15,9 +15,9 @@
       </div>
         <nav class="h-100 flex-column align-items-stretch pe-4">
           <nav class="nav nav-pills flex-column" id="scroll" >
-            <a class="nav-link nav-scroll" (click)="indoPraCima('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" (click)="teste()">Dados Gerais</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCima('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">Benefícios</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCima('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="cursor:pointer">Adicionais</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCima('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" >{{ "telas.tela-corrida.scroll-dados-gerais" | translate }}</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCima('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">{{ "telas.tela-corrida.scroll-beneficios" | translate }}</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCima('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="cursor:pointer">{{ "telas.tela-corrida.scroll-adicionais" | translate }}</a>
           </nav>
         </nav>
     </div>
@@ -26,25 +26,34 @@
   <div class="tela-corrida col-10 border-start">
     <div>
       <div style="margin: 0 10vw" class="mt-5">
-        <p-accordion *ngIf="aparecerProposta">
+        <div class="border rounded p-3 mb-4" *ngIf="verificaSeTemParecerOuRecomendacao()">
+          <h5>Parecer da Comissão:</h5>
+          
+          <p>{{dadosDemanda?.parecerComissaoProposta}}</p>
+          <br>
+          <h5>Recomendações da Comissão:</h5>
+          <p>{{dadosDemanda?.recomendacaoProposta}}</p>
+        </div>
+        <p-accordion *ngIf="aparecerProposta" id="accordion-proposta" [activeIndex]="[0]">
           <p-accordionTab header="Demanda">
-            <app-parte-demanda></app-parte-demanda>
+            <app-parte-demanda [aparecerProposta]="aparecerProposta"></app-parte-demanda>
           </p-accordionTab>
         </p-accordion>
-        <app-parte-demanda *ngIf="!aparecerProposta"></app-parte-demanda>
+        <app-parte-demanda *ngIf="!aparecerProposta" [aparecerProposta]="aparecerProposta"></app-parte-demanda>
         <app-parte-reuniao *ngIf="aparecerProposta"></app-parte-reuniao>
         <div
           class="d-flex justify-content-between"
           style="margin-top: 2vh !important; margin-bottom: 2vh"
         >
           <button class="btn btn-danger ms-2" routerLink="/tela-inicial">
-            Cancelar
+            {{ "telas.tela-corrida.b-cancelar" | translate }}
           </button>
           <button class="btn btn-primary me-2" (click)="onSubmitDemanda()">
-            Finalizar
+            {{ "telas.tela-corrida.b-finalizar" | translate }}
           </button>
         </div>
       </div>
     </div>
   </div>
 </div>
+<p-toast></p-toast>

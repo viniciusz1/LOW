@@ -1,5 +1,5 @@
 <div class="low-shadow rounded border" style="padding: 15px; background: white;">
-    <h6 class="d-flex justify-content-between">Filtrar demandas
+    <h6 class="d-flex justify-content-between">{{ "componentes-reutilizaveis.filtro-demanda.filtrar-demandas" | translate }}
         <i *ngIf="mostrarIconeDeAbrirFiltro" type="button" class="bi bi-chevron-down" (click)="closeFiltro.emit()"
             aria-controls="collapseExample">
         </i>
@@ -12,26 +12,27 @@
                         <span class="p-float-label me-2 ">
                             <input class="p-inputtext-sm" #titulo placeholder="Ex: Sistema de Gerenciamento" pInputText
                                 type="text" pInputText>
-                            <label for="float-input" *ngIf="!filtroReduzidoVertical">Título da Demanda:</label>
-                            <label for="float-input" *ngIf="filtroReduzidoVertical">Título Demanda:</label>
+                            <label for="float-input" *ngIf="!filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.titulo-demanda" | translate }}</label>
+                            <label for="float-input" *ngIf="filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.s-titulo-demanda" | translate }}</label>
 
                         </span>
                         <span class="p-float-label me-2">
                             <input class="p-inputtext-sm" #codigo placeholder="Ex: 123" pInputText type="text"
                                 pInputText>
-                            <label for="float-input" *ngIf="!filtroReduzidoVertical">Número da Solicitação:</label>
-                            <label for="float-input" *ngIf="filtroReduzidoVertical">N. da Solicitação:</label>
+                            <label for="float-input" *ngIf="!filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.numero-solicitacao" | translate }}</label>
+                            <label for="float-input" *ngIf="filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.s-numero-solicitacao" | translate }}</label>
                         </span>
                         <span class="p-float-label me-2">
                             <input class="p-inputtext-sm" #analista placeholder="Ex: Vinícius" pInputText type="text"
                                 pInputText>
-                            <label for="float-input">Responsável:</label>
+                            <label for="float-input">{{ "componentes-reutilizaveis.filtro-demanda.responsavel" | translate }}</label>
                         </span>
                         <span class="p-float-label me-2">
                             <p-dropdown [style]="{height: '37px'}" inputId="dropdown" [autoDisplayFirst]="false"
-                                [options]="tamanho" [(ngModel)]="valorTamanho" optionLabel="tamanho"></p-dropdown>
-                            <label for="float-input" *ngIf="!filtroReduzidoVertical">Tamanho da demanda:</label>
-                            <label for="float-input" *ngIf="filtroReduzidoVertical">Tam. demanda:</label>
+                                [options]="tamanho" [(ngModel)]="valorTamanho"></p-dropdown>
+                            <label for="float-input" *ngIf="!filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.tamanho" | translate }}</label>
+                            <label for="float-input" *ngIf="filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.tamanho" | translate }}</label>
+
                         </span>
                     </div>
                 </div>
@@ -39,26 +40,27 @@
                     <span class="p-float-label me-2">
                         <input class="p-inputtext-sm" #solicitante placeholder="Ex: Cléber" pInputText type="text"
                             pInputText>
-                        <label for="float-input">Solicitante:</label>
+                        <label for="float-input">{{ "componentes-reutilizaveis.filtro-demanda.solicitante" | translate }}</label>
                     </span>
                     <span class="p-float-label me-2">
                         <input class="p-inputtext-sm" #departamento placeholder="Ex: Motores" pInputText type="text"
                             pInputText>
-                        <label for="float-input">Departamento:</label>
+                        <label for="float-input">{{ "componentes-reutilizaveis.filtro-demanda.departamento" | translate }}</label>
                     </span>
                     <span class="p-float-label me-2">
                         <p-dropdown [style]="{height: '37px'}" inputId="dropdown" [autoDisplayFirst]="false"
-                            [options]="status" [(ngModel)]="valorStatus" optionLabel="status"></p-dropdown>
-                        <label for="dropdown">Status de Aprovação:</label>
+                            [options]="status" [(ngModel)]="valorStatus"></p-dropdown>
+                        <label for="dropdown">{{ "componentes-reutilizaveis.filtro-demanda.status" | translate }}</label>
+
                     </span>
                     <span class="p-float-label me-2">
                         <button
-                            (click)="atualizarFiltro({solicitante: solicitante.value,codigoDemanda: codigo.value,status: valorStatus, tamanho: valorTamanho, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value})"
+                            (click)="atualizarFiltro({solicitante: solicitante.value,codigoDemanda: codigo.value,status: valorStatus, tamanho: valorTamanho, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value, sort: ''})"
                             class="btn btn-primary"><i class="bi bi-search"></i></button>
                     </span>
                     <span class="p-float-label me-2" *ngIf="mostrarExel">
                         <button
-                            (click)="exportarExcel.emit({solicitante: solicitante.value,codigoDemanda: codigo.value,status: valorStatus, tamanho: valorTamanho, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value})"
+                            (click)="exportarExcel.emit({solicitante: solicitante.value,codigoDemanda: codigo.value,status: valorStatus, tamanho: valorTamanho, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value, sort: ''})"
                             class="btn btn-success"><i class="bi bi-filetype-csv " style="font-size: 17px"></i></button>
                     </span>
                 </div>

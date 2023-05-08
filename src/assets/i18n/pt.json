@@ -51,7 +51,8 @@
       "titulo": "Perfil",
       "subtitulo": "CONFIGURAÇÕES GERAIS DE CONTA",
       "nome": "Nome",
-      "dataNasc": "Data de Nascimento",
+      "username":"Nome de Usuário",
+      "departamento": "Departamento",
       "cpf": "CPF",
       "email": "Email",
       "telefone": "Telefone",
@@ -130,23 +131,6 @@
       "t8": {
         "titulo": "Filtrar Demandas",
         "desc": "Tenha uma visão mais ampla com nosso calendário"
-      },
-      "tela-login": {
-        "login":"Login",
-        "usuario": "Usuario",
-        "senha": "Senha",
-        "lembrar-senha": "Lembrar-me",
-        "esqueceu-senha": "Esqueceu a senha?",
-        "b-entrar": "Entrar"
-      },
-      "filtro-demandas": {
-        "titulo": "Titulo",
-        "num-solicitacao": "Número da solicitacao",
-        "responsavel": "Responsável",
-        "tamanho": "Tamanho da Demanda",
-        "solicitante": "Solicitante",
-        "departamento": "Departamento",
-        "status": "Status de Aprovação"
       },
       "botao-criar-demanda": "Criar demanda"
     },
@@ -248,9 +232,9 @@
       "p-tamanho": "Selecione um tamanho",
       "bu-beneficiada": "BU beneficiada:",
       "p-bu-beneficiada": "Selecione as BUs",
-      "bu-solicitante": "BU Solicitante",
+      "bu-solicitante": "BU Solicitante:",
       "p-bu-solicitante": "Selecione uma BU",
-      "secao-ti-responsavel": "Seção de TI Responsável",
+      "secao-ti-responsavel": "Seção de TI Responsável:",
       "p-secao-ti-responsavel": "Selecione uma seção",
       "anexar-documento": "Anexar documento:",
       "b-reprovar": "Reprovar",
@@ -281,7 +265,11 @@
       "visualizar": "Visualizar",
       "b-ata-publicada": "Ata publicada",
       "b-ata-nao-publicada": "Ata não publicada",
-      "b-gerar-documentacao": "Gerar documentação"
+      "b-gerar-documentacao": "Gerar documentação",
+      "b-finalizar-reuniao":"Finalizar Reunião",
+      "b-cancelar-reuniao":"Cancelar Reunião",
+      "b-nao":"Não",
+      "b-sim":"Sim"
     },
     "tela-login": {
       "login": "Login",
@@ -303,8 +291,7 @@
       "data-hora-reuniao": "Data e Hora da Reunião:",
       "selecione-comissao": "Selecione a Comissão da Reunião:",
       "p-data-hora-reuniao": "Clique aqui!",
-      "p-selecione-comissao": "Selecione a comissão:",
-      "b-marcar-reuniao": "Marcar Reunião"
+      "p-selecione-comissao": "Selecione a comissão:"
     },
     "modal-historico": {
       "historico": "Histórico",
@@ -339,14 +326,49 @@
     "situacao-atual": "Situação Atual:",
     "beneficio-real": "Benefício Real:",
     "memoria-calculo-beneficio-real": "Memória de cálculo do benefício real:",
-    "benefício-potencial": "Benefício Potencial:",
+    "beneficio-potencial": "Benefício Potencial:",
     "memoria-calculo-beneficio-potencial": "Memória de cálculo do benefício potencial:",
     "beneficio-qualitativo": "Benefício Qualitativo:",
     "frequencia-uso-sistema": "Frequencia de Uso do Sistema:",
     "documentos": "DOCUMENTOS:",
     "b-cancelar": "Cancelar",
     "b-reprovar": "Reprovar Demanda",
-    "b-aprovar": "Aprovar Demanda"
+    "b-aprovar": "Aprovar Demanda",
+    "mensais": " mensais",
+    "ata-reuniao-comissao-processos":"ATA REUNIÃO COMISSÃO PROCESSOS DE VENDAS E DESENVOLVIMENTO DE PRODUTO",
+    "ata-n":"ATA N°:",
+    "data":"DATA:",
+    "responsaveis-negocio":"RESPONSÁVEIS NEGÓCIO:",
+    "parecer-comissao":"PARECER COMISSÃO:",
+    "decisao":"DECISÃO:",
+    "b-fechar":"Fechar",
+    "solicitante-menor":"Solicitante:",
+    "proposta-comite":"PROPOSTA PARA COMITÊ/COMISSÃO DE PROCESSOS",
+    "situacao-problema":"Situação Atual - Problema a ser tratado/ resolvido:",
+    "escopo-projeto":"Escopo do Projeto:",
+    "resultados-esperados-qualitativos":"Resultados Esperados (Qualitativos)",
+    "resultados-esperados-potenciais":"Resultados Esperados (Ganhos Potenciais)",
+    "custos-totais":"Custos totais do projeto: ",
+    "total-despesas-externas":"Total despesas recursos externos (Desembolso):",
+    "total-despesas-internas":"Total despesa recursos internos:",
+    "despesas": "Despesas (Desembolso)",
+    "esforco":"Esforço",
+    "valor-total":"Valor total",
+    "cc-pagante":"CC Pagante",
+    "investimentos":"Investimentos / recorrentes",
+    "licencas":"Licenças",
+    "valor-unit":"Valor Unit",
+    "total":"Total",
+    "recursos-internos":"Recursos Internos (Sem Desembolso)",
+    "periodo-execucao":"Período de execução:",
+    "a":"à",
+    "payback":"Payback:",
+    "recursos-necessarios":"Recursos Necessários",
+    "tipo-despesa":"Tipo da despesa",
+    "perfil-despesa":"Perfil da despesa",
+    "qtd-horas":"Qtd de Horas",
+    "valor-hora":"Valor da hora",
+    "periodo-execucao-mensal":"Período de Execução (Mensal)"
   },
   "componentes-reutilizaveis": {
     "card-demanda": {
@@ -368,7 +390,7 @@
       "departamentos-beneficiados": "Departamentos Beneficiados: ",
       "exemplos": "Vendas, Motores, Trefilação",
       "cancelar-reuniao": "Cancelar Reunião",
-      "motivo-cancelamento": "Ver motivo do cancelamento",
+      "motivo-cancelamento": "Ver cancelamento",
       "detalhes-reuniao": "Detalhes da Reunião"
     },
     "filtro-reuniao": {
@@ -387,11 +409,11 @@
       "numero-solicitacao": "Número da Solicitação",
       "s-numero-solicitacao": "N. da Solicitação:",
       "responsavel": "Responsável",
-      "tamanho-demanda": "Tamanho da demanda:",
+      "tamanho": "Tamanho:",
       "s-tamanho-demanda": "Tam. demanda:",
       "solicitante": "Solicitante:",
       "departamento": "Departamento:",
-      "status-aprovacao": "Status de Aprovação",
+      "status": "Status:",
       "p-titulo-demanda": "Ex: Sistema de Gerenciamento",
       "p-departamento": "Ex: Motores"
     },

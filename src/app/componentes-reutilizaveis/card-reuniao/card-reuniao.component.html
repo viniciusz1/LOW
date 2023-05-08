@@ -6,9 +6,9 @@
     justify-content: space-between;">
           <div class="d-flex">
             <label class="me-2" for="">{{dadosReuniao.codigoReuniao}}</label>
-            <label class="me-2 text-truncate" for="titulo"><b>Dia da comissão: {{dadosReuniao.dataReuniao | date:"dd/MM/YY"}}</b></label>
+            <label class="me-2 text-truncate" for="titulo"><b>{{ "componentes-reutilizaveis.card-reuniao.dia-comissao" | translate }} {{dadosReuniao.dataReuniao | date:"dd/MM/YY"}}</b></label>
           </div>
-            <small class="me-3" for="">Status: {{dadosReuniao.statusReuniao | titlecase}}</small>
+            <small class="me-3" for="">{{ "componentes-reutilizaveis.card-reuniao.status" | translate }} {{dadosReuniao.statusReuniao | titlecase}}</small>
             <!-- <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>
@@ -16,22 +16,22 @@
                 </button>
               </mat-menu> -->
         </div>
-        <p class="card-text"><b>Comissão:</b> {{dadosReuniao.comissaoReuniao}}</p>
-        <p class="card-text"><b>Propostas adicionadas: </b> 
+        <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.comissao" | translate }}</b> {{dadosReuniao.comissaoReuniao}}</p>
+        <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.propostas-adicionadas" | translate }} </b> 
         RESOLVER</p>
         <p class="card-text bottom-card">
             <label class=" me-2">
                 <b>
-                    Departamentos Beneficiados:
+                  {{ "componentes-reutilizaveis.card-reuniao.departamentos-beneficiados" | translate }}
                 </b>
                 RESOLVER
             </label>
             <span class="d-flex">
               <button class="btn btn-outline-danger btn-sm me-2" *ngIf="
               dadosReuniao.statusReuniao != 'CANCELADO' &&
-              dadosReuniao.statusReuniao != 'CONCLUIDO'" (click)="cancelarReuniao.emit()">Cancelar Reunião</button>
-              <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'CANCELADO'" (click)="motivoCancelamento.emit(dadosReuniao)">Ver cancelamento</button>
-              <button class="btn btn-primary btn-sm" [routerLink]="['/tela-inicial/ver-reuniao/' + dadosReuniao.codigoReuniao]" *ngIf="dadosReuniao.statusReuniao != 'CANCELADO'">Detalhes da Reunião</button>
+              dadosReuniao.statusReuniao != 'CONCLUIDO'" (click)="cancelarReuniao.emit()">{{ "componentes-reutilizaveis.card-reuniao.cancelar-reuniao" | translate }}</button>
+              <button class="btn btn-primary btn-sm" *ngIf="dadosReuniao.statusReuniao == 'CANCELADO'" (click)="motivoCancelamento.emit(dadosReuniao)">{{ "componentes-reutilizaveis.card-reuniao.motivo-cancelamento" | translate }}</button>
+              <button class="btn btn-primary btn-sm" [routerLink]="['/tela-inicial/ver-reuniao/' + dadosReuniao.codigoReuniao]" *ngIf="dadosReuniao.statusReuniao != 'CANCELADO'">{{ "componentes-reutilizaveis.card-reuniao.detalhes-reuniao" | translate }}</button>
             </span>
           </p>
     </div>

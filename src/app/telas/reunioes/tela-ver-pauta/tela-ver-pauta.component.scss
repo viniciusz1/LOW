@@ -19,11 +19,16 @@
     justify-content: space-between;
     align-items: flex-end;
 }
-
+.alinhar-centro{
+       align-items: center;
+     justify-content: center;
+     display: flex;
+     flex-direction: column;
+}
 .alinhar-direita{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
 }
 

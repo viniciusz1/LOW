@@ -3,43 +3,62 @@
 
         <div class="col-9 mb-5" style="overflow: auto; height: 70vh;    border: 1px solid #c5c5c5;
         border-radius: 5px;
-        padding: 20px;" >
-            <div  *ngFor="let proposta of reuniao?.propostasReuniao" class="mb-2">
-                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'" (abrirModalParecerComissao)="openModalParecerComissaoProposta(proposta)" [dadosDemada]="proposta" [mudarTamanho]="'100%'"></app-card-demanda>
+        padding: 20px;">
+            <div *ngFor="let proposta of reuniao?.propostasReuniao" class="mb-2">
+                <app-card-demanda [exibirBotaoParecerComissao]="true" [tipoDeAta]="'Ata Publicada'"
+                    (abrirModalParecerComissao)="openModalParecerComissaoProposta(proposta)" [dadosDemada]="proposta"
+                    [mudarTamanho]="'100%'"></app-card-demanda>
             </div>
         </div>
 
         <div class="col-3 direita-grande">
-            <div class="alinhar-direita">
-                <div class="d-flex flex-column p-3 rounded" style="border: 1px solid rgb(112, 110, 110); width: fit-content;">
-                    <span class="d-flex">Data da comissão: {{reuniao?.dataReuniao | date:'dd/MM/YYYY'}}</span>
+            <div class="alinhar-direita h-100">
+                <div class="d-flex flex-column p-3 rounded"
+                    style="border: 1px solid rgb(112, 110, 110); width: fit-content;">
+                    <span class="d-flex"> {{ "telas.tela-ver-pauta.data-comissao" | translate }} {{reuniao?.dataReuniao
+                        | date:'dd/MM/YYYY'}}</span>
                     <hr>
-                    <span class="d-flex">Comissão: {{reuniao?.comissaoReuniao}}</span>
+                    <span class="d-flex"> {{ "telas.tela-ver-pauta.comissao" | translate }}
+                        {{reuniao?.comissaoReuniao}}</span>
                     <hr>
-                    <span class="d-flex">Qtd Propostas:  {{reuniao?.propostasReuniao?.length}}</span>
+                    <span class="d-flex"> {{ "telas.tela-ver-pauta.qtd-propostas" | translate }}
+                        {{reuniao?.propostasReuniao?.length}}</span>
                 </div>
-                <div class="d-flex w-100 mt-3 flex-column">
-                  <h6>Visualizar:</h6>
-                  <hr class="my-1">
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <div class="d-flex w-100 mt-3 flex-column align-items-center">
+                        <div class="alinhar-centro" *ngIf="mostrarAtaPublicada() || mostrarAtaNaoPublicada()">
+                            <h6> {{ "telas.tela-ver-pauta.visualizar" | translate }}</h6>
+                            <hr class="my-1 w-100">
+                            <button *ngIf="mostrarAtaPublicada()" class="btn btn-primary mt-3"
+                                (click)="openModalAtaDocumento('PUBLICADA')"> {{
+                                "telas.tela-ver-pauta.b-ata-publicada" | translate }}</button>
+                            <button *ngIf="mostrarAtaNaoPublicada()" class="btn btn-primary mt-2"
+                                (click)="openModalAtaDocumento('NAO_PUBLICADA')"> {{
+                                "telas.tela-ver-pauta.b-ata-nao-publicada" | translate }}</button>
+                        </div>
+                    </div>
 
+                    <div *ngIf="mostrarBotoesReuniao()" class="d-flex flex-column mb-5">
+                        <button class="btn btn-primary mb-3" (click)="modalConfirmacaoFinalizar()"> {{
+                            "telas.tela-ver-pauta.b-finalizar-reuniao" | translate }}</button>
+                        <button class="btn btn-danger" (click)="cancelarReuniao()"> {{
+                            "telas.tela-ver-pauta.b-cancelar-reuniao" | translate }}</button>
+                    </div>
                 </div>
-                <button class="btn btn-primary mt-3" (click)="openModalAtaDocumento('PUBLICADA')">Ata publicada</button>
-                <button class="btn btn-primary mt-2" (click)="openModalAtaDocumento('NAO_PUBLICADA')">Ata não publicada</button>
+
             </div>
-            <div *ngIf="mostrarBotoesReuniao()" class="d-flex flex-column mb-5">
-                <button class="btn btn-primary mb-3 me-4" (click)="modalConfirmacaoFinalizar()">Finalizar Reunião</button>
-                <button class="btn btn-danger" (click)="cancelarReuniao()">Cancelar Reunião</button>
-            </div>
+
         </div>
         <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{width: '40vw'}">
             <ng-template pTemplate="footer">
-              <button type="button" (click)="cd.reject()" class="btn btn-outline-danger">
-                <i class="pi pi-times me-2"></i>
-                Não
-              </button>
-              <button type="button" class="btn btn-danger" (click)="cd.accept()">
-                <i class="pi pi-check me-2"></i>Sim</button>
+                <button type="button" (click)="cd.reject()" class="btn btn-outline-danger">
+                    <i class="pi pi-times me-2"></i>
+                    {{ "telas.tela-ver-pauta.b-nao" | translate }}
+                </button>
+                <button type="button" class="btn btn-danger" (click)="cd.accept()">
+                    <i class="pi pi-check me-2"></i> {{ "telas.tela-ver-pauta.b-sim" | translate }}</button>
             </ng-template>
-          </p-confirmDialog>
+        </p-confirmDialog>
     </div>
 </div>
+<p-toast></p-toast>

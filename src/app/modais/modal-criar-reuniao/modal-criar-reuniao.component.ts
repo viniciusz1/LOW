@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../services/usuario.service';
 import { Router } from '@angular/router';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { FormBuilder } from '@angular/forms';
@@ -5,9 +6,13 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input, EventEmitter } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalHistoricoComponent } from '../modal-historico/modal-historico.component';
+import { ModalDemandaDocumentoComponent } from '../modal-demanda-documento/modal-demanda-documento.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-modal-criar-reuniao',
@@ -17,36 +22,87 @@ import { ReuniaoService } from 'src/app/services/reuniao.service';
 export class ModalCriarReuniaoComponent implements OnInit {
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
-    public dialogRef: DialogRef<ModalCriarReuniaoComponent>,
-    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<ModalCriarReuniaoComponent>,
+    private matDialog: MatDialog,
     private demandaService: DemandaService,
     private reuniaoService: ReuniaoService,
+    private usuarioService: UsuarioService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
     private router: Router
   ) {
-
-
+    this.usuarioService.verificarTokenUserDetailsReturn()
+      .subscribe(
+        {
+          next: e => {
+            // FAZER VERIFICAÇÃO DE QUEM PODE USAR+
+          },
+          error: err => {
+            this.showError("Não foi possível verificar o Token")
+          }
+        }
+      )
   }
 
+
+  fecharModal(){
+    this.dialogRef.close();
+  }
+  
   ngOnInit(): void {
     this.atualizarDemandas();
   }
 
   listaComissoes = [
-    {value: "CPVM", nome:"CPVM – Comissão de Processos de Vendas e Desenvolvimento de produtos"},
-    {value: "CPGCI", nome:"CPGCI – Comissão de Processos da Cadeia Integrada"},
-    {value: "CPGPR", nome:"CPGPR – Comissão de Processos de Gestão de Projetos"},
-    {value: "CGPN", nome:"CGPN – Comitê de Gestão de Processos de Negócio"},
-    {value: "CTI", nome:"CTI – Comitê de TI"},
-    {value: "CWBS", nome:"CWBS – Comitê WEG Business Services"},
-    {value: "DTI", nome:"DTI – Diretoria de TI"},
+    { value: "CPVM", nome: "CPVM – Comissão de Processos de Vendas e Desenvolvimento de produtos" },
+    { value: "CPGCI", nome: "CPGCI – Comissão de Processos da Cadeia Integrada" },
+    { value: "CPGPR", nome: "CPGPR – Comissão de Processos de Gestão de Projetos" },
+    { value: "CGPN", nome: "CGPN – Comitê de Gestão de Processos de Negócio" },
+    { value: "CTI", nome: "CTI – Comitê de TI" },
+    { value: "CWBS", nome: "CWBS – Comitê WEG Business Services" },
+    { value: "DTI", nome: "DTI – Diretoria de TI" },
   ]
-    
+
+  openModalHistorico(codigoDemanda: string) {
+    this.matDialog.open(ModalHistoricoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      minHeight: '70vh',
+      data: codigoDemanda
+    });
+  }
+
+  openModalDemandaDocumento(event: Demanda) {
+    this.matDialog
+      .open(ModalDemandaDocumentoComponent, {
+        maxWidth: '70vw',
+        minWidth: '50vw',
+        data: event,
+      })
+      .afterClosed().subscribe({
+        next: e => {
+          let indice: number | undefined = -1
+          if (this.listaDemandas) {
+            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+            if (indice !== -1) {
+              this.listaDemandas.splice(indice, 1, e);
+            }
+          }
+        }
+      })
+  }
+
+  // irParaChat() {
+  //   this.dialogRef.close();
+  //   this.router.navigate(['/tela-inicial/chat']);
+  // }
 
   listaReunioes: Reuniao[] = [];
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
   listaDemandas: Demanda[] = [];
   listaProposta: Proposta[] = [];
+  cabecalhoMensagemDeConfirmacao = 'Avançar status';
 
   dataReuniao: any;
   comissaoSelecionada: string | undefined = undefined;
@@ -57,8 +113,9 @@ export class ModalCriarReuniaoComponent implements OnInit {
       comissaoReuniao: this.comissaoSelecionada,
       propostasReuniao: this.listaDemandasEscolhidas
     }
+    console.log(reuniao)
     this.reuniaoService.postReuniao(reuniao).subscribe(e => {
-      this.router.navigate(['/tela-inicial/reunioes'])
+      this.router.navigate(['/tela-inicial/ver-reuniao/' + e.codigoReuniao])
       this.dialogRef.close()
     })
   }
@@ -104,15 +161,24 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
   }
 
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
   atualizarDemandas() {
     this.demandaService
       .getDemandasFiltradasStatus({ status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + "" })
       .subscribe({
-        next: (demanda) => {
+        next: demanda => {
           this.listaDemandas = demanda
           this.removerDaListaAdicSecundaria()
-        },
-        error: (err) => console.log(err),
+        }, error: err => {
+          this.showError("Não foi possível filtrar as demandas")
+        }
       });
   }
 

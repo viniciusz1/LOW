@@ -1,14 +1,14 @@
 export let PermissoesDeRotas = [
     {
-        path: '/tela-inicial',
-        authorities: ["*"]
-    },
-    {
         path: '/tela-inicial/classificar-demanda',
         authorities: ["Analista", "GestorTI"]
     },
     {
         path: '/tela-inicial/rascunhos',
+        authorities: ["*"]
+    },
+    {
+        path: '/tela-inicial/not-found',
         authorities: ["*"]
     },
     {

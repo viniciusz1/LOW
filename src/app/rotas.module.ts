@@ -15,6 +15,7 @@ import { TelaPerfilComponent } from './telas/perfil/tela-perfil/tela-perfil.comp
 import { TelaLoginComponent } from './telas/login/tela-login/tela-login.component';
 import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-corrida/tela-corrida.component';
 import { AuthenticationChildGuard } from './security/authentication-child.guard';
+import { NotFoundComponent } from './telas/not-found/not-found.component';
 
 
 @NgModule({
@@ -23,10 +24,10 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
     CommonModule,
     RouterModule.forRoot([
       {
-        path: '',
+        path: 'login',
         component: TelaLoginComponent,
-        
       },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       {
         path: 'tela-inicial',
         component: EscopoPrincipalComponent,
@@ -42,8 +43,12 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
             component: TelaClassificarDemandaComponent
           },
           {
-            path: 'rascunhos',
-            component: TelaInicialComponent
+            path: 'rascunho/:indiceRascunho',
+            component: TelaCorridaComponent
+          },
+          {
+            path: 'chat/:codigoDemanda',
+            component: TelaChatComponent
           },
           {
             path: 'chat',
@@ -57,7 +62,10 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
             path: 'reformular-demanda/:codigoDemanda',
             component: TelaCorridaComponent
           },
-
+          {
+            path: 'not-found',
+            component: NotFoundComponent
+          },
           {
             path: 'proposta/:codigoDemanda',
             component: TelaCorridaComponent
@@ -92,6 +100,10 @@ import { AuthenticationChildGuard } from './security/authentication-child.guard'
               }
             ]
           },
+          {
+            path: '**',
+            component: NotFoundComponent
+          }
         ]
       }
     ])

@@ -12,6 +12,7 @@ import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-doc
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalReprovacaoDemandaComponent } from 'src/app/modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { FileUpload } from 'primeng/fileupload';
+import { MessageService } from 'primeng/api';
 
 
 
@@ -92,7 +93,8 @@ export class TelaClassificarDemandaComponent implements OnInit {
     private demandaClassificadaService: DemandaClassificadaService,
     private demandaService: DemandaService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {
 
     this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota).subscribe({
@@ -101,18 +103,28 @@ export class TelaClassificarDemandaComponent implements OnInit {
         this.demanda = value;
       },
       error: (err) => {
-        console.log(err);
+        this.showError("Código não encontrado!")
       },
     });
   }
 
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
+
   onSubmitClassificacaoDemanda() {
-    this.demandaClassificadaService.postProposta(this.demanda?.codigoDemanda).subscribe({
+    this.demandaClassificadaService.postClassificacaoDemanda(this.demanda?.codigoDemanda).subscribe({
       next: e => {
+        this.showSuccess("Demanda classificada com sucesso")
         this.router.navigate(['/tela-inicial'])
       },
       error: err => {
-        alert(err)
+        this.showError("Certifique-se do preenchimento de todos os campos!")
       }
     });
   }

@@ -22,6 +22,7 @@ export class ListDemandaComponent implements OnInit {
   @Output() irParaChat = new EventEmitter();
   @Output() abrirModalCriarReuniao = new EventEmitter();
   @Output() verDocumentoEmAta = new EventEmitter();
+  @Output() fechouModal = new EventEmitter();
   @Output() avancarStatusDemanda = new EventEmitter<{
     mensagem: string;
     codigoDemanda: string | undefined;
@@ -55,9 +56,12 @@ export class ListDemandaComponent implements OnInit {
     }
     return false;
   }
-  abrirModalHistorico() {
+  abrirModalHistorico(){
+    console.log("clicou no historico");
+    
     this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
   }
+
 
   retornaProximoStatusDemanda(statusDemanda: StatusDemanda | undefined) {
     if (statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO) {

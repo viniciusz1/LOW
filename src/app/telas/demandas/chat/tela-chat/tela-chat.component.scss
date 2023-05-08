@@ -26,6 +26,11 @@ header img,
 header img {
     margin-left: 16px;
 }
+.alinhar-alerta{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .list-group-item {
     border-radius: 0!important;
@@ -36,8 +41,8 @@ header img {
 
 ::ng-deep{
     .p-speeddial-button{
-         width: 16px !important; 
-         height: 20px !important; 
+         width: 16px !important;
+         height: 20px !important;
     }
     .p-button-icon {
         font-size: 1rem !important;
@@ -143,7 +148,9 @@ header img {
     color: rgb(255, 255, 255);
     word-wrap:break-word;
 }
-
+.na-rota{
+    background-color: #f0f0ff;
+}
 .balao-chat-solicitante:after{
     content: "";
     width: 0px;

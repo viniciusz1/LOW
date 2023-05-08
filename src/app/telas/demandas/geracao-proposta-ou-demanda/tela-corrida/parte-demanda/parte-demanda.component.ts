@@ -1,8 +1,19 @@
+import { ActivatedRoute } from '@angular/router';
+import { RascunhoService } from './../../../../../services/rascunho.service';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { DemandaService } from './../../../../../services/demanda.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar } from 'ngx-editor';
+import Locals from 'ngx-editor/lib/Locals';
+import { MessageService } from 'primeng/api';
+
+interface Tab {
+  title: string;
+  content: string;
+}
 
 @Component({
   selector: 'app-parte-demanda',
@@ -12,7 +23,29 @@ import { Editor, Toolbar } from 'ngx-editor';
 export class ParteDemandaComponent implements OnInit, OnDestroy {
   constructor(
     private demandaService: DemandaService,
-  ) { }
+    private rascunhoService: RascunhoService,
+    private route: ActivatedRoute,
+    private messageService: MessageService
+  ) {
+    let indiceRascunho = route.snapshot.params['indiceRascunho']
+    this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
+      if(route.snapshot.url){
+        if(indiceRascunho){
+          rascunhoService.atualizarRascunhoDemanda = indiceRascunho
+        }else{
+          rascunhoService.atualizarRascunhoProposta = route.snapshot.params['codigoDemanda']
+        }
+      }
+    });
+   }
+
+   onInputChange() {
+    // Em vez de chamar diretamente o método, envie um evento ao Subject
+    this.inputSubject.next("");
+  }
+
+  inputSubject = new Subject<string>();
+  @Input() aparecerProposta = false;
 
   listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];
@@ -28,7 +61,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   ];
 
   editor: Editor = new Editor();
-  formEditorEspecial = this.demandaService.formEditorEspecial
   toolbarDemanda: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -55,6 +87,15 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
+  abrirSegundoAccordion: boolean = false;
+  
+  tabs1: Tab[] = [
+    { title: 'Tab 1', content: 'Conteúdo da Tab 1' },
+    { title: 'Tab 2', content: 'Conteúdo da Tab 2' },
+    { title: 'Tab 3', content: 'Conteúdo da Tab 3' }
+  ];
+
+  activeIndex = 0;
 
   ngOnInit(): void {
     this.demandaService.listaArquivosDemanda.subscribe(arquivos => {
@@ -69,11 +110,19 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   removerCentroDeCusto(index: number) {
     this.demandaService.removeCenterOfCost(index);
   }
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
   adicionarCentroCusto() {
     try {
       this.demandaService.addCenterOfCost();
     } catch (err) {
-      alert(err);
+      this.showError("Não foi possível adicionar o centro de custo")
     }
   }
 

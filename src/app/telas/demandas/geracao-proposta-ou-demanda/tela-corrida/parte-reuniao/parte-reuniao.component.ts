@@ -5,6 +5,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { Recurso } from 'src/app/models/recurso.model';
+import { Subject, debounceTime } from 'rxjs';
+import { RascunhoService } from 'src/app/services/rascunho.service';
+import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 interface Responsavel {
   nome: string;
@@ -19,27 +23,37 @@ interface Responsavel {
 export class ParteReuniaoComponent implements OnInit {
   constructor(
     private propostaService: PropostaService,
-    private demandaService: DemandaService
-
+    private demandaService: DemandaService,
+    private rascunhoService: RascunhoService,
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {
-    // spyService.addTarget(target: 'reuniao', offset: 0)
+
+    this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
+      rascunhoService.atualizarRascunhoProposta = this.route.snapshot.params['codigoDemanda']
+    });
   }
 
+  onInputChange() {
+    console.log("change")
+    this.inputSubject.next("");
+  }
+
+  inputSubject = new Subject<string>();
   custosTotais: number = 0;
   paybackProposta = this.propostaService.paybackProposta;
   centroCustos: CentroCusto[] = [];
   formProposta = this.propostaService.formProposta;
   formRecursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
-  values: string[] = [];
 
   statusDemanda = [
     {
-      name:'Business Case', 
+      name: 'Business Case',
       value: 'BUSINESS_CASE'
     },
     {
-      name:'Assessment', 
+      name: 'Assessment',
       value: 'ASSESSMENT'
     }
   ]
@@ -88,18 +102,27 @@ export class ParteReuniaoComponent implements OnInit {
     { porcentagem: '', index: 0 },
   ];
   quantidadeCC = [0];
-  centrosDeCustoOpcoes = [ 'Center 1', 'Center 2', 'Center 3' ];
+  centrosDeCustoOpcoes = ['Center 1', 'Center 2', 'Center 3'];
   //fazer verificações necessárias
   addRowRecurso() {
-    try{
+    try {
       this.propostaService.addRowRecurso()
       this.mudarCustoTotalProjetoEPayback()
-    }catch(err){
-      alert(err)
+    } catch (err) {
+      this.showError("Não foi possível adicionar recurso")
     }
   }
 
-  mudarCustoTotalProjetoEPayback(){
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
+
+  mudarCustoTotalProjetoEPayback() {
     this.custosTotais = 0
     this.listaRecursos.forEach(recurso => {
       this.custosTotais += recurso.valorHoraRecurso * recurso.quantidadeHorasRecurso;
@@ -109,7 +132,7 @@ export class ParteReuniaoComponent implements OnInit {
 
 
 
-  editarRecurso(index: number){
+  editarRecurso(index: number) {
     this.formRecursos.patchValue({
       nomeRecurso: this.listaRecursos[index].nomeRecurso,
       tipoDespesaRecurso: this.listaRecursos[index].tipoDespesaRecurso,
@@ -122,29 +145,25 @@ export class ParteReuniaoComponent implements OnInit {
     this.listaRecursos.splice(index, 1)
   }
 
-  removerRecurso(index: number){
+  removerRecurso(index: number) {
     this.listaRecursos.splice(index, 1)
   }
 
-  listaCentrodeCusto : number[] = [];
+  listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
 
-  adicionarCentroCusto(){
-    try{
+  adicionarCentroCusto() {
+    try {
       this.propostaService.addCenterOfCost()
-    }catch(err){
-      alert(err)
+    } catch (err) {
+      this.showError("Não foi possível adicionar o centro de custo")
     }
   }
 
-  removerCentroDeCusto(index: number){
+  removerCentroDeCusto(index: number) {
     this.propostaService.removeCenterOfCost(index);
   }
 
-
-
-
-  teste: string[] = []
   ngOnInit(): void {
   }
 }

@@ -1,11 +1,16 @@
+import { Demanda } from './../../../../models/demanda.model';
 import { CentroCusto } from './../../../../models/centro-custo.model';
 import { PropostaService } from './../../../../services/proposta.service';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { PrimeIcons } from 'primeng/api';
-import { DemandaAnalista } from 'src/app/models/demanda-analista.model';
-import { DemandaClassificadaService } from 'src/app/services/demanda-classificada.service';
+import { MessageService, PrimeIcons } from 'primeng/api';
+import { RascunhoService } from 'src/app/services/rascunho.service';
+
+interface Tab {
+  title: string;
+  content: string;
+}
 
 @Component({
   selector: 'app-tela-corrida',
@@ -13,13 +18,28 @@ import { DemandaClassificadaService } from 'src/app/services/demanda-classificad
   styleUrls: ['./tela-corrida.component.scss'],
 })
 export class TelaCorridaComponent implements OnInit {
-serviceCalled = false;
+  serviceCalled = false;
   aparecerProposta = false;
   centroCustos: CentroCusto[] = [];
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
   posicaoScroll = 0;
   titulosDemanda: any[] = [];
   activeSection: string = '';
+  tabs2: Tab[] = [
+    { title: 'Aba 1', content: 'Conteúdo da Aba 1' },
+    { title: 'Aba 2', content: 'Conteúdo da Aba 2' },
+    { title: 'Aba 3', content: 'Conteúdo da Aba 3' }
+  ];
+
+  activeIndex = 1;
+  dadosDemanda: Demanda | undefined;
+  
+  verificaSeTemParecerOuRecomendacao(){
+    if(this.dadosDemanda?.parecerComissaoProposta || this.dadosDemanda?.recomendacaoProposta){
+      return true;
+    }
+    return false;
+  }
 
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
@@ -27,35 +47,38 @@ serviceCalled = false;
       if (this.router.url.includes('reformular-demanda')) {
         this.demandaService.reformularDemanda().subscribe({
           next: (response) => {
+            this.showSuccess("Demanda reformulada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
-            alert('Ocorreu um erro: ' + err.status);
+            this.showError("Não foi possível reformular a demanda!")
           },
         });
-      }else{
+      } else {
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
+            let codigo = this.route.snapshot.params['indiceRascunho']
+            this.rascunhoService.deleteRascunho(codigo)
+            this.showSuccess("Demanda criada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
-            alert('Ocorreu um erro: ' + err.status);
+            this.showError("Certifique-se do preenchimento de todos os campos!")
           },
         });
       }
-
-      
     } else {
-        this.propostaService
-          .postProposta()
-          .subscribe({
-            next: (response) => {
-              this.router.navigate(['/tela-inicial']);
-            },
-            error: (err) => {
-              alert('Ocorreu um erro: ' + err.status);
-            },
-          });
+      this.propostaService
+        .postProposta()
+        .subscribe({
+          next: (response) => {
+            this.showSuccess("Proposta criada com sucesso!")
+            this.router.navigate(['/tela-inicial']);
+          },
+          error: (err) => {
+           this.showError("Não foi possível criar proposta")
+          },
+        });
     }
   }
 
@@ -64,38 +87,56 @@ serviceCalled = false;
     private router: Router,
     private demandaService: DemandaService,
     private propostaService: PropostaService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
+    private rascunhoService: RascunhoService,
+    private messageService: MessageService
   ) {
     this.tipoExibicaoTela();
 
   }
 
   teste() {
-    console.log(window.scrollY);
+    return this.demandaService.getFormDemandaInvalid
   }
+
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
 
   tipoExibicaoTela() {
-    if (this.router.url == '/tela-inicial/demanda') {
+    if (this.router.url.includes('reformular-demanda')) {
       this.aparecerProposta = false;
-      this.demandaService.resetDemandaForm();
-    } 
-    else {
-      if (this.router.url.includes('reformular-demanda')) {
-        this.aparecerProposta = false;
-      }else{
-        this.aparecerProposta = true;
-      }
       this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
-    .subscribe(e => {
-      console.log(e)
-      this.serviceCalled = true;
-      this.demandaService.setFormDemandaData(e);
-    })
+        .subscribe(e => {
+          this.serviceCalled = true;
+          this.demandaService.setFormDemandaData(e);
+        })
+    } else if (this.router.url.includes('rascunho')) {
+      this.aparecerProposta = false;
+      this.activatedRoute.params.subscribe(
+        e => {
+          this.demandaService.setFormDemandaRascunho(e['indiceRascunho'])
+        }
+      )
+    } else {
       this.aparecerProposta = true;
-      this.demandaService.resetDemandaForm();
+      this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota)
+        .subscribe(e => {
+          this.serviceCalled = true;
+          this.dadosDemanda = e;
+          console.log(e)
+          this.verificaSeTemParecerOuRecomendacao()
+          this.demandaService.setFormDemandaData(e);
+          this.propostaService.setFormDemandaRascunho(this.codigoDemandaRota)
+        })
     }
   }
-
 
 
   onScroll() {

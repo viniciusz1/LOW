@@ -1,3 +1,4 @@
+import { RascunhoService } from './../../../services/rascunho.service';
 import { PropostaService } from './../../../services/proposta.service';
 
 import { MessageService } from 'primeng/api';
@@ -28,11 +29,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
+
 @NgModule({
   declarations: [
     TelaCorridaComponent,
     ParteDemandaComponent,
-    ParteReuniaoComponent,
+    ParteReuniaoComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +67,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
         background_color: 'Background Color',
 
         // popups, forms, others...
+        
         url: 'URL',
         text: 'Text',
         openInNewTab: 'Open in new tab',
@@ -94,6 +97,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   providers: [
     MessageService,
     PropostaService,
+    RascunhoService
   ]
 })
 export class GeracaoPropostaOuDemandaModule { }

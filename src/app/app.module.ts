@@ -10,18 +10,17 @@ import { ComponentesReutilizaveisModule } from './componentes-reutilizaveis/comp
 import { ModelsModule } from './models/models.module';
 import { PipesModule } from './pipes/pipes.module';
 import { RotasModule } from './rotas.module';
-import { TelasModule } from './telas/telas.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemandaService } from './services/demanda.service';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ConfirmationService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
-import { TranslateModule, TranslateLoader, TranslateService, TranslateStore } from '@ngx-translate/core';
-import { HttpLoaderFactory } from 'ngx.translate.config';
+import {  TranslateService, TranslateStore } from '@ngx-translate/core';
 import { LogInterceptor } from './interceptor';
-
+import { TelasModule } from './telas/telas.module';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -40,8 +39,8 @@ import { LogInterceptor } from './interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     DialogModule,
-    SharedModule
-
+    SharedModule,
+    MessagesModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

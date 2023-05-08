@@ -36,6 +36,8 @@ export class ModalDemandaDocumentoComponent implements OnInit {
             this.showTimeline = true
             this.configureTimeline()
           }
+          this.showbotoesAprovarDemanda = true
+
         }, error: err => {
           alert(err)
         }

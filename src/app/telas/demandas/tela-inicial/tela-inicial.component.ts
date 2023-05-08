@@ -40,7 +40,7 @@ export class TelaInicialComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
   ) {
-    this.pesquisaAlterada.pipe(debounceTime(2000)).subscribe(() => {
+    this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
     });
     if (router.url == '/tela-inicial/rascunhos') {

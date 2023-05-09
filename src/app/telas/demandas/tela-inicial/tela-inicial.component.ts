@@ -50,7 +50,7 @@ export class TelaInicialComponent implements OnInit {
       this.tipoRascunho = true;
       this.isFiltrado = true;
     };
-  }
+  })}
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
 

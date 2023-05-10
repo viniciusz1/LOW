@@ -183,18 +183,21 @@ export class DemandaService {
 
   reformularDemanda() {
 
-    this.demandaForm.patchValue({
-      situacaoAtualDemanda: toHTML(this.demandaForm.value.situacaoAtualDemanda as unknown as Record<string, any>),
-      objetivoDemanda: toHTML(this.demandaForm.value.objetivoDemanda as unknown as Record<string, any>),
-      // statusDemanda: 'BACKLOG_CLASSIFICACAO'
-    })
+    this.insertsBeforePostDemanda()
+    
     let demandaFormData = new FormData();
-    this.arquivos.map((item) =>
-      demandaFormData.append('arquivos', item, item.name)
-    );
+    if (this.arquivos.length != 0) {
+      this.arquivos.map((item) =>
+        demandaFormData.append('arquivos', item, item.name)
+      );
+    } else {
+      demandaFormData.append('arquivos', new File([], ''));
+    }
 
     this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
-    demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+    let demandaFormValue: any = this.demandaForm.value
+    demandaFormValue.statusDemanda = 'BACKLOG_CLASSIFICACAO'
+    demandaFormData.append('demanda', JSON.stringify(demandaFormValue));
     return this.http.put<Demanda | string>(
       path + 'demanda/update',
       demandaFormData

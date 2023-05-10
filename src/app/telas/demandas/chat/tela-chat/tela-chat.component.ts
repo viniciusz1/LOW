@@ -7,6 +7,9 @@ import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
 import { MessagesService } from 'src/app/websocket/messages.service';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Mensagem } from 'src/app/models/message.model';
+import { ScrollPanel } from 'primeng/scrollpanel';
+import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tela-chat',
@@ -21,8 +24,13 @@ export class TelaChatComponent implements OnInit {
   mensagens: Mensagem[] = []
   conversasDemandas: Demanda[] = []
   mostrarConversas = false;
+  demandaDiscutida: Demanda | undefined
 
-  constructor(private confirmationService: ConfirmationService, private route: ActivatedRoute, private usuarioService: UsuarioService, private messagesService: MessagesService) {
+  constructor(private confirmationService: ConfirmationService,
+     private route: ActivatedRoute, 
+     private usuarioService: UsuarioService,
+      private messagesService: MessagesService,
+      private matDialog: MatDialog) {
     if (this.codigoRota != "") {
       this.iniciarWebSocketChat()
     }
@@ -30,9 +38,31 @@ export class TelaChatComponent implements OnInit {
   }
 
 
+  @ViewChild('scrollPanel') scrollPanel: ScrollPanel | undefined;
+
+  scrollToBottom() {
+    if (this.scrollPanel) {
+      this.scrollPanel.scrollTop(99999)
+
+    }
+  }
+
+  verificarMensagemMaisAtual() {
+    const mensagemMaisAtual = this.mensagens.reduce((mensagemMaisRecente: Mensagem | undefined, mensagemAtual: Mensagem) => {
+      if (!mensagemMaisRecente) {
+        return mensagemAtual;
+      }
+      if (mensagemAtual.dataMensagens && mensagemMaisRecente.dataMensagens) {
+        return mensagemAtual.dataMensagens > mensagemMaisRecente.dataMensagens ? mensagemAtual : mensagemMaisRecente;
+      }
+      return
+    }, undefined);
+  }
+
   iniciarWebSocketChat() {
     this.messagesService.initializeWebSocketConnection()
     this.messagesService.$mensagesEmmiter.subscribe(mensagens => {
+      this.setarConversas()
       this.mensagens = []
       for (let i of mensagens) {
         if ((i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == this.usuarioService.getCodigoUser()) {
@@ -43,6 +73,7 @@ export class TelaChatComponent implements OnInit {
       }
       this.mostrarConversas = true
       this.mensagens.push(...mensagens)
+      this.scrollToBottom()
     })
   }
 
@@ -52,29 +83,39 @@ export class TelaChatComponent implements OnInit {
     this.messagesService.getDemandasRelacionadas()
       .subscribe(e => {
         console.log(e)
+
         this.conversasDemandas = e
-      }
-      )
+        this.demandaDiscutida = this.conversasDemandas.find(e => e.codigoDemanda == this.codigoRota)
+      })
   }
 
-  enviarMensagemPorTeclado(event: KeyboardEvent){
+  enviarMensagemPorTeclado(event: KeyboardEvent) {
     if (event.key === "Enter") {
       this.enviarMensagem()
     }
   }
 
   enviarMensagem() {
-      this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
-      this.mensagem.nativeElement.value = ""
-    
+    this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
+    this.mensagem.nativeElement.value = ""
+
   }
+
+  openModalDemandaDocumento() {
+    this.matDialog
+      .open(ModalDemandaDocumentoComponent, {
+        maxWidth: '70vw',
+        minWidth: '50vw',
+        data: this.demandaDiscutida,
+      })
+    }
 
   ngOnInit(): void {
     this.route.params.subscribe(e => {
       this.codigoRota = e['codigoDemanda']
       this.messagesService.codigoRota = this.codigoRota
       this.iniciarWebSocketChat()
-     })
+    })
 
   }
 

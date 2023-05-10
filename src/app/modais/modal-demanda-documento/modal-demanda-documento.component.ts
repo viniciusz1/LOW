@@ -33,14 +33,14 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe({
         next: e => {
-          if (e.usuario.nivelAcessoUsuario == 'GestorTI' && this.dadosDemanda?.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
+          if ((e.usuario.nivelAcessoUsuario == 'GestorTI' || e.usuario.nivelAcessoUsuario == 'GerenteNegocio') && this.dadosDemanda?.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
             this.showbotoesAprovarDemanda = true
           }
           if (e.usuario.nivelAcessoUsuario == 'Solicitante') {
             this.showTimeline = true
             this.configureTimeline()
           }
-          this.showbotoesAprovarDemanda = true
+          // this.showbotoesAprovarDemanda = true
 
         }, error: err => {
           this.showError("Não foi possível verificar o Token")

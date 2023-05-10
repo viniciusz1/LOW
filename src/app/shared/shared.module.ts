@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from 'ngx.translate.config';
+// import { HttpLoaderFactory } from 'ngx.translate.config';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FormsModule } from '@angular/forms';
@@ -16,13 +16,6 @@ import { ToastModule } from 'primeng/toast';
   imports: [
     CommonModule,
     ScrollPanelModule,
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
   ],
   exports:[
     ScrollPanelModule,

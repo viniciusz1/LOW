@@ -54,7 +54,7 @@
         >
         <span
           ><b>{{ "documento-pdf.data" | translate }} </b>
-          {{ dadosDemanda?.inicioExDemandaProposta }}</span
+          {{ dadosDemanda?.dataCriacaoDemanda  | date: 'dd/MM/yyyy' }}</span
         >
       </h4>
       <h4>
@@ -124,12 +124,10 @@
         <b>{{ "documento-pdf.frequencia-uso-sistema" | translate }} </b>
         {{ dadosDemanda?.frequenciaDeUsoDemanda }}
       </p>
+
       <div
         class="fazer ng-if"
-        *ngIf="
-          dadosDemanda?.statusDemanda == 'ASSESSMENT' ||
-          dadosDemanda?.statusDemanda == 'BUSINESS_CASE'
-        "
+        *ngIf="dadosDemanda?.inicioExDemandaProposta != null"
       >
         <h4>
           <b>{{ "documento-pdf.escopo-projeto" | translate }} </b>
@@ -228,8 +226,8 @@
           <b>
             {{ "documento-pdf.periodo-execucao" | translate }}
           </b>
-          {{ dadosDemanda?.inicioExDemandaProposta }} à
-          {{ dadosDemanda?.fimExDemandaProposta }}
+          {{ dadosDemanda?.inicioExDemandaProposta | date: 'dd/MM/yyyy' }} à
+          {{ dadosDemanda?.fimExDemandaProposta | date: 'dd/MM/yyyy' }}
         </p>
         <p>
           <b>
@@ -238,21 +236,23 @@
           {{ dadosDemanda?.paybackProposta }}
         </p>
       </div>
-      <h4>
-        <b>{{ "documento-pdf.documentos" | translate }} </b>
-        <a
-          *ngFor="let arquivo of dadosDemanda?.arquivosDemanda"
-          role="button"
-          (click)="download(arquivo)"
-        >
-          {{ arquivo.nomeArquivo }}
-        </a>
-      </h4>
+
+      <div *ngIf="dadosDemanda?.arquivosDemanda?.length != 0">
+        <h4>
+          <b>{{ "documento-pdf.documentos" | translate }} </b>
+          <a
+            *ngFor="let arquivo of dadosDemanda?.arquivosDemanda"
+            role="button"
+            (click)="download(arquivo)"
+          >
+            {{ arquivo.nomeArquivo }}
+          </a>
+        </h4>
+      </div>
     </p-scrollPanel>
   </mat-dialog-content>
-  
-  <div *ngIf="documentoEmAta">
 
+  <div *ngIf="documentoEmAta">
     <h4 mat-dialog-title class="d-flex">
       <span
         ><b>{{ "documento-pdf.solicitante" | translate }}: </b
@@ -323,12 +323,12 @@
       <b>{{ "documento-pdf.frequencia-uso-sistema" | translate }} </b>
       {{ dadosDemanda?.frequenciaDeUsoDemanda }}
     </p>
+    <!--
+      Verificação se é uma proposta
+ -->
     <div
       class="fazer ng-if"
-      *ngIf="
-        dadosDemanda?.statusDemanda == 'ASSESSMENT' ||
-        dadosDemanda?.statusDemanda == 'BUSINESS_CASE'
-      "
+      *ngIf="dadosDemanda?.inicioExDemandaProposta != null"
     >
       <h4>
         <b>{{ "documento-pdf.escopo-projeto" | translate }} </b>
@@ -347,14 +347,6 @@
         {{ dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio }}
       </h4>
 
-      <!-- <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
-        <b >
-          Custos totais do projeto: R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}</b>
-        <span *ngIf="calcularDados.tipoDespesaRecurso == 'externo'">
-        <br> Total despesas recursos externos (Desembolso): R$30.000,00 </span>
-        <span *ngIf="calcularDados.tipoDespesaRecurso == 'interno'">
-        <br> Total despesa recursos internos: R$20.000,00</span>
-      </p> -->
       <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
         <b> {{ "documento-pdf.custos-totais" | translate }}</b> R${{
           calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso
@@ -420,8 +412,8 @@
         <b>
           {{ "documento-pdf.periodo-execucao" | translate }}
         </b>
-        {{ dadosDemanda?.inicioExDemandaProposta }} à
-        {{ dadosDemanda?.fimExDemandaProposta }}
+        {{ dadosDemanda?.inicioExDemandaProposta | date: 'dd/MM/yyyy' }} à
+        {{ dadosDemanda?.fimExDemandaProposta | date: 'dd/MM/yyyy' }}
       </p>
       <p>
         <b>
@@ -430,16 +422,19 @@
         {{ dadosDemanda?.paybackProposta }}
       </p>
     </div>
-    <h4>
-      <b>{{ "documento-pdf.documentos" | translate }} </b>
-      <a
-        *ngFor="let arquivo of dadosDemanda?.arquivosDemanda"
-        role="button"
-        (click)="download(arquivo)"
-      >
-        {{ arquivo.nomeArquivo }}
-      </a>
-    </h4>
+
+    <div *ngIf="dadosDemanda?.arquivosDemanda">
+      <h4>
+        <b>{{ "documento-pdf.documentos" | translate }} </b>
+        <a
+          *ngFor="let arquivo of dadosDemanda?.arquivosDemanda"
+          role="button"
+          (click)="download(arquivo)"
+        >
+          {{ arquivo.nomeArquivo }}
+        </a>
+      </h4>
+    </div>
   </div>
   <mat-dialog-actions
     class="d-flex justify-content-between"

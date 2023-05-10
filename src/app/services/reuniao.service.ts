@@ -36,8 +36,8 @@ export class ReuniaoService {
     return this.http.post<Reuniao>(path + 'reuniao', reuniao);
   }
 
-  enviarParecerComissao(info: {tipoAtaProposta: string, parecerComissaoProposta: string, decisaoProposta: string, recomendacaoProposta: string}, codigoProposta: string){
-    return this.http.put<Demanda>(path + 'reuniao/parecer/' + codigoProposta, info)
+  enviarParecerComissao(codigoReuniao: number | undefined, info: {tipoAtaProposta: string, parecerComissaoProposta: string, decisaoProposta: string, recomendacaoProposta: string}, codigoProposta: string){
+    return this.http.put<Demanda>(path + 'reuniao/parecer/' + codigoProposta + '?codigoReuniao=' + codigoReuniao, info)
   }
 
   getReuniaoFiltrada(filtros: {

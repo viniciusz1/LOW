@@ -16,11 +16,8 @@
     </p>
 
     <div *ngFor="let proposta of reuniao?.propostasReuniao; let i = index">
-        <div>
-            <hr *ngIf="i != 0">
-            <div  *ngIf="tipoAta == proposta.tipoAtaProposta">
-              ok
-            </div>
+        <div *ngIf="tipoAta == proposta.tipoAtaProposta">
+            <hr *ngIf="mostrarHr(i, tipoAta)">
             <app-modal-demanda-documento [documentoEmAta]="true" [dadosDemanda]="proposta"></app-modal-demanda-documento> -->
 
             <b>

@@ -3,6 +3,7 @@ import { Output, Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { Demanda } from 'src/app/models/demanda.model';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { NivelAcesso } from 'src/app/models/nivel-acesso.enum';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-list-demanda',
@@ -43,7 +44,7 @@ export class ListDemandaComponent implements OnInit {
   nivelAcesso: NivelAcesso = NivelAcesso.Analista;
   textoExibidoEmBotaoDependendoRota: { rota: string, texto: string } | undefined = undefined;
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private messageService: MessageService) { }
   statusPermitido() {
     if (
       this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -62,6 +63,13 @@ export class ListDemandaComponent implements OnInit {
     this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
   }
 
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
 
   retornaProximoStatusDemanda(statusDemanda: StatusDemanda | undefined) {
     if (statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO) {

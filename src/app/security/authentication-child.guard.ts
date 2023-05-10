@@ -5,13 +5,14 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserDetails } from '../models/userDetails.model';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationChildGuard implements CanActivateChild {
   permissoes = PermissoesDeRotas
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private messageService: MessageService) {
 
   }
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
@@ -28,7 +29,7 @@ export class AuthenticationChildGuard implements CanActivateChild {
             }else if(permissao.authorities.includes("*")){
               return true;
             }else{
-              alert("Você não tem permissão para acessar esta rota!")
+              this.showError("Você não tem permissão para acessar essa rota")
               this.router.navigate(['/tela-inicial'])
               return false;
             }
@@ -36,10 +37,19 @@ export class AuthenticationChildGuard implements CanActivateChild {
         }
         return false;
       }, error: err => {
-        alert(err)
+        this.showError("Erro")
         return false;
       },
     })
     return true;
+  }
+
+  
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 }

@@ -29,3 +29,14 @@
     transform: rotate(0);
     transition: 0.5s;
 }
+@media screen and (max-width: 1250px) {
+    a {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 1251px) {
+    a {
+        font-size: 14px;
+    }
+}

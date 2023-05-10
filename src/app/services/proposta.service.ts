@@ -8,6 +8,7 @@ import { Demanda } from '../models/demanda.model';
 import { Validators } from '@angular/forms';
 import { DemandaService } from './demanda.service';
 import { UsuarioService } from './usuario.service';
+import { MessageService } from 'primeng/api';
 
 interface RecursoDoForm {
   nomeRecurso: string;
@@ -123,12 +124,10 @@ export class PropostaService {
 
 
     try {
-
-     
-
+      this.showSuccess("Cadastrado!")
       this.demandaService.insertsBeforePostDemanda()
     } catch (err) {
-      alert("Ocorreu um erro ao cadastrar: " + err);
+      this.showError("Erro ao cadastrar")
     }
 
     propostaFormData.append('proposta', JSON.stringify(this.valueDemandaProposta));
@@ -147,7 +146,15 @@ export class PropostaService {
     );
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private demandaService: DemandaService, private usuarioService: UsuarioService) {
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
+  constructor(private http: HttpClient, private fb: FormBuilder, private demandaService: DemandaService, private usuarioService: UsuarioService, private messageService: MessageService) {
 
   }
 }

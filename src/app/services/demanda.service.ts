@@ -13,6 +13,7 @@ import { TestScheduler } from 'rxjs/testing';
 import { CentroCusto } from '../models/centro-custo.model';
 import { toHTML } from 'ngx-editor';
 import { Validators as ValidatorsEditor } from 'ngx-editor';
+import { MessageService } from 'primeng/api';
 
 
 @Injectable({
@@ -45,6 +46,7 @@ export class DemandaService {
   private link = '';
   public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
   private filtros: Filtro | undefined
+  
   public arquivos: File[] = [];
 
   beneficioValidator(formGroup: FormGroup) {
@@ -109,11 +111,7 @@ export class DemandaService {
         objetivoDemanda: listaRascunho[indiceDemanda].objetivoDemanda,
       })
     }
-
-
   }
-
-
 
   //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
   //ou até mesmo o número do código de usuário
@@ -141,9 +139,6 @@ export class DemandaService {
 
   postDemanda() {
     //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
-
-
-
     let demandaFormData = new FormData();
     if (this.arquivos.length != 0) {
       this.arquivos.map((item) =>
@@ -155,7 +150,7 @@ export class DemandaService {
     try {
       this.insertsBeforePostDemanda()
     } catch (err) {
-      alert("Ocorreu um erronos inserts " + err);
+      this.showError("Ocorreu um erro nos Inserts")
     }
 
     //Inserindo o form da demanda em si
@@ -168,6 +163,16 @@ export class DemandaService {
       path + 'demanda',
       demandaFormData
     );
+  }
+
+  
+  
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
   createCentroCusto(cc: CentroCusto | undefined): FormGroup {
@@ -386,7 +391,7 @@ export class DemandaService {
     return this.http.put<any>(path + `demanda/update/status`, data);
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService,  private messageService: MessageService) {
     this.listaArquivosDemanda.subscribe(arquivos => {
       this.arquivos = arquivos
     })

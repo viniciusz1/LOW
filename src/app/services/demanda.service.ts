@@ -31,9 +31,6 @@ export class DemandaService {
     }),
     beneficioQualitativoDemanda: [''],
     frequenciaDeUsoDemanda: ['', Validators.required],
-    solicitanteDemanda: {
-      codigoUsuario: 0,
-    },
     codigoDemanda: [''],
     centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
 
@@ -74,7 +71,7 @@ export class DemandaService {
       demandaFormData.append('arquivos', item, item.name)
     );
 
-    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
+    // this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
     return this.http.put<Demanda | string>(
       path + 'demanda/update',
@@ -282,7 +279,7 @@ export class DemandaService {
    
     if(this.formEditorEspecial.value.situacaoAtualDemanda && this.formEditorEspecial.value.objetivoDemanda)
     this.demandaForm.patchValue({
-      solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
+      // solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
       situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda.replace('<br>', '<br />'),
       objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda.replace('<br>', '<br />')
     })

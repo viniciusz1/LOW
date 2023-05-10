@@ -12,7 +12,7 @@ import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalHistoricoComponent } from '../modal-historico/modal-historico.component';
 import { ModalDemandaDocumentoComponent } from '../modal-demanda-documento/modal-demanda-documento.component';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-modal-criar-reuniao',
@@ -28,16 +28,17 @@ export class ModalCriarReuniaoComponent implements OnInit {
     private reuniaoService: ReuniaoService,
     private usuarioService: UsuarioService,
     private confirmationService: ConfirmationService,
+    private messageService: MessageService,
     private router: Router
   ) {
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe(
         {
           next: e => {
-            // FAZER VERIFICAÇÃO DE QUEM PODE USAR
+            // FAZER VERIFICAÇÃO DE QUEM PODE USAR+
           },
           error: err => {
-
+            this.showError("Não foi possível verificar o Token")
           }
         }
       )
@@ -114,7 +115,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
     console.log(reuniao)
     this.reuniaoService.postReuniao(reuniao).subscribe(e => {
-      this.router.navigate(['/tela-inicial/ver-pauta/' + e.codigoReuniao])
+      this.router.navigate(['/tela-inicial/ver-reuniao/' + e.codigoReuniao])
       this.dialogRef.close()
     })
   }
@@ -160,15 +161,24 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
   }
 
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
   atualizarDemandas() {
     this.demandaService
       .getDemandasFiltradasStatus({ status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + "" })
       .subscribe({
-        next: (demanda) => {
+        next: demanda => {
           this.listaDemandas = demanda
           this.removerDaListaAdicSecundaria()
-        },
-        error: (err) => console.log(err),
+        }, error: err => {
+          this.showError("Não foi possível filtrar as demandas")
+        }
       });
   }
 

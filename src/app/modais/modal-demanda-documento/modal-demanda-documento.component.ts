@@ -1,9 +1,10 @@
+import { path } from './../../services/path/rota-api';
 
 import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { PrimeIcons } from 'primeng/api';
+import { MessageService, PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Tamanho } from 'src/app/models/tamanho.enum';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -11,6 +12,7 @@ import { ModalReprovacaoDemandaComponent } from '../modal-reprovacao-demanda/mod
 import { Proposta } from 'src/app/models/proposta.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
+
 @Component({
   selector: 'app-modal-demanda-documento',
   templateUrl: './modal-demanda-documento.component.html',
@@ -19,11 +21,13 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 export class ModalDemandaDocumentoComponent implements OnInit {
   showbotoesAprovarDemanda = false;
   showTimeline = false;
+  path = path
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
     private demandaService: DemandaService,
     private dialogRef: MatDialogRef<ModalDemandaDocumentoComponent>,
     private matDialog: MatDialog,
+    private messageService: MessageService,
     private usuarioService: UsuarioService) {
     this.dadosDemanda = data
     this.usuarioService.verificarTokenUserDetailsReturn()
@@ -37,12 +41,22 @@ export class ModalDemandaDocumentoComponent implements OnInit {
             this.configureTimeline()
           }
         }, error: err => {
-          alert(err)
+          this.showError("Não foi possível verificar o Token")
         }
       })
   }
   @Input() dadosDemanda: Demanda | undefined;
   @Input() documentoEmAta = false;
+
+
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
 
   configureTimeline() {
     if (this.dadosDemanda?.statusDemanda) {
@@ -71,10 +85,11 @@ export class ModalDemandaDocumentoComponent implements OnInit {
         )
         .subscribe({
           next: event => {
+            this.showSuccess("Decisão enviada!")
             this.dialogRef.close(event)
           },
           error: err => {
-            console.log(err)
+            this.showError("Decisão não enviada!")
           }
         });
     }

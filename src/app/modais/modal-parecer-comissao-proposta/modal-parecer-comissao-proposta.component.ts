@@ -4,6 +4,7 @@ import { ModalPropostaDocumentoComponent } from './../modal-proposta-documento/m
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-modal-parecer-comissao-proposta',
@@ -17,7 +18,8 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { demanda: Demanda, statusReuniao: StatusReuniao },
     public dialogRef: MatDialogRef<ModalParecerComissaoPropostaComponent>,
     private matDialog: MatDialog,
-    private reuniaoService: ReuniaoService
+    private reuniaoService: ReuniaoService,
+    private messageService: MessageService
 
   ) {
 
@@ -80,15 +82,24 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
     });
   }
 
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
   enviarParecerComissao() {
     if (this.demanda?.codigoDemanda)
       this.reuniaoService.enviarParecerComissao({ tipoAtaProposta: this.tipoAtaSelecionada, parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.demanda.codigoDemanda?.toString())
         .subscribe({
           next: e => {
+            this.showSuccess("Parecer enviado!")
             this.dialogRef.close(e)
           },
           error: err => {
-            console.log(err)
+            this.showError("Não foi possível enviar o Parecer da Comissão")
           }
         })
   }

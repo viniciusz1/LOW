@@ -11,16 +11,20 @@ import { Arquivo } from '../models/arquivo.model';
 import { UsuarioService } from './usuario.service';
 import { TestScheduler } from 'rxjs/testing';
 import { CentroCusto } from '../models/centro-custo.model';
+import { toHTML } from 'ngx-editor';
+import { Validators as ValidatorsEditor } from 'ngx-editor';
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class DemandaService {
   public demandaForm = this.fb.group({
     tituloDemanda: ['', Validators.required],
-    situacaoAtualDemanda: [''],
-    objetivoDemanda: [''],
+    situacaoAtualDemanda: ['', ValidatorsEditor.required],
+    objetivoDemanda: ['', ValidatorsEditor.required],
     beneficioRealDemanda: this.fb.group({
-      moedaBeneficio: [''],
+      moedaBeneficio: ['', this.beneficioValidator.bind(this)],
       memoriaDeCalculoBeneficio: [''],
       valorBeneficio: [''],
     }),
@@ -33,20 +37,108 @@ export class DemandaService {
     frequenciaDeUsoDemanda: ['', Validators.required],
     codigoDemanda: [''],
     centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
-
   });
 
-  public get getFormDemandaValid(){
-    return this.formEditorEspecial
+  private link = '';
+  public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
+  private filtros: Filtro | undefined
+  public arquivos: File[] = [];
+
+  beneficioValidator(formGroup: FormGroup) {
+    const beneficioReal = formGroup.get('beneficioRealDemanda');
+    const beneficioPotencial = formGroup.get('beneficioPotencialDemanda');
+
+    if (beneficioReal?.get('moedaBeneficio')?.value ||
+      beneficioReal?.get('memoriaDeCalculoBeneficio')?.value ||
+      beneficioReal?.get('valorBeneficio')?.value) {
+
+      if (!beneficioReal.get('moedaBeneficio')?.value ||
+        !beneficioReal.get('memoriaDeCalculoBeneficio')?.value ||
+        !beneficioReal.get('valorBeneficio')?.value) {
+        beneficioReal.setErrors({ beneficioIncomplete: true });
+      } else {
+        beneficioReal.setErrors(null);
+      }
+    }
+
+    if (beneficioPotencial?.get('moedaBeneficio')?.value ||
+      beneficioPotencial?.get('memoriaDeCalculoBeneficio')?.value ||
+      beneficioPotencial?.get('valorBeneficio')?.value) {
+
+      if (!beneficioPotencial?.get('moedaBeneficio')?.value ||
+        !beneficioPotencial?.get('memoriaDeCalculoBeneficio')?.value ||
+        !beneficioPotencial?.get('valorBeneficio')?.value) {
+        beneficioPotencial.setErrors({ beneficioIncomplete: true });
+      } else {
+        beneficioPotencial.setErrors(null);
+      }
+    }
   }
 
-  public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
+  public get getFormDemandaInvalid() {
+    return this.demandaForm.invalid
+  }
+  public get getFormDemanda() {
+    return this.demandaForm.value
+  }
 
-  formEditorEspecial = new FormGroup({
-    situacaoAtualDemanda: new FormControl('', Validators.required),
-    objetivoDemanda: new FormControl('', Validators.required),
-    version: new FormControl(0),
-  });
+  setFormDemandaRascunho(indiceDemanda: number) {
+    let i: any = localStorage.getItem('rascunhos')
+    let listaRascunho = JSON.parse(i)
+    if (listaRascunho[indiceDemanda]) {
+      this.demandaForm.patchValue({
+        tituloDemanda: listaRascunho[indiceDemanda].tituloDemanda,
+        beneficioRealDemanda: {
+          moedaBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.valorBeneficio
+        },
+        beneficioPotencialDemanda: {
+          moedaBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.moedaBeneficio,
+          memoriaDeCalculoBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.memoriaDeCalculoBeneficio,
+          valorBeneficio: listaRascunho[indiceDemanda].beneficioRealDemanda?.valorBeneficio
+        },
+        beneficioQualitativoDemanda: listaRascunho[indiceDemanda].beneficioQualitativoDemanda,
+        frequenciaDeUsoDemanda: listaRascunho[indiceDemanda].frequenciaDeUsoDemanda,
+        centroCustosDemanda: listaRascunho[indiceDemanda].centroCustosDemanda,
+        codigoDemanda: indiceDemanda.toString(),
+        situacaoAtualDemanda: listaRascunho[indiceDemanda].situacaoAtualDemanda,
+        objetivoDemanda: listaRascunho[indiceDemanda].objetivoDemanda,
+      })
+    }
+
+
+  }
+
+
+  postDemanda() {
+    //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
+    let demandaFormData = new FormData();
+    if (this.arquivos.length != 0) {
+      this.arquivos.map((item) =>
+        demandaFormData.append('arquivos', item, item.name)
+      );
+    } else {
+      demandaFormData.append('arquivos', new File([], ''));
+    }
+    try {
+      this.insertsBeforePostDemanda()
+    } catch (err) {
+      alert("Ocorreu um erronos inserts " + err);
+    }
+
+    //Inserindo o form da demanda em si
+
+    console.log(this.demandaForm.value)
+    demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+
+    //Retornando a requisição
+    return this.http.post<Demanda | string>(
+      path + 'demanda',
+      demandaFormData
+    );
+  }
+
 
   createCentroCusto(cc: CentroCusto | undefined): FormGroup {
     return this.fb.group({
@@ -56,23 +148,31 @@ export class DemandaService {
   }
 
   removeCenterOfCost(index: number) {
-    (this.demandaForm.controls.centroCustosDemanda as FormArray).removeAt(index);
+    (this.demandaForm.controls['centroCustosDemanda'] as FormArray).removeAt(index);
   }
 
   reformularDemanda() {
 
-    this.demandaForm.patchValue({
-      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda,
-      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda,
-      // statusDemanda: 'BACKLOG_CLASSIFICACAO'
-    })
+    this.insertsBeforePostDemanda()
+    
     let demandaFormData = new FormData();
-    this.arquivos.map((item) =>
-      demandaFormData.append('arquivos', item, item.name)
-    );
+    if (this.arquivos.length != 0) {
+      this.arquivos.map((item) =>
+        demandaFormData.append('arquivos', item, item.name)
+      );
+    } else {
+      demandaFormData.append('arquivos', new File([], ''));
+    }
+
 
     // this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
-    demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+    // demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+
+
+    let demandaFormValue: any = this.demandaForm.value
+    demandaFormValue.statusDemanda = 'BACKLOG_CLASSIFICACAO'
+    demandaFormData.append('demanda', JSON.stringify(demandaFormValue));
+
     return this.http.put<Demanda | string>(
       path + 'demanda/update',
       demandaFormData
@@ -103,37 +203,31 @@ export class DemandaService {
       beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
       frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,
       centroCustosDemanda: demanda.centroCustosDemanda,
-      codigoDemanda: demanda.codigoDemanda, 
-    })
-
-   
-    
-    this.formEditorEspecial.patchValue({
+      codigoDemanda: demanda.codigoDemanda,
       situacaoAtualDemanda: demanda.situacaoAtualDemanda,
       objetivoDemanda: demanda.objetivoDemanda,
-      version: demanda.version
+      // version: demanda.version
     })
-    
-    this.listaArquivosDemanda.emit(this.saveByteArrayFile(demanda.arquivosDemanda)) 
+
+
+
+    this.listaArquivosDemanda.emit(this.saveByteArrayFile(demanda.arquivosDemanda))
   }
 
   reprovarDemanda(codigoDemanda: number, motivoReprovacao: string) {
     return this.http.put(path + 'demanda/cancell/' + codigoDemanda, motivoReprovacao)
   }
   public addCenterOfCost() {
-    (this.demandaForm.controls.centroCustosDemanda as FormArray).push(
+    (this.demandaForm.controls['centroCustosDemanda'] as FormArray).push(
       this.createCentroCusto(undefined)
     );
 
   }
-  private filtros: Filtro | undefined
 
-  private arquivos: File[] = [];
-
-  public get getArquivos(){
+  public get getArquivos() {
     return this.arquivos
   }
-  public set setArquivos(arq: File[]){
+  public set setArquivos(arq: File[]) {
     this.arquivos = arq
   }
 
@@ -208,7 +302,6 @@ export class DemandaService {
     }
     return 0;
   }
-  private link = ''
   getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
     if (pesquisaEspecial?.status) {
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=&ordenar=${this.filtros?.sort}`
@@ -261,68 +354,40 @@ export class DemandaService {
     );
   }
 
+
   //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
   //ou até mesmo o número do código de usuário
-  insertsBeforePostDemanda(){
-    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == undefined) {
+  insertsBeforePostDemanda() {
+    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == '') {
       this.demandaForm.patchValue({
         beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
       })
     }
 
-    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == undefined) {
+    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == '') {
       this.demandaForm.patchValue({
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
-
-   
-    if(this.formEditorEspecial.value.situacaoAtualDemanda && this.formEditorEspecial.value.objetivoDemanda)
+    let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
+    let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
+    // toHTML(
     this.demandaForm.patchValue({
-      // solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-      situacaoAtualDemanda: this.formEditorEspecial.value.situacaoAtualDemanda.replace('<br>', '<br />'),
-      objetivoDemanda: this.formEditorEspecial.value.objetivoDemanda.replace('<br>', '<br />')
+      objetivoDemanda: objetivoDemanda,
+      situacaoAtualDemanda: situacaoAtualDemanda
     })
-  }
-
-  postDemanda() {
-    //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
-    let demandaFormData = new FormData();
-    this.arquivos.map((item) =>
-      demandaFormData.append('arquivos', item, item.name)
-    );
-    try {
-      this.insertsBeforePostDemanda()
-    } catch (err) {
-      alert("Ocorreu um erro ao cadastrar: " + err);
-    }
-
-    console.log(this.demandaForm.value)
-    //Inserindo o form da demanda em si
-    
-    demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
-
-    //Retornando a requisição
-    return this.http.post<Demanda | string>(
-      path + 'demanda',
-      demandaFormData
-    );
   }
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
-
-    return this.http.put<any>(
-      path + `demanda/update/status/${codigoDemanda}`,
-      decisao
-    );
+    let data = new FormData();
+    data.append('codigo', codigoDemanda);
+    data.append('decisao', decisao.toString());
+    return this.http.put<any>(path + `demanda/update/status`, data);
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) {
-    
-    
     this.listaArquivosDemanda.subscribe(arquivos => {
-      console.log("hey")
       this.arquivos = arquivos
     })
-   }
+  }
 }

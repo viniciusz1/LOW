@@ -18,7 +18,7 @@
     <b class="me-2">01</b>
     <span>
       <div class="d-flex align-items-center justify-content-between">
-        <a [href]="['http://localhost:8081/demanda/pdf/' + dadosDemanda?.codigoDemanda]">
+        <a [href]="[path+'demanda/pdf/' + dadosDemanda?.codigoDemanda]">
           <i class="bi bi-download me-3" style="font-size: 25px;"></i>
 
         </a>
@@ -28,10 +28,7 @@
   </p>
 
   <mat-dialog-content class="mat-typography" [ngStyle]="{ 'overflow': (documentoEmAta ? 'hidden' : 'hidden') }">
-    <p-scrollPanel
-      [style]="{ width: '100%', height: '70vh' }"
-      styleClass="custombar1"
-    >
+    <p-scrollPanel [style]="{ width: '100%', height: '70vh' }" styleClass="custombar1">
       <h4 mat-dialog-title class="d-flex justify-content-between">
         <span><b>{{ "documento-pdf.solicitante" | translate }}: </b>{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span>
         <span><b>{{ "documento-pdf.data" | translate }} </b> {{ dadosDemanda?.inicioExDemandaProposta }}</span>
@@ -109,7 +106,7 @@
           {{dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio}}
           {{dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
         </h4>
-        
+
         <!-- <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
           <b >
             Custos totais do projeto: R${{calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso}}</b> 
@@ -148,7 +145,7 @@
               </td>
               <td>
                 <p *ngFor="let centroCustoPagante of itemRecurso.centroCustoRecurso">
-                  {{centroCustoPagante.nomeCentroCusto}}: {{centroCustoPagante.porcentagemCentroCusto}}% 
+                  {{centroCustoPagante.nomeCentroCusto}}: {{centroCustoPagante.porcentagemCentroCusto}}%
                 </p>
               </td>
               <td>
@@ -163,7 +160,7 @@
             </tr>
           </tbody>
         </table>
-         
+
         <p>
           <b>
             {{ "documento-pdf.periodo-execucao" | translate }}
@@ -206,3 +203,4 @@
     </div>
   </mat-dialog-actions>
 </div>
+<p-toast></p-toast>

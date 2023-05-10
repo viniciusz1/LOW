@@ -14,6 +14,7 @@ import { Reuniao } from 'src/app/models/reuniao.model';
 import { Proposta } from 'src/app/models/proposta.model';
 import { routerModuleForChild } from 'ngx-joyride';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-tela-ver-pauta',
@@ -26,6 +27,7 @@ export class TelaVerPauta implements OnInit {
     private matDialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private reuniaoService: ReuniaoService,
+    private messageService: MessageService,
     private router: Router) { }
 
   codigoReuniao = this.activatedRoute.snapshot.params['codigoReuniao']
@@ -39,6 +41,15 @@ export class TelaVerPauta implements OnInit {
         }
       })
   }
+  mostrarAtaPublicada(){
+    
+    return this.reuniao?.propostasReuniao?.some(p => p.tipoAtaProposta == 'PUBLICADA')
+  }
+
+  mostrarAtaNaoPublicada(){
+    this.reuniao?.propostasReuniao?.some(p => p.tipoAtaProposta == 'NAO_PUBLICADA')
+    return true;
+  }
 
   finalizarReuniao() {
     this.reuniaoService.finalizarReuniao(this.reuniao?.codigoReuniao)
@@ -46,9 +57,17 @@ export class TelaVerPauta implements OnInit {
         next: e => {
           this.router.navigate(['/tela-inicial/reunioes'])
         }, error: err => {
-          alert(err)
+          this.showError("Não foi possível finalizar a reunião!")
         }
       })
+  }
+
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
   mostrarBotoesReuniao() {

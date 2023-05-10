@@ -19,7 +19,7 @@ export interface Demanda {
     beneficioPotencialDemanda?: Beneficio,
     beneficioQualitativoDemanda?: string,
     frequenciaDeUsoDemanda?: string,
-    recursosProposta?:  Recurso[],
+    recursosProposta?: Recurso[],
     escopoDemanda?: string,
     inicioExDemandaProposta?: Date,
     fimExDemandaProposta?: Date,
@@ -44,4 +44,6 @@ export interface Demanda {
     secaoDemandaAnalista?: string,
     analista?: Usuario,
     gerenteNegocio?: Usuario
+    horaUltimaMensagem?: Date
+    qtdMensagensNaoLidas?: number
 }

@@ -1,11 +1,14 @@
-<div class="card low-shadow position-relative" [ngStyle]="{ width: mudarTamanho }"
-  style="font-size: 14px; height: 163px">
+<div
+  class="card low-shadow position-relative principal"
+  [ngStyle]="{ width: mudarTamanho }"
+  style="font-size: 14px; height: 163px"
+>
   <div class="line-top-start" [ngClass]="primaryColorClass"></div>
   <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
   <div class="card-body pb-1">
     <div class="mt-2 card-title d-flex" style="align-items: baseline; justify-content: space-between">
       <div class="d-flex" style="width: 80%">
-        <label class="me-2" for="">{{ dadosDemada.codigoDemanda }}</label>
+        <label class="me-2" for="" *ngIf="!rascunho">{{ dadosDemada.codigoDemanda }}</label>
         <label class="me-2 text-truncate" for="titulo">
           <b>{{ dadosDemada.tituloDemanda }}</b>
         </label>
@@ -15,12 +18,25 @@
         <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75"
           aria-valuemin="0" aria-valuemax="100"></div>
       </div>
-      <i class="bi bi-chat-left-dots me-3" (click)="confirmarChat()" *ngIf="!rascunho && statusPermitido()"
-        (click)="irParaChat.emit()" style="cursor: pointer"></i>
-      <i class="bi bi-three-dots-vertical three-dots" *ngIf="!rascunho" role="button" [matMenuTriggerFor]="menu"></i>
+      <i
+        class="bi bi-chat-left-dots me-3"
+        *ngIf="!rascunho && statusPermitido()"
+        (click)="irParaChat.emit($event)"
+        style="cursor: pointer"
+      ></i>
+      <i
+        class="bi bi-three-dots-vertical three-dots"
+        *ngIf="!rascunho"
+        role="button"
+        [matMenuTriggerFor]="menu"
+      ></i>
       <div *ngIf="rascunho">
-        <i class="bi bi-trash3" role="button" (click)="clicouEmExcluir.emit()" style="font-size: 20px"></i>
-        <i class="bi bi-arrows-fullscreen" role="button" style="font-size: 20px; margin-left: 1vw"></i>
+        <i
+          class="bi bi-trash3"
+          role="button"
+          (click)="deleteRascunhoFromLocalStorage()"
+          style="font-size: 20px"
+        ></i>
       </div>
 
       <mat-menu #menu="matMenu">
@@ -32,7 +48,7 @@
           <i class="bi bi-arrows-angle-expand me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.ver-demanda" | translate }}</span>
         </button>
-        <button *ngIf="existePauta()" routerLink="/tela-inicial/reunioes" mat-menu-item>
+        <button *ngIf="existePauta()" [routerLink]="['/tela-inicial/reunioes']" mat-menu-item>
           <i class="bi bi-person-lines-fill me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.ir-reuniao" | translate }}</span>
         </button>
@@ -40,7 +56,7 @@
           <i class="bi-file-text me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
         </button>
-        <button routerLink="/tela-inicial/chat" mat-menu-item>
+        <button [routerLink]="['/tela-inicial/chat/'+dadosDemada.codigoDemanda]" mat-menu-item>
           <i class="bi bi-chat-left-quote me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.iniciar-conversa" | translate }}</span>
         </button>

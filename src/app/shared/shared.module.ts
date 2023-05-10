@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 
 
 
@@ -28,7 +29,8 @@ import { ButtonModule } from 'primeng/button';
     FormsModule,
     ButtonModule,
     ConfirmDialogModule,
-    TranslateModule
+    TranslateModule,
+    ToastModule
   ]
 })
 export class SharedModule { }

@@ -1,5 +1,5 @@
 .bloco {
-    width: 20.8vw;
+    width: 21vw;
     background-color: #fff;
     position: absolute;
     z-index: 99;
@@ -16,8 +16,17 @@
     align-items: center;
 }
 
+::ng-deep .p-card-title{
+    font-size: 1rem !important;
+}
+
+::ng-deep .p-card{
+    font-size: 0.8rem !important;
+}
+
 h4{
     margin-bottom: 2vh;
+    font-size: 1.4rem;
 }
 
 .custom-marker {

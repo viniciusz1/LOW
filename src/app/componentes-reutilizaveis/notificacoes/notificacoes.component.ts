@@ -18,7 +18,7 @@ export class NotificacoesComponent implements OnInit {
     notificacoes: Notificacao[] = []
 
     ngOnInit() {
-      this.notificacoesService.getNotificacoes(2).subscribe(notificacoes => {
+      this.notificacoesService.getNotificacoes().subscribe(notificacoes => {
         this.notificacoes = notificacoes
       })
     }

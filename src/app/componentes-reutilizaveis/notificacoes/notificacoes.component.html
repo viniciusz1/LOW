@@ -5,7 +5,6 @@
     <p-scrollPanel [style]="{width: '100%', height: '50vh'}">
         <h6 *ngIf="notificacoes.length == 0">Não há notificações</h6>
         <p-timeline [value]="notificacoes">
-
             <ng-template pTemplate="marker" let-notificacoes>
                 <span class="custom-marker shadow-2" [style.backgroundColor]="'blue'">
                     <i [ngClass]="'bi bi-plus-lg'"></i>
@@ -14,7 +13,7 @@
 
 
             <ng-template pTemplate="content" let-notificacoes>
-                <p-card [header]="notificacoes.tituloDemandaNotificacao" [subheader]="notificacoes.horaNotificacao">
+                <p-card [header]="notificacoes.tituloDemandaNotificacao" [subheader]="notificacoes.dataNotificacao">
                     <span>{{notificacoes.descricaoNotificacao}}</span>
                 </p-card>
             </ng-template>

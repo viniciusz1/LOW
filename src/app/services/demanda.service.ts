@@ -36,9 +36,6 @@ export class DemandaService {
     }),
     beneficioQualitativoDemanda: [''],
     frequenciaDeUsoDemanda: ['', Validators.required],
-    solicitanteDemanda: {
-      codigoUsuario: 0,
-    },
     codigoDemanda: [''],
     centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
   });
@@ -113,30 +110,6 @@ export class DemandaService {
     }
   }
 
-  //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
-  //ou até mesmo o número do código de usuário
-  insertsBeforePostDemanda() {
-    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == '') {
-      this.demandaForm.patchValue({
-        beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
-      })
-    }
-
-    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == '') {
-      this.demandaForm.patchValue({
-        beneficioRealDemanda: { moedaBeneficio: 'Real' }
-      })
-    }
-    let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
-    let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
-    // toHTML(
-    this.demandaForm.patchValue({
-      solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
-      objetivoDemanda: objetivoDemanda,
-      situacaoAtualDemanda: situacaoAtualDemanda
-    })
-  }
-
   postDemanda() {
     //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
     let demandaFormData = new FormData();
@@ -164,8 +137,6 @@ export class DemandaService {
       demandaFormData
     );
   }
-
-  
   
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
@@ -199,10 +170,15 @@ export class DemandaService {
       demandaFormData.append('arquivos', new File([], ''));
     }
 
-    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
+
+    // this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
+    // demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
+
+
     let demandaFormValue: any = this.demandaForm.value
     demandaFormValue.statusDemanda = 'BACKLOG_CLASSIFICACAO'
     demandaFormData.append('demanda', JSON.stringify(demandaFormValue));
+
     return this.http.put<Demanda | string>(
       path + 'demanda/update',
       demandaFormData
@@ -382,6 +358,30 @@ export class DemandaService {
     return this.http.get<Demanda>(
       path + 'demanda/' + codigoDemanda
     );
+  }
+
+
+  //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
+  //ou até mesmo o número do código de usuário
+  insertsBeforePostDemanda() {
+    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == '') {
+      this.demandaForm.patchValue({
+        beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
+      })
+    }
+
+    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == '') {
+      this.demandaForm.patchValue({
+        beneficioRealDemanda: { moedaBeneficio: 'Real' }
+      })
+    }
+    let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
+    let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
+    // toHTML(
+    this.demandaForm.patchValue({
+      objetivoDemanda: objetivoDemanda,
+      situacaoAtualDemanda: situacaoAtualDemanda
+    })
   }
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {

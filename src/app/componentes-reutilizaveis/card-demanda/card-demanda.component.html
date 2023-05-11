@@ -8,9 +8,9 @@
   <div class="card-body pb-1">
     <div class="mt-2 card-title d-flex" style="align-items: baseline; justify-content: space-between">
       <div class="d-flex" style="width: 80%">
-        <label class="me-2" for="" *ngIf="!rascunho">{{ dadosDemada.codigoDemanda }}</label>
+        <label class="me-2" for="" *ngIf="!rascunho">{{ dadosDemanda.codigoDemanda }}</label>
         <label class="me-2 text-truncate" for="titulo">
-          <b>{{ dadosDemada.tituloDemanda }}</b>
+          <b>{{ dadosDemanda.tituloDemanda }}</b>
         </label>
       </div>
 
@@ -44,7 +44,7 @@
           <i class="bi bi-arrow-counterclockwise me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.historico" | translate }}</span>
         </button>
-        <button (click)="verDocumentoProposta.emit(dadosDemada)" mat-menu-item>
+        <button (click)="verDocumentoProposta.emit(dadosDemanda)" mat-menu-item>
           <i class="bi bi-arrows-angle-expand me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.ver-demanda" | translate }}</span>
         </button>
@@ -56,9 +56,13 @@
           <i class="bi-file-text me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
         </button>
-        <button [routerLink]="['/tela-inicial/chat/'+dadosDemada.codigoDemanda]" mat-menu-item>
+        <button [routerLink]="['/tela-inicial/chat/'+dadosDemanda.codigoDemanda]" mat-menu-item>
           <i class="bi bi-chat-left-quote me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.iniciar-conversa" | translate }}</span>
+        </button>
+        <button *ngIf="mostrarCancelarPropriaDemanda()" (click)="abrirModalReprovar.emit(dadosDemanda)" mat-menu-item>
+          <i class="bi bi-x-circle me-3"></i>
+          <span>Cancelar Demanda</span>
         </button>
       </mat-menu>
     </div>
@@ -67,12 +71,12 @@
       <span> <b>{{ "componentes-reutilizaveis.card-demanda.score" | translate }}</b> 109.8 </span>
       <span>
         <small for="" *ngIf="!rascunho && nivelAcesso != 'Solicitante'">
-          {{ dadosDemada.statusDemanda | uppercase }}
+          {{ dadosDemanda.statusDemanda | uppercase }}
         </small>
       </span>
     </p>
     <p class="card-text d-flex justify-content-between">
-      <span><b>{{ "componentes-reutilizaveis.card-demanda.autor" | translate }} </b>{{ dadosDemada.solicitanteDemanda?.nomeUsuario }}</span>
+      <span><b>{{ "componentes-reutilizaveis.card-demanda.autor" | translate }} </b>{{ dadosDemanda.solicitanteDemanda?.nomeUsuario }}</span>
       <span *ngIf="tipoDeAta.length != 0">{{ tipoDeAta }}</span>
     </p>
     <p class="card-text bottom-card">
@@ -85,7 +89,7 @@
             !exibirBotaoParecerDg
         }" style="width: 160px">
         <b>{{ "componentes-reutilizaveis.card-demanda.departamento" | translate }} </b>
-        {{ dadosDemada.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento }}
+        {{ dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento }}
       </label>
       <span>
         <button *ngIf="textoExibidoEmBotaoDependendoRota && exibicaoBotoes() && mostrarBotao"
@@ -96,5 +100,5 @@
       <i role="button" *ngIf="isPauta" class="bi bi-trash-fill fs-5" (click)="clicouEmExcluir.emit()"></i>
     </p>
   </div>
-  
+
 </div>

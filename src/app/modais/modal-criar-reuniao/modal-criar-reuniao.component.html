@@ -13,7 +13,7 @@
       <p-scrollPanel [style]="{ width: '100%', height: '50vh' }">
         <h6>{{ "modais.modal-criar-reuniao.demandas" | translate }}</h6>
         <div *ngFor="let demanda of listaDemandas" class="mt-2">
-          <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas" [dadosDemada]="demanda"
+          <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas" [dadosDemanda]="demanda"
             [mostrarIconeAdicionar]="true" (clicouAdicionarPauta)="adicionarDemanda(demanda)"
             [mudarTamanho]="'100%'" (modalHistorico)="openModalHistorico($event)" (verDocumentoProposta)="openModalDemandaDocumento($event)"
             (fechouModal)="fecharModal()" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()">
@@ -30,7 +30,7 @@
         </div>
         <span *ngFor="let demanda of listaDemandasEscolhidas" style="margin-top:10px ; ">
           <app-card-demanda pDraggable="products" [mostrarBotao]="false" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()"
-            [dadosDemada]="demanda" [isPauta]="true" (clicouEmExcluir)="excluirDemanda(demanda)"
+            [dadosDemanda]="demanda" [isPauta]="true" (clicouEmExcluir)="excluirDemanda(demanda)"
             [mudarTamanho]="'100%'"></app-card-demanda>
         </span>
       </p-scrollPanel>

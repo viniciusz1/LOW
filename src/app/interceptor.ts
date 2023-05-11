@@ -7,11 +7,12 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Observable, tap } from 'rxjs';
 @Injectable()
 export class LogInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private messageService: MessageService) {
 
   }
 
@@ -28,7 +29,7 @@ export class LogInterceptor implements HttpInterceptor {
         next: (event) => {
           if (event instanceof HttpResponse) {
             if (event.status == 401) {
-              alert('Unauthorized access!')
+              this.showError("Acesso Negado!")
               this.router.navigate(['/login'])
             }
           }
@@ -36,10 +37,19 @@ export class LogInterceptor implements HttpInterceptor {
         },
         error: (error) => {
           if (error.status === 401) {
-            alert('Unauthorized access!')
+            this.showError("Acesso Negado!")
             this.router.navigate(['/login'])
           }
         }
       }));
+  }
+
+  
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 }

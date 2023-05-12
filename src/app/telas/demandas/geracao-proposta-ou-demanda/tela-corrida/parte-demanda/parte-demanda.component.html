@@ -99,9 +99,13 @@
                 pTooltip="Qual seria o lucro mínimo adquirido pela sua proposta?" tooltipPosition="top"></i>
             </div>
             <div style="display: flex; justify-content: space-between">
-              <input (input)="onInputChange()" placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
-                formControlName="valorBeneficio" />
-              <p-dropdown (onChange)="onInputChange()" [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
+              <div style="width: 100%;">
+                <p-inputNumber class="largura-customizada" (input)="onInputChange()" formControlName="valorBeneficio" mode="currency" [currency]="currencyMoedaBeneficio1" [locale]="localMoedaBeneficio1"> </p-inputNumber>
+
+              </div>
+              <!-- <input (input)="onInputChange()" formControlName="valorBeneficio" placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
+                 /> -->
+              <p-dropdown (onChange)="mudouMoeda($event, 1)" [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
                 optionValue="value"></p-dropdown>
             </div>
             <div class="situacao-atual" style="display: grid" id="item-1-2">
@@ -129,9 +133,10 @@
                   pTooltip="Qual seria o lucro máximo adquirido pela sua proposta?" tooltipPosition="top"></i>
               </div>
               <div style="display: flex; justify-content: space-between">
-                <input (input)="onInputChange()" placeholder="Ex: 20.000" style="width: 93%;" type="text" pInputText class="input"
-                  formControlName="valorBeneficio" />
-                <p-dropdown (onChange)="onInputChange()" [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
+                <div style="width: 100%;">
+                  <p-inputNumber class="largura-customizada" (input)="onInputChange()" formControlName="valorBeneficio" mode="currency" [currency]="currencyMoedaBeneficio2" [locale]="localMoedaBeneficio2"> </p-inputNumber>
+                </div>
+                <p-dropdown (onChange)="mudouMoeda($event, 2)" [options]="opcoesDeMoeda" formControlName="moedaBeneficio" optionLabel="name"
                   optionValue="value"></p-dropdown>
               </div>
             </div>

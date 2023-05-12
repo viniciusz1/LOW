@@ -9,6 +9,7 @@ import { CentroCusto } from 'src/app/models/centro-custo.model';
 import { Editor, Toolbar } from 'ngx-editor';
 import Locals from 'ngx-editor/lib/Locals';
 import { MessageService } from 'primeng/api';
+import { InputNumber } from 'primeng/inputnumber';
 
 interface Tab {
   title: string;
@@ -137,8 +138,11 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
   }
 
-  mudouMoeda(event: Event, ordemInput: number) {
-    let moeda = event.target as HTMLSelectElement;
+  mudouMoeda(event: any, ordemInput: number) {
+    this.onInputChange()
+    let moeda = event;
+    console.log(moeda)
+
     if (moeda.value == 'Real') {
       if (ordemInput == 1) {
         this.localMoedaBeneficio1 = 'pt-BR';

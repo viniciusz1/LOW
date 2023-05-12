@@ -91,8 +91,8 @@
         <b>{{ "documento-pdf.memoria-calculo-beneficio-real" | translate }} </b>
       </p>
       <ul>
-        <li>
-          {{ dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio }}
+        <li style="word-wrap: break-word;">  
+            {{ dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio }}        
         </li>
       </ul>
       <h4>
@@ -106,7 +106,7 @@
         </b>
       </p>
       <ul>
-        <li>
+        <li style="word-wrap: break-word;">
           {{
             dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
           }}
@@ -116,7 +116,7 @@
         <b>{{ "documento-pdf.beneficio-qualitativo" | translate }} </b>
       </h4>
       <ul>
-        <li>
+        <li style="word-wrap: break-word;">
           {{ dadosDemanda?.beneficioQualitativoDemanda }}
         </li>
       </ul>
@@ -237,7 +237,7 @@
         </p>
       </div>
 
-      <div *ngIf="dadosDemanda?.arquivosDemanda?.length != 0">
+      <div class="mb-5" *ngIf="dadosDemanda?.arquivosDemanda?.length != 0">
         <h4>
           <b>{{ "documento-pdf.documentos" | translate }} </b>
           <a
@@ -251,6 +251,20 @@
       </div>
     </p-scrollPanel>
   </mat-dialog-content>
+
+
+
+
+
+
+
+
+  <!-- DOCUMENTO EM ATA REPETE A PARTE DE CIMA COM ALGUMAS ALTERAÇÕES. PENSAR EM UMA MANEIRA MELHOR -->
+
+
+
+
+
 
   <div *ngIf="documentoEmAta">
     <h4 mat-dialog-title class="d-flex">
@@ -292,7 +306,7 @@
       <b>{{ "documento-pdf.memoria-calculo-beneficio-real" | translate }} </b>
     </p>
     <ul>
-      <li>
+      <li style="word-wrap: break-word;">
         {{ dadosDemanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio }}
       </li>
     </ul>
@@ -307,7 +321,7 @@
       </b>
     </p>
     <ul>
-      <li>
+      <li style="word-wrap: break-word;">
         {{ dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio }}
       </li>
     </ul>
@@ -315,7 +329,7 @@
       <b>{{ "documento-pdf.beneficio-qualitativo" | translate }} </b>
     </h4>
     <ul>
-      <li>
+      <li style="word-wrap: break-word;">
         {{ dadosDemanda?.beneficioQualitativoDemanda }}
       </li>
     </ul>

@@ -35,9 +35,6 @@ export class DemandaService {
     }),
     beneficioQualitativoDemanda: [''],
     frequenciaDeUsoDemanda: ['', Validators.required],
-    solicitanteDemanda: {
-      codigoUsuario: 0,
-    },
     codigoDemanda: [''],
     centroCustosDemanda: this.fb.array([this.createCentroCusto(undefined)])
   });
@@ -133,7 +130,6 @@ export class DemandaService {
     let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
     // toHTML(
     this.demandaForm.patchValue({
-      solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() },
       objetivoDemanda: objetivoDemanda,
       situacaoAtualDemanda: situacaoAtualDemanda
     })
@@ -194,7 +190,6 @@ export class DemandaService {
       demandaFormData.append('arquivos', new File([], ''));
     }
 
-    this.demandaForm.patchValue({ solicitanteDemanda: { codigoUsuario: this.usuarioService.getCodigoUser() } });
     let demandaFormValue: any = this.demandaForm.value
     demandaFormValue.statusDemanda = 'BACKLOG_CLASSIFICACAO'
     demandaFormData.append('demanda', JSON.stringify(demandaFormValue));

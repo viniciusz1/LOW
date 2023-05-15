@@ -5,13 +5,9 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Validators } from '@angular/forms';
 import { saveAs } from 'file-saver';
-import { FormControl } from '@angular/forms';
 import { path } from './path/rota-api';
 import { Arquivo } from '../models/arquivo.model';
-import { UsuarioService } from './usuario.service';
-import { TestScheduler } from 'rxjs/testing';
 import { CentroCusto } from '../models/centro-custo.model';
-import { toHTML } from 'ngx-editor';
 import { Validators as ValidatorsEditor } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
 
@@ -43,7 +39,7 @@ export class DemandaService {
   private link = '';
   public listaArquivosDemanda: EventEmitter<File[]> = new EventEmitter();
   private filtros: Filtro | undefined
-  
+
   public arquivos: File[] = [];
 
   beneficioValidator(formGroup: FormGroup) {
@@ -75,6 +71,10 @@ export class DemandaService {
         beneficioPotencial.setErrors(null);
       }
     }
+  }
+
+  iniciarConversa(codigoDemanda: string | undefined) {
+    return this.http.put(path + 'mensagens/iniciarChat/' + codigoDemanda, null)
   }
 
   public get getFormDemandaInvalid() {
@@ -164,7 +164,7 @@ export class DemandaService {
       demandaFormData
     );
   }
-  
+
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
@@ -187,7 +187,7 @@ export class DemandaService {
   reformularDemanda() {
 
     this.insertsBeforePostDemanda()
-    
+
     let demandaFormData = new FormData();
     if (this.arquivos.length != 0) {
       this.arquivos.map((item) =>
@@ -216,10 +216,10 @@ export class DemandaService {
   //função utilizada para pré-definir informações da demanda quando estamos em proposta
   //ou até mesmo em modo rascunho
   setFormDemandaData(demanda: Demanda) {
-    if(demanda.centroCustosDemanda)
-    for(let i = 0; i < demanda.centroCustosDemanda.length -1; i++){
-      this.addCenterOfCost()
-    }
+    if (demanda.centroCustosDemanda)
+      for (let i = 0; i < demanda.centroCustosDemanda.length - 1; i++) {
+        this.addCenterOfCost()
+      }
 
     this.demandaForm.patchValue({
       tituloDemanda: demanda.tituloDemanda,
@@ -396,7 +396,7 @@ export class DemandaService {
     return this.http.put<any>(path + `demanda/update/status`, data);
   }
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService,  private messageService: MessageService) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private messageService: MessageService) {
     this.listaArquivosDemanda.subscribe(arquivos => {
       this.arquivos = arquivos
     })

@@ -66,10 +66,10 @@ export class CardDemandaComponent implements OnInit {
     return false;
   }
   exibirIniciarChat(){
-    if(this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser() ||
-    this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser() ){
-      console.log("É analista ou solicitante responsável")
-      return true
+    if(this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()){
+      return true;
+    }else if(this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista){
+      return true;
     }
     return false;
   }
@@ -271,7 +271,7 @@ export class CardDemandaComponent implements OnInit {
     }
   }
 
-  
+
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }

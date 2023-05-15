@@ -21,6 +21,7 @@ import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-hi
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
+import { MessagesService } from 'src/app/websocket/messages.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -38,7 +39,7 @@ export class TelaInicialComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {
@@ -46,11 +47,12 @@ export class TelaInicialComponent implements OnInit {
       } else {
         this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
       }
-    if (router.url == '/tela-inicial/rascunhos') {
-      this.tipoRascunho = true;
-      this.isFiltrado = true;
-    };
-  })}
+      if (router.url == '/tela-inicial/rascunhos') {
+        this.tipoRascunho = true;
+        this.isFiltrado = true;
+      };
+    })
+  }
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
 
@@ -225,7 +227,7 @@ export class TelaInicialComponent implements OnInit {
     );
   }
 
-  irParaChat(event: Event) {
+  irParaChat(event: Event, demanda: Demanda) {
     if (event.target)
       this.confirmationService.confirm({
         target: event.target,
@@ -233,7 +235,15 @@ export class TelaInicialComponent implements OnInit {
         icon: 'pi pi-exclamation-triangle',
         blockScroll: false,
         accept: () => {
-          this.router.navigate(['/tela-inicial/chat']);
+          this.demandasService.iniciarConversa(demanda.codigoDemanda)
+            .subscribe({
+              next: (e) => {
+                console.log(e)
+
+                this.router.navigate(['/tela-inicial/chat']);
+              }
+              , error: (err) => { console.log(err) }
+            })
         },
         reject: () => {
 
@@ -290,11 +300,11 @@ export class TelaInicialComponent implements OnInit {
 
   openModalReprovacaoDemanda(demanda: Demanda) {
     this.matDialog.open(ModalReprovacaoDemandaComponent,
-    {
-      maxWidth: '70vw',
-      minWidth: '50vw',
-      data:demanda
-    });
+      {
+        maxWidth: '70vw',
+        minWidth: '50vw',
+        data: demanda
+      });
   }
 
   openModalDemandaDocumento(event: Demanda) {

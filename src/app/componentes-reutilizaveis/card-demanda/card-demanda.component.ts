@@ -68,6 +68,7 @@ export class CardDemandaComponent implements OnInit {
   exibirIniciarChat(){
     if(this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser() ||
     this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser() ){
+      console.log("É analista ou solicitante responsável")
       return true
     }
     return false;

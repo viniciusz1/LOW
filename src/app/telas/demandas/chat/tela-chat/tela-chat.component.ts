@@ -81,8 +81,6 @@ export class TelaChatComponent implements OnInit {
   setarConversas() {
     this.messagesService.getDemandasRelacionadas()
       .subscribe(e => {
-        console.log(e)
-
         this.conversasDemandas = e
         this.demandaDiscutida = this.conversasDemandas.find(e => e.codigoDemanda == this.codigoRota)
         this.scrollToBottom()

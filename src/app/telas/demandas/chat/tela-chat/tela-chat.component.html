@@ -40,7 +40,13 @@
                 <i *ngIf="codigoRota" class="bi bi-file-text me-3" style="cursor: pointer;" (click)="openModalDemandaDocumento()"></i>
             </header>
             <main [ngClass]="{'alinhar-alerta': !codigoRota}">
-              <h3 *ngIf="!codigoRota">SELECIONE UMA CONVERSA</h3>
+
+
+
+              <h3 *ngIf="!codigoRota && mensagens.length > 0">SELECIONE UMA CONVERSA</h3>
+              <h3 *ngIf="!codigoRota && mensagens.length == 0">VOCÊ NÃO TEM CONVERSAS CADASTRADAS</h3>
+
+
                 <p-scrollPanel #scrollPanel [style]="{width: '100%', height: '70.25vh'}">
                     <div style="width: 100%;">
                         <div *ngIf="mostrarConversas" class="mensagens">

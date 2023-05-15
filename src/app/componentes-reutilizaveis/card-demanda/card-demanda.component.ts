@@ -136,6 +136,7 @@ export class CardDemandaComponent implements OnInit {
     return false;
   }
 
+  //Função chamada quando o usuário clica na ação do card
   direcionarUsuario() {
     switch (this.textoExibidoEmBotaoDependendoRota?.rota) {
       case '': this.abrirModalMotivoReprovacao.emit(this.dadosDemanda);
@@ -160,6 +161,7 @@ export class CardDemandaComponent implements OnInit {
       case 'PARECER_COMISSAO': this.abrirModalParecerComissao.emit(this.dadosDemanda);
         break;
       default:
+        //Caso não tenha uma função pré-definida, vai para a rota atrelada ao botão
         this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
@@ -275,6 +277,7 @@ export class CardDemandaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Adicionando classes para estilização do card
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + '-sec';
 

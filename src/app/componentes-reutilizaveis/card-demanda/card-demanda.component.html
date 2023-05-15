@@ -14,7 +14,7 @@
         </label>
       </div>
 
-      <div class="progress low-shadow" *ngIf="versaoSolicitante">
+      <div class="progress low-shadow" *ngIf="versaoSolicitante()">
         <div class="progress-bar" role="progressbar" aria-label="Basic example" [style.width.%]="porcentagemBarraProgressao()" aria-valuenow="75"
           aria-valuemin="0" aria-valuemax="100"></div>
       </div>

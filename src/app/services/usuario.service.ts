@@ -25,7 +25,8 @@ export class UsuarioService {
   }
 
   get getRole() {
-    return this.nivelAcesso;
+    let user = this.getUser('user')
+        return user?.nivelAcessoUsuario;
   }
 
   //Não deve de jeito nenhum retornar 0, verificar isso posteriormente
@@ -53,7 +54,8 @@ export class UsuarioService {
     if (user) {
       return JSON.parse(user)
     }
-    throw Error("Usuario não encontrado")
+    // throw Error("Usuario não encontrado")
+    return undefined
   }
 
   autenticar(usuario: string, senha: string) {

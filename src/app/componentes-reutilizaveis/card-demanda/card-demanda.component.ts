@@ -181,7 +181,7 @@ export class CardDemandaComponent implements OnInit {
     //Caso a rota não existir, é um comando para a função direcionarUsuario()
     switch (this.dadosDemanda.statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
-        if (nivelAcesso == 'Analista' || 'GestorTI') {
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota:
               '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
@@ -190,7 +190,7 @@ export class CardDemandaComponent implements OnInit {
         };
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
-        if (nivelAcesso == 'Analista' || 'GestorTI') {
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
             texto: 'Criar Proposta'
@@ -198,7 +198,7 @@ export class CardDemandaComponent implements OnInit {
         }
         return true;
       case StatusDemanda.BACKLOG_APROVACAO:
-        if (nivelAcesso == 'GerenteNegocio' || 'GestorTI') {
+        if (nivelAcesso == 'GerenteNegocio' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'ABRIR_MODAL_AVALIAR',
             texto: 'Avaliar Demanda',
@@ -206,7 +206,7 @@ export class CardDemandaComponent implements OnInit {
         }
         return true;
       case StatusDemanda.ASSESSMENT || StatusDemanda.BUSINESS_CASE:
-        if (nivelAcesso == 'Analista' || 'GestorTI') {
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_ADD_REUNIAO',
             texto: 'Adicionar Proposta',
@@ -214,7 +214,7 @@ export class CardDemandaComponent implements OnInit {
         }
         return true;
       case StatusDemanda.TO_DO || StatusDemanda.DESIGN_AND_BUILD || StatusDemanda.SUPPORT:
-        if (nivelAcesso == 'Analista' || 'GestorTI') {
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_AVANCAR_FASE',
             texto: 'Avançar Fase',

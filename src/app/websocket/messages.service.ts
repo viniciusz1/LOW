@@ -58,6 +58,7 @@ export class MessagesService {
         let infoExtras = demandas.infoCard.find((e: { codigoDemanda: any; }) => e.codigoDemanda == demanda.codigoDemanda)
         demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem
         demanda.qtdMensagensNaoLidas = infoExtras.qtdMensagensNaoLidas
+        demanda.usuarioAguardando = infoExtras.usuarioAguardando
       }
 
       const mapaDemanda = new Map();
@@ -98,7 +99,7 @@ send(destino: string, mensagem: string, codigoDemanda: string, codigoUsuario: st
 
   if (this.stompClient) {
     this.stompClient.send(
-      destino, {},JSON.stringify(mensagemDTO) 
+      destino, {},JSON.stringify(mensagemDTO)
     )
   } else {
     // console.lo("Conexão não estabelecida!")

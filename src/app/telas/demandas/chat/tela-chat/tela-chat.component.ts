@@ -46,6 +46,12 @@ export class TelaChatComponent implements OnInit {
 
     }
   }
+  exibirQtdMensagensNaoLidas(conversa: any){
+    if(conversa?.qtdMensagensNaoLidas != 0 && conversa?.usuarioAguardando.codigoUsuario != this.usuarioService.getCodigoUser()){
+      return true
+    }
+    return false;
+  }
 
   verificarMensagemMaisAtual() {
     const mensagemMaisAtual = this.mensagens.reduce((mensagemMaisRecente: Mensagem | undefined, mensagemAtual: Mensagem) => {

@@ -228,7 +228,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   irParaChat(event: Event, demanda: Demanda) {
-    if (event.target)
+    if (event.target && demanda.analista?.codigoUsuario == undefined) {
       this.confirmationService.confirm({
         target: event.target,
         message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
@@ -238,17 +238,20 @@ export class TelaInicialComponent implements OnInit {
           this.demandasService.iniciarConversa(demanda.codigoDemanda)
             .subscribe({
               next: (e) => {
-                console.log(e)
-
-                this.router.navigate(['/tela-inicial/chat']);
+                this.router.navigate(['/tela-inicial/chat/' + demanda.codigoDemanda]);
               }
               , error: (err) => { console.log(err) }
             })
+
         },
         reject: () => {
 
         }
       });
+    }
+    else {
+      this.router.navigate(['/tela-inicial/chat/' + demanda.codigoDemanda]);
+    }
   }
 
   excluirDemandaRascunho(index: number) {

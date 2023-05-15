@@ -24,7 +24,7 @@
                     </div>
                     <div class="d-flex flex-column align-items-center">
                         <span class="timeago">{{conversa?.horaUltimaMensagem | date : 'HH:mm'}}</span>
-                        <span *ngIf="conversa?.qtdMensagensNaoLidas != 0" class="badge text-bg-primary badge-pill">{{conversa?.qtdMensagensNaoLidas}}</span>
+                        <span *ngIf="exibirQtdMensagensNaoLidas(conversa)" class="badge text-bg-primary badge-pill">{{conversa?.qtdMensagensNaoLidas}}</span>
                     </div>
                 </a>
             </div>

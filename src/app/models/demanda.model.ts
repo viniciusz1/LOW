@@ -46,4 +46,6 @@ export interface Demanda {
     gerenteNegocio?: Usuario
     horaUltimaMensagem?: Date
     qtdMensagensNaoLidas?: number
+    //usuario aguardando a mensagem ser visualizada
+    usuarioAguardando?: Usuario
 }

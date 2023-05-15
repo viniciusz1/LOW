@@ -14,8 +14,8 @@
         </label>
       </div>
 
-      <div class="progress low-shadow" *ngIf="nivelAcesso == 'Solicitante' && !rascunho">
-        <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75"
+      <div class="progress low-shadow" *ngIf="versaoSolicitante">
+        <div class="progress-bar" role="progressbar" aria-label="Basic example" [style.width.%]="porcentagemBarraProgressao()" aria-valuenow="75"
           aria-valuemin="0" aria-valuemax="100"></div>
       </div>
       <i
@@ -70,7 +70,7 @@
     <p class="card-text d-flex justify-content-between">
       <span> <b>{{ "componentes-reutilizaveis.card-demanda.score" | translate }}</b> 109.8 </span>
       <span>
-        <small for="" *ngIf="!rascunho && nivelAcesso != 'Solicitante'">
+        <small for="">
           {{ dadosDemanda.statusDemanda | uppercase }}
         </small>
       </span>
@@ -92,9 +92,9 @@
         {{ dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento }}
       </label>
       <span>
-        <button *ngIf="textoExibidoEmBotaoDependendoRota && exibicaoBotoes() && mostrarBotao"
+        <button *ngIf="exibicaoBotoes()"
           class="btn btn-primary btn-sm" style="width: 147px" (click)="direcionarUsuario()">
-          {{ textoExibidoEmBotaoDependendoRota.texto }}
+          {{ textoExibidoEmBotaoDependendoRota?.texto }}
         </button>
       </span>
       <i role="button" *ngIf="isPauta" class="bi bi-trash-fill fs-5" (click)="clicouEmExcluir.emit()"></i>

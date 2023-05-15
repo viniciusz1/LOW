@@ -12,9 +12,11 @@ import { UserDetails } from '../models/userDetails.model';
 export class UsuarioService {
   constructor(private http: HttpClient,) {
 
+    let user = this.getUser('user')
+    this.nivelAcesso = user?.nivelAcessoUsuario
   }
 
-  private nivelAcesso: NivelAcesso = NivelAcesso.Analista;
+  private nivelAcesso: string | undefined = NivelAcesso.Analista;
 
   usuario: Usuario | undefined
 

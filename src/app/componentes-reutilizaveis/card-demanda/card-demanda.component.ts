@@ -7,7 +7,7 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Route, Router } from '@angular/router';
 import { RascunhoService } from 'src/app/services/rascunho.service';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-card-demanda',
@@ -50,7 +50,8 @@ export class CardDemandaComponent implements OnInit {
   constructor(private route: Router,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
-    private usuarioService: UsuarioService) { }
+    private usuarioService: UsuarioService,
+    private messageService: MessageService) { }
   statusPermitido() {
     if (
       this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -253,13 +254,21 @@ export class CardDemandaComponent implements OnInit {
 
   deleteRascunhoFromLocalStorage() {
     if (this.dadosDemanda.codigoDemanda) {
+      this.showSuccess("Rascunho deletado!")
       this.rascunhoService.deleteRascunho(this.dadosDemanda.codigoDemanda)
       this.clicouEmExcluir.emit()
     } else {
-      alert(
-        "Código demanda is null: card-demanda"
-      )
+      this.showError("Não foi possível excluir o rascunho!")
     }
+  }
+
+  
+  showSuccess(message: string) {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
   existePauta() {

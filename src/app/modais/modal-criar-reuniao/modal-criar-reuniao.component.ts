@@ -114,9 +114,15 @@ export class ModalCriarReuniaoComponent implements OnInit {
       propostasReuniao: this.listaDemandasEscolhidas
     }
     console.log(reuniao)
-    this.reuniaoService.postReuniao(reuniao).subscribe(e => {
-      this.router.navigate(['/tela-inicial/ver-reuniao/' + e.codigoReuniao])
+    this.reuniaoService.postReuniao(reuniao)
+    .subscribe({
+      next: reuniao => {
+        this.showSuccess("Reunião Marcada!")
+      this.router.navigate(['/tela-inicial/reunioes'])
       this.dialogRef.close()
+      }, error: err => {
+        this.showError("Não foi possível marcar a reunião")
+      }
     })
   }
   dragStart(demanda: Demanda) {

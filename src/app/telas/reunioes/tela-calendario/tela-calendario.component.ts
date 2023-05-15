@@ -7,6 +7,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CalendarOptions, defineFullCalendarElement, EventApi } from '@fullcalendar/web-component';
 import brasil from '@fullcalendar/core/locales/pt-br';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { MessageService } from 'primeng/api';
 defineFullCalendarElement();
 @Component({
   selector: 'app-tela-calendario',
@@ -24,7 +25,7 @@ export class TelaCalendarioComponent implements OnInit {
     return 'blue';
   }
 
-  constructor(private route: Router, public dialogRef: DialogRef,
+  constructor(private route: Router, public dialogRef: DialogRef, private messageService: MessageService,
     @Inject(DIALOG_DATA) public data: Reuniao[]) {
     let events: { title?: string, date?: Date, url?: string, color: string }[] = []
     data.forEach(reuniao => {
@@ -43,8 +44,6 @@ export class TelaCalendarioComponent implements OnInit {
       titleFormat: { year: 'numeric', month: 'long' },
       eventClick: (arg) => {
         console.log(arg)
-        // this.route.navigate(['/tela-inicial/ver-reuniao']);
-        // this.dialogRef.close()
       },
 
       eventsSet: this.handleEvents.bind(this)
@@ -61,11 +60,9 @@ export class TelaCalendarioComponent implements OnInit {
   ngAfterViewInit() {
 
   }
-  handleDateClick(arg: any) {
-    alert('date click! ' + arg.dateStr)
-  }
   currentEvents: EventApi[] = []
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
   }
+
 }

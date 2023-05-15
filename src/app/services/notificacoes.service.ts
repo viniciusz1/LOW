@@ -13,10 +13,8 @@ export class NotificacoesService {
   constructor(private http: HttpClient){
   }
 
-  getNotificacoes(codigoUsuario: number){
-    return this.http.get<Notificacao[]>(path + 'notificacao/' + codigoUsuario)
-// Handler for events without an event type specified
-
-
+  getNotificacoes(){
+    return this.http.get<Notificacao[]>(path + 'notificacao')
   }
+
 }

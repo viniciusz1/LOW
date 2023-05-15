@@ -10,7 +10,8 @@
     ">
     <div class="w-100">
       <div class="d-flex justify-content-between">
-        <div class="titulo" style="display: grid" id="item-1-1">
+        
+        <div class="titulo" style="display: grid; width: 28vw; height: 9vh;" >
           <div class="infos" style="display: flex; align-items: center; width: 28vw">
             <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.prazo-elaboracao" | translate
               }}</label>
@@ -24,7 +25,8 @@
           <small *ngIf="formProposta.controls.prazoProposta.errors && formProposta.controls.prazoProposta.touched"
             id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
-        <div class="titulo" style="display: grid; width: 32vw" id="item-1-1">
+
+        <div class="titulo" style="display: grid; width: 32vw; height: 9vh;" >
           <div class="infos" style="display: flex; align-items: center; width: 28vw">
             <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.codigo-ppm" | translate
               }}</label>
@@ -38,6 +40,7 @@
             *ngIf="formProposta.controls.codigoPPMProposta.errors && formProposta.controls.codigoPPMProposta.touched"
             id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
+
       </div>
       <div class="titulo" style="display: grid" id="item-1-1">
         <div class="infos" style="display: flex; align-items: center; width: 28vw">
@@ -279,9 +282,9 @@
 
 
   <!-- formControlName="responsavelProposta" -->
-  <input (input)="onInputChange()" pInputText styleClass="w-100" defaultLabel="Selecione os Responsaveis"
-    optionLabel="nome" display="chip" separator=","
-    [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched}" />
+  <p-chips  separator="," placeholder="Insira o/os responsáveis" (input)="onInputChange()" styleClass="w-100" 
+  optionLabel="nome" display="chip"
+  [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched}"></p-chips>
   <small *ngIf="formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched"
     id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
 

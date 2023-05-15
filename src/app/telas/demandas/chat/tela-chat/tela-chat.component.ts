@@ -27,10 +27,10 @@ export class TelaChatComponent implements OnInit {
   demandaDiscutida: Demanda | undefined
 
   constructor(private confirmationService: ConfirmationService,
-     private route: ActivatedRoute, 
-     private usuarioService: UsuarioService,
-      private messagesService: MessagesService,
-      private matDialog: MatDialog) {
+    private route: ActivatedRoute,
+    private usuarioService: UsuarioService,
+    private messagesService: MessagesService,
+    private matDialog: MatDialog) {
     if (this.codigoRota != "") {
       this.iniciarWebSocketChat()
     }
@@ -73,7 +73,6 @@ export class TelaChatComponent implements OnInit {
       }
       this.mostrarConversas = true
       this.mensagens.push(...mensagens)
-      this.scrollToBottom()
     })
   }
 
@@ -86,6 +85,7 @@ export class TelaChatComponent implements OnInit {
 
         this.conversasDemandas = e
         this.demandaDiscutida = this.conversasDemandas.find(e => e.codigoDemanda == this.codigoRota)
+        this.scrollToBottom()
       })
   }
 
@@ -96,8 +96,10 @@ export class TelaChatComponent implements OnInit {
   }
 
   enviarMensagem() {
-    this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
-    this.mensagem.nativeElement.value = ""
+    if (this.mensagem.nativeElement.value != "") {
+      this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
+      this.mensagem.nativeElement.value = ""
+    }
 
   }
 
@@ -108,7 +110,7 @@ export class TelaChatComponent implements OnInit {
         minWidth: '50vw',
         data: this.demandaDiscutida,
       })
-    }
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(e => {

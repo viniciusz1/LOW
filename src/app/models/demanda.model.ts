@@ -24,7 +24,7 @@ export interface Demanda {
     inicioExDemandaProposta?: Date,
     fimExDemandaProposta?: Date,
     paybackProposta?: string,
-    responsaveisNegocioDemanda?: [],
+    responsavelProposta?: [],
     parecerComissaoProposta?: string,
     ultimaDecisaoComissao?: string,
     tipoAtaProposta?: string,

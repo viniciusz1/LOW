@@ -52,6 +52,7 @@ export class CardDemandaComponent implements OnInit {
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService) { }
+
   statusPermitido() {
     if (
       this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -61,6 +62,13 @@ export class CardDemandaComponent implements OnInit {
       this.dadosDemanda.statusDemanda == StatusDemanda.BUSINESS_CASE
     ) {
       return true;
+    }
+    return false;
+  }
+  exibirIniciarChat(){
+    if(this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser() ||
+    this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser() ){
+      return true
     }
     return false;
   }

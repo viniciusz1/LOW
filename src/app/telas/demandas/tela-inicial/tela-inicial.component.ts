@@ -8,7 +8,7 @@ import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
 import { Demanda } from 'src/app/models/demanda.model';
@@ -53,6 +53,7 @@ export class TelaInicialComponent implements OnInit {
   })}
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
+  @Input() rascunho: boolean = false;
 
   ordenarSelect = '';
   opcoesOrdenacao = [
@@ -323,7 +324,7 @@ export class TelaInicialComponent implements OnInit {
     this.matDialog.open(ModalHistoricoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      minHeight: '70vh',
+      minHeight: '30vh',
       data: codigoDemanda
     });
   }

@@ -120,10 +120,9 @@ export class PropostaService {
 
 
     try {
-      this.showSuccess("Cadastrado!")
       this.demandaService.insertsBeforePostDemanda()
     } catch (err) {
-      this.showError("Erro ao cadastrar")
+      this.showError("Erro")
     }
     console.log(this.valueDemandaProposta)
 

@@ -72,11 +72,13 @@ export class TelaCorridaComponent implements OnInit {
         .postProposta()
         .subscribe({
           next: (response) => {
+            console.log("Chama 3x?");
+            
             this.showSuccess("Proposta criada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
-          error: (err) => {
-           this.showError("Não foi possível criar proposta")
+          error: (err) => {   
+            this.showError("Não foi possível criar proposta")
           },
         });
     }

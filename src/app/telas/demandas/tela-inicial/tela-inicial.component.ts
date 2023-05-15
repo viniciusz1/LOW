@@ -46,12 +46,11 @@ export class TelaInicialComponent implements OnInit {
       } else {
         this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
       }
-    });
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
     };
-  }
+  })}
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
 
@@ -289,12 +288,13 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalReprovacaoDemanda() {
-    this.matDialog.open(ModalReprovacaoDemandaComponent),
+  openModalReprovacaoDemanda(demanda: Demanda) {
+    this.matDialog.open(ModalReprovacaoDemandaComponent,
     {
       maxWidth: '70vw',
       minWidth: '50vw',
-    };
+      data:demanda
+    });
   }
 
   openModalDemandaDocumento(event: Demanda) {
@@ -415,7 +415,7 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  modalMotivoReprovacao(demanda: Demanda) {
+  openModalMotivoReprovacao(demanda: Demanda) {
     this.confirmationService.confirm({
       dismissableMask: true,
       key: 'motivoReprovacao',

@@ -108,6 +108,33 @@ export class DemandaService {
         objetivoDemanda: listaRascunho[indiceDemanda].objetivoDemanda,
       })
     }
+
+
+  }
+
+
+
+  //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
+  //ou até mesmo o número do código de usuário
+  insertsBeforePostDemanda() {
+    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == '') {
+      this.demandaForm.patchValue({
+        beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
+      })
+    }
+
+    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == '') {
+      this.demandaForm.patchValue({
+        beneficioRealDemanda: { moedaBeneficio: 'Real' }
+      })
+    }
+    let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
+    let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
+    // toHTML(
+    this.demandaForm.patchValue({
+      objetivoDemanda: objetivoDemanda,
+      situacaoAtualDemanda: situacaoAtualDemanda
+    })
   }
 
   postDemanda() {
@@ -361,28 +388,6 @@ export class DemandaService {
   }
 
 
-  //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
-  //ou até mesmo o número do código de usuário
-  insertsBeforePostDemanda() {
-    if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == '') {
-      this.demandaForm.patchValue({
-        beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
-      })
-    }
-
-    if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == '') {
-      this.demandaForm.patchValue({
-        beneficioRealDemanda: { moedaBeneficio: 'Real' }
-      })
-    }
-    let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
-    let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
-    // toHTML(
-    this.demandaForm.patchValue({
-      objetivoDemanda: objetivoDemanda,
-      situacaoAtualDemanda: situacaoAtualDemanda
-    })
-  }
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
     let data = new FormData();

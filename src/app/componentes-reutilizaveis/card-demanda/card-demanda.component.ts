@@ -1,3 +1,4 @@
+import { UsuarioService } from 'src/app/services/usuario.service';
 import { NivelAcesso } from './../../models/nivel-acesso.enum';
 import { RotasModule } from './../../rotas.module';
 import { StatusDemanda } from './../../models/statusDemanda.enum';
@@ -18,6 +19,7 @@ export class CardDemandaComponent implements OnInit {
   @Output() abrirModalMotivoReprovacao = new EventEmitter<Demanda>();
   @Output() abrirModalAvaliarDemanda = new EventEmitter();
   @Output() abrirModalParecerComissao = new EventEmitter<Demanda>();
+  @Output() abrirModalReprovar = new EventEmitter<Demanda>()
   @Output() verDocumentoProposta = new EventEmitter<Demanda>();
   @Output() clicouEmExcluir = new EventEmitter();
   @Output() irParaChat = new EventEmitter();
@@ -32,7 +34,7 @@ export class CardDemandaComponent implements OnInit {
 
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
-  @Input() dadosDemada: Demanda = {};
+  @Input() dadosDemanda: Demanda = {};
   @Input() rascunho: boolean = false;
   @Input() exibirBotaoParecerComissao: boolean = false;
   @Input() exibirBotaoParecerDg: boolean = false;
@@ -42,18 +44,21 @@ export class CardDemandaComponent implements OnInit {
   textoExibidoEmBotaoDependendoRota:
     | { rota: string; texto: string }
     | undefined = undefined;
-  nivelAcesso: NivelAcesso = NivelAcesso.Analista;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
 
-  constructor(private route: Router, private confirmationService: ConfirmationService, private rascunhoService: RascunhoService,  private messageService: MessageService) {}
+  constructor(private route: Router,
+    private confirmationService: ConfirmationService,
+    private rascunhoService: RascunhoService,
+    private usuarioService: UsuarioService,
+    private messageService: MessageService) { }
   statusPermitido() {
     if (
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_APROVACAO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.ASSESSMENT ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BUSINESS_CASE
     ) {
       return true;
     }
@@ -61,30 +66,52 @@ export class CardDemandaComponent implements OnInit {
   }
 
   retornaProximoStatusDemanda(statusDemanda: StatusDemanda | undefined) {
-    if (statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO) {
-      return StatusDemanda.BACKLOG_APROVACAO;
-    } else if (statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
-      return StatusDemanda.BACKLOG_PROPOSTA;
-    } else if (statusDemanda == StatusDemanda.BACKLOG_PROPOSTA) {
-      return StatusDemanda.ASSESSMENT;
-    } else if (statusDemanda == StatusDemanda.ASSESSMENT) {
-      return StatusDemanda.TO_DO;
-    } else if (statusDemanda == StatusDemanda.BUSINESS_CASE) {
-      return StatusDemanda.TO_DO;
-    } else if (statusDemanda == StatusDemanda.TO_DO) {
-      return StatusDemanda.DESIGN_AND_BUILD;
-    } else if (statusDemanda == StatusDemanda.DESIGN_AND_BUILD) {
-      return StatusDemanda.SUPPORT;
-    } else if (statusDemanda == StatusDemanda.SUPPORT) {
-      return StatusDemanda.DONE;
-    } else if (statusDemanda == StatusDemanda.DONE) {
-      return StatusDemanda.DONE;
+    switch (statusDemanda) {
+      case StatusDemanda.BACKLOG_CLASSIFICACAO: return StatusDemanda.BACKLOG_APROVACAO
+      case StatusDemanda.BACKLOG_APROVACAO: return StatusDemanda.BACKLOG_PROPOSTA
+      case StatusDemanda.BACKLOG_PROPOSTA: return StatusDemanda.ASSESSMENT
+      case StatusDemanda.ASSESSMENT: return StatusDemanda.DISCUSSION
+      case StatusDemanda.BUSINESS_CASE: return StatusDemanda.DISCUSSION
+      case StatusDemanda.DISCUSSION: return StatusDemanda.TO_DO
+      case StatusDemanda.TO_DO: return StatusDemanda.DESIGN_AND_BUILD
+      case StatusDemanda.DESIGN_AND_BUILD: return StatusDemanda.SUPPORT;
+      case StatusDemanda.SUPPORT: return StatusDemanda.DONE;
+      case StatusDemanda.DONE: return StatusDemanda.DONE;
+      default: return 0
     }
-    return null;
+  }
+  abrirModalHistorico() {
+    this.modalHistorico.emit(this.dadosDemanda.codigoDemanda)
   }
 
-  abrirModalHistorico() {
-    this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
+  porcentagemBarraProgressao() {
+    switch (this.dadosDemanda.statusDemanda) {
+      case StatusDemanda.BACKLOG_CLASSIFICACAO: return 10
+      case StatusDemanda.BACKLOG_APROVACAO: return 20
+      case StatusDemanda.BACKLOG_PROPOSTA: return 30
+      case StatusDemanda.ASSESSMENT: return 40
+      case StatusDemanda.BUSINESS_CASE: return 40
+      case StatusDemanda.DISCUSSION: return 50
+      case StatusDemanda.TO_DO: return 60
+      case StatusDemanda.DESIGN_AND_BUILD: return 70
+      case StatusDemanda.SUPPORT: return 80
+      case StatusDemanda.DONE: return 100
+      default: return 0
+    }
+  }
+
+  versaoSolicitante() {
+    if (this.usuarioService.getRole == "Solicitante") {
+      return true;
+    }
+    return false;
+  }
+
+  mostrarCancelarPropriaDemanda() {
+    if (this.usuarioService.getCodigoUser() == this.dadosDemanda.solicitanteDemanda?.codigoUsuario) {
+      return true
+    }
+    return false;
   }
 
   confirmarChat() {
@@ -100,159 +127,135 @@ export class CardDemandaComponent implements OnInit {
 
   existeAta() {
     if (
-      this.dadosDemada.statusDemanda == StatusDemanda.TO_DO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT ||
-      this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
-      this.dadosDemada.statusDemanda == StatusDemanda.DONE
+      this.dadosDemanda.statusDemanda == StatusDemanda.TO_DO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.SUPPORT ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.DONE
     ) {
       return true;
     }
     return false;
   }
 
+  //Função chamada quando o usuário clica na ação do card
   direcionarUsuario() {
-    if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
-      this.abrirModalMotivoReprovacao.emit(this.dadosDemada);
-    } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar') {
-      this.verDocumentoProposta.emit(this.dadosDemada);
-    } else if (
-      this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'
-    ) {
-      this.abrirModalCriarReuniao.emit(this.dadosDemada);
-    } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'ver em ata') {
-      this.verDocumentoEmAta.emit();
-    } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avancar fase') {
-      this.avancarStatusDemanda.emit({
-        mensagem:
-          'Tem certeza que deseja avançar a fase da demanda?<br>Ela avançará para o Status: ' +
-          this.retornaProximoStatusDemanda(this.dadosDemada.statusDemanda),
-        codigoDemanda: this.dadosDemada.codigoDemanda,
-        statusDemanda: this.dadosDemada.statusDemanda,
-      });
-    } else if (
-      this.textoExibidoEmBotaoDependendoRota?.rota == 'ver documento'
-    ) {
-      this.verDocumentoProposta.emit(this.dadosDemada);
-    } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'parecer comissao') {
-      this.abrirModalParecerComissao.emit(this.dadosDemada)
-    } else {
-      this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
+    switch (this.textoExibidoEmBotaoDependendoRota?.rota) {
+      case '': this.abrirModalMotivoReprovacao.emit(this.dadosDemanda);
+        break;
+      case 'ABRIR_MODAL_AVALIAR': this.verDocumentoProposta.emit(this.dadosDemanda);
+        break;
+      case 'MODAL_ADD_REUNIAO': this.abrirModalCriarReuniao.emit(this.dadosDemanda);
+        break;
+      case 'ver em ata':
+        break;
+      case 'MODAL_AVANCAR_FASE':
+        this.avancarStatusDemanda.emit({
+          mensagem:
+            'Tem certeza que deseja avançar a fase da demanda?<br>Ela avançará para o Status: ' +
+            this.retornaProximoStatusDemanda(this.dadosDemanda.statusDemanda),
+          codigoDemanda: this.dadosDemanda.codigoDemanda,
+          statusDemanda: this.dadosDemanda.statusDemanda,
+        });
+        break;
+      case 'VER_DOCUMENTO': this.verDocumentoProposta.emit(this.dadosDemanda);
+        break;
+      case 'PARECER_COMISSAO': this.abrirModalParecerComissao.emit(this.dadosDemanda);
+        break;
+      default:
+        //Caso não tenha uma função pré-definida, vai para a rota atrelada ao botão
+        this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
 
   exibicaoBotoes() {
-    if (
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO &&
-      this.nivelAcesso == NivelAcesso.Analista
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota:
-          '/tela-inicial/classificar-demanda/' + this.dadosDemada.codigoDemanda,
-        texto: 'Classificar Demanda',
-      };
-      return true;
-    } else if (
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA &&
-      this.nivelAcesso == NivelAcesso.Analista
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/proposta/' + this.dadosDemada.codigoDemanda,
-        texto: 'Criar Proposta',
-      };
-      return true;
-    } else if (
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO &&
-      this.nivelAcesso == NivelAcesso.GerenteNegocio
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'avaliar',
-        texto: 'Avaliar Demanda',
-      };
-      return true;
-    } else if (this.exibirBotaoParecerComissao) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'parecer comissao',
-        texto: 'Parecer Comissao',
-      };
-      return true;
+    const nivelAcesso = this.usuarioService.getRole
+    //Caso o usuário não tenha permissão de ação na demanda, ele poderá ve-la
+    this.textoExibidoEmBotaoDependendoRota = {
+      rota: 'VER_DOCUMENTO',
+      texto: 'Ver Demanda',
+    };
+    //Caso o card seja definido que não precisa mostrar o botão
+    if(!this.mostrarBotao){
+      return false;
     }
 
-    else if (
-      (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
-        this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE) &&
-      this.nivelAcesso == NivelAcesso.Analista
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'adicionar a reuniao',
-        texto: 'Adicionar Proposta',
-      };
-      return true;
-    } else if (
-      this.dadosDemada.statusDemanda == StatusDemanda.TO_DO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
-      this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT
-    ) {
-      if (this.nivelAcesso == NivelAcesso.Analista) {
-        this.textoExibidoEmBotaoDependendoRota = {
-          rota: 'avancar fase',
-          texto: 'Avançar Fase',
+    //Caso a rota não existir, é um comando para a função direcionarUsuario()
+    switch (this.dadosDemanda.statusDemanda) {
+      case StatusDemanda.BACKLOG_CLASSIFICACAO:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota:
+              '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
+            texto: 'Classificar Demanda',
+          }
         };
-      } else {
+        return true;
+      case StatusDemanda.BACKLOG_PROPOSTA:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
+            texto: 'Criar Proposta'
+          };
+        }
+        return true;
+      case StatusDemanda.BACKLOG_APROVACAO:
+        if (nivelAcesso == 'GerenteNegocio' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'ABRIR_MODAL_AVALIAR',
+            texto: 'Avaliar Demanda',
+          };
+        }
+        return true;
+      case StatusDemanda.ASSESSMENT || StatusDemanda.BUSINESS_CASE:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_ADD_REUNIAO',
+            texto: 'Adicionar Proposta',
+          };
+        }
+        return true;
+      case StatusDemanda.TO_DO || StatusDemanda.DESIGN_AND_BUILD || StatusDemanda.SUPPORT:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_AVANCAR_FASE',
+            texto: 'Avançar Fase',
+          };
+        }
+        return true;
+      case StatusDemanda.CANCELLED:
         this.textoExibidoEmBotaoDependendoRota = {
-          rota: 'ver documento',
-          texto: 'Ver Demanda',
+          rota: '',
+          texto: 'Motivo',
         };
-      }
-      return true;
-    } else if (this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
-        texto: 'Motivo',
-      };
-      return true;
-    } else if (this.exibirBotaoParecerDg) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
-        texto: 'Parecer da DG',
-      };
-      return true;
-    } else if (this.dadosDemada.statusDemanda == StatusDemanda.DRAFT) {
-      this.rascunho = true
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'tela-inicial/rascunho/' + this.dadosDemada.codigoDemanda,
-        texto: 'Continuar Demanda',
-      };
-    } else if (this.dadosDemada.statusDemanda == StatusDemanda.DRAFT_PROPOSTA) {
-      this.rascunho = true
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'tela-inicial/proposta/' + this.dadosDemada.codigoDemanda,
-        texto: 'Continuar Demanda',
-      };
-    } else if (
-      !this.isPauta &&
-      !this.rascunho &&
-      this.textoExibidoEmBotaoDependendoRota &&
-      !this.exibirBotaoParecerComissao &&
-      !this.exibirBotaoParecerDg
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'ver documento',
-        texto: 'Ver Demanda',
-      };
-      return true;
-    } else {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'ver documento',
-        texto: 'Ver Demanda',
-      };
+        return true;
+      case StatusDemanda.DRAFT:
+        this.rascunho = true
+        this.textoExibidoEmBotaoDependendoRota = {
+          rota: 'tela-inicial/rascunho/' + this.dadosDemanda.codigoDemanda,
+          texto: 'Continuar Demanda',
+        };
+        return true;
+      default:
+        if (this.exibirBotaoParecerComissao) {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'PARECER_COMISSAO',
+            texto: 'Parecer Comissao',
+          };
+          return true;
+        } else if (this.exibirBotaoParecerDg) {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'PARECER_DG',
+            texto: 'Parecer da DG',
+          };
+        }
+        return true;
     }
-    return true;
   }
 
   deleteRascunhoFromLocalStorage() {
-    if (this.dadosDemada.codigoDemanda) {
+    if (this.dadosDemanda.codigoDemanda) {
       this.showSuccess("Rascunho deletado!")
-      this.rascunhoService.deleteRascunho(this.dadosDemada.codigoDemanda)
+      this.rascunhoService.deleteRascunho(this.dadosDemanda.codigoDemanda)
       this.clicouEmExcluir.emit()
     } else {
       this.showError("Não foi possível excluir o rascunho!")
@@ -270,12 +273,12 @@ export class CardDemandaComponent implements OnInit {
 
   existePauta() {
     if (
-      this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
-      this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED
+      this.dadosDemanda.statusDemanda == StatusDemanda.ASSESSMENT ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BUSINESS_CASE ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_APROVACAO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.CANCELLED
     ) {
       return false;
     }
@@ -283,8 +286,9 @@ export class CardDemandaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.primaryColorClass = this.dadosDemada.statusDemanda;
-    this.secondaryColorClass = this.dadosDemada.statusDemanda + '-sec';
+    //Adicionando classes para estilização do card
+    this.primaryColorClass = this.dadosDemanda.statusDemanda;
+    this.secondaryColorClass = this.dadosDemanda.statusDemanda + '-sec';
 
     this.exibicaoBotoes();
   }

@@ -48,7 +48,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   fecharModal(){
     this.dialogRef.close();
   }
-  
+
   ngOnInit(): void {
     this.atualizarDemandas();
   }
@@ -180,6 +180,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
       .getDemandasFiltradasStatus({ status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + "" })
       .subscribe({
         next: demanda => {
+          console.log(demanda)
           this.listaDemandas = demanda
           this.removerDaListaAdicSecundaria()
         }, error: err => {

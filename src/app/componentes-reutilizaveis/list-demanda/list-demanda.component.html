@@ -2,27 +2,27 @@
     <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
     <div class="d-flex" style="width: 80%;">
         <li class="nav-item">
-            <label class="" for="">00{{dadosDemada.codigoDemanda}}</label>
+            <label class="" for="">00{{dadosDemanda.codigoDemanda}}</label>
         </li>
         <li class="nav-item d-flex justify-content-center" [ngStyle]="{'width': !demandaPequena ? '25%' : '45%'}">
-            <label class="text-truncate d-inline-block" for=""><b>{{dadosDemada.tituloDemanda}}</b></label>
+            <label class="text-truncate d-inline-block" for=""><b>{{dadosDemanda.tituloDemanda}}</b></label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width: 20%;">
-            <label class="text-truncate d-inline-block">{{dadosDemada.solicitanteDemanda?.nomeUsuario}}</label>
+            <label class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.nomeUsuario}}</label>
         </li>
         <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '15%' : '50%'}">
             <label
-                class="text-truncate d-inline-block">{{dadosDemada.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
+                class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  5%;">
             <label class="text-truncate d-inline-block">190.8</label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  15%;">
 
-            <label class="text-truncate d-inline-block">{{dadosDemada.statusDemanda | uppercase}}</label>
+            <label class="text-truncate d-inline-block">{{dadosDemanda.statusDemanda | uppercase}}</label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  10%;">
-            <label class="text-truncate d-inline-block">{{dadosDemada.scoreDemanda}}</label>
+            <label class="text-truncate d-inline-block">{{dadosDemanda.scoreDemanda}}</label>
         </li>
 
     </div>
@@ -41,7 +41,7 @@
                 <i class="bi bi-arrow-counterclockwise me-3"></i>
                 <span>{{ "componentes-reutilizaveis.list-demanda.historico" | translate }}</span>
             </button>
-            <button (click)="verDocumentoProposta.emit(dadosDemada)" mat-menu-item>
+            <button (click)="verDocumentoProposta.emit(dadosDemanda)" mat-menu-item>
                 <i class="bi bi-arrows-angle-expand me-3"></i>
                 <span>{{ "componentes-reutilizaveis.list-demanda.ver-demanda" | translate }}</span>
             </button>

@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NivelAcesso } from './../../models/nivel-acesso.enum';
 import { textoTutorial } from '../../shared/textoDoTutorial';
@@ -20,8 +21,8 @@ import { filter } from 'rxjs';
 
 export class HeaderComponent implements OnInit {
 
-  constructor(private router: Router) {
-    
+  constructor(private translate: TranslateService,private router: Router ) {
+
     //Tem o objetivo de setar as rotas em que o sistema se encontra, no caso os chamados breadcrummbs
     //Para isso ele fraciona a rota, e adiciona a uma lista
     this.router.events
@@ -40,6 +41,12 @@ export class HeaderComponent implements OnInit {
           }
         }
       });
+  }
+
+  linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
+  mudarIdioma(sigla: string, link: string){
+    this.linkImagemPais = link
+    this.translate.use(sigla);
   }
   @Input() telaLogin = false;
   //?

@@ -39,7 +39,7 @@ export class PropostaService {
     inicioExDemandaProposta: ['', [Validators.required]],
     fimExDemandaProposta: ['', [Validators.required]],
     paybackProposta: [this.paybackProposta],
-    responsavelProposta: { 'codigoUsuario': 0 },
+    responsavelProposta: [''],
     statusDemanda: ['']
   });
 
@@ -118,10 +118,6 @@ export class PropostaService {
 
     let propostaFormData = new FormData();
 
-    this.formProposta.patchValue({
-      responsavelProposta: { 'codigoUsuario': this.usuarioService.getCodigoUser() }
-    })
-
 
     try {
       this.showSuccess("Cadastrado!")
@@ -129,6 +125,7 @@ export class PropostaService {
     } catch (err) {
       this.showError("Erro ao cadastrar")
     }
+    console.log(this.valueDemandaProposta)
 
     propostaFormData.append('proposta', JSON.stringify(this.valueDemandaProposta));
 

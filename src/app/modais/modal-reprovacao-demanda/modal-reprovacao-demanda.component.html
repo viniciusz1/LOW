@@ -1,7 +1,7 @@
 <div style="padding: 8px; background: white; width: 50vw;">
     <div>
         <div class="d-flex justify-content-between">
-            <span class="h3">{{ "modais.modal-reprovacao-demanda.demanda" | translate }} 001
+            <span class="h3">{{dadosDemanda?.tituloDemanda}} - {{dadosDemanda?.codigoDemanda}}
                 <hr style="margin: 0; margin-bottom: 10px; width: 150%;">
             </span>
             <i class="bi bi-x" role="button" (click)="dialogRef.close()"></i>

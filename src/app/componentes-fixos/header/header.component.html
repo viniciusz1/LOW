@@ -16,9 +16,9 @@
         </nav>
     </ul>
     <ul class="nav justify-content-end nav-items-center" style="width:60%" *ngIf="!telaLogin">
-        <div class="d-flex" joyrideStep="oito" [title]="'Seções'" [stepContent]="customContent"
+        <div class="d-flex" joyrideStep="oito" [title]="'Seções'" [stepContent]="customContent" 
             [stepContentParams]="{'texto': textoTutorial[7]}" style="overflow: auto;">
-            <li *ngIf="nivelAcessoUsuario != 'Solicitante'" class="nav-item">
+            <li *ngIf="!versaoSolicitante()" class="nav-item">
                 <a class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'">{{ "componentes-fixos.header.reunioes" | translate }}</a>
             </li>
             <li class="nav-item">

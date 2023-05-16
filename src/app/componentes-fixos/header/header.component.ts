@@ -51,6 +51,10 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
+  sair(){
+    this.usuarioService.logout().subscribe();
+  }
+
   linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
   mudarIdioma(sigla: string, link: string){
     this.linkImagemPais = link

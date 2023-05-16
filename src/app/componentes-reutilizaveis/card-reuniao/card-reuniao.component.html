@@ -17,8 +17,7 @@
               </mat-menu> -->
         </div>
         <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.comissao" | translate }}</b> {{dadosReuniao.comissaoReuniao}}</p>
-        <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.propostas-adicionadas" | translate }} </b> 
-        RESOLVER</p>
+        <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.propostas-adicionadas" | translate }} </b>{{ titulosPropostas().join(', ')}} </p>
         <p class="card-text bottom-card">
             <label class=" me-2">
                 <b>
@@ -26,6 +25,7 @@
                 </b>
                 RESOLVER
             </label>
+            <button (click)="departamentosBeneficiados()">teste</button>
             <span class="d-flex">
               <button class="btn btn-outline-danger btn-sm me-2" *ngIf="
               dadosReuniao.statusReuniao != 'CANCELADO' &&

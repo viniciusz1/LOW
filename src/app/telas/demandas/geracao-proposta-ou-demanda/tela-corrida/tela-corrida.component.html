@@ -1,10 +1,7 @@
 <div class="row">
   <div class="col-2" style="padding: 3.5rem !important;">
-    <div style="position: fixed; left: 1vw; display: flex;">
+    <div style="position: fixed; left: 1vw; display: flex;" *ngIf="!aparecerProposta" >
       <div style="margin-top: 0.45vh;">
-        <!-- <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar" style="width: 100%"></div>
-        </div> -->
         <p-timeline [value]="titulosDemanda">
             <ng-template pTemplate="marker" let-event>
                 <a class="custom-marker shadow-2" [style.backgroundColor]="event.color">
@@ -18,6 +15,25 @@
             <a class="nav-link nav-scroll" (click)="indoPraCima('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" >{{ "telas.tela-corrida.scroll-dados-gerais" | translate }}</a>
             <a class="nav-link nav-scroll" (click)="indoPraCima('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">{{ "telas.tela-corrida.scroll-beneficios" | translate }}</a>
             <a class="nav-link nav-scroll" (click)="indoPraCima('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="cursor:pointer">{{ "telas.tela-corrida.scroll-adicionais" | translate }}</a>
+          </nav>
+        </nav>
+    </div>
+    <div style="position: fixed; left: 1vw; display: flex;" *ngIf="aparecerProposta" >
+      <div style="margin-top: 0.45vh;">
+        <p-timeline [value]="titulosDemanda">
+            <ng-template pTemplate="marker" let-event1>
+                <a class="custom-marker shadow-2" [style.backgroundColor]="event1.color">
+                    <i [ngClass]="event1.icon"></i>
+                </a>
+            </ng-template>
+        </p-timeline>
+      </div>
+        <nav class="h-100 flex-column align-items-stretch pe-4">
+          <nav class="nav nav-pills flex-column" id="scroll" >
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('sectionProposta1')" [ngClass]="{'active': activeSection === 'sectionProposta1'}" style="margin-bottom: 3.1vh; cursor:pointer" >Proposta</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('sectionProposta2')" [ngClass]="{'active': activeSection === 'sectionProposta2'}" style="margin-bottom: 3.1vh;cursor:pointer">Recursos</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('sectionProposta3')" [ngClass]="{'active': activeSection === 'sectionProposta3'}" style="margin-bottom: 3.1vh;cursor:pointer">Escopo</a>
+            <!-- <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('sectionProposta4')" [ngClass]="{'active': activeSection === 'sectionProposta4'}" style="cursor:pointer">Dados Finais</a> -->
           </nav>
         </nav>
     </div>

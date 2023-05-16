@@ -80,6 +80,7 @@ export class TelaInicialComponent implements OnInit {
   showSidebar = -350;
   listaDemandas: Demanda[] = [];
   demandasVazias: boolean = false;
+  divScrollCircle: boolean = false;
   tipoRascunho = false;
   listaTituloNaoFiltrado: { status: string; titulo: string }[] = [];
   qtdDemandasStatus: number[] = []
@@ -413,15 +414,25 @@ export class TelaInicialComponent implements OnInit {
   carregarDemandasIniciais() {
     this.listaDemandas = [];
     this.listaTituloNaoFiltrado = [];
+    
+    let isFirstIfExecuted = false;
     this.demandasService.getDemandasTelaInicial().subscribe({
       next: (e) => {
         console.log(e)
         e['demandas'].forEach((demandas: Demanda[]) => {
+
           if (demandas.length > 0) {
+            console.log("divscroll 1 " , this.divScrollCircle)
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
+            isFirstIfExecuted = true;
+            this.divScrollCircle = false;
             this.nenhumResultadoEncontrado = false;
-          } else {
+          } 
+
+          if(!isFirstIfExecuted && demandas.length == 0) {
+            console.log("divscroll 2 " , this.divScrollCircle)
+            this.divScrollCircle = true;
             setTimeout(() => {
               this.demandasVazias = true;
             }, 5000)

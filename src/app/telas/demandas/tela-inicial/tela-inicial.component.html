@@ -90,9 +90,7 @@
               pesquisarDemandas({
                 status: linha.status,
                 pesquisaCampo: undefined
-              })"
-              
-          >
+              })">
             {{ "telas.tela-inicial.ver-mais" | translate }} ({{ qtdDemandasStatus[i] }})
           </div>
         </div>
@@ -102,11 +100,8 @@
               let demanda of listaDemandas
                 | filtrarDemandaStatus : linha.titulo
                 | slice : 0 : 4
-            "
-            [dadosDemanda]="demanda"
-            (verDocumentoProposta)="openModalDemandaDocumento($event)"
-            (irParaChat)="irParaChat($event, demanda)"
-            (modalHistorico)="openModalHistorico($event)"
+            " [dadosDemanda]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"
+            (irParaChat)="irParaChat($event, demanda)" (modalHistorico)="openModalHistorico($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
             (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)" class="mb-2">
           </app-list-demanda>
@@ -116,14 +111,10 @@
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                     | slice : 4
-                "
-                (irParaChat)="irParaChat($event, demanda)"
+                " (irParaChat)="irParaChat($event, demanda)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-                (modalHistorico)="openModalHistorico($event)"
-                (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-                [dadosDemanda]="demanda"
-                class="mb-2"
-              >
+                (modalHistorico)="openModalHistorico($event)" (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
+                [dadosDemanda]="demanda" class="mb-2">
               </app-list-demanda>
             </div>
           </div>
@@ -142,14 +133,9 @@
     <div *ngIf="isFiltrado">
       <div style="padding: 10px; margin-left: 6px"></div>
       <div class="container d-flex flex-column align-items-center">
-        <app-list-demanda
-          (irParaChat)="irParaChat($event, demanda)"
-          (modalHistorico)="openModalHistorico($event)"
-          *ngFor="let demanda of listaDemandas"
-          [dadosDemanda]="demanda"
-          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-          class="mb-2"
-        >
+        <app-list-demanda (irParaChat)="irParaChat($event, demanda)" (modalHistorico)="openModalHistorico($event)"
+          *ngFor="let demanda of listaDemandas" [dadosDemanda]="demanda"
+          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)" class="mb-2">
         </app-list-demanda>
       </div>
     </div>
@@ -170,8 +156,7 @@
                   status: linha.status,
                   pesquisaCampo: undefined
                 })
-              "
-            >
+              ">
               {{ "telas.tela-inicial.ver-mais" | translate }} ({{ qtdDemandasStatus[i] }})
             </div>
           </div>
@@ -181,13 +166,9 @@
               <app-card-demanda *ngFor="
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
-                "
-                (clicouEmExcluir)="carregarDemandasIniciais()"
-                [dadosDemanda]="demanda"
-                (verDocumentoProposta)="openModalDemandaDocumento($event)"
-                (irParaChat)="irParaChat($event, demanda)"
-                (modalHistorico)="openModalHistorico($event)"
-                (avancarStatusDemanda)="avancarStatusDemanda($event)"
+                " (clicouEmExcluir)="carregarDemandasIniciais()" [dadosDemanda]="demanda"
+                (verDocumentoProposta)="openModalDemandaDocumento($event)" (irParaChat)="irParaChat($event, demanda)"
+                (modalHistorico)="openModalHistorico($event)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
                 (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
@@ -213,29 +194,20 @@
         <app-card-demanda [rascunho]="tipoRascunho" *ngFor="let demanda of listaDemandasRascunho; let i = index"
           [dadosDemanda]="demanda" (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-          (verDocumentoProposta)="openModalDemandaDocumento($event)"
-          [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat($event, demanda)"
-          (avancarStatusDemanda)="avancarStatusDemanda($event)"
-          (modalHistorico)="openModalHistorico($event)"
-          (verDocumentoEmAta)="openModalAtaDocumento()"
-          class="col-lg-6 col-xl-4 mb-3"
-        >
+          (verDocumentoProposta)="openModalDemandaDocumento($event)" [mudarTamanho]="'100%'"
+          (irParaChat)="irParaChat($event, demanda)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
+          (modalHistorico)="openModalHistorico($event)" (verDocumentoEmAta)="openModalAtaDocumento()"
+          class="col-lg-6 col-xl-4 mb-3">
         </app-card-demanda>
       </div>
       <div class="row" *ngIf="!tipoRascunho">
         <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemanda]="demanda"
           (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-          (verDocumentoProposta)="openModalDemandaDocumento($event)"
-          (clicouEmExcluir)="excluirDemandaRascunho(i)"
-          (avancarStatusDemanda)="avancarStatusDemanda($event)"
-          [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat($event, demanda)"
-          (modalHistorico)="openModalHistorico($event)"
-          (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-          (verDocumentoEmAta)="openModalAtaDocumento()"
-          class="col-lg-6 col-xl-4 mb-3"
-        >
+          (verDocumentoProposta)="openModalDemandaDocumento($event)" (clicouEmExcluir)="excluirDemandaRascunho(i)"
+          (avancarStatusDemanda)="avancarStatusDemanda($event)" [mudarTamanho]="'100%'"
+          (irParaChat)="irParaChat($event, demanda)" (modalHistorico)="openModalHistorico($event)"
+          (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (verDocumentoEmAta)="openModalAtaDocumento()"
+          class="col-lg-6 col-xl-4 mb-3">
         </app-card-demanda>
       </div>
     </div>
@@ -289,9 +261,9 @@
       </ng-template></p-confirmDialog>
   </div>
 </div>
-<div >
+<div *ngIf="divScrollCircle" style="display: flex; justify-content: center; align-items: center; height: 45vh;">
   <mat-spinner *ngIf="!demandasVazias" [diameter]="50" class=""></mat-spinner>
-  <span *ngIf="demandasVazias" >NÃO HÁ DEMANDAS NO MOMENTO</span>
+  <span *ngIf="demandasVazias" style="font-weight: 600; font-size: 1.4rem; color: #6c757d;">NÃO HÁ DEMANDAS NO MOMENTO</span>
 </div>
 
 <p-toast></p-toast>

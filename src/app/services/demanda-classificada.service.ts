@@ -18,7 +18,7 @@ export class DemandaClassificadaService {
     buSolicitanteDemandaClassificada:[''],
     busBeneficiadasDemandaClassificada:[''],
     codigoDemanda: [''],
-    analista: { codigoUsuario: this.usuarioService.getCodigoUser() },
+    // analista: { codigoUsuario: this.usuarioService.getCodigoUser() },
     secaoDemandaClassificada: [''],
   });
   postClassificacaoDemanda(codigoDemanda: string | undefined) {

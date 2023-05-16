@@ -100,6 +100,8 @@ export class CardDemandaComponent implements OnInit {
     }
   }
   abrirModalHistorico() {
+    console.log("Clicou no modal");
+    
     this.modalHistorico.emit(this.dadosDemanda.codigoDemanda)
   }
 

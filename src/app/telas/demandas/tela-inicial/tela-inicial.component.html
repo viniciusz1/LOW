@@ -175,8 +175,8 @@
               pesquisarDemandas({
                 status: linha.status,
                 pesquisaCampo: undefined
-              })
-            "
+              })"
+              
           >
             {{ "telas.tela-inicial.ver-mais" | translate }} ({{ qtdDemandasStatus[i] }})
           </div>
@@ -272,6 +272,7 @@
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
             <div
+              *ngIf="linha.status != 'DRAFT'"
               class="me-3"
               style="align-self: flex-end; cursor: pointer"
               (click)="

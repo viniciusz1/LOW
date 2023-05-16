@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { filter } from 'rxjs';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,7 @@ import { filter } from 'rxjs';
 
 export class HeaderComponent implements OnInit {
 
-  constructor(private translate: TranslateService,private router: Router ) {
+  constructor(private translate: TranslateService,private router: Router, private usuarioService: UsuarioService ) {
 
     //Tem o objetivo de setar as rotas em que o sistema se encontra, no caso os chamados breadcrummbs
     //Para isso ele fraciona a rota, e adiciona a uma lista
@@ -41,6 +42,13 @@ export class HeaderComponent implements OnInit {
           }
         }
       });
+  }
+
+  versaoSolicitante() {
+    if (this.usuarioService.getRole == "Solicitante") {
+      return true;
+    }
+    return false;
   }
 
   linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"

@@ -14,7 +14,6 @@ export class AppComponent implements OnInit{
 
 
     translate.setDefaultLang('pt');
-    translate.use('pt');
 
     let htmlRoot:HTMLElement = <HTMLElement> document.getElementsByTagName('html')[0];
     let bodyroot:HTMLElement = <HTMLElement> document.getElementsByTagName('body')[0];
@@ -31,7 +30,7 @@ export class AppComponent implements OnInit{
     }
     ngOnInit(): void {
     }
-    
+
     onMessage(message: any){
     }
 

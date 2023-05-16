@@ -1,3 +1,4 @@
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UsuarioService } from './services/usuario.service';
 
@@ -14,14 +15,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemandaService } from './services/demanda.service';
-import {  HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {  HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { ConfirmationService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
-import {  TranslateService, TranslateStore } from '@ngx-translate/core';
+import { TranslateModule, TranslateService, TranslateStore, TranslateLoader } from '@ngx-translate/core';
 import { LogInterceptor } from './interceptor';
 import { TelasModule } from './telas/telas.module';
 import { MessagesModule } from 'primeng/messages';
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,11 +45,18 @@ import { MessagesModule } from 'primeng/messages';
     DialogModule,
     SharedModule,
     MessagesModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: LogInterceptor,
-    multi: true   
+    multi: true
   },
     DemandaService, ConfirmationService, UsuarioService, TranslateService, TranslateStore],
   bootstrap: [AppComponent],

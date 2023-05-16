@@ -48,7 +48,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   fecharModal(){
     this.dialogRef.close();
   }
-  
+
   ngOnInit(): void {
     this.atualizarDemandas();
   }
@@ -67,7 +67,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
     this.matDialog.open(ModalHistoricoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      minHeight: '70vh',
+      minHeight: '30vh',
       data: codigoDemanda
     });
   }
@@ -180,6 +180,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
       .getDemandasFiltradasStatus({ status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + "" })
       .subscribe({
         next: demanda => {
+          console.log(demanda)
           this.listaDemandas = demanda
           this.removerDaListaAdicSecundaria()
         }, error: err => {

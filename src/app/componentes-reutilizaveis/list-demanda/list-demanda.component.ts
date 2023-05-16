@@ -34,7 +34,7 @@ export class ListDemandaComponent implements OnInit {
   @Input() rascunho: boolean = false;
   @Input() exibirBotaoParecerComissao: boolean = false;
   @Input() exibirBotaoParecerDg: boolean = false;
-  @Input() dadosDemada: Demanda = {};
+  @Input() dadosDemanda: Demanda = {};
   @Input() mostrarBotao = true;
   @Input() mudarTamanho: string = '68vw';
   @Input('mostrarIconeAdicionar') demandaPequena = false;
@@ -47,11 +47,11 @@ export class ListDemandaComponent implements OnInit {
   constructor(private route: Router, private messageService: MessageService) { }
   statusPermitido() {
     if (
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_APROVACAO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.ASSESSMENT ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BUSINESS_CASE
     ) {
       return true;
     }
@@ -59,8 +59,8 @@ export class ListDemandaComponent implements OnInit {
   }
   abrirModalHistorico(){
     console.log("clicou no historico");
-    
-    this.modalHistorico.emit(this.dadosDemada.codigoDemanda)
+
+    this.modalHistorico.emit(this.dadosDemanda.codigoDemanda)
   }
 
   showSuccess(message: string) {
@@ -96,10 +96,10 @@ export class ListDemandaComponent implements OnInit {
 
   existeAta() {
     if (
-      this.dadosDemada.statusDemanda == StatusDemanda.TO_DO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT ||
-      this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
-      this.dadosDemada.statusDemanda == StatusDemanda.DONE
+      this.dadosDemanda.statusDemanda == StatusDemanda.TO_DO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.SUPPORT ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.DONE
     ) {
       return true;
     }
@@ -108,11 +108,11 @@ export class ListDemandaComponent implements OnInit {
 
   existePauta() {
     if (
-      this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
-      this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED
+      this.dadosDemanda.statusDemanda == StatusDemanda.ASSESSMENT ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BUSINESS_CASE ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.CANCELLED
     ) {
       return false;
     }
@@ -121,27 +121,27 @@ export class ListDemandaComponent implements OnInit {
 
   direcionarUsuario() {
     if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
-      this.abrirModalMotivoReprovacao.emit(this.dadosDemada);
+      this.abrirModalMotivoReprovacao.emit(this.dadosDemanda);
     } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar') {
-      this.verDocumentoProposta.emit(this.dadosDemada);
+      this.verDocumentoProposta.emit(this.dadosDemanda);
     } else if (
       this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'
     ) {
-      this.abrirModalCriarReuniao.emit(this.dadosDemada);
+      this.abrirModalCriarReuniao.emit(this.dadosDemanda);
     } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'ver em ata') {
       this.verDocumentoEmAta.emit();
     } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avancar fase') {
       this.avancarStatusDemanda.emit({
         mensagem:
           'Tem certeza que deseja a fase da demanda?<br>Ela avançará para o Status: ' +
-          this.retornaProximoStatusDemanda(this.dadosDemada.statusDemanda),
-        codigoDemanda: this.dadosDemada.codigoDemanda,
-        statusDemanda: this.dadosDemada.statusDemanda,
+          this.retornaProximoStatusDemanda(this.dadosDemanda.statusDemanda),
+        codigoDemanda: this.dadosDemanda.codigoDemanda,
+        statusDemanda: this.dadosDemanda.statusDemanda,
       });
     } else if (
       this.textoExibidoEmBotaoDependendoRota?.rota == 'ver documento'
     ) {
-      this.verDocumentoProposta.emit(this.dadosDemada);
+      this.verDocumentoProposta.emit(this.dadosDemanda);
     } else {
       this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
@@ -149,26 +149,26 @@ export class ListDemandaComponent implements OnInit {
 
   exibicaoBotoes() {
     if (
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO &&
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO &&
       this.nivelAcesso == NivelAcesso.Analista
     ) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota:
-          '/tela-inicial/classificar-demanda/' + this.dadosDemada.codigoDemanda,
+          '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
         texto: 'Classificar Demanda',
       };
       return true;
     } else if (
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA &&
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA &&
       this.nivelAcesso == NivelAcesso.Analista
     ) {
       this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/proposta/' + this.dadosDemada.codigoDemanda,
+        rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
         texto: 'Criar Proposta',
       };
       return true;
     } else if (
-      this.dadosDemada.statusDemanda == StatusDemanda.BACKLOG_APROVACAO &&
+      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_APROVACAO &&
       this.nivelAcesso == NivelAcesso.GerenteNegocio
     ) {
       this.textoExibidoEmBotaoDependendoRota = {
@@ -177,8 +177,8 @@ export class ListDemandaComponent implements OnInit {
       };
       return true;
     } else if (
-      (this.dadosDemada.statusDemanda == StatusDemanda.ASSESSMENT ||
-        this.dadosDemada.statusDemanda == StatusDemanda.BUSINESS_CASE) &&
+      (this.dadosDemanda.statusDemanda == StatusDemanda.ASSESSMENT ||
+        this.dadosDemanda.statusDemanda == StatusDemanda.BUSINESS_CASE) &&
       this.nivelAcesso == NivelAcesso.Analista
     ) {
       this.textoExibidoEmBotaoDependendoRota = {
@@ -187,9 +187,9 @@ export class ListDemandaComponent implements OnInit {
       };
       return true;
     } else if (
-      this.dadosDemada.statusDemanda == StatusDemanda.TO_DO ||
-      this.dadosDemada.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
-      this.dadosDemada.statusDemanda == StatusDemanda.SUPPORT
+      this.dadosDemanda.statusDemanda == StatusDemanda.TO_DO ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
+      this.dadosDemanda.statusDemanda == StatusDemanda.SUPPORT
     ) {
       if (this.nivelAcesso == NivelAcesso.Analista) {
         this.textoExibidoEmBotaoDependendoRota = {
@@ -203,7 +203,7 @@ export class ListDemandaComponent implements OnInit {
         };
       }
       return true;
-    } else if (this.dadosDemada.statusDemanda == StatusDemanda.CANCELLED) {
+    } else if (this.dadosDemanda.statusDemanda == StatusDemanda.CANCELLED) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: '',
         texto: 'Motivo',
@@ -248,8 +248,8 @@ export class ListDemandaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.primaryColorClass = this.dadosDemada.statusDemanda;
-    this.secondaryColorClass = this.dadosDemada.statusDemanda + "-sec";
+    this.primaryColorClass = this.dadosDemanda.statusDemanda;
+    this.secondaryColorClass = this.dadosDemanda.statusDemanda + "-sec";
     this.exibicaoBotoes()
   }
 

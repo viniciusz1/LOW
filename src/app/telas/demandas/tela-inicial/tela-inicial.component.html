@@ -175,8 +175,8 @@
               pesquisarDemandas({
                 status: linha.status,
                 pesquisaCampo: undefined
-              })
-            "
+              })"
+              
           >
             {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
@@ -191,12 +191,12 @@
                 | filtrarDemandaStatus : linha.titulo
                 | slice : 0 : 4
             "
-            [dadosDemada]="demanda"
+            [dadosDemanda]="demanda"
             (verDocumentoProposta)="openModalDemandaDocumento($event)"
             (irParaChat)="irParaChat($event)"
             (modalHistorico)="openModalHistorico($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-            (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
+            (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
             class="mb-2"
           >
           </app-list-demanda>
@@ -212,10 +212,10 @@
                     | slice : 4
                 "
                 (irParaChat)="irParaChat($event)"
-            (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
+                (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
                 (modalHistorico)="openModalHistorico($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-                [dadosDemada]="demanda"
+                [dadosDemanda]="demanda"
                 class="mb-2"
               >
               </app-list-demanda>
@@ -252,7 +252,8 @@
           (irParaChat)="irParaChat($event)"
           (modalHistorico)="openModalHistorico($event)"
           *ngFor="let demanda of listaDemandas"
-          [dadosDemada]="demanda"
+          [dadosDemanda]="demanda"
+          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
           class="mb-2"
         >
         </app-list-demanda>
@@ -271,6 +272,7 @@
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
             <div
+              *ngIf="linha.status != 'DRAFT'"
               class="me-3"
               style="align-self: flex-end; cursor: pointer"
               (click)="
@@ -299,12 +301,13 @@
                     | filtrarDemandaStatus : linha.titulo
                 "
                 (clicouEmExcluir)="carregarDemandasIniciais()"
-                [dadosDemada]="demanda"
+                [dadosDemanda]="demanda"
                 (verDocumentoProposta)="openModalDemandaDocumento($event)"
                 (irParaChat)="irParaChat($event)"
                 (modalHistorico)="openModalHistorico($event)"
                 (avancarStatusDemanda)="avancarStatusDemanda($event)"
-                (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
+                (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
+                (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 (verDocumentoEmAta)="openModalAtaDocumento()"
               ></app-card-demanda>
@@ -337,8 +340,8 @@
         <app-card-demanda
           [rascunho]="tipoRascunho"
           *ngFor="let demanda of listaDemandasRascunho; let i = index"
-          [dadosDemada]="demanda"
-          (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
+          [dadosDemanda]="demanda"
+          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           [mudarTamanho]="'100%'"
@@ -353,8 +356,8 @@
       <div class="row" *ngIf="!tipoRascunho">
         <app-card-demanda
           *ngFor="let demanda of listaDemandas; let i = index"
-          [dadosDemada]="demanda"
-          (abrirModalMotivoReprovacao)="modalMotivoReprovacao($event)"
+          [dadosDemanda]="demanda"
+          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           (clicouEmExcluir)="excluirDemandaRascunho(i)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)"

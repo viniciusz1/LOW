@@ -21,6 +21,7 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
     private router: Router,
     private messageService: MessageService
   ) {
+    console.log(data)
     this.dadosDemanda = data
   }
 
@@ -28,7 +29,7 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
   }
   motivoReprovacao = ""
   reprovarDemanda() {
-    console.log(this.dadosDemanda)
+    // console.log(this.dadosDemanda)
     if(this.dadosDemanda?.codigoDemanda)
     //Parâmetro 0 na decisão significa que a demand é reprovada
     this.demandaService

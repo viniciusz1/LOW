@@ -8,7 +8,7 @@ import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
 import { Demanda } from 'src/app/models/demanda.model';
@@ -46,14 +46,14 @@ export class TelaInicialComponent implements OnInit {
       } else {
         this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
       }
-    });
     if (router.url == '/tela-inicial/rascunhos') {
       this.tipoRascunho = true;
       this.isFiltrado = true;
     };
-  }
+  })}
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
+  @Input() rascunho: boolean = false;
 
   ordenarSelect = '';
   opcoesOrdenacao = [
@@ -289,12 +289,13 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalReprovacaoDemanda() {
-    this.matDialog.open(ModalReprovacaoDemandaComponent),
+  openModalReprovacaoDemanda(demanda: Demanda) {
+    this.matDialog.open(ModalReprovacaoDemandaComponent,
     {
       maxWidth: '70vw',
       minWidth: '50vw',
-    };
+      data:demanda
+    });
   }
 
   openModalDemandaDocumento(event: Demanda) {
@@ -323,7 +324,7 @@ export class TelaInicialComponent implements OnInit {
     this.matDialog.open(ModalHistoricoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      minHeight: '70vh',
+      minHeight: '30vh',
       data: codigoDemanda
     });
   }
@@ -415,7 +416,7 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  modalMotivoReprovacao(demanda: Demanda) {
+  openModalMotivoReprovacao(demanda: Demanda) {
     this.confirmationService.confirm({
       dismissableMask: true,
       key: 'motivoReprovacao',

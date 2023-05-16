@@ -112,7 +112,7 @@
           id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.tipo-despesa" | translate }}</label>
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.tipo-despesa" | translate }}:</label>
         <p-dropdown (onChange)="onInputChange()" [options]="tipoDaDespesa" optionValue="value" optionLabel="tipo"
           [required]="true" placeholder="Selecione o Tipo" formControlName="tipoDespesaRecurso" [showClear]="true"
           [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.tipoDespesaRecurso.errors && formRecursos.controls.tipoDespesaRecurso.touched}">
@@ -135,7 +135,7 @@
     <div class="row">
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">
-          {{ "telas.proposta.quantidade-horas" | translate }}</label>
+          {{ "telas.proposta.quantidade-horas" | translate }}:</label>
         <div style="width: 100%; display: grid">
           <p-inputNumber (input)="onInputChange()" placeholder="Ex: 220" type="text" class="input" [required]="true"
             formControlName="quantidadeHorasRecurso"
@@ -147,7 +147,7 @@
         </div>
       </div>
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.valor-hora" | translate }}</label>
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.valor-hora" | translate }}:</label>
         <div style="width: 100%; display: grid">
           <p-inputNumber (input)="onInputChange()" placeholder="Ex: R$55,00" [required]="true" type="text" class="input"
             formControlName="valorHoraRecurso"
@@ -158,7 +158,7 @@
         </div>
       </div>
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.periodo-execucao" | translate }}</label>
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.periodo-execucao" | translate }}:</label>
         <div style="width: 100%; display: grid">
           <p-inputNumber (input)="onInputChange()" placeholder="Ex: 5" [required]="true" type="text" class="input"
             formControlName="periodoExMesesRecurso"
@@ -171,14 +171,14 @@
       </div>
     </div>
     <div formArrayName="centroCustoRecurso" class="row align-items-center">
-      <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.centros-custo" | translate }}o</label>
+      <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.centros-custo" | translate }}:</label>
       <div style="width: 50%; display: -webkit-box;">
         <div class="d-flex flex-column">
           <div *ngFor="let centroCusto of formRecursos.controls.centroCustoRecurso.controls; let i = index"
             style="flex-wrap: wrap;" class="mb-1">
             <div [formGroupName]="i" class="d-flex">
               <div class="p-inputgroup" style=" margin-right: 0.5vw;">
-                <input (input)="onInputChange()" style="width: 5vw;" [id]="'porcentagemListaReuniao' + i" pInputText
+                <input (input)="onInputChange()" style="width: 7vw;" [id]="'porcentagemListaReuniao' + i" pInputText
                   [required]="true" formControlName="porcentagemCentroCusto" placeholder="Porcentagem" />
                 <span class="p-inputgroup-addon">%</span>
               </div>

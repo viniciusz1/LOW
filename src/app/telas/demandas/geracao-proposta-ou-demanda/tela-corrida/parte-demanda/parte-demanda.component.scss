@@ -4,10 +4,13 @@
 :host ::ng-deep .p-dropdown{
     width: 100%;
 }
-:host ::ng-deep .p-inputnumber {
+// :host ::ng-deep .p-inputnumber{    display: contents;
+// }
 
-  width: 100%;
-}
+.largura-customizada {
+    width: 90%;
+    display: grid;
+  }
 .drop{
 
     background-color: #00579d;

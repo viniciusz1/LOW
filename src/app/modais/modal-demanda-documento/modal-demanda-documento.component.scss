@@ -19,6 +19,12 @@
     font-size: 0.8rem;
 }
 
+:host ::ng-deep {
+  .p-scrollpanel-content{
+    height:100%;
+  }
+}
+
 .custom-marker {
     display: flex;
     width: 2vw;
@@ -42,7 +48,7 @@
         .customized-timeline {
             .p-timeline-event:nth-child(even) {
                 flex-direction: row !important;
-                
+
                 .p-timeline-event-content {
                     text-align: left !important;
                 }
@@ -95,4 +101,4 @@
             transition: background-color .2s;
         }
     }
-}    
+}

@@ -17,6 +17,7 @@ import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-hi
 import { MessageService } from 'primeng/api';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { RascunhoService } from 'src/app/services/rascunho.service';
+import { ModalCriarReuniaoComponent } from 'src/app/modais/modal-criar-reuniao/modal-criar-reuniao.component';
 
 @Component({
   selector: 'app-tela-ver-pauta',
@@ -42,13 +43,13 @@ export class TelaVerPauta implements OnInit {
     this.reuniaoService.getReuniaoId(this.codigoReuniao)
       .subscribe({
         next: (x) => {
-          console.log(x)
           this.reuniao = x
+          console.log(this.reuniao)
         }
       })
   }
   mostrarAtaPublicada(){
-    
+
     return this.reuniao?.propostasReuniao?.some(p => p.tipoAtaProposta == 'PUBLICADA')
   }
 
@@ -66,6 +67,14 @@ export class TelaVerPauta implements OnInit {
         }
       })
   }
+
+  openModalCriarReuniao() {
+    this.matDialog.open(ModalCriarReuniaoComponent, {
+      minWidth: '300px',
+      data: this.reuniao?.propostasReuniao
+    });
+  }
+
 
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
@@ -148,7 +157,7 @@ export class TelaVerPauta implements OnInit {
       minWidth: '50vw',
       data: { demanda: proposta, reuniao: this.reuniao }
     });
-    
+
     dialog.afterClosed().subscribe({next: e => {let indice: number | undefined = -1
       if (this.reuniao?.propostasReuniao) {
         indice = this.reuniao?.propostasReuniao.findIndex(p => p.codigoDemanda == e.codigoDemanda);

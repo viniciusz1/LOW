@@ -5,15 +5,15 @@
         border-radius: 5px;
         padding: 20px;">
             <div *ngFor="let proposta of reuniao?.propostasReuniao" class="mb-2">
-                <app-card-demanda 
-                [exibirBotaoParecerComissao]="true" 
-                [tipoDeAta]="'Ata Publicada'"  
-                (modalHistorico)="openModalHistorico($event)"
-                (abrirModalParecerComissao)="openModalParecerComissaoProposta(proposta)" 
-                [dadosDemada]="proposta"
-                [mudarTamanho]="'100%'"
-                (verDocumentoProposta)="openModalDemandaDocumento($event)"
-                
+                <app-card-demanda
+                  [exibirBotaoParecerComissao]="true"
+                  [tipoDeAta]="'Ata Publicada'"
+                  (modalHistorico)="openModalHistorico($event)"
+                  (abrirModalParecerComissao)="openModalParecerComissaoProposta(proposta)"
+                  [dadosDemanda]="proposta"
+                  [mudarTamanho]="'100%'"
+                  (verDocumentoProposta)="openModalDemandaDocumento($event)"
+
                 ></app-card-demanda>
             </div>
         </div>
@@ -46,6 +46,7 @@
                     </div>
 
                     <div *ngIf="mostrarBotoesReuniao()" class="d-flex flex-column mb-5">
+                      <button (click)="openModalCriarReuniao()">Edit</button>
                         <button class="btn btn-primary mb-3" (click)="modalConfirmacaoFinalizar()"> {{
                             "telas.tela-ver-pauta.b-finalizar-reuniao" | translate }}</button>
                         <button class="btn btn-danger" (click)="cancelarReuniao()"> {{

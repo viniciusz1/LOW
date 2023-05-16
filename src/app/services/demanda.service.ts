@@ -10,6 +10,7 @@ import { Arquivo } from '../models/arquivo.model';
 import { CentroCusto } from '../models/centro-custo.model';
 import { Validators as ValidatorsEditor } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
+import { map } from 'rxjs';
 
 
 @Injectable({
@@ -85,6 +86,8 @@ export class DemandaService {
   }
 
   setFormDemandaRascunho(indiceDemanda: number) {
+    console.log('setFormDemandaRascunho')
+    console.log(indiceDemanda)
     let i: any = localStorage.getItem('rascunhos')
     let listaRascunho = JSON.parse(i)
     if (listaRascunho[indiceDemanda]) {
@@ -107,6 +110,8 @@ export class DemandaService {
         situacaoAtualDemanda: listaRascunho[indiceDemanda].situacaoAtualDemanda,
         objetivoDemanda: listaRascunho[indiceDemanda].objetivoDemanda,
       })
+    } else {
+      this.demandaForm.reset();
     }
 
 
@@ -220,7 +225,7 @@ export class DemandaService {
       for (let i = 0; i < demanda.centroCustosDemanda.length - 1; i++) {
         this.addCenterOfCost()
       }
-
+    console.log(demanda)
     this.demandaForm.patchValue({
       tituloDemanda: demanda.tituloDemanda,
       beneficioRealDemanda: {
@@ -275,9 +280,14 @@ export class DemandaService {
   avancarPage(page: number) {
     let linkComPaginacao = this.link;
     linkComPaginacao += '&page=' + page
+    console.log(linkComPaginacao)
     return this.http.get<Demanda[]>(
       linkComPaginacao
-    );
+    ).pipe(map((pageable: any) => {
+      console.log(pageable)
+      this.pageable = pageable
+      return pageable.content
+    }))
   }
 
 
@@ -335,6 +345,13 @@ export class DemandaService {
     }
     return 0;
   }
+  //usado para realizar verificações de paginação
+  private pageable: any
+
+  get totalPages(){
+    return this.pageable.totalPages || 0
+  }
+
   getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
     if (pesquisaEspecial?.status) {
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=&ordenar=${this.filtros?.sort}`
@@ -345,7 +362,11 @@ export class DemandaService {
     }
     return this.http.get<Demanda[]>(
       this.link
-    );
+    ).pipe(map((pageable: any) => {
+      console.log(pageable)
+      this.pageable = pageable
+      return pageable.content
+    }))
   }
 
   getTodasAsDemandasFiltradas() {

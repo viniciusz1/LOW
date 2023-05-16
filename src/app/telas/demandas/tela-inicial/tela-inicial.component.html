@@ -176,7 +176,7 @@
                 status: linha.status,
                 pesquisaCampo: undefined
               })"
-              
+
           >
             {{ "telas.tela-inicial.ver-mais" | translate }} ({{ qtdDemandasStatus[i] }})
           </div>
@@ -382,7 +382,7 @@
         [rows]="1"
         [showJumpToPageDropdown]="true"
         [showPageLinks]="false"
-        [totalRecords]="10"
+        [totalRecords]="totalPagesPagination"
         (onPageChange)="paginate($event)"
       ></p-paginator>
     </div>

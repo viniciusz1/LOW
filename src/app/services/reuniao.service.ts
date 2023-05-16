@@ -11,11 +11,7 @@ export class ReuniaoService {
   constructor(private http: HttpClient) {}
 
   getReuniao() {
-   
-    const cred = {
-      withCredentials: true
-    }
-    return this.http.get<Reuniao[]>(path + 'reuniao', cred);
+    return this.http.get<Reuniao[]>(path + 'reuniao');
   }
 
   getReuniaoId(codigoReuniao: Number) {
@@ -55,7 +51,6 @@ export class ReuniaoService {
     );
   }
   putReuniao(reuniao: Reuniao) {
-    console.log('aqui: ');
     return this.http.put<Reuniao>(
       path + 'reuniao/update/' + reuniao.codigoReuniao,
       reuniao

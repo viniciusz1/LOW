@@ -80,6 +80,7 @@ export class TelaInicialComponent implements OnInit {
   listaDemandas: Demanda[] = [];
   tipoRascunho = false;
   listaTituloNaoFiltrado: { status: string; titulo: string }[] = [];
+  qtdDemandasStatus: number[] = []
   pesquisaDemanda = '';
   nenhumResultadoEncontrado = false;
   listaDemandasRascunho: Demanda[] = [
@@ -413,13 +414,16 @@ export class TelaInicialComponent implements OnInit {
     this.demandasService.getDemandasTelaInicial().subscribe({
       next: (e) => {
         console.log(e)
-        e.forEach((demandas) => {
+        e['demandas'].forEach((demandas: Demanda[]) => {
           if (demandas.length > 0) {
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
             this.nenhumResultadoEncontrado = false;
           }
         });
+        e['qtdDemandas'].forEach((qtd: number) => {
+          this.qtdDemandasStatus.push(qtd)
+        })
         this.exibirFilasDeStatus();
       },
       error: (err) => {

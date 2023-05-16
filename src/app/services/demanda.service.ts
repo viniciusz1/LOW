@@ -376,7 +376,7 @@ export class DemandaService {
   }
 
   getDemandasTelaInicial() {
-    return this.http.get<[][]>(
+    return this.http.get<any>(
       path + 'demanda/status'
     );
   }

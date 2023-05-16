@@ -24,7 +24,7 @@ export interface Demanda {
     inicioExDemandaProposta?: Date,
     fimExDemandaProposta?: Date,
     paybackProposta?: string,
-    responsaveisNegocioDemanda?: [],
+    responsavelProposta?: [],
     parecerComissaoProposta?: string,
     ultimaDecisaoComissao?: string,
     tipoAtaProposta?: string,
@@ -46,4 +46,6 @@ export interface Demanda {
     gerenteNegocio?: Usuario
     horaUltimaMensagem?: Date
     qtdMensagensNaoLidas?: number
+    //usuario aguardando a mensagem ser visualizada
+    usuarioAguardando?: Usuario
 }

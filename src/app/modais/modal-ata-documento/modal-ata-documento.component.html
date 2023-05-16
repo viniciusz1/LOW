@@ -20,11 +20,6 @@
             <hr *ngIf="mostrarHr(i, tipoAta)">
             <app-modal-demanda-documento [documentoEmAta]="true" [dadosDemanda]="proposta"></app-modal-demanda-documento> -->
 
-            <b>
-                {{ "documento-pdf.responsaveis-negocio" | translate }}
-            </b>
-            <span *ngFor="let responsavel of proposta.responsaveisNegocioDemanda">{{responsavel}}</span>
-
             <p>
                 <b>{{ "documento-pdf.parecer-comissao" | translate }}</b> {{proposta.parecerComissaoProposta}}<br>
                 <b>{{ "documento-pdf.decisao" | translate }}</b> {{proposta.ultimaDecisaoComissao}}

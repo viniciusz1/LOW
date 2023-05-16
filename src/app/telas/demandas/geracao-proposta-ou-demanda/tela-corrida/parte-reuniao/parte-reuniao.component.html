@@ -283,7 +283,7 @@
 
   <!-- formControlName="responsavelProposta" -->
   <p-chips  separator="," placeholder="Insira o/os responsáveis" (input)="onInputChange()" styleClass="w-100" 
-  optionLabel="nome" display="chip"
+  optionLabel="nome" display="chip" formControlName="responsavelProposta"
   [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched}"></p-chips>
   <small *ngIf="formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched"
     id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>

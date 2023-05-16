@@ -21,6 +21,7 @@ import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-hi
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
+import { MessagesService } from 'src/app/websocket/messages.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -38,7 +39,7 @@ export class TelaInicialComponent implements OnInit {
     private router: Router,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {
@@ -46,11 +47,12 @@ export class TelaInicialComponent implements OnInit {
       } else {
         this.pesquisarDemandas({ status: undefined, pesquisaCampo: this.pesquisaDemanda });
       }
-    if (router.url == '/tela-inicial/rascunhos') {
-      this.tipoRascunho = true;
-      this.isFiltrado = true;
-    };
-  })}
+      if (router.url == '/tela-inicial/rascunhos') {
+        this.tipoRascunho = true;
+        this.isFiltrado = true;
+      };
+    })
+  }
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
   @Input() rascunho: boolean = false;
@@ -80,6 +82,7 @@ export class TelaInicialComponent implements OnInit {
   demandasVazias: boolean = false;
   tipoRascunho = false;
   listaTituloNaoFiltrado: { status: string; titulo: string }[] = [];
+  qtdDemandasStatus: number[] = []
   pesquisaDemanda = '';
   nenhumResultadoEncontrado = false;
   listaDemandasRascunho: Demanda[] = [
@@ -227,20 +230,31 @@ export class TelaInicialComponent implements OnInit {
     );
   }
 
-  irParaChat(event: Event) {
-    if (event.target)
+  irParaChat(event: Event, demanda: Demanda) {
+    if (event.target && demanda.analista?.codigoUsuario == undefined) {
       this.confirmationService.confirm({
         target: event.target,
         message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
         icon: 'pi pi-exclamation-triangle',
         blockScroll: false,
         accept: () => {
-          this.router.navigate(['/tela-inicial/chat']);
+          this.demandasService.iniciarConversa(demanda.codigoDemanda)
+            .subscribe({
+              next: (e) => {
+                this.router.navigate(['/tela-inicial/chat/' + demanda.codigoDemanda]);
+              }
+              , error: (err) => { console.log(err) }
+            })
+
         },
         reject: () => {
 
         }
       });
+    }
+    else {
+      this.router.navigate(['/tela-inicial/chat/' + demanda.codigoDemanda]);
+    }
   }
 
   excluirDemandaRascunho(index: number) {
@@ -292,11 +306,11 @@ export class TelaInicialComponent implements OnInit {
 
   openModalReprovacaoDemanda(demanda: Demanda) {
     this.matDialog.open(ModalReprovacaoDemandaComponent,
-    {
-      maxWidth: '70vw',
-      minWidth: '50vw',
-      data:demanda
-    });
+      {
+        maxWidth: '70vw',
+        minWidth: '50vw',
+        data: demanda
+      });
   }
 
   openModalDemandaDocumento(event: Demanda) {
@@ -402,7 +416,7 @@ export class TelaInicialComponent implements OnInit {
     this.demandasService.getDemandasTelaInicial().subscribe({
       next: (e) => {
         console.log(e)
-        e.forEach((demandas) => {
+        e['demandas'].forEach((demandas: Demanda[]) => {
           if (demandas.length > 0) {
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
@@ -413,6 +427,9 @@ export class TelaInicialComponent implements OnInit {
             }, 5000)
           }
         });
+        e['qtdDemandas'].forEach((qtd: number) => {
+          this.qtdDemandasStatus.push(qtd)
+        })
         this.exibirFilasDeStatus();
       },
       error: (err) => {

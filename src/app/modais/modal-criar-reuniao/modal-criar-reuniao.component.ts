@@ -1,15 +1,14 @@
+
 import { UsuarioService } from './../../services/usuario.service';
 import { Router } from '@angular/router';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { FormBuilder } from '@angular/forms';
-import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
-import { Component, OnInit, Inject, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalHistoricoComponent } from '../modal-historico/modal-historico.component';
 import { ModalDemandaDocumentoComponent } from '../modal-demanda-documento/modal-demanda-documento.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -21,7 +20,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 })
 export class ModalCriarReuniaoComponent implements OnInit {
   constructor(
-    @Inject(DIALOG_DATA) public data: Demanda,
+    @Inject(MAT_DIALOG_DATA) public data: Demanda | Demanda[],
     public dialogRef: MatDialogRef<ModalCriarReuniaoComponent>,
     private matDialog: MatDialog,
     private demandaService: DemandaService,
@@ -45,7 +44,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
 
-  fecharModal(){
+  fecharModal() {
     this.dialogRef.close();
   }
 
@@ -113,17 +112,29 @@ export class ModalCriarReuniaoComponent implements OnInit {
       comissaoReuniao: this.comissaoSelecionada,
       propostasReuniao: this.listaDemandasEscolhidas
     }
-    console.log(reuniao)
+    if(!Array.isArray(this.data)){
     this.reuniaoService.postReuniao(reuniao)
-    .subscribe({
-      next: reuniao => {
-        this.showSuccess("Reunião Marcada!")
-      this.router.navigate(['/tela-inicial/reunioes'])
-      this.dialogRef.close()
-      }, error: err => {
-        this.showError("Não foi possível marcar a reunião")
-      }
-    })
+      .subscribe({
+        next: reuniao => {
+          this.showSuccess("Reunião Marcada!")
+          this.router.navigate(['/tela-inicial/reunioes'])
+          this.dialogRef.close()
+        }, error: err => {
+          this.showError("Não foi possível marcar a reunião")
+        }
+      })
+    }else{
+      this.reuniaoService.putReuniao(reuniao)
+      .subscribe({
+        next: reuniao => {
+          this.showSuccess("Reunião Editada com sucesso!")
+          this.router.navigate(['/tela-inicial/reunioes'])
+          this.dialogRef.close()
+        }, error: err => {
+          this.showError("Não foi possível editar a reunião")
+        }
+      })
+    }
   }
   dragStart(demanda: Demanda) {
     this.draggedDemanda = demanda;
@@ -157,11 +168,26 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   removerDaListaAdicSecundaria() {
-    if (this.data) {
+
+    //remove se for Demanda
+    if (!Array.isArray(this.data)) {
+      console.log("opa funcionou")
       this.listaDemandasEscolhidas.push(this.data);
       for (let i of this.listaDemandas) {
         if (i.codigoDemanda == this.data.codigoDemanda) {
           this.listaDemandas.splice(this.listaDemandas.indexOf(i), 1);
+        }
+      }
+    }
+
+    //remove se for Demanda[]
+    else {
+      for (let i of this.data) {
+        this.listaDemandasEscolhidas.push(i);
+        for (let j of this.listaDemandas) {
+          if (j.codigoDemanda == i.codigoDemanda) {
+            this.listaDemandas.splice(this.listaDemandas.indexOf(j), 1);
+          }
         }
       }
     }
@@ -179,10 +205,9 @@ export class ModalCriarReuniaoComponent implements OnInit {
     this.demandaService
       .getDemandasFiltradasStatus({ status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + "" })
       .subscribe({
-        next: demanda => {
-          console.log(demanda)
-          this.listaDemandas = demanda
-          this.removerDaListaAdicSecundaria()
+        next: demandas => {
+          this.listaDemandas = demandas
+          // this.removerDaListaAdicSecundaria()
         }, error: err => {
           this.showError("Não foi possível filtrar as demandas")
         }

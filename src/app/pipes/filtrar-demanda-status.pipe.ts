@@ -1,19 +1,24 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Inject, Injectable, Pipe, PipeTransform } from '@angular/core';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
-
+import { UsuarioService } from '../services/usuario.service';
+@Injectable()
 @Pipe({
   name: 'filtrarDemandaStatus'
 })
 
 /*
-  Pipe utilizado para realizar a tela principal do sistema. Ele basicamente recebe uma lista 
+  Pipe utilizado para realizar a tela principal do sistema. Ele basicamente recebe uma lista
   com todas as demandas que devem ser exibidas na tela inicial, e também uma lista com os tí
   tulos que são exibidos. Após isso, ela filtra as demandas que devem ser exibidas para cada
   título e então, retorna uma fileira de demandas de status correspondentes.
 */
 
 export class FiltrarDemandaStatusPipe implements PipeTransform {
+  constructor(private usuarioService: UsuarioService) {
+
+  }
+
 
   transform(demandas: Demanda[], ...titulo: string[]): Demanda[] {
     if (titulo[0] == "Seus Rascunhos") {
@@ -31,15 +36,26 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
       // for (let i of listProposta) {
       //   list.push(i)
       // }
-      
+
       return list
     }
-    if (titulo[0] == "Backlog - Classificação") {
-      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
+
+    if (this.usuarioService.getRole == 'Analista' || this.usuarioService.getRole == 'GestorTI') {
+      if (titulo[0] == "Backlog - Classificação") {
+        return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
+      }
+      if (titulo[0] == "Backlog - Classificação") {
+        return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
+      }
+    } else if (this.usuarioService.getRole == 'GerenteNegocio') {
+      if (titulo[0] == "Backlog - Aprovação") {
+        return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
+      }
+      if (titulo[0] == "Backlog - Classificação") {
+        return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
+      }
     }
-    else if (titulo[0] == "Backlog - Aprovação") {
-      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
-    }
+
     else if (titulo[0] == "Backlog - Propostas") {
       return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA)
     }
@@ -67,6 +83,7 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
     else if (titulo[0] == "Done") {
       return demandas.filter(d => d.statusDemanda == StatusDemanda.DONE)
     }
+
     return demandas;
   }
 

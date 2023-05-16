@@ -19,7 +19,7 @@ export class NotificacoesComponent implements OnInit {
 
     ngOnInit() {
       this.notificacoesService.getNotificacoes().subscribe(notificacoes => {
-        this.notificacoes = notificacoes
+        this.notificacoes = notificacoes.reverse();
       })
     }
 }

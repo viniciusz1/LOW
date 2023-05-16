@@ -66,7 +66,7 @@ export class TelaInicialComponent implements OnInit {
     { name: 'Z-A', value: '5' },
   ];
 
-
+  totalPagesPagination = 0
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
   positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -110,7 +110,9 @@ export class TelaInicialComponent implements OnInit {
     this.demandasService
       .getDemandasFiltradas(pesquisaEspecial)
       .subscribe((listaDemandas: Demanda[]) => {
+        console.log(listaDemandas)
         if (listaDemandas.length > 0) {
+          this.totalPagesPagination = this.demandasService.totalPages
           this.listaDemandas = listaDemandas;
           this.isFiltrado = true;
           this.nenhumResultadoEncontrado = false;

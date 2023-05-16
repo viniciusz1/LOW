@@ -1,5 +1,4 @@
 import { ModalCancelamentoReuniaoComponent } from './../../../modais/modal-cancelamento-reuniao/modal-cancelamento-reuniao.component';
-import { Demanda } from './../../../models/demanda.model';
 import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -9,7 +8,6 @@ import { Reuniao } from 'src/app/models/reuniao.model';
 import { fadeAnimation } from './../../../shared/app.animation';
 import { textoTutorial } from 'src/app/shared/textoDoTutorial';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
-import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 
 @Component({
   selector: 'app-tela-login',
@@ -63,7 +61,6 @@ export class TelaReuniaoComponent implements OnInit {
   }
 
   openModalCriarReuniao() {
-    console.log("oi")
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
     });
@@ -101,7 +98,7 @@ export class TelaReuniaoComponent implements OnInit {
   }
 
 
-  
+
   pesquisarReunioes(event: {
     nomeComissao: string;
     dataReuniao: string;

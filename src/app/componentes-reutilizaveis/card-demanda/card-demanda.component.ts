@@ -52,6 +52,7 @@ export class CardDemandaComponent implements OnInit {
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService) { }
+
   statusPermitido() {
     if (
       this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -61,6 +62,24 @@ export class CardDemandaComponent implements OnInit {
       this.dadosDemanda.statusDemanda == StatusDemanda.BUSINESS_CASE
     ) {
       return true;
+    }
+    return false;
+  }
+  exibirIniciarChat() {
+    if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()) {
+      return true;
+    }
+    else if (this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista) {
+      if (this.dadosDemanda.analista == undefined) {
+        return true;
+      }
+      //Se um outro analista já tiver iniciado a conversa, não exibe o botão
+      else if (this.dadosDemanda.analista?.codigoUsuario == this.usuarioService.getCodigoUser()) {
+        return true;
+      }
+      else if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+        return false;
+      }
     }
     return false;
   }
@@ -177,7 +196,7 @@ export class CardDemandaComponent implements OnInit {
       texto: 'Ver Demanda',
     };
     //Caso o card seja definido que não precisa mostrar o botão
-    if(!this.mostrarBotao){
+    if (!this.mostrarBotao) {
       return false;
     }
 
@@ -264,7 +283,7 @@ export class CardDemandaComponent implements OnInit {
     }
   }
 
-  
+
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }

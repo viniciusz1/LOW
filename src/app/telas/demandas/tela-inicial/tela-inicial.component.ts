@@ -77,6 +77,7 @@ export class TelaInicialComponent implements OnInit {
   showPesquisaEBotaoFiltro = true;
   showSidebar = -350;
   listaDemandas: Demanda[] = [];
+  demandasVazias: boolean = false;
   tipoRascunho = false;
   listaTituloNaoFiltrado: { status: string; titulo: string }[] = [];
   pesquisaDemanda = '';
@@ -406,6 +407,10 @@ export class TelaInicialComponent implements OnInit {
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
             this.nenhumResultadoEncontrado = false;
+          } else {
+            setTimeout(() => {
+              this.demandasVazias = true;
+            }, 5000)
           }
         });
         this.exibirFilasDeStatus();

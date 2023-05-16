@@ -20,7 +20,7 @@
       </div>
       <i
         class="bi bi-chat-left-dots me-3"
-        *ngIf="!rascunho && statusPermitido()"
+        *ngIf="!rascunho && statusPermitido() && exibirIniciarChat()"
         (click)="irParaChat.emit($event)"
         style="cursor: pointer"
       ></i>
@@ -56,7 +56,7 @@
           <i class="bi-file-text me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
         </button>
-        <button [routerLink]="['/tela-inicial/chat/'+dadosDemanda.codigoDemanda]" mat-menu-item>
+        <button *ngIf="statusPermitido() && exibirIniciarChat()" [routerLink]="['/tela-inicial/chat/'+dadosDemanda.codigoDemanda]" mat-menu-item>
           <i class="bi bi-chat-left-quote me-3"></i>
           <span>{{ "componentes-reutilizaveis.card-demanda.iniciar-conversa" | translate }}</span>
         </button>

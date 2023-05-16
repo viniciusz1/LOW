@@ -178,7 +178,7 @@
               })"
               
           >
-            {{ "telas.tela-inicial.ver-mais" | translate }}
+            {{ "telas.tela-inicial.ver-mais" | translate }} ({{ qtdDemandasStatus[i] }})
           </div>
         </div>
         <div
@@ -193,7 +193,7 @@
             "
             [dadosDemanda]="demanda"
             (verDocumentoProposta)="openModalDemandaDocumento($event)"
-            (irParaChat)="irParaChat($event)"
+            (irParaChat)="irParaChat($event, demanda)"
             (modalHistorico)="openModalHistorico($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
             (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
@@ -211,7 +211,7 @@
                     | filtrarDemandaStatus : linha.titulo
                     | slice : 4
                 "
-                (irParaChat)="irParaChat($event)"
+                (irParaChat)="irParaChat($event, demanda)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
                 (modalHistorico)="openModalHistorico($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
@@ -249,7 +249,7 @@
       <div style="padding: 10px; margin-left: 6px"></div>
       <div class="container d-flex flex-column align-items-center">
         <app-list-demanda
-          (irParaChat)="irParaChat($event)"
+          (irParaChat)="irParaChat($event, demanda)"
           (modalHistorico)="openModalHistorico($event)"
           *ngFor="let demanda of listaDemandas"
           [dadosDemanda]="demanda"
@@ -282,7 +282,7 @@
                 })
               "
             >
-              {{ "telas.tela-inicial.ver-mais" | translate }}
+              {{ "telas.tela-inicial.ver-mais" | translate }} ({{ qtdDemandasStatus[i] }})
             </div>
           </div>
           <div
@@ -303,7 +303,7 @@
                 (clicouEmExcluir)="carregarDemandasIniciais()"
                 [dadosDemanda]="demanda"
                 (verDocumentoProposta)="openModalDemandaDocumento($event)"
-                (irParaChat)="irParaChat($event)"
+                (irParaChat)="irParaChat($event, demanda)"
                 (modalHistorico)="openModalHistorico($event)"
                 (avancarStatusDemanda)="avancarStatusDemanda($event)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
@@ -345,7 +345,7 @@
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat($event)"
+          (irParaChat)="irParaChat($event, demanda)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)"
           (modalHistorico)="openModalHistorico($event)"
           (verDocumentoEmAta)="openModalAtaDocumento()"
@@ -362,7 +362,7 @@
           (clicouEmExcluir)="excluirDemandaRascunho(i)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)"
           [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat($event)"
+          (irParaChat)="irParaChat($event, demanda)"
           (modalHistorico)="openModalHistorico($event)"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
           (verDocumentoEmAta)="openModalAtaDocumento()"

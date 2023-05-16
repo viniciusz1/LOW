@@ -10,6 +10,8 @@ import { UsuarioService } from './usuario.service';
 @Injectable({
   providedIn: 'root',
 })
+//A partir do momento em que a demanda tem um analista, ela inicia uma conversa
+//Ao analista aceitar iniciar uma demanda, é feita uma requisição setando o analista da mesma
 export class DemandaClassificadaService {
   public demandaClassificadaForm = this.fb.group({
     tamanhoDemandaClassificada: [''],

@@ -19,7 +19,7 @@
         <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.comissao" | translate }}</b> {{dadosReuniao.comissaoReuniao}}</p>
         <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.propostas-adicionadas" | translate }} </b>{{ titulosPropostas().join(', ')}} </p>
         <p class="card-text bottom-card">
-            <label class=" me-2">
+            <label class=" me-2" (click)="departamentosBeneficiados()">
                 <b>
                   Centros de custo beneficiados:
                 </b>

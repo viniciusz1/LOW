@@ -17,6 +17,10 @@
 
 }
 
+:host ::ng-deep .moedaDrop {
+    width: 20%;
+}
+
 hr {
     margin: 0
 }

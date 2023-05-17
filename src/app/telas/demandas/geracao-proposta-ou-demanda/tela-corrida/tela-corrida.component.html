@@ -20,20 +20,20 @@
     </div>
     <div style="position: fixed; left: 1vw; display: flex;" *ngIf="aparecerProposta" >
       <div style="margin-top: 0.45vh;">
-        <p-timeline [value]="titulosDemanda">
-            <ng-template pTemplate="marker" let-event1>
-                <a class="custom-marker shadow-2" [style.backgroundColor]="event1.color">
-                    <i [ngClass]="event1.icon"></i>
+        <p-timeline [value]="titulosProposta">
+            <ng-template pTemplate="marker" let-event>
+                <a class="custom-marker shadow-2" [style.backgroundColor]="event.color">
+                    <i [ngClass]="event.icon"></i>
                 </a>
             </ng-template>
         </p-timeline>
       </div>
         <nav class="h-100 flex-column align-items-stretch pe-4">
           <nav class="nav nav-pills flex-column" id="scroll" >
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('sectionProposta1')" [ngClass]="{'active': activeSection === 'sectionProposta1'}" style="margin-bottom: 3.1vh; cursor:pointer" >Proposta</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('sectionProposta2')" [ngClass]="{'active': activeSection === 'sectionProposta2'}" style="margin-bottom: 3.1vh;cursor:pointer">Recursos</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('sectionProposta3')" [ngClass]="{'active': activeSection === 'sectionProposta3'}" style="margin-bottom: 3.1vh;cursor:pointer">Escopo</a>
-            <!-- <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('sectionProposta4')" [ngClass]="{'active': activeSection === 'sectionProposta4'}" style="cursor:pointer">Dados Finais</a> -->
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" >Proposta</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">Recursos</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="margin-bottom: 3.1vh;cursor:pointer">Escopo</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section4')" [ngClass]="{'active': activeSection === 'section4'}" style="cursor:pointer">Dados Finais</a>
           </nav>
         </nav>
     </div>

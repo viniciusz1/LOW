@@ -103,6 +103,7 @@
 
   <div [formGroup]="formRecursos">
     <div class="row">
+
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.recurso-necessario" | translate }}:</label>
         <input (input)="onInputChange()" placeholder="Ex: Programador Back-end" type="text" required="true" pInputText
@@ -111,19 +112,10 @@
         <small *ngIf="formRecursos.controls.nomeRecurso.errors && formRecursos.controls.nomeRecurso.touched"
           id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
-      <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.tipo-despesa" | translate }}:</label>
-        <p-dropdown (onChange)="onInputChange()" [options]="tipoDaDespesa" optionValue="value" optionLabel="tipo"
-          [required]="true" placeholder="Selecione o Tipo" formControlName="tipoDespesaRecurso" [showClear]="true"
-          [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.tipoDespesaRecurso.errors && formRecursos.controls.tipoDespesaRecurso.touched}">
-        </p-dropdown>
-        <small
-          *ngIf="formRecursos.controls.tipoDespesaRecurso.errors && formRecursos.controls.tipoDespesaRecurso.touched"
-          id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
-      </div>
-      <div class="col-3">
+      
+      <div class="col-3" style="display: grid; padding-right: 0px !important; margin-left: 0.1vw;">
         <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.perfil-despesa" | translate }}:</label>
-        <p-dropdown (onChange)="onInputChange()" placeholder="Ex: Interna" type="text" [required]="true"
+        <p-dropdown (onChange)="onInputChange()" styleClass="dropDespesa" placeholder="Ex: Interna" type="text" [required]="true"
           [options]="perfilDaDespesa" optionValue="value" optionLabel="tipo" formControlName="perfilDespesaRecurso"
           [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.perfilDespesaRecurso.errors && formRecursos.controls.perfilDespesaRecurso.touched}">
         </p-dropdown>
@@ -131,8 +123,24 @@
           *ngIf="formRecursos.controls.perfilDespesaRecurso.errors && formRecursos.controls.perfilDespesaRecurso.touched"
           id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
+
+      <div class="col-3" style="padding-left: 0px !important;">
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.valor-hora" | translate }}:</label>
+        <div style="width: 100%; display: grid">
+          <p-inputNumber (input)="onInputChange()" placeholder="Ex: R$55,00" [required]="true" type="text" class="input"
+            formControlName="valorHoraRecurso"
+            [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.valorHoraRecurso.errors && formRecursos.controls.valorHoraRecurso.touched}">
+          </p-inputNumber>
+          <small *ngIf="formRecursos.controls.valorHoraRecurso.errors && formRecursos.controls.valorHoraRecurso.touched"
+            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
+        </div>
+      </div>
+
+      
+
     </div>
     <div class="row">
+
       <div class="col-3">
         <label class="mt-1" for="Recurso Necessário:">
           {{ "telas.proposta.quantidade-horas" | translate }}:</label>
@@ -146,18 +154,20 @@
             id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
         </div>
       </div>
-      <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.valor-hora" | translate }}:</label>
-        <div style="width: 100%; display: grid">
-          <p-inputNumber (input)="onInputChange()" placeholder="Ex: R$55,00" [required]="true" type="text" class="input"
-            formControlName="valorHoraRecurso"
-            [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.valorHoraRecurso.errors && formRecursos.controls.valorHoraRecurso.touched}">
-          </p-inputNumber>
-          <small *ngIf="formRecursos.controls.valorHoraRecurso.errors && formRecursos.controls.valorHoraRecurso.touched"
-            id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
-        </div>
+
+      <div class="col-3" style="display: grid; padding-right: 0px !important; margin-left: 0.1vw;">
+        <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.tipo-despesa" | translate }}:</label>
+        <p-dropdown (onChange)="onInputChange()" styleClass="dropDespesa" [options]="tipoDaDespesa" optionValue="value" optionLabel="tipo"
+          [required]="true" placeholder="Selecione o Tipo" formControlName="tipoDespesaRecurso" [showClear]="true"
+          [ngClass]="{'ng-dirty ng-invalid': formRecursos.controls.tipoDespesaRecurso.errors && formRecursos.controls.tipoDespesaRecurso.touched}">
+        </p-dropdown>
+        <small
+          *ngIf="formRecursos.controls.tipoDespesaRecurso.errors && formRecursos.controls.tipoDespesaRecurso.touched"
+          id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
-      <div class="col-3">
+
+
+      <div class="col-3" style="padding-left: 0px !important;">
         <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.periodo-execucao" | translate }}:</label>
         <div style="width: 100%; display: grid">
           <p-inputNumber (input)="onInputChange()" placeholder="Ex: 5" [required]="true" type="text" class="input"
@@ -219,9 +229,6 @@
         placeholder="Escreva aqui...">
       </ngx-editor>
     </div>
-
-
-
 
     <small
       *ngIf="formProposta.controls.escopoDemandaProposta.errors && formProposta.controls.escopoDemandaProposta.touched"
@@ -295,7 +302,7 @@
       tooltipPosition="top"></i>
   </div>
   <div>
-    <p-dropdown (onChange)="onInputChange()" formControlName="statusDemanda" [options]="statusDemanda"
+    <p-dropdown styleClass="dropStatus" (onChange)="onInputChange()" formControlName="statusDemanda" [options]="statusDemanda"
       [optionLabel]="'name'" [optionValue]="'value'" placeholder="Status"></p-dropdown>
   </div>
 </form>

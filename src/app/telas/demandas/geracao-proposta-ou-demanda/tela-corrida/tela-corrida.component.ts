@@ -144,23 +144,48 @@ export class TelaCorridaComponent implements OnInit {
 
 
   onScroll() {
+
     const sections = document.querySelectorAll('section');
     const scrollPosition = window.pageYOffset;
-    
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 50;
-      const sectionBottom = sectionTop + section.offsetHeight;
 
-      if (
-        scrollPosition >= sectionTop - 200 &&
-        scrollPosition < sectionBottom
-      ) {
-        this.activeSection = section.id;
-      }
-      if (scrollPosition >= 1270) {
-        this.activeSection = 'section3';
-      }
-    });
+    if (!this.aparecerProposta) {
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 50;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (
+          scrollPosition >= sectionTop - 200 &&
+          scrollPosition < sectionBottom
+        ) {
+          this.activeSection = section.id;
+        }
+        if (scrollPosition >= 1270) {
+          this.activeSection = 'section3';
+        }
+      });
+    } else {
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 50;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (
+          scrollPosition >= sectionTop - 200 &&
+          scrollPosition < sectionBottom
+        ) {
+          this.activeSection = section.id;
+        }
+        if (scrollPosition >= 500) {
+          this.activeSection = 'section2';
+        }
+        if (scrollPosition >= 900) {
+          this.activeSection = 'section3';
+        }
+        if (scrollPosition >= 1000) {
+          this.activeSection = 'section4';
+        }
+      });
+    }
+
   }
 
   indoPraCima(id: string) {
@@ -195,10 +220,18 @@ export class TelaCorridaComponent implements OnInit {
     setInterval(() => {
       let icones = document.getElementsByClassName('nav-scroll');
       for (let i = 0; i < icones.length; i++) {
-        if (icones[i].classList.length > 2) {
-          this.titulosDemanda[i].color = '#00579d';
+        if (!this.aparecerProposta) {
+          if (icones[i].classList.length > 2) {
+            this.titulosDemanda[i].color = '#00579d';
+          } else {
+            this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
+          }
         } else {
-          this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
+          if (icones[i].classList.length > 3) {
+            this.titulosDemanda[i].color = '#00579d';
+          } else {
+            this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
+          }
         }
       }
     });

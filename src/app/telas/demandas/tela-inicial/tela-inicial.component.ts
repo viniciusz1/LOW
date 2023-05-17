@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
-import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
@@ -21,8 +20,6 @@ import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-hi
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
-import { MessagesService } from 'src/app/websocket/messages.service';
-import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -505,8 +502,9 @@ export class TelaInicialComponent implements OnInit {
 
     if (this.nivelAcessoUsuario == 'GerenteNegocio') {
       if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
+        console.log("Hey")
         this.listaTituloNaoFiltrado.push({
-          status: 'SUAS_TAREFAS',
+          status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
         });
       }

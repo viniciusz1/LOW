@@ -370,6 +370,7 @@ export class DemandaService {
     }))
   }
 
+
   getTodasAsDemandasFiltradas() {
     let linkParaTodasDemandas = this.link
     linkParaTodasDemandas += '&size=2000'

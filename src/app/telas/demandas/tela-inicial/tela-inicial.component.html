@@ -183,9 +183,14 @@
               })
             "
           >
-            {{ "telas.tela-inicial.ver-mais" | translate }} ({{
-              qtdDemandasStatus[i]
-            }})
+            {{ "telas.tela-inicial.ver-mais" | translate }}
+            <span
+              *ngIf="
+                nivelAcessoUsuario == 'Analista' ||
+                nivelAcessoUsuario == 'GestorTI'
+              "
+              >({{ qtdDemandasStatus[i] }})</span
+            >
           </div>
         </div>
         <div
@@ -196,7 +201,7 @@
             *ngFor="
               let demanda of listaDemandas
                 | filtrarDemandaStatus : linha.titulo
-                | slice : 0 : 4
+                | slice : 0 : 5
             "
             [dadosDemanda]="demanda"
             (verDocumentoProposta)="openModalDemandaDocumento($event)"
@@ -216,7 +221,7 @@
                 *ngFor="
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
-                    | slice : 4
+                    | slice : 5
                 "
                 (irParaChat)="irParaChat($event, demanda)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
@@ -300,6 +305,12 @@
             *ngIf="listaTituloNaoFiltrado[0].status != 'DRAFT'"
             class="me-3"
             style="align-self: flex-end; cursor: pointer"
+            (click)="
+              pesquisarDemandas({
+                status: listaTituloNaoFiltrado[0].status,
+                pesquisaCampo: undefined
+              })
+            "
           >
             {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
@@ -343,16 +354,11 @@
           </div>
         </div>
       </div>
-      <div
-        class="my-4 row justify-content-center align-items-center"
-      >
+      <div class="my-4 row justify-content-center align-items-center">
         <div class="ms-3 title-demanda" for="status">
           <div style="width: 30%">
             <h5>Demandas do seu departamento</h5>
             <hr style="margin: 0; opacity: 1" class="mb-2" />
-          </div>
-          <div class="me-3" style="align-self: flex-end; cursor: pointer">
-            {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
         </div>
         <div class="d-flex row" #tamanhoDaFila style="width: 100%">

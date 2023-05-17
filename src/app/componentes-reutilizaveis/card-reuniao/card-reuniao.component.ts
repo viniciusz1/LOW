@@ -37,15 +37,15 @@ export class CardReuniaoComponent implements OnInit {
   departamentosBeneficiados() {
 
     console.log(this.dadosReuniao);
-    // const propostasAdicionadas = this.dadosReuniao.propostasReuniao;
-    // const titulosPropostas: string[] = [];
+      // const propostasAdicionadas = this.dadosReuniao.propostasReuniao;
+      // const titulosPropostas: string[] = [];
 
-    // propostasAdicionadas?.forEach((proposta: any) => {
-    //   const titulo = proposta.tituloDemanda;
-    //   titulosPropostas.push(titulo);
-    // })
+      // propostasAdicionadas?.forEach((proposta: any) => {
+      //   const titulo = proposta.tituloDemanda;
+      //   titulosPropostas.push(titulo);
+      // })
 
-    // return titulosPropostas;
+      // return titulosPropostas;
   }
 
 

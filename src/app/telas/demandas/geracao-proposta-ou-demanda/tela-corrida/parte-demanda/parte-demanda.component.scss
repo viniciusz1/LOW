@@ -1,18 +1,13 @@
-:host ::ng-deep .p-multiselect{
-    width: 100%;
-}
-:host ::ng-deep .p-dropdown{
-    width: 100%;
-}
-// :host ::ng-deep .p-inputnumber{    display: contents;
+// :host ::ng-deep .p-dropdown {
+//     width: 50vw;
 // }
 
 .largura-customizada {
-    width: 90%;
+    width: 100%;
     display: grid;
-  }
-.drop{
+}
 
+.drop {
     background-color: #00579d;
     color: #fff;
     border-radius: 5px;
@@ -21,18 +16,21 @@
     outline: none;
 
 }
-hr{
+
+hr {
     margin: 0
 }
-label, i{
+
+label,
+i {
     margin-top: 20px;
 }
 
-.editor-demanda{
+.editor-demanda {
     border: 1px solid #dee2e6 !important;
     border-radius: 5px !important;
     max-width: 100%;
     min-height: 25vh;
-    word-wrap:break-word;
+    word-wrap: break-word;
 }
 

@@ -128,7 +128,21 @@ export class ModalCriarReuniaoComponent implements OnInit {
       statusReuniao: StatusReuniao.PROXIMO,
       codigoReuniao: parseInt(this.router.url.split("/").pop() as string)
     }
-    if (!Array.isArray(this.data)) {
+
+    if (this.data == undefined) {
+      this.reuniaoService.postReuniao(reuniao)
+        .subscribe({
+          next: reuniao => {
+            this.showSuccess("Reunião Marcada!")
+            this.router.navigate(['/tela-inicial/reunioes'])
+            this.dialogRef.close(reuniao)
+          }, error: err => {
+            this.showError("Não foi possível marcar a reunião")
+          }
+        })
+    }
+
+    if (this.instanceOfDemanda(this.data)) {
       this.reuniaoService.postReuniao(reuniao)
         .subscribe({
           next: reuniao => {
@@ -140,6 +154,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
           }
         })
     } else {
+      console.log("edit")
       this.reuniaoService.putReuniao(reuniao)
         .subscribe({
           next: reuniao => {

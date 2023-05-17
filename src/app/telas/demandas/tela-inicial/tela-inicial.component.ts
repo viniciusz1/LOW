@@ -86,14 +86,14 @@ export class TelaInicialComponent implements OnInit {
   nenhumResultadoEncontrado = false;
   listaDemandasRascunho: Demanda[] = [
     {
-      scoreDemanda: 2034,
+      score: 2034,
       statusDemanda: StatusDemanda.DRAFT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',
       ppmDemanda: 'PPM 123456',
     },
     {
-      scoreDemanda: 2034,
+      score: 2034,
       statusDemanda: StatusDemanda.DRAFT,
       departamentoBenDemanda: 'Tecnologia da Informação',
       tituloDemanda: 'Sistema de Gestão de Demandas',

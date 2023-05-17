@@ -32,7 +32,7 @@ export interface Demanda {
     ppmDemanda?: string
     solicitanteDemanda?: Usuario
     departamentoBenDemanda?: string
-    scoreDemanda?: number,
+    score?: number,
     dataCriacaoDemanda?: Date
     version?: number
     motivoReprovacaoDemanda?: string,

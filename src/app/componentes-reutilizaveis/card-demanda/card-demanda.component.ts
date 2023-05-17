@@ -84,6 +84,10 @@ export class CardDemandaComponent implements OnInit {
     return false;
   }
 
+  formatarNumero(numero: number | undefined, casasDecimais: number): string {
+    return numero !== undefined ? numero.toFixed(casasDecimais) : '';
+  }
+
   retornaProximoStatusDemanda(statusDemanda: StatusDemanda | undefined) {
     switch (statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO: return StatusDemanda.BACKLOG_APROVACAO

@@ -214,7 +214,7 @@
       </div>
       <p-fileUpload (input)="onInputChange()" [chooseLabel]="'Escolher'" [uploadLabel]="'Enviar'"
         [cancelLabel]="'Cancelar'" [multiple]="true" [auto]="true" [customUpload]="true" [files]="listaFiles"
-        (uploadHandler)="uploadDocumentos($event)">
+        (uploadHandler)="uploadDocumentos($event)" [maxFileSize]="100000000">
       </p-fileUpload>
     </div>
   </section>

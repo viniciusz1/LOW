@@ -30,6 +30,12 @@
                 <span *ngIf="notificacoes.tipoNotificacao == 'DESMARCOU_REUNIAO'" class="custom-marker shadow-2" [style.backgroundColor]="'#FF7171'">
                     <i [ngClass]="'pi pi-calendar-times'"></i>
                 </span>
+                <span *ngIf="notificacoes.tipoNotificacao == 'REUNIAO_PROXIMA'" class="custom-marker shadow-2" [style.backgroundColor]="'#EF8300'">
+                    <i [ngClass]="'pi pi-chevron-circle-right'"></i>
+                </span>
+                <span *ngIf="notificacoes.tipoNotificacao == 'REUNIAO_PENDETE'" class="custom-marker shadow-2" [style.backgroundColor]="'#EF8300'">
+                    <i [ngClass]="'pi pi-exclamation-circle'"></i>
+                </span>
             </ng-template>
 
 

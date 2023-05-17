@@ -6,10 +6,8 @@ import { Subject } from 'rxjs';
 import { DemandaService } from './../../../../../services/demanda.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
-import { Editor, Toolbar } from 'ngx-editor';
-import Locals from 'ngx-editor/lib/Locals';
+import { Editor, Toolbar,Validators } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
-import { InputNumber } from 'primeng/inputnumber';
 
 interface Tab {
   title: string;
@@ -89,7 +87,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
   abrirSegundoAccordion: boolean = false;
-  
+
   tabs1: Tab[] = [
     { title: 'Tab 1', content: 'Conteúdo da Tab 1' },
     { title: 'Tab 2', content: 'Conteúdo da Tab 2' },

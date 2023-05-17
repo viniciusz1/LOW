@@ -133,6 +133,8 @@ export class DemandaService {
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
+    console.log(this.demandaForm.value.objetivoDemanda)
+
     let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
     let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
     // toHTML(
@@ -244,7 +246,6 @@ export class DemandaService {
       codigoDemanda: demanda.codigoDemanda,
       situacaoAtualDemanda: demanda.situacaoAtualDemanda,
       objetivoDemanda: demanda.objetivoDemanda,
-      // version: demanda.version
     })
 
 
@@ -386,6 +387,12 @@ export class DemandaService {
   getHistoricoDemandaByCodigo(codigoDemanda: string) {
     return this.http.get<Demanda[]>(
       path + `demanda/versoes/${codigoDemanda}`
+    );
+  }
+
+  getDemandasTelaInicialByDepartamento(){
+    return this.http.get<Demanda[]>(
+      path + 'demanda/departamento'
     );
   }
 

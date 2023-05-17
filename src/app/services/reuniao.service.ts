@@ -3,19 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Reuniao } from '../models/reuniao.model';
 import { Demanda } from '../models/demanda.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReuniaoService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   getReuniao() {
-   
-    const cred = {
-      withCredentials: true
-    }
-    return this.http.get<Reuniao[]>(path + 'reuniao', cred);
+    return this.http.get<Reuniao[]>(path + 'reuniao');
   }
 
   getReuniaoId(codigoReuniao: Number) {
@@ -55,7 +52,9 @@ export class ReuniaoService {
     );
   }
   putReuniao(reuniao: Reuniao) {
-    console.log('aqui: ');
+    this.route.url.subscribe((url) => {
+      console.log(url);
+    });
     return this.http.put<Reuniao>(
       path + 'reuniao/update/' + reuniao.codigoReuniao,
       reuniao

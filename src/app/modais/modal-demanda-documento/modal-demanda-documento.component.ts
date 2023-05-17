@@ -29,6 +29,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private matDialog: MatDialog,
     private messageService: MessageService,
     private usuarioService: UsuarioService) {
+      console.log(data)
     this.dadosDemanda = data
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe({

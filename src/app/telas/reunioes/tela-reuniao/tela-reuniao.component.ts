@@ -1,15 +1,13 @@
 import { ModalCancelamentoReuniaoComponent } from './../../../modais/modal-cancelamento-reuniao/modal-cancelamento-reuniao.component';
-import { Demanda } from './../../../models/demanda.model';
 import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reuniao/modal-criar-reuniao.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TelaCalendarioComponent } from './../tela-calendario/tela-calendario.component';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { fadeAnimation } from './../../../shared/app.animation';
 import { textoTutorial } from 'src/app/shared/textoDoTutorial';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
-import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 
 @Component({
   selector: 'app-tela-login',
@@ -24,7 +22,8 @@ export class TelaReuniaoComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public matDialog: MatDialog,
     private messageService: MessageService,
-    private reuniaoService: ReuniaoService
+    private reuniaoService: ReuniaoService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
   opcoesOrdenacao = [{ name: 'Data', value: 'data' }, { name: 'Comissão', value: 'comissao' }]
   ordenarSelect = ""
@@ -63,10 +62,23 @@ export class TelaReuniaoComponent implements OnInit {
   }
 
   openModalCriarReuniao() {
-    console.log("oi")
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
-    });
+    }).afterClosed().subscribe((reuniao: Reuniao | undefined) => {
+      if(reuniao){
+        //verificar se ja existe
+        const index = this.listaReunioes.findIndex(e => e.codigoReuniao === reuniao.codigoReuniao);
+
+        if (index !== -1) {
+          // Substituir a reunião existente
+          this.listaReunioes[index] = reuniao;
+        } else {
+          this.atualizarReunioes();
+        }
+
+
+      }
+    })
   }
 
   openCalendario() {
@@ -101,7 +113,7 @@ export class TelaReuniaoComponent implements OnInit {
   }
 
 
-  
+
   pesquisarReunioes(event: {
     nomeComissao: string;
     dataReuniao: string;

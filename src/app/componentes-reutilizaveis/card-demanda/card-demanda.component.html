@@ -68,13 +68,11 @@
     </div>
 
     <p class="card-text d-flex justify-content-between">
+      <span>
+          <b>Status:</b> <small for=""> {{ dadosDemanda.statusDemanda | uppercase }}</small>
+      </span>
       <span *ngIf="dadosDemanda.score != undefined"> <b>{{ "componentes-reutilizaveis.card-demanda.score" | translate }}</b> {{ formatarNumero(dadosDemanda.score, 2) }} </span>
       <span *ngIf="dadosDemanda.score == undefined"></span>
-      <span>
-        <small for="">
-          {{ dadosDemanda.statusDemanda | uppercase }}
-        </small>
-      </span>
     </p>
     <p class="card-text d-flex justify-content-between">
       <span><b>{{ "componentes-reutilizaveis.card-demanda.autor" | translate }} </b>{{ dadosDemanda.solicitanteDemanda?.nomeUsuario }}</span>

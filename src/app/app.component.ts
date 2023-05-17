@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { WebSocketConnector } from './websocket/websocket-connector';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +30,5 @@ export class AppComponent implements OnInit{
     ngOnInit(): void {
     }
 
-    onMessage(message: any){
-    }
 
 }

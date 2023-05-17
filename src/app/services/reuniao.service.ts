@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Reuniao } from '../models/reuniao.model';
 import { Demanda } from '../models/demanda.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReuniaoService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   getReuniao() {
     return this.http.get<Reuniao[]>(path + 'reuniao');
@@ -51,6 +52,9 @@ export class ReuniaoService {
     );
   }
   putReuniao(reuniao: Reuniao) {
+    this.route.url.subscribe((url) => {
+      console.log(url);
+    });
     return this.http.put<Reuniao>(
       path + 'reuniao/update/' + reuniao.codigoReuniao,
       reuniao

@@ -3,7 +3,7 @@ import { ModalCriarReuniaoComponent } from './../../../modais/modal-criar-reunia
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { TelaCalendarioComponent } from './../tela-calendario/tela-calendario.component';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { fadeAnimation } from './../../../shared/app.animation';
 import { textoTutorial } from 'src/app/shared/textoDoTutorial';
@@ -22,7 +22,8 @@ export class TelaReuniaoComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public matDialog: MatDialog,
     private messageService: MessageService,
-    private reuniaoService: ReuniaoService
+    private reuniaoService: ReuniaoService,
+    private changeDetectorRef: ChangeDetectorRef
   ) { }
   opcoesOrdenacao = [{ name: 'Data', value: 'data' }, { name: 'Comissão', value: 'comissao' }]
   ordenarSelect = ""
@@ -63,7 +64,21 @@ export class TelaReuniaoComponent implements OnInit {
   openModalCriarReuniao() {
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
-    });
+    }).afterClosed().subscribe((reuniao: Reuniao | undefined) => {
+      if(reuniao){
+        //verificar se ja existe
+        const index = this.listaReunioes.findIndex(e => e.codigoReuniao === reuniao.codigoReuniao);
+
+        if (index !== -1) {
+          // Substituir a reunião existente
+          this.listaReunioes[index] = reuniao;
+        } else {
+          this.atualizarReunioes();
+        }
+
+
+      }
+    })
   }
 
   openCalendario() {

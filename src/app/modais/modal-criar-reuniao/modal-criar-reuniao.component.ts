@@ -1,26 +1,37 @@
-
+import { Reuniao } from './../../models/reuniao.model';
+import { Demanda } from './../../models/demanda.model';
 import { UsuarioService } from './../../services/usuario.service';
 import { Router } from '@angular/router';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
-import { Demanda } from 'src/app/models/demanda.model';
-import { Reuniao } from 'src/app/models/reuniao.model';
-import { Component, OnInit, Inject, } from '@angular/core';
+import { Component, OnInit, Inject,LOCALE_ID } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalHistoricoComponent } from '../modal-historico/modal-historico.component';
 import { ModalDemandaDocumentoComponent } from '../modal-demanda-documento/modal-demanda-documento.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
+import { Calendar } from 'primeng/calendar';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
+
 
 @Component({
   selector: 'app-modal-criar-reuniao',
   templateUrl: './modal-criar-reuniao.component.html',
   styleUrls: ['./modal-criar-reuniao.component.scss'],
+  providers: [
+    Calendar,
+    { provide: LOCALE_ID, useValue: 'pt' }
+  ]
 })
 export class ModalCriarReuniaoComponent implements OnInit {
+  localeConfig: any;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Demanda | Demanda[],
+    @Inject(MAT_DIALOG_DATA) public data: Demanda | Reuniao,
     public dialogRef: MatDialogRef<ModalCriarReuniaoComponent>,
     private matDialog: MatDialog,
     private demandaService: DemandaService,
@@ -28,8 +39,11 @@ export class ModalCriarReuniaoComponent implements OnInit {
     private usuarioService: UsuarioService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private calendar: Calendar
   ) {
+    this.dataReuniao = new Date();
+    this.localeConfig = this.calendar.locale;
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe(
         {
@@ -103,37 +117,39 @@ export class ModalCriarReuniaoComponent implements OnInit {
   listaProposta: Proposta[] = [];
   cabecalhoMensagemDeConfirmacao = 'Avançar status';
 
-  dataReuniao: any;
+  dataReuniao: Date;
   comissaoSelecionada: string | undefined = undefined;
 
   onSubmit() {
     let reuniao: Reuniao = {
       dataReuniao: this.dataReuniao,
       comissaoReuniao: this.comissaoSelecionada,
-      propostasReuniao: this.listaDemandasEscolhidas
+      propostasReuniao: this.listaDemandasEscolhidas,
+      statusReuniao: StatusReuniao.PROXIMO,
+      codigoReuniao: parseInt(this.router.url.split("/").pop() as string)
     }
-    if(!Array.isArray(this.data)){
-    this.reuniaoService.postReuniao(reuniao)
-      .subscribe({
-        next: reuniao => {
-          this.showSuccess("Reunião Marcada!")
-          this.router.navigate(['/tela-inicial/reunioes'])
-          this.dialogRef.close()
-        }, error: err => {
-          this.showError("Não foi possível marcar a reunião")
-        }
-      })
-    }else{
+    if (!Array.isArray(this.data)) {
+      this.reuniaoService.postReuniao(reuniao)
+        .subscribe({
+          next: reuniao => {
+            this.showSuccess("Reunião Marcada!")
+            this.router.navigate(['/tela-inicial/reunioes'])
+            this.dialogRef.close(reuniao)
+          }, error: err => {
+            this.showError("Não foi possível marcar a reunião")
+          }
+        })
+    } else {
       this.reuniaoService.putReuniao(reuniao)
-      .subscribe({
-        next: reuniao => {
-          this.showSuccess("Reunião Editada com sucesso!")
-          this.router.navigate(['/tela-inicial/reunioes'])
-          this.dialogRef.close()
-        }, error: err => {
-          this.showError("Não foi possível editar a reunião")
-        }
-      })
+        .subscribe({
+          next: reuniao => {
+            this.showSuccess("Reunião Editada com sucesso!")
+            this.router.navigate(['/tela-inicial/reunioes'])
+            this.dialogRef.close()
+          }, error: err => {
+            this.showError("Não foi possível editar a reunião")
+          }
+        })
     }
   }
   dragStart(demanda: Demanda) {
@@ -167,11 +183,18 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
   }
 
+  instanceOfDemanda(data: any): data is Demanda {
+    return 'codigoDemanda' in data;
+  }
+
   removerDaListaAdicSecundaria() {
 
+    if (this.data == undefined) {
+      return
+    }
+
     //remove se for Demanda
-    if (!Array.isArray(this.data)) {
-      console.log("opa funcionou")
+    if (this.instanceOfDemanda(this.data)) {
       this.listaDemandasEscolhidas.push(this.data);
       for (let i of this.listaDemandas) {
         if (i.codigoDemanda == this.data.codigoDemanda) {
@@ -182,15 +205,24 @@ export class ModalCriarReuniaoComponent implements OnInit {
 
     //remove se for Demanda[]
     else {
-      for (let i of this.data) {
-        this.listaDemandasEscolhidas.push(i);
-        for (let j of this.listaDemandas) {
-          if (j.codigoDemanda == i.codigoDemanda) {
-            this.listaDemandas.splice(this.listaDemandas.indexOf(j), 1);
+      if (this.data.propostasReuniao)
+        for (let i of this.data.propostasReuniao) {
+          this.listaDemandasEscolhidas.push(i);
+          for (let j of this.listaDemandas) {
+            if (j.codigoDemanda == i.codigoDemanda) {
+              this.listaDemandas.splice(this.listaDemandas.indexOf(j), 1);
+            }
           }
         }
-      }
+      this.setInformacoesPreDefinidas(this.data)
     }
+  }
+
+
+  setInformacoesPreDefinidas(reuniao: Reuniao) {
+    this.comissaoSelecionada = reuniao.comissaoReuniao
+    if(reuniao.dataReuniao)
+    this.dataReuniao = new Date(reuniao.dataReuniao)
   }
 
   showSuccess(message: string) {
@@ -207,12 +239,13 @@ export class ModalCriarReuniaoComponent implements OnInit {
       .subscribe({
         next: demandas => {
           this.listaDemandas = demandas
-          // this.removerDaListaAdicSecundaria()
+          this.removerDaListaAdicSecundaria()
         }, error: err => {
           this.showError("Não foi possível filtrar as demandas")
         }
       });
   }
+
 
   dragEnd() {
     this.draggedDemanda = undefined;

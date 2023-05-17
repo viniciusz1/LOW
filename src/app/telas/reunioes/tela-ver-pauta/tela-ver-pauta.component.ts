@@ -71,7 +71,7 @@ export class TelaVerPauta implements OnInit {
   openModalCriarReuniao() {
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
-      data: this.reuniao?.propostasReuniao
+      data: this.reuniao
     });
   }
 

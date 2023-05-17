@@ -38,7 +38,7 @@
     <div class=" mt-1 p-3 border rounded low-shadow">
       <div class="">
         <label for="time">{{ "modais.modal-criar-reuniao.data-hora-reuniao" | translate }}</label>
-        <p-calendar placeholder="Clique aqui!" [showTime]="true" [showSeconds]="true"
+        <p-calendar placeholder="Clique aqui!" [showTime]="true" [showSeconds]="true" [locale]="localeConfig"
           inputId="time" [(ngModel)]="dataReuniao"></p-calendar>
       </div>
       <div class="mt-1 d-grid">

@@ -15,6 +15,7 @@ import { StatusReuniao } from '../models/statusReuniao.enum';
 export class OrdenarReuniaoPipe implements PipeTransform {
 
   transform(reuniao: Reuniao[]): Reuniao[] {
+    console.log("No pipe")
     let novaLista: Reuniao[] = []
     novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.PROXIMO))
     novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.AGUARDANDO))

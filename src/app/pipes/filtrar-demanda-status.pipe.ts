@@ -39,21 +39,20 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
 
       return list
     }
-
-    if (this.usuarioService.getRole == 'Analista' || this.usuarioService.getRole == 'GestorTI') {
-      if (titulo[0] == "Backlog - Classificação") {
-        return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
-      }
-      if (titulo[0] == "Backlog - Classificação") {
-        return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
-      }
-    } else if (this.usuarioService.getRole == 'GerenteNegocio') {
-      if (titulo[0] == "Backlog - Aprovação") {
-        return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
-      }
-      if (titulo[0] == "Backlog - Classificação") {
-        return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
-      }
+    if (titulo[0] == "Suas Tarefas") {
+      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
+    }
+    if (titulo[0] == "Suas Demandas") {
+      return demandas.filter(d => d.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())
+    }
+    if (titulo[0] == "Demandas do Seu Departamento") {
+      return demandas
+    }
+    if (titulo[0] == "Backlog - Classificação") {
+      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
+    }
+    if (titulo[0] == "Backlog - Aprovação") {
+      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
     }
 
     else if (titulo[0] == "Backlog - Propostas") {

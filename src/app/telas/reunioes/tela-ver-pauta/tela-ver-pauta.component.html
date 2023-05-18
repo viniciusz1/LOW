@@ -46,7 +46,7 @@
                     </div>
 
                     <div *ngIf="mostrarBotoesReuniao()" class="d-flex flex-column mb-5">
-                      <button (click)="openModalCriarReuniao()">Edit</button>
+                      <button class="btn btn-outline-primary mb-3" (click)="openModalCriarReuniao()">Editar Reunião</button>
                         <button class="btn btn-primary mb-3" (click)="modalConfirmacaoFinalizar()"> {{
                             "telas.tela-ver-pauta.b-finalizar-reuniao" | translate }}</button>
                         <button class="btn btn-danger" (click)="cancelarReuniao()"> {{

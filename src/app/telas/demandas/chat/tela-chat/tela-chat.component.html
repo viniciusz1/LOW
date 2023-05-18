@@ -45,8 +45,8 @@
       <header class="d-flex align-items-center border-bottom">
         <div class="d-flex flex-column flex-fill ms-3">
           <h6>{{ demandaDiscutida?.tituloDemanda }}</h6>
-          <small class="timeago">Solicitante: {{ demandaDiscutida?.solicitanteDemanda?.nomeUsuario }} | Analista: {{ demandaDiscutida?.analista?.nomeUsuario }}</small>
-    
+          <small *ngIf="demandaDiscutida" class="timeago">Solicitante: {{ demandaDiscutida?.solicitanteDemanda?.nomeUsuario }} | Analista: {{ demandaDiscutida?.analista?.nomeUsuario }}</small>
+
         </div>
         <!-- <i class="bi bi-mic-mute me-3" (click)="silenciarChat()" style="cursor: pointer;"></i>
                 <i class="bi bi-x-circle me-3" (click)="finalizarChat()" style="cursor: pointer;"></i> -->

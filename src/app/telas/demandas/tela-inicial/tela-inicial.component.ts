@@ -82,7 +82,10 @@ export class TelaInicialComponent implements OnInit {
   showPesquisaEBotaoFiltro = true;
   showSidebar = -350;
   listaDemandas: Demanda[] = [];
+  demandasVazias: boolean = false;
+  divScrollCircle: boolean = false;
   tipoRascunho = false;
+  isFirstIfExecuted: boolean = false;
   listaTituloNaoFiltrado: { status: string; titulo: string }[] = [];
   qtdDemandasStatus: number[] = []
   pesquisaDemanda = '';
@@ -441,9 +444,20 @@ export class TelaInicialComponent implements OnInit {
       this.demandasService.getDemandasTelaInicialByDepartamento().subscribe({
         next: (demandas) => {
           if (demandas.length > 0) {
+            console.log("divscroll 1 " , this.divScrollCircle)
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
+            this.isFirstIfExecuted = true;
+            this.divScrollCircle = false;
             this.nenhumResultadoEncontrado = false;
+          } 
+
+          if(!this.isFirstIfExecuted && demandas.length == 0) {
+            console.log("divscroll 2 " , this.divScrollCircle)
+            this.divScrollCircle = true;
+            setTimeout(() => {
+              this.demandasVazias = true;
+            }, 5000)
           }
           this.exibirFilasDeStatus();
         },

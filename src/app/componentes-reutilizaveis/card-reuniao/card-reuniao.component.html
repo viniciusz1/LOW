@@ -17,14 +17,13 @@
               </mat-menu> -->
         </div>
         <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.comissao" | translate }}</b> {{dadosReuniao.comissaoReuniao}}</p>
-        <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.propostas-adicionadas" | translate }} </b> 
-        RESOLVER</p>
+        <p class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.propostas-adicionadas" | translate }} </b>{{ titulosPropostas().join(', ')}} </p>
         <p class="card-text bottom-card">
-            <label class=" me-2">
+            <label class=" me-2" (click)="departamentosBeneficiados()">
                 <b>
-                  {{ "componentes-reutilizaveis.card-reuniao.departamentos-beneficiados" | translate }}
+                  Centros de custo beneficiados:
                 </b>
-                RESOLVER
+               DADOS REUNIAO NÃO RETORNA CENTROS DE CUSTO
             </label>
             <span class="d-flex">
               <button class="btn btn-outline-danger btn-sm me-2" *ngIf="

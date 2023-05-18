@@ -17,6 +17,14 @@ export class TelaPerfilComponent implements OnInit {
     this.usuario = this.usuarioService.getUser('user')
   }
 
+  numberPassword: number = 0;
+
+  defineQuantidadeSenha(){
+    const regex = /[a-zA-Z]/g;
+    const matches = this.usuario?.senhaUsuario.match(regex);
+    this.numberPassword = matches ? matches.length : 0;
+  }
+
   onClick() {
     this.joyrideService.startTour(
       {

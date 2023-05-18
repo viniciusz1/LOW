@@ -4,8 +4,12 @@
 :host ::ng-deep .p-inputnumber	{
       width: 100%;
 }
-:host ::ng-deep .p-dropdown{
-    width:100%
+:host ::ng-deep .dropDespesa{
+    width:90%;
+}
+
+:host ::ng-deep .dropStatus{
+    width: 30%;
 }
 
 :host ::ng-deep .p-chips .p-chips-multiple-container .p-chips-token {

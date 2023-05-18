@@ -24,7 +24,10 @@ export class TelaCorridaComponent implements OnInit {
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
   posicaoScroll = 0;
   titulosDemanda: any[] = [];
+  titulosProposta: any[] = [];
   activeSection: string = '';
+  activePage: string = '';
+
   tabs2: Tab[] = [
     { title: 'Aba 1', content: 'Conteúdo da Aba 1' },
     { title: 'Aba 2', content: 'Conteúdo da Aba 2' },
@@ -33,9 +36,9 @@ export class TelaCorridaComponent implements OnInit {
 
   activeIndex = 1;
   dadosDemanda: Demanda | undefined;
-  
-  verificaSeTemParecerOuRecomendacao(){
-    if(this.dadosDemanda?.parecerComissaoProposta || this.dadosDemanda?.recomendacaoProposta){
+
+  verificaSeTemParecerOuRecomendacao() {
+    if (this.dadosDemanda?.parecerComissaoProposta || this.dadosDemanda?.recomendacaoProposta) {
       return true;
     }
     return false;
@@ -43,7 +46,6 @@ export class TelaCorridaComponent implements OnInit {
 
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
-
       if (this.router.url.includes('reformular-demanda')) {
         this.demandaService.reformularDemanda().subscribe({
           next: (response) => {
@@ -57,9 +59,9 @@ export class TelaCorridaComponent implements OnInit {
       } else {
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
+            this.showSuccess("Demanda criada com sucesso!")
             let codigo = this.route.snapshot.params['indiceRascunho']
             this.rascunhoService.deleteRascunho(codigo)
-            this.showSuccess("Demanda criada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
@@ -73,11 +75,11 @@ export class TelaCorridaComponent implements OnInit {
         .subscribe({
           next: (response) => {
             console.log("Chama 3x?");
-            
+
             this.showSuccess("Proposta criada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
-          error: (err) => {   
+          error: (err) => {
             this.showError("Não foi possível criar proposta")
           },
         });
@@ -132,7 +134,6 @@ export class TelaCorridaComponent implements OnInit {
         .subscribe(e => {
           this.serviceCalled = true;
           this.dadosDemanda = e;
-          console.log(e)
           this.verificaSeTemParecerOuRecomendacao()
           this.demandaService.setFormDemandaData(e);
           this.propostaService.setFormDemandaRascunho(this.codigoDemandaRota)
@@ -142,28 +143,73 @@ export class TelaCorridaComponent implements OnInit {
 
 
   onScroll() {
+
     const sections = document.querySelectorAll('section');
     const scrollPosition = window.pageYOffset;
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 50;
-      const sectionBottom = sectionTop + section.offsetHeight;
 
-      if (
-        scrollPosition >= sectionTop - 200 &&
-        scrollPosition < sectionBottom
-      ) {
-        this.activeSection = section.id;
-      }
-      if (scrollPosition == 890) {
-        this.activeSection = 'section3';
-      }
-    });
+    if (!this.aparecerProposta) {
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 50;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (
+          scrollPosition >= sectionTop - 200 &&
+          scrollPosition < sectionBottom
+        ) {
+          this.activeSection = section.id;
+        }
+        if (scrollPosition >= 1270) {
+          this.activeSection = 'section3';
+        }
+      });
+    } else {
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 50;
+        const sectionBottom = sectionTop + section.offsetHeight;
+
+        if (
+          scrollPosition >= sectionTop - 200 &&
+          scrollPosition < sectionBottom
+        ) {
+          this.activeSection = section.id;
+        }
+        if (scrollPosition >= 500) {
+          this.activeSection = 'section2';
+        }
+        if (scrollPosition >= 900) {
+          this.activeSection = 'section3';
+        }
+        if (scrollPosition >= 1000) {
+          this.activeSection = 'section4';
+        }
+      });
+    }
+
   }
 
   indoPraCima(id: string) {
+    const scrollHeight = document.documentElement.scrollHeight;
     const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (element?.id == 'section1') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (element?.id == 'section2') {
+      window.scrollTo({ top: 1000, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: scrollHeight, behavior: 'smooth' });
+    }
+  }
+
+  indoPraCimaProposta(id: string) {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const element = document.getElementById(id);
+    if (element?.id == 'section1') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (element?.id == 'section2') {
+      window.scrollTo({ top: 550, behavior: 'smooth' });
+    } else if (element?.id == 'section3') {
+      window.scrollTo({ top: 950, behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: scrollHeight, behavior: 'smooth' });
     }
   }
 
@@ -173,10 +219,18 @@ export class TelaCorridaComponent implements OnInit {
     setInterval(() => {
       let icones = document.getElementsByClassName('nav-scroll');
       for (let i = 0; i < icones.length; i++) {
-        if (icones[i].classList.length > 2) {
-          this.titulosDemanda[i].color = '#00579d';
+        if (!this.aparecerProposta) {
+          if (icones[i].classList.length > 2) {
+            this.titulosDemanda[i].color = '#00579d';
+          } else {
+            this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
+          }
         } else {
-          this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
+          if (icones[i].classList.length > 2) {
+            this.titulosProposta[i].color = '#00579d';
+          } else {
+            this.titulosProposta[i].color = 'rgb(233, 233, 233)';
+          }
         }
       }
     });
@@ -203,6 +257,37 @@ export class TelaCorridaComponent implements OnInit {
         color: 'rgb(233, 233, 233)',
         local: 1100,
       },
+    ];
+
+    this.titulosProposta = [
+      {
+        titulo: 'Proposta',
+        id: 'proposta',
+        icon: PrimeIcons.CHART_BAR,
+        color: 'rgb(233, 233, 233)',
+        local: 0,
+      },
+      {
+        titulo: 'Recursos',
+        id: 'recursos',
+        icon: PrimeIcons.DATABASE,
+        color: 'rgb(233, 233, 233)',
+        local: 600,
+      },
+      {
+        titulo: 'Escopo',
+        id: 'escopo',
+        icon: PrimeIcons.PENCIL,
+        color: 'rgb(233, 233, 233)',
+        local: 1100,
+      },
+      {
+        titulo: 'Dados Finais',
+        id: 'dadosFinais',
+        icon: PrimeIcons.CHECK,
+        color: 'rgb(233, 233, 233)',
+        local: 1700,
+      }
     ];
   }
 }

@@ -13,7 +13,7 @@ header, footer {
 }
 
 main {
-  background-color: rgb(245, 245, 245);
+  background-color: #ffffff;
   min-height: calc(100vh - 32.5vh);
 }
 
@@ -39,7 +39,9 @@ header img {
     border-color: #f8f8f8;
 }
 
-::ng-deep{
+
+
+:host ::ng-deep{
     .p-speeddial-button{
          width: 16px !important;
          height: 20px !important;
@@ -106,16 +108,16 @@ header img {
 
 
 .balao-chat-analista{
-    margin: 5px 20px 0px 35px;
+    margin: 5px 20px 0px 25px;
     position: relative;
     font-size: 15px;
     /* line-height: 14px; */
     width: 30vw;
-    background-color: #6a7575;
+    background-color: #EFEFEF;
     border-radius: 10px;
     padding: 10px 10px 10px 21px;
     /* text-align: center; */
-    color: rgb(255, 255, 255);
+    color: #495057;
     word-wrap:break-word;
 }
 
@@ -124,10 +126,9 @@ header img {
     width: 0px;
     height: 0px;
     position: absolute;
-
-    border-left: 12px solid #6a7575;
+    border-left: 12px solid #EFEFEF;
     border-right: 6px solid transparent;
-    border-top: 6px solid #6a7575;
+    border-top: 6px solid #EFEFEF;
     border-bottom: 10px solid transparent;
     left: 20px;
     bottom: -15px;
@@ -136,16 +137,16 @@ header img {
 }
 
 .balao-chat-solicitante{
-    margin: 5px 20px 0px 20px;
+    margin: 5px 25px 0px 20px;
     position: relative;
     font-size: 15px;
     /* line-height: 14px; */
     width: 30vw;
-    background-color: #0c5279;
+    background-color: #E8F1F3;
     border-radius: 10px;
     padding: 10px 10px 10px 21px;
     /* text-align: center; */
-    color: rgb(255, 255, 255);
+    color: #495057;
     word-wrap:break-word;
 }
 .na-rota{
@@ -157,9 +158,9 @@ header img {
     height: 0px;
     position: absolute;
     justify-content: end;
-    border-right: 12px solid #0c5279;
+    border-right: 12px solid #E8F1F3;
     border-left: 6px solid transparent;
-    border-top: 6px solid #0c5279;
+    border-top: 6px solid #E8F1F3;
     border-bottom: 10px solid transparent;
     right: 20px;
     bottom: -15px;

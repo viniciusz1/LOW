@@ -56,10 +56,10 @@
         </div>
       </div>
     </div>
-    <div formArrayName="centroCustosDemanda" class="row align-items-center">
-      <label style="font-weight: 500" class="me-2">{{ "telas.demanda.centros-custo" | translate }}<i
+    <div formArrayName="centroCustosDemanda" class="align-items-center">
+      <label style="font-weight: 500" class="me-2">{{ "telas.demanda.centros-custo" | translate }} <i
           class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
-          pTooltip="Quais sessões se beneficiariam com sua proposta?" tooltipPosition="top"></i></label>
+          pTooltip="Quais sessões se beneficiariam com sua proposta? Deve completar 100%" tooltipPosition="top"></i></label>
       <div style="width: 50%; display: -webkit-box;">
         <div class="d-flex flex-column">
           <div *ngFor="let centroCusto of demandaForm.controls.centroCustosDemanda.controls; let i = index"
@@ -70,8 +70,9 @@
                   [required]="true" type="number" formControlName="porcentagemCentroCusto" placeholder="Porcentagem" />
                 <span class="p-inputgroup-addon">%</span>
               </div>
-              <input maxlength="70" (input)="onInputChange()" style="width: 10vw; margin-right: 0.5vw;" [id]="'nomeCentroCusto'+i"
-                pInputText [required]="true" formControlName="nomeCentroCusto" placeholder="Centro de Custo" />
+              <input maxlength="70" (input)="onInputChange()" style="width: 10vw; margin-right: 0.5vw;"
+                [id]="'nomeCentroCusto'+i" pInputText [required]="true" formControlName="nomeCentroCusto"
+                placeholder="Centro de Custo" />
               <button (click)="removerCentroDeCusto(i)"
                 [disabled]="this.demandaForm.controls.centroCustosDemanda.length == 1" class="btn btn-danger"><i
                   class="bi bi-trash"></i></button>
@@ -101,11 +102,11 @@
                 style="font-size: 0.9rem; color: #00579d; cursor: pointer; margin-top: 0px !important;"
                 pTooltip="Qual seria o lucro mínimo adquirido pela sua proposta?" tooltipPosition="top"></i>
             </div>
-            <div style="display: flex; justify-content: space-between">
-              <div style="width: 100%;">
-                <p-inputNumber class="largura-customizada" (input)="onInputChange()" formControlName="valorBeneficio"
-                  mode="currency" [currency]="currencyMoedaBeneficio1" [locale]="localMoedaBeneficio1" [maxlength]="20"> </p-inputNumber>
-
+            <div style="display: flex; column-gap: 1vw;">
+              <div>
+                <p-inputNumber placeholder="Ex: 6.000,00"  type="number" class="largura-customizada" (input)="onInputChange()" formControlName="valorBeneficio"
+                  mode="currency" [currency]="currencyMoedaBeneficio1" [locale]="localMoedaBeneficio1" [maxlength]="20">
+                </p-inputNumber>
               </div>
               <!-- <input (input)="onInputChange()" formControlName="valorBeneficio" placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
                  /> -->
@@ -137,10 +138,11 @@
                   style="font-size: 0.9rem; color: #00579d; cursor: pointer; margin-top: 0px !important;"
                   pTooltip="Qual seria o lucro máximo adquirido pela sua proposta?" tooltipPosition="top"></i>
               </div>
-              <div style="display: flex; justify-content: space-between">
-                <div style="width: 100%;">
-                  <p-inputNumber class="largura-customizada" (input)="onInputChange()" formControlName="valorBeneficio"
-                    mode="currency" [currency]="currencyMoedaBeneficio2" [locale]="localMoedaBeneficio2" [maxlength]="20">
+              <div style="display: flex; column-gap: 1vw;">
+                <div>
+                  <p-inputNumber placeholder="Ex: 6.000,00" class="largura-customizada" (input)="onInputChange()" formControlName="valorBeneficio"
+                    mode="currency" [currency]="currencyMoedaBeneficio2" [locale]="localMoedaBeneficio2"
+                    [maxlength]="20">
                   </p-inputNumber>
                 </div>
                 <p-dropdown (onChange)="mudouMoeda($event, 2)" [options]="opcoesDeMoeda" placeholder="Moeda"
@@ -195,7 +197,7 @@
         <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Qual seria a usabilidade do sistema?" tooltipPosition="top"></i>
       </div>
-      <p-dropdown (onChange)="onInputChange()"
+      <p-dropdown (selectionChange)="onInputChange()" styleClass="moedaDrop"
         [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.frequenciaDeUsoDemanda.errors && demandaForm.controls.frequenciaDeUsoDemanda.touched}"
         [options]="opcoesDeTamanho" placeholder="Selecione a frequência" formControlName="frequenciaDeUsoDemanda">
       </p-dropdown>

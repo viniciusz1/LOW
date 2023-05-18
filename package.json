@@ -37,7 +37,7 @@
     "jspdf": "^2.5.1",
     "net": "^1.0.2",
     "ng-spy": "^4.0.2",
-    "ngx-editor": "^15.0.0",
+    "ngx-editor": "^15.3.0",
     "ngx-joyride": "^2.5.0",
     "pdfmake": "^0.2.7",
     "primeflex": "^3.3.0",

@@ -11,7 +11,7 @@ import { CentroCusto } from '../models/centro-custo.model';
 import { Validators as ValidatorsEditor } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
 import { map } from 'rxjs';
-
+import { toHTML } from 'ngx-editor';
 
 @Injectable({
   providedIn: 'root',
@@ -127,13 +127,14 @@ export class DemandaService {
         beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
       })
     }
-
+    console.log(this.demandaForm.value.beneficioRealDemanda)
     if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == '') {
       this.demandaForm.patchValue({
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
     console.log(this.demandaForm.value.objetivoDemanda)
+    console.log(this.demandaForm.value.situacaoAtualDemanda)
 
     let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
     let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
@@ -281,11 +282,9 @@ export class DemandaService {
   avancarPage(page: number) {
     let linkComPaginacao = this.link;
     linkComPaginacao += '&page=' + page
-    console.log(linkComPaginacao)
     return this.http.get<Demanda[]>(
       linkComPaginacao
     ).pipe(map((pageable: any) => {
-      console.log(pageable)
       this.pageable = pageable
       return pageable.content
     }))

@@ -69,4 +69,8 @@ export class UsuarioService {
       "senhaUsuario": senha
     })
   }
+
+  logout(){
+    return this.http.get<String>(path + "logout")
+  }
 }

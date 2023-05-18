@@ -10,10 +10,3 @@ export interface Notificacao {
   lido: Boolean
 }
 
-
-// tituloDemandaNotificacao;
-// TipoNotificacao tipoNotificacao;
-// descricaoNotificacao;
-// dataNotificacao
-// lido
-// List<Usuario> usuariosNotificacao;

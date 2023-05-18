@@ -27,7 +27,7 @@
           <div class="NgxEditor__Wrapper editor-demanda"
             [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}">
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-            <ngx-editor (input)="onInputChange()" [editor]="editor" formControlName="situacaoAtualDemanda">
+            <ngx-editor (input)="onInputChange()" [ngModel]="html" [editor]="editor" formControlName="situacaoAtualDemanda">
             </ngx-editor>
           </div>
           <small
@@ -48,7 +48,7 @@
           <div class="NgxEditor__Wrapper editor-demanda"
             [ngClass]="{'ng-dirty ng-invalid': demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched}">
             <ngx-editor-menu [editor]="editorDemanda" [toolbar]="toolbarDemanda"> </ngx-editor-menu>
-            <ngx-editor (input)="onInputChange()" [editor]="editorDemanda" formControlName="objetivoDemanda">
+            <ngx-editor (input)="onInputChange()" [ngModel]="html" [editor]="editorDemanda" formControlName="objetivoDemanda">
             </ngx-editor>
           </div>
           <small *ngIf="demandaForm.controls.objetivoDemanda.errors && demandaForm.controls.objetivoDemanda.touched"
@@ -108,7 +108,9 @@
                   mode="currency" [currency]="currencyMoedaBeneficio1" [locale]="localMoedaBeneficio1" [maxlength]="20">
                 </p-inputNumber>
               </div>
-              <p-dropdown (onChange)="mudouMoeda($event, 1)" [options]="opcoesDeMoeda" formControlName="moedaBeneficio"
+              <!-- <input (input)="onInputChange()" formControlName="valorBeneficio" placeholder="Ex: 150.000" style="width: 93%;" type="text" pInputText class="input"
+                 /> -->
+              <p-dropdown (onChange)="mudouMoeda($event, 1)" [options]="opcoesDeMoeda" formControlName="moedaBeneficio" placeholder="Moeda"
                 optionLabel="name" optionValue="value"></p-dropdown>
             </div>
             <div class="situacao-atual" style="display: grid" id="item-1-2">
@@ -143,7 +145,7 @@
                     [maxlength]="20">
                   </p-inputNumber>
                 </div>
-                <p-dropdown (onChange)="mudouMoeda($event, 2)" [options]="opcoesDeMoeda"
+                <p-dropdown (onChange)="mudouMoeda($event, 2)" [options]="opcoesDeMoeda" placeholder="Moeda"
                   formControlName="moedaBeneficio" optionLabel="name" optionValue="value"></p-dropdown>
               </div>
             </div>

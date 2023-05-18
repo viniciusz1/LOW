@@ -63,7 +63,7 @@ export class TelaReuniaoComponent implements OnInit {
 
   openModalCriarReuniao() {
     this.matDialog.open(ModalCriarReuniaoComponent, {
-      minWidth: '300px',
+      minHeight: '',
     }).afterClosed().subscribe((reuniao: Reuniao | undefined) => {
       if(reuniao){
         //verificar se ja existe

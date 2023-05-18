@@ -53,6 +53,7 @@ export class TelaInicialComponent implements OnInit {
       };
     })
     this.nivelAcessoUsuario = usuarioService.getRole
+    this.departamentoUsuario = usuarioService.getDepartamento
   }
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
@@ -66,6 +67,7 @@ export class TelaInicialComponent implements OnInit {
     { name: 'A-Z', value: '4' },
     { name: 'Z-A', value: '5' },
   ];
+  departamentoUsuario?= ''
   nivelAcessoUsuario?= ''
   totalPagesPagination = 0
   pesquisaAlterada = new Subject<string>();
@@ -108,7 +110,7 @@ export class TelaInicialComponent implements OnInit {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
   //Pesquisa demandas por status, pelo campo de pesquisa pequeno, ou por todos os campos, no caso do filtro especializado
-  pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
+  pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | string | undefined) {
     this.demandasService
       .getDemandasFiltradas(pesquisaEspecial)
       .subscribe((listaDemandas: Demanda[]) => {
@@ -504,6 +506,11 @@ export class TelaInicialComponent implements OnInit {
           status: 'SUAS_DEMANDAS',
           titulo: 'Suas Demandas',
         });
+      }else {
+        this.listaTituloNaoFiltrado.push({
+          status: 'Sem demandas',
+          titulo: 'Sem demandas',
+        });
       }
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
@@ -520,6 +527,11 @@ export class TelaInicialComponent implements OnInit {
         this.listaTituloNaoFiltrado.push({
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
+        });
+      }else{
+        this.listaTituloNaoFiltrado.push({
+          status: 'Sem demandas',
+          titulo: 'Sem demandas',
         });
       }
 
@@ -621,4 +633,5 @@ export class TelaInicialComponent implements OnInit {
       this.listaTituloNaoFiltrado.push({ status: 'DONE', titulo: 'Done' });
     }
   }
+
 }

@@ -20,7 +20,7 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
   }
 
 
-  transform(demandas: Demanda[], ...titulo: string[]): Demanda[] {
+  transform(demandas: Demanda[], ...titulo: string[]): Demanda[] | undefined {
     if (titulo[0] == "Seus Rascunhos") {
       let list: any = localStorage.getItem('rascunhos')
       // let listProposta: any = localStorage.getItem('rascunhosProposta')
@@ -39,7 +39,12 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
 
       return list
     }
-    if (titulo[0] == "Suas Tarefas") {
+
+    if(titulo[0] == "Sem demandas"){
+      return undefined
+    }
+
+    if (titulo[0] == "Suas Tarefas" && this.usuarioService.getRole == 'GerenteNegocio') {
       return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
     }
     if (titulo[0] == "Suas Demandas") {

@@ -38,7 +38,9 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     });
    }
    maxTotalFileSize = 100 * 1024 * 1024;
-
+   //serve para setar o tipo do editor de texto como html por padrão
+   //NÃO DELETAR
+   html = ""
    onInputChange() {
     // Em vez de chamar diretamente o método, envie um evento ao Subject
     this.inputSubject.next("");
@@ -52,7 +54,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     for (const file of files) {
       totalSize += file.size; // Calcula o tamanho total dos arquivos
       maxTotal -= file.size; //Para verificar se excedeu o total aceito
-      
+
       if (maxTotal < 0) { // Verifica se o tamanho total excedeu os 100 MB em bytes
         // Exibe uma mensagem de erro
         this.messageService.add({
@@ -67,11 +69,11 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
         return; // Retorna para evitar adicionar mais arquivos à lista
       }
 
-  
+
     }
     // this.listaFiles.push(...files); // Adiciona o arquivo à lista
     // this.listaFiles = this.listaFiles.filter(file => file ==(file));
-    
+
     this.maxTotalFileSize -= totalSize;
     console.log(this.maxTotalFileSize)
   }

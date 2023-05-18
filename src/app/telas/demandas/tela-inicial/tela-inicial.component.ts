@@ -619,4 +619,5 @@ export class TelaInicialComponent implements OnInit {
       this.listaTituloNaoFiltrado.push({ status: 'DONE', titulo: 'Done' });
     }
   }
+
 }

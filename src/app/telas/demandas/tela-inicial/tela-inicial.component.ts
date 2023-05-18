@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
-import { ModalMotivoDevolucaoComponent } from 'src/app/modais/modal-motivo-devolucao/modal-motivo-devolucao.component';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
@@ -21,7 +20,7 @@ import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-hi
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
-import { MessagesService } from 'src/app/websocket/messages.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -40,6 +39,7 @@ export class TelaInicialComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private messageService: MessageService,
+    private usuarioService: UsuarioService
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {
@@ -52,6 +52,7 @@ export class TelaInicialComponent implements OnInit {
         this.isFiltrado = true;
       };
     })
+    this.nivelAcessoUsuario = usuarioService.getRole
   }
 
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
@@ -65,7 +66,7 @@ export class TelaInicialComponent implements OnInit {
     { name: 'A-Z', value: '4' },
     { name: 'Z-A', value: '5' },
   ];
-
+  nivelAcessoUsuario?= ''
   totalPagesPagination = 0
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
@@ -416,13 +417,29 @@ export class TelaInicialComponent implements OnInit {
   carregarDemandasIniciais() {
     this.listaDemandas = [];
     this.listaTituloNaoFiltrado = [];
-    
-    let isFirstIfExecuted = false;
-    this.demandasService.getDemandasTelaInicial().subscribe({
-      next: (e) => {
-        console.log(e)
-        e['demandas'].forEach((demandas: Demanda[]) => {
+    if (this.nivelAcessoUsuario == 'Analista' || this.nivelAcessoUsuario == 'GestorTI') {
+      this.demandasService.getDemandasTelaInicial().subscribe({
+        next: (e) => {
+          e['demandas'].forEach((demandas: Demanda[]) => {
+            if (demandas.length > 0) {
+              this.listaDemandas.push(...demandas);
+              this.isFiltrado = false;
+              this.nenhumResultadoEncontrado = false;
+            }
+          });
+          e['qtdDemandas'].forEach((qtd: number) => {
+            this.qtdDemandasStatus.push(qtd)
+          })
 
+          this.exibirFilasDeStatus();
+        },
+        error: (err) => {
+          this.showError("Não foi possível carregar as demandas!")
+        },
+      });
+    } else if (this.nivelAcessoUsuario == 'Solicitante' || this.nivelAcessoUsuario == 'GerenteNegocio') {
+      this.demandasService.getDemandasTelaInicialByDepartamento().subscribe({
+        next: (demandas) => {
           if (demandas.length > 0) {
             console.log("divscroll 1 " , this.divScrollCircle)
             this.listaDemandas.push(...demandas);
@@ -439,16 +456,14 @@ export class TelaInicialComponent implements OnInit {
               this.demandasVazias = true;
             }, 5000)
           }
-        });
-        e['qtdDemandas'].forEach((qtd: number) => {
-          this.qtdDemandasStatus.push(qtd)
-        })
-        this.exibirFilasDeStatus();
-      },
-      error: (err) => {
-        this.showError("Não foi possível carregar as demandas!")
-      },
-    });
+          this.exibirFilasDeStatus();
+        },
+        error: (err) => {
+          this.showError("Não foi possível carregar as demandas!")
+        },
+      });
+    }
+
   }
 
   openModalMotivoReprovacao(demanda: Demanda) {
@@ -479,7 +494,44 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
+
+
   exibirFilasDeStatus() {
+    if (this.nivelAcessoUsuario == 'Solicitante') {
+      if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
+        this.listaTituloNaoFiltrado.push({
+          status: 'SUAS_DEMANDAS',
+          titulo: 'Suas Demandas',
+        });
+      }
+      this.listaTituloNaoFiltrado.push({
+        status: 'DEMANDAS_DEPARTAMENTO',
+        titulo: 'Demandas do Seu Departamento',
+      });
+
+
+      return
+    }
+
+    if (this.nivelAcessoUsuario == 'GerenteNegocio') {
+      if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
+        console.log("Hey")
+        this.listaTituloNaoFiltrado.push({
+          status: 'BACKLOG_APROVACAO',
+          titulo: 'Suas Tarefas',
+        });
+      }
+
+
+      this.listaTituloNaoFiltrado.push({
+        status: 'DEMANDAS_DEPARTAMENTO',
+        titulo: 'Demandas do Seu Departamento',
+      });
+
+
+      return
+    }
+
     if (this.rascunhoService.getRascunhosDemanda.length > 0) {
       this.listaTituloNaoFiltrado.push({
         status: 'DRAFT',

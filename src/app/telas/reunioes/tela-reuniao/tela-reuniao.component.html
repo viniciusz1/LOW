@@ -47,12 +47,10 @@
           </button>
         </ng-template>
       </p-confirmDialog>
-      <div  *ngFor="let reuniao of listaReunioes | ordenarReuniaoPipe">
-        <app-card-reuniao class="m-1" [dadosReuniao]="reuniao"
+        <app-card-reuniao class="m-1" [dadosReuniao]="reuniao" *ngFor="let reuniao of listaReunioes | ordenarReuniaoPipe"
           (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda(reuniao)"
           (motivoCancelamento)="modalMotivoCancelamentoDemanda($event)">
         </app-card-reuniao>
-      </div>
     </div>
   </div>
 

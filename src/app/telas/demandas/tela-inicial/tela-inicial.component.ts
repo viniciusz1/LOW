@@ -21,7 +21,6 @@ import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-hi
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
-import { MessagesService } from 'src/app/websocket/messages.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -552,4 +551,5 @@ export class TelaInicialComponent implements OnInit {
       this.listaTituloNaoFiltrado.push({ status: 'DONE', titulo: 'Done' });
     }
   }
+
 }

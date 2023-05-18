@@ -33,9 +33,9 @@ h4{
     width: 40.75vw;
 }
 
-// :host ::ng-deep .p-dropdown {
-//     width: 40.75vw;
-// }
+:host ::ng-deep .p-dropdown {
+    width: 40.75vw;
+}
 
 :host::ng-deep {
     .p-fileupload-content{

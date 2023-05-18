@@ -44,38 +44,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     this.inputSubject.next("");
   }
 
-  VerificarTamanho(event: any) {
-    const files: File[] = event.files; // Obtém os arquivos selecionados
-    let totalSize = 0; // Variável para armazenar o tamanho total dos arquivos
-    let maxTotal = this.maxTotalFileSize;
-
-    for (const file of files) {
-      totalSize += file.size; // Calcula o tamanho total dos arquivos
-      maxTotal -= file.size; //Para verificar se excedeu o total aceito
-      
-      if (maxTotal < 0) { // Verifica se o tamanho total excedeu os 100 MB em bytes
-        // Exibe uma mensagem de erro
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Tamanho máximo excedido',
-          detail: 'O tamanho total dos arquivos selecionados excede 100 MB.'
-        });
-        console.log("Aqui" + this.listaFiles)
-        const nomesLista2 = files.map(file => file.name); // Obter uma lista de nomes da lista2
-        this.listaFiles = this.listaFiles.filter(file => !nomesLista2.includes(file.name));
-        console.log("Aqui" + this.listaFiles)
-        return; // Retorna para evitar adicionar mais arquivos à lista
-      }
-
-  
-    }
-    // this.listaFiles.push(...files); // Adiciona o arquivo à lista
-    // this.listaFiles = this.listaFiles.filter(file => file ==(file));
-    
-    this.maxTotalFileSize -= totalSize;
-    console.log(this.maxTotalFileSize)
-  }
-
   inputSubject = new Subject<string>();
   @Input() aparecerProposta = false;
 

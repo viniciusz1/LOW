@@ -134,7 +134,6 @@ export class TelaCorridaComponent implements OnInit {
         .subscribe(e => {
           this.serviceCalled = true;
           this.dadosDemanda = e;
-          console.log(e)
           this.verificaSeTemParecerOuRecomendacao()
           this.demandaService.setFormDemandaData(e);
           this.propostaService.setFormDemandaRascunho(this.codigoDemandaRota)
@@ -227,10 +226,10 @@ export class TelaCorridaComponent implements OnInit {
             this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
           }
         } else {
-          if (icones[i].classList.length > 3) {
-            this.titulosDemanda[i].color = '#00579d';
+          if (icones[i].classList.length > 2) {
+            this.titulosProposta[i].color = '#00579d';
           } else {
-            this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
+            this.titulosProposta[i].color = 'rgb(233, 233, 233)';
           }
         }
       }

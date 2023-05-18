@@ -113,7 +113,7 @@
           id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
       
-      <div class="col-3" style="display: grid; padding-right: 0px !important; margin-left: 0.1vw;">
+      <div class="col-3" style="display: grid; padding-right: 0px !important;">
         <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.perfil-despesa" | translate }}:</label>
         <p-dropdown (onChange)="onInputChange()" styleClass="dropDespesa" placeholder="Ex: Interna" type="text" [required]="true"
           [options]="perfilDaDespesa" optionValue="value" optionLabel="tipo" formControlName="perfilDespesaRecurso"
@@ -155,7 +155,7 @@
         </div>
       </div>
 
-      <div class="col-3" style="display: grid; padding-right: 0px !important; margin-left: 0.1vw;">
+      <div class="col-3" style="display: grid; padding-right: 0px !important;">
         <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.tipo-despesa" | translate }}:</label>
         <p-dropdown (onChange)="onInputChange()" styleClass="dropDespesa" [options]="tipoDaDespesa" optionValue="value" optionLabel="tipo"
           [required]="true" placeholder="Selecione o Tipo" formControlName="tipoDespesaRecurso" [showClear]="true"

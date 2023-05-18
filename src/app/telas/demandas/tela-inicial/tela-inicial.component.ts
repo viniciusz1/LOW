@@ -83,6 +83,7 @@ export class TelaInicialComponent implements OnInit {
   demandasVazias: boolean = false;
   divScrollCircle: boolean = false;
   tipoRascunho = false;
+  isFirstIfExecuted: boolean = false;
   listaTituloNaoFiltrado: { status: string; titulo: string }[] = [];
   qtdDemandasStatus: number[] = []
   pesquisaDemanda = '';
@@ -444,12 +445,12 @@ export class TelaInicialComponent implements OnInit {
             console.log("divscroll 1 " , this.divScrollCircle)
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
-            isFirstIfExecuted = true;
+            this.isFirstIfExecuted = true;
             this.divScrollCircle = false;
             this.nenhumResultadoEncontrado = false;
           } 
 
-          if(!isFirstIfExecuted && demandas.length == 0) {
+          if(!this.isFirstIfExecuted && demandas.length == 0) {
             console.log("divscroll 2 " , this.divScrollCircle)
             this.divScrollCircle = true;
             setTimeout(() => {

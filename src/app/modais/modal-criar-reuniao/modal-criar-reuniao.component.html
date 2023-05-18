@@ -1,55 +1,109 @@
-<div class="d-flex justify-content-between">
-  <h5>{{ "modais.modal-criar-reuniao.marcar-reuniao" | translate }}</h5>
-  <i class="bi bi-x-lg" role="button" (click)="dialogRef.close()"></i>
-</div>
-<hr class="mt-0" style="overflow: auto;">
-<div (onSubmit)="onSubmit()"class="row m-3" >
-  <div class="col-sm-6 drag-column d-flex flex-column">
-    <div class="d-flex">
-      <app-filtro-demanda class="mb-2 w-100" [filtroReduzidoVertical]="true" [mostrarIconeDeAbrirFiltro]="false">
-      </app-filtro-demanda>
+<div style="">
+  <div class="d-flex justify-content-between">
+    <h5>{{ "modais.modal-criar-reuniao.marcar-reuniao" | translate }}</h5>
+    <i class="bi bi-x-lg" role="button" (click)="dialogRef.close()"></i>
+  </div>
+  <hr class="mt-0" style="overflow: auto" />
+  <div (onSubmit)="onSubmit()" class="row m-3">
+    <div class="col-sm-6 drag-column d-flex flex-column">
+      <div class="d-flex">
+        <app-filtro-demanda
+          class="mb-2 w-100"
+          [filtroReduzidoVertical]="true"
+          [mostrarIconeDeAbrirFiltro]="false"
+        >
+        </app-filtro-demanda>
+      </div>
+      <div
+        style="height: -webkit-fill-available"
+        class="drop-column d-table border p-3 rounded low-shadow w-100"
+        pDroppable="demandas"
+        (onDrop)="drop()"
+      >
+        <p-scrollPanel [style]="{ width: '100%', height: '50vh' }">
+          <h6>{{ "modais.modal-criar-reuniao.demandas" | translate }}</h6>
+          <div *ngFor="let demanda of listaDemandas" class="mt-2">
+            <app-list-demanda
+              role="button"
+              [mostrarBotao]="false"
+              pDraggable="demandas"
+              [dadosDemanda]="demanda"
+              [mostrarIconeAdicionar]="true"
+              (clicouAdicionarPauta)="adicionarDemanda(demanda)"
+              [mudarTamanho]="'100%'"
+              (modalHistorico)="openModalHistorico($event)"
+              (verDocumentoProposta)="openModalDemandaDocumento($event)"
+              (fechouModal)="fecharModal()"
+              (onDragStart)="dragStart(demanda)"
+              (onDragEnd)="dragEnd()"
+            >
+            </app-list-demanda>
+          </div>
+        </p-scrollPanel>
+      </div>
     </div>
-    <div  style="height: -webkit-fill-available;" class="drop-column d-table border p-3 rounded low-shadow w-100" pDroppable="demandas" (onDrop)="drop()">
-      <p-scrollPanel [style]="{ width: '100%', height: '50vh' }">
-        <h6>{{ "modais.modal-criar-reuniao.demandas" | translate }}</h6>
-        <div *ngFor="let demanda of listaDemandas" class="mt-2">
-          <app-list-demanda role="button" [mostrarBotao]="false" pDraggable="demandas" [dadosDemanda]="demanda"
-            [mostrarIconeAdicionar]="true" (clicouAdicionarPauta)="adicionarDemanda(demanda)"
-            [mudarTamanho]="'100%'" (modalHistorico)="openModalHistorico($event)" (verDocumentoProposta)="openModalDemandaDocumento($event)"
-            (fechouModal)="fecharModal()" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()">
-          </app-list-demanda>
+    <div class="col-sm-6 alinhar-baixo" pDroppable="demandas" (onDrop)="drop()">
+      <div class="border rounded drop-column p-1 mb-2 low-shadow h-100">
+        <p-scrollPanel
+          [style]="{ width: '100%', height: '47vh' }"
+          styleClass="scroll"
+        >
+          <div
+            class="text-center h5 mt-3"
+            *ngIf="listaDemandasEscolhidas.length == 0"
+          >
+            {{ "modais.modal-criar-reuniao.arraste-demandas" | translate }}
+          </div>
+          <span
+            *ngFor="let demanda of listaDemandasEscolhidas"
+            style="margin-top: 10px"
+          >
+            <app-card-demanda
+              pDraggable="products"
+              [mostrarBotao]="false"
+              (onDragStart)="dragStart(demanda)"
+              (onDragEnd)="dragEnd()"
+              [dadosDemanda]="demanda"
+              [isPauta]="true"
+              (clicouEmExcluir)="excluirDemanda(demanda)"
+              [mudarTamanho]="'100%'"
+            ></app-card-demanda>
+          </span>
+        </p-scrollPanel>
+      </div>
+      <div class="mt-1 p-3 border rounded low-shadow">
+        <div class="">
+          <label for="time">{{
+            "modais.modal-criar-reuniao.data-hora-reuniao" | translate
+          }}</label>
+          <p-calendar
+            placeholder="Clique aqui!"
+            [showTime]="true"
+            [showSeconds]="true"
+            [locale]="localeConfig"
+            inputId="time"
+            [(ngModel)]="dataReuniao"
+          ></p-calendar>
         </div>
-      </p-scrollPanel>
+        <div class="mt-1 d-grid">
+          <label for="time">{{
+            "modais.modal-criar-reuniao.selecione-comissao" | translate
+          }}</label>
+          <p-dropdown
+            placeholder="Selecione a Comissão:"
+            [options]="listaComissoes"
+            optionValue="value"
+            [(ngModel)]="comissaoSelecionada"
+            optionLabel="nome"
+          ></p-dropdown>
+        </div>
+        <div class="mt-1 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+            {{ "modais.modal-criar-reuniao.marcar-reuniao" | translate }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="col-sm-6 alinhar-baixo"  pDroppable="demandas" (onDrop)="drop()">
-    <div class="border rounded drop-column p-1 mb-2 low-shadow h-100">
-      <p-scrollPanel [style]="{ width: '100%', height: '47vh' }" styleClass="scroll">
-        <div class="text-center h5 mt-3" *ngIf="listaDemandasEscolhidas.length == 0">
-          {{ "modais.modal-criar-reuniao.arraste-demandas" | translate }}
-        </div>
-        <span *ngFor="let demanda of listaDemandasEscolhidas" style="margin-top:10px ; ">
-          <app-card-demanda pDraggable="products" [mostrarBotao]="false" (onDragStart)="dragStart(demanda)" (onDragEnd)="dragEnd()"
-            [dadosDemanda]="demanda" [isPauta]="true" (clicouEmExcluir)="excluirDemanda(demanda)"
-            [mudarTamanho]="'100%'"></app-card-demanda>
-        </span>
-      </p-scrollPanel>
-    </div>
-    <div class=" mt-1 p-3 border rounded low-shadow">
-      <div class="">
-        <label for="time">{{ "modais.modal-criar-reuniao.data-hora-reuniao" | translate }}</label>
-        <p-calendar placeholder="Clique aqui!" [showTime]="true" [showSeconds]="true" [locale]="localeConfig"
-          inputId="time" [(ngModel)]="dataReuniao"></p-calendar>
-      </div>
-      <div class="mt-1 d-grid">
-        <label for="time">{{ "modais.modal-criar-reuniao.selecione-comissao" | translate }}</label>
-        <p-dropdown placeholder="Selecione a Comissão:" [options]="listaComissoes" optionValue="value" [(ngModel)]="comissaoSelecionada" optionLabel="nome" ></p-dropdown>
-
-      </div>
-      <div class=" mt-1 d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary" (click)="onSubmit()">{{ "modais.modal-criar-reuniao.marcar-reuniao" | translate }}</button>
-      </div>
-    </div>
-  </div>
+  <p-toast></p-toast>
 </div>
-<p-toast></p-toast>

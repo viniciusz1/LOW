@@ -67,7 +67,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   listaComissoes = [
-    { value: "CPVM", nome: "CPVM – Comissão de Processos de Vendas e Desenvolvimento de produtos" },
+    { value: "CPVM", nome: "CPVM – Comissão de Processos de Vendas e Desenvolvimento..." },
     { value: "CPGCI", nome: "CPGCI – Comissão de Processos da Cadeia Integrada" },
     { value: "CPGPR", nome: "CPGPR – Comissão de Processos de Gestão de Projetos" },
     { value: "CGPN", nome: "CGPN – Comitê de Gestão de Processos de Negócio" },

@@ -29,6 +29,11 @@ export class UsuarioService {
         return user?.nivelAcessoUsuario;
   }
 
+  get getDepartamento() {
+    let user = this.getUser('user')
+        return user?.departamentoUsuario.nomeDepartamento;
+  }
+
   //Não deve de jeito nenhum retornar 0, verificar isso posteriormente
   getCodigoUser(): number {
     try {

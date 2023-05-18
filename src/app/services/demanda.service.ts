@@ -349,17 +349,21 @@ export class DemandaService {
   //usado para realizar verificações de paginação
   private pageable: any
 
-  get totalPages(){
+  get totalPages() {
     return this.pageable.totalPages || 0
   }
 
-  getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | undefined) {
-    if (pesquisaEspecial?.status) {
-      this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=&ordenar=${this.filtros?.sort}`
-    } else if (pesquisaEspecial?.pesquisaCampo) {
-      this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=&ordenar=${this.filtros?.sort}`
+  getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | string | undefined) {
+    if (typeof pesquisaEspecial != 'string') {
+      if (pesquisaEspecial?.status) {
+        this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=&ordenar=${this.filtros?.sort}`
+      } else if (pesquisaEspecial?.pesquisaCampo) {
+        this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=&ordenar=${this.filtros?.sort}`
+      } else {
+        this.link = path + `demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}&ordenar=${this.filtros?.sort}`
+      }
     } else {
-      this.link = path + `demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}&ordenar=${this.filtros?.sort}`
+      this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=&analista=&departamento=${pesquisaEspecial}&ordenar=`
     }
     return this.http.get<Demanda[]>(
       this.link
@@ -391,9 +395,9 @@ export class DemandaService {
     );
   }
 
-  getDemandasTelaInicialByDepartamento(){
+  getDemandasTelaInicialByDepartamento() {
     return this.http.get<Demanda[]>(
-      path + 'demanda/departamento'
+      this.link = path + 'demanda/departamento'
     );
   }
 

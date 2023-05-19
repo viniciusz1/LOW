@@ -12,15 +12,20 @@ export class VLibrasComponent implements OnInit {
   vLibrasActive: boolean = false;
 
   constructor(private renderer: Renderer2, private route: ActivatedRoute) {
-    route.url.subscribe(() => {
-      this.initVLibras();
-    })
+    // route.url.subscribe(() => {
+    //   this.renderer.removeChild(document.body, this.vLibrasScript);
+    // })
+    this.initVLibras();
   }
 
   ngOnInit(): void {
 
   }
+
+  vLibrasScript: any;
+
   private initVLibras() {
+
     const vLibrasScript = this.renderer.createElement('script');
     vLibrasScript.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
     vLibrasScript.onload = async () => {
@@ -30,9 +35,4 @@ export class VLibrasComponent implements OnInit {
     this.renderer.appendChild(document.body, vLibrasScript);
   }
 
-}
-interface Window {
-  VLibras: {
-    Widget: any; // Substitua 'any' pelo tipo correto, se disponível
-  };
 }

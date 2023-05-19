@@ -6,7 +6,7 @@ import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao
 import { TelaVerPauta } from './telas/reunioes/tela-ver-pauta/tela-ver-pauta.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { EscopoPrincipalComponent } from './componentes-fixos/escopo-principal/escopo-principal.component';
 import { TelaInicialComponent } from './telas/demandas/tela-inicial/tela-inicial.component';
 import { TelaClassificarDemandaComponent } from './telas/demandas/tela-classificar-demanda/tela-classificar-demanda.component';
@@ -106,7 +106,13 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
           }
         ]
       }
-    ])
+    ],{
+      useHash: true,
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
+      preloadingStrategy: PreloadAllModules,
+    })
   ],
   exports: [
     RouterModule

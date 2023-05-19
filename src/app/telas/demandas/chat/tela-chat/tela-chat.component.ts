@@ -24,6 +24,7 @@ export class TelaChatComponent implements OnInit {
   mensagens: Mensagem[] = []
   conversasDemandas: Demanda[] = []
   mostrarConversas = false;
+  usuarioLogado: any;
   demandaDiscutida: Demanda | undefined
 
   constructor(private confirmationService: ConfirmationService,
@@ -43,7 +44,6 @@ export class TelaChatComponent implements OnInit {
   scrollToBottom() {
     if (this.scrollPanel) {
       this.scrollPanel.scrollTop(99999)
-
     }
   }
   exibirQtdMensagensNaoLidas(conversa: any){
@@ -99,6 +99,7 @@ export class TelaChatComponent implements OnInit {
     }
   }
 
+
   enviarMensagem() {
     if (this.mensagem.nativeElement.value != "") {
       this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
@@ -117,6 +118,7 @@ export class TelaChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuarioLogado = this.usuarioService.getUser('user');
     this.route.params.subscribe(e => {
       this.codigoRota = e['codigoDemanda']
       this.messagesService.codigoRota = this.codigoRota

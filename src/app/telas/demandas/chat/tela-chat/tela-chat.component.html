@@ -4,7 +4,7 @@
       <header class="d-flex justify-content-between align-items-center">
         <div>
           <i class="bi bi-person-circle icon mx-3"></i>
-          Vinícius Bonatti Benner
+          {{usuarioLogado.nomeUsuario}}
         </div>
         <i class="bi bi-three-dots-vertical icon"></i>
       </header>
@@ -45,16 +45,16 @@
             }}</small>
 
         </div>
-        <i class="bi bi-mic-mute me-3" (click)="silenciarChat()" style="cursor: pointer;"></i>
-        <i class="bi bi-x-circle me-3" (click)="finalizarChat()" style="cursor: pointer;"></i>
+        <i *ngIf="codigoRota" class="bi bi-mic-mute me-3" (click)="silenciarChat()" style="cursor: pointer;"></i>
+        <i *ngIf="codigoRota" class="bi bi-x-circle me-3" (click)="finalizarChat()" style="cursor: pointer;"></i>
         <i *ngIf="codigoRota" class="bi bi-file-text me-3" style="cursor: pointer"
           (click)="openModalDemandaDocumento()"></i>
       </header>
       <main [ngClass]="{ 'alinhar-alerta': !codigoRota }">
-        <span style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" *ngIf="!codigoRota && mensagens.length > 0">
+        <span style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" *ngIf="!codigoRota && conversasDemandas.length > 0">
           {{ "telas.tela-chat.selecione-conversa" | translate }}
         </span>
-        <span style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" *ngIf="!codigoRota && mensagens.length == 0">
+        <span style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" *ngIf="!codigoRota && conversasDemandas.length == 0">
           {{ "telas.tela-chat.conversas-cadastradas" | translate }}
         </span>
 

@@ -15,7 +15,8 @@
       "modal-b-sim": "Yes",
       "modal-b-nao": "No",
       "modal-b-reformular": "Reformulate Demand",
-      "modal-b-ok": "Ok"
+      "modal-b-ok": "Ok",
+      "nao-demandas": "NO DEMANDS AT THE MOMENT"
     },
     "tela-reunioes": {
       "marcar": "Schedule Meeting",
@@ -51,20 +52,22 @@
       "titulo": "Profile",
       "subtitulo": "GENERAL ACCOUNT SETTINGS",
       "nome": "Name",
-      "dataNasc": "Date of Birth",
-      "cpf": "CPF",
-      "username":"Username",
+      "username": "Username",
       "departamento": "Department",
       "email": "Email",
       "telefone": "Phone",
       "senha": "Password",
-      "alterar": "Change"
+      "alterar": "Change",
+      "informacoes-basicas": "Basic Information",
+      "informacoes-contato": "Contact Information",
+      "informacoes-departamento": "Department Information",
+      "nivel-acesso": "Access Level"
     },
     "configuracoes-layout": {
       "titulo": "Layout",
       "subtitulo": "GENERAL LAYOUT SETTINGS",
-      "padrao":"Standart (Light)",
-      "preto":"Black",
+      "padrao": "Standart (Light)",
+      "preto": "Black",
       "temas": "Themes",
       "fonte": "Font",
       "tamanho": "Size"
@@ -198,7 +201,7 @@
       "periodo-execucao-demanda": "Demand execution period:",
       "payback-simples": "Simple Payback:",
       "responsaveis-negocio": "Business responsibles:",
-      "selecione-status":"Select status to drive demand:",
+      "selecione-status": "Select status to drive demand:",
       "p-prazo-elaboracao": "Click to schedule",
       "p-recurso-necessario": "Ex: Backend Programmer",
       "p-tipo-despesa": "Select Type",
@@ -225,7 +228,13 @@
       "scroll-beneficios": "Benefits",
       "scroll-adicionais": "Additional Information",
       "b-cancelar": "Cancel",
-      "b-finalizar": "Finish"
+      "b-finalizar": "Finish",
+      "scroll-proposta": "Proposal",
+      "scroll-recursos": "Resources",
+      "scroll-escopo": "Scope",
+      "scroll-dados": "Final Data",
+      "parecer-comissao": "Commission's Opinion:",
+      "recomendacoes-comissao": "Commission's Recommendations:"
     },
     "tela-classificar-demanda": {
       "preencha-campos": "Fill in the fields below:",
@@ -246,7 +255,11 @@
       "modal-b-sim": "Yes",
       "modal-b-nao": "No",
       "p-buscar-demanda": "Search for demands",
-      "visto-por-ultimo": "Last seen by:"
+      "visto-por-ultimo": "Last seen by:",
+      "solicitante": "Requester:",
+      "analista": "Analyst:",
+      "selecione-conversa": "SELECT A CONVERSATION",
+      "conversas-cadastradas": "YOU HAVE NO REGISTERED CONVERSATIONS"
     },
     "tela-calendario": {
       "calendario-reunioes": "Meetings Calendar"
@@ -267,10 +280,11 @@
       "b-ata-publicada": "Minutes published",
       "b-ata-nao-publicada": "Minutes not published",
       "b-gerar-documentacao": "Generate documentation",
-      "b-finalizar-reuniao":"End Meeting",
-      "b-cancelar-reuniao":"Cancel Meeting",
-      "b-nao":"No",
-      "b-sim":"Yes"
+      "b-finalizar-reuniao": "End Meeting",
+      "b-cancelar-reuniao": "Cancel Meeting",
+      "b-nao": "No",
+      "b-sim": "Yes",
+      "editar-reuniao": "Edit Meeting"
     },
     "tela-login": {
       "login": "Login",
@@ -279,6 +293,11 @@
       "lembrar": "Remember me",
       "esqueceu-senha": "Forgot Password?",
       "b-entrar": "Login"
+    },
+    "tela-not-found": {
+      "ocorreu-erro": "An error occurred",
+      "requisicao": "This request was not found, generating this error, sorry!",
+      "sabemos": "That's all we know"
     }
   },
   "modais": {
@@ -318,28 +337,69 @@
       "motivo-reprovacao": "Reason for rejecting the demand:",
       "b-reprovar": "Reject Demand",
       "b-cancelar": "Cancel"
+    },
+    "modal-cancelamento-reuniao": {
+      "demanda": "Demand",
+      "motivo-cancelamento": "Meeting Cancellation Reason",
+      "cancelar": "Cancel",
+      "cancelar-reuniao": "Cancel Meeting"
     }
   },
   "documento-pdf": {
     "solicitante": "Requester",
     "departamento": "Department",
-    "objetivo": "Objective",
-    "situacao-atual": "Current situation",
-    "beneficio-real": "Real benefit",
-    "memoria-calculo-beneficio-real": "Memory of calculation of real benefit",
-    "benefício-potencial": "Potential benefit",
-    "memoria-calculo-beneficio-potencial": "Memory of calculation of potential benefit",
-    "beneficio-qualitativo": "Qualitative benefit",
-    "frequencia-uso-sistema": "Frequency of system use",
-    "documentos": "DOCUMENTS",
+    "objetivo": "Objective:",
+    "situacao-atual": "Current Situation:",
+    "beneficio-real": "Real Benefit:",
+    "memoria-calculo-beneficio-real": "Calculation Memo for Real Benefit:",
+    "beneficio-potencial": "Potential Benefit:",
+    "memoria-calculo-beneficio-potencial": "Calculation Memo for Potential Benefit:",
+    "beneficio-qualitativo": "Qualitative Benefit:",
+    "frequencia-uso-sistema": "System Usage Frequency:",
+    "documentos": "DOCUMENTS:",
     "b-cancelar": "Cancel",
     "b-reprovar": "Reject Request",
     "b-aprovar": "Approve Request",
-    "mensais": " monthly"
+    "mensais": "monthly",
+    "ata-reuniao-comissao-processos": "MINUTES OF SALES AND PRODUCT DEVELOPMENT PROCESS COMMISSION MEETING",
+    "ata-n": "Minutes No:",
+    "data": "Date:",
+    "responsaveis-negocio": "Business Responsibles:",
+    "parecer-comissao": "Commission Opinion:",
+    "decisao": "Decision:",
+    "b-fechar": "Close",
+    "solicitante-menor": "Requester:",
+    "proposta-comite": "PROPOSAL FOR COMMITTEE/COMMISSION OF PROCESSES",
+    "situacao-problema": "Current Situation - Problem to be addressed/resolved:",
+    "escopo-projeto": "Project Scope:",
+    "resultados-esperados-qualitativos": "Expected Results (Qualitative)",
+    "resultados-esperados-potenciais": "Expected Results (Potential Gains)",
+    "custos-totais": "Total Project Costs:",
+    "total-despesas-externas": "Total External Resource Expenses (Disbursement):",
+    "total-despesas-internas": "Total Internal Resource Expenses:",
+    "despesas": "Expenses (Disbursement)",
+    "esforco": "Effort",
+    "valor-total": "Total Value",
+    "cc-pagante": "Paying CC",
+    "investimentos": "Investments/Recurring",
+    "licencas": "Licenses",
+    "valor-unit": "Unit Value",
+    "total": "Total",
+    "recursos-internos": "Internal Resources (Non-Disbursement)",
+    "periodo-execucao": "Execution Period:",
+    "a": "to",
+    "payback": "Payback:",
+    "recursos-necessarios": "Required Resources",
+    "tipo-despesa": "Expense Type",
+    "perfil-despesa": "Expense Profile",
+    "qtd-horas": "Hours Quantity",
+    "valor-hora": "Hourly Rate",
+    "periodo-execucao-mensal": "Execution Period (Monthly)",
+    "responsavel-proposta": "Proposal Responsible:"
   },
   "componentes-reutilizaveis": {
     "card-demanda": {
-      "historico":"History",
+      "historico": "History",
       "ver-demanda": "View demand",
       "trocar-status": "Change status",
       "ir-reuniao": "Go to meeting",
@@ -347,7 +407,9 @@
       "iniciar-conversa": "Start conversation",
       "score": "Score:",
       "autor": "Author:",
-      "departamento": "Department:"
+      "departamento": "Department:",
+      "cancelar-demanda": "Cancel Demand",
+      "status": "Status:"
     },
     "card-reuniao": {
       "dia-comissao": "Commission Day:",
@@ -398,9 +460,16 @@
       "cancelado": "Cancelled"
     },
     "sidebar-demanda": {
-      "classificacao": "Classification",
-      "proposta": "Proposal",
-      "aprovacao": "Approval"
+      "classificacao": "Backlog - Classificação",
+      "proposta": "Backlog - Proposta",
+      "aprovacao": "Backlog - Aprovação",
+      "assessment": "Assessment",
+      "business-case": "Business Case",
+      "to-do": "To-do",
+      "design": "Design and Build",
+      "support": "Support",
+      "cancelled": "Cancelled",
+      "done": "Done"
     }
   },
   "componentes-fixos": {

@@ -283,7 +283,7 @@
             (verDocumentoEmAta)="openModalAtaDocumento()"
           ></app-card-demanda>
         </div>
-        <a class="d-flex align-items-end justify-content-end" role="button" (click)="pesquisarDemandas(departamentoUsuario)">Ver Mais</a>
+        <a class="d-flex align-items-end justify-content-end" role="button" (click)="pesquisarDemandas(departamentoUsuario)">{{ "telas.tela-inicial.ver-mais" | translate }}</a>
       </div>
     </div>
     <div class="bloco-branco" style="width: 10%"></div>
@@ -448,7 +448,7 @@
 </div>
 <div *ngIf="divScrollCircle" style="display: flex; justify-content: center; align-items: center; height: 45vh;">
   <mat-spinner *ngIf="!demandasVazias" [diameter]="50" class=""></mat-spinner>
-  <span *ngIf="demandasVazias" style="font-weight: 600; font-size: 1.4rem; color: #6c757d;">NÃO HÁ DEMANDAS NO MOMENTO</span>
+  <span *ngIf="demandasVazias" style="font-weight: 600; font-size: 1.4rem; color: #6c757d;">{{ "telas.tela-inicial.nao-demandas" | translate }}</span>
 </div>
 
 <p-toast></p-toast>

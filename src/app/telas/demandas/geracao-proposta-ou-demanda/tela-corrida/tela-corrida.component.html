@@ -30,10 +30,10 @@
       </div>
         <nav class="h-100 flex-column align-items-stretch pe-4">
           <nav class="nav nav-pills flex-column" id="scroll" >
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" >Proposta</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">Recursos</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="margin-bottom: 3.1vh;cursor:pointer">Escopo</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section4')" [ngClass]="{'active': activeSection === 'section4'}" style="cursor:pointer">Dados Finais</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" >{{ "telas.tela-corrida.scroll-proposta" | translate }}</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">{{ "telas.tela-corrida.scroll-recursos" | translate }}</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="margin-bottom: 3.1vh;cursor:pointer">{{ "telas.tela-corrida.scroll-escopo" | translate }}</a>
+            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section4')" [ngClass]="{'active': activeSection === 'section4'}" style="cursor:pointer">{{ "telas.tela-corrida.scroll-dados" | translate }}</a>
           </nav>
         </nav>
     </div>
@@ -43,11 +43,11 @@
     <div>
       <div style="margin: 0 10vw" class="mt-5">
         <div class="border rounded p-3 mb-4" *ngIf="verificaSeTemParecerOuRecomendacao()">
-          <h5>Parecer da Comissão:</h5>
+          <h5>{{ "telas.tela-corrida.parecer-comissao" | translate }}</h5>
           
           <p>{{dadosDemanda?.parecerComissaoProposta}}</p>
           <br>
-          <h5>Recomendações da Comissão:</h5>
+          <h5>{{ "telas.tela-corrida.recomendacoes-comissao" | translate }}</h5>
           <p>{{dadosDemanda?.recomendacaoProposta}}</p>
         </div>
         <p-accordion *ngIf="aparecerProposta" id="accordion-proposta" [activeIndex]="[0]">

@@ -1,7 +1,7 @@
 <div style="padding: 8px; background: white; width: 50vw;">
     <div>
         <div class="d-flex justify-content-between">
-            <span class="h3">Demanda 001
+            <span class="h3">{{"modais.modal-cancelamento-reuniao.demanda" | translate}} 001
                 <hr style="margin: 0; margin-bottom: 10px; width: 150%;">
             </span>
             <i class="bi bi-x" role="button" (click)="dialogRef.close()"></i>
@@ -9,14 +9,14 @@
     </div>
     <div class="d-flex flex-column">
         <label for="subtitulo" style="margin-bottom: 0.5vh;">
-            Motivo de cancelamento da Reunião
+            {{"modais.modal-cancelamento-reuniao.motivo-cancelamento" | translate}}
         </label>
         <textarea pInputTextarea style="height: 300px;" [(ngModel)]="motivoInput"></textarea>
 
     </div>
     <div class="d-flex justify-content-end mt-3">
-        <button  class="btn btn-outline-primary me-3" (click)="dialogRef.close()">Cancelar</button>
-        <button routerLink="/tela-inicial" class="btn btn-primary" (click)="cancelarReuniao()">Cancelar Reunião</button>
+        <button  class="btn btn-outline-primary me-3" (click)="dialogRef.close()">{{"modais.modal-cancelamento-reuniao.cancelar" | translate}}</button>
+        <button routerLink="/tela-inicial" class="btn btn-primary" (click)="cancelarReuniao()">{{"modais.modal-cancelamento-reuniao.cancelar-reuniao" | translate}}</button>
     </div>
 </div>
 <p-toast></p-toast>

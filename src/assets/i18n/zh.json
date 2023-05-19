@@ -15,7 +15,8 @@
             "modal-b-sim": "是",
             "modal-b-nao": "否",
             "modal-b-reformular": "修改需求",
-            "modal-b-ok": "确定"
+            "modal-b-ok": "确定",
+            "nao-demandas": "目前沒有要求"
         },
         "tela-reunioes": {
             "marcar": "安排会议",
@@ -51,12 +52,14 @@
             "titulo": "个人资料",
             "subtitulo": "账户常规设置",
             "nome": "姓名",
-            "dataNasc": "出生日期",
-            "cpf": "身份证号",
             "email": "电子邮件",
             "telefone": "电话号码",
             "senha": "密码",
-            "alterar": "更改"
+            "alterar": "更改",
+            "informacoes-basicas": "基本信息",
+            "informacoes-contato": "联系信息",
+            "informacoes-departamento": "部门信息",
+            "nivel-acesso": "访问级别"
         },
         "configuracoes-layout": {
             "titulo": "布局",
@@ -84,7 +87,7 @@
             "descricao": "为了改善服务、开发系统或运作，您可以通过以下方式发送建议，以便更轻松地使用系统:",
             "p-input": "在这里写下您的问题：",
             "b-enviar": "发送",
-            "b-baixar":"往下走"
+            "b-baixar": "往下走"
         },
         "tutorial": {
             "t1": {
@@ -196,7 +199,7 @@
             "periodo-execucao-demanda": "需求执行期间：",
             "payback-simples": "简单回报：",
             "responsaveis-negocio": "业务负责人：",
-            "selecione-status":"選擇狀態以推動需求：",
+            "selecione-status": "選擇狀態以推動需求：",
             "p-prazo-elaboracao": "点击安排",
             "p-recurso-necessario": "例如：后端程序员",
             "p-tipo-despesa": "选择类型",
@@ -223,7 +226,13 @@
             "scroll-beneficios": "福利",
             "scroll-adicionais": "额外",
             "b-cancelar": "取消",
-            "b-finalizar": "完成"
+            "b-finalizar": "完成",
+            "scroll-proposta": "提案",
+            "scroll-recursos": "资源",
+            "scroll-escopo": "范围",
+            "scroll-dados": "最终数据",
+            "parecer-comissao": "委员会意见：",
+            "recomendacoes-comissao": "委员会建议："
         },
         "tela-classificar-demanda": {
             "preencha-campos": "请填写以下字段：",
@@ -244,7 +253,11 @@
             "modal-b-sim": "是",
             "modal-b-nao": "否",
             "p-buscar-demanda": "搜索需求",
-            "visto-por-ultimo": "最后查看："
+            "visto-por-ultimo": "最后查看：",
+            "solicitante": "请求者：",
+            "analista": "分析师：",
+            "selecione-conversa": "选择一次对话",
+            "conversas-cadastradas": "您没有注册的对话"
         },
         "tela-calendario": {
             "calendario-reunioes": "会议日历"
@@ -265,10 +278,11 @@
             "b-ata-publicada": "公开记录",
             "b-ata-nao-publicada": "未公开记录",
             "b-gerar-documentacao": "生成文档",
-            "b-finalizar-reuniao":"結束會議",
-            "b-cancelar-reuniao":"取消會議",
-            "b-nao":"否",
-            "b-sim":"是"
+            "b-finalizar-reuniao": "結束會議",
+            "b-cancelar-reuniao": "取消會議",
+            "b-nao": "否",
+            "b-sim": "是",
+            "editar-reuniao": "编辑会议"
         },
         "tela-login": {
             "login": "登录",
@@ -277,6 +291,11 @@
             "lembrar": "记住我",
             "esqueceu-senha": "忘记密码？",
             "b-entrar": "进入"
+        },
+        "tela-not-found": {
+            "ocorreu-erro": "发生错误",
+            "requisicao": "未找到此请求，导致此错误，非常抱歉！",
+            "sabemos": "这是我们所知道的全部"
         }
     },
     "modais": {
@@ -316,24 +335,65 @@
             "motivo-reprovacao": "需求被拒绝的原因：",
             "b-reprovar": "拒绝需求",
             "b-cancelar": "取消"
+        },
+        "modal-cancelamento-reuniao": {
+            "demanda": "需求",
+            "motivo-cancelamento": "取消会议的原因",
+            "cancelar": "取消",
+            "cancelar-reuniao": "取消会议"
         }
     },
     "documento-pdf": {
         "solicitante": "申请人",
         "departamento": "部门",
         "objetivo": "目标：",
-        "situacao-atual": "当前状态：",
+        "situacao-atual": "当前情况：",
         "beneficio-real": "实际收益：",
-        "memoria-calculo-beneficio-real": "实际收益计算记忆：",
-        "benefício-potencial": "潜在收益：",
-        "memoria-calculo-beneficio-potencial": "潜在收益计算记忆：",
+        "memoria-calculo-beneficio-real": "实际收益计算备忘录：",
+        "beneficio-potencial": "潜在收益：",
+        "memoria-calculo-beneficio-potencial": "潜在收益计算备忘录：",
         "beneficio-qualitativo": "质量收益：",
         "frequencia-uso-sistema": "系统使用频率：",
         "documentos": "文件：",
         "b-cancelar": "取消",
-        "b-reprovar": "拒绝需求",
-        "b-aprovar": "批准需求",
-        "mensais": " 每月"
+        "b-reprovar": "拒绝申请",
+        "b-aprovar": "批准申请",
+        "mensais": "每月",
+        "ata-reuniao-comissao-processos": "销售和产品开发流程委员会会议记录",
+        "ata-n": "记录编号：",
+        "data": "日期：",
+        "responsaveis-negocio": "业务负责人：",
+        "parecer-comissao": "委员会意见：",
+        "decisao": "决定：",
+        "b-fechar": "关闭",
+        "solicitante-menor": "申请人：",
+        "proposta-comite": "委员会/流程建议",
+        "situacao-problema": "当前情况 - 需要处理/解决的问题：",
+        "escopo-projeto": "项目范围：",
+        "resultados-esperados-qualitativos": "预期结果（质量）",
+        "resultados-esperados-potenciais": "预期结果（潜在收益）",
+        "custos-totais": "项目总成本：",
+        "total-despesas-externas": "外部资源总支出（支付）：",
+        "total-despesas-internas": "内部资源总支出：",
+        "despesas": "支出（支付）",
+        "esforco": "工作量",
+        "valor-total": "总金额",
+        "cc-pagante": "支付成本中心",
+        "investimentos": "投资/重复",
+        "licencas": "许可证",
+        "valor-unit": "单价",
+        "total": "总计",
+        "recursos-internos": "内部资源（无支付）",
+        "periodo-execucao": "执行期间：",
+        "a": "至",
+        "payback": "投资回收期：",
+        "recursos-necessarios": "所需资源",
+        "tipo-despesa": "支出类型",
+        "perfil-despesa": "支出配置",
+        "qtd-horas": "工时数量",
+        "valor-hora": "小时费率",
+        "periodo-execucao-mensal": "执行期间（每月）",
+        "responsavel-proposta": "建议负责人："
     },
     "componentes-reutilizaveis": {
         "card-demanda": {
@@ -345,7 +405,9 @@
             "iniciar-conversa": "开始对话",
             "score": "评分：",
             "autor": "作者：",
-            "departamento": "部门："
+            "departamento": "部门：",
+            "cancelar-demanda": "取消需求",
+            "status": "状态:"
         },
         "card-reuniao": {
             "dia-comissao": "委员会日期：",
@@ -396,9 +458,16 @@
             "cancelado": "已取消"
         },
         "sidebar-demanda": {
-            "classificacao": "分类",
-            "proposta": "建议",
-            "aprovacao": "批准"
+            "classificacao": "待办事项 - 分类",
+            "proposta": "待办事项 - 提议",
+            "aprovacao": "待办事项 - 批准",
+            "assessment": "评估",
+            "business-case": "商业案例",
+            "to-do": "待办",
+            "design": "设计与构建",
+            "support": "支持",
+            "cancelled": "已取消",
+            "done": "已完成"
         }
     },
     "componentes-fixos": {

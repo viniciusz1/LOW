@@ -18,6 +18,35 @@ export class CardReuniaoComponent implements OnInit {
   ngOnInit(): void {
     this.primaryColorClass = this.dadosReuniao.statusReuniao;
     this.secondaryColorClass = this.dadosReuniao.statusReuniao + "-sec";
-1  }
+    1
+  }
+
+  titulosPropostas() {
+
+    const propostasAdicionadas = this.dadosReuniao.propostasReuniao;
+    const titulosPropostas: string[] = [];
+
+    propostasAdicionadas?.forEach((proposta: any) => {
+      const titulo = proposta.tituloDemanda;
+      titulosPropostas.push(titulo);
+    })
+
+    return titulosPropostas;
+  }
+
+  departamentosBeneficiados() {
+
+    console.log(this.dadosReuniao);
+      // const propostasAdicionadas = this.dadosReuniao.propostasReuniao;
+      // const titulosPropostas: string[] = [];
+
+      // propostasAdicionadas?.forEach((proposta: any) => {
+      //   const titulo = proposta.tituloDemanda;
+      //   titulosPropostas.push(titulo);
+      // })
+
+      // return titulosPropostas;
+  }
+
 
 }

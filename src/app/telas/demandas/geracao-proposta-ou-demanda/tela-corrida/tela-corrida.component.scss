@@ -6,6 +6,13 @@ input {
     width: 58.5vw;
 }
 
+.meu-flex {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
 label {
     font-size: 0.85vw;
     margin: 5px;
@@ -62,8 +69,8 @@ hr {
     z-index: 1;
 }
 
-:host ::ng-deep{
-    .p-card:hover{
+:host ::ng-deep {
+    .p-card:hover {
         background-color: #ecebeb;
     }
 }
@@ -83,27 +90,29 @@ hr {
 }
 
 :host ::ng-deep {
-    .p-card{
+    .p-card {
         padding: 0.5rem;
         margin-bottom: 0.5rem;
     }
 }
 
 :host ::ng-deep {
-    .p-card{
+    .p-card {
         padding: 0.5rem;
         margin-bottom: 1rem;
     }
 }
 
 :host ::ng-deep {
-    .p-card-body{
+    .p-card-body {
         padding: 0rem !important;
     }
 }
 
-:host ::ng-deep{
-    .p-timeline.p-timeline-vertical .p-timeline-event-opposite, .p-timeline.p-timeline-vertical .p-timeline-event-content{
+:host ::ng-deep {
+
+    .p-timeline.p-timeline-vertical .p-timeline-event-opposite,
+    .p-timeline.p-timeline-vertical .p-timeline-event-content {
         padding: 0.3vw;
     }
 }

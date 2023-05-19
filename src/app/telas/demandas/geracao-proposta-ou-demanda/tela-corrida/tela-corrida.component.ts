@@ -34,13 +34,13 @@ export class TelaCorridaComponent implements OnInit {
   activeIndex = 1;
   dadosDemanda: Demanda | undefined;
 
-  verificaSeTemParecerOuRecomendacao(){
-    if(this.dadosDemanda?.parecerComissaoProposta || this.dadosDemanda?.recomendacaoProposta){
+  verificaSeTemParecerOuRecomendacao() {
+    if (this.dadosDemanda?.parecerComissaoProposta || this.dadosDemanda?.recomendacaoProposta) {
       return true;
     }
     return false;
   }
-  beneficioValidator(){
+  beneficioValidator() {
     this.demandaService.beneficioValidator()
   }
   onSubmitDemanda() {
@@ -70,19 +70,24 @@ export class TelaCorridaComponent implements OnInit {
         });
       }
     } else {
-      this.propostaService
-        .postProposta()
-        .subscribe({
-          next: (response) => {
-            console.log("Chama 3x?");
+      if (this.propostaService.verificaRecursos()) {
+        this.propostaService
+          .postProposta()
+          .subscribe({
+            next: (response) => {
+              console.log("Chama 3x?");
 
-            this.showSuccess("Proposta criada com sucesso!")
-            this.router.navigate(['/tela-inicial']);
-          },
-          error: (err) => {
-            this.showError("Não foi possível criar proposta")
-          },
-        });
+              this.showSuccess("Proposta criada com sucesso!")
+              this.router.navigate(['/tela-inicial']);
+            },
+            error: (err) => {
+              this.showError("Não foi possível criar proposta")
+            },
+          });
+      } else {
+        this.showError("Adicione pelo menos um recurso!")
+      }
+
     }
   }
 
@@ -100,15 +105,15 @@ export class TelaCorridaComponent implements OnInit {
 
   }
 
-  invalid(){
+  invalid() {
     return this.demandaService.getFormDemanda.invalid
   }
-  invalidProposta(){
+  invalidProposta() {
     return this.propostaService.getFormProposta.invalid
   }
 
   teste() {
-    console.log(this.demandaService.getFormDemanda)
+    console.log(this.propostaService.getFormProposta)
   }
 
   showSuccess(message: string) {

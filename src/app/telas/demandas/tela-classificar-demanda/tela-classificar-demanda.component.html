@@ -36,9 +36,9 @@
           <div class="btn btn-danger" (click)="openModalReprovacao()">{{ "telas.tela-classificar-demanda.b-reprovar" | translate }}</div>
           <div class="justify-content-end">
             <div class="btn btn-outline-primary" routerLink="/tela-inicial/chat">{{ "telas.tela-classificar-demanda.b-contatar-solicitante" | translate }}</div>
-            <div (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">
+            <button [disabled]="isFormClassificadaInvalid()" (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">
               {{ "telas.tela-classificar-demanda.b-aprovar" | translate }}
-            </div>
+            </button>
           </div>
         </div>
       </div>

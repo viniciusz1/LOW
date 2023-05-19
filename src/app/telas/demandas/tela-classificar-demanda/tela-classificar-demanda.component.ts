@@ -33,14 +33,14 @@ export class TelaClassificarDemandaComponent implements OnInit {
 
 
   listaBUs = [
-    {value: 'WMOI', nome: 'WMO-I – WEG Motores Industrial'},
-    {value: 'WMOC', nome: 'WMO-C – WEG Motores Comercial'},
-    {value: 'WEN', nome: 'WEN  – WEG Energia'},
-    {value: 'WAU', nome: 'WAU – WEG Automação'},
-    {value: 'WDS', nome: 'WDS – WEG Digital e Sistemas'},
-    {value: 'WDC', nome: 'WDC – WEG Drives e Controls'},
-    {value: 'WTI', nome: 'WTI – WEG Tintas'},
-    {value: 'WTD', nome: 'WTD – WEG Transmissão e Distribuição'},
+    { value: 'WMOI', nome: 'WMO-I – WEG Motores Industrial' },
+    { value: 'WMOC', nome: 'WMO-C – WEG Motores Comercial' },
+    { value: 'WEN', nome: 'WEN  – WEG Energia' },
+    { value: 'WAU', nome: 'WAU – WEG Automação' },
+    { value: 'WDS', nome: 'WDS – WEG Digital e Sistemas' },
+    { value: 'WDC', nome: 'WDC – WEG Drives e Controls' },
+    { value: 'WTI', nome: 'WTI – WEG Tintas' },
+    { value: 'WTD', nome: 'WTD – WEG Transmissão e Distribuição' },
   ]
 
 
@@ -72,22 +72,26 @@ export class TelaClassificarDemandaComponent implements OnInit {
   ];
 
   listaSecoes = [
-    {value: 'SVE', nome: 'SVE – Seção Desenvolvimento Sistemas de Vendas e E-commerce'},
-    {value: 'SIM', nome: 'SIM – Seção Desenvolvimento Sistemas de manufatura'},
-    {value: 'SIE', nome: 'SIE – Seção Desenvolvimento Sistemas de Engenhar'},
-    {value: 'SDO', nome: 'SDO – Setor Desenvolvimento Plataforma Orchestra'},
-    {value: 'SCO', nome: 'SCO – Seção Desenvolvimento Sistemas Corporativos'},
-    {value: 'PTI', nome: 'PTI – Seção Projetos de TI'},
-    {value: 'AGD', nome: 'AGD – Seção Arquitetura e Governança de Dados'},
-    {value: 'STD', nome: 'STD – Seção Desenvolvimento Tecnologias Digitais'},
-    {value: 'TIN', nome: 'TIN – Seção Tecnologia de Infraestrutura'},
-    {value: 'SGI', nome: 'SGI – Seção Suporte Global Infraestrutura'},
-    {value: 'SEG', nome: 'SEG – Seção Segurança da Informação e Riscos TI'},
-    {value: 'AAS', nome: 'AAS – Atendimento e serviços TI – América do Sul'},
+    { value: 'SVE', nome: 'SVE – Seção Desenvolvimento Sistemas de Vendas e E-commerce' },
+    { value: 'SIM', nome: 'SIM – Seção Desenvolvimento Sistemas de manufatura' },
+    { value: 'SIE', nome: 'SIE – Seção Desenvolvimento Sistemas de Engenhar' },
+    { value: 'SDO', nome: 'SDO – Setor Desenvolvimento Plataforma Orchestra' },
+    { value: 'SCO', nome: 'SCO – Seção Desenvolvimento Sistemas Corporativos' },
+    { value: 'PTI', nome: 'PTI – Seção Projetos de TI' },
+    { value: 'AGD', nome: 'AGD – Seção Arquitetura e Governança de Dados' },
+    { value: 'STD', nome: 'STD – Seção Desenvolvimento Tecnologias Digitais' },
+    { value: 'TIN', nome: 'TIN – Seção Tecnologia de Infraestrutura' },
+    { value: 'SGI', nome: 'SGI – Seção Suporte Global Infraestrutura' },
+    { value: 'SEG', nome: 'SEG – Seção Segurança da Informação e Riscos TI' },
+    { value: 'AAS', nome: 'AAS – Atendimento e serviços TI – América do Sul' },
   ]
 
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
+  isFormClassificadaInvalid() {
+    return this.demandaClassificadaService.isFormDemandaClassificadaInvalid;
+  }
 
+  
   constructor(
     private matDialog: MatDialog,
     private demandaClassificadaService: DemandaClassificadaService,
@@ -106,7 +110,9 @@ export class TelaClassificarDemandaComponent implements OnInit {
         this.showError("Código não encontrado!")
       },
     });
+    // this.isFormClassificadaInvalid =
   }
+
 
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
@@ -129,7 +135,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
   }
 
-  download(arquivo: Arquivo){
+  download(arquivo: Arquivo) {
     this.demandaService.saveByteArray(arquivo.dadosArquivo, arquivo.tipoArquivo, arquivo.nomeArquivo)
   }
 

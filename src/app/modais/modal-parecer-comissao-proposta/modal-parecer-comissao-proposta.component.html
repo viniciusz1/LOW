@@ -11,7 +11,7 @@
                 <p-dropdown [disabled]="bloquearCamposInput()" class="me-3" [options]="tipoAtas"
                     [(ngModel)]="tipoAtaSelecionada" optionLabel="name" optionValue="value"></p-dropdown>
                 <div class="rounded low-shadow me-3 ">
-                    <button class="btn btn-primary" (click)="openModalPropostaDocumento()">{{ "modais.modal-parecer-comissao-proposta.b-visualizar-proposta" | translate }}</button>
+                    <button class="btn btn-primary" (click)="openModalDemandaDocumento()">{{ "modais.modal-parecer-comissao-proposta.b-visualizar-proposta" | translate }}</button>
                 </div>
                 <i class="bi bi-x me-3" role="button" (click)="dialogRef.close();"></i>
             </div>

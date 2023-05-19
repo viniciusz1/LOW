@@ -7,7 +7,6 @@ import { fadeAnimation } from './../../../shared/app.animation';
 import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
-import { ModalPropostaDocumentoComponent } from './../../../modais/modal-proposta-documento/modal-proposta-documento.component';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { Demanda } from 'src/app/models/demanda.model';
@@ -298,14 +297,6 @@ export class TelaInicialComponent implements OnInit {
     } else {
       this.showSidebar = 0;
     }
-  }
-
-
-  openModalPropostaDocumento() {
-    this.matDialog.open(ModalPropostaDocumentoComponent, {
-      maxWidth: '70vw',
-      minWidth: '50vw',
-    });
   }
 
   openModalReprovacaoDemanda(demanda: Demanda) {

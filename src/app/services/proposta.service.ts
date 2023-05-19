@@ -34,7 +34,7 @@ export class PropostaService {
     prazoProposta: ['', [Validators.required]],
     codigoPPMProposta: ['', [Validators.required]],
     jiraProposta: ['', [Validators.required]],
-    recursosProposta: [this.listaRecursos, [Validators.required]],
+    recursosProposta: [this.listaRecursos],
     escopoDemandaProposta: ['', [Validators.required]],
     inicioExDemandaProposta: ['', [Validators.required]],
     fimExDemandaProposta: ['', [Validators.required]],
@@ -116,10 +116,17 @@ export class PropostaService {
     return Object.assign({}, this.formProposta.value, this.demandaService.demandaForm.value);
   }
 
+  verificaRecursos(){
+    if(this.listaRecursos.length == 0){
+      return false
+    }
+    return true
+  }
+
   postProposta() {
 
     let propostaFormData = new FormData();
-
+   
 
     try {
       this.demandaService.insertsBeforePostDemanda()

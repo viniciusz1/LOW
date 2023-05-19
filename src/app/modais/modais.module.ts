@@ -3,7 +3,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalPropostaDocumentoComponent } from './modal-proposta-documento/modal-proposta-documento.component';
 import { ModalAtaDocumentoComponent } from './modal-ata-documento/modal-ata-documento.component';
 import { ModalParecerComissaoPropostaComponent } from './modal-parecer-comissao-proposta/modal-parecer-comissao-proposta.component';
 import { ModalDemandaDocumentoComponent } from './modal-demanda-documento/modal-demanda-documento.component';
@@ -27,7 +26,6 @@ import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    ModalPropostaDocumentoComponent,
     ModalAtaDocumentoComponent,
     ModalParecerComissaoPropostaComponent,
     ModalDemandaDocumentoComponent,

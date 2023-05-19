@@ -59,7 +59,9 @@
             "informacoes-basicas": "基本信息",
             "informacoes-contato": "联系信息",
             "informacoes-departamento": "部门信息",
-            "nivel-acesso": "访问级别"
+            "nivel-acesso": "访问级别",
+            "username": "Usuário",
+            "departamento": "Departamento"
         },
         "configuracoes-layout": {
             "titulo": "布局",
@@ -414,7 +416,7 @@
             "status": "状态：",
             "comissao": "委员会：",
             "propostas-adicionadas": "已添加的建议：",
-            "departamentos-beneficiados": "受益部门：",
+            "bus-beneficiados": "受益部门：",
             "exemplos": "销售、发动机、拉拔",
             "cancelar-reuniao": "取消会议",
             "motivo-cancelamento": "查看取消原因",

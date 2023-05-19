@@ -3,6 +3,11 @@
     flex-direction: column;
     justify-content: space-between;
 }
-// :host ::ng-deep .p-dropdown {
-//     width: 100%;
-// }
+:host ::ng-deep .inputComissoes {
+    width: 35vw;
+}
+
+:host ::ng-deep .inputCalendario {
+    width: 30vw;
+}
+

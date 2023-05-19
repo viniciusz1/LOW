@@ -28,7 +28,7 @@
       <div style="margin: 0 10vw" class="mt-5">
         <div class="border rounded p-3 mb-4" *ngIf="verificaSeTemParecerOuRecomendacao()">
           <h5>Parecer da Comissão:</h5>
-          
+
           <p>{{dadosDemanda?.parecerComissaoProposta}}</p>
           <br>
           <h5>Recomendações da Comissão:</h5>
@@ -48,7 +48,9 @@
           <button class="btn btn-danger ms-2" routerLink="/tela-inicial">
             {{ "telas.tela-corrida.b-cancelar" | translate }}
           </button>
-          <button class="btn btn-primary me-2" (click)="onSubmitDemanda()">
+          <div *ngIf="invalidProposta() && invalid()">INVALID</div>
+          <div *ngIf="!(invalidProposta() && invalid())">VALID</div>
+          <button [disabled]="invalid()" class="btn btn-primary me-2"  (click)="onSubmitDemanda()">
             {{ "telas.tela-corrida.b-finalizar" | translate }}
           </button>
         </div>

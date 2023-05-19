@@ -38,9 +38,9 @@ export class PropostaService {
     escopoDemandaProposta: ['', [Validators.required]],
     inicioExDemandaProposta: ['', [Validators.required]],
     fimExDemandaProposta: ['', [Validators.required]],
-    paybackProposta: [this.paybackProposta],
-    responsavelProposta: [''],
-    statusDemanda: ['']
+    paybackProposta: [this.paybackProposta, [Validators.required]],
+    responsavelProposta: ['', [Validators.required]],
+    statusDemanda: ['', [Validators.required]]
   });
 
   public formRecursos = this.fb.group({
@@ -63,8 +63,6 @@ export class PropostaService {
     let i: any = localStorage.getItem('rascunhosProposta')
     let listaRascunho: any[] = JSON.parse(i)
     let proposta =listaRascunho.find(e=> e.codigoDemanda == codigoDemanda)
-    console.log(proposta)
-    console.log(proposta.prazoProposta)
     if (proposta) {
       this.formProposta.patchValue({
         prazoProposta: proposta.prazoProposta,
@@ -100,6 +98,10 @@ export class PropostaService {
       throw new Error("A porcentagem dos centros de custo devem fechar 100%")
     }
 
+  }
+
+  get getFormProposta(){
+    return this.formProposta
   }
 
 

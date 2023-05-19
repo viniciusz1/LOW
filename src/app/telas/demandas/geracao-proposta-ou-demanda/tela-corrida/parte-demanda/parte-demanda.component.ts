@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { DemandaService } from './../../../../../services/demanda.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
-import { Editor, Toolbar,Validators } from 'ngx-editor';
+import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
 
 interface Tab {
@@ -28,25 +28,25 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   ) {
     let indiceRascunho = route.snapshot.params['indiceRascunho']
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
-      if(route.snapshot.url){
-        if(indiceRascunho){
+      if (route.snapshot.url) {
+        if (indiceRascunho) {
           rascunhoService.atualizarRascunhoDemanda = indiceRascunho
-        }else{
+        } else {
           rascunhoService.atualizarRascunhoProposta = route.snapshot.params['codigoDemanda']
         }
       }
     });
-   }
-   maxTotalFileSize = 100 * 1024 * 1024;
-   //serve para setar o tipo do editor de texto como html por padrão
-   //NÃO DELETAR
-   html = ""
-   onInputChange() {
+  }
+  maxTotalFileSize = 100 * 1024 * 1024;
+  //serve para setar o tipo do editor de texto como html por padrão
+  //NÃO DELETAR
+  html = ""
+  onInputChange() {
     // Em vez de chamar diretamente o método, envie um evento ao Subject
     this.inputSubject.next("");
   }
 
-  VerificarTamanho(event: any) {
+  verificarTamanho(event: any) {
     const files: File[] = event.files; // Obtém os arquivos selecionados
     let totalSize = 0; // Variável para armazenar o tamanho total dos arquivos
     let maxTotal = this.maxTotalFileSize;

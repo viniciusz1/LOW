@@ -33,14 +33,16 @@ export class TelaCorridaComponent implements OnInit {
 
   activeIndex = 1;
   dadosDemanda: Demanda | undefined;
-  
+
   verificaSeTemParecerOuRecomendacao(){
     if(this.dadosDemanda?.parecerComissaoProposta || this.dadosDemanda?.recomendacaoProposta){
       return true;
     }
     return false;
   }
-
+  beneficioValidator(){
+    this.demandaService.beneficioValidator()
+  }
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
 
@@ -73,11 +75,11 @@ export class TelaCorridaComponent implements OnInit {
         .subscribe({
           next: (response) => {
             console.log("Chama 3x?");
-            
+
             this.showSuccess("Proposta criada com sucesso!")
             this.router.navigate(['/tela-inicial']);
           },
-          error: (err) => {   
+          error: (err) => {
             this.showError("Não foi possível criar proposta")
           },
         });
@@ -98,8 +100,15 @@ export class TelaCorridaComponent implements OnInit {
 
   }
 
+  invalid(){
+    return this.demandaService.getFormDemanda.invalid
+  }
+  invalidProposta(){
+    return this.propostaService.getFormProposta.invalid
+  }
+
   teste() {
-    return this.demandaService.getFormDemandaInvalid
+    console.log(this.demandaService.getFormDemanda)
   }
 
   showSuccess(message: string) {

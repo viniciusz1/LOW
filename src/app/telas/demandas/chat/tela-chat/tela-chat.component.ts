@@ -64,7 +64,7 @@ export class TelaChatComponent implements OnInit {
       return
     }, undefined);
   }
-
+  pesquisaFiltro = ''
   iniciarWebSocketChat() {
     this.messagesService.initializeWebSocketConnection()
     this.messagesService.$mensagesEmmiter.subscribe(mensagens => {

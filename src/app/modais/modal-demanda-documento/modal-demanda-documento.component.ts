@@ -35,7 +35,8 @@ export class ModalDemandaDocumentoComponent implements OnInit {
       .subscribe({
         next: e => {
           if ((e.usuario.nivelAcessoUsuario == 'GestorTI' || e.usuario.nivelAcessoUsuario == 'GerenteNegocio') && this.dadosDemanda?.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
-            if (this.dadosDemanda.isHistorico == false) {
+
+            if (!this.dadosDemanda.isHistorico) {
               this.showbotoesAprovarDemanda = true
             }
           }

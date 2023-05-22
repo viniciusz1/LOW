@@ -43,7 +43,9 @@ export class TelaCorridaComponent implements OnInit {
     }
     return false;
   }
-
+  beneficioValidator() {
+    this.demandaService.beneficioValidator()
+  }
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
       if (this.router.url.includes('reformular-demanda')) {
@@ -70,19 +72,24 @@ export class TelaCorridaComponent implements OnInit {
         });
       }
     } else {
-      this.propostaService
-        .postProposta()
-        .subscribe({
-          next: (response) => {
-            console.log("Chama 3x?");
+      if (this.propostaService.verificaRecursos()) {
+        this.propostaService
+          .postProposta()
+          .subscribe({
+            next: (response) => {
+              console.log("Chama 3x?");
 
-            this.showSuccess("Proposta criada com sucesso!")
-            this.router.navigate(['/tela-inicial']);
-          },
-          error: (err) => {
-            this.showError("Não foi possível criar proposta")
-          },
-        });
+              this.showSuccess("Proposta criada com sucesso!")
+              this.router.navigate(['/tela-inicial']);
+            },
+            error: (err) => {
+              this.showError("Não foi possível criar proposta")
+            },
+          });
+      } else {
+        this.showError("Adicione pelo menos um recurso!")
+      }
+
     }
   }
 
@@ -100,8 +107,15 @@ export class TelaCorridaComponent implements OnInit {
 
   }
 
+  invalid() {
+    return this.demandaService.getFormDemanda.invalid
+  }
+  invalidProposta() {
+    return this.propostaService.getFormProposta.invalid
+  }
+
   teste() {
-    return this.demandaService.getFormDemandaInvalid
+    console.log(this.propostaService.getFormProposta)
   }
 
   showSuccess(message: string) {

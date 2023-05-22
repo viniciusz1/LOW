@@ -1,11 +1,11 @@
 import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 import { Demanda } from 'src/app/models/demanda.model';
-import { ModalPropostaDocumentoComponent } from './../modal-proposta-documento/modal-proposta-documento.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { MessageService } from 'primeng/api';
 import { Reuniao } from 'src/app/models/reuniao.model';
+import { ModalDemandaDocumentoComponent } from '../modal-demanda-documento/modal-demanda-documento.component';
 
 @Component({
   selector: 'app-modal-parecer-comissao-proposta',
@@ -76,10 +76,11 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
     }
   }
 
-  openModalPropostaDocumento() {
-    this.matDialog.open(ModalPropostaDocumentoComponent, {
+  openModalDemandaDocumento() {
+    this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: this.demanda
     });
   }
 

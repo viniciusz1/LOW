@@ -41,7 +41,7 @@
         <div class="d-flex flex-column flex-fill ms-3">
           <h6>{{ demandaDiscutida?.tituloDemanda }}</h6>
           <small *ngIf="demandaDiscutida" class="timeago">{{ "telas.tela-chat.solicitante" | translate }} {{
-            demandaDiscutida?.solicitanteDemanda?.nomeUsuario }} | {{ "telas.tela-chat.analista" | translate }} {{ demandaDiscutida?.analista?.nomeUsuario
+            demandaDiscutida.solicitanteDemanda?.nomeUsuario }} | {{ "telas.tela-chat.analista" | translate }} {{ demandaDiscutida.analista?.nomeUsuario
             }}</small>
 
         </div>

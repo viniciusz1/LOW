@@ -1,5 +1,5 @@
 
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -14,12 +14,11 @@ import { UsuarioService } from './usuario.service';
 //Ao analista aceitar iniciar uma demanda, é feita uma requisição setando o analista da mesma
 export class DemandaClassificadaService {
   public demandaClassificadaForm = this.fb.group({
-    tamanhoDemandaClassificada: [''],
-    buSolicitanteDemandaClassificada:[''],
-    busBeneficiadasDemandaClassificada:[''],
+    tamanhoDemandaClassificada: ['', Validators.required],
+    buSolicitanteDemandaClassificada:['', Validators.required],
+    busBeneficiadasDemandaClassificada:['', Validators.required],
     codigoDemanda: [''],
-    // analista: { codigoUsuario: this.usuarioService.getCodigoUser() },
-    secaoDemandaClassificada: [''],
+    secaoDemandaClassificada: ['', Validators.required],
   });
   postClassificacaoDemanda(codigoDemanda: string | undefined) {
     if(codigoDemanda != undefined){
@@ -30,6 +29,10 @@ export class DemandaClassificadaService {
 
       this.demandaClassificadaForm.value
     );
+  }
+  
+  get isFormDemandaClassificadaInvalid(){
+    return this.demandaClassificadaForm.invalid;
   }
 
   constructor(private http: HttpClient, private fb: FormBuilder, private usuarioService: UsuarioService) {}

@@ -22,7 +22,7 @@ export class DemandaService {
     situacaoAtualDemanda: ['', ValidatorsEditor.required],
     objetivoDemanda: ['', ValidatorsEditor.required],
     beneficioRealDemanda: this.fb.group({
-      moedaBeneficio: ['', this.beneficioValidator.bind(this)],
+      moedaBeneficio: [''],
       memoriaDeCalculoBeneficio: [''],
       valorBeneficio: [''],
     }),
@@ -43,9 +43,9 @@ export class DemandaService {
 
   public arquivos: File[] = [];
 
-  beneficioValidator(formGroup: FormGroup) {
-    const beneficioReal = formGroup.get('beneficioRealDemanda');
-    const beneficioPotencial = formGroup.get('beneficioPotencialDemanda');
+  beneficioValidator() {
+    const beneficioReal = this.demandaForm.get('beneficioRealDemanda');
+    const beneficioPotencial = this.demandaForm.get('beneficioPotencialDemanda');
 
     if (beneficioReal?.get('moedaBeneficio')?.value ||
       beneficioReal?.get('memoriaDeCalculoBeneficio')?.value ||
@@ -54,9 +54,9 @@ export class DemandaService {
       if (!beneficioReal.get('moedaBeneficio')?.value ||
         !beneficioReal.get('memoriaDeCalculoBeneficio')?.value ||
         !beneficioReal.get('valorBeneficio')?.value) {
-        beneficioReal.setErrors({ beneficioIncomplete: true });
+          return false;
       } else {
-        beneficioReal.setErrors(null);
+        return true
       }
     }
 
@@ -67,22 +67,22 @@ export class DemandaService {
       if (!beneficioPotencial?.get('moedaBeneficio')?.value ||
         !beneficioPotencial?.get('memoriaDeCalculoBeneficio')?.value ||
         !beneficioPotencial?.get('valorBeneficio')?.value) {
-        beneficioPotencial.setErrors({ beneficioIncomplete: true });
+          return false;
       } else {
-        beneficioPotencial.setErrors(null);
+        return true
       }
     }
+    console.log("Não deveria chegar aqui")
+    return false;
   }
 
   iniciarConversa(codigoDemanda: string | undefined) {
     return this.http.put(path + 'mensagens/iniciarChat/' + codigoDemanda, null)
   }
 
-  public get getFormDemandaInvalid() {
-    return this.demandaForm.invalid
-  }
+
   public get getFormDemanda() {
-    return this.demandaForm.value
+    return this.demandaForm
   }
 
   setFormDemandaRascunho(indiceDemanda: number) {
@@ -144,6 +144,8 @@ export class DemandaService {
       situacaoAtualDemanda: situacaoAtualDemanda
     })
   }
+
+
 
   postDemanda() {
     //Criando um demandaFormData, onde vamos inserir a demanda, e os arquivos da demanda em conjunto.
@@ -333,7 +335,7 @@ export class DemandaService {
   getBeneficioReal(): number {
     if (this.demandaForm.value.beneficioRealDemanda?.valorBeneficio) {
       return parseInt(
-        this.demandaForm.value.beneficioRealDemanda?.valorBeneficio
+        this.demandaForm.value.beneficioRealDemanda?.valorBeneficio as string
       );
     }
     return 0;
@@ -341,7 +343,7 @@ export class DemandaService {
 
   getBeneficioPotencial() {
     if (this.demandaForm.value.beneficioPotencialDemanda?.valorBeneficio) {
-      return parseInt(this.demandaForm.value.beneficioPotencialDemanda?.valorBeneficio);
+      return parseInt(this.demandaForm.value.beneficioPotencialDemanda?.valorBeneficio as string);
     }
     return 0;
   }

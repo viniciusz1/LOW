@@ -12,9 +12,10 @@ import { JoyrideModule } from 'ngx-joyride';
 import {TabMenuModule} from 'primeng/tabmenu';
 import { EscopoPerfilComponent } from './escopo-perfil/escopo-perfil.component';
 import { SharedModule } from '../shared/shared.module';
+import { VLibrasComponent } from './v-libras/v-libras.component';
 
 /*
-  Módulo do sistema onde ficam componentes em que são usados em múltiplas telas e não necessitam 
+  Módulo do sistema onde ficam componentes em que são usados em múltiplas telas e não necessitam
   de muitas alterações de valores, como cabeçalhos, pós cabeçalhos e escopos, ou seja a parte fixa
   de algumas telas que se encontram no sistema
 */
@@ -24,7 +25,8 @@ import { SharedModule } from '../shared/shared.module';
     HeaderComponent,
     PosHeaderComponent,
     EscopoPrincipalComponent,
-    EscopoPerfilComponent
+    EscopoPerfilComponent,
+    VLibrasComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    VLibrasComponent
   ],
   providers: [
   ]

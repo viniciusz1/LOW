@@ -96,10 +96,14 @@
             class="me-3"
             style="align-self: flex-end; cursor: pointer"
             (click)="
-              pesquisarDemandas(linha.titulo != 'Demandas do Seu Departamento' ? {
-                status: linha.status,
-                pesquisaCampo: undefined
-              } : departamentoUsuario)
+              pesquisarDemandas(
+                linha.titulo != 'Demandas do Seu Departamento'
+                  ? {
+                      status: linha.status,
+                      pesquisaCampo: undefined
+                    }
+                  : departamentoUsuario
+              )
             "
           >
             {{ "telas.tela-inicial.ver-mais" | translate }}
@@ -253,15 +257,12 @@
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
           <div
-
-          class="me-3"
-          style="align-self: flex-end; cursor: pointer"
-          (click)="
-            pesquisarDemandas(departamentoUsuario)
-          "
-        >
-          {{ "telas.tela-inicial.ver-mais" | translate }}
-        </div>
+            class="me-3"
+            style="align-self: flex-end; cursor: pointer"
+            (click)="pesquisarDemandas(departamentoUsuario)"
+          >
+            {{ "telas.tela-inicial.ver-mais" | translate }}
+          </div>
         </div>
         <div class="d-flex row" #tamanhoDaFila style="width: 100%">
           <app-card-demanda
@@ -283,7 +284,12 @@
             (verDocumentoEmAta)="openModalAtaDocumento()"
           ></app-card-demanda>
         </div>
-        <a class="d-flex align-items-end justify-content-end" role="button" (click)="pesquisarDemandas(departamentoUsuario)">{{ "telas.tela-inicial.ver-mais" | translate }}</a>
+        <a
+          class="d-flex align-items-end justify-content-end"
+          role="button"
+          (click)="pesquisarDemandas(departamentoUsuario)"
+          >{{ "telas.tela-inicial.ver-mais" | translate }}</a
+        >
       </div>
     </div>
     <div class="bloco-branco" style="width: 10%"></div>

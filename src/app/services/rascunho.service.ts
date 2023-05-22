@@ -11,10 +11,10 @@ import { PropostaService } from './proposta.service';
     providedIn: 'root',
 })
 export class RascunhoService {
-    
+
     set atualizarRascunhoDemanda(indice: number) {
         let rascunhos = this.getRascunhosDemanda
-        rascunhos[indice] = this.demandaService.getFormDemanda
+        rascunhos[indice] = this.demandaService.getFormDemanda.value
         rascunhos[indice].codigoDemanda = indice
         localStorage.setItem('rascunhos', JSON.stringify(rascunhos))
     }
@@ -66,7 +66,7 @@ export class RascunhoService {
             return -1
         }
     }
-    
+
     constructor(private demandaService: DemandaService, private propostaService: PropostaService) {
 
     }

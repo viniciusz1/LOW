@@ -10,7 +10,7 @@
     ">
     <div class="w-100">
       <div class="d-flex justify-content-between">
-        
+
         <div class="titulo" style="display: grid; width: 28vw; height: 9vh;" >
           <div class="infos" style="display: flex; align-items: center; width: 28vw">
             <label style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.prazo-elaboracao" | translate
@@ -112,7 +112,7 @@
         <small *ngIf="formRecursos.controls.nomeRecurso.errors && formRecursos.controls.nomeRecurso.touched"
           id="username2-help" class="p-error block">{{ "telas.proposta.campo-obrigatorio" | translate }}</small>
       </div>
-      
+
       <div class="col-3" style="display: grid; padding-right: 0px !important;">
         <label class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.perfil-despesa" | translate }}:</label>
         <p-dropdown (onChange)="onInputChange()" styleClass="dropDespesa" placeholder="Ex: Interna" type="text" [required]="true"
@@ -136,7 +136,7 @@
         </div>
       </div>
 
-      
+
 
     </div>
     <div class="row">
@@ -289,7 +289,7 @@
 
 
   <!-- formControlName="responsavelProposta" -->
-  <p-chips  separator="," placeholder="Insira o/os responsáveis" (input)="onInputChange()" styleClass="w-100" 
+  <p-chips  separator="," placeholder="Insira o/os responsáveis" (input)="onInputChange()" styleClass="w-100"
   optionLabel="nome" display="chip" formControlName="responsavelProposta"
   [ngClass]="{'ng-dirty ng-invalid': formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched}"></p-chips>
   <small *ngIf="formProposta.controls.responsavelProposta.errors && formProposta.controls.responsavelProposta.touched"
@@ -302,8 +302,11 @@
       tooltipPosition="top"></i>
   </div>
   <div>
-    <p-dropdown styleClass="dropStatus" (onChange)="onInputChange()" formControlName="statusDemanda" [options]="statusDemanda"
-      [optionLabel]="'name'" [optionValue]="'value'" placeholder="Status"></p-dropdown>
+    <p-dropdown (onChange)="onInputChange()"
+    formControlName="statusDemanda"
+    [options]="statusDemanda"
+    placeholder="Status de Discussão"
+    [optionLabel]="'name'" [optionValue]="'value'"></p-dropdown>
   </div>
 </form>
 

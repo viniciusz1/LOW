@@ -64,7 +64,11 @@
           <button class="btn btn-danger ms-2" routerLink="/tela-inicial">
             {{ "telas.tela-corrida.b-cancelar" | translate }}
           </button>
-          <button class="btn btn-primary me-2" (click)="onSubmitDemanda()">
+          <div *ngIf="invalid()">DEMANDA INVALID</div>
+          <div *ngIf="!invalid()">DEMANDA VALID</div>
+          <div *ngIf="invalidProposta()" (click)="teste()">PROPOSTA INVALID</div>
+          <div *ngIf="!invalidProposta()" (click)="teste()">PROPOSTA VALID</div>
+          <button [disabled]="invalid()" class="btn btn-primary me-2"  (click)="onSubmitDemanda()">
             {{ "telas.tela-corrida.b-finalizar" | translate }}
           </button>
         </div>

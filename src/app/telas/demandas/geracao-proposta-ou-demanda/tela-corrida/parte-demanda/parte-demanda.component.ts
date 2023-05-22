@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { DemandaService } from './../../../../../services/demanda.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
-import { Editor, Toolbar, Validators } from 'ngx-editor';
+import { Editor, Toolbar } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
 
 interface Tab {
@@ -31,52 +31,17 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
       if (route.snapshot.url) {
         if (indiceRascunho) {
           rascunhoService.atualizarRascunhoDemanda = indiceRascunho
-        } else {
-          rascunhoService.atualizarRascunhoProposta = route.snapshot.params['codigoDemanda']
         }
       }
     });
   }
-  maxTotalFileSize = 100 * 1024 * 1024;
   //serve para setar o tipo do editor de texto como html por padrão
   //NÃO DELETAR
   html = ""
   onInputChange() {
     // Em vez de chamar diretamente o método, envie um evento ao Subject
-    this.inputSubject.next("");
+    this.inputSubject.next('aaaA');
   }
-
-  // verificarTamanho(event: any) {
-  //   const files: File[] = event.files; // Obtém os arquivos selecionados
-  //   let totalSize = 0; // Variável para armazenar o tamanho total dos arquivos
-  //   let maxTotal = this.maxTotalFileSize;
-
-  //   for (const file of files) {
-  //     totalSize += file.size; // Calcula o tamanho total dos arquivos
-  //     maxTotal -= file.size; //Para verificar se excedeu o total aceito
-
-  //     if (maxTotal < 0) { // Verifica se o tamanho total excedeu os 100 MB em bytes
-  //       // Exibe uma mensagem de erro
-  //       this.messageService.add({
-  //         severity: 'error',
-  //         summary: 'Tamanho máximo excedido',
-  //         detail: 'O tamanho total dos arquivos selecionados excede 100 MB.'
-  //       });
-  //       console.log("Aqui" + this.listaFiles)
-  //       const nomesLista2 = files.map(file => file.name); // Obter uma lista de nomes da lista2
-  //       this.listaFiles = this.listaFiles.filter(file => !nomesLista2.includes(file.name));
-  //       console.log("Aqui" + this.listaFiles)
-  //       return; // Retorna para evitar adicionar mais arquivos à lista
-  //     }
-
-
-  //   }
-  //   // this.listaFiles.push(...files); // Adiciona o arquivo à lista
-  //   // this.listaFiles = this.listaFiles.filter(file => file ==(file));
-
-  //   this.maxTotalFileSize -= totalSize;
-  //   console.log(this.maxTotalFileSize)
-  // }
 
   inputSubject = new Subject<string>();
   @Input() aparecerProposta = false;
@@ -138,9 +103,24 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   }
 
   uploadDocumentos(event: any) {
-    this.demandaService.setArquivos = event['files'] as File[];
-  }
+    if (!this.isBiggerThan100MB(event['files'] as File[])) {
+      this.demandaService.setArquivos = event['files'] as File[];
+    } else {
+      this.listaFiles = []
+      this.showError("O tamanho total dos arquivos não pode ser maior que 100MB")
+    }
 
+  }
+  isBiggerThan100MB(files: File[]): boolean {
+    let totalSize = 0;
+    for (const file of files) {
+      totalSize += file.size;
+    }
+    // Convertendo para megabytes
+    const totalSizeInMB = totalSize / (1024 * 1024);
+
+    return totalSizeInMB > 100;
+  }
   removerCentroDeCusto(index: number) {
     this.demandaService.removeCenterOfCost(index);
   }
@@ -172,7 +152,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   }
 
   mudouMoeda(event: any, ordemInput: number) {
-    // this.onInputChange()
+    this.onInputChange()
 
     let moeda = event;
     console.log(moeda)

@@ -28,7 +28,16 @@ export class UsuarioService {
     let user = this.getUser('user')
         return user?.nivelAcessoUsuario;
   }
+  // /login/return-user-logged
+  // let user = this.http.get<Usuario>(path + " /login/return-user-logged")
+  //   .subscribe(user => {
+  //     if (user) {
+  //       return user
 
+  //     }
+  //     return undefined
+  //   })
+  // return user
   get getDepartamento() {
     let user = this.getUser('user')
         return user?.departamentoUsuario.nomeDepartamento;
@@ -55,6 +64,8 @@ export class UsuarioService {
   }
 
   getUser(key: string): Usuario | undefined {
+
+
     let user = localStorage.getItem(key)
     if (user) {
       return JSON.parse(user)

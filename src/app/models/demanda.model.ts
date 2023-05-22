@@ -37,6 +37,7 @@ export interface Demanda {
     version?: number
     motivoReprovacaoDemanda?: string,
 
+    isHistorico?: boolean,
     recomendacaoProposta?: string,
     tamanhoDemandaAnalista?: Tamanho,
     buSolicitanteDemandaAnalista?: BusinessUnit,

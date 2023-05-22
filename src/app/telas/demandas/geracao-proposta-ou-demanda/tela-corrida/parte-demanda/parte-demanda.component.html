@@ -448,7 +448,7 @@
           pTooltip="Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"
           tooltipPosition="top"
         >
-          100MB
+          Máximo Total: 100MB
         </i>
       </div>
       <p-fileUpload
@@ -460,8 +460,6 @@
         [auto]="true"
         [customUpload]="true"
         [files]="listaFiles"
-        [fileLimit]="10"
-        [maxFileSize]="100000000000000"
         (uploadHandler)="uploadDocumentos($event)"
       >
       </p-fileUpload>

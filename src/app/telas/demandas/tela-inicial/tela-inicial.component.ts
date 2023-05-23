@@ -38,7 +38,8 @@ export class TelaInicialComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private messageService: MessageService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {

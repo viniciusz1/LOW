@@ -1,2 +1,17 @@
+<div
+  *ngIf="!startedRecodAudio"
+  style="position: fixed; top: 33%; right: 0; z-index: 2"
+  (click)="startVoice()"
+>
+  <i class="bi bi-mic"></i>
+</div>
+
+<div
+  *ngIf="startedRecodAudio"
+  style="position: fixed; top: 33%; right: 0; z-index: 2"
+  (click)="stopVoice()"
+>
+  <i class="bi bi-x-lg"></i>
+</div>
 <app-v-libras></app-v-libras>
 <router-outlet></router-outlet>

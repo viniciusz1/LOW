@@ -8,6 +8,9 @@
   class="scrollspy-example-2"
   tabindex="0"
 >
+  <div (click)="startVoice()">AOBA</div>
+  <div (click)="stopService()">CLONSE</div>
+  {{ voiceRecognitionService.text }}
   <h3>{{ "telas.demanda.dados-gerais" | translate }}</h3>
   <hr />
   <section id="section1">
@@ -31,6 +34,7 @@
         formControlName="tituloDemanda"
         class="input w-100"
         maxlength="100"
+        inputEmFoco
         [ngClass]="{
           'ng-dirty ng-invalid':
             demandaForm.controls.tituloDemanda.errors &&
@@ -73,6 +77,8 @@
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
             </ngx-editor-menu>
             <ngx-editor
+              #editor1
+              (focusIn)="onFocoIn(editor1)"
               (input)="onInputChange()"
               [ngModel]="html"
               [editor]="editor"
@@ -115,9 +121,11 @@
             <ngx-editor-menu
               [editor]="editorDemanda"
               [toolbar]="toolbarDemanda"
+              inputEmFoco
             >
             </ngx-editor-menu>
             <ngx-editor
+              inputEmFoco
               (input)="onInputChange()"
               [ngModel]="html"
               [editor]="editorDemanda"
@@ -162,6 +170,7 @@
               <div class="p-inputgroup" style="margin-right: 0.5vw">
                 <input
                   (input)="onInputChange()"
+                  inputEmFoco
                   style="width: 7vw"
                   [id]="'porcentagemListaReuniao' + i"
                   pInputText
@@ -175,6 +184,7 @@
               <input
                 maxlength="70"
                 (input)="onInputChange()"
+                inputEmFoco
                 style="width: 10vw; margin-right: 0.5vw"
                 [id]="'nomeCentroCusto' + i"
                 pInputText
@@ -245,6 +255,7 @@
               <div style="width: 100%">
                 <p-inputNumber
                   class="largura-customizada"
+                  inputEmFoco
                   (input)="onInputChange()"
                   formControlName="valorBeneficio"
                   mode="currency"
@@ -259,6 +270,7 @@
               <p-dropdown
                 (onChange)="mudouMoeda($event, 1)"
                 [options]="opcoesDeMoeda"
+                inputEmFoco
                 formControlName="moedaBeneficio"
                 placeholder="Moeda"
                 optionLabel="name"
@@ -278,6 +290,7 @@
                 ></i>
               </div>
               <textarea
+                inputEmFoco
                 (input)="onInputChange()"
                 placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
                 style="width: 100%"
@@ -314,6 +327,7 @@
               <div style="display: flex; justify-content: space-between">
                 <div style="width: 100%">
                   <p-inputNumber
+                    inputEmFoco
                     class="largura-customizada"
                     (input)="onInputChange()"
                     formControlName="valorBeneficio"
@@ -348,6 +362,7 @@
               </div>
               <div style="display: flex">
                 <textarea
+                inputEmFoco
                   (input)="onInputChange()"
                   placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
                   style="width: 100%"
@@ -382,6 +397,7 @@
             </div>
             <div style="display: grid">
               <textarea
+              inputEmFoco
                 (input)="onInputChange()"
                 placeholder="Ex: O benefício se torna qualitativo porque seu retorno..."
                 style="width: 100%"

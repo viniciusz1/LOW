@@ -21,14 +21,14 @@
         <label for="subtitulo" style="margin-top: 5px;">
             {{ "modais.modal-parecer-comissao-proposta.informe-parecer" | translate }}
         </label>
-        <textarea [disabled]="bloquearCamposInput()" pInputTextarea style="min-height: 300px;"
+        <textarea inputEmFoco [disabled]="bloquearCamposInput()" pInputTextarea style="min-height: 300px;"
             [(ngModel)]="parecerComissaoInput"></textarea>
     </div>
     <div class="d-flex flex-column" *ngIf="aparecerRecomendacao">
         <label for="subtitulo" style="margin-top: 5px;">
             {{ "modais.modal-parecer-comissao-proposta.recomendacoes" | translate }}
         </label>
-        <textarea [disabled]="bloquearCamposInput()" pInputTextarea style="min-height: 10vh;"
+        <textarea inputEmFoco [disabled]="bloquearCamposInput()" pInputTextarea style="min-height: 10vh;"
             [(ngModel)]="recomendacaoInput"></textarea>
     </div>
     <div class="d-flex justify-content-between mt-3">

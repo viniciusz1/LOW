@@ -11,6 +11,7 @@
       <div id="search" class="border-top border-bottom">
         <i class="bi bi-search px-3"></i>
         <input
+          inputEmFoco
           type="text"
           placeholder="Busque por demandas"
           [(ngModel)]="pesquisaFiltro"
@@ -172,6 +173,7 @@
         </p-speedDial>
         <div class="border rounded">
           <input
+            inputEmFoco
             type="text"
             #mensagemDigitada
             (keydown)="enviarMensagemPorTeclado($event)"

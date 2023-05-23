@@ -42,8 +42,8 @@
         </div>
         <span class="p-input-icon-left ms-3">
           <i class="pi pi-search"></i>
-          <input type="text" class="border" pInputText placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda"
-            (ngModelChange)="mudouCampodePesquisa()" />
+          <input type="text" class="border" inputEmFoco pInputText placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda"
+            (ngModelChange)="mudouCampodePesquisa()"/>
         </span>
 
         <button *ngIf="showPesquisaEBotaoFiltro && !tipoRascunho" class="btn btn-primary ms-3"

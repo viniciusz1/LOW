@@ -37,5 +37,6 @@ export class NotificacoesComponent implements OnInit {
         this.notificacoes = this.notificacoes.reverse();
       })
     }
+    
 }
 

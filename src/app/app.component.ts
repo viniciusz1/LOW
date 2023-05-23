@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { VoiceRecognitionService } from './services/voice-recognition.service';
+import { FalarTextoDirective } from './directives/falar-texto.directive';
+import { FalarTextoService } from './services/falar-textos.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,8 @@ export class AppComponent implements OnInit {
   title = 'low';
   constructor(translate: TranslateService,
     private http: HttpClient,
-    public voiceRecognitionService: VoiceRecognitionService) {
+    public voiceRecognitionService: VoiceRecognitionService,
+    public falarTextoService: FalarTextoService) {
 
 
     this.voiceRecognitionService.init()
@@ -33,6 +36,8 @@ export class AppComponent implements OnInit {
   }
   ngOnInit(): void {
   }
+
+  
   startedRecodAudio = false;
   startVoice() {
     this.startedRecodAudio = true;

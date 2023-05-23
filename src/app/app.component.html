@@ -13,5 +13,20 @@
 >
   <i class="bi bi-x-lg"></i>
 </div>
+<div
+  *ngIf="falarTextoService.permitirFala"
+  style="position: fixed; top: 35%; right: 0; z-index: 2"
+  (click)="falarTextoService.permitirFala = false"
+>
+  <i class="bi bi-volume-off"></i>
+</div>
+<div
+  *ngIf="!falarTextoService.permitirFala"
+  style="position: fixed; top: 35%; right: 0; z-index: 2"
+  (click)="falarTextoService.permitirFala = true"
+>
+  <i class="bi bi-volume-mute"></i>
+</div>
+
 <app-v-libras></app-v-libras>
 <router-outlet></router-outlet>

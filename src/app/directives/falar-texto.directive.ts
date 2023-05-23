@@ -1,12 +1,12 @@
 import { Directive, ElementRef } from '@angular/core';
-import { TextToSpeechService } from '../services/falar-textos.service';
+import { FalarTextoService } from '../services/falar-textos.service';
 
 @Directive({
-  selector: '[appFalarTexto]'
+  selector: '[falarTexto]'
 })
 export class FalarTextoDirective {
 
-  constructor(private elementRef: ElementRef, private textToSpeechService: TextToSpeechService) {}
+  constructor(private elementRef: ElementRef, private falarTextoService: FalarTextoService) {}
 
   ngOnInit(): void {
     this.elementRef.nativeElement.addEventListener('click', this.onElementClick.bind(this));
@@ -18,6 +18,6 @@ export class FalarTextoDirective {
 
   onElementClick(): void {
     const text = this.elementRef.nativeElement.innerText;
-    this.textToSpeechService.speak(text);
+    this.falarTextoService.speak(text);
   }
 }

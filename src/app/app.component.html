@@ -12,7 +12,7 @@
   role="button"
   *ngIf="startedRecodAudio"
   class="estilo-cards"
-  style="top: 33%"
+  style="top: 33%; background-color: red;"
   (click)="stopVoice()"
 >
   <i class="bi bi-x-lg" style="color: white"></i>
@@ -21,10 +21,10 @@
   role="button"
   *ngIf="falarTextoService.permitirFala"
   class="estilo-cards"
-  style="top: 38.5%"
+  style="top: 38.5%; background-color: red;"
   (click)="pararDeFalar()"
 >
-  <i class="bi bi-volume-off" style="color: white"></i>
+  <i class="bi bi-volume-off" style="color: white; font-size: 20px;"></i>
 </div>
 <div
   role="button"
@@ -33,7 +33,7 @@
   style="top: 38.5%"
   (click)="iniciarFala()"
 >
-  <i class="bi bi-volume-mute" style="color: white"></i>
+  <i class="bi bi-volume-mute" style="color: white; font-size: 20px"></i>
 </div>
 
 <app-v-libras></app-v-libras>

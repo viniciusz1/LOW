@@ -1,5 +1,5 @@
 <form class="container" [formGroup]="formProposta" (onSubmit)="onSubmit()">
-  <h3 class="mt-4" spyTarget="proposta">
+  <h3 falarTexto class="mt-4" spyTarget="proposta">
     {{ "telas.proposta.proposta" | translate }}
   </h3>
   <hr />
@@ -20,10 +20,15 @@
             class="infos"
             style="display: flex; align-items: center; width: 28vw"
           >
-            <label style="font-weight: 500" class="me-2" for="time">{{
-              "telas.proposta.prazo-elaboracao" | translate
-            }}</label>
+            <label
+              falarTexto
+              style="font-weight: 500"
+              class="me-2"
+              for="time"
+              >{{ "telas.proposta.prazo-elaboracao" | translate }}</label
+            >
             <i
+              falarTexto
               class="bi bi-info-circle me-2"
               style="font-size: 0.9rem; color: #00579d; cursor: pointer"
               pTooltip="Em quanto tempo a proposta ficará pronta?"
@@ -44,6 +49,7 @@
             inputId="time"
           ></p-calendar>
           <small
+            falarTexto
             *ngIf="
               formProposta.controls.prazoProposta.errors &&
               formProposta.controls.prazoProposta.touched
@@ -59,10 +65,15 @@
             class="infos"
             style="display: flex; align-items: center; width: 28vw"
           >
-            <label style="font-weight: 500" class="me-2" for="time">{{
-              "telas.proposta.codigo-ppm" | translate
-            }}</label>
+            <label
+              falarTexto
+              style="font-weight: 500"
+              class="me-2"
+              for="time"
+              >{{ "telas.proposta.codigo-ppm" | translate }}</label
+            >
             <i
+              falarTexto
               class="bi bi-info-circle me-2"
               style="font-size: 0.9rem; color: #00579d; cursor: pointer"
               pTooltip="Qual o código do SAP?"
@@ -84,6 +95,7 @@
             }"
           />
           <small
+            falarTexto
             *ngIf="
               formProposta.controls.codigoPPMProposta.errors &&
               formProposta.controls.codigoPPMProposta.touched
@@ -99,10 +111,11 @@
           class="infos"
           style="display: flex; align-items: center; width: 28vw"
         >
-          <label style="font-weight: 500" class="me-2" for="time">{{
+          <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
             "telas.proposta.link-jira" | translate
           }}</label>
           <i
+            falarTexto
             class="bi bi-info-circle me-2"
             style="font-size: 0.9rem; color: #00579d; cursor: pointer"
             pTooltip="Insira a URL que aparece ao topo da sua página do JIRA"
@@ -124,6 +137,7 @@
           }"
         />
         <small
+          falarTexto
           *ngIf="
             formProposta.controls.jiraProposta.errors &&
             formProposta.controls.jiraProposta.touched
@@ -135,7 +149,7 @@
       </div>
     </div>
   </div>
-  <h3 class="mt-4" spyTarget="recursosTarget">
+  <h3 falarTexto class="mt-4" spyTarget="recursosTarget">
     {{ "telas.proposta.recursos" | translate }}
   </h3>
   <hr />
@@ -146,31 +160,35 @@
   >
     <ng-template pTemplate="header">
       <tr>
-        <th>{{ "telas.proposta.recurso-necessario" | translate }}</th>
-        <th>{{ "telas.proposta.tipo-despesa" | translate }}</th>
-        <th>{{ "telas.proposta.perfil-despesa" | translate }}</th>
-        <th>{{ "telas.proposta.centro-custo-pagante" | translate }}</th>
-        <th>{{ "telas.proposta.quantidade-horas" | translate }}</th>
-        <th>{{ "telas.proposta.valor-hora" | translate }}</th>
-        <th>{{ "telas.proposta.periodo-execucao" | translate }}</th>
+        <th falarTexto>
+          {{ "telas.proposta.recurso-necessario" | translate }}
+        </th>
+        <th falarTexto>{{ "telas.proposta.tipo-despesa" | translate }}</th>
+        <th falarTexto>{{ "telas.proposta.perfil-despesa" | translate }}</th>
+        <th falarTexto>
+          {{ "telas.proposta.centro-custo-pagante" | translate }}
+        </th>
+        <th falarTexto>{{ "telas.proposta.quantidade-horas" | translate }}</th>
+        <th falarTexto>{{ "telas.proposta.valor-hora" | translate }}</th>
+        <th falarTexto>{{ "telas.proposta.periodo-execucao" | translate }}</th>
         <th></th>
         <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-recursos let-index="rowIndex">
       <tr>
-        <td>{{ recursos.nomeRecurso }}</td>
-        <td>{{ recursos.tipoDespesaRecurso | titlecase }}</td>
-        <td>{{ recursos.perfilDespesaRecurso }}</td>
-        <td>
-          <span *ngFor="let centro of recursos.centroCustoRecurso"
+        <td falarTexto>{{ recursos.nomeRecurso }}</td>
+        <td falarTexto>{{ recursos.tipoDespesaRecurso | titlecase }}</td>
+        <td falarTexto>{{ recursos.perfilDespesaRecurso }}</td>
+        <td falarTexto>
+          <span falarTexto *ngFor="let centro of recursos.centroCustoRecurso"
             >{{ centro.nomeCentroCusto }} -
             {{ centro.porcentagemCentroCusto }}%<br
           /></span>
         </td>
-        <td>{{ recursos.quantidadeHorasRecurso }}</td>
-        <td>{{ recursos.valorHoraRecurso }}</td>
-        <td>{{ recursos.periodoExMesesRecurso }}</td>
+        <td falarTexto>{{ recursos.quantidadeHorasRecurso }}</td>
+        <td falarTexto>{{ recursos.valorHoraRecurso }}</td>
+        <td falarTexto>{{ recursos.periodoExMesesRecurso }}</td>
         <td (click)="editarRecurso(index)">
           <i role="button" class="bi bi-pencil"></i>
         </td>
@@ -181,7 +199,7 @@
     </ng-template>
     <ng-template pTemplate="summary">
       <tr>
-        <td class="text-right">
+        <td falarTexto class="text-right">
           {{ "telas.proposta.custos-totais" | translate }}
           {{ custosTotais | currency : "BRL" }}
         </td>
@@ -192,7 +210,7 @@
   <div [formGroup]="formRecursos">
     <div class="row">
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:"
+        <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.recurso-necessario" | translate }}:</label
         >
         <input
@@ -211,6 +229,7 @@
           }"
         />
         <small
+          falarTexto
           *ngIf="
             formRecursos.controls.nomeRecurso.errors &&
             formRecursos.controls.nomeRecurso.touched
@@ -222,7 +241,7 @@
       </div>
 
       <div class="col-3" style="display: grid; padding-right: 0px !important">
-        <label class="mt-1" for="Recurso Necessário:"
+        <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.perfil-despesa" | translate }}:</label
         >
         <p-dropdown
@@ -243,6 +262,7 @@
         >
         </p-dropdown>
         <small
+          falarTexto
           *ngIf="
             formRecursos.controls.perfilDespesaRecurso.errors &&
             formRecursos.controls.perfilDespesaRecurso.touched
@@ -254,7 +274,7 @@
       </div>
 
       <div class="col-3" style="padding-left: 0px !important">
-        <label class="mt-1" for="Recurso Necessário:"
+        <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.valor-hora" | translate }}:</label
         >
         <div style="width: 100%; display: grid">
@@ -274,6 +294,7 @@
           >
           </p-inputNumber>
           <small
+            falarTexto
             *ngIf="
               formRecursos.controls.valorHoraRecurso.errors &&
               formRecursos.controls.valorHoraRecurso.touched
@@ -287,7 +308,7 @@
     </div>
     <div class="row">
       <div class="col-3">
-        <label class="mt-1" for="Recurso Necessário:">
+        <label falarTexto class="mt-1" for="Recurso Necessário:">
           {{ "telas.proposta.quantidade-horas" | translate }}:</label
         >
         <div style="width: 100%; display: grid">
@@ -307,6 +328,7 @@
           >
           </p-inputNumber>
           <small
+            falarTexto
             *ngIf="
               formRecursos.controls.quantidadeHorasRecurso.errors &&
               formRecursos.controls.quantidadeHorasRecurso.touched
@@ -319,7 +341,7 @@
       </div>
 
       <div class="col-3" style="display: grid; padding-right: 0px !important">
-        <label class="mt-1" for="Recurso Necessário:"
+        <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.tipo-despesa" | translate }}:</label
         >
         <p-dropdown
@@ -346,12 +368,13 @@
           "
           id="username2-help"
           class="p-error block"
+          falarTexto
           >{{ "telas.proposta.campo-obrigatorio" | translate }}</small
         >
       </div>
 
       <div class="col-3" style="padding-left: 0px !important">
-        <label class="mt-1" for="Recurso Necessário:"
+        <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.periodo-execucao" | translate }}:</label
         >
         <div style="width: 100%; display: grid">
@@ -371,6 +394,7 @@
           >
           </p-inputNumber>
           <small
+            falarTexto
             *ngIf="
               formRecursos.controls.periodoExMesesRecurso.errors &&
               formRecursos.controls.periodoExMesesRecurso.touched
@@ -383,7 +407,7 @@
       </div>
     </div>
     <div formArrayName="centroCustoRecurso" class="row align-items-center">
-      <label class="mt-1" for="Recurso Necessário:"
+      <label falarTexto class="mt-1" for="Recurso Necessário:"
         >{{ "telas.proposta.centros-custo" | translate }}:</label
       >
       <div style="width: 50%; display: -webkit-box">
@@ -447,6 +471,7 @@
 
     <div class="">
       <button
+        falarTexto
         class="btn btn-primary mt-3"
         [disabled]="!formRecursos.valid"
         (click)="addRowRecurso()"
@@ -455,16 +480,17 @@
       </button>
     </div>
   </div>
-  <h3 class="mt-4" spyTarget="escopo">
+  <h3 falarTexto class="mt-4" spyTarget="escopo">
     {{ "telas.proposta.escopo" | translate }}
   </h3>
   <hr />
   <div>
     <div class="infos" style="display: flex; align-items: center; width: 28vw">
-      <label style="font-weight: 500" class="me-2" for="time">{{
+      <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
         "telas.proposta.escopo-demanda" | translate
       }}</label>
       <i
+        falarTexto
         class="bi bi-info-circle me-2"
         style="font-size: 0.9rem; color: #00579d; cursor: pointer"
         pTooltip="Defina e personalize a finalidade da sua proposta"
@@ -473,6 +499,7 @@
     </div>
 
     <div
+      falarTexto
       class="NgxEditor__Wrapper escopo-demanda"
       [ngClass]="{
         'ng-dirty ng-invalid':
@@ -492,6 +519,7 @@
     </div>
 
     <small
+      falarTexto
       *ngIf="
         formProposta.controls.escopoDemandaProposta.errors &&
         formProposta.controls.escopoDemandaProposta.touched
@@ -502,7 +530,7 @@
     >
   </div>
 
-  <h3 class="mt-4" spyTarget="dados finais">
+  <h3 falarTexto class="mt-4" spyTarget="dados finais">
     {{ "telas.proposta.dados-finais" | translate }}
   </h3>
   <hr />
@@ -512,10 +540,11 @@
         class="infos"
         style="display: flex; align-items: center; width: 28vw"
       >
-        <label style="font-weight: 500" class="me-2" for="time">{{
+        <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
           "telas.proposta.periodo-execucao-demanda" | translate
         }}</label>
         <i
+          falarTexto
           class="bi bi-info-circle me-2"
           style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Insira a data que irá iniciar sua proposta e data que irá finalizar sua proposta"
@@ -537,6 +566,7 @@
           >
           </p-calendar>
           <small
+            falarTexto
             *ngIf="
               formProposta.controls.inicioExDemandaProposta.errors &&
               formProposta.controls.inicioExDemandaProposta.touched
@@ -561,6 +591,7 @@
           >
           </p-calendar>
           <small
+            falarTexto
             *ngIf="
               formProposta.controls.fimExDemandaProposta.errors &&
               formProposta.controls.fimExDemandaProposta.touched
@@ -578,7 +609,7 @@
         class="infos"
         style="display: flex; align-items: center; width: 28vw"
       >
-        <label style="font-weight: 500" class="me-2" for="time">{{
+        <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
           "telas.proposta.payback-simples" | translate
         }}</label>
         <i
@@ -600,10 +631,11 @@
   </div>
 
   <div class="infos" style="display: flex; align-items: center; width: 28vw">
-    <label style="font-weight: 500" class="me-2" for="time">{{
+    <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
       "telas.proposta.responsaveis-negocio" | translate
     }}</label>
     <i
+      falarTexto
       class="bi bi-info-circle me-2"
       style="font-size: 0.9rem; color: #00579d; cursor: pointer"
       pTooltip="Insira os responsáveis por suceder a proposta, validando-os por vírgulas ou acionando a tecla Enter"
@@ -628,6 +660,7 @@
     }"
   ></p-chips>
   <small
+    falarTexto
     *ngIf="
       formProposta.controls.responsavelProposta.errors &&
       formProposta.controls.responsavelProposta.touched
@@ -638,10 +671,11 @@
   >
 
   <div class="infos" style="display: flex; align-items: center; width: 28vw">
-    <label style="font-weight: 500" class="me-2" for="time">{{
+    <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
       "telas.proposta.selecione-status" | translate
     }}</label>
     <i
+      falarTexto
       class="bi bi-info-circle me-2"
       style="font-size: 0.9rem; color: #00579d; cursor: pointer"
       pTooltip="Insira os responsáveis por suceder a proposta, validando-os por vírgulas ou acionando a tecla Enter"

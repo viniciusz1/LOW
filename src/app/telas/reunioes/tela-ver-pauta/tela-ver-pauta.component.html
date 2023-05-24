@@ -31,27 +31,27 @@
           class="d-flex flex-column p-3 rounded"
           style="border: 1px solid rgb(112, 110, 110); width: fit-content"
         >
-          <span class="d-flex">
+          <span falarTexto class="d-flex">
             {{ "telas.tela-ver-pauta.data-comissao" | translate }}
             {{ reuniao?.dataReuniao | date : "dd/MM/YYYY" }}</span
           >
           <hr />
-          <span class="d-flex">
+          <span falarTexto class="d-flex">
             {{ "telas.tela-ver-pauta.comissao" | translate }}
             {{ reuniao?.comissaoReuniao }}</span
           >
           <hr />
-          <span class="d-flex">
+          <span falarTexto class="d-flex">
             {{ "telas.tela-ver-pauta.qtd-propostas" | translate }}
             {{ reuniao?.propostasReuniao?.length }}</span
           >
           <hr *ngIf="reuniao?.numAtaDG" />
-          <span class="d-flex" *ngIf="reuniao?.numAtaDG">
+          <span falarTexto class="d-flex" *ngIf="reuniao?.numAtaDG">
             Nº ata DG:
             {{ reuniao?.numAtaDG }}</span
           >
           <hr *ngIf="reuniao?.arquivoReuniao" />
-          <span class="d-flex" *ngIf="reuniao?.arquivoReuniao">
+          <span falarTexto class="d-flex" *ngIf="reuniao?.arquivoReuniao">
             Doc. Aprovação:
             <a (click)="download()" role="button" class="link-ata"
               >{{ reuniao?.arquivoReuniao?.nomeArquivo | slice : 0 : 10 }}...</a
@@ -64,9 +64,12 @@
               class="alinhar-centro"
               *ngIf="mostrarAtaPublicada() || mostrarAtaNaoPublicada()"
             >
-              <h6>{{ "telas.tela-ver-pauta.visualizar" | translate }}</h6>
+              <h6 falarTexto>
+                {{ "telas.tela-ver-pauta.visualizar" | translate }}
+              </h6>
               <hr class="my-1 w-100" />
               <button
+                falarTexto
                 *ngIf="mostrarAtaPublicada()"
                 class="btn btn-primary mt-3"
                 (click)="openModalAtaDocumento('PUBLICADA')"
@@ -74,6 +77,7 @@
                 {{ "telas.tela-ver-pauta.b-ata-publicada" | translate }}
               </button>
               <button
+                falarTexto
                 *ngIf="mostrarAtaNaoPublicada()"
                 class="btn btn-primary mt-2"
                 (click)="openModalAtaDocumento('NAO_PUBLICADA')"
@@ -84,26 +88,36 @@
           </div>
           <div *ngIf="mostrarBotoesReuniao()" class="d-flex flex-column mb-5">
             <button
+              falarTexto
               class="btn btn-outline-primary mb-3"
               (click)="openModalCriarReuniao()"
             >
               Editar Reunião
             </button>
             <button
+              falarTexto
               class="btn btn-primary mb-3"
               (click)="modalConfirmacaoFinalizar()"
             >
               {{ "telas.tela-ver-pauta.b-finalizar-reuniao" | translate }}
             </button>
-            <button class="btn btn-danger" (click)="cancelarReuniao()">
+            <button
+              falarTexto
+              class="btn btn-danger"
+              (click)="cancelarReuniao()"
+            >
               {{ "telas.tela-ver-pauta.b-cancelar-reuniao" | translate }}
             </button>
           </div>
 
           <div *ngIf="reuniao?.statusReuniao == 'CONCLUIDO'">
             <button (click)="openModalDG()" class="btn btn-primary mb-4">
-              <span *ngIf="reuniao?.numAtaDG == ''">Adicionar Info. DG</span>
-              <span *ngIf="reuniao?.numAtaDG != ''">Editar Info. DG</span>
+              <span falarTexto *ngIf="reuniao?.numAtaDG == ''"
+                >Adicionar Info. DG</span
+              >
+              <span falarTexto *ngIf="reuniao?.numAtaDG != ''"
+                >Editar Info. DG</span
+              >
             </button>
           </div>
         </div>
@@ -116,6 +130,7 @@
     >
       <ng-template pTemplate="footer">
         <button
+          falarTexto
           type="button"
           (click)="cd.reject()"
           class="btn btn-outline-danger"
@@ -123,7 +138,12 @@
           <i class="pi pi-times me-2"></i>
           {{ "telas.tela-ver-pauta.b-nao" | translate }}
         </button>
-        <button type="button" class="btn btn-danger" (click)="cd.accept()">
+        <button
+          falarTexto
+          type="button"
+          class="btn btn-danger"
+          (click)="cd.accept()"
+        >
           <i class="pi pi-check me-2"></i>
           {{ "telas.tela-ver-pauta.b-sim" | translate }}
         </button>

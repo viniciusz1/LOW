@@ -1,16 +1,28 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FalarTextoService {
+  private synth: SpeechSynthesis;
+  private utterance: SpeechSynthesisUtterance;
+  constructor() {
+    this.synth = window.speechSynthesis;
+    this.utterance = new SpeechSynthesisUtterance();
+  }
+
+
   public permitirFala = false;
   speak(text: string): void {
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(text);
-    if(this.permitirFala){
-      synth.speak(utterance);
+    if (this.permitirFala) {
+      this.utterance.text = text;
+      this.synth.speak(this.utterance);
+    }
+  }
+  cancel(){
+    if (this.synth.speaking) {
+      this.synth.cancel();
     }
   }
 }

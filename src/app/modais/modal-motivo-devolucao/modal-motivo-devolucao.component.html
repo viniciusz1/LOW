@@ -1,13 +1,13 @@
 <div style="padding: 8px; background: white">
             <div>
                 <div class="d-flex justify-content-between">
-                    <span class="h3">{{ "modais.modal-motivo-devolucao.motivo-devolucao" | translate }}
+                    <span class="h3" falarTexto>{{ "modais.modal-motivo-devolucao.motivo-devolucao" | translate }}
                         <hr style="margin: 0; margin-bottom: 10px; width: 150%;">
                     </span>
                     <i class="bi bi-x" role="button" (click)="dialogRef.close();"></i></div>
             </div>
             <div class="d-block">
-                <label for="subtitulo">
+                <label falarTexto for="subtitulo">
                     {{ "modais.modal-motivo-devolucao.i-motivo-devolucao" | translate }}
                 </label>
                 <input inputEmFoco type="text" style="outline:none">

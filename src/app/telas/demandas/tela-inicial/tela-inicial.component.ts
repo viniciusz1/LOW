@@ -1,3 +1,4 @@
+import { FalarTextoService } from './../../../services/falar-textos.service';
 import { RascunhoService } from './../../../services/rascunho.service';
 import { Filtro } from './../../../models/filtro.model';
 import { DemandaExcel } from './../../../models/demandaExcel.model';
@@ -38,7 +39,8 @@ export class TelaInicialComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private messageService: MessageService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private falarTextoService: FalarTextoService
   ) {
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {
@@ -441,7 +443,7 @@ export class TelaInicialComponent implements OnInit {
             this.isFirstIfExecuted = true;
             this.divScrollCircle = false;
             this.nenhumResultadoEncontrado = false;
-          } 
+          }
 
           if(!this.isFirstIfExecuted && demandas.length == 0) {
             console.log("divscroll 2 " , this.divScrollCircle)

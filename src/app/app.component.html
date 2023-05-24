@@ -1,31 +1,39 @@
 <div
+  role="button"
   *ngIf="!startedRecodAudio"
-  style="position: fixed; top: 33%; right: 0; z-index: 2"
+  class="estilo-cards"
+  style="top: 33%"
   (click)="startVoice()"
 >
-  <i class="bi bi-mic"></i>
+  <i class="bi bi-mic" style="color: white"></i>
 </div>
 
 <div
+  role="button"
   *ngIf="startedRecodAudio"
-  style="position: fixed; top: 33%; right: 0; z-index: 2"
+  class="estilo-cards"
+  style="top: 33%"
   (click)="stopVoice()"
 >
-  <i class="bi bi-x-lg"></i>
+  <i class="bi bi-x-lg" style="color: white"></i>
 </div>
 <div
+  role="button"
   *ngIf="falarTextoService.permitirFala"
-  style="position: fixed; top: 35%; right: 0; z-index: 2"
-  (click)="falarTextoService.permitirFala = false"
+  class="estilo-cards"
+  style="top: 38.5%"
+  (click)="pararDeFalar()"
 >
-  <i class="bi bi-volume-off"></i>
+  <i class="bi bi-volume-off" style="color: white"></i>
 </div>
 <div
+  role="button"
   *ngIf="!falarTextoService.permitirFala"
-  style="position: fixed; top: 35%; right: 0; z-index: 2"
-  (click)="falarTextoService.permitirFala = true"
+  class="estilo-cards"
+  style="top: 38.5%"
+  (click)="iniciarFala()"
 >
-  <i class="bi bi-volume-mute"></i>
+  <i class="bi bi-volume-mute" style="color: white"></i>
 </div>
 
 <app-v-libras></app-v-libras>

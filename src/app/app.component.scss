@@ -1,3 +1,15 @@
 .joyride-step__container{
     box-shadow: 0
 }
+.estilo-cards{
+  padding: 8px 10px 9px 10px;
+  position: fixed;
+  border-radius: 9px;
+  right: 0;
+  z-index: 2;
+  background: #00579d;
+}
+.estilo-cards:hover
+{
+  background: #015da8;
+}

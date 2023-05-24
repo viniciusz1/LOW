@@ -18,21 +18,21 @@
       </div>
       <nav class="h-100 flex-column align-items-stretch pe-4">
         <nav class="nav nav-pills flex-column" id="scroll">
-          <a
+          <a falarTexto
             class="nav-link nav-scroll"
             (click)="indoPraCima('section1')"
             [ngClass]="{ active: activeSection === 'section1' }"
             style="margin-bottom: 3.1vh; cursor: pointer"
             >{{ "telas.tela-corrida.scroll-dados-gerais" | translate }}</a
           >
-          <a
+          <a falarTexto
             class="nav-link nav-scroll"
             (click)="indoPraCima('section2')"
             [ngClass]="{ active: activeSection === 'section2' }"
             style="margin-bottom: 3.1vh; cursor: pointer"
             >{{ "telas.tela-corrida.scroll-beneficios" | translate }}</a
           >
-          <a
+          <a falarTexto
             class="nav-link nav-scroll"
             (click)="indoPraCima('section3')"
             [ngClass]="{ active: activeSection === 'section3' }"
@@ -60,28 +60,28 @@
       </div>
       <nav class="h-100 flex-column align-items-stretch pe-4">
         <nav class="nav nav-pills flex-column" id="scroll">
-          <a
+          <a falarTexto
             class="nav-link nav-scroll"
             (click)="indoPraCimaProposta('section1')"
             [ngClass]="{ active: activeSection === 'section1' }"
             style="margin-bottom: 3.1vh; cursor: pointer"
             >Proposta</a
           >
-          <a
+          <a falarTexto
             class="nav-link nav-scroll"
             (click)="indoPraCimaProposta('section2')"
             [ngClass]="{ active: activeSection === 'section2' }"
             style="margin-bottom: 3.1vh; cursor: pointer"
             >Recursos</a
           >
-          <a
+          <a falarTexto
             class="nav-link nav-scroll"
             (click)="indoPraCimaProposta('section3')"
             [ngClass]="{ active: activeSection === 'section3' }"
             style="margin-bottom: 3.1vh; cursor: pointer"
             >Escopo</a
           >
-          <a
+          <a falarTexto
             class="nav-link nav-scroll"
             (click)="indoPraCimaProposta('section4')"
             [ngClass]="{ active: activeSection === 'section4' }"
@@ -100,12 +100,12 @@
           class="border rounded p-3 mb-4"
           *ngIf="verificaSeTemParecerOuRecomendacao()"
         >
-          <h5>Parecer da Comissão:</h5>
+          <h5 falarTexto>Parecer da Comissão:</h5>
 
-          <p>{{ dadosDemanda?.parecerComissaoProposta }}</p>
+          <p falarTexto>{{ dadosDemanda?.parecerComissaoProposta }}</p>
           <br />
-          <h5>Recomendações da Comissão:</h5>
-          <p>{{ dadosDemanda?.recomendacaoProposta }}</p>
+          <h5 falarTexto>Recomendações da Comissão:</h5>
+          <p falarTexto>{{ dadosDemanda?.recomendacaoProposta }}</p>
         </div>
         <p-accordion
           *ngIf="aparecerProposta"
@@ -127,7 +127,7 @@
           class="d-flex justify-content-between"
           style="margin-top: 2vh !important; margin-bottom: 2vh"
         >
-          <button class="btn btn-danger ms-2" routerLink="/tela-inicial">
+          <button falarTexto class="btn btn-danger ms-2" routerLink="/tela-inicial">
             {{ "telas.tela-corrida.b-cancelar" | translate }}
           </button>
           <div *ngIf="invalid()">DEMANDA INVALID</div>
@@ -141,12 +141,13 @@
               [disabled]="(invalid() || invalidProposta())"
               class="btn btn-primary me-2"
               (click)="onSubmitDemanda()"
+              falarTexto
             >
               {{ "telas.tela-corrida.b-finalizar" | translate }}
             </button>
           </div>
           <div *ngIf="!aparecerProposta">
-            <button
+            <button falarTexto
               [disabled]="invalid()"
               class="btn btn-primary me-2"
               (click)="onSubmitDemanda()"

@@ -63,7 +63,7 @@ export class TelaCorridaComponent implements OnInit {
           next: (response) => {
             this.showSuccess("Demanda criada com sucesso!")
             let codigo = this.route.snapshot.params['indiceRascunho']
-            this.rascunhoService.deleteRascunho(codigo)
+            // this.rascunhoService.deleteRascunho(codigo)
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {

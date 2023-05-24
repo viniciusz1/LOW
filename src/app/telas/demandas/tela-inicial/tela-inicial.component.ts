@@ -481,12 +481,17 @@ export class TelaInicialComponent implements OnInit {
   }
 
   criarUmaNovaDemanda() {
-    let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
-    if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
-      this.router.navigate(['tela-inicial/rascunho/' + 0])
-    } else {
-      this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
-    }
+    console.log("aaaaaaaaa")
+    this.rascunhoService.postRascunhoDemanda().subscribe((rascunho) => {
+      console.log("entrou")
+      this.router.navigate(['tela-inicial/rascunho/' + rascunho.codigoDemanda])
+    })
+    // let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
+    // if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
+    //   this.router.navigate(['tela-inicial/rascunho/' + 0])
+    // } else {
+    //   this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
+    // }
   }
 
 

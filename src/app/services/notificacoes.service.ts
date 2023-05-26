@@ -12,7 +12,8 @@ import * as SockJS from 'sockjs-client';
 })
 export class NotificacoesService {
   constructor(private http: HttpClient) {
-    this.initializeWebSocketConnection();
+    // this.initializeWebSocketConnection();
+    // this.initializeWebSocketConnectionCount();
   }
 
   getNotificacoes(){
@@ -21,6 +22,7 @@ export class NotificacoesService {
 
   public stompClient: any;
   public $notificationEmmiter: EventEmitter<Notificacao[]> = new EventEmitter()
+  public $notificationCountEmmiter: EventEmitter<Number> = new EventEmitter()
   public codigoRota: string | undefined
 
 
@@ -34,68 +36,52 @@ export class NotificacoesService {
     });
   }
 
+  initializeWebSocketConnectionCount() {
+    const serverUrl = 'http://localhost:8085/low/ws/info';
+    const ws = new SockJS(serverUrl);
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.connect({}, (frame: any) => {
+      this.inscreverCount()
+    });
+  }
+
   inscrever(codigoRota?: string) {
-      this.getMessages().subscribe(e => {
+      this.getNotifications().subscribe(e => {
         this.$notificationEmmiter.emit(e);
       })
 
     this.stompClient.subscribe('/usuario', (message: any) => {
       if (message.body) {
-        this.getMessages().subscribe(e => {
+        this.getNotifications().subscribe(e => {
           this.$notificationEmmiter.emit(e);
         })
       }
     });
   }
 
-//   getDemandasRelacionadas() {
-//     return this.http.get<any>('http://localhost:8085/low/mensagens/demandasDiscutidas/' + this.usuarioService.getCodigoUser())
-//     .pipe(map((demandas: any) => {
-//       //console.log(demandas)
-//       console.log(demandas)
-//       for(let demanda of demandas.demandas){
-//         let infoExtras = demandas.infoCard.find((e: { codigoDemanda: any; }) => e.codigoDemanda == demanda.codigoDemanda)
-//         demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem
-//         demanda.qtdMensagensNaoLidas = infoExtras.qtdMensagensNaoLidas
-//         demanda.usuarioAguardando = infoExtras.usuarioAguardando
-//       }
+  inscreverCount(codigoRota?: string) {
+    this.getCountNotifications().subscribe(e => {
+      this.$notificationCountEmmiter.emit(e);
+    })
 
-//       const mapaDemanda = new Map();
-//       demandas.demandas.forEach((demanda: Demanda) => {
-//         if (!mapaDemanda.has(demanda.codigoDemanda)) {
-//           mapaDemanda.set(demanda.codigoDemanda, demanda);
-//         } else {
-//           const demandaExistente = mapaDemanda.get(demanda.codigoDemanda);
-//           if ((demanda.version) && demanda.version > demandaExistente.version) {
-//             mapaDemanda.set(demanda.codigoDemanda, demanda);
-//           }
-//         }
-//       });
-//       return [...mapaDemanda.values()];
-//     }))
-//   }
+  this.stompClient.subscribe('/usuario', (message: any) => {
+    if (message.body) {
+      this.getCountNotifications().subscribe(e => {
+        this.$notificationCountEmmiter.emit(e);
+      })
+    }
+  });
+}
 
+getNotifications() {
+  return this.http.get<Notificacao[]>(path + 'notificacao')
 
-getMessages() {
-  return this.http.get<Notificacao[]>('http://localhost:8085/low/notificacao')
-
+}
+getCountNotifications() {
+  return this.http.get<Number>(path + 'notificacao/quantidade')
 }
 
 send(destino: string) {
-//   let file = new File([new Blob()], 'filename.jpg', { type: 'image/jpeg' })
-//   const formData = new FormData();
-//   formData.append('file', file, 'filename.jpg');
-//   let mensagemDTO = {
-//     textoMensagens: mensagem,
-//     demandaMensagens: {
-//       codigoDemanda: codigoDemanda
-//     },
-//     usuarioMensagens: {
-//       codigoUsuario: codigoUsuario
-//     },
-//     multipartFile: formData
-//   }
-
   if (this.stompClient) {
     this.stompClient.send(
       destino
@@ -104,5 +90,14 @@ send(destino: string) {
     // console.lo("Conexão não estabelecida!")
   }
 }
+
+disconect() {
+  if (this.stompClient) {
+    this.stompClient.disconnect(() => {
+      console.log('WebSocket desconectado');
+    });
+  }
+}
+
 }
 

@@ -13,13 +13,15 @@ import { fadeAnimation } from 'src/app/shared/app.animation';
 export class NotificacoesComponent implements OnInit {
     constructor(private notificacoesService: NotificacoesService) {
     }
-    stompClient: any
-    socket: any = ''
     notificacoes: Notificacao[] = []
 
     ngOnInit() {
       this.iniciarWebSocketNotification();
       this.setarNotificacoes();
+    }
+
+    ngOnDestroy(): void {
+      this.notificacoesService.disconect();
     }
     
     setarNotificacoes(){

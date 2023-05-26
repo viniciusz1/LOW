@@ -481,7 +481,6 @@ export class TelaInicialComponent implements OnInit {
   }
 
   criarUmaNovaDemanda() {
-    console.log("aaaaaaaaa")
     this.rascunhoService.postRascunhoDemanda().subscribe((rascunho) => {
       console.log("entrou")
       this.router.navigate(['tela-inicial/rascunho/' + rascunho.codigoDemanda])

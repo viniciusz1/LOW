@@ -17,9 +17,9 @@ export class RascunhoService {
         if(indice != 0){
             console.log("Atualizou")
         // let rascunho = this.getRascunhoDemanda(indice)
-        let rascunhoNovo: any = this.demandaService.getFormDemanda.value
-        console.log(rascunhoNovo)
-        rascunhoNovo.codigoDemanda = indice + ""
+        let rascunhoNovo: any = this.demandaService.getFormDemanda
+        console.log(rascunhoNovo.value)
+        rascunhoNovo.value.codigoDemanda = indice
         let demandaFormData = new FormData();
         if (this.demandaService.arquivos.length != 0) {
             this.demandaService.arquivos.map((item) =>
@@ -28,7 +28,8 @@ export class RascunhoService {
           } else {
             demandaFormData.append('arquivos', new File([], ''));
           }
-          demandaFormData.append('rascunho', rascunhoNovo)
+          demandaFormData.append('rascunho', JSON.stringify(rascunhoNovo.value))
+          
         this.putRascunhoDemanda(demandaFormData).subscribe()
         }else{
             console.log("Criou")

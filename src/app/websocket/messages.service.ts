@@ -32,6 +32,8 @@ export class MessagesService {
   connectWithRetry(maxRetries = 5, retryCount = 0) {
     this.stompClient.connect({}, (frame: any) => {
       this.inscrever();
+      this.inscreverNotificacoes();
+      // this.inscrever();
     }, (error: any) => {
       if (retryCount < maxRetries) {
         retryCount++;
@@ -42,6 +44,13 @@ export class MessagesService {
       } else {
         console.log('Falha na conexão após várias tentativas. Verifique sua conexão de rede.');
       }
+    });
+  }
+
+  inscreverNotificacoes() {
+    let codigoUser = this.usuarioService.getCodigoUser()
+    this.stompClient.subscribe('/noticicacoes-messages/' + codigoUser + '/chat', (message: any) => {
+      console.log("ChamarNotificação")
     });
   }
 
@@ -69,7 +78,7 @@ export class MessagesService {
   getDemandasRelacionadas() {
     return this.http.get<any>('http://localhost:8085/low/mensagens/demandasDiscutidas/' + this.usuarioService.getCodigoUser())
       .pipe(map((demandas: any) => {
-
+        console.log(demandas)
         let qtdMensagensNaoLidas = 0;
         for (let demanda of demandas.demandas) {
           let infoExtras = demandas.infoCard.find((e: { codigoDemanda: any; }) => e.codigoDemanda == demanda.codigoDemanda)
@@ -78,7 +87,6 @@ export class MessagesService {
           qtdMensagensNaoLidas += demanda.qtdMensagensNaoLidas
           demanda.usuarioAguardando = infoExtras.usuarioAguardando
         }
-        console.log("qtdMensagensNaoLidas", qtdMensagensNaoLidas)
         if (qtdMensagensNaoLidas > 0) {
           this.$qtdMensagensNaoLida.emit(qtdMensagensNaoLidas);
         }

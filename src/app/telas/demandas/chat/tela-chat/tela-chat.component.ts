@@ -10,6 +10,7 @@ import { Mensagem } from 'src/app/models/message.model';
 import { ScrollPanel } from 'primeng/scrollpanel';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
   selector: 'app-tela-chat',
@@ -32,6 +33,7 @@ export class TelaChatComponent implements OnInit {
     private messagesService: MessagesService,
     private matDialog: MatDialog) {
     this.setarConversas()
+    this.messagesService.inscrever()
   }
 
 

@@ -20,7 +20,9 @@ export class AppComponent implements OnInit {
     private messagesService: MessagesService,
     public voiceRecognitionService: VoiceRecognitionService,
     public falarTextoService: FalarTextoService) {
-    messagesService.initializeWebSocketConnection();
+
+
+    this.messagesService.initializeWebSocketConnection();
     this.voiceRecognitionService.init()
     translate.setDefaultLang('pt');
     let htmlRoot: HTMLElement = <HTMLElement>document.getElementsByTagName('html')[0];
@@ -35,6 +37,7 @@ export class AppComponent implements OnInit {
       htmlRoot.style.fontSize = fontSize + 'px';
       window.localStorage.setItem('fontSize', fontSize);
     }
+
   }
   ngOnInit(): void {
   }

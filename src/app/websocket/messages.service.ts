@@ -31,8 +31,7 @@ export class MessagesService {
 
   connectWithRetry(maxRetries = 5, retryCount = 0) {
     this.stompClient.connect({}, (frame: any) => {
-      this.inscrever();
-      this.inscreverNotificacoes();
+      this.inscreverNotificacoesMensagem();
       // this.inscrever();
     }, (error: any) => {
       if (retryCount < maxRetries) {
@@ -47,10 +46,12 @@ export class MessagesService {
     });
   }
 
-  inscreverNotificacoes() {
+
+
+  inscreverNotificacoesMensagem() {
     let codigoUser = this.usuarioService.getCodigoUser()
     this.stompClient.subscribe('/noticicacoes-messages/' + codigoUser + '/chat', (message: any) => {
-      console.log("ChamarNotificação")
+      this.updateQuantidadeMensagensNotificacoes();
     });
   }
 
@@ -71,6 +72,16 @@ export class MessagesService {
         })
       }
     });
+  }
+
+  updateQuantidadeMensagensNotificacoes() {
+    return this.http.get<any>('http://localhost:8085/low/mensagens/qtd-total-n-lidas/' + this.usuarioService.getCodigoUser())
+      .subscribe({
+        next: e => {
+          console.log("QTD mensagens não lidas: "+ e)
+          this.$qtdMensagensNaoLida.next(e)
+        }
+      })
   }
 
 

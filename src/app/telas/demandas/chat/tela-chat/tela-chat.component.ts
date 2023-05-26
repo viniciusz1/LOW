@@ -31,9 +31,6 @@ export class TelaChatComponent implements OnInit {
     private usuarioService: UsuarioService,
     private messagesService: MessagesService,
     private matDialog: MatDialog) {
-    if (this.codigoRota != "") {
-      this.iniciarWebSocketChat()
-    }
     this.setarConversas()
   }
 

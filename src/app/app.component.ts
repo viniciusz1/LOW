@@ -5,6 +5,7 @@ import { VoiceRecognitionService } from './services/voice-recognition.service';
 import { FalarTextoDirective } from './directives/falar-texto.directive';
 import { FalarTextoService } from './services/falar-textos.service';
 import { MessageService } from 'primeng/api';
+import { MessagesService } from './websocket/messages.service';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,10 @@ export class AppComponent implements OnInit {
   constructor(translate: TranslateService,
     private http: HttpClient,
     private messageService: MessageService,
+    private messagesService: MessagesService,
     public voiceRecognitionService: VoiceRecognitionService,
     public falarTextoService: FalarTextoService) {
-    // falarTextoService.enableTextToSpeech();
+    messagesService.initializeWebSocketConnection();
     this.voiceRecognitionService.init()
     translate.setDefaultLang('pt');
     let htmlRoot: HTMLElement = <HTMLElement>document.getElementsByTagName('html')[0];
@@ -39,13 +41,13 @@ export class AppComponent implements OnInit {
 
 
   startedRecodAudio = false;
-  pararDeFalar(){
+  pararDeFalar() {
     this.showError('Parando a tradução de texto para voz!')
     this.falarTextoService.cancel();
     this.falarTextoService.permitirFala = false;
   }
 
-  iniciarFala(){
+  iniciarFala() {
     this.showSuccess('Clique em um texto para ouvi-lo!')
     this.falarTextoService.permitirFala = true
   }

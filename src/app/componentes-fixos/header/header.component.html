@@ -84,7 +84,13 @@
         [stepContentParams]="{ texto: textoTutorial[6] }"
         style="overflow: auto"
       >
-        <a class="nav-link"><i class="bi bi-chat-left-dots icon"></i></a>
+        <a class="nav-link"><i class="bi bi-chat-left-dots icon">
+          <span
+            *ngIf="this.quantidadeMensagensNaoLidas != 0"
+            class="badge badge-danger small-badge"
+            >{{ this.quantidadeMensagensNaoLidas }}</span
+          >
+        </i></a>
       </li>
       <li
         role="button"

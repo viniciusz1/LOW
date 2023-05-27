@@ -32,7 +32,7 @@ export class MessagesService {
   connectWithRetry(maxRetries = 5, retryCount = 0) {
     this.stompClient.connect({}, (frame: any) => {
       this.inscreverNotificacoesMensagem();
-      // this.inscrever();
+      this.inscrever();
     }, (error: any) => {
       if (retryCount < maxRetries) {
         retryCount++;

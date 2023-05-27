@@ -33,7 +33,7 @@ export class TelaChatComponent implements OnInit {
     private messagesService: MessagesService,
     private matDialog: MatDialog) {
     this.setarConversas()
-    this.messagesService.inscrever()
+    this.messagesService.initializeWebSocketConnection()
   }
 
 

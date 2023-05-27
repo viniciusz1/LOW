@@ -17,7 +17,7 @@ export class InputFocoDirective {
     this.emFoco = true;
     this.inputEmFoco = target as HTMLInputElement;
     this.voiceRecognition.setInputEmFoco(this.inputEmFoco)
-    console.log('Input NOVO em foco');
+    // console.log('Input NOVO em foco');
   }
 
 
@@ -25,7 +25,7 @@ export class InputFocoDirective {
 
   @HostListener('focusIn', ['$event.elementRef'])
   onFocusIn(target: any) {
-    console.log(target);
+    // console.log(target);
     // Lógica adicional a ser executada quando o evento for disparado
   }
   @HostListener('onBlur')
@@ -34,7 +34,7 @@ export class InputFocoDirective {
     this.emFoco = false;
     this.inputEmFoco = undefined;
     this.voiceRecognition.setInputEmFoco(null)
-    console.log('Input sem foco');
+    // console.log('Input sem foco');
   }
 
 }

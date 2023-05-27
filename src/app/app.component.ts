@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     public falarTextoService: FalarTextoService) {
 
 
-    this.messagesService.initializeWebSocketConnection();
+    // this.messagesService.initializeWebSocketConnection();
     this.voiceRecognitionService.init()
     translate.setDefaultLang('pt');
     let htmlRoot: HTMLElement = <HTMLElement>document.getElementsByTagName('html')[0];

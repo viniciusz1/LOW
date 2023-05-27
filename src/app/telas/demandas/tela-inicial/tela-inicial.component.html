@@ -112,7 +112,7 @@
                 nivelAcessoUsuario == 'Analista' ||
                 nivelAcessoUsuario == 'GestorTI'
               "
-              >({{ qtdDemandasStatus[i] }})</span
+              >({{ qtdDemandasStatus[i-1] }})</span
             >
           </div>
         </div>
@@ -288,7 +288,7 @@
           class="d-flex align-items-end justify-content-end"
           role="button"
           (click)="pesquisarDemandas(departamentoUsuario)"
-          >Ver Mais</a
+          >{{ "telas.tela-inicial.ver-mais" | translate }}</a
         >
       </div>
     </div>
@@ -325,7 +325,7 @@
               "
             >
               {{ "telas.tela-inicial.ver-mais" | translate }} ({{
-                qtdDemandasStatus[i]
+                qtdDemandasStatus[i-1]
               }})
             </div>
           </div>

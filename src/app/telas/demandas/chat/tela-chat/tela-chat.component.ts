@@ -97,7 +97,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     if (
       conversa?.qtdMensagensNaoLidas != 0 &&
       conversa?.usuarioAguardando.codigoUsuario !=
-        this.usuarioService.getCodigoUser()
+      this.usuarioService.getCodigoUser()
     ) {
       return true;
     }
@@ -138,7 +138,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       if (
         mensagem.usuarioMensagens &&
         mensagem.usuarioMensagens.codigoUsuario ==
-          this.usuarioService.getCodigoUser()
+        this.usuarioService.getCodigoUser()
       ) {
         mensagem.ladoMensagem = true;
       } else {
@@ -188,6 +188,12 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeEmmiterMensagens();
+  }
+
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    this.scrollToBottom();
   }
 
   silenciarChat() {

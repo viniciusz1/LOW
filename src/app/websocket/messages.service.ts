@@ -68,30 +68,43 @@ export class MessagesService {
     }
   }
 
-  subscribeToNotificationsMensagens() {
+  subscribeToNotifications() {
     let codigoUser = this.usuarioService.getCodigoUser();
-
-    try {
-      if (this._client) {
-          this.subscriptionNotificacaoMensagem = this._client.subscribe(
-          '/notificacoes-messages/' + codigoUser + '/chat',
-          (message: Message) => {
-            console.log('Recebeu notificação: ' + message);
-          }
-        );
-      }
-
-    } catch (err) {
-      setTimeout(() => {
-        this.subscribeToNotificationsMensagens();
-      }, 3000)
+    if (this._client) {
+      const subscription = this._client.subscribe(
+        '/noticicacoes-messages/' + codigoUser + '/chat',
+        (message: Message) => {
+          console.log('Recebeu notificação: ' + message);
+        }
+      );
     }
-
   }
 
+  // connectWithRetry(maxRetries = 5, retryCount = 0) {
+  //   this.stomp_client.connect({}, (frame: any) => {
+  //     this.inscreverNotificacoesMensagem();
+  //     this.inscrever();
+  //   }, (error: any) => {
+  //     if (retryCount < maxRetries) {
+  //       retryCount++;
+  //       console.log('Erro de conexão. Tentando novamente...');
+  //       setTimeout(() => {
+  //         this.connectWithRetry(maxRetries, retryCount);
+  //       }, 3000); // Espera 3 segundos antes de tentar novamente
+  //     } else {
+  //       console.log('Falha na conexão após várias tentativas. Verifique sua conexão de rede.');
+  //     }
+  //   });
+  // }
+
+  // inscreverNotificacoesMensagem() {
+  //   let codigoUser = this.usuarioService.getCodigoUser()
+  //   this.stomp_client.subscribe('/noticicacoes-messages/' + codigoUser + '/chat', (message: any) => {
+  //     this.updateQuantidadeMensagensNotificacoes();
+  //   });
+  // }
+
   public subscriptionChat: StompSubscription | undefined;
-  public subscriptionVisto: StompSubscription | undefined;
-  public subscriptionNotificacaoMensagem: StompSubscription | undefined;
 
   subscribeChat(codigoRota?: string) {
     if (this.subscriptionChat != undefined) {
@@ -106,7 +119,6 @@ export class MessagesService {
           '/demanda/' + this.codigoRota + '/chat',
           (message: Message) => {
             this.$mensagesEmmiter.emit(JSON.parse(message.body));
-
           },
 
         );
@@ -116,31 +128,7 @@ export class MessagesService {
       setTimeout(() => {
         this.subscribeChat();
       }, 3000)
-    }
-  }
 
-  subscribeVisto(codigoRota?: string) {
-    if (this.subscriptionVisto != undefined) {
-      this.subscriptionVisto.unsubscribe();
-    }
-    if (codigoRota) {
-      this.codigoRota = codigoRota;
-    }
-    try {
-      if (this._client) {
-        this.subscriptionVisto = this._client.subscribe(
-          '/visto/' + this.codigoRota + '/chat',
-          (message: Message) => {
-            console.log('Visto: ' + message.body)
-          },
-
-        );
-      }
-
-    } catch (err) {
-      setTimeout(() => {
-        this.subscribeVisto();
-      }, 3000)
     }
   }
 

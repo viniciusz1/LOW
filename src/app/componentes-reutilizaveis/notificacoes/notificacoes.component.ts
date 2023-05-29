@@ -16,18 +16,22 @@ export class NotificacoesComponent implements OnInit {
     notificacoes: Notificacao[] = []
 
     ngOnInit() {
-      this.subscribeNotification();
+      this.iniciarWebSocketNotification();
       this.setarNotificacoes();
     }
 
-
+    ngOnDestroy(): void {
+      this.notificacoesService.disconect();
+    }
+    
     setarNotificacoes(){
       this.notificacoesService.getNotificacoes().subscribe(notificacoes => {
         this.notificacoes = notificacoes.reverse();
       })
     }
 
-    subscribeNotification() {
+    iniciarWebSocketNotification() {
+      this.notificacoesService.initializeWebSocketConnection()
       this.notificacoesService.$notificationEmmiter.subscribe(notificacoes => {
         // this.setarNotificacoes()
         this.notificacoes = []

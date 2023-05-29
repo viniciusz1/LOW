@@ -6,6 +6,7 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { MessageService } from 'primeng/api';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-reprovacao-demanda',
@@ -15,7 +16,7 @@ import { MessageService } from 'primeng/api';
 export class ModalReprovacaoDemandaComponent implements OnInit {
   dadosDemanda: Demanda | undefined;
 
-  constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>,
+  constructor(public matDialogRef: MatDialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
     @Inject(DIALOG_DATA) public data: Demanda,
     private router: Router,
@@ -41,7 +42,7 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
         next: event => {
           this.showSuccess("Demanda reprovada com sucesso!")
           this.router.navigate(['/tela-inicial'])
-          this.dialogRef.close()
+          this.matDialogRef.close(event)
         },
         error: err => {
           this.showError("Não foi possivel reprovar a demanda!")

@@ -67,7 +67,7 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
             component: NotFoundComponent
           },
           {
-            path: 'proposta/:codigoDemanda',
+            path: 'proposta/:codigoProposta',
             component: TelaCorridaComponent
           },
           {

@@ -173,14 +173,6 @@ export class TelaVerPauta implements OnInit {
       minWidth: '50vw',
       minHeight: '30vh',
       data: codigoDemanda
-    }).afterClosed().subscribe({
-      next: e => {
-        console.log(e)
-        this.reuniao = e;
-      },
-      error: err => {
-        this.showError("Não foi possível editar dados!: " + err)
-      }
     });
   }
 

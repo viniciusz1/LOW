@@ -162,9 +162,10 @@
           </li>
         </ol>
 
-        <p falarTexto>
+        <p falarTexto *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
           <b> {{ "documento-pdf.custos-totais" | translate }}</b> R${{
-            custosTotais
+            calcularDados.quantidadeHorasRecurso *
+              calcularDados.valorHoraRecurso
           }}
         </p>
 

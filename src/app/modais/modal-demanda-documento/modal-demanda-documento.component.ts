@@ -12,7 +12,6 @@ import { ModalReprovacaoDemandaComponent } from '../modal-reprovacao-demanda/mod
 import { Proposta } from 'src/app/models/proposta.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
-import { PropostaService } from 'src/app/services/proposta.service';
 
 @Component({
   selector: 'app-modal-demanda-documento',
@@ -28,19 +27,10 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private demandaService: DemandaService,
     private dialogRef: MatDialogRef<ModalDemandaDocumentoComponent>,
     private matDialog: MatDialog,
-    private propostaService: PropostaService,
     private messageService: MessageService,
     private usuarioService: UsuarioService) {
     console.log(data)
     this.dadosDemanda = data
-    this.custosTotais = 0
-    if (this.dadosDemanda.recursosProposta) {
-      this.dadosDemanda.recursosProposta
-        .forEach(recurso => {
-          this.custosTotais += recurso.valorHoraRecurso * recurso.quantidadeHorasRecurso;
-        })
-    }
-
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe({
         next: e => {
@@ -63,7 +53,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   }
   @Input() dadosDemanda: Demanda | undefined;
   @Input() documentoEmAta = false;
-  custosTotais: number = 0;
+
 
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
@@ -173,6 +163,5 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   ];
 
   ngOnInit() {
-
   }
 }

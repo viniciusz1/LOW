@@ -299,18 +299,6 @@ export class TelaInicialComponent implements OnInit {
         maxWidth: '70vw',
         minWidth: '50vw',
         data: demanda
-      }).afterClosed().subscribe({
-        next: e => {
-          let indice: number | undefined = -1
-          if (this.listaDemandas) {
-            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-            if (indice !== -1) {
-              this.listaTituloNaoFiltrado = [];
-              this.listaDemandas.splice(indice, 1, e);
-              this.exibirFilasDeStatus()
-            }
-          }
-        }
       });
   }
 

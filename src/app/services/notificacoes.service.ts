@@ -36,6 +36,8 @@ export class NotificacoesService {
     // });
   }
 
+
+
   initializeWebSocketConnectionCount() {
     // const serverUrl = 'http://localhost:8085/low/ws/info';
     // const ws = new SockJS(serverUrl);
@@ -43,15 +45,6 @@ export class NotificacoesService {
     // this.stompClient.connect({}, (frame: any) => {
     //   this.inscreverCount()
     // });
-  }
-
-  initializeWebSocketConnectionCount() {
-    const serverUrl = 'http://localhost:8085/low/ws/info';
-    const ws = new SockJS(serverUrl);
-    this.stompClient = Stomp.over(ws);
-    this.stompClient.connect({}, (frame: any) => {
-      this.inscreverCount()
-    });
   }
 
   inscrever(codigoRota?: string) {

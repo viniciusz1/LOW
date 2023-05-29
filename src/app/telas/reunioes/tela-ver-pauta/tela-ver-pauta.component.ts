@@ -18,6 +18,7 @@ import { MessageService } from 'primeng/api';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { RascunhoService } from 'src/app/services/rascunho.service';
 import { ModalCriarReuniaoComponent } from 'src/app/modais/modal-criar-reuniao/modal-criar-reuniao.component';
+import { ModalDgDocumentosComponent } from 'src/app/modais/modal-dg-documentos/modal-dg-documentos.component';
 
 @Component({
   selector: 'app-tela-ver-pauta',
@@ -31,8 +32,16 @@ export class TelaVerPauta implements OnInit {
     private activatedRoute: ActivatedRoute,
     private reuniaoService: ReuniaoService,
     private messageService: MessageService,
-    private rascunhoService: RascunhoService,
-    private router: Router) { }
+    private demandaService: DemandaService,
+    private router: Router) {
+    this.reuniaoService.getReuniaoId(this.codigoReuniao)
+      .subscribe({
+        next: (x) => {
+          this.reuniao = x
+          this.mostrarBotoesReuniao();
+        }
+      })
+  }
 
   codigoReuniao = this.activatedRoute.snapshot.params['codigoReuniao']
   reuniao: Reuniao | undefined = undefined;
@@ -40,20 +49,22 @@ export class TelaVerPauta implements OnInit {
   listaTituloNaoFiltrado: { status: string; titulo: string }[] = [];
 
   ngOnInit(): void {
-    this.reuniaoService.getReuniaoId(this.codigoReuniao)
-      .subscribe({
-        next: (x) => {
-          this.reuniao = x
-          console.log(this.reuniao)
-        }
-      })
+
   }
-  mostrarAtaPublicada(){
+
+  download(): void {
+    this.demandaService.saveByteArray(
+      this.reuniao?.arquivoReuniao?.dadosArquivo as string,
+      this.reuniao?.arquivoReuniao?.tipoArquivo as string,
+      this.reuniao?.arquivoReuniao?.nomeArquivo as string
+    );
+  }
+  mostrarAtaPublicada() {
 
     return this.reuniao?.propostasReuniao?.some(p => p.tipoAtaProposta == 'PUBLICADA')
   }
 
-  mostrarAtaNaoPublicada(){
+  mostrarAtaNaoPublicada() {
     return this.reuniao?.propostasReuniao?.some(p => p.tipoAtaProposta == 'NAO_PUBLICADA')
   }
 
@@ -72,7 +83,15 @@ export class TelaVerPauta implements OnInit {
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
       data: this.reuniao
-    });
+    }).afterClosed().subscribe({
+      next: e => {
+        console.log(e)
+        this.reuniao = e;
+      },
+      error: err => {
+        this.showError("Não foi possível editar dados!: " + err)
+      }
+    })
   }
 
 
@@ -89,6 +108,22 @@ export class TelaVerPauta implements OnInit {
       return false
     }
     return true
+  }
+
+  openModalDG() {
+    this.matDialog.open(ModalDgDocumentosComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      data: this.reuniao
+    }).afterClosed().subscribe({
+      next: e => {
+        console.log(e)
+        this.reuniao = e;
+      },
+      error: err => {
+        this.showError("Não foi possível adicionar dados!: " + err)
+      }
+    })
   }
 
   cancelarReuniao() {
@@ -126,12 +161,11 @@ export class TelaVerPauta implements OnInit {
             if (indice !== -1) {
               this.listaTituloNaoFiltrado = [];
               this.listaDemandas.splice(indice, 1, e);
-              this.exibirFilasDeStatus()
             }
           }
         }
       })
-    }
+  }
 
   openModalHistorico(codigoDemanda: string) {
     this.matDialog.open(ModalHistoricoComponent, {
@@ -158,104 +192,18 @@ export class TelaVerPauta implements OnInit {
       data: { demanda: proposta, reuniao: this.reuniao }
     });
 
-    dialog.afterClosed().subscribe({next: e => {let indice: number | undefined = -1
-      if (this.reuniao?.propostasReuniao) {
-        indice = this.reuniao?.propostasReuniao.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-        if (indice !== -1) {
-          this.reuniao?.propostasReuniao.splice(indice, 1, e);
+    dialog.afterClosed().subscribe({
+      next: e => {
+        let indice: number | undefined = -1
+        if (this.reuniao?.propostasReuniao) {
+          indice = this.reuniao?.propostasReuniao.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+          if (indice !== -1) {
+            this.reuniao?.propostasReuniao.splice(indice, 1, e);
+          }
         }
       }
-    }});
+    });
   }
 
-  exibirFilasDeStatus() {
-    if (this.rascunhoService.getRascunhosDemanda.length > 0) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'DRAFT',
-        titulo: 'Seus Rascunhos',
-      });
-    }
-    if (
-      this.listaDemandas.some(
-        (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'
-      )
-    ) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'BACKLOG_CLASSIFICACAO',
-        titulo: 'Backlog - Classificação',
-      });
-    }
-    if (
-      this.listaDemandas.some(
-        (e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO'
-      )
-    ) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'BACKLOG_APROVACAO',
-        titulo: 'Backlog - Aprovação',
-      });
-    }
-    if (
-      this.listaDemandas.some(
-        (e) => e.statusDemanda?.toString() == 'BACKLOG_PROPOSTA'
-      )
-    ) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'BACKLOG_PROPOSTA',
-        titulo: 'Backlog - Propostas',
-      });
-    }
-    if (
-      this.listaDemandas.some(
-        (e) => e.statusDemanda?.toString() == 'BUSINESS_CASE'
-      )
-    ) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'BUSINESS_CASE',
-        titulo: 'Business Case',
-      });
-    }
-    if (
-      this.listaDemandas.some(
-        (e) => e.statusDemanda?.toString() == 'ASSESSMENT'
-      )
-    ) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'ASSESSMENT',
-        titulo: 'Assessment',
-      });
-    }
-    if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'DISCUSSION')) {
-      this.listaTituloNaoFiltrado.push({ status: 'DISCUSSION', titulo: 'Discussion' });
-    }
-    if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'TO_DO')) {
-      this.listaTituloNaoFiltrado.push({ status: 'TO_DO', titulo: 'To Do' });
-    }
-    if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'DESIGN_AND_BUILD')) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'DESIGN_AND_BUILD',
-        titulo: 'Design and Build',
-      });
-    }
-    if (
-      this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'SUPPORT')
-    ) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'SUPPORT',
-        titulo: 'Support',
-      });
-    }
-    if (
-      this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'CANCELLED')
-    ) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'CANCELLED',
-        titulo: 'Cancelled',
-      });
-    }
-    if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'DONE')) {
-      this.listaTituloNaoFiltrado.push({ status: 'DONE', titulo: 'Done' });
-    }
-  }
 
 }

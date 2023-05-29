@@ -1,3 +1,4 @@
+import { FalarTextoService } from './../../../services/falar-textos.service';
 import { RascunhoService } from './../../../services/rascunho.service';
 import { Filtro } from './../../../models/filtro.model';
 import { DemandaExcel } from './../../../models/demandaExcel.model';
@@ -39,8 +40,9 @@ export class TelaInicialComponent implements OnInit {
     private rascunhoService: RascunhoService,
     private messageService: MessageService,
     private usuarioService: UsuarioService,
-
+    private falarTextoService: FalarTextoService
   ) {
+    //Pipe ativado quando é realizado algum tipo de filtro por campo de texto
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {
         this.carregarDemandasIniciais()
@@ -52,13 +54,15 @@ export class TelaInicialComponent implements OnInit {
         this.isFiltrado = true;
       };
     })
+    //Setando nivel de acesso usuário e departamento
     this.nivelAcessoUsuario = usuarioService.getRole
     this.departamentoUsuario = usuarioService.getDepartamento
   }
-
+  //Utilizado para realizar o calculo dos cards que se movimentam para o lado
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
-  @Input() rascunho: boolean = false;
 
+
+  @Input() rascunho: boolean = false;
   ordenarSelect = '';
   opcoesOrdenacao = [
     { name: 'Data de criação ↑', value: '1' },
@@ -90,22 +94,6 @@ export class TelaInicialComponent implements OnInit {
   qtdDemandasStatus: number[] = []
   pesquisaDemanda = '';
   nenhumResultadoEncontrado = false;
-  listaDemandasRascunho: Demanda[] = [
-    {
-      score: 2034,
-      statusDemanda: StatusDemanda.DRAFT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-      ppmDemanda: 'PPM 123456',
-    },
-    {
-      score: 2034,
-      statusDemanda: StatusDemanda.DRAFT,
-      departamentoBenDemanda: 'Tecnologia da Informação',
-      tituloDemanda: 'Sistema de Gestão de Demandas',
-      ppmDemanda: 'PPM 123456',
-    },
-  ];
   mudouCampodePesquisa() {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
@@ -237,6 +225,7 @@ export class TelaInicialComponent implements OnInit {
     );
   }
 
+  //Inicia e direciona o usuário para a tela de chat caso ele seja o analista da demanda
   irParaChat(event: Event, demanda: Demanda) {
     if (event.target && demanda.analista?.codigoUsuario == undefined) {
       this.confirmationService.confirm({
@@ -264,10 +253,7 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
-  excluirDemandaRascunho(index: number) {
-    this.listaDemandasRascunho = this.listaDemandasRascunho.splice(1, index);
-  }
-
+  //Lógica para mover as demandas da tela inicial para a direita
   changeRight(index: number) {
     let tamanhoDaListaCompleta = (
       document.getElementById(`filaCompleta${index}`) as HTMLElement
@@ -280,21 +266,24 @@ export class TelaInicialComponent implements OnInit {
       this.positionListCards[index] -= 397 * 2;
     }
   }
+  //Lógica para mover as demandas da tela inicial para a esquerda
   changeLeft(index: number) {
     if (this.positionListCards[index] < 0) {
       this.positionListCards[index] += 397 * 2;
     }
   }
 
+  //Muda a exibição das demandas para formato de lista
   changeToList() {
     this.tipoExibicaoDemanda = false;
   }
 
 
+  //Muda a exibição das demandas para formato de card
   changeToCard() {
     this.tipoExibicaoDemanda = true;
   }
-
+  //Abre e fecha o sidebar lateral esquerdo
   moveSidebar() {
     if (this.showSidebar == 0) {
       this.showSidebar = -350;
@@ -303,6 +292,7 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
+  //Abre modal de reprovação de demanda
   openModalReprovacaoDemanda(demanda: Demanda) {
     this.matDialog.open(ModalReprovacaoDemandaComponent,
       {
@@ -312,6 +302,7 @@ export class TelaInicialComponent implements OnInit {
       });
   }
 
+  //Abre modal de documento da demanda
   openModalDemandaDocumento(event: Demanda) {
     this.matDialog
       .open(ModalDemandaDocumentoComponent, {
@@ -334,6 +325,7 @@ export class TelaInicialComponent implements OnInit {
       })
 
   }
+  //Abre modal de reprovação de histórico
   openModalHistorico(codigoDemanda: string) {
     this.matDialog.open(ModalHistoricoComponent, {
       maxWidth: '70vw',
@@ -343,6 +335,7 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  //Abre modal de criar reunião
   openModalCriarReuniao(demanda: Demanda) {
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minWidth: '300px',
@@ -350,6 +343,7 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  //Abre modal de ata
   openModalAtaDocumento() {
     this.matDialog.open(ModalAtaDocumentoComponent, {
       maxWidth: '70vw',
@@ -357,6 +351,7 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  //Abre modal que vai atualizar o status da demanda
   avancarStatusDemanda(info: {
     mensagem: string;
     codigoDemanda: string | undefined;
@@ -409,6 +404,8 @@ export class TelaInicialComponent implements OnInit {
     }
   }
 
+
+  //Método que carrega as demandas inciais dependendo do nível de acesso do usuário
   carregarDemandasIniciais() {
     this.listaDemandas = [];
     this.listaTituloNaoFiltrado = [];
@@ -442,7 +439,7 @@ export class TelaInicialComponent implements OnInit {
             this.isFirstIfExecuted = true;
             this.divScrollCircle = false;
             this.nenhumResultadoEncontrado = false;
-          } 
+          }
 
           if(!this.isFirstIfExecuted && demandas.length == 0) {
             console.log("divscroll 2 " , this.divScrollCircle)
@@ -461,6 +458,7 @@ export class TelaInicialComponent implements OnInit {
 
   }
 
+  //Abre o modal do motivo de reprovação da demanda
   openModalMotivoReprovacao(demanda: Demanda) {
     this.confirmationService.confirm({
       dismissableMask: true,
@@ -480,6 +478,7 @@ export class TelaInicialComponent implements OnInit {
     this.carregarDemandasIniciais();
   }
 
+  //Lógica para a criação de uma nova demanda
   criarUmaNovaDemanda() {
     let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
     if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
@@ -490,7 +489,8 @@ export class TelaInicialComponent implements OnInit {
   }
 
 
-
+  //Lógica para a exibição das fileiras de status da tela inicial
+  //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
     if (this.nivelAcessoUsuario == 'Solicitante') {
       if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {

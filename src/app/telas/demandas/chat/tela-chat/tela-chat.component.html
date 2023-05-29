@@ -2,7 +2,7 @@
   <div class="row">
     <div id="panel-left" class="col-md-4 px-0">
       <header class="d-flex justify-content-between align-items-center">
-        <div>
+        <div falarTexto>
           <i class="bi bi-person-circle icon mx-3"></i>
           Vinícius Bonatti Benner
         </div>
@@ -10,27 +10,42 @@
       </header>
       <div id="search" class="border-top border-bottom">
         <i class="bi bi-search px-3"></i>
-        <input type="text" placeholder="Busque por demandas" />
+        <input
+          inputEmFoco
+          type="text"
+          placeholder="Busque por demandas"
+          [(ngModel)]="pesquisaFiltro"
+        />
       </div>
       <div class="list-group">
         <p-scrollPanel [style]="{ width: '100%', height: '70vh' }">
-          <a [routerLink]="['/tela-inicial/chat/' + conversa.codigoDemanda]" routerLinkActive="na-rota"
-            *ngFor="let conversa of conversasDemandas"
-            class="list-group-item list-group-item-action d-flex align-items-center" style="
-            border-left: 4px solid #00579d;
-            border-bottom: #dbdbdb 1px solid;
-          ">
+          <a
+
+            [routerLink]="['/tela-inicial/chat/' + conversa.codigoDemanda]"
+            routerLinkActive="na-rota"
+            *ngFor="
+              let conversa of conversasDemandas | filtrarChat : pesquisaFiltro
+            "
+            class="list-group-item list-group-item-action d-flex align-items-center"
+            style="
+              border-left: 4px solid #00579d;
+              border-bottom: #dbdbdb 1px solid;
+            "
+          >
             <div class="d-flex flex-column flex-fill">
-              <h6>{{ conversa.tituloDemanda }}</h6>
+              <h6 falarTexto>{{ conversa.tituloDemanda }}</h6>
 
               <small>{{ conversa?.solicitanteDemanda?.nomeUsuario }}</small>
             </div>
             <div class="d-flex flex-column align-items-center">
-              <span class="timeago">{{
+              <span falarTexto class="timeago">{{
                 conversa?.horaUltimaMensagem | date : "HH:mm"
-                }}</span>
-              <span *ngIf="exibirQtdMensagensNaoLidas(conversa)" class="badge text-bg-primary badge-pill">{{
-                conversa?.qtdMensagensNaoLidas }}</span>
+              }}</span>
+              <span falarTexto
+                *ngIf="exibirQtdMensagensNaoLidas(conversa)"
+                class="badge text-bg-primary badge-pill"
+                >{{ conversa?.qtdMensagensNaoLidas }}</span
+              >
             </div>
           </a>
         </p-scrollPanel>
@@ -39,51 +54,106 @@
     <section class="col-md-8 px-0 d-flex flex-column">
       <header class="d-flex align-items-center border-bottom">
         <div class="d-flex flex-column flex-fill ms-3">
-          <h6>{{ demandaDiscutida?.tituloDemanda }}</h6>
-          <small *ngIf="demandaDiscutida" class="timeago">Solicitante: {{
-            demandaDiscutida.solicitanteDemanda?.nomeUsuario }} | Analista: {{ demandaDiscutida.analista?.nomeUsuario
-            }}</small>
-
+          <h6 falarTexto>{{ demandaDiscutida?.tituloDemanda }}</h6>
+          <small falarTexto *ngIf="demandaDiscutida" class="timeago"
+            >Solicitante:
+            {{ demandaDiscutida.solicitanteDemanda?.nomeUsuario }} | Analista:
+            {{ demandaDiscutida.analista?.nomeUsuario }}</small
+          >
         </div>
-        <i class="bi bi-mic-mute me-3" (click)="silenciarChat()" style="cursor: pointer;"></i>
-        <i class="bi bi-x-circle me-3" (click)="finalizarChat()" style="cursor: pointer;"></i>
-        <i *ngIf="codigoRota" class="bi bi-file-text me-3" style="cursor: pointer"
-          (click)="openModalDemandaDocumento()"></i>
+        <i
+          class="bi bi-mic-mute me-3"
+          (click)="silenciarChat()"
+          style="cursor: pointer"
+        ></i>
+        <i
+          class="bi bi-x-circle me-3"
+          (click)="finalizarChat()"
+          style="cursor: pointer"
+        ></i>
+        <i
+          *ngIf="codigoRota"
+          class="bi bi-file-text me-3"
+          style="cursor: pointer"
+          (click)="openModalDemandaDocumento()"
+        ></i>
       </header>
       <main [ngClass]="{ 'alinhar-alerta': !codigoRota }">
-        <span style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" *ngIf="!codigoRota && mensagens.length > 0">
+        <span falarTexto
+          style="font-weight: 600; font-size: 1.4rem; color: #6c757d"
+          *ngIf="!codigoRota && mensagens.length > 0"
+        >
           SELECIONE UMA CONVERSA
         </span>
-        <span style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" *ngIf="!codigoRota && mensagens.length == 0">
+        <span falarTexto
+          style="font-weight: 600; font-size: 1.4rem; color: #6c757d"
+          *ngIf="!codigoRota && mensagens.length == 0"
+        >
           VOCÊ NÃO TEM CONVERSAS CADASTRADAS
         </span>
 
         <p-scrollPanel #scrollPanel [style]="{ width: '100%', height: '70vh' }">
-          <div style="width: 100%; margin-top: 0.5vh;">
+          <div style="width: 100%; margin-top: 0.5vh">
             <div *ngIf="mostrarConversas" class="mensagens">
-              <div *ngFor="let mensagem of mensagens" class="row" [ngStyle]="{
+              <div
+                *ngFor="let mensagem of mensagens"
+                class="row"
+                [ngStyle]="{
                   'justify-content': mensagem.ladoMensagem
                     ? 'flex-end'
                     : 'flex-start'
-                }">
-                <div [ngClass]="[
+                }"
+              >
+                <div
+                  [ngClass]="[
                     mensagem.ladoMensagem
                       ? 'balao-chat-solicitante'
                       : 'balao-chat-analista'
-                  ]">
+                  ]"
+                >
                   <span>
                     {{ mensagem.textoMensagens }}<br />
-                    <div style="width: 100%; display: flex; justify-content: end; ">
-                      <small style="justify-content: center; align-items: center; display: flex;margin-right: 0.5vw;">{{
-                        mensagem.dataMensagens | date : "dd/MM/yyyy"
-                      }}</small>
-                      <div  style="display: flex; justify-content: center; align-items: center;">
-                        <small style="margin-right: 0.1vw;">{{
+                    <div
+                      style="width: 100%; display: flex; justify-content: end"
+                    >
+                      <small falarTexto
+                        style="
+                          justify-content: center;
+                          align-items: center;
+                          display: flex;
+                          margin-right: 0.5vw;
+                        "
+                        >{{
+                          mensagem.dataMensagens | date : "dd/MM/yyyy"
+                        }}</small
+                      >
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                        "
+                      >
+                        <small falarTexto style="margin-right: 0.1vw">{{
                           mensagem.dataMensagens | date : "HH:mm"
                         }}</small>
                         <div *ngIf="mensagem.ladoMensagem">
-                          <small class="pe-2" *ngIf="mensagem.statusMensagens == 'ENVIADA'"><i class="bi bi-check-all" style="color: #a1a1a1; font-size: 1.1rem;"></i></small>
-                          <small class="pe-2" *ngIf="mensagem.statusMensagens == 'VISTA'"><i class="bi bi-check-all" style="color: #00579d; font-size: 1.1rem;"></i></small>
+                          <small
+                            class="pe-2"
+                            *ngIf="mensagem.statusMensagens == 'ENVIADA'"
+                            ><i
+                              class="bi bi-check-all"
+                              style="color: #a1a1a1; font-size: 1.1rem"
+                            ></i
+                          ></small>
+                          <small
+                            class="pe-2"
+                            *ngIf="mensagem.statusMensagens == 'VISTA'"
+                            ><i
+                              class="bi bi-check-all"
+                              style="color: #00579d; font-size: 1.1rem"
+                            ></i
+                          ></small>
                         </div>
                       </div>
                     </div>
@@ -95,11 +165,22 @@
         </p-scrollPanel>
       </main>
       <div *ngIf="codigoRota" id="send" class="d-flex">
-        <p-speedDial [model]="items" direction="up" [style]="{ width: '1vh', height: '1vh' }" class="me-3 ms-3">
+        <p-speedDial
+          [model]="items"
+          direction="up"
+          [style]="{ width: '1vh', height: '1vh' }"
+          class="me-3 ms-3"
+        >
         </p-speedDial>
         <div class="border rounded">
-          <input type="text" #mensagemDigitada (keydown)="enviarMensagemPorTeclado($event)"
-            placeholder="Escreva sua Mensagem" maxlength="255" />
+          <input
+            inputEmFoco
+            type="text"
+            #mensagemDigitada
+            (keydown)="enviarMensagemPorTeclado($event)"
+            placeholder="Escreva sua Mensagem"
+            maxlength="255"
+          />
           <i class="bi bi-send" (click)="enviarMensagem()"></i>
         </div>
       </div>
@@ -107,13 +188,17 @@
   </div>
 
   <div>
-    <p-confirmDialog #cd [style]="{ width: '25vw' }" icon="pi pi-exclamation-triangle">
+    <p-confirmDialog
+      #cd
+      [style]="{ width: '25vw' }"
+      icon="pi pi-exclamation-triangle"
+    >
       <ng-template pTemplate="footer">
-        <button type="button" class="btn btn-primary" (click)="cd.reject()">
+        <button falarTexto type="button" class="btn btn-primary" (click)="cd.reject()">
           <i class="pi pi-times me-2"></i>
           {{ "telas.tela-chat.modal-b-nao" | translate }}
         </button>
-        <button type="button" class="btn btn-primary" (click)="cd.accept()">
+        <button falarTexto type="button" class="btn btn-primary" (click)="cd.accept()">
           <i class="pi pi-check me-2"></i>
           {{ "telas.tela-chat.modal-b-sim" | translate }}
         </button>

@@ -1,76 +1,160 @@
 <div class="row">
-  <div class="col-2" style="padding: 3.5rem !important;">
-    <div style="position: fixed; left: 1vw; display: flex;" *ngIf="!aparecerProposta" >
-      <div style="margin-top: 0.45vh;">
+  <div class="col-2" style="padding: 3.5rem !important">
+    <div
+      style="position: fixed; left: 1vw; display: flex"
+      *ngIf="!aparecerProposta"
+    >
+      <div style="margin-top: 0.45vh">
         <p-timeline [value]="titulosDemanda">
-            <ng-template pTemplate="marker" let-event>
-                <a class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-                    <i [ngClass]="event.icon"></i>
-                </a>
-            </ng-template>
+          <ng-template pTemplate="marker" let-event>
+            <a
+              class="custom-marker shadow-2"
+              [style.backgroundColor]="event.color"
+            >
+              <i [ngClass]="event.icon"></i>
+            </a>
+          </ng-template>
         </p-timeline>
       </div>
-        <nav class="h-100 flex-column align-items-stretch pe-4">
-          <nav class="nav nav-pills flex-column" id="scroll" >
-            <a class="nav-link nav-scroll" (click)="indoPraCima('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" >{{ "telas.tela-corrida.scroll-dados-gerais" | translate }}</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCima('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">{{ "telas.tela-corrida.scroll-beneficios" | translate }}</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCima('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="cursor:pointer">{{ "telas.tela-corrida.scroll-adicionais" | translate }}</a>
-          </nav>
+      <nav class="h-100 flex-column align-items-stretch pe-4">
+        <nav class="nav nav-pills flex-column" id="scroll">
+          <a falarTexto
+            class="nav-link nav-scroll"
+            (click)="indoPraCima('section1')"
+            [ngClass]="{ active: activeSection === 'section1' }"
+            style="margin-bottom: 3.1vh; cursor: pointer"
+            >{{ "telas.tela-corrida.scroll-dados-gerais" | translate }}</a
+          >
+          <a falarTexto
+            class="nav-link nav-scroll"
+            (click)="indoPraCima('section2')"
+            [ngClass]="{ active: activeSection === 'section2' }"
+            style="margin-bottom: 3.1vh; cursor: pointer"
+            >{{ "telas.tela-corrida.scroll-beneficios" | translate }}</a
+          >
+          <a falarTexto
+            class="nav-link nav-scroll"
+            (click)="indoPraCima('section3')"
+            [ngClass]="{ active: activeSection === 'section3' }"
+            style="cursor: pointer"
+            >{{ "telas.tela-corrida.scroll-adicionais" | translate }}</a
+          >
         </nav>
+      </nav>
     </div>
-    <div style="position: fixed; left: 1vw; display: flex;" *ngIf="aparecerProposta" >
-      <div style="margin-top: 0.45vh;">
+    <div
+      style="position: fixed; left: 1vw; display: flex"
+      *ngIf="aparecerProposta"
+    >
+      <div style="margin-top: 0.45vh">
         <p-timeline [value]="titulosProposta">
-            <ng-template pTemplate="marker" let-event>
-                <a class="custom-marker shadow-2" [style.backgroundColor]="event.color">
-                    <i [ngClass]="event.icon"></i>
-                </a>
-            </ng-template>
+          <ng-template pTemplate="marker" let-event>
+            <a
+              class="custom-marker shadow-2"
+              [style.backgroundColor]="event.color"
+            >
+              <i [ngClass]="event.icon"></i>
+            </a>
+          </ng-template>
         </p-timeline>
       </div>
-        <nav class="h-100 flex-column align-items-stretch pe-4">
-          <nav class="nav nav-pills flex-column" id="scroll" >
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section1')" [ngClass]="{'active': activeSection === 'section1'}" style="margin-bottom: 3.1vh; cursor:pointer" >Proposta</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section2')" [ngClass]="{'active': activeSection === 'section2'}" style="margin-bottom: 3.1vh;cursor:pointer">Recursos</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section3')" [ngClass]="{'active': activeSection === 'section3'}" style="margin-bottom: 3.1vh;cursor:pointer">Escopo</a>
-            <a class="nav-link nav-scroll" (click)="indoPraCimaProposta('section4')" [ngClass]="{'active': activeSection === 'section4'}" style="cursor:pointer">Dados Finais</a>
-          </nav>
+      <nav class="h-100 flex-column align-items-stretch pe-4">
+        <nav class="nav nav-pills flex-column" id="scroll">
+          <a falarTexto
+            class="nav-link nav-scroll"
+            (click)="indoPraCimaProposta('section1')"
+            [ngClass]="{ active: activeSection === 'section1' }"
+            style="margin-bottom: 3.1vh; cursor: pointer"
+            >Proposta</a
+          >
+          <a falarTexto
+            class="nav-link nav-scroll"
+            (click)="indoPraCimaProposta('section2')"
+            [ngClass]="{ active: activeSection === 'section2' }"
+            style="margin-bottom: 3.1vh; cursor: pointer"
+            >Recursos</a
+          >
+          <a falarTexto
+            class="nav-link nav-scroll"
+            (click)="indoPraCimaProposta('section3')"
+            [ngClass]="{ active: activeSection === 'section3' }"
+            style="margin-bottom: 3.1vh; cursor: pointer"
+            >Escopo</a
+          >
+          <a falarTexto
+            class="nav-link nav-scroll"
+            (click)="indoPraCimaProposta('section4')"
+            [ngClass]="{ active: activeSection === 'section4' }"
+            style="cursor: pointer"
+            >Dados Finais</a
+          >
         </nav>
+      </nav>
     </div>
   </div>
 
   <div class="tela-corrida col-10 border-start">
     <div>
       <div style="margin: 0 10vw" class="mt-5">
-        <div class="border rounded p-3 mb-4" *ngIf="verificaSeTemParecerOuRecomendacao()">
-          <h5>Parecer da Comissão:</h5>
+        <div
+          class="border rounded p-3 mb-4"
+          *ngIf="verificaSeTemParecerOuRecomendacao()"
+        >
+          <h5 falarTexto>Parecer da Comissão:</h5>
 
-          <p>{{dadosDemanda?.parecerComissaoProposta}}</p>
-          <br>
-          <h5>Recomendações da Comissão:</h5>
-          <p>{{dadosDemanda?.recomendacaoProposta}}</p>
+          <p falarTexto>{{ dadosDemanda?.parecerComissaoProposta }}</p>
+          <br />
+          <h5 falarTexto>Recomendações da Comissão:</h5>
+          <p falarTexto>{{ dadosDemanda?.recomendacaoProposta }}</p>
         </div>
-        <p-accordion *ngIf="aparecerProposta" id="accordion-proposta" [activeIndex]="[0]">
+        <p-accordion
+          *ngIf="aparecerProposta"
+          id="accordion-proposta"
+          [activeIndex]="[0]"
+        >
           <p-accordionTab header="Demanda">
-            <app-parte-demanda [aparecerProposta]="aparecerProposta"></app-parte-demanda>
+            <app-parte-demanda
+              [aparecerProposta]="aparecerProposta"
+            ></app-parte-demanda>
           </p-accordionTab>
         </p-accordion>
-        <app-parte-demanda *ngIf="!aparecerProposta" [aparecerProposta]="aparecerProposta"></app-parte-demanda>
+        <app-parte-demanda
+          *ngIf="!aparecerProposta"
+          [aparecerProposta]="aparecerProposta"
+        ></app-parte-demanda>
         <app-parte-reuniao *ngIf="aparecerProposta"></app-parte-reuniao>
         <div
           class="d-flex justify-content-between"
           style="margin-top: 2vh !important; margin-bottom: 2vh"
         >
-          <button class="btn btn-danger ms-2" routerLink="/tela-inicial">
+          <button falarTexto class="btn btn-danger ms-2" routerLink="/tela-inicial">
             {{ "telas.tela-corrida.b-cancelar" | translate }}
           </button>
           <div *ngIf="invalid()">DEMANDA INVALID</div>
           <div *ngIf="!invalid()">DEMANDA VALID</div>
-          <div *ngIf="invalidProposta()" (click)="teste()">PROPOSTA INVALID</div>
+          <div *ngIf="invalidProposta()" (click)="teste()">
+            PROPOSTA INVALID
+          </div>
           <div *ngIf="!invalidProposta()" (click)="teste()">PROPOSTA VALID</div>
-          <button [disabled]="invalid()" class="btn btn-primary me-2"  (click)="onSubmitDemanda()">
-            {{ "telas.tela-corrida.b-finalizar" | translate }}
-          </button>
+          <div *ngIf="aparecerProposta">
+            <button
+              [disabled]="(invalid() || invalidProposta())"
+              class="btn btn-primary me-2"
+              (click)="onSubmitDemanda()"
+              falarTexto
+            >
+              {{ "telas.tela-corrida.b-finalizar" | translate }}
+            </button>
+          </div>
+          <div *ngIf="!aparecerProposta">
+            <button falarTexto
+              [disabled]="invalid()"
+              class="btn btn-primary me-2"
+              (click)="onSubmitDemanda()"
+            >
+              {{ "telas.tela-corrida.b-finalizar" | translate }}
+            </button>
+          </div>
         </div>
       </div>
     </div>

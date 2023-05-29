@@ -21,7 +21,10 @@ export class ModalHistoricoComponent implements OnInit {
   ) {
     this.demandaService.getHistoricoDemandaByCodigo(data).subscribe({
       next: (e) => {
-        this.listaHistoricoDemandas = e;
+        this.listaHistoricoDemandas = []
+        for (let i of e) {
+          this.listaHistoricoDemandas.push({ ...i, isHistorico: true })
+        }
       },
       error: (err) => {
         this.showError("Código não encontrado")
@@ -41,5 +44,5 @@ export class ModalHistoricoComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

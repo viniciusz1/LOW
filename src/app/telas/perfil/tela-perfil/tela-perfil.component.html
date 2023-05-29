@@ -1,173 +1,297 @@
-<div class="paginas-conf container-fluid" style="padding: 0px !important;">
-    <div class="perfil-completo">
-        <div class="desc-incial"
-            style="display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
-            <h5 style="margin: 0px;">
-                {{ "telas.configuracoes-perfil.subtitulo" | translate }}
-            </h5>
-        </div>
-
-        <div class="principal" style="margin: 1vw;">
-            <div>
-                <h5 style="font-size: 1.25rem;">Informações Básicas</h5>
-            </div>
-
-            <div class="informacoesBasicas">
-                <div class="nome"
-                    style="display: flex; justify-content: start; align-items: center; border-bottom: 1px solid #d3d3d3; margin-bottom: 0.5vw;">
-                    <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
-                        <div class="icone">
-                            <i style="font-size: 1.5rem;" class="bi bi-person"></i>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
-                        <div style="display: grid; justify-content: start; align-items: center;">
-                            <div style="font-size: 1rem;">
-                                <span>
-                                    {{usuario?.nomeUsuario}}
-                                </span>
-                            </div>
-                            <div style="font-size: 0.7rem; margin-bottom: 0.5vw;">
-                                <span>
-                                    {{ "telas.configuracoes-perfil.nome" | translate }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="username"
-                    style="display: flex; justify-content: start; align-items: center; border-bottom: 1px solid #d3d3d3; margin-bottom: 0.5vw;">
-                    <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
-                        <div class="icone">
-                            <i style="font-size: 1.5rem;" class="bi bi-person-video"></i>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
-                        <div style="display: grid; justify-content: start; align-items: center;">
-                            <div style="font-size: 1rem;">
-                                <span>
-                                    {{usuario?.userUsuario}}
-                                </span>
-                            </div>
-                            <div style="font-size: 0.7rem; margin-bottom: 0.5vw;">
-                                <span>
-                                    Usuário
-                                </span>
-                            </div>
-                        </div>
-                        <div class="circle">
-                            <i style="font-size: 1.5rem;" class="bi bi-pencil"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="senha"
-                    style="display: flex; justify-content: start; align-items: center ; border-bottom: 1px solid #d3d3d3; margin-bottom: 0.5vw;">
-                    <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
-                        <div class="icone">
-                            <i style="font-size: 1.5rem;" class="bi bi-fingerprint"></i>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
-                        <div style="display: grid; justify-content: start; align-items: center;">
-                            <div style="font-size: 1rem;">
-                                <span>
-                                    ********
-                                </span>
-                            </div>
-                            <div style="font-size: 0.7rem; margin-bottom: 0.5vw;">
-                                <span>
-                                    {{ "telas.configuracoes-perfil.senha" | translate }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="circle">
-                            <i style="font-size: 1.5rem;" class="bi bi-pencil"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 1vw;">
-                <h5 style="font-size: 1.25rem;">Informações de Contato</h5>
-            </div>
-
-            <div class="informacoesBasicas">
-                <div class="nome"
-                    style="display: flex; justify-content: start; align-items: center ; border-bottom: 1px solid #d3d3d3; margin-bottom: 0.5vw;">
-                    <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
-                        <div class="icone">
-                            <i style="font-size: 1.5rem;" class="bi bi-envelope"></i>
-                        </div>
-                    </div>
-                    <div style="display: grid; justify-content: start; align-items: center;">
-                        <div style="font-size: 1rem;">
-                            <span>
-                                {{usuario?.emailUsuario}}
-                            </span>
-                        </div>
-                        <div style="font-size: 0.7rem; margin-bottom: 0.5vw;">
-                            <span>
-                                {{ "telas.configuracoes-perfil.email" | translate }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div style="margin-top: 1vw;">
-                <h5 style="font-size: 1.25rem;">Informações de Departamento</h5>
-            </div>
-
-            <div class="informacoesBasicas">
-                <div class="departamento"
-                    style="display: flex; justify-content: start; align-items: center ; border-bottom: 1px solid #d3d3d3; margin-bottom: 0.5vw;">
-                    <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
-                        <div class="icone">
-                            <i style="font-size: 1.5rem;" class="bi bi-inboxes"></i>
-                        </div>
-                    </div>
-                    <div style="display: grid; justify-content: start; align-items: center;">
-                        <div style="font-size: 1rem;">
-                            <span>
-                                {{usuario?.departamentoUsuario?.nomeDepartamento}}
-                            </span>
-                        </div>
-                        <div style="font-size: 0.7rem; margin-bottom: 0.5vw;">
-                            <span>
-                                Departamento
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 1vw;">
-                <h5 style="font-size: 1.25rem;">Nível de Acesso</h5>
-            </div>
-
-            <div class="informacoesBasicas">
-                <div class="nivel-acesso"
-                    style="display: flex; justify-content: start; align-items: center ; border-bottom: 1px solid #d3d3d3; margin-bottom: 0.5vw; ">
-                    <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
-                        <div class="icone">
-                            <i style="font-size: 1.5rem;" class="bi bi-tv"></i>
-                        </div>
-                    </div>
-                    <div style="display: grid; justify-content: start; align-items: center;">
-                        <div style="font-size: 1rem;">
-                            <span>
-                                {{usuario?.nivelAcessoUsuario}}
-                            </span>
-                        </div>
-                        <div style="font-size: 0.7rem; margin-bottom: 0.5vw;">
-                            <span>
-                                Nível de Acesso
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="paginas-conf container-fluid" style="padding: 0px !important">
+  <div class="perfil-completo">
+    <div
+      class="desc-incial"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #8f8f8f;
+        padding: 10px 0px 10px 10px;
+      "
+    >
+      <h5 falarTexto style="margin: 0px">
+        {{ "telas.configuracoes-perfil.subtitulo" | translate }}
+      </h5>
     </div>
+
+    <div class="principal" style="margin: 1vw">
+      <div>
+        <h5 style="font-size: 1.25rem" falarTexto>Informações Básicas</h5>
+      </div>
+
+      <div class="informacoesBasicas">
+        <div
+          class="nome"
+          style="
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            border-bottom: 1px solid #d3d3d3;
+            margin-bottom: 0.5vw;
+          "
+        >
+          <div
+            style="
+              margin-right: 1vw;
+              display: flex;
+              justify-content: start;
+              align-items: center;
+            "
+          >
+            <div class="icone">
+              <i style="font-size: 1.5rem" class="bi bi-person"></i>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              width: 95%;
+            "
+          >
+            <div
+              style="display: grid; justify-content: start; align-items: center"
+            >
+              <div style="font-size: 1rem">
+                <span falarTexto>
+                  {{ usuario?.nomeUsuario }}
+                </span>
+              </div>
+              <div style="font-size: 0.7rem; margin-bottom: 0.5vw">
+                <span falarTexto>
+                  {{ "telas.configuracoes-perfil.nome" | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="username"
+          style="
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            border-bottom: 1px solid #d3d3d3;
+            margin-bottom: 0.5vw;
+          "
+        >
+          <div
+            style="
+              margin-right: 1vw;
+              display: flex;
+              justify-content: start;
+              align-items: center;
+            "
+          >
+            <div class="icone">
+              <i style="font-size: 1.5rem" class="bi bi-person-video"></i>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              width: 95%;
+            "
+          >
+            <div
+              style="display: grid; justify-content: start; align-items: center"
+            >
+              <div style="font-size: 1rem">
+                <span falarTexto>
+                  {{ usuario?.userUsuario }}
+                </span>
+              </div>
+              <div style="font-size: 0.7rem; margin-bottom: 0.5vw">
+                <span falarTexto> Usuário </span>
+              </div>
+            </div>
+            <div class="circle">
+              <i style="font-size: 1.5rem" class="bi bi-pencil"></i>
+            </div>
+          </div>
+        </div>
+        <div
+          class="senha"
+          style="
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            border-bottom: 1px solid #d3d3d3;
+            margin-bottom: 0.5vw;
+          "
+        >
+          <div
+            style="
+              margin-right: 1vw;
+              display: flex;
+              justify-content: start;
+              align-items: center;
+            "
+          >
+            <div class="icone">
+              <i style="font-size: 1.5rem" class="bi bi-fingerprint"></i>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              width: 95%;
+            "
+          >
+            <div
+              style="display: grid; justify-content: start; align-items: center"
+            >
+              <div style="font-size: 1rem">
+                <span> ******** </span>
+              </div>
+              <div style="font-size: 0.7rem; margin-bottom: 0.5vw">
+                <span falarTexto>
+                  {{ "telas.configuracoes-perfil.senha" | translate }}
+                </span>
+              </div>
+            </div>
+            <div class="circle">
+              <i style="font-size: 1.5rem" class="bi bi-pencil"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 1vw">
+        <h5 style="font-size: 1.25rem" falarTexto>Informações de Contato</h5>
+      </div>
+
+      <div class="informacoesBasicas">
+        <div
+          class="nome"
+          style="
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            border-bottom: 1px solid #d3d3d3;
+            margin-bottom: 0.5vw;
+          "
+        >
+          <div
+            style="
+              margin-right: 1vw;
+              display: flex;
+              justify-content: start;
+              align-items: center;
+            "
+          >
+            <div class="icone">
+              <i style="font-size: 1.5rem" class="bi bi-envelope"></i>
+            </div>
+          </div>
+          <div
+            style="display: grid; justify-content: start; align-items: center"
+          >
+            <div style="font-size: 1rem">
+              <span falarTexto>
+                {{ usuario?.emailUsuario }}
+              </span>
+            </div>
+            <div style="font-size: 0.7rem; margin-bottom: 0.5vw">
+              <span falarTexto>
+                {{ "telas.configuracoes-perfil.email" | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 1vw">
+        <h5 style="font-size: 1.25rem" falarTexto>
+          Informações de Departamento
+        </h5>
+      </div>
+
+      <div class="informacoesBasicas">
+        <div
+          class="departamento"
+          style="
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            border-bottom: 1px solid #d3d3d3;
+            margin-bottom: 0.5vw;
+          "
+        >
+          <div
+            style="
+              margin-right: 1vw;
+              display: flex;
+              justify-content: start;
+              align-items: center;
+            "
+          >
+            <div class="icone">
+              <i style="font-size: 1.5rem" class="bi bi-inboxes"></i>
+            </div>
+          </div>
+          <div
+            style="display: grid; justify-content: start; align-items: center"
+          >
+            <div style="font-size: 1rem">
+              <span falarTexto>
+                {{ usuario?.departamentoUsuario?.nomeDepartamento }}
+              </span>
+            </div>
+            <div style="font-size: 0.7rem; margin-bottom: 0.5vw">
+              <span falarTexto> Departamento </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 1vw">
+        <h5 style="font-size: 1.25rem" falarTexto>Nível de Acesso</h5>
+      </div>
+
+      <div class="informacoesBasicas">
+        <div
+          class="nivel-acesso"
+          style="
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            border-bottom: 1px solid #d3d3d3;
+            margin-bottom: 0.5vw;
+          "
+        >
+          <div
+            style="
+              margin-right: 1vw;
+              display: flex;
+              justify-content: start;
+              align-items: center;
+            "
+          >
+            <div class="icone">
+              <i style="font-size: 1.5rem" class="bi bi-tv"></i>
+            </div>
+          </div>
+          <div
+            style="display: grid; justify-content: start; align-items: center"
+          >
+            <div style="font-size: 1rem">
+              <span falarTexto>
+                {{ usuario?.nivelAcessoUsuario }}
+              </span>
+            </div>
+            <div style="font-size: 0.7rem; margin-bottom: 0.5vw">
+              <span falarTexto> Nível de Acesso </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

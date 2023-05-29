@@ -3,40 +3,40 @@
     <div class="col-lg-6" [formGroup]="demandaClassificadaForm" (ngSubmit)="onSubmitClassificacaoDemanda()">
       <div style="height: 70vh;">
         <div style="margin-top: 2.5vh;">
-          <h3>
+          <h3 falarTexto>
             {{ "telas.tela-classificar-demanda.preencha-campos" | translate }}
           </h3>
         </div>
         <div style="margin-top: 1vh;">
-          <label class="form-label me-2">{{ "telas.tela-classificar-demanda.tamanho" | translate }}</label>
+          <label class="form-label me-2" falarTexto>{{ "telas.tela-classificar-demanda.tamanho" | translate }}</label>
           <br />
           <p-dropdown formControlName="tamanhoDemandaClassificada" [options]="opcoesDeTamanho" [optionLabel]="'name'"
             [optionValue]="'value'" placeholder="Selecione um tamanho"></p-dropdown>
         </div>
         <div style="margin-top: 1vh;">
-          <label class="form-label">{{ "telas.tela-classificar-demanda.bu-beneficiada" | translate }}</label>
+          <label class="form-label" falarTexto>{{ "telas.tela-classificar-demanda.bu-beneficiada" | translate }}</label>
           <br />
           <p-multiSelect [options]="listaBUs" formControlName="busBeneficiadasDemandaClassificada" optionLabel="nome"
             optionValue="value" defaultLabel="Selecione as BUs" display="chip">
           </p-multiSelect>
         </div>
         <div style="margin-top: 1vh;">
-          <label class="form-label">{{ "telas.tela-classificar-demanda.bu-solicitante" | translate }}</label>
+          <label class="form-label" falarTexto>{{ "telas.tela-classificar-demanda.bu-solicitante" | translate }}</label>
           <br />
           <p-dropdown formControlName="buSolicitanteDemandaClassificada" [options]="listaBUs" optionLabel="nome"
             optionValue="value" placeholder="Selecione uma BU"></p-dropdown>
         </div>
         <div style="margin-top: 1vh;">
-          <label class="form-label">{{ "telas.tela-classificar-demanda.secao-ti-responsavel" | translate }}</label>
+          <label class="form-label" falarTexto>{{ "telas.tela-classificar-demanda.secao-ti-responsavel" | translate }}</label>
           <br />
           <p-dropdown formControlName="secaoDemandaClassificada" [options]="listaSecoes" optionLabel="nome"
             optionValue="value" placeholder="Selecione uma sessão"></p-dropdown>
         </div>
         <div class="d-flex justify-content-between" style="margin-top: 26vh;">
-          <div class="btn btn-danger" (click)="openModalReprovacao()">{{ "telas.tela-classificar-demanda.b-reprovar" | translate }}</div>
+          <div falarTexto class="btn btn-danger" (click)="openModalReprovacao()">{{ "telas.tela-classificar-demanda.b-reprovar" | translate }}</div>
           <div class="justify-content-end">
-            <div class="btn btn-outline-primary" routerLink="/tela-inicial/chat">{{ "telas.tela-classificar-demanda.b-contatar-solicitante" | translate }}</div>
-            <button [disabled]="isFormClassificadaInvalid()" (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">
+            <div falarTexto class="btn btn-outline-primary" routerLink="/tela-inicial/chat">{{ "telas.tela-classificar-demanda.b-contatar-solicitante" | translate }}</div>
+            <button falarTexto [disabled]="isFormClassificadaInvalid()" (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">
               {{ "telas.tela-classificar-demanda.b-aprovar" | translate }}
             </button>
           </div>
@@ -49,53 +49,53 @@
       </p>
       <p-scrollPanel [style]="{height: '70vh', width:'42.6vw'}">
         <h4 mat-dialog-title class="d-flex justify-content-between">
-          <span><b>{{ "documento-pdf.solicitante" | translate }}: </b>{{demanda?.solicitanteDemanda?.nomeUsuario}}</span>
+          <span falarTexto><b>{{ "documento-pdf.solicitante" | translate }}: </b>{{demanda?.solicitanteDemanda?.nomeUsuario}}</span>
 
         </h4>
-        <h4><b>{{ "documento-pdf.departamento" | translate }}:</b> {{demanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
-        <h4 class="d-flex justify-content-center">
+        <h4 falarTexto><b>{{ "documento-pdf.departamento" | translate }}:</b> {{demanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
+        <h4 falarTexto class="d-flex justify-content-center">
           <b>{{demanda?.tituloDemanda}} –
             {{demanda?.codigoDemanda}}</b>
         </h4>
 
-        <h4><b>{{ "documento-pdf.objetivo" | translate }}</b></h4>
+        <h4 falarTexto><b>{{ "documento-pdf.objetivo" | translate }}</b></h4>
         <p [innerHTML]="demanda?.objetivoDemanda">
         </p>
 
-        <h4><b>{{ "documento-pdf.situacao-atual" | translate }}</b></h4>
+        <h4 falarTexto><b>{{ "documento-pdf.situacao-atual" | translate }}</b></h4>
         <p [innerHTML]="demanda?.situacaoAtualDemanda">
         </p>
 
 
-        <h4><b>{{ "documento-pdf.beneficio-real" | translate }}</b>{{demanda?.beneficioRealDemanda?.valorBeneficio}} {{ "documento-pdf.mensais" | translate }}</h4>
-        <p>
+        <h4 falarTexto><b>{{ "documento-pdf.beneficio-real" | translate }}</b>{{demanda?.beneficioRealDemanda?.valorBeneficio}} {{ "documento-pdf.mensais" | translate }}</h4>
+        <p falarTexto>
           <b>{{ "documento-pdf.memoria-calculo-beneficio-real" | translate }}</b>
         </p>
         <ul>
-          <li>
+          <li falarTexto>
             {{demanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio}}
           </li>
         </ul>
-        <h4><b>{{ "documento-pdf.beneficio-potencial" | translate }}</b>{{demanda?.beneficioPotencialDemanda?.valorBeneficio}} {{ "documento-pdf.mensais" | translate }}</h4>
-        <p>
+        <h4 falarTexto><b>{{ "documento-pdf.beneficio-potencial" | translate }}</b>{{demanda?.beneficioPotencialDemanda?.valorBeneficio}} {{ "documento-pdf.mensais" | translate }}</h4>
+        <p falarTexto>
           <b>{{ "documento-pdf.memoria-calculo-beneficio-potencial" | translate }}</b>
         </p>
         <ul>
-          <li>
+          <li falarTexto>
             {{demanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio}}
           </li>
         </ul>
-        <h4>
+        <h4 falarTexto>
           <b>{{ "documento-pdf.beneficio-qualitativo" | translate }}</b>
         </h4>
         <ul>
-          <li>
+          <li falarTexto>
             {{demanda?.beneficioQualitativoDemanda}}
           </li>
         </ul>
 
-        <p><b>{{ "documento-pdf.frequencia-uso-sistema" | translate }}</b>{{demanda?.frequenciaDeUsoDemanda}}</p>
-        <h4><b>{{ "documento-pdf.documentos" | translate }}</b>
+        <p falarTexto><b>{{ "documento-pdf.frequencia-uso-sistema" | translate }}</b>{{demanda?.frequenciaDeUsoDemanda}}</p>
+        <h4 falarTexto><b>{{ "documento-pdf.documentos" | translate }}</b>
           <a *ngFor="let arquivo of demanda?.arquivosDemanda" role="button" (click)="download(arquivo)">
             {{ arquivo.nomeArquivo }}
           </a>

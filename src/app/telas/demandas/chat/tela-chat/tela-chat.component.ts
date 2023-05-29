@@ -1,9 +1,7 @@
-;
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
 import { MessagesService } from 'src/app/websocket/messages.service';
 import { Demanda } from 'src/app/models/demanda.model';
 import { Mensagem } from 'src/app/models/message.model';
@@ -14,117 +12,184 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-tela-chat',
   templateUrl: './tela-chat.component.html',
-  styleUrls: ['./tela-chat.component.scss']
+  styleUrls: ['./tela-chat.component.scss'],
 })
-
-export class TelaChatComponent implements OnInit {
+export class TelaChatComponent implements OnInit, OnDestroy {
   messageService: any;
   items: MenuItem[] = [];
-  codigoRota = ""
-  mensagens: Mensagem[] = []
-  conversasDemandas: Demanda[] = []
+  codigoRota = '';
+  mensagens: Mensagem[] = [];
+  conversasDemandas: Demanda[] = [];
   mostrarConversas = false;
   usuarioLogado: any;
-  demandaDiscutida: Demanda | undefined
+  demandaDiscutida: Demanda | undefined;
+  pesquisaFiltro = '';
 
-  constructor(private confirmationService: ConfirmationService,
+  constructor(
+    private confirmationService: ConfirmationService,
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
     private messagesService: MessagesService,
-    private matDialog: MatDialog) {
-    if (this.codigoRota != "") {
-      this.iniciarWebSocketChat()
-    }
-    this.setarConversas()
+    private matDialog: MatDialog
+  ) {
+    console.log('Rodou construtor   ');
+
+    this.setarConversas();
+    this.route.params.subscribe((e) => {
+      this.codigoRota = e['codigoDemanda'];
+      this.messagesService.codigoRota = this.codigoRota;
+      if (this.codigoRota != '' && this.codigoRota != undefined) {
+        // this.messagesService.subscriptionChat.unsubscribe();
+        this.setMensagens();
+        this.iniciarSubscribeChat();
+      }
+    });
+    // this.initializeChat();
   }
 
+  // async initializeChat() {
+  //   await this.waitForWebSocketConnection();
+  //   if (this.codigoRota != '') {
+  //     this.setMensagens();
+  //     this.subscribeEmmiterMensagens();
+  //     this.iniciarSubscribeChat();
+  //   }
+  // }
+
+  // waitForWebSocketConnection(): Promise<void> {
+  //   return new Promise((resolve) => {
+  //     const intervalId = setInterval(() => {
+  //       if (this.messagesService.client?.active) {
+  //         clearInterval(intervalId);
+  //         resolve();
+  //       }
+  //     }, 100); // Verifica a cada 100ms se o WebSocket está ativo
+  //   });
+  // }
+
+  setMensagens() {
+    this.messagesService
+      .getMessages(this.codigoRota)
+      .subscribe((novasMensagens) => {
+        this.mensagens = this.trocarLadoDaMensagem(novasMensagens);
+        this.mostrarConversas = true;
+      });
+    this.scrollToBottom();
+  }
+
+  iniciarSubscribeChat() {
+    this.messagesService.subscribeChat();
+  }
+
+  ngOnDestroy(): void {
+    if (this.messagesService.subscriptionChat != undefined) {
+      this.messagesService.subscriptionChat.unsubscribe();
+    }
+  }
 
   @ViewChild('scrollPanel') scrollPanel: ScrollPanel | undefined;
 
   scrollToBottom() {
     if (this.scrollPanel) {
-      this.scrollPanel.scrollTop(99999)
+      this.scrollPanel.scrollTop(99999);
     }
   }
-  exibirQtdMensagensNaoLidas(conversa: any){
-    if(conversa?.qtdMensagensNaoLidas != 0 && conversa?.usuarioAguardando.codigoUsuario != this.usuarioService.getCodigoUser()){
-      return true
+  exibirQtdMensagensNaoLidas(conversa: any) {
+    if (
+      conversa?.qtdMensagensNaoLidas != 0 &&
+      conversa?.usuarioAguardando.codigoUsuario !=
+        this.usuarioService.getCodigoUser()
+    ) {
+      return true;
     }
     return false;
   }
 
   verificarMensagemMaisAtual() {
-    const mensagemMaisAtual = this.mensagens.reduce((mensagemMaisRecente: Mensagem | undefined, mensagemAtual: Mensagem) => {
-      if (!mensagemMaisRecente) {
-        return mensagemAtual;
-      }
-      if (mensagemAtual.dataMensagens && mensagemMaisRecente.dataMensagens) {
-        return mensagemAtual.dataMensagens > mensagemMaisRecente.dataMensagens ? mensagemAtual : mensagemMaisRecente;
-      }
-      return
-    }, undefined);
+    const mensagemMaisAtual = this.mensagens.reduce(
+      (mensagemMaisRecente: Mensagem | undefined, mensagemAtual: Mensagem) => {
+        if (!mensagemMaisRecente) {
+          return mensagemAtual;
+        }
+        if (mensagemAtual.dataMensagens && mensagemMaisRecente.dataMensagens) {
+          return mensagemAtual.dataMensagens > mensagemMaisRecente.dataMensagens
+            ? mensagemAtual
+            : mensagemMaisRecente;
+        }
+        return;
+      },
+      undefined
+    );
   }
 
-  iniciarWebSocketChat() {
-    this.messagesService.initializeWebSocketConnection()
-    this.messagesService.$mensagesEmmiter.subscribe(mensagens => {
-      this.setarConversas()
-      this.mensagens = []
-      for (let i of mensagens) {
-        if ((i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == this.usuarioService.getCodigoUser()) {
-          i.ladoMensagem = true
-        } else {
-          i.ladoMensagem = false
-        }
+  subscribeEmmiterMensagens() {
+    this.messagesService.$mensagesEmmiter.subscribe((mensagem) => {
+      let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
+      this.mostrarConversas = true;
+      this.mensagens.push(...novaMensagem);
+      console.log("emitiu")
+      setTimeout(() => {
+        this.scrollToBottom();
+      }, 200);
+    });
+  }
+
+  trocarLadoDaMensagem(mensagens: Mensagem[]) {
+    for (let mensagem of mensagens) {
+      if (
+        mensagem.usuarioMensagens &&
+        mensagem.usuarioMensagens.codigoUsuario ==
+          this.usuarioService.getCodigoUser()
+      ) {
+        mensagem.ladoMensagem = true;
+      } else {
+        mensagem.ladoMensagem = false;
       }
-      this.mostrarConversas = true
-      this.mensagens.push(...mensagens)
-    })
+    }
+    return mensagens;
   }
 
   @ViewChild('mensagemDigitada') private mensagem: any;
 
   setarConversas() {
-    this.messagesService.getDemandasRelacionadas()
-      .subscribe(e => {
-        this.conversasDemandas = e
-        this.demandaDiscutida = this.conversasDemandas.find(e => e.codigoDemanda == this.codigoRota)
-        this.scrollToBottom()
-      })
+    this.messagesService.getDemandasRelacionadas().subscribe((e) => {
+      this.conversasDemandas = e;
+      this.demandaDiscutida = this.conversasDemandas.find(
+        (e) => e.codigoDemanda == this.codigoRota
+      );
+      this.scrollToBottom();
+    });
   }
 
   enviarMensagemPorTeclado(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      this.enviarMensagem()
+    if (event.key === 'Enter') {
+      this.enviarMensagem();
     }
   }
 
 
   enviarMensagem() {
-    if (this.mensagem.nativeElement.value != "") {
-      this.messagesService?.send("/low/demanda/" + this.codigoRota, this.mensagem.nativeElement.value, this.codigoRota, this.usuarioService.getCodigoUser().toString())
-      this.mensagem.nativeElement.value = ""
+    if (this.mensagem.nativeElement.value != '') {
+      this.messagesService?.send(
+        '/low/demanda/' + this.codigoRota,
+        this.mensagem.nativeElement.value,
+        this.codigoRota,
+        this.usuarioService.getCodigoUser().toString()
+      );
+      this.mensagem.nativeElement.value = '';
     }
-
   }
 
   openModalDemandaDocumento() {
-    this.matDialog
-      .open(ModalDemandaDocumentoComponent, {
-        maxWidth: '70vw',
-        minWidth: '50vw',
-        data: this.demandaDiscutida,
-      })
+    this.matDialog.open(ModalDemandaDocumentoComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      data: this.demandaDiscutida,
+    });
   }
 
   ngOnInit(): void {
-    this.usuarioLogado = this.usuarioService.getUser('user');
-    this.route.params.subscribe(e => {
-      this.codigoRota = e['codigoDemanda']
-      this.messagesService.codigoRota = this.codigoRota
-      this.iniciarWebSocketChat()
-    })
-
+    this.subscribeEmmiterMensagens();
   }
 
   silenciarChat() {
@@ -134,9 +199,9 @@ export class TelaChatComponent implements OnInit {
       header: 'Silenciar Chat',
       accept: () => {
         //Actual logic to perform a confirmation
-      }
-    })
-  };
+      },
+    });
+  }
 
   finalizarChat() {
     this.confirmationService.confirm({
@@ -145,9 +210,7 @@ export class TelaChatComponent implements OnInit {
       header: 'Finalizar Chat',
       accept: () => {
         //Actual logic to perform a confirmation
-      }
-    })
-  };
-
-
+      },
+    });
+  }
 }

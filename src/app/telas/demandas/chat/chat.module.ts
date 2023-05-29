@@ -7,21 +7,23 @@ import { TelaChatComponent } from './tela-chat/tela-chat.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {SpeedDialModule} from 'primeng/speeddial';
 import { WebSocketConnector } from 'src/app/websocket/websocket-connector';
+import { PipesModule } from "../../../pipes/pipes.module";
 
 
 
 
 @NgModule({
-  declarations: [
-    TelaChatComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ConfirmDialogModule,
-    SharedModule,
-    SpeedDialModule
-  ],
-  providers: []
+    declarations: [
+        TelaChatComponent
+    ],
+    providers: [],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ConfirmDialogModule,
+        SharedModule,
+        SpeedDialModule,
+        PipesModule
+    ]
 })
 export class ChatModule { }

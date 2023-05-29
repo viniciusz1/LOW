@@ -2,10 +2,10 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { UsuarioService } from './../services/usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Client, Message } from '@stomp/stompjs';
+import { Client, Message, StompHeaders } from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import { Mensagem } from '../models/message.model';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,37 +19,59 @@ export class MessagesService {
   public $mensagesEmmiter: EventEmitter<Mensagem> = new EventEmitter();
   public $qtdMensagensNaoLida: EventEmitter<number> = new EventEmitter();
   public codigoRota: string | undefined;
-  private client: Client | undefined;
+  private _client: Client | undefined;
+  private currentAttempt = 0;
+  private reconnectAttempts = 10;
+  get client() {
+    return this._client;
+  }
 
   initializeWebSocketConnection() {
     const serverUrl = 'http://localhost:8085/low/ws/info';
     const ws = new SockJS(serverUrl);
-    this.client = new Client({
+    this._client = new Client({
       webSocketFactory: () => ws,
       debug: (msg: string) => console.log(msg),
     });
+
+    this._client.onStompError = (frame: any) => {
+      console.error('Erro no STOMP:', frame);
+
+      // Lógica para lidar com o erro de conexão STOMP e reconexão
+      if (this.currentAttempt < this.reconnectAttempts) {
+        this.currentAttempt++;
+        console.log(
+          `Tentando reconectar (tentativa ${this.currentAttempt})...`
+        );
+        setTimeout(() => {
+          this.initializeWebSocketConnection(); // Tentar reconectar após o intervalo de tempo definido
+        }, 3000);
+      } else {
+        console.log('Número máximo de tentativas de reconexão alcançado.');
+      }
+    };
   }
 
-  connect() {
-    if (this.client?.active == false) {
-      this.client.activate();
+  activate() {
+    if (this._client?.active == false) {
+      this._client.activate();
     } else {
-      alert('Cliente indefinido');
+      alert('_cliente indefinido');
     }
   }
 
   disconnect() {
-    if (this.client) {
-      this.client.deactivate();
+    if (this._client) {
+      this._client.deactivate();
     } else {
-      alert('Cliente indefinido');
+      alert('_cliente indefinido');
     }
   }
 
   subscribeToNotifications() {
     let codigoUser = this.usuarioService.getCodigoUser();
-    if (this.client) {
-      const subscription = this.client.subscribe(
+    if (this._client) {
+      const subscription = this._client.subscribe(
         '/noticicacoes-messages/' + codigoUser + '/chat',
         (message: Message) => {
           console.log('Recebeu notificação: ' + message);
@@ -59,7 +81,7 @@ export class MessagesService {
   }
 
   // connectWithRetry(maxRetries = 5, retryCount = 0) {
-  //   this.stompClient.connect({}, (frame: any) => {
+  //   this.stomp_client.connect({}, (frame: any) => {
   //     this.inscreverNotificacoesMensagem();
   //     this.inscrever();
   //   }, (error: any) => {
@@ -77,22 +99,24 @@ export class MessagesService {
 
   // inscreverNotificacoesMensagem() {
   //   let codigoUser = this.usuarioService.getCodigoUser()
-  //   this.stompClient.subscribe('/noticicacoes-messages/' + codigoUser + '/chat', (message: any) => {
+  //   this.stomp_client.subscribe('/noticicacoes-messages/' + codigoUser + '/chat', (message: any) => {
   //     this.updateQuantidadeMensagensNotificacoes();
   //   });
   // }
+
+  public subscriptionChat: any;
 
   subscribeChat(codigoRota?: string) {
     if (codigoRota) {
       this.codigoRota = codigoRota;
     }
 
-    if (this.client) {
-      const subscription = this.client.subscribe(
+    if (this._client) {
+      this.subscriptionChat = this._client.subscribe(
         '/demanda/' + this.codigoRota + '/chat',
         (message: Message) => {
           this.$mensagesEmmiter.emit(JSON.parse(message.body));
-        }
+        },
       );
     }
   }
@@ -180,8 +204,8 @@ export class MessagesService {
       multipartFile: formData,
     };
 
-    if (this.client) {
-      this.client.publish({
+    if (this._client) {
+      this._client.publish({
         destination: destino,
         body: JSON.stringify(mensagemDTO),
       });

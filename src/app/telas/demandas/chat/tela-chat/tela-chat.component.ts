@@ -15,7 +15,6 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./tela-chat.component.scss'],
 })
 export class TelaChatComponent implements OnInit, OnDestroy {
-
   messageService: any;
   items: MenuItem[] = [];
   codigoRota = '';
@@ -33,24 +32,42 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog
   ) {
     console.log('Rodou construtor   ');
+
+    this.setarConversas();
     this.route.params.subscribe((e) => {
       this.codigoRota = e['codigoDemanda'];
       this.messagesService.codigoRota = this.codigoRota;
-      console.log('ROUTE');
-      if (this.codigoRota != '') {
+      if (this.codigoRota != '' && this.codigoRota != undefined) {
+        // this.messagesService.subscriptionChat.unsubscribe();
         this.setMensagens();
+        this.subscribeEmmiterMensagens();
+        this.iniciarSubscribeChat();
       }
     });
-
-    this.setarConversas();
-    this.messagesService.initializeWebSocketConnection();
-    this.messagesService.connect();
-
-    // this.messagesService.subscribeChat();
+    // this.initializeChat();
   }
 
+  // async initializeChat() {
+  //   await this.waitForWebSocketConnection();
+  //   if (this.codigoRota != '') {
+  //     this.setMensagens();
+  //     this.subscribeEmmiterMensagens();
+  //     this.iniciarSubscribeChat();
+  //   }
+  // }
+
+  // waitForWebSocketConnection(): Promise<void> {
+  //   return new Promise((resolve) => {
+  //     const intervalId = setInterval(() => {
+  //       if (this.messagesService.client?.active) {
+  //         clearInterval(intervalId);
+  //         resolve();
+  //       }
+  //     }, 100); // Verifica a cada 100ms se o WebSocket está ativo
+  //   });
+  // }
+
   setMensagens() {
-    console.log('SET MENSAGENS');
     this.messagesService
       .getMessages(this.codigoRota)
       .subscribe((novasMensagens) => {
@@ -65,7 +82,9 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.messagesService.disconnect();
+    if (this.codigoRota != undefined) {
+      this.messagesService.subscriptionChat.unsubscribe();
+    }
   }
 
   @ViewChild('scrollPanel') scrollPanel: ScrollPanel | undefined;
@@ -168,7 +187,15 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscribeEmmiterMensagens();
+    // this.route.params.subscribe((e) => {
+    //   this.codigoRota = e['codigoDemanda'];
+    //   this.messagesService.codigoRota = this.codigoRota;
+    //   console.log('ROUTE');
+    // });
+    // if (this.codigoRota != '') {
+    //   this.setMensagens();
+    //   this.subscribeEmmiterMensagens();
+    // }
   }
 
   silenciarChat() {

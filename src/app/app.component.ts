@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
     public voiceRecognitionService: VoiceRecognitionService,
     public falarTextoService: FalarTextoService) {
 
-
+      this.messagesService.initializeWebSocketConnection();
+      this.messagesService.activate();
     // this.messagesService.initializeWebSocketConnection();
     this.voiceRecognitionService.init()
     translate.setDefaultLang('pt');

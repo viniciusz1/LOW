@@ -40,7 +40,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       if (this.codigoRota != '' && this.codigoRota != undefined) {
         // this.messagesService.subscriptionChat.unsubscribe();
         this.setMensagens();
-        this.subscribeEmmiterMensagens();
         this.iniciarSubscribeChat();
       }
     });
@@ -82,7 +81,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.codigoRota != undefined) {
+    if (this.messagesService.subscriptionChat != undefined) {
       this.messagesService.subscriptionChat.unsubscribe();
     }
   }
@@ -127,6 +126,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
       this.mostrarConversas = true;
       this.mensagens.push(...novaMensagem);
+      console.log("emitiu")
       setTimeout(() => {
         this.scrollToBottom();
       }, 200);
@@ -187,15 +187,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // this.route.params.subscribe((e) => {
-    //   this.codigoRota = e['codigoDemanda'];
-    //   this.messagesService.codigoRota = this.codigoRota;
-    //   console.log('ROUTE');
-    // });
-    // if (this.codigoRota != '') {
-    //   this.setMensagens();
-    //   this.subscribeEmmiterMensagens();
-    // }
+    this.subscribeEmmiterMensagens();
   }
 
   silenciarChat() {

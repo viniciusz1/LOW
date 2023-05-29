@@ -2,7 +2,7 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { UsuarioService } from './../services/usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Client, Message, StompHeaders } from '@stomp/stompjs';
+import { Client, Message, StompHeaders, StompSubscription } from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import { Mensagem } from '../models/message.model';
 import { map, Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ export class MessagesService {
   constructor(
     private http: HttpClient,
     private usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   public $mensagesEmmiter: EventEmitter<Mensagem> = new EventEmitter();
   public $qtdMensagensNaoLida: EventEmitter<number> = new EventEmitter();
@@ -104,20 +104,31 @@ export class MessagesService {
   //   });
   // }
 
-  public subscriptionChat: any;
+  public subscriptionChat: StompSubscription | undefined;
 
   subscribeChat(codigoRota?: string) {
+    if (this.subscriptionChat != undefined) {
+      this.subscriptionChat.unsubscribe();
+    }
     if (codigoRota) {
       this.codigoRota = codigoRota;
     }
+    try {
+      if (this._client) {
+        this.subscriptionChat = this._client.subscribe(
+          '/demanda/' + this.codigoRota + '/chat',
+          (message: Message) => {
+            this.$mensagesEmmiter.emit(JSON.parse(message.body));
+          },
 
-    if (this._client) {
-      this.subscriptionChat = this._client.subscribe(
-        '/demanda/' + this.codigoRota + '/chat',
-        (message: Message) => {
-          this.$mensagesEmmiter.emit(JSON.parse(message.body));
-        },
-      );
+        );
+      }
+
+    } catch (err) {
+      setTimeout(() => {
+        this.subscribeChat();
+      }, 3000)
+
     }
   }
 
@@ -125,7 +136,7 @@ export class MessagesService {
     return this.http
       .get<any>(
         'http://localhost:8085/low/mensagens/qtd-total-n-lidas/' +
-          this.usuarioService.getCodigoUser()
+        this.usuarioService.getCodigoUser()
       )
       .subscribe({
         next: (e) => {
@@ -139,7 +150,7 @@ export class MessagesService {
     return this.http
       .get<any>(
         'http://localhost:8085/low/mensagens/demandasDiscutidas/' +
-          this.usuarioService.getCodigoUser()
+        this.usuarioService.getCodigoUser()
       )
       .pipe(
         map((demandas: any) => {

@@ -1,5 +1,5 @@
 ;
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -18,7 +18,7 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
   styleUrls: ['./tela-chat.component.scss']
 })
 
-export class TelaChatComponent implements OnInit {
+export class TelaChatComponent implements OnInit, OnDestroy {
   messageService: any;
   items: MenuItem[] = [];
   codigoRota = ""
@@ -33,7 +33,17 @@ export class TelaChatComponent implements OnInit {
     private messagesService: MessagesService,
     private matDialog: MatDialog) {
     this.setarConversas()
-    this.messagesService.initializeWebSocketConnection()
+    this.messagesService.initializeWebSocketConnection();
+    this.messagesService.connect();
+    // this.messagesService.subscribeChat();
+  }
+
+  iniciarSubscribeChat() {
+    this.messagesService.subscribeChat();
+  }
+
+  ngOnDestroy(): void {
+    this.messagesService.disconnect();
   }
 
 
@@ -45,8 +55,8 @@ export class TelaChatComponent implements OnInit {
 
     }
   }
-  exibirQtdMensagensNaoLidas(conversa: any){
-    if(conversa?.qtdMensagensNaoLidas != 0 && conversa?.usuarioAguardando.codigoUsuario != this.usuarioService.getCodigoUser()){
+  exibirQtdMensagensNaoLidas(conversa: any) {
+    if (conversa?.qtdMensagensNaoLidas != 0 && conversa?.usuarioAguardando.codigoUsuario != this.usuarioService.getCodigoUser()) {
       return true
     }
     return false;
@@ -64,20 +74,18 @@ export class TelaChatComponent implements OnInit {
     }, undefined);
   }
   pesquisaFiltro = ''
-  iniciarWebSocketChat() {
-    this.messagesService.initializeWebSocketConnection()
-    this.messagesService.$mensagesEmmiter.subscribe(mensagens => {
-      this.setarConversas()
-      this.mensagens = []
-      for (let i of mensagens) {
-        if ((i.usuarioMensagens) && i.usuarioMensagens.codigoUsuario == this.usuarioService.getCodigoUser()) {
-          i.ladoMensagem = true
-        } else {
-          i.ladoMensagem = false
-        }
+
+  subscribeEmmiterMensagens() {
+    this.messagesService.$mensagesEmmiter.subscribe(mensagem => {
+      if ((mensagem.usuarioMensagens) && mensagem.usuarioMensagens.codigoUsuario == this.usuarioService.getCodigoUser()) {
+        mensagem.ladoMensagem = true
+      } else {
+        mensagem.ladoMensagem = false
+
       }
       this.mostrarConversas = true
-      this.mensagens.push(...mensagens)
+      this.mensagens.push(mensagem)
+      console.log(this.mensagens)
     })
   }
 
@@ -119,9 +127,8 @@ export class TelaChatComponent implements OnInit {
     this.route.params.subscribe(e => {
       this.codigoRota = e['codigoDemanda']
       this.messagesService.codigoRota = this.codigoRota
-      this.iniciarWebSocketChat()
     })
-
+    this.subscribeEmmiterMensagens();
   }
 
   silenciarChat() {

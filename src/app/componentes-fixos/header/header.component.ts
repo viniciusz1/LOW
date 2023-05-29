@@ -28,8 +28,7 @@ export class HeaderComponent implements OnInit {
     private usuarioService: UsuarioService,
     private notificacoesService: NotificacoesService,
     private messagesService: MessagesService) {
-
-    this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: Number) => {
+    this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: number) => {
       this.quantidadeMensagensNaoLidas = qtdMensagensNaoLida;
     })
 
@@ -52,8 +51,8 @@ export class HeaderComponent implements OnInit {
         }
       });
   }
-  quantidadeNotificacoes: Number = 0;
-  quantidadeMensagensNaoLidas: Number = 0;
+  quantidadeNotificacoes: number = 0;
+  quantidadeMensagensNaoLidas: number = 0;
 
 
   versaoSolicitante() {
@@ -89,10 +88,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.activeItem = this.items[0];
     this.iniciarWebSocketNotificationCount();
+    this.messagesService.subscribeToNotificationsMensagens();
+    this.notificacoesService.inscrever();
   }
 
   iniciarWebSocketNotificationCount() {
-    this.notificacoesService.initializeWebSocketConnectionCount()
     this.notificacoesService.$notificationCountEmmiter.subscribe(quantidade => {
       // this.setarNotificacoes()
       this.quantidadeNotificacoes = quantidade;

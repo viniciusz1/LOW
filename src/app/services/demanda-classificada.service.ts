@@ -30,11 +30,7 @@ export class DemandaClassificadaService {
       this.demandaClassificadaForm.value
     );
   }
-
-  resetForm(){
-    this.demandaClassificadaForm.reset();
-  }
-
+  
   get isFormDemandaClassificadaInvalid(){
     return this.demandaClassificadaForm.invalid;
   }

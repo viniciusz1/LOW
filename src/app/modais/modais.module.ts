@@ -22,8 +22,6 @@ import { ModalCriarReuniaoComponent } from './modal-criar-reuniao/modal-criar-re
 import {CalendarModule} from 'primeng/calendar';
 import { ModalCancelamentoReuniaoComponent } from './modal-cancelamento-reuniao/modal-cancelamento-reuniao.component';
 import { SharedModule } from '../shared/shared.module';
-import { ModalDgDocumentosComponent } from './modal-dg-documentos/modal-dg-documentos.component';
-import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -36,7 +34,6 @@ import { FileUploadModule } from 'primeng/fileupload';
     ModalHistoricoComponent,
     ModalCriarReuniaoComponent,
     ModalCancelamentoReuniaoComponent,
-    ModalDgDocumentosComponent,
   ],
   imports: [
     CommonModule,
@@ -54,8 +51,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     CalendarModule,
     ReactiveFormsModule,
     DragDropModule,
-    SharedModule,
-    FileUploadModule
+    SharedModule
   ],
   exports: [
     ModalDemandaDocumentoComponent

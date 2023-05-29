@@ -1,22 +1,2 @@
-<div class="position-fixed div-principal" style="right: 0; top: 33%; margin: 0!important;">
-  <div role="button" *ngIf="!startedRecodAudio" class="estilo-cards" style="top: 33%" (click)="startVoice()">
-    <i class="bi bi-mic" style="color: white"></i>
-  </div>
-
-  <div role="button" *ngIf="startedRecodAudio" class="estilo-cards" style="top: 33%; background-color: red;"
-    (click)="stopVoice()">
-    <i class="bi bi-x-lg" style="color: white"></i>
-  </div>
-  <div role="button" *ngIf="falarTextoService.permitirFala" class="estilo-cards mt-2"
-    style="top: 38.5%; background-color: red;" (click)="pararDeFalar()">
-    <i class="bi bi-volume-off" style="color: white; font-size: 20px;"></i>
-  </div>
-  <div role="button" *ngIf="!falarTextoService.permitirFala" class="estilo-cards mt-2" style="top: 38.5%"
-    (click)="iniciarFala()">
-    <i class="bi bi-volume-mute" style="color: white; font-size: 20px"></i>
-  </div>
-
-  <app-v-libras class="mt-2"></app-v-libras>
-</div>
-
+<app-v-libras></app-v-libras>
 <router-outlet></router-outlet>

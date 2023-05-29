@@ -1,9 +1,9 @@
 <div @fadeAnimation class="bloco px-3 pt-3 low-shadow" >
     <div class="titulo">
-        <h4 falarTexto>{{ "telas.notificacoes.suas-notificacoes" | translate }}</h4>
+        <h4>{{ "telas.notificacoes.suas-notificacoes" | translate }}</h4>
     </div>
     <p-scrollPanel [style]="{width: '100%', height: '50vh'}">
-        <h6 *ngIf="notificacoes.length == 0" falarTexto>{{ "telas.notificacoes.not-found" | translate }}</h6>
+        <h6 *ngIf="notificacoes.length == 0">{{ "telas.notificacoes.not-found" | translate }}</h6>
         <p-timeline [value]="notificacoes">
             <ng-template pTemplate="marker" let-notificacoes>
                 <span *ngIf="notificacoes.tipoNotificacao == 'CRIOU_DEMANDA'" class="custom-marker shadow-2" [style.backgroundColor]="'#00579D'">
@@ -41,7 +41,7 @@
 
             <ng-template pTemplate="content" let-notificacoes>
                 <p-card [header]="notificacoes.tituloDemandaNotificacao" [subheader]="notificacoes.dataNotificacao">
-                    <span falarTexto>{{notificacoes.descricaoNotificacao}}</span>
+                    <span>{{notificacoes.descricaoNotificacao}}</span>
                 </p-card>
             </ng-template>
 

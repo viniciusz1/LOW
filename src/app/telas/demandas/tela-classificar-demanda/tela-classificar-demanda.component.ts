@@ -91,7 +91,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
     return this.demandaClassificadaService.isFormDemandaClassificadaInvalid;
   }
 
-
+  
   constructor(
     private matDialog: MatDialog,
     private demandaClassificadaService: DemandaClassificadaService,
@@ -147,7 +147,5 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.demandaClassificadaService.resetForm();
-  }
+  ngOnInit(): void { }
 }

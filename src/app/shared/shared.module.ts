@@ -8,20 +8,14 @@ import { CommonModule } from '@angular/common';
 import {ScrollPanelModule} from 'primeng/scrollpanel';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
-import { InputFocoDirective } from '../directives/input-foco.directive';
-import { FalarTextoDirective } from '../directives/falar-texto.directive';
 
 
 
 @NgModule({
-  declarations: [
-    InputFocoDirective,
-    FalarTextoDirective
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     ScrollPanelModule,
-
   ],
   exports:[
     ScrollPanelModule,
@@ -29,9 +23,7 @@ import { FalarTextoDirective } from '../directives/falar-texto.directive';
     ButtonModule,
     ConfirmDialogModule,
     TranslateModule,
-    ToastModule,
-    InputFocoDirective,
-    FalarTextoDirective
+    ToastModule
   ]
 })
 export class SharedModule { }

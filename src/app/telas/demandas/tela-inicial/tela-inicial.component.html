@@ -1,24 +1,9 @@
-<div
-  [ngClass]="{ container: isFiltrado }"
-  class="nav my-4 justify-content-center"
->
-  <nav
-    [ngClass]="{ container: !isFiltrado }"
-    class="nav justify-content-between w-100"
-  >
+<div [ngClass]="{ container: isFiltrado }" class="nav my-4 justify-content-center">
+  <nav [ngClass]="{ container: !isFiltrado }" class="nav justify-content-between w-100">
     <div class="d-flex align-items-start" style="overflow: auto">
-      <button
-        joyrideStep="um"
-        [prevTemplate]="prevButton"
-        [nextTemplate]="nextButton"
-        [doneTemplate]="doneButton"
-        [title]="'Criar uma Demanda'"
-        [stepContent]="customContent"
-        [stepContentParams]="{ texto: textoTutorial[0] }"
-        class="btn btn-primary"
-        style="height: 42px"
-        (click)="criarUmaNovaDemanda()"
-      >
+      <button joyrideStep="um" [prevTemplate]="prevButton" [nextTemplate]="nextButton" [doneTemplate]="doneButton"
+        [title]="'Criar uma Demanda'" [stepContent]="customContent" [stepContentParams]="{ texto: textoTutorial[0] }"
+        class="btn btn-primary" style="height: 42px" (click)="criarUmaNovaDemanda()">
         <i class="bi bi-plus" style="font-size: 17px"></i>
         {{ "telas.tela-inicial.b-criar-demanda" | translate }}
       </button>
@@ -40,125 +25,64 @@
       <ng-template #customContent let-texto="texto" style="border-radius: 20px">
         <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
       </ng-template>
-      <joyrideStep
-        joyrideStep="bv"
-        title="Bem Vindo!"
-        text="Agora você terá um tutorial de como o sistema de demandas funciona!"
-        stepPosition="center"
-      >
+      <joyrideStep joyrideStep="bv" title="Bem Vindo!"
+        text="Agora você terá um tutorial de como o sistema de demandas funciona!" stepPosition="center">
       </joyrideStep>
     </div>
-    <div
-      joyrideStep="dois"
-      [title]="'Filtrar Demandas'"
-      [stepContent]="customContent"
-      [stepContentParams]="{ texto: textoTutorial[1] }"
-      class="nav p-1 justify-content-center"
-    >
+    <div joyrideStep="dois" [title]="'Filtrar Demandas'" [stepContent]="customContent"
+      [stepContentParams]="{ texto: textoTutorial[1] }" class="nav p-1 justify-content-center">
       <div *ngIf="showPesquisaEBotaoFiltro" class="d-flex">
-        <button
-          (click)="exportExcel()"
-          class="btn btn-success me-3"
-          *ngIf="isFiltrado"
-          [disabled]="nenhumResultadoEncontrado"
-        >
+        <button (click)="exportExcel()" class="btn btn-success me-3" *ngIf="isFiltrado"
+          [disabled]="nenhumResultadoEncontrado">
           <i class="bi bi-filetype-csv" style="font-size: 17px"></i>
         </button>
         <div>
-          <p-dropdown
-            class="drop"
-            [options]="opcoesOrdenacao"
-            [(ngModel)]="ordenarSelect"
-            placeholder="Ordenar"
-            optionLabel="name"
-            (onChange)="ordenar($event.value)"
-          ></p-dropdown>
+          <p-dropdown class="drop" [options]="opcoesOrdenacao" [(ngModel)]="ordenarSelect" placeholder="Ordenar"
+            optionLabel="name" (onChange)="ordenar($event.value)"></p-dropdown>
         </div>
         <span class="p-input-icon-left ms-3">
           <i class="pi pi-search"></i>
-          <input
-            type="text"
-            class="border"
-            inputEmFoco
-            pInputText
-            placeholder="Pesquisar Demanda"
-            [(ngModel)]="pesquisaDemanda"
-            (ngModelChange)="mudouCampodePesquisa()"
-          />
+          <input type="text" class="border" pInputText placeholder="Pesquisar Demanda" [(ngModel)]="pesquisaDemanda"
+            (ngModelChange)="mudouCampodePesquisa()" />
         </span>
 
-        <button
-          *ngIf="showPesquisaEBotaoFiltro && !tipoRascunho"
-          class="btn btn-primary ms-3"
-          (click)="mudarStatusFiltro()"
-          style="width: 150px"
-          falarTexto
-        >
+        <button *ngIf="showPesquisaEBotaoFiltro && !tipoRascunho" class="btn btn-primary ms-3"
+          (click)="mudarStatusFiltro()" style="width: 150px">
           {{ "telas.tela-inicial.filtrar-mais" | translate }}
           <i class="bi bi-chevron-double-down"></i>
         </button>
       </div>
-      <app-filtro-demanda
-        @fadeAnimation
-        *ngIf="showFiltro"
-        (filtroAcionado)="pesquisarDemandas(undefined)"
-        (closeFiltro)="mudarStatusFiltro()"
-        class="me-3"
-        (exportarExcel)="exportExcel()"
-      >
+      <app-filtro-demanda @fadeAnimation *ngIf="showFiltro" (filtroAcionado)="pesquisarDemandas(undefined)"
+        (closeFiltro)="mudarStatusFiltro()" class="me-3" (exportarExcel)="exportExcel()">
       </app-filtro-demanda>
     </div>
     <!-- Trocar exibição de lista para card e vice-versa -->
-    <div
-      *ngIf="!tipoRascunho"
-      [ngClass]="
+    <div *ngIf="!tipoRascunho" [ngClass]="
         isFiltrado ? 'justify-content-between' : 'justify-content-end container'
-      "
-      style="overflow: auto"
-      class="my-3 d-flex w-100"
-    >
-      <i
-        *ngIf="isFiltrado"
-        (click)="carregarDemandasIniciais()"
-        class="bi bi-arrow-left"
-        style="font-size: 25px; cursor: pointer"
-      ></i>
+      " style="overflow: auto" class="my-3 d-flex w-100">
+      <i *ngIf="isFiltrado" (click)="carregarDemandasIniciais()" class="bi bi-arrow-left"
+        style="font-size: 25px; cursor: pointer"></i>
       <div class="d-flex">
-        <div
-          joyrideStep="tres"
-          [title]="'Trocar Exibição'"
-          [stepContent]="customContent"
-          [stepContentParams]="{ texto: textoTutorial[2] }"
-          [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
-          (click)="changeToList()"
-          class="change-type-list me-2"
-        >
+        <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
+          [stepContentParams]="{ texto: textoTutorial[2] }" [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
+          (click)="changeToList()" class="change-type-list me-2">
           <i class="bi bi-list" style="font-size: 15px"></i>
         </div>
-        <div
-          [ngClass]="{ 'color-actived': tipoExibicaoDemanda }"
-          (click)="changeToCard()"
-          class="change-type-list"
-        >
+        <div [ngClass]="{ 'color-actived': tipoExibicaoDemanda }" (click)="changeToCard()" class="change-type-list">
           <i class="bi bi-border-all" style="font-size: 15px"> </i>
         </div>
       </div>
     </div>
   </nav>
   <!-- sidebar -->
-  <app-sidebar-demanda
-    [style.left.px]="showSidebar"
-    (clicouNaSeta)="moveSidebar()"
-    (clicouEmUmStatus)="
+  <app-sidebar-demanda [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()" (clicouEmUmStatus)="
       pesquisarDemandas({ status: $event, pesquisaCampo: undefined })
-    "
-    style="
+    " style="
       position: fixed;
       z-index: 2;
       transition: left 0.3s ease 0s;
       top: 43vh;
-    "
-  ></app-sidebar-demanda>
+    "></app-sidebar-demanda>
   <div @fadeAnimation *ngIf="!tipoExibicaoDemanda">
     <!-- Parte Não Filtrada em Lista -->
     <div class="" *ngIf="!isFiltrado">
@@ -169,7 +93,6 @@
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
           <div
-            falarTexto
             class="me-3"
             style="align-self: flex-end; cursor: pointer"
             (click)="
@@ -189,17 +112,13 @@
                 nivelAcessoUsuario == 'Analista' ||
                 nivelAcessoUsuario == 'GestorTI'
               "
-              falarTexto
               >({{ qtdDemandasStatus[i] }})</span
             >
           </div>
         </div>
-        <div
-          class="d-flex justify-content-center align-items-center flex-column my-2"
-          style="margin-left: auto; margin-right: auto"
-        >
-          <app-list-demanda
-            *ngFor="
+        <div class="d-flex justify-content-center align-items-center flex-column my-2"
+          style="margin-left: auto; margin-right: auto">
+          <app-list-demanda *ngFor="
               let demanda of listaDemandas
                 | filtrarDemandaStatus : linha.titulo
                 | slice : 0 : 5
@@ -209,44 +128,28 @@
             (irParaChat)="irParaChat($event, demanda)"
             (modalHistorico)="openModalHistorico($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-            (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-            class="mb-2"
-          >
+            (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)" class="mb-2">
           </app-list-demanda>
           <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
-            <div
-              class="d-flex justify-content-center align-items-center flex-column"
-            >
-              <app-list-demanda
-                *ngFor="
+            <div class="d-flex justify-content-center align-items-center flex-column">
+              <app-list-demanda *ngFor="
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                     | slice : 5
                 "
                 (irParaChat)="irParaChat($event, demanda)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-                (modalHistorico)="openModalHistorico($event)"
-                (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-                [dadosDemanda]="demanda"
-                class="mb-2"
-              >
+                (modalHistorico)="openModalHistorico($event)" (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
+                [dadosDemanda]="demanda" class="mb-2">
               </app-list-demanda>
             </div>
           </div>
           <!-- Bloco para expandir -->
-          <div
-            *ngIf="listaDemandas.length > 0"
-            type="button"
-            (click)="collapse.toggle()"
+          <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
             class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
-            style="width: 30%; height: 30px"
-          >
-            <i
-              class="bi bi-chevron-down text-light"
-              [attr.aria-expanded]="!isCollapsed[i]"
-              aria-controls="collapseExample"
-              [ngClass]="!isCollapsed[i] ? 'inverte' : 'naoinverte'"
-            >
+            style="width: 30%; height: 30px">
+            <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed[i]"
+              aria-controls="collapseExample" [ngClass]="!isCollapsed[i] ? 'inverte' : 'naoinverte'">
             </i>
           </div>
         </div>
@@ -256,14 +159,9 @@
     <div *ngIf="isFiltrado">
       <div style="padding: 10px; margin-left: 6px"></div>
       <div class="container d-flex flex-column align-items-center">
-        <app-list-demanda
-          (irParaChat)="irParaChat($event, demanda)"
-          (modalHistorico)="openModalHistorico($event)"
-          *ngFor="let demanda of listaDemandas"
-          [dadosDemanda]="demanda"
-          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-          class="mb-2"
-        >
+        <app-list-demanda (irParaChat)="irParaChat($event, demanda)" (modalHistorico)="openModalHistorico($event)"
+          *ngFor="let demanda of listaDemandas" [dadosDemanda]="demanda"
+          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)" class="mb-2">
         </app-list-demanda>
       </div>
     </div>
@@ -296,11 +194,10 @@
       >
         <div class="ms-3 title-demanda" for="status">
           <div style="width: 20%">
-            <h5 falarTexto>{{ listaTituloNaoFiltrado[0].titulo }}</h5>
+            <h5>{{ listaTituloNaoFiltrado[0].titulo }}</h5>
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
           <div
-            falarTexto
             *ngIf="listaTituloNaoFiltrado[0].status != 'DRAFT'"
             class="me-3"
             style="align-self: flex-end; cursor: pointer"
@@ -356,15 +253,13 @@
       <div class="my-4 row justify-content-center align-items-center">
         <div class="ms-3 title-demanda" for="status">
           <div style="width: 30%">
-            <h5
-            falarTexto>{{ listaTituloNaoFiltrado[1].titulo }}</h5>
+            <h5>{{ listaTituloNaoFiltrado[1].titulo }}</h5>
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
           <div
             class="me-3"
             style="align-self: flex-end; cursor: pointer"
             (click)="pesquisarDemandas(departamentoUsuario)"
-            falarTexto
           >
             {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
@@ -393,7 +288,6 @@
           class="d-flex align-items-end justify-content-end"
           role="button"
           (click)="pesquisarDemandas(departamentoUsuario)"
-          falarTexto
           >{{ "telas.tela-inicial.ver-mais" | translate }}</a
         >
       </div>
@@ -420,59 +314,36 @@
         <div class="my-4 tamanho-container">
           <div class="ms-3 title-demanda" for="status">
             <div style="width: 20%">
-              <h5
-              falarTexto>{{ linha.titulo }}</h5>
+              <h5>{{ linha.titulo }}</h5>
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
-            <div
-              *ngIf="linha.status != 'DRAFT'"
-              class="me-3"
-              style="align-self: flex-end; cursor: pointer"
-              (click)="
+            <div *ngIf="linha.status != 'DRAFT'" class="me-3" style="align-self: flex-end; cursor: pointer" (click)="
                 pesquisarDemandas({
                   status: linha.status,
                   pesquisaCampo: undefined
                 })
               "
-              falarTexto
             >
               {{ "telas.tela-inicial.ver-mais" | translate }} ({{
                 qtdDemandasStatus[i]
               }})
             </div>
           </div>
-          <div
-            class="d-flex position-relative"
-            #tamanhoDaFila
-            style="width: 100%"
-          >
-            <div
-              [style.left.px]="positionListCards[i]"
-              [id]="'filaCompleta' + i"
-              class="div-cards d-flex position-relative transition-cards"
-            >
-              <app-card-demanda
-                *ngFor="
+          <div class="d-flex position-relative" #tamanhoDaFila style="width: 100%">
+            <div [style.left.px]="positionListCards[i]" [id]="'filaCompleta' + i"
+              class="div-cards d-flex position-relative transition-cards">
+              <app-card-demanda *ngFor="
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
-                "
-                (clicouEmExcluir)="carregarDemandasIniciais()"
-                [dadosDemanda]="demanda"
-                (verDocumentoProposta)="openModalDemandaDocumento($event)"
-                (irParaChat)="irParaChat($event, demanda)"
-                (modalHistorico)="openModalHistorico($event)"
-                (avancarStatusDemanda)="avancarStatusDemanda($event)"
+                " (clicouEmExcluir)="carregarDemandasIniciais()" [dadosDemanda]="demanda"
+                (verDocumentoProposta)="openModalDemandaDocumento($event)" (irParaChat)="irParaChat($event, demanda)"
+                (modalHistorico)="openModalHistorico($event)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
                 (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-                (verDocumentoEmAta)="openModalAtaDocumento()"
-              ></app-card-demanda>
+                (verDocumentoEmAta)="openModalAtaDocumento()"></app-card-demanda>
             </div>
-            <div
-              *ngIf="positionListCards[i] != 0"
-              class="left-arrow alinhacao"
-              (click)="changeLeft(i)"
-            >
+            <div *ngIf="positionListCards[i] != 0" class="left-arrow alinhacao" (click)="changeLeft(i)">
               <i style="font-size: 25px" class="bi bi-chevron-left"></i>
             </div>
             <div class="right-arrow alinhacao" (click)="changeRight(i)">
@@ -497,19 +368,13 @@
     <div style="padding: 10px; margin-left: 6px"></div>
     <div class="container">
       <div class="row" *ngIf="!tipoRascunho">
-        <app-card-demanda
-          *ngFor="let demanda of listaDemandas; let i = index"
-          [dadosDemanda]="demanda"
+        <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemanda]="demanda"
           (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-          (verDocumentoProposta)="openModalDemandaDocumento($event)"
-          (avancarStatusDemanda)="avancarStatusDemanda($event)"
-          [mudarTamanho]="'100%'"
-          (irParaChat)="irParaChat($event, demanda)"
-          (modalHistorico)="openModalHistorico($event)"
-          (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-          (verDocumentoEmAta)="openModalAtaDocumento()"
-          class="col-lg-6 col-xl-4 mb-3"
-        >
+          (verDocumentoProposta)="openModalDemandaDocumento($event)" (clicouEmExcluir)="excluirDemandaRascunho(i)"
+          (avancarStatusDemanda)="avancarStatusDemanda($event)" [mudarTamanho]="'100%'"
+          (irParaChat)="irParaChat($event, demanda)" (modalHistorico)="openModalHistorico($event)"
+          (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (verDocumentoEmAta)="openModalAtaDocumento()"
+          class="col-lg-6 col-xl-4 mb-3">
         </app-card-demanda>
       </div>
     </div>
@@ -527,29 +392,18 @@
         (onPageChange)="paginate($event)"
       ></p-paginator>
     </div>
-    <div
-      *ngIf="nenhumResultadoEncontrado == true"
-      class="d-flex justify-content-center mt-3 mb-4"
-    >
+    <div *ngIf="nenhumResultadoEncontrado == true" class="d-flex justify-content-center mt-3 mb-4">
       <div style="display: grid; align-items: center; justify-content: center">
-        <div
-          style="display: flex; align-items: center; justify-content: center"
-        >
-          <img
-            style="width: 14vw"
-            src="/assets/images/robo-not-found.png"
-            alt="image"
-          />
+        <div style="display: flex; align-items: center; justify-content: center">
+          <img style="width: 14vw" src="/assets/images/robo-not-found.png" alt="image" />
         </div>
         <div>
-          <h5 style="font-family: unset; color: grey; text-align: center"
-          falarTexto>
+          <h5 style="font-family: unset; color: grey; text-align: center">
             {{ "telas.tela-inicial.sinto-muito" | translate }}
           </h5>
         </div>
         <div>
-          <h5 style="font-family: unset; color: grey"
-          falarTexto>
+          <h5 style="font-family: unset; color: grey">
             {{ "telas.tela-inicial.demanda-nao-encontrada" | translate }}
           </h5>
         </div>
@@ -559,40 +413,30 @@
   <div>
     <p-confirmDialog icon="pi pi-exclamation-triangle" #cd>
       <ng-template pTemplate="header">
-        <h4
-        falarTexto>{{ cabecalhoMensagemDeConfirmacao }}</h4>
+        <h4>{{ cabecalhoMensagemDeConfirmacao }}</h4>
       </ng-template>
       <ng-template pTemplate="footer">
         <button
           type="button"
           (click)="cd.reject()"
           class="btn btn-outline-primary"
-          falarTexto
         >
           <i class="pi pi-times me-2"></i>
           {{ "telas.tela-inicial.modal-b-nao" | translate }}
         </button>
-        <button type="button" class="btn btn-primary" (click)="cd.accept()"
-        falarTexto>
+        <button type="button" class="btn btn-primary" (click)="cd.accept()">
           <i class="pi pi-check me-2"></i>
           {{ "telas.tela-inicial.modal-b-sim" | translate }}
         </button>
-      </ng-template></p-confirmDialog
-    >
+      </ng-template></p-confirmDialog>
   </div>
   <div>
-    <p-confirmDialog
-      icon="pi pi-exclamation-triangle"
-      key="motivoReprovacao"
-      #bt
-      [style]="{ width: '40vw' }"
-    >
+    <p-confirmDialog icon="pi pi-exclamation-triangle" key="motivoReprovacao" #bt [style]="{ width: '40vw' }">
       <ng-template pTemplate="footer">
         <button
           type="button"
           class="btn btn-outline-primary"
           (click)="bt.accept()"
-          falarTexto
         >
           <i class="pi pi-sync me-2"></i>
           {{ "telas.tela-inicial.modal-b-reformular" | translate }}
@@ -601,26 +445,16 @@
           type="button"
           class="btn btn-outline-primary"
           (click)="bt.reject()"
-          falarTexto
         >
           <i class="pi pi-check me-2"></i>
           {{ "telas.tela-inicial.modal-b-ok" | translate }}
         </button>
-      </ng-template></p-confirmDialog
-    >
+      </ng-template></p-confirmDialog>
   </div>
 </div>
-<div
-  *ngIf="divScrollCircle"
-  style="
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 45vh;
-  "
->
+<div *ngIf="divScrollCircle" style="display: flex; justify-content: center; align-items: center; height: 45vh;">
   <mat-spinner *ngIf="!demandasVazias" [diameter]="50" class=""></mat-spinner>
-  <span *ngIf="demandasVazias" style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" falarTexto>{{ "telas.tela-inicial.nao-demandas" | translate }}</span>
+  <span *ngIf="demandasVazias" style="font-weight: 600; font-size: 1.4rem; color: #6c757d;">{{ "telas.tela-inicial.nao-demandas" | translate }}</span>
 </div>
 
 <p-toast></p-toast>

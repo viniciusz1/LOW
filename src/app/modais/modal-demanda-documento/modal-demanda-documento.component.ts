@@ -29,16 +29,13 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private matDialog: MatDialog,
     private messageService: MessageService,
     private usuarioService: UsuarioService) {
-    console.log(data)
+      console.log(data)
     this.dadosDemanda = data
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe({
         next: e => {
           if ((e.usuario.nivelAcessoUsuario == 'GestorTI' || e.usuario.nivelAcessoUsuario == 'GerenteNegocio') && this.dadosDemanda?.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
-
-            if (!this.dadosDemanda.isHistorico) {
-              this.showbotoesAprovarDemanda = true
-            }
+            this.showbotoesAprovarDemanda = true
           }
           if (e.usuario.nivelAcessoUsuario == 'Solicitante') {
             this.showTimeline = true
@@ -67,15 +64,15 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   configureTimeline() {
     if (this.dadosDemanda?.statusDemanda) {
       let ordinalStatus = Object.keys(StatusDemanda).indexOf(this.dadosDemanda.statusDemanda);
-      if (ordinalStatus == 0) {
+      if(ordinalStatus == 0){
         this.timeline[0].color == "#00579D"
-      } else if (ordinalStatus > 0 && ordinalStatus < 3) {
-        this.timeline[0].color == "#00579D"
-        this.timeline[1].color == "#00579D"
-      } else if (ordinalStatus > 0 && ordinalStatus < 3) {
+      }else if(ordinalStatus > 0 && ordinalStatus < 3){
         this.timeline[0].color == "#00579D"
         this.timeline[1].color == "#00579D"
-      } else if (ordinalStatus > 0 && ordinalStatus < 3) {
+      }else if(ordinalStatus > 0 && ordinalStatus < 3){
+        this.timeline[0].color == "#00579D"
+        this.timeline[1].color == "#00579D"
+      }else if(ordinalStatus > 0 && ordinalStatus < 3){
         this.timeline[0].color == "#00579D"
         this.timeline[1].color == "#00579D"
       }
@@ -117,7 +114,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     );
   }
 
-  timeline: { status: string, date: string, icon: string, color: string, fontWeight: string }[] = [
+  timeline: {status: string, date: string, icon: string, color: string, fontWeight: string}[] = [
     {
       status: 'Reserva',
       date: '15/10/2020 10:30',

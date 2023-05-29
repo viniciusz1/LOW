@@ -15,7 +15,6 @@ import {CascadeSelectModule} from 'primeng/cascadeselect';
 
 import 'web-component-essentials';
 import { JoyrideModule } from 'ngx-joyride';
-import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -34,8 +33,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     SharedModule,
     DropdownModule,
     JoyrideModule.forRoot(),
-    PipesModule,
-    FileUploadModule
+    PipesModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

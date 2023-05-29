@@ -1,22 +1,22 @@
 <div style="padding: 8px; background: white; width: 50vw;">
     <div>
         <div class="d-flex justify-content-between">
-            <span class="h3" falarTexto>{{dadosDemanda?.tituloDemanda}} - {{dadosDemanda?.codigoDemanda}}
+            <span class="h3">{{dadosDemanda?.tituloDemanda}} - {{dadosDemanda?.codigoDemanda}}
                 <hr style="margin: 0; margin-bottom: 10px; width: 150%;">
             </span>
             <i class="bi bi-x" role="button" (click)="dialogRef.close()"></i>
         </div>
     </div>
     <div class="d-flex flex-column">
-        <label falarTexto for="subtitulo" style="margin-bottom: 0.5vh;">
+        <label for="subtitulo" style="margin-bottom: 0.5vh;">
             {{ "modais.modal-reprovacao-demanda.motivo-reprovacao" | translate }}
         </label>
-        <textarea inputEmFoco pInputTextarea style="height: 300px;" [(ngModel)]="motivoReprovacao"></textarea>
+        <textarea pInputTextarea style="height: 300px;" [(ngModel)]="motivoReprovacao"></textarea>
 
     </div>
     <div class="d-flex justify-content-end mt-3">
-        <button  class="btn btn-outline-primary me-3" (click)="dialogRef.close()" falarTexto>{{ "modais.modal-reprovacao-demanda.b-cancelar" | translate }}</button>
-        <button routerLink="/tela-inicial" class="btn btn-primary" (click)="reprovarDemanda()" falarTexto>{{ "modais.modal-reprovacao-demanda.b-reprovar" | translate }}</button>
+        <button  class="btn btn-outline-primary me-3" (click)="dialogRef.close()">{{ "modais.modal-reprovacao-demanda.b-cancelar" | translate }}</button>
+        <button routerLink="/tela-inicial" class="btn btn-primary" (click)="reprovarDemanda()">{{ "modais.modal-reprovacao-demanda.b-reprovar" | translate }}</button>
     </div>
 </div>
 <p-toast></p-toast>

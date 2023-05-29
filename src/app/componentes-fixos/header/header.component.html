@@ -62,16 +62,21 @@
             >{{ "componentes-fixos.header.reunioes" | translate }}</a
           >
         </li>
-        <li class="nav-item">
-          <a
-            falarTexto
-            role="button"
-            class="nav-link"
-            routerLink="/tela-inicial"
-            [routerLinkActive]="'active'"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >{{ "componentes-fixos.header.demandas" | translate }}</a
-          >
+        <li role="button" class="nav-item" (click)="mostrar_modal = !mostrar_modal" *ngIf="!inicial" joyrideStep="seis"
+            [title]="'Notificações'" [stepContentParams]="{'texto': textoTutorial[5]}"
+            style="overflow: auto;">
+              <a class="nav-link">
+                <i class="bi bi-bell icon"></i>
+                <span *ngIf="this.quantidadeNotificacoes != 0" class="badge badge-danger small-badge">{{this.quantidadeNotificacoes}}</span>
+              </a>
+            <app-notificacoes class="" *ngIf="mostrar_modal"></app-notificacoes>
+        </li>
+        <li role="button" class="nav-item" [matMenuTriggerFor]="idiomaMenu" joyrideStep="cinco" [title]="'Idiomas'"
+           [stepContentParams]="{'texto': textoTutorial[4]}" style="overflow: auto;">
+            <a class="nav-link"><img style="width: 30px; margin-right: 10px"
+                    [src]="linkImagemPais">
+                <i class="bi bi-chevron-down">
+                </i></a>
         </li>
       </div>
       <li

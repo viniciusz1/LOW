@@ -29,17 +29,18 @@ export class NotificacoesService {
 
 
 
-  inscrever(codigoRota?: string) {
-    // this.getCountNotifications().subscribe(e => {
-    //   console.log("COUNT: "+e)
-    //   this.$notificationCountEmmiter.emit(e);
-    // })
+  inscrever() {
+    this.getCountNotifications().subscribe(e => {
+      this.$notificationCountEmmiter.emit(e);
+    })
     // this.setNotificacoes();
     if (this.messagesService.client) {
       try {
         this.messagesService.client.subscribe('/usuario', (message: any) => {
           if (message.body) {
-            console.log(message.body)
+            this.getCountNotifications().subscribe(e => {
+              this.$notificationCountEmmiter.emit(e);
+            })
             // this.setNotificacoes()
           }
         });
@@ -56,32 +57,9 @@ export class NotificacoesService {
       this.$notificationEmmiter.emit(e);
     })
     this.getCountNotifications().subscribe(e => {
-      console.log("COUNT: "+e)
       this.$notificationCountEmmiter.emit(e);
     })
   }
-
-  // inscreverCount(codigoRota?: string) {
-  //   this.getCountNotifications().subscribe(e => {
-  //     this.$notificationCountEmmiter.emit(e);
-  //   })
-
-  //   if (this.messagesService.client) {
-  //     try {
-  //       this.messagesService.client.subscribe('/usuario', (message: any) => {
-  //         if (message.body) {
-  //           this.getCountNotifications().subscribe(e => {
-  //             this.$notificationCountEmmiter.emit(e);
-  //           })
-  //         }
-  //       });
-  //     } catch (err) {
-  //       setTimeout(() => {
-  //         this.inscreverCount();
-  //       }, 3000)
-  //     }
-  //   }
-  // }
 
   getNotifications() {
     return this.http.get<Notificacao[]>(path + 'notificacao')

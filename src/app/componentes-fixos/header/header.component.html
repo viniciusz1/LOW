@@ -36,8 +36,11 @@
         <li role="button" class="nav-item" (click)="mostrar_modal = !mostrar_modal" *ngIf="!inicial" joyrideStep="seis"
             [title]="'Notificações'" [stepContent]="customContent" [stepContentParams]="{'texto': textoTutorial[5]}"
             style="overflow: auto;">
-            <a class="nav-link"><i class="bi bi-bell icon"></i></a>
-            <app-notificacoes *ngIf="mostrar_modal"></app-notificacoes>
+              <a class="nav-link">
+                <i class="bi bi-bell icon"></i>
+                <span *ngIf="this.quantidadeNotificacoes != 0" class="badge badge-danger small-badge">{{this.quantidadeNotificacoes}}</span>
+              </a>
+            <app-notificacoes class="" *ngIf="mostrar_modal"></app-notificacoes>
         </li>
         <li role="button" class="nav-item" [matMenuTriggerFor]="idiomaMenu" joyrideStep="cinco" [title]="'Idiomas'"
             [stepContent]="customContent" [stepContentParams]="{'texto': textoTutorial[4]}" style="overflow: auto;">

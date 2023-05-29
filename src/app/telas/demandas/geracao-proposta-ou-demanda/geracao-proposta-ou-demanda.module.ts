@@ -26,6 +26,7 @@ import { TimelineModule } from 'primeng/timeline';
 import {AccordionModule} from 'primeng/accordion';
 import {ChipsModule} from 'primeng/chips';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { InputFocoDirective } from 'src/app/directives/input-foco.directive';
 
 
 
@@ -34,7 +35,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   declarations: [
     TelaCorridaComponent,
     ParteDemandaComponent,
-    ParteReuniaoComponent
+    ParteReuniaoComponent,
   ],
   imports: [
     CommonModule,
@@ -67,7 +68,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
         background_color: 'Background Color',
 
         // popups, forms, others...
-        
+
         url: 'URL',
         text: 'Text',
         openInNewTab: 'Open in new tab',

@@ -51,7 +51,8 @@ export class CardDemandaComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
-    private messageService: MessageService) { }
+    private messageService: MessageService) {
+     }
 
   statusPermitido() {
     if (
@@ -66,10 +67,12 @@ export class CardDemandaComponent implements OnInit {
     return false;
   }
   exibirIniciarChat() {
+
     if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()) {
       return true;
-    }
+    }  
     else if (this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista) {
+      
       if (this.dadosDemanda.analista == undefined) {
         return true;
       }
@@ -105,7 +108,7 @@ export class CardDemandaComponent implements OnInit {
   }
   abrirModalHistorico() {
     console.log("Clicou no modal");
-    
+
     this.modalHistorico.emit(this.dadosDemanda.codigoDemanda)
   }
 

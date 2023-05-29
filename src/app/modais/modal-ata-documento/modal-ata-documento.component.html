@@ -5,14 +5,14 @@
   <img style="width: 60px;"
         src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt=""></p>
 <mat-dialog-content class="mat-typography">
-    <h3 mat-dialog-title class="d-flex justify-content-center"><span><b>
+    <h3 falarTexto mat-dialog-title class="d-flex justify-content-center"><span><b>
                 {{ "documento-pdf.ata-reuniao-comissao-processos" | translate }}
             </b></span>
     </h3>
     <p>
-        <span><b>{{ "documento-pdf.ata-n" | translate }}</b>  {{reuniao?.codigoReuniao}}/{{reuniao?.dataReuniao | date:'YYYY'}}</span>
+        <span falarTexto><b>{{ "documento-pdf.ata-n" | translate }}</b>  {{reuniao?.codigoReuniao}}/{{reuniao?.dataReuniao | date:'YYYY'}}</span>
         <br>
-        <span><b>{{ "documento-pdf.data" | translate }}</b> {{reuniao?.dataReuniao | date:'dd/MM/YYYY'}}</span>
+        <span falarTexto><b>{{ "documento-pdf.data" | translate }}</b> {{reuniao?.dataReuniao | date:'dd/MM/YYYY'}}</span>
     </p>
 
     <div *ngFor="let proposta of reuniao?.propostasReuniao; let i = index">
@@ -20,7 +20,7 @@
             <hr *ngIf="mostrarHr(i, tipoAta)">
             <app-modal-demanda-documento [documentoEmAta]="true" [dadosDemanda]="proposta"></app-modal-demanda-documento> -->
 
-            <p>
+            <p falarTexto>
                 <b>{{ "documento-pdf.parecer-comissao" | translate }}</b> {{proposta.parecerComissaoProposta}}<br>
                 <b>{{ "documento-pdf.decisao" | translate }}</b> {{proposta.ultimaDecisaoComissao}}
             </p>
@@ -32,5 +32,5 @@
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{ "documento-pdf.b-fechar" | translate }}</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial falarTexto>{{ "documento-pdf.b-fechar" | translate }}</button>
 </mat-dialog-actions>

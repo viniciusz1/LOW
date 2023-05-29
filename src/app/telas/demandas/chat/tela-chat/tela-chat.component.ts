@@ -32,8 +32,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     private messagesService: MessagesService,
     private matDialog: MatDialog
   ) {
-    console.log('Rodou construtor   ');
-
     this.setarConversas();
     this.route.params.subscribe((e) => {
       this.codigoRota = e['codigoDemanda'];
@@ -44,28 +42,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
         this.iniciarSubscribeChat();
       }
     });
-    // this.initializeChat();
   }
-
-  // async initializeChat() {
-  //   await this.waitForWebSocketConnection();
-  //   if (this.codigoRota != '') {
-  //     this.setMensagens();
-  //     this.subscribeEmmiterMensagens();
-  //     this.iniciarSubscribeChat();
-  //   }
-  // }
-
-  // waitForWebSocketConnection(): Promise<void> {
-  //   return new Promise((resolve) => {
-  //     const intervalId = setInterval(() => {
-  //       if (this.messagesService.client?.active) {
-  //         clearInterval(intervalId);
-  //         resolve();
-  //       }
-  //     }, 100); // Verifica a cada 100ms se o WebSocket está ativo
-  //   });
-  // }
 
   setMensagens() {
     this.messagesService
@@ -79,6 +56,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   iniciarSubscribeChat() {
     this.messagesService.subscribeChat();
+    this.messagesService.subscribeVisto();
   }
 
   ngOnDestroy(): void {
@@ -124,6 +102,12 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   subscribeEmmiterMensagens() {
     this.messagesService.$mensagesEmmiter.subscribe((mensagem) => {
+      if (mensagem.usuarioMensagens?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+        this.messagesService.client?.publish({
+          destination: '/low/visto/' + this.codigoRota, body: JSON.stringify({ textoMensagens: "agora vai" })
+        })
+      }
+
       let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
       this.mostrarConversas = true;
       this.mensagens.push(...novaMensagem);

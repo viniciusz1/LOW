@@ -16,7 +16,7 @@ export class NotificacoesComponent implements OnInit {
     notificacoes: Notificacao[] = []
 
     ngOnInit() {
-      this.subscribeNotification();
+      // this.subscribeNotification();
       this.setarNotificacoes();
     }
 
@@ -27,13 +27,13 @@ export class NotificacoesComponent implements OnInit {
       })
     }
 
-    subscribeNotification() {
-      this.notificacoesService.$notificationEmmiter.subscribe(notificacoes => {
-        // this.setarNotificacoes()
-        this.notificacoes = []
-        this.notificacoes.push(...notificacoes)
-        this.notificacoes = this.notificacoes.reverse();
-      })
-    }
+    // subscribeNotification() {
+    //   this.notificacoesService.$notificationEmmiter.subscribe(notificacoes => {
+    //     // this.setarNotificacoes()
+    //     this.notificacoes = []
+    //     this.notificacoes.push(...notificacoes)
+    //     this.notificacoes = this.notificacoes.reverse();
+    //   })
+    // }
 }
 

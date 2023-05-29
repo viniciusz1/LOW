@@ -96,7 +96,6 @@ export class HeaderComponent implements OnInit {
     this.notificacoesService.$notificationCountEmmiter.subscribe(quantidade => {
       // this.setarNotificacoes()
       this.quantidadeNotificacoes = quantidade;
-      console.log(quantidade)
     })
   }
 }

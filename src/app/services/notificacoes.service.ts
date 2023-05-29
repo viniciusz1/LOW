@@ -30,16 +30,18 @@ export class NotificacoesService {
 
 
   inscrever(codigoRota?: string) {
-    // this.getCountNotifications().subscribe(e => {
-    //   console.log("COUNT: "+e)
-    //   this.$notificationCountEmmiter.emit(e);
-    // })
+    this.getCountNotifications().subscribe(e => {
+      this.$notificationCountEmmiter.emit(e);
+    })
     // this.setNotificacoes();
     if (this.messagesService.client) {
       try {
         this.messagesService.client.subscribe('/usuario', (message: any) => {
           if (message.body) {
-            console.log(message.body)
+            this.getCountNotifications().subscribe(e => {
+              console.log("COUNT: "+e)
+              this.$notificationCountEmmiter.emit(e);
+            })
             // this.setNotificacoes()
           }
         });

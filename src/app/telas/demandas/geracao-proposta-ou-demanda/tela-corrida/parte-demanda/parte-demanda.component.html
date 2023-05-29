@@ -260,9 +260,9 @@
                 (onChange)="mudouMoeda($event, 1)"
                 [options]="opcoesDeMoeda"
                 formControlName="moedaBeneficio"
-                placeholder="Moeda"
                 optionLabel="name"
                 optionValue="value"
+                [(ngModel)]="moedaSelecionada"
               ></p-dropdown>
             </div>
             <div class="situacao-atual" style="display: grid" id="item-1-2">
@@ -327,10 +327,10 @@
                 <p-dropdown
                   (onChange)="mudouMoeda($event, 2)"
                   [options]="opcoesDeMoeda"
-                  placeholder="Moeda"
                   formControlName="moedaBeneficio"
                   optionLabel="name"
                   optionValue="value"
+                  [(ngModel)]="moedaSelecionada"
                 ></p-dropdown>
               </div>
             </div>

@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
     private usuarioService: UsuarioService,
     private notificacoesService: NotificacoesService,
     private messagesService: MessagesService) {
+      
     this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: number) => {
       this.quantidadeMensagensNaoLidas = qtdMensagensNaoLida;
     })
@@ -87,12 +88,12 @@ export class HeaderComponent implements OnInit {
   //Função que é executada quando o componente inicia.
   ngOnInit() {
     this.activeItem = this.items[0];
-    this.iniciarWebSocketNotificationCount();
+    this.subscribeNotificationCount();
     this.messagesService.subscribeToNotificationsMensagens();
     this.notificacoesService.inscrever();
   }
 
-  iniciarWebSocketNotificationCount() {
+  subscribeNotificationCount() {
     this.notificacoesService.$notificationCountEmmiter.subscribe(quantidade => {
       // this.setarNotificacoes()
       this.quantidadeNotificacoes = quantidade;

@@ -166,8 +166,6 @@ export class MessagesService {
       )
       .pipe(
         map((demandas: any) => {
-          console.log(demandas);
-          let qtdMensagensNaoLidas = 0;
           for (let demanda of demandas.demandas) {
             let infoExtras = demandas.infoCard.find(
               (e: { codigoDemanda: any }) =>
@@ -175,12 +173,9 @@ export class MessagesService {
             );
             demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem;
             demanda.qtdMensagensNaoLidas = infoExtras.qtdMensagensNaoLidas;
-            qtdMensagensNaoLidas += demanda.qtdMensagensNaoLidas;
             demanda.usuarioAguardando = infoExtras.usuarioAguardando;
           }
-          if (qtdMensagensNaoLidas > 0) {
-            this.$qtdMensagensNaoLida.emit(qtdMensagensNaoLidas);
-          }
+
 
           const mapaDemanda = new Map();
           demandas.demandas.forEach((demanda: Demanda) => {

@@ -22,6 +22,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     LoginModule,
     PerfilModule,
     ReunioesModule,
+    SharedModule
   ],
   providers: [
   ]

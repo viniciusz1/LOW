@@ -15,7 +15,8 @@
             "modal-b-sim": "Ja",
             "modal-b-nao": "Nein",
             "modal-b-reformular": "Anforderung überarbeiten",
-            "modal-b-ok": "OK"
+            "modal-b-ok": "OK",
+            "nao-demandas": "Derzeit keine Forderungen"
         },
         "tela-reunioes": {
             "marcar": "Meeting vereinbaren",
@@ -51,14 +52,16 @@
             "titulo": "Profil",
             "subtitulo": "ALLGEMEINE KONTOEINSTELLUNGEN",
             "nome": "Name",
-            "username":"Nutzername",
+            "username": "Nutzername",
             "departamento": "Abteilung",
-            "dataNasc": "Geburtsdatum",
-            "cpf": "CPF",
             "email": "E-Mail",
             "telefone": "Telefon",
             "senha": "Passwort",
-            "alterar": "Ändern"
+            "alterar": "Ändern",
+            "informacoes-basicas": "Grundinformationen",
+            "informacoes-contato": "Kontaktinformationen",
+            "informacoes-departamento": "Abteilungsinformationen",
+            "nivel-acesso": "Zugriffsebene"
         },
         "configuracoes-layout": {
             "titulo": "Layout",
@@ -198,7 +201,7 @@
             "periodo-execucao-demanda": "Zeitraum für die Ausführung der Anforderung:",
             "payback-simples": "Einfache Amortisation:",
             "responsaveis-negocio": "Verantwortliche für das Geschäft:",
-            "selecione-status":"Wählen Sie den Status aus, um die Nachfrage zu steigern:",
+            "selecione-status": "Wählen Sie den Status aus, um die Nachfrage zu steigern:",
             "p-prazo-elaboracao": "Klicken Sie hier, um einen Termin zu vereinbaren",
             "p-recurso-necessario": "z.B. Back-End-Programmierer",
             "p-tipo-despesa": "Wählen Sie den Typ aus",
@@ -225,7 +228,13 @@
             "scroll-beneficios": "Vorteile",
             "scroll-adicionais": "Zusätzliche Informationen",
             "b-cancelar": "Abbrechen",
-            "b-finalizar": "Beenden"
+            "b-finalizar": "Beenden",
+            "scroll-proposta": "Vorschlag",
+            "scroll-recursos": "Ressourcen",
+            "scroll-escopo": "Umfang",
+            "scroll-dados": "Endgültige Daten",
+            "parecer-comissao": "Meinung des Ausschusses:",
+            "recomendacoes-comissao": "Empfehlungen des Ausschusses:"
         },
         "tela-classificar-demanda": {
             "preencha-campos": "Füllen Sie die folgenden Felder aus:",
@@ -246,7 +255,11 @@
             "modal-b-sim": "Ja",
             "modal-b-nao": "Nein",
             "p-buscar-demanda": "Suchen Sie nach Anfragen",
-            "visto-por-ultimo": "Zuletzt gesehen von:"
+            "visto-por-ultimo": "Zuletzt gesehen von:",
+            "solicitante": "Antragsteller:",
+            "analista": "Analyst:",
+            "selecione-conversa": "WÄHLE EINE UNTERHALTUNG AUS",
+            "conversas-cadastradas": "DU HAST KEINE REGISTRIERTEN UNTERHALTUNGEN"
         },
         "tela-calendario": {
             "calendario-reunioes": "Kalender der Meetings"
@@ -267,10 +280,11 @@
             "b-ata-publicada": "Protokoll veröffentlicht",
             "b-ata-nao-publicada": "Protokoll nicht veröffentlicht",
             "b-gerar-documentacao": "Dokumentation generieren",
-            "b-finalizar-reuniao":"Besprechung beenden",
-            "b-cancelar-reuniao":"Treffen absagen",
-            "b-nao":"Nein",
-            "b-sim":"Ja"
+            "b-finalizar-reuniao": "Besprechung beenden",
+            "b-cancelar-reuniao": "Treffen absagen",
+            "b-nao": "Nein",
+            "b-sim": "Ja",
+            "editar-reuniao": "Besprechung bearbeiten"
         },
         "tela-login": {
             "login": "Anmeldung",
@@ -279,6 +293,11 @@
             "lembrar": "Erinnere mich",
             "esqueceu-senha": "Passwort vergessen?",
             "b-entrar": "Einloggen"
+        },
+        "tela-not-found": {
+            "ocorreu-erro": "Ein Fehler ist aufgetreten",
+            "requisicao": "Diese Anfrage wurde nicht gefunden, was zu diesem Fehler führt, tut mir leid!",
+            "sabemos": "Das ist alles, was wir wissen"
         }
     },
     "modais": {
@@ -318,24 +337,65 @@
             "motivo-reprovacao": "Grund für die Ablehnung der Anforderung:",
             "b-reprovar": "Anforderung ablehnen",
             "b-cancelar": "Abbrechen"
+        },
+        "modal-cancelamento-reuniao": {
+            "demanda": "Nachfrage",
+            "motivo-cancelamento": "Grund für die Absage des Treffens",
+            "cancelar": "Stornieren",
+            "cancelar-reuniao": "Meeting absagen"
         }
     },
     "documento-pdf": {
-        "solicitante": "ANTRAGSTELLER",
-        "departamento": "ABTEILUNG",
+        "solicitante": "Antragsteller",
+        "departamento": "Abteilung",
         "objetivo": "Ziel:",
         "situacao-atual": "Aktuelle Situation:",
         "beneficio-real": "Tatsächlicher Nutzen:",
-        "memoria-calculo-beneficio-real": "Berechnungserinnerung des tatsächlichen Nutzens:",
-        "benefício-potencial": "Potenzieller Nutzen:",
-        "memoria-calculo-beneficio-potencial": "Berechnungserinnerung des potenziellen Nutzens:",
+        "memoria-calculo-beneficio-real": "Berechnungsmemo für den tatsächlichen Nutzen:",
+        "beneficio-potencial": "Potenzieller Nutzen:",
+        "memoria-calculo-beneficio-potencial": "Berechnungsmemo für den potenziellen Nutzen:",
         "beneficio-qualitativo": "Qualitativer Nutzen:",
         "frequencia-uso-sistema": "Systemnutzungshäufigkeit:",
-        "documentos": "UNTERLAGEN:",
-        "b-cancelar": "Stornieren",
-        "b-reprovar": "Anforderung ablehnen",
-        "b-aprovar": "Anforderung genehmigen",
-        "mensais":" monatlich"
+        "documentos": "DOKUMENTE:",
+        "b-cancelar": "Abbrechen",
+        "b-reprovar": "Antrag ablehnen",
+        "b-aprovar": "Antrag genehmigen",
+        "mensais": "monatlich",
+        "ata-reuniao-comissao-processos": "PROTOKOLL DER KOMMISSIONSSITZUNG FÜR VERKAUFS- UND PRODUKTENTWICKLUNGSPROZESSE",
+        "ata-n": "Protokoll Nr.:",
+        "data": "Datum:",
+        "responsaveis-negocio": "Verantwortliche Geschäftsleute:",
+        "parecer-comissao": "Kommissionsmeinung:",
+        "decisao": "Entscheidung:",
+        "b-fechar": "Schließen",
+        "solicitante-menor": "Antragsteller:",
+        "proposta-comite": "VORSCHLAG FÜR KOMITEE/KOMMISSION DER PROZESSE",
+        "situacao-problema": "Aktuelle Situation - Zu behandelndes/gelöstes Problem:",
+        "escopo-projeto": "Projektumfang:",
+        "resultados-esperados-qualitativos": "Erwartete Ergebnisse (qualitativ)",
+        "resultados-esperados-potenciais": "Erwartete Ergebnisse (potenzielle Gewinne)",
+        "custos-totais": "Gesamtkosten des Projekts:",
+        "total-despesas-externas": "Gesamte externe Ressourcenausgaben (Auszahlung):",
+        "total-despesas-internas": "Gesamte interne Ressourcenausgaben:",
+        "despesas": "Ausgaben (Auszahlung)",
+        "esforco": "Aufwand",
+        "valor-total": "Gesamtwert",
+        "cc-pagante": "Zahlende Kostenstelle",
+        "investimentos": "Investitionen/Wiederkehrend",
+        "licencas": "Lizenzen",
+        "valor-unit": "Stückpreis",
+        "total": "Gesamt",
+        "recursos-internos": "Interne Ressourcen (ohne Auszahlung)",
+        "periodo-execucao": "Ausführungszeitraum:",
+        "a": "bis",
+        "payback": "Amortisationsdauer:",
+        "recursos-necessarios": "Erforderliche Ressourcen",
+        "tipo-despesa": "Ausgabentyp",
+        "perfil-despesa": "Ausgabenprofil",
+        "qtd-horas": "Stundenmenge",
+        "valor-hora": "Stundensatz",
+        "periodo-execucao-mensal": "Ausführungszeitraum (monatlich)",
+        "responsavel-proposta": "Verantwortlicher für den Vorschlag:"
     },
     "componentes-reutilizaveis": {
         "card-demanda": {
@@ -347,7 +407,9 @@
             "iniciar-conversa": "Konversation beginnen",
             "score": "Score:",
             "autor": "Autor:",
-            "departamento": "Abteilung:"
+            "departamento": "Abteilung:",
+            "cancelar-demanda": "Nachfrage abbrechen",
+            "status": "Status:"
         },
         "card-reuniao": {
             "dia-comissao": "Tag der Kommission:",
@@ -398,9 +460,16 @@
             "cancelado": "Abgebrochen"
         },
         "sidebar-demanda": {
-            "classificacao": "Klassifizierung",
-            "proposta": "Vorschlag",
-            "aprovacao": "Genehmigung"
+            "classificacao": "Backlog - Klassifizierung",
+            "proposta": "Backlog - Vorschlag",
+            "aprovacao": "Backlog - Genehmigung",
+            "assessment": "Bewertung",
+            "business-case": "Geschäftsfall",
+            "to-do": "To-do",
+            "design": "Design und Aufbau",
+            "support": "Support",
+            "cancelled": "Abgebrochen",
+            "done": "Erledigt"
         }
     },
     "componentes-fixos": {

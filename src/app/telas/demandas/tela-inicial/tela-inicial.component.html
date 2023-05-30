@@ -394,7 +394,7 @@
           role="button"
           (click)="pesquisarDemandas(departamentoUsuario)"
           falarTexto
-          >Ver Mais</a
+          >{{ "telas.tela-inicial.ver-mais" | translate }}</a
         >
       </div>
     </div>
@@ -620,12 +620,7 @@
   "
 >
   <mat-spinner *ngIf="!demandasVazias" [diameter]="50" class=""></mat-spinner>
-  <span
-    *ngIf="demandasVazias"
-    style="font-weight: 600; font-size: 1.4rem; color: #6c757d"
-    falarTexto
-    >NÃO HÁ DEMANDAS NO MOMENTO</span
-  >
+  <span *ngIf="demandasVazias" style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" falarTexto>{{ "telas.tela-inicial.nao-demandas" | translate }}</span>
 </div>
 
 <p-toast></p-toast>

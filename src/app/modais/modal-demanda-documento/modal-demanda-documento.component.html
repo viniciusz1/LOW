@@ -148,6 +148,11 @@
             dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
           }}
         </h4>
+        <h4>
+          <b>{{
+            "documento-pdf.responsavel-proposta" | translate
+            }}</b>
+        </h4>
         <b falarTexto>
           {{ "documento-pdf.responsaveis-negocio" | translate | titlecase }}
         </b>
@@ -157,10 +162,9 @@
           </li>
         </ol>
 
-        <p falarTexto *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
+        <p falarTexto>
           <b> {{ "documento-pdf.custos-totais" | translate }}</b> R${{
-            calcularDados.quantidadeHorasRecurso *
-              calcularDados.valorHoraRecurso
+            custosTotais
           }}
         </p>
 

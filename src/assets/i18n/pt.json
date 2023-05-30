@@ -15,8 +15,9 @@
       "modal-b-sim": "Sim",
       "modal-b-nao": "Não",
       "modal-b-reformular": "Reformular Demanda",
-      "modal-b-ok": "Ok"
-    },  
+      "modal-b-ok": "Ok",
+      "nao-demandas": "NÃO HÁ DEMANDAS NO MOMENTO"
+    },
     "tela-reunioes": {
       "marcar": "Marcar Reunião",
       "calendario": "Ver em Calendario",
@@ -50,20 +51,23 @@
     "configuracoes-perfil": {
       "titulo": "Perfil",
       "subtitulo": "CONFIGURAÇÕES GERAIS DE CONTA",
+      "informacoes-basicas": "Informações Básicas",
       "nome": "Nome",
-      "username":"Nome de Usuário",
+      "username": "Usuário",
+      "informacoes-contato": "Informações de Contato",
+      "informacoes-departamento": "Informações de Departamento",
       "departamento": "Departamento",
-      "cpf": "CPF",
       "email": "Email",
       "telefone": "Telefone",
       "senha": "Senha",
-      "alterar": "Alterar"
+      "alterar": "Alterar",
+      "nivel-acesso": "Nível de Acesso"
     },
     "configuracoes-layout": {
       "titulo": "Layout",
       "subtitulo": "CONFIGURAÇÕES GERAIS DE LAYOUT",
-      "padrao":"Padrão (Claro)",
-      "preto":"Preto",
+      "padrao": "Padrão (Claro)",
+      "preto": "Preto",
       "temas": "Temas",
       "fonte": "Fonte",
       "tamanho": "Tamanho da Fonte"
@@ -85,7 +89,7 @@
       "descricao": "Para melhorar o atendimento, desenvolvimento do sistema ou funcionamento, nos envie uma sugestão de maneira que facilite sua navegação pelo sistema:",
       "p-input": "Escreva aqui sua duvida:",
       "b-enviar": "Enviar",
-      "b-baixar":"Baixar"
+      "b-baixar": "Baixar"
     },
     "tutorial": {
       "t1": {
@@ -197,7 +201,7 @@
       "periodo-execucao-demanda": "Período de Execução da Demanda:",
       "payback-simples": "Payback Simples:",
       "responsaveis-negocio": "Responsáveis pelo Negócio:",
-      "selecione-status":"Selecione o status para direcionar a demanda:",
+      "selecione-status": "Selecione o status para direcionar a demanda:",
       "p-prazo-elaboracao": "Clique para Agendar",
       "p-recurso-necessario": "Ex: Programador Back-end",
       "p-tipo-despesa": "Selecione o Tipo",
@@ -223,6 +227,12 @@
       "scroll-dados-gerais": "Dados Gerais",
       "scroll-beneficios": "Benefícios",
       "scroll-adicionais": "Adicionais",
+      "scroll-proposta": "Proposta",
+      "scroll-recursos": "Recursos",
+      "scroll-escopo": "Escopo",
+      "scroll-dados": "Dados Finais",
+      "parecer-comissao": "Parecer da Comissão:",
+      "recomendacoes-comissao": "Recomendações da Comissão:",
       "b-cancelar": "Cancelar",
       "b-finalizar": "Finalizar"
     },
@@ -245,7 +255,11 @@
       "modal-b-sim": "Sim",
       "modal-b-nao": "Não",
       "p-buscar-demanda": "Busque por demandas",
-      "visto-por-ultimo": "Visto por último:"
+      "visto-por-ultimo": "Visto por último:",
+      "solicitante": "Solicitante:",
+      "analista": "Analista:",
+      "selecione-conversa": "SELECIONE UMA CONVERSA",
+      "conversas-cadastradas": "VOCÊ NÃO TEM CONVERSAS CADASTRADAS"
     },
     "tela-calendario": {
       "calendario-reunioes": "Calendário de Reuniões"
@@ -266,10 +280,11 @@
       "b-ata-publicada": "Ata publicada",
       "b-ata-nao-publicada": "Ata não publicada",
       "b-gerar-documentacao": "Gerar documentação",
-      "b-finalizar-reuniao":"Finalizar Reunião",
-      "b-cancelar-reuniao":"Cancelar Reunião",
-      "b-nao":"Não",
-      "b-sim":"Sim"
+      "b-finalizar-reuniao": "Finalizar Reunião",
+      "b-cancelar-reuniao": "Cancelar Reunião",
+      "b-nao": "Não",
+      "b-sim": "Sim",
+      "editar-reuniao": "Editar Reunião"
     },
     "tela-login": {
       "login": "Login",
@@ -278,6 +293,11 @@
       "lembrar": "Lembrar-me",
       "esqueceu-senha": "Esqueceu a senha?",
       "b-entrar": "Entrar"
+    },
+    "tela-not-found": {
+      "ocorreu-erro": "Ocorreu um erro",
+      "requisicao": "Esta requisição não foi encontrada, gerando este erro, sinto muito!",
+      "sabemos": "Isso é tudo que sabemos"
     }
   },
   "modais": {
@@ -317,6 +337,12 @@
       "motivo-reprovacao": "Motivo de reprovação da demanda:",
       "b-reprovar": "Reprovar Demanda",
       "b-cancelar": "Cancelar"
+    },
+    "modal-cancelamento-reuniao": {
+      "demanda": "Demanda",
+      "motivo-cancelamento": "Motivo de cancelamento da Reunião",
+      "cancelar": "Cancelar",
+      "cancelar-reuniao": "Cancelar Reunião"
     }
   },
   "documento-pdf": {
@@ -335,40 +361,41 @@
     "b-reprovar": "Reprovar Demanda",
     "b-aprovar": "Aprovar Demanda",
     "mensais": " mensais",
-    "ata-reuniao-comissao-processos":"ATA REUNIÃO COMISSÃO PROCESSOS DE VENDAS E DESENVOLVIMENTO DE PRODUTO",
-    "ata-n":"ATA N°:",
-    "data":"DATA:",
-    "responsaveis-negocio":"RESPONSÁVEIS NEGÓCIO:",
-    "parecer-comissao":"PARECER COMISSÃO:",
-    "decisao":"DECISÃO:",
-    "b-fechar":"Fechar",
-    "solicitante-menor":"Solicitante:",
-    "proposta-comite":"PROPOSTA PARA COMITÊ/COMISSÃO DE PROCESSOS",
-    "situacao-problema":"Situação Atual - Problema a ser tratado/ resolvido:",
-    "escopo-projeto":"Escopo do Projeto:",
-    "resultados-esperados-qualitativos":"Resultados Esperados (Qualitativos)",
-    "resultados-esperados-potenciais":"Resultados Esperados (Ganhos Potenciais)",
-    "custos-totais":"Custos totais do projeto: ",
-    "total-despesas-externas":"Total despesas recursos externos (Desembolso):",
-    "total-despesas-internas":"Total despesa recursos internos:",
+    "ata-reuniao-comissao-processos": "ATA REUNIÃO COMISSÃO PROCESSOS DE VENDAS E DESENVOLVIMENTO DE PRODUTO",
+    "ata-n": "ATA N°:",
+    "data": "DATA:",
+    "responsaveis-negocio": "RESPONSÁVEIS NEGÓCIO:",
+    "parecer-comissao": "PARECER COMISSÃO:",
+    "decisao": "DECISÃO:",
+    "b-fechar": "Fechar",
+    "solicitante-menor": "Solicitante:",
+    "proposta-comite": "PROPOSTA PARA COMITÊ/COMISSÃO DE PROCESSOS",
+    "situacao-problema": "Situação Atual - Problema a ser tratado/ resolvido:",
+    "escopo-projeto": "Escopo do Projeto:",
+    "resultados-esperados-qualitativos": "Resultados Esperados (Qualitativos)",
+    "resultados-esperados-potenciais": "Resultados Esperados (Ganhos Potenciais)",
+    "custos-totais": "Custos totais do projeto: ",
+    "total-despesas-externas": "Total despesas recursos externos (Desembolso):",
+    "total-despesas-internas": "Total despesa recursos internos:",
     "despesas": "Despesas (Desembolso)",
-    "esforco":"Esforço",
-    "valor-total":"Valor total",
-    "cc-pagante":"CC Pagante",
-    "investimentos":"Investimentos / recorrentes",
-    "licencas":"Licenças",
-    "valor-unit":"Valor Unit",
-    "total":"Total",
-    "recursos-internos":"Recursos Internos (Sem Desembolso)",
-    "periodo-execucao":"Período de execução:",
-    "a":"à",
-    "payback":"Payback:",
-    "recursos-necessarios":"Recursos Necessários",
-    "tipo-despesa":"Tipo da despesa",
-    "perfil-despesa":"Perfil da despesa",
-    "qtd-horas":"Qtd de Horas",
-    "valor-hora":"Valor da hora",
-    "periodo-execucao-mensal":"Período de Execução (Mensal)"
+    "esforco": "Esforço",
+    "valor-total": "Valor total",
+    "cc-pagante": "CC Pagante",
+    "investimentos": "Investimentos / recorrentes",
+    "licencas": "Licenças",
+    "valor-unit": "Valor Unit",
+    "total": "Total",
+    "recursos-internos": "Recursos Internos (Sem Desembolso)",
+    "periodo-execucao": "Período de execução:",
+    "a": "à",
+    "payback": "Payback:",
+    "recursos-necessarios": "Recursos Necessários",
+    "tipo-despesa": "Tipo da despesa",
+    "perfil-despesa": "Perfil da despesa",
+    "qtd-horas": "Qtd de Horas",
+    "valor-hora": "Valor da hora",
+    "periodo-execucao-mensal": "Período de Execução (Mensal)",
+    "responsavel-proposta": "Responsável Proposta:"
   },
   "componentes-reutilizaveis": {
     "card-demanda": {
@@ -380,14 +407,16 @@
       "iniciar-conversa": "Iniciar conversa",
       "score": "Score:",
       "autor": "Autor:",
-      "departamento": "Departamento:"
+      "departamento": "Departamento:",
+      "cancelar-demanda": "Cancelar Demanda",
+      "status": "Status:"
     },
     "card-reuniao": {
       "dia-comissao": "Dia da comissão:",
       "status": "Status:",
       "comissao": "Comissão: ",
       "propostas-adicionadas": "Propostas adicionadas: ",
-      "departamentos-beneficiados": "Departamentos Beneficiados: ",
+      "bus-beneficiados": "BU's Beneficiadas: ",
       "exemplos": "Vendas, Motores, Trefilação",
       "cancelar-reuniao": "Cancelar Reunião",
       "motivo-cancelamento": "Ver cancelamento",
@@ -431,9 +460,16 @@
       "cancelado": "Cancelado"
     },
     "sidebar-demanda": {
-      "classificacao": "Classificação",
-      "proposta": "Proposta",
-      "aprovacao": "Aprovação"
+      "classificacao": "Backlog - Classificação",
+      "proposta": "Backlog - Proposta",
+      "aprovacao": "Backlog - Aprovação",
+      "assessment": "Assessment",
+      "business-case": "Business Case",
+      "to-do": "To-do",
+      "design": "Design and Build",
+      "support": "Support",
+      "cancelled": "Cancelled",
+      "done": "Done"
     }
   },
   "componentes-fixos": {

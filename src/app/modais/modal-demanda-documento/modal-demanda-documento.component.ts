@@ -22,6 +22,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   showbotoesAprovarDemanda = false;
   showTimeline = false;
   path = path
+  custosTotais: number = 0;
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
     private demandaService: DemandaService,
@@ -31,6 +32,13 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private usuarioService: UsuarioService) {
     console.log(data)
     this.dadosDemanda = data
+    this.custosTotais = 0
+    if (this.dadosDemanda.recursosProposta) {
+      this.dadosDemanda.recursosProposta
+        .forEach(recurso => {
+          this.custosTotais += recurso.valorHoraRecurso * recurso.quantidadeHorasRecurso;
+        })
+    }
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe({
         next: e => {

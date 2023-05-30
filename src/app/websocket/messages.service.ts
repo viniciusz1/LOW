@@ -154,11 +154,8 @@ export class MessagesService {
       )
       .pipe(
         map((demandas: any) => {
-<<<<<<< HEAD
-=======
           console.log(demandas);
           let qtdMensagensNaoLidas = 0;
->>>>>>> parent of e1bcb45 (Revert "Merge branch 'main' into Camilly")
           for (let demanda of demandas.demandas) {
             let infoExtras = demandas.infoCard.find(
               (e: { codigoDemanda: any }) =>
@@ -166,18 +163,12 @@ export class MessagesService {
             );
             demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem;
             demanda.qtdMensagensNaoLidas = infoExtras.qtdMensagensNaoLidas;
-<<<<<<< HEAD
-            demanda.usuarioAguardando = infoExtras.usuarioAguardando;
-          }
-
-=======
             qtdMensagensNaoLidas += demanda.qtdMensagensNaoLidas;
             demanda.usuarioAguardando = infoExtras.usuarioAguardando;
           }
           if (qtdMensagensNaoLidas > 0) {
             this.$qtdMensagensNaoLida.emit(qtdMensagensNaoLidas);
           }
->>>>>>> parent of e1bcb45 (Revert "Merge branch 'main' into Camilly")
 
           const mapaDemanda = new Map();
           demandas.demandas.forEach((demanda: Demanda) => {
@@ -224,14 +215,6 @@ export class MessagesService {
       multipartFile: formData,
     };
 
-<<<<<<< HEAD
-    // if (this._client) {
-    //   this._client.publish({
-    //     destination: destino,
-    //     body: JSON.stringify(mensagemDTO),
-    //   })}
-    }
-=======
     if (this._client) {
       this._client.publish({
         destination: destino,
@@ -241,5 +224,4 @@ export class MessagesService {
       // console.lo("Conexão não estabelecida!")
     }
   }
->>>>>>> parent of e1bcb45 (Revert "Merge branch 'main' into Camilly")
 }

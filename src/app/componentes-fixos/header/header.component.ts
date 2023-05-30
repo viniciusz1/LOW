@@ -28,17 +28,10 @@ export class HeaderComponent implements OnInit {
     private usuarioService: UsuarioService,
     private notificacoesService: NotificacoesService,
     private messagesService: MessagesService) {
-<<<<<<< HEAD
-      
-    // this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: number) => {
-    //   this.quantidadeMensagensNaoLidas = qtdMensagensNaoLida;
-    // })
-=======
 
     this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: Number) => {
       this.quantidadeMensagensNaoLidas = qtdMensagensNaoLida;
     })
->>>>>>> parent of e1bcb45 (Revert "Merge branch 'main' into Camilly")
 
     //Tem o objetivo de setar as rotas em que o sistema se encontra, no caso os chamados breadcrummbs
     //Para isso ele fraciona a rota, e adiciona a uma lista
@@ -96,13 +89,7 @@ export class HeaderComponent implements OnInit {
   //Função que é executada quando o componente inicia.
   ngOnInit() {
     this.activeItem = this.items[0];
-<<<<<<< HEAD
-    this.subscribeNotificationCount();
-    // this.messagesService.subscribeToNotificationsMensagens();
-    this.notificacoesService.inscrever();
-=======
-    this.iniciarWebSocketNotificationCount();
->>>>>>> parent of e1bcb45 (Revert "Merge branch 'main' into Camilly")
+    // this.iniciarWebSocketNotificationCount();
   }
 
   subscribeNotificationCount() {

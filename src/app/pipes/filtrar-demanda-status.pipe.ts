@@ -1,6 +1,7 @@
 import { Inject, Injectable, Pipe, PipeTransform } from '@angular/core';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
+import { DemandaService } from '../services/demanda.service';
 import { UsuarioService } from '../services/usuario.service';
 @Injectable()
 @Pipe({
@@ -15,7 +16,8 @@ import { UsuarioService } from '../services/usuario.service';
 */
 
 export class FiltrarDemandaStatusPipe implements PipeTransform {
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private usuarioService: UsuarioService,
+    private demandaService: DemandaService) {
 
   }
 
@@ -51,7 +53,11 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
       return demandas.filter(d => d.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())
     }
     if (titulo[0] == "Demandas do Seu Departamento") {
-      return demandas
+      let suasDemandas = localStorage.getItem("suasDemandas");
+      console.log(suasDemandas);
+      if(suasDemandas != null){
+      return JSON.parse(suasDemandas);
+      }
     }
     if (titulo[0] == "Backlog - Classificação") {
       return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)

@@ -420,8 +420,10 @@ export class DemandaService {
       path + 'demanda/' + codigoDemanda
     );
   }
-
-
+  
+  getDemandaByUsuario(){
+    return this.http.get<Demanda[]>(path + 'demanda/usuario')
+  }
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
     let data = new FormData();

@@ -496,18 +496,30 @@ export class TelaInicialComponent implements OnInit {
 
 
   exibirFilasDeStatus() {
-    if (this.nivelAcessoUsuario == 'Solicitante') {
-      if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
-        this.listaTituloNaoFiltrado.push({
-          status: 'SUAS_DEMANDAS',
-          titulo: 'Suas Demandas',
-        });
-      }else {
-        this.listaTituloNaoFiltrado.push({
-          status: 'Sem demandas',
-          titulo: 'Sem demandas',
-        });
-      }
+    if(this.demandasService.getDemandaByUsuario().subscribe()){
+      this.demandasService.getDemandaByUsuario().subscribe((e) => {
+        localStorage.setItem("suasDemandas", JSON.stringify(e))
+      })
+    
+    }else if(this.nivelAcessoUsuario == 'Solicitante'){
+      this.listaTituloNaoFiltrado.push({
+        status: 'Sem demandas',
+        titulo: 'Sem demandas',
+      });
+    }
+
+      // if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
+      //   this.listaTituloNaoFiltrado.push({
+      //     status: 'SUAS_DEMANDAS',
+      //     titulo: 'Suas Demandas',
+      //   });
+      // }else if(this.nivelAcessoUsuario == 'Solicitante'){
+      //   this.listaTituloNaoFiltrado.push({
+      //     status: 'Sem demandas',
+      //     titulo: 'Sem demandas',
+      //   });
+      // }
+      if (this.nivelAcessoUsuario == 'Solicitante') {
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
@@ -541,12 +553,12 @@ export class TelaInicialComponent implements OnInit {
       return
     }
 
-    if (this.rascunhoService.getRascunhosDemanda.length > 0) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'DRAFT',
-        titulo: 'Seus Rascunhos',
-      });
-    }
+    // if (this.rascunhoService.getRascunhosDemanda.length > 0) {
+    //   this.listaTituloNaoFiltrado.push({
+    //     status: 'DRAFT',
+    //     titulo: 'Seus Rascunhos',
+    //   });
+    // }
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'

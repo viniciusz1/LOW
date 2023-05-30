@@ -57,7 +57,7 @@ export class ListDemandaComponent implements OnInit {
     }
     return false;
   }
-  abrirModalHistorico(){
+  abrirModalHistorico() {
     console.log("clicou no historico");
 
     this.modalHistorico.emit(this.dadosDemanda.codigoDemanda)

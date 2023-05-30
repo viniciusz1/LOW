@@ -52,7 +52,7 @@ export class CardDemandaComponent implements OnInit {
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService) {
-     }
+  }
 
   statusPermitido() {
     if (
@@ -70,9 +70,9 @@ export class CardDemandaComponent implements OnInit {
 
     if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()) {
       return true;
-    }  
+    }
     else if (this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista) {
-      
+
       if (this.dadosDemanda.analista == undefined) {
         return true;
       }

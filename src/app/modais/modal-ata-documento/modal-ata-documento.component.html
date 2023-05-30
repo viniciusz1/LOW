@@ -2,8 +2,8 @@
   <a [href]="[path + 'reuniao/ata/' + reuniao?.codigoReuniao + '?tipoAta=' + tipoAta]">
     <i class="bi bi-download me-3" style="font-size: 25px"></i>
   </a>
-  <img style="width: 60px;"
-        src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt=""></p>
+  <img style="width: 60px;" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt="">
+</p>
 <mat-dialog-content class="mat-typography">
     <h3 falarTexto mat-dialog-title class="d-flex justify-content-center"><span><b>
                 {{ "documento-pdf.ata-reuniao-comissao-processos" | translate }}
@@ -14,22 +14,16 @@
         <br>
         <span falarTexto><b>{{ "documento-pdf.data" | translate }}</b> {{reuniao?.dataReuniao | date:'dd/MM/YYYY'}}</span>
     </p>
-
     <div *ngFor="let proposta of reuniao?.propostasReuniao; let i = index">
         <div *ngIf="tipoAta == proposta.tipoAtaProposta">
             <hr *ngIf="mostrarHr(i, tipoAta)">
             <app-modal-demanda-documento [documentoEmAta]="true" [dadosDemanda]="proposta"></app-modal-demanda-documento> -->
-
             <p falarTexto>
                 <b>{{ "documento-pdf.parecer-comissao" | translate }}</b> {{proposta.parecerComissaoProposta}}<br>
                 <b>{{ "documento-pdf.decisao" | translate }}</b> {{proposta.ultimaDecisaoComissao}}
             </p>
-
         </div>
     </div>
-
-
-
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button [mat-dialog-close]="true" cdkFocusInitial falarTexto>{{ "documento-pdf.b-fechar" | translate }}</button>

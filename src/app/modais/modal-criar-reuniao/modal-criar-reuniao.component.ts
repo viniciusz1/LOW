@@ -4,7 +4,7 @@ import { UsuarioService } from './../../services/usuario.service';
 import { Router } from '@angular/router';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
-import { Component, OnInit, Inject,LOCALE_ID } from '@angular/core';
+import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -236,8 +236,8 @@ export class ModalCriarReuniaoComponent implements OnInit {
 
   setInformacoesPreDefinidas(reuniao: Reuniao) {
     this.comissaoSelecionada = reuniao.comissaoReuniao
-    if(reuniao.dataReuniao)
-    this.dataReuniao = new Date(reuniao.dataReuniao)
+    if (reuniao.dataReuniao)
+      this.dataReuniao = new Date(reuniao.dataReuniao)
   }
 
   showSuccess(message: string) {

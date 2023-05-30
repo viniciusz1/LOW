@@ -1,62 +1,69 @@
-
-
-.row{
-    div{
+.row {
+    div {
         padding: 0.5rem;
     }
 }
-.perfil-label{
+
+.perfil-label {
     display: flex;
     justify-content: space-between;
 }
-.buttons{
+
+.buttons {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top:2rem;
-    button{
+    margin-top: 2rem;
+
+    button {
         margin: 0.5rem
     }
 }
 
-.icones{
+.icones {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
 }
 
-h6{
+h6 {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.nome-dado{
+.nome-dado {
     width: 20vw;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.caracteristica{
-   font-weight: 600;
+.caracteristica {
+    font-weight: 600;
 }
 
-.alterar-dado{
+.alterar-dado {
     font-size: 11px;
- }
+}
 
- .perfil, .layout, .notificacoes, .sugestoes, .ajuda, .tutorial{
+.perfil,
+.layout,
+.notificacoes,
+.sugestoes,
+.ajuda,
+.tutorial {
     cursor: pointer;
- }
+}
 
- .rota-Ativa{
+.rota-Ativa {
     background-color: #00579D;
     color: #fff;
- }
- .menu-item:hover{
+}
+
+.menu-item:hover {
     background-color: #025091;
     color: #fff;
     transition: 0.3s;
- }
+}

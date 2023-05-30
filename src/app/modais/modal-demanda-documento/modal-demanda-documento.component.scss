@@ -1,28 +1,29 @@
-.bloco{
+.bloco {
     display: block;
     background: #fff;
     padding: 70px;
 }
-.paragrafo-inicial{
+
+.paragrafo-inicial {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2vh !important;
 }
 
-.mat-typography{
+.mat-typography {
     margin: 0px !important;
     padding: 0px !important;
 }
 
-.TitulosRodape{
+.TitulosRodape {
     font-size: 0.8rem;
 }
 
 :host ::ng-deep {
-  .p-scrollpanel-content{
-    height:100%;
-  }
+    .p-scrollpanel-content {
+        height: 100%;
+    }
 }
 
 .custom-marker {
@@ -37,6 +38,7 @@
 }
 
 ::ng-deep {
+
     .p-timeline-event-content,
     .p-timeline-event-opposite {
         line-height: 1;

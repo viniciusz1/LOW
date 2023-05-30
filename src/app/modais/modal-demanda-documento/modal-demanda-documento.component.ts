@@ -52,8 +52,6 @@ export class ModalDemandaDocumentoComponent implements OnInit {
             this.showTimeline = true
             this.configureTimeline()
           }
-          // this.showbotoesAprovarDemanda = true
-
         }, error: err => {
           this.showError("Não foi possível verificar o Token")
         }

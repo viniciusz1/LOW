@@ -19,7 +19,7 @@ export class FiltroDemandaComponent implements OnInit {
   valorTamanho: any = "";
   valorStatus: any = "";
   mostrarExel = false
-  atualizarFiltro(dados: Filtro){
+  atualizarFiltro(dados: Filtro) {
     this.demandaService.setFiltroData = dados
     this.filtroAcionado.emit()
     this.mostrarExel = true

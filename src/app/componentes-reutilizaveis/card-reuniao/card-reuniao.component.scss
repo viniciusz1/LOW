@@ -1,28 +1,33 @@
 @import '../../../styles.scss';
-.line-top-start{
+
+.line-top-start {
     width: 80%;
-    position:absolute;
+    position: absolute;
     top: 0;
     left: 0;
     height: 10px;
 }
-.three-dots{
+
+.three-dots {
     position: absolute;
     right: 10px;
-    top:23px
+    top: 23px
 }
-.line-top-end{
+
+.line-top-end {
     width: 20%;
-    position:absolute;
+    position: absolute;
     top: 0;
     right: 0;
     height: 10px;
 }
-.bottom-card{
+
+.bottom-card {
     display: flex;
     justify-content: space-between;
 }
-.card{
+
+.card {
     border: 1px solid #8f8f8f !important;
     border-radius: 0;
 }

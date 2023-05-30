@@ -223,7 +223,7 @@ export class MessagesService {
       multipartFile: formData,
     };
 
-    if (this._client) {
+    if (this._client && mensagemDTO.textoMensagens != undefined) {
       this._client.publish({
         destination: destino,
         body: JSON.stringify(mensagemDTO),

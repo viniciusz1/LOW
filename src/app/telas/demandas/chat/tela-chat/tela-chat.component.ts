@@ -8,6 +8,7 @@ import { Mensagem } from 'src/app/models/message.model';
 import { ScrollPanel } from 'primeng/scrollpanel';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MenuModule } from 'ngx-editor/lib/modules/menu/menu.module';
 
 @Component({
   selector: 'app-tela-chat',
@@ -101,22 +102,22 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   subscribeEmmiterMensagens() {
     this.messagesService.$mensagesEmmiter.subscribe((mensagem) => {
-      console.log(mensagem.usuarioMensagens?.codigoUsuario != this.usuarioService.getCodigoUser())
-      console.log(mensagem.usuarioMensagens?.codigoUsuario)
-      console.log(this.usuarioService.getCodigoUser())
       if (mensagem.usuarioMensagens?.codigoUsuario != this.usuarioService.getCodigoUser()) {
         this.messagesService.client?.publish({
           destination: '/low/visto/' + this.codigoRota, body: JSON.stringify({ textoMensagens: "agora vai" })
         })
       }
 
-      let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
-      this.mostrarConversas = true;
-      this.mensagens.push(...novaMensagem);
-      console.log("emitiu")
-      setTimeout(() => {
-        this.scrollToBottom();
-      }, 200);
+      console.log("MENSAGEM: " + mensagem.textoMensagens)
+      if(mensagem.textoMensagens != undefined){
+        let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
+        this.mostrarConversas = true;
+        this.mensagens.push(...novaMensagem);
+        console.log("emitiu")
+        setTimeout(() => {
+          this.scrollToBottom();
+        }, 200);
+      }
     });
   }
 
@@ -176,7 +177,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribeEmmiterMensagens();
     this.messagesService.$mensagensVistas.subscribe(() => {
-      console.log("Entrou no subscribe do visto")
       this.mensagens.forEach((mensagem) => {
         mensagem.statusMensagens = "VISTA"
         })

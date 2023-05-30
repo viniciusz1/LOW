@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
+import { NgModel } from '@angular/forms';
 declare var webkitSpeechRecognition: any;
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -10,6 +11,9 @@ export class VoiceRecognitionService {
   isStoppedSpeechRecog = false;
   public text = '';
   tempWords: any;
+  //se o inputEmFoco for uma string, esse emmiter emite a palavra digitada
+  //tela parte-demanda deve se inscrever nesse emmiter
+  public $novasPalavrasFaladas = new EventEmitter<string>();
   constructor() { }
 
   init() {
@@ -24,13 +28,17 @@ export class VoiceRecognitionService {
         .join('');
       this.tempWords = transcript;
       if(this.inputEmFoco != null){
-        //@ts-ignore
-
-        this.inputEmFoco.value = this.tempWords
+        if(typeof this.inputEmFoco  == 'string'){
+          this.inputEmFoco = this.tempWords
+        }else{
+          //@ts-ignore
+          this.inputEmFoco.value = this.tempWords
+        }
       }
       // console.log(transcript);
     });
   }
+
 
   start() {
     this.isStoppedSpeechRecog = false;
@@ -60,9 +68,9 @@ export class VoiceRecognitionService {
     this.tempWords = '';
   }
 
-  private inputEmFoco: HTMLElement | null =  null;
+  private inputEmFoco: HTMLElement | null | string =  null;
 
-  setInputEmFoco(input: HTMLElement | null): void {
+  setInputEmFoco(input: HTMLElement | null | string): void {
     this.text = ''
     this.inputEmFoco = input;
   }

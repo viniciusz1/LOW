@@ -420,7 +420,9 @@ export class TelaInicialComponent implements OnInit {
             }
           });
           e['qtdDemandas'].forEach((qtd: number) => {
-            this.qtdDemandasStatus.push(qtd)
+            if(qtd > 0){
+              this.qtdDemandasStatus.push(qtd)
+            }
           })
 
           this.exibirFilasDeStatus();

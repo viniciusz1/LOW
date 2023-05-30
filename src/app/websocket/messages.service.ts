@@ -18,6 +18,7 @@ export class MessagesService {
 
   public $mensagesEmmiter: EventEmitter<Mensagem> = new EventEmitter();
   public $qtdMensagensNaoLida: EventEmitter<number> = new EventEmitter();
+  public $mensagensVistas: EventEmitter<any> = new EventEmitter();
   public codigoRota: string | undefined;
   private _client: Client | undefined;
   private currentAttempt = 0;
@@ -76,7 +77,7 @@ export class MessagesService {
           this.subscriptionNotificacaoMensagem = this._client.subscribe(
           '/notificacoes-messages/' + codigoUser + '/chat',
           (message: Message) => {
-            console.log('Recebeu notificação: ' + message);
+            this.updateQuantidadeMensagensNotificacoes();
           }
         );
       }
@@ -131,7 +132,7 @@ export class MessagesService {
         this.subscriptionVisto = this._client.subscribe(
           '/visto/' + this.codigoRota + '/chat',
           (message: Message) => {
-            console.log('Visto: ' + message.body)
+            this.$mensagensVistas.emit();
           },
 
         );

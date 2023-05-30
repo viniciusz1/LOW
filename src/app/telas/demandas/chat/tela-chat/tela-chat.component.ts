@@ -27,7 +27,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   constructor(
     private confirmationService: ConfirmationService,
     private route: ActivatedRoute,
-    private usuarioService: UsuarioService,
+    public usuarioService: UsuarioService,
     private messagesService: MessagesService,
     private matDialog: MatDialog
   ) {
@@ -101,6 +101,9 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   subscribeEmmiterMensagens() {
     this.messagesService.$mensagesEmmiter.subscribe((mensagem) => {
+      console.log(mensagem.usuarioMensagens?.codigoUsuario != this.usuarioService.getCodigoUser())
+      console.log(mensagem.usuarioMensagens?.codigoUsuario)
+      console.log(this.usuarioService.getCodigoUser())
       if (mensagem.usuarioMensagens?.codigoUsuario != this.usuarioService.getCodigoUser()) {
         this.messagesService.client?.publish({
           destination: '/low/visto/' + this.codigoRota, body: JSON.stringify({ textoMensagens: "agora vai" })
@@ -172,6 +175,12 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeEmmiterMensagens();
+    this.messagesService.$mensagensVistas.subscribe(() => {
+      console.log("Entrou no subscribe do visto")
+      this.mensagens.forEach((mensagem) => {
+        mensagem.statusMensagens = "VISTA"
+        })
+    })
   }
 
   ngAfterViewChecked(): void {

@@ -4,7 +4,7 @@
       <header class="d-flex justify-content-between align-items-center">
         <div falarTexto>
           <i class="bi bi-person-circle icon mx-3"></i>
-          Vinícius Bonatti Benner
+          {{usuarioService.getUser('user')?.nomeUsuario}}
         </div>
         <i class="bi bi-three-dots-vertical icon"></i>
       </header>
@@ -111,7 +111,7 @@
                       : 'balao-chat-analista'
                   ]"
                 >
-                  <span>
+                  <span falarTexto>
                     {{ mensagem.textoMensagens }}<br />
                     <div
                       style="width: 100%; display: flex; justify-content: end"

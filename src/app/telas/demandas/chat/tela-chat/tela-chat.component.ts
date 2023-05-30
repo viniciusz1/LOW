@@ -8,6 +8,7 @@ import { Mensagem } from 'src/app/models/message.model';
 import { ScrollPanel } from 'primeng/scrollpanel';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MenuModule } from 'ngx-editor/lib/modules/menu/menu.module';
 
 @Component({
   selector: 'app-tela-chat',
@@ -28,7 +29,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   constructor(
     private confirmationService: ConfirmationService,
     private route: ActivatedRoute,
-    private usuarioService: UsuarioService,
+    public usuarioService: UsuarioService,
     private messagesService: MessagesService,
     private matDialog: MatDialog
   ) {
@@ -124,13 +125,22 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   subscribeEmmiterMensagens() {
     this.messagesService.$mensagesEmmiter.subscribe((mensagem) => {
-      let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
-      this.mostrarConversas = true;
-      this.mensagens.push(...novaMensagem);
-      console.log("emitiu")
-      setTimeout(() => {
-        this.scrollToBottom();
-      }, 200);
+      if (mensagem.usuarioMensagens?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+        this.messagesService.client?.publish({
+          destination: '/low/visto/' + this.codigoRota, body: JSON.stringify({ textoMensagens: "agora vai" })
+        })
+      }
+
+      console.log("MENSAGEM: " + mensagem.textoMensagens)
+      if(mensagem.textoMensagens != undefined){
+        let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
+        this.mostrarConversas = true;
+        this.mensagens.push(...novaMensagem);
+        console.log("emitiu")
+        setTimeout(() => {
+          this.scrollToBottom();
+        }, 200);
+      }
     });
   }
 
@@ -190,6 +200,11 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeEmmiterMensagens();
+    this.messagesService.$mensagensVistas.subscribe(() => {
+      this.mensagens.forEach((mensagem) => {
+        mensagem.statusMensagens = "VISTA"
+        })
+    })
   }
 
   silenciarChat() {

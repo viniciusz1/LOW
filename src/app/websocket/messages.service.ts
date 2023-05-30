@@ -18,6 +18,7 @@ export class MessagesService {
 
   public $mensagesEmmiter: EventEmitter<Mensagem> = new EventEmitter();
   public $qtdMensagensNaoLida: EventEmitter<number> = new EventEmitter();
+  public $mensagensVistas: EventEmitter<any> = new EventEmitter();
   public codigoRota: string | undefined;
   private _client: Client | undefined;
   private currentAttempt = 0;
@@ -68,43 +69,28 @@ export class MessagesService {
     }
   }
 
-  subscribeToNotifications() {
+  subscribeToNotificationsMensagens() {
     let codigoUser = this.usuarioService.getCodigoUser();
-    if (this._client) {
-      const subscription = this._client.subscribe(
-        '/noticicacoes-messages/' + codigoUser + '/chat',
-        (message: Message) => {
-          console.log('Recebeu notificação: ' + message);
-        }
-      );
+
+    try {
+      if (this._client) {
+          this.subscriptionNotificacaoMensagem = this._client.subscribe(
+          '/notificacoes-messages/' + codigoUser + '/chat',
+          (message: Message) => {
+            this.updateQuantidadeMensagensNotificacoes();
+          }
+        );
+      }
+
+    } catch (err) {
+      setTimeout(() => {
+        this.subscribeToNotificationsMensagens();
+      }, 3000)
     }
   }
-
-  // connectWithRetry(maxRetries = 5, retryCount = 0) {
-  //   this.stomp_client.connect({}, (frame: any) => {
-  //     this.inscreverNotificacoesMensagem();
-  //     this.inscrever();
-  //   }, (error: any) => {
-  //     if (retryCount < maxRetries) {
-  //       retryCount++;
-  //       console.log('Erro de conexão. Tentando novamente...');
-  //       setTimeout(() => {
-  //         this.connectWithRetry(maxRetries, retryCount);
-  //       }, 3000); // Espera 3 segundos antes de tentar novamente
-  //     } else {
-  //       console.log('Falha na conexão após várias tentativas. Verifique sua conexão de rede.');
-  //     }
-  //   });
-  // }
-
-  // inscreverNotificacoesMensagem() {
-  //   let codigoUser = this.usuarioService.getCodigoUser()
-  //   this.stomp_client.subscribe('/noticicacoes-messages/' + codigoUser + '/chat', (message: any) => {
-  //     this.updateQuantidadeMensagensNotificacoes();
-  //   });
-  // }
-
+  public subscriptionNotificacaoMensagem: StompSubscription | undefined;
   public subscriptionChat: StompSubscription | undefined;
+  public subscriptionVisto: StompSubscription | undefined;
 
   subscribeChat(codigoRota?: string) {
     if (this.subscriptionChat != undefined) {
@@ -129,6 +115,32 @@ export class MessagesService {
         this.subscribeChat();
       }, 3000)
 
+    }
+
+  }
+
+  subscribeVisto(codigoRota?: string) {
+    if (this.subscriptionVisto != undefined) {
+      this.subscriptionVisto.unsubscribe();
+    }
+    if (codigoRota) {
+      this.codigoRota = codigoRota;
+    }
+    try {
+      if (this._client) {
+        this.subscriptionVisto = this._client.subscribe(
+          '/visto/' + this.codigoRota + '/chat',
+          (message: Message) => {
+            this.$mensagensVistas.emit();
+          },
+
+        );
+      }
+
+    } catch (err) {
+      setTimeout(() => {
+        this.subscribeVisto();
+      }, 3000)
     }
   }
 
@@ -215,7 +227,7 @@ export class MessagesService {
       multipartFile: formData,
     };
 
-    if (this._client) {
+    if (this._client && mensagemDTO.textoMensagens != undefined) {
       this._client.publish({
         destination: destino,
         body: JSON.stringify(mensagemDTO),

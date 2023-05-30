@@ -62,14 +62,14 @@
         </button>
         <button *ngIf="mostrarCancelarPropriaDemanda()" (click)="abrirModalReprovar.emit(dadosDemanda)" mat-menu-item>
           <i class="bi bi-x-circle me-3"></i>
-          <span falarTexto>Cancelar Demanda</span>
+          <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.cancelar-demanda" | translate }}</span>
         </button>
       </mat-menu>
     </div>
 
     <p class="card-text d-flex justify-content-between">
       <span falarTexto>
-          <b>Status:</b> <small for=""> {{ dadosDemanda.statusDemanda | uppercase }}</small>
+          <b>{{ "componentes-reutilizaveis.card-demanda.status" | translate }}</b> <small for=""> {{ dadosDemanda.statusDemanda | uppercase }}</small>
       </span>
       <span falarTexto *ngIf="dadosDemanda.score != undefined"> <b>{{ "componentes-reutilizaveis.card-demanda.score" | translate }}</b> {{ formatarNumero(dadosDemanda.score, 2) }} </span>
       <span *ngIf="dadosDemanda.score == undefined"></span>

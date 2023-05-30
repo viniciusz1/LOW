@@ -20,7 +20,10 @@ export class NotificacoesComponent implements OnInit {
       this.setarNotificacoes();
     }
 
-
+    ngOnDestroy(): void {
+      this.notificacoesService.disconect();
+    }
+    
     setarNotificacoes(){
       this.notificacoesService.getNotificacoes().subscribe(notificacoes => {
         this.notificacoes = notificacoes.reverse();

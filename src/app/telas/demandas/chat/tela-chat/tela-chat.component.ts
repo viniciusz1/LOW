@@ -22,6 +22,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   mensagens: Mensagem[] = [];
   conversasDemandas: Demanda[] = [];
   mostrarConversas = false;
+  usuarioLogado: any;
   demandaDiscutida: Demanda | undefined;
   pesquisaFiltro = '';
 
@@ -32,6 +33,8 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     private messagesService: MessagesService,
     private matDialog: MatDialog
   ) {
+    console.log('Rodou construtor   ');
+
     this.setarConversas();
     this.route.params.subscribe((e) => {
       this.codigoRota = e['codigoDemanda'];
@@ -42,7 +45,28 @@ export class TelaChatComponent implements OnInit, OnDestroy {
         this.iniciarSubscribeChat();
       }
     });
+    // this.initializeChat();
   }
+
+  // async initializeChat() {
+  //   await this.waitForWebSocketConnection();
+  //   if (this.codigoRota != '') {
+  //     this.setMensagens();
+  //     this.subscribeEmmiterMensagens();
+  //     this.iniciarSubscribeChat();
+  //   }
+  // }
+
+  // waitForWebSocketConnection(): Promise<void> {
+  //   return new Promise((resolve) => {
+  //     const intervalId = setInterval(() => {
+  //       if (this.messagesService.client?.active) {
+  //         clearInterval(intervalId);
+  //         resolve();
+  //       }
+  //     }, 100); // Verifica a cada 100ms se o WebSocket está ativo
+  //   });
+  // }
 
   setMensagens() {
     this.messagesService
@@ -56,7 +80,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   iniciarSubscribeChat() {
     this.messagesService.subscribeChat();
-    this.messagesService.subscribeVisto();
   }
 
   ngOnDestroy(): void {
@@ -76,7 +99,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     if (
       conversa?.qtdMensagensNaoLidas != 0 &&
       conversa?.usuarioAguardando.codigoUsuario !=
-      this.usuarioService.getCodigoUser()
+        this.usuarioService.getCodigoUser()
     ) {
       return true;
     }
@@ -126,7 +149,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       if (
         mensagem.usuarioMensagens &&
         mensagem.usuarioMensagens.codigoUsuario ==
-        this.usuarioService.getCodigoUser()
+          this.usuarioService.getCodigoUser()
       ) {
         mensagem.ladoMensagem = true;
       } else {
@@ -153,6 +176,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       this.enviarMensagem();
     }
   }
+
 
   enviarMensagem() {
     if (this.mensagem.nativeElement.value != '') {
@@ -181,12 +205,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
         mensagem.statusMensagens = "VISTA"
         })
     })
-  }
-
-  ngAfterViewChecked(): void {
-    //Called after every check of the component's view. Applies to components only.
-    //Add 'implements AfterViewChecked' to the class.
-    this.scrollToBottom();
   }
 
   silenciarChat() {

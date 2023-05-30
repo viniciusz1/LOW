@@ -2,7 +2,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NivelAcesso } from './../../models/nivel-acesso.enum';
 import { textoTutorial } from '../../shared/textoDoTutorial';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { fadeAnimation } from 'src/app/shared/app.animation';
 import { filter } from 'rxjs';
@@ -28,8 +28,8 @@ export class HeaderComponent implements OnInit {
     private usuarioService: UsuarioService,
     private notificacoesService: NotificacoesService,
     private messagesService: MessagesService) {
-      
-    this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: number) => {
+
+    this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: Number) => {
       this.quantidadeMensagensNaoLidas = qtdMensagensNaoLida;
     })
 
@@ -52,8 +52,8 @@ export class HeaderComponent implements OnInit {
         }
       });
   }
-  quantidadeNotificacoes: number = 0;
-  quantidadeMensagensNaoLidas: number = 0;
+  quantidadeNotificacoes: Number = 0;
+  quantidadeMensagensNaoLidas: Number = 0;
 
 
   versaoSolicitante() {
@@ -75,6 +75,7 @@ export class HeaderComponent implements OnInit {
   @Input() telaLogin = false;
   //?
   mostrar_modal = false;
+  
   //Variável em que recebe o texto do tutorial
   textoTutorial = textoTutorial;
   //items que são exibidos nos breadcrumbs
@@ -88,9 +89,7 @@ export class HeaderComponent implements OnInit {
   //Função que é executada quando o componente inicia.
   ngOnInit() {
     this.activeItem = this.items[0];
-    this.subscribeNotificationCount();
-    this.messagesService.subscribeToNotificationsMensagens();
-    this.notificacoesService.inscrever();
+    // this.iniciarWebSocketNotificationCount();
   }
 
   subscribeNotificationCount() {

@@ -44,7 +44,37 @@
     transition: 0.5s;
 }
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 600px) {
+    a {
+        font-size: 8px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    a {
+        font-size: 8px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    a {
+        font-size: 9px;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    a {
+        font-size: 10px;
+    }
+}
+
+@media screen and (min-width: 1090px) {
+    a {
+        font-size: 11px;
+    }
+}
+
+@media screen and (min-width: 1250px) {
     a {
         font-size: 12px;
     }

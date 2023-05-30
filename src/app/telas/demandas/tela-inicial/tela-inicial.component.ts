@@ -84,7 +84,7 @@ export class TelaInicialComponent implements OnInit {
   isFiltrado = false;
   showFiltro = false;
   showPesquisaEBotaoFiltro = true;
-  showSidebar = -350;
+  showSidebar = -18.2;
   listaDemandas: Demanda[] = [];
   demandasVazias: boolean = false;
   divScrollCircle: boolean = false;
@@ -286,7 +286,7 @@ export class TelaInicialComponent implements OnInit {
   //Abre e fecha o sidebar lateral esquerdo
   moveSidebar() {
     if (this.showSidebar == 0) {
-      this.showSidebar = -350;
+      this.showSidebar = -18.2;
     } else {
       this.showSidebar = 0;
     }

@@ -147,7 +147,7 @@
   </nav>
   <!-- sidebar -->
   <app-sidebar-demanda
-    [style.left.px]="showSidebar"
+    [style.left.vw]="showSidebar"
     (clicouNaSeta)="moveSidebar()"
     (clicouEmUmStatus)="
       pesquisarDemandas({ status: $event, pesquisaCampo: undefined })
@@ -156,7 +156,8 @@
       position: fixed;
       z-index: 2;
       transition: left 0.3s ease 0s;
-      top: 43vh;
+      top: 38vh;
+      left: 0px;
     "
   ></app-sidebar-demanda>
   <div @fadeAnimation *ngIf="!tipoExibicaoDemanda">

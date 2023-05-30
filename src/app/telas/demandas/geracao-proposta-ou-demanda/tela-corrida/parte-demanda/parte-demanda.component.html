@@ -41,7 +41,7 @@
             }">
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
             </ngx-editor-menu>
-            <ngx-editor #editor1 (focusIn)="onFocoIn(editor1)" (input)="onInputChange()" [ngModel]="html"
+            <ngx-editor #editor1 (focusIn)="onFocoIn(editor1)" (input)="onInputChange()" [ngModel]="htmlSituacaoAtual"
               [editor]="editor" formControlName="situacaoAtualDemanda">
             </ngx-editor>
           </div>
@@ -67,7 +67,7 @@
             }">
             <ngx-editor-menu [editor]="editorDemanda" [toolbar]="toolbarDemanda" inputEmFoco>
             </ngx-editor-menu>
-            <ngx-editor inputEmFoco (input)="onInputChange()" [ngModel]="html" [editor]="editorDemanda"
+            <ngx-editor inputEmFoco (input)="onInputChange()" [ngModel]="htmlObjetivo" [editor]="editorDemanda"
               formControlName="objetivoDemanda">
             </ngx-editor>
           </div>

@@ -43,13 +43,13 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     this.voiceRecognitionService.start();
   }
 
-  stopService(){
+  stopService() {
     this.voiceRecognitionService.stop()
   }
 
 
 
-  onFocoIn(elementRef : NgxEditorComponent) {
+  onFocoIn(elementRef: NgxEditorComponent) {
     this.voiceRecognitionService.setInputEmFoco(this.htmlSituacaoAtual)
   }
 
@@ -58,8 +58,10 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
   //serve para setar o tipo do editor de texto como html por padrão
   //NÃO DELETAR
+
   htmlSituacaoAtual = ""
   htmlObjetivo = ""
+
   onInputChange() {
     // Em vez de chamar diretamente o método, envie um evento ao Subject
     this.inputSubject.next('aaaA');
@@ -68,6 +70,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   inputSubject = new Subject<string>();
   @Input() aparecerProposta = false;
 
+  index: number = 0;
   listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [
@@ -97,6 +100,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   localMoedaBeneficio2 = 'pt-BR';
   currencyMoedaBeneficio1 = 'BRL';
   currencyMoedaBeneficio2 = 'BRL';
+  campoEntrada: string = '';
   demandaForm = this.demandaService.demandaForm;
   opcoesDeTamanho = [
     'Muito Pequena',
@@ -106,6 +110,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     'Muito Grande',
   ];
   porcentagem: number = 0
+  porcentagem100: boolean = false;
   opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   moedaSelecionada: any = { name: 'BRL', value: 'Real' };
   moedaSelecionada2: any = { name: 'BRL', value: 'Real' };
@@ -136,6 +141,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     }
 
   }
+
   isBiggerThan100MB(files: File[]): boolean {
     let totalSize = 0;
     for (const file of files) {
@@ -148,6 +154,19 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   }
   removerCentroDeCusto(index: number) {
     this.demandaService.removeCenterOfCost(index);
+    if (this.demandaForm.value.centroCustosDemanda) {
+      this.porcentagem = 0;
+      for (let i = 0; i < this.demandaForm.value.centroCustosDemanda.length; i++) {
+        this.porcentagem += parseInt(this.demandaForm.value.centroCustosDemanda[i].porcentagemCentroCusto)
+        console.log("Ta entrando sim ", this.porcentagem)
+      }
+    }
+
+    if (this.porcentagem < 100) {
+      this.porcentagem100 = false;
+    } else if (this.porcentagem > 100) {
+      this.showError("Sua porcentagem ainda está acima de 100")
+    }
   }
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
@@ -159,14 +178,35 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
   adicionarCentroCusto() {
     try {
-      if(this.demandaForm.value.centroCustosDemanda){
-        for (let i of this.demandaForm.value.centroCustosDemanda) {
-          this.porcentagem += parseInt(i.porcentagemCentroCusto)
+      if (this.demandaForm.value.centroCustosDemanda) {
+        this.porcentagem = 0;
+        for (let i = 0; i < this.demandaForm.value.centroCustosDemanda.length; i++) {
+          this.porcentagem += parseInt(this.demandaForm.value.centroCustosDemanda[i].porcentagemCentroCusto)
+          console.log("Ta entrando sim ", this.porcentagem)
         }
       }
-      this.demandaService.addCenterOfCost();
+
+      if (this.porcentagem < 100) {
+        this.porcentagem100 = false;
+      }
+
+      if (this.porcentagem == 100) {
+        this.porcentagem100 = true;
+      }
+
+      if (this.porcentagem > 100) {
+        this.porcentagem100 = true;
+        if (this.demandaForm.value.centroCustosDemanda?.length) {
+          this.removerCentroDeCusto(this.demandaForm.value.centroCustosDemanda.length - 1)
+        }
+        this.showError("A porcentagem ultrapassou os 100%")
+      }
+
+      if (!this.porcentagem100) {
+        this.demandaService.addCenterOfCost();
+      }
     } catch (err) {
-      this.showError("Não foi possível adicionar o centro de custo")
+      this.showError("Não foi possível adicionar centro de custo!")
     }
   }
 

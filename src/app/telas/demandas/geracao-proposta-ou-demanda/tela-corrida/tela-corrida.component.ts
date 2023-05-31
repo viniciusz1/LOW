@@ -67,7 +67,12 @@ export class TelaCorridaComponent implements OnInit {
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
-            this.showError("Certifique-se do preenchimento de todos os campos!")
+            console.log("Erro ", err.error);
+            if(err.error === "Falta completar as porcentagem de centro de custos"){
+              this.showError("Centros de custo está inválido! Verifique se ele se encontra em 100%")
+            } else {
+              this.showError("Certifique-se do preenchimento de todos os campos!")
+            }
           },
         });
       }

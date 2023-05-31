@@ -193,6 +193,7 @@
           [disabled]="
             !demandaForm.controls.centroCustosDemanda.valid || !resultado
           "
+          [ngClass]="{'opacity': porcentagem100, 'opacity-normal': !porcentagem100}"
           (click)="adicionarCentroCusto()"
         >
           <i class="bi bi-plus-lg" style="font-size: 19px"></i>

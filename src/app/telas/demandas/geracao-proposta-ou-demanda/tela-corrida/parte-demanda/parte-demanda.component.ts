@@ -107,6 +107,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   ];
   opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   moedaSelecionada: any = { name: 'BRL', value: 'Real' };
+  moedaSelecionada2: any = { name: 'BRL', value: 'Real' };
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
   abrirSegundoAccordion: boolean = false;

@@ -9,6 +9,7 @@ import { filter } from 'rxjs';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { NotificacoesService } from 'src/app/services/notificacoes.service';
 import { MessagesService } from 'src/app/websocket/messages.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,8 @@ import { MessagesService } from 'src/app/websocket/messages.service';
 */
 
 export class HeaderComponent implements OnInit {
+
+  usuario: Usuario | undefined
 
   constructor(private translate: TranslateService, private router: Router,
     private usuarioService: UsuarioService,
@@ -88,6 +91,7 @@ export class HeaderComponent implements OnInit {
   nivelAcessoUsuario: NivelAcesso | undefined
   //Função que é executada quando o componente inicia.
   ngOnInit() {
+    this.usuario = this.usuarioService.getUser('user')
     this.activeItem = this.items[0];
     // this.iniciarWebSocketNotificationCount();
   }

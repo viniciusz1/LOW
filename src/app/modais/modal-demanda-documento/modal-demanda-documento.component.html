@@ -1,15 +1,7 @@
 <div id="html-to-pdf">
-  <p-timeline
-    *ngIf="showTimeline"
-    [value]="timeline"
-    align="top"
-    layout="horizontal"
-  >
+  <p-timeline *ngIf="showTimeline" [value]="timeline" align="top" layout="horizontal">
     <ng-template pTemplate="marker" let-event>
-      <span
-        class="custom-marker shadow-2"
-        [style.backgroundColor]="event.color"
-      >
+      <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
         <i [ngClass]="event.icon"></i>
       </span>
     </ng-template>
@@ -21,52 +13,36 @@
   </p-timeline>
 
   <p class="paragrafo-inicial" *ngIf="documentoEmAta == false">
-    <b class="me-2" falarTexto>01</b>
+    <b class="me-2" falarTexto>{{dadosDemanda?.codigoDemanda}} aaaaaaaaaaaaaa</b>
     <span>
       <div class="d-flex align-items-center justify-content-between">
         <a [href]="[path + 'demanda/pdf/' + dadosDemanda?.codigoDemanda]">
           <i class="bi bi-download me-3" style="font-size: 25px"></i>
         </a>
-        <img
-          style="width: 60px"
-          src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png"
-          alt=""
-        />
+        <img style="width: 60px" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt="" />
       </div>
     </span>
   </p>
 
-  <mat-dialog-content
-    *ngIf="!documentoEmAta"
-    class="mat-typography"
-    [ngStyle]="{ overflow: documentoEmAta ? 'hidden' : 'hidden' }"
-  >
-    <p-scrollPanel
-      [style]="{ width: '100%', height: '70vh' }"
-      styleClass="custombar1"
-    >
+  <mat-dialog-content *ngIf="!documentoEmAta" class="mat-typography"
+    [ngStyle]="{ overflow: documentoEmAta ? 'hidden' : 'hidden' }">
+    <p-scrollPanel [style]="{ width: '100%', height: '70vh' }" styleClass="custombar1">
       <h4 mat-dialog-title class="d-flex justify-content-between">
-        <span falarTexto
-          ><b>{{ "documento-pdf.solicitante" | translate }}: </b
-          >{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span
-        >
-        <span falarTexto
-          ><b>{{ "documento-pdf.data" | translate }} </b>
-          {{ dadosDemanda?.dataCriacaoDemanda | date : "dd/MM/yyyy" }}</span
-        >
+        <span falarTexto><b>{{ "documento-pdf.solicitante" | translate }}: </b>{{
+          dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span>
+        <span falarTexto><b>{{ "documento-pdf.data" | translate }} </b>
+          {{ dadosDemanda?.dataCriacaoDemanda | date : "dd/MM/yyyy" }}</span>
       </h4>
       <h4 falarTexto>
         <b>{{ "documento-pdf.departamento" | translate }}: </b>
         {{
-          dadosDemanda?.solicitanteDemanda?.departamentoUsuario
-            ?.nomeDepartamento
+        dadosDemanda?.solicitanteDemanda?.departamentoUsuario
+        ?.nomeDepartamento
         }}
       </h4>
       <h4 falarTexto class="d-flex justify-content-center">
-        <b
-          >{{ dadosDemanda?.tituloDemanda }} –
-          {{ dadosDemanda?.codigoDemanda }}</b
-        >
+        <b>{{ dadosDemanda?.tituloDemanda }} –
+          {{ dadosDemanda?.codigoDemanda }}</b>
       </h4>
       <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 
@@ -81,8 +57,7 @@
       <p [innerHTML]="dadosDemanda?.situacaoAtualDemanda"></p>
 
       <h4 falarTexto>
-        <b>{{ "documento-pdf.beneficio-real" | translate }} </b
-        >{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }}
+        <b>{{ "documento-pdf.beneficio-real" | translate }} </b>{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }}
         {{ "documento-pdf.mensais" | translate }}
       </h4>
       <p falarTexto>
@@ -94,19 +69,18 @@
         </li>
       </ul>
       <h4 falarTexto>
-        <b>{{ "documento-pdf.beneficio-potencial" | translate }} </b
-        >{{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }}
+        <b>{{ "documento-pdf.beneficio-potencial" | translate }} </b>{{
+        dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }}
         {{ "documento-pdf.mensais" | translate }}
       </h4>
       <p falarTexto>
-        <b
-          >{{ "documento-pdf.memoria-calculo-beneficio-potencial" | translate }}
+        <b>{{ "documento-pdf.memoria-calculo-beneficio-potencial" | translate }}
         </b>
       </p>
       <ul falarTexto>
         <li style="word-wrap: break-word">
           {{
-            dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
+          dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
           }}
         </li>
       </ul>
@@ -122,11 +96,7 @@
         <b>{{ "documento-pdf.frequencia-uso-sistema" | translate }} </b>
         {{ dadosDemanda?.frequenciaDeUsoDemanda }}
       </p>
-
-      <div
-        class="fazer ng-if"
-        *ngIf="dadosDemanda?.inicioExDemandaProposta != null"
-      >
+      <div class="fazer ng-if" *ngIf="dadosDemanda?.inicioExDemandaProposta != null">
         <h4 falarTexto>
           <b>{{ "documento-pdf.escopo-projeto" | translate }} </b>
         </h4>
@@ -134,16 +104,16 @@
         <h4 falarTexto>
           <b>{{
             "documento-pdf.resultados-esperados-qualitativos" | translate
-          }}</b>
+            }}</b>
           {{ dadosDemanda?.beneficioQualitativoDemanda }}
         </h4>
         <h4 falarTexto>
           <b>{{
             "documento-pdf.resultados-esperados-potenciais" | translate
-          }}</b>
+            }}</b>
           {{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }}
           {{
-            dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
+          dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
           }}
         </h4>
         <h4>
@@ -162,7 +132,7 @@
 
         <p falarTexto>
           <b> {{ "documento-pdf.custos-totais" | translate }}</b> R${{
-            custosTotais
+          custosTotais
           }}
         </p>
 
@@ -187,10 +157,7 @@
             </tr>
           </thead>
 
-          <tbody
-            *ngFor="let itemRecurso of dadosDemanda?.recursosProposta"
-            class="table-group-divider"
-          >
+          <tbody *ngFor="let itemRecurso of dadosDemanda?.recursosProposta" class="table-group-divider">
             <tr>
               <td falarTexto>
                 {{ itemRecurso.nomeRecurso }}
@@ -202,11 +169,9 @@
                 {{ itemRecurso.perfilDespesaRecurso }}
               </td>
               <td falarTexto>
-                <p
-                  *ngFor="
+                <p *ngFor="
                     let centroCustoPagante of itemRecurso.centroCustoRecurso
-                  "
-                >
+                  ">
                   {{ centroCustoPagante.nomeCentroCusto }}:
                   {{ centroCustoPagante.porcentagemCentroCusto }}%
                 </p>
@@ -242,11 +207,7 @@
       <div class="mb-5" *ngIf="dadosDemanda?.arquivosDemanda?.length != 0">
         <h4 falarTexto>
           <b>{{ "documento-pdf.documentos" | translate }} </b>
-          <a falarTexto
-            *ngFor="let arquivo of dadosDemanda?.arquivosDemanda"
-            role="button"
-            (click)="download(arquivo)"
-          >
+          <a falarTexto *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" role="button" (click)="download(arquivo)">
             {{ arquivo.nomeArquivo }}
           </a>
         </h4>
@@ -258,22 +219,18 @@
 
   <div *ngIf="documentoEmAta">
     <h4 mat-dialog-title class="d-flex">
-      <span
-        ><b>{{ "documento-pdf.solicitante" | translate }}: </b
-        >{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario }}</span
-      >
+      <span><b>{{ "documento-pdf.solicitante" | translate }}: </b>{{ dadosDemanda?.solicitanteDemanda?.nomeUsuario
+        }}</span>
     </h4>
     <h4>
       <b>{{ "documento-pdf.departamento" | translate }}: </b>
       {{
-        dadosDemanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento
+      dadosDemanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento
       }}
     </h4>
     <h4 class="d-flex justify-content-center">
-      <b
-        >{{ dadosDemanda?.tituloDemanda }} –
-        {{ dadosDemanda?.codigoDemanda }}</b
-      >
+      <b>{{ dadosDemanda?.tituloDemanda }} –
+        {{ dadosDemanda?.codigoDemanda }}</b>
     </h4>
     <!-- <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaAnalista}}</p> -->
 
@@ -288,8 +245,7 @@
     <p [innerHTML]="dadosDemanda?.situacaoAtualDemanda"></p>
 
     <h4>
-      <b>{{ "documento-pdf.beneficio-real" | translate }} </b
-      >{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }}
+      <b>{{ "documento-pdf.beneficio-real" | translate }} </b>{{ dadosDemanda?.beneficioRealDemanda?.valorBeneficio }}
       {{ "documento-pdf.mensais" | translate }}
     </h4>
     <p>
@@ -301,13 +257,12 @@
       </li>
     </ul>
     <h4>
-      <b>{{ "documento-pdf.beneficio-potencial" | translate }} </b
-      >{{ dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }}
+      <b>{{ "documento-pdf.beneficio-potencial" | translate }} </b>{{
+      dadosDemanda?.beneficioPotencialDemanda?.valorBeneficio }}
       {{ "documento-pdf.mensais" | translate }}
     </h4>
     <p>
-      <b
-        >{{ "documento-pdf.memoria-calculo-beneficio-potencial" | translate }}
+      <b>{{ "documento-pdf.memoria-calculo-beneficio-potencial" | translate }}
       </b>
     </p>
     <ul>
@@ -330,10 +285,7 @@
     <!--
       Verificação se é uma proposta
  -->
-    <div
-      class="fazer ng-if"
-      *ngIf="dadosDemanda?.inicioExDemandaProposta != null"
-    >
+    <div class="fazer ng-if" *ngIf="dadosDemanda?.inicioExDemandaProposta != null">
       <h4>
         <b>{{ "documento-pdf.escopo-projeto" | translate }} </b>
       </h4>
@@ -341,7 +293,7 @@
       <h4>
         <b>{{
           "documento-pdf.resultados-esperados-qualitativos" | translate
-        }}</b>
+          }}</b>
         {{ dadosDemanda?.beneficioQualitativoDemanda }}
       </h4>
       <h4>
@@ -356,7 +308,7 @@
       </ol>
       <p *ngFor="let calcularDados of dadosDemanda?.recursosProposta">
         <b> {{ "documento-pdf.custos-totais" | translate }}</b> R${{
-          calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso
+        calcularDados.quantidadeHorasRecurso * calcularDados.valorHoraRecurso
         }}
       </p>
       <table class="table">
@@ -378,10 +330,7 @@
           </tr>
         </thead>
 
-        <tbody
-          *ngFor="let itemRecurso of dadosDemanda?.recursosProposta"
-          class="table-group-divider"
-        >
+        <tbody *ngFor="let itemRecurso of dadosDemanda?.recursosProposta" class="table-group-divider">
           <tr>
             <td>
               {{ itemRecurso.nomeRecurso }}
@@ -393,11 +342,9 @@
               {{ itemRecurso.perfilDespesaRecurso }}
             </td>
             <td>
-              <p
-                *ngFor="
+              <p *ngFor="
                   let centroCustoPagante of itemRecurso.centroCustoRecurso
-                "
-              >
+                ">
                 {{ centroCustoPagante.nomeCentroCusto }}:
                 {{ centroCustoPagante.porcentagemCentroCusto }}%
               </p>
@@ -433,36 +380,21 @@
     <div *ngIf="dadosDemanda?.arquivosDemanda">
       <h4>
         <b>{{ "documento-pdf.documentos" | translate }} </b>
-        <a
-          *ngFor="let arquivo of dadosDemanda?.arquivosDemanda"
-          role="button"
-          (click)="download(arquivo)"
-        >
+        <a *ngFor="let arquivo of dadosDemanda?.arquivosDemanda" role="button" (click)="download(arquivo)">
           {{ arquivo.nomeArquivo }}
         </a>
       </h4>
     </div>
   </div>
-  <mat-dialog-actions
-    class="d-flex justify-content-between"
-    *ngIf="documentoEmAta == false"
-  >
+  <mat-dialog-actions class="d-flex justify-content-between" *ngIf="documentoEmAta == false">
     <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">
       {{ "documento-pdf.b-cancelar" | translate }}
     </button>
     <div>
-      <button
-        class="btn btn-danger me-2"
-        *ngIf="showbotoesAprovarDemanda"
-        (click)="openModalReprovacao()"
-      >
+      <button class="btn btn-danger me-2" *ngIf="showbotoesAprovarDemanda" (click)="openModalReprovacao()">
         {{ "documento-pdf.b-reprovar" | translate }}
       </button>
-      <button
-        class="btn btn-primary"
-        *ngIf="showbotoesAprovarDemanda"
-        (click)="enviarDecisao(1)"
-      >
+      <button class="btn btn-primary" *ngIf="showbotoesAprovarDemanda" (click)="enviarDecisao(1)">
         {{ "documento-pdf.b-aprovar" | translate }}
       </button>
     </div>

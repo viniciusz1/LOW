@@ -94,11 +94,13 @@ export class ModalCriarReuniaoComponent implements OnInit {
       })
       .afterClosed().subscribe({
         next: e => {
-          let indice: number | undefined = -1
-          if (this.listaDemandas) {
-            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-            if (indice !== -1) {
-              this.listaDemandas.splice(indice, 1, e);
+          if(e != undefined){
+            let indice: number | undefined = -1
+            if (this.listaDemandas) {
+              indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+              if (indice !== -1) {
+                this.listaDemandas.splice(indice, 1, e);
+              }
             }
           }
         }

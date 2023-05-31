@@ -70,9 +70,9 @@ export class CardDemandaComponent implements OnInit {
 
     if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()) {
       return true;
-    }  
+    }
     else if (this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista) {
-      
+
       if (this.dadosDemanda.analista == undefined) {
         return true;
       }
@@ -234,7 +234,15 @@ export class CardDemandaComponent implements OnInit {
           };
         }
         return true;
-      case StatusDemanda.ASSESSMENT || StatusDemanda.BUSINESS_CASE:
+      case StatusDemanda.ASSESSMENT:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_ADD_REUNIAO',
+            texto: 'Adicionar Proposta',
+          };
+        }
+        return true;
+        case StatusDemanda.BUSINESS_CASE:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_ADD_REUNIAO',

@@ -84,17 +84,15 @@
         [stepContentParams]="{ texto: textoTutorial[6] }"
         style="overflow: auto"
       >
-        <a class="nav-link"><i class="bi bi-chat-left-dots icon">
-          <span
-            class="badge badge-danger small-badge"
-            >!</span
-          >
-        </i></a>
+        <a class="nav-link"
+          ><i class="bi bi-chat-left-dots icon">
+            <span class="badge badge-danger small-badge">!</span>
+          </i></a
+        >
       </li1>
       <li
         role="button"
         class="nav-item"
-        (click)="openModalNotificacoes()"
         *ngIf="!inicial"
         joyrideStep="seis"
         [title]="'Notificações'"
@@ -102,7 +100,7 @@
         style="overflow: auto"
       >
         <a class="nav-link">
-          <i class="bi bi-bell icon"></i>
+          <i class="bi bi-bell icon" (click)="openModalNotificacoes()"></i>
           <span
             *ngIf="this.quantidadeNotificacoes != 0"
             class="badge badge-danger small-badge"

@@ -8,6 +8,7 @@ import { Reuniao } from 'src/app/models/reuniao.model';
 import { fadeAnimation } from './../../../shared/app.animation';
 import { textoTutorial } from 'src/app/shared/textoDoTutorial';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-tela-login',
@@ -25,7 +26,10 @@ export class TelaReuniaoComponent implements OnInit {
     private reuniaoService: ReuniaoService,
     private changeDetectorRef: ChangeDetectorRef
   ) { }
-  opcoesOrdenacao = [{ name: 'Data', value: 'data' }, { name: 'Comissão', value: 'comissao' }]
+  opcoesOrdenacao = [
+    { name: 'Data da reunião ↑', value: '1' },
+    { name: 'Data da reunião ↓', value: '2' }
+  ];
   ordenarSelect = ""
   //tipoExibicao = true --> mostrar todas reuniões
   //tipoExibicao = false --> Cria nova pauta
@@ -61,11 +65,34 @@ export class TelaReuniaoComponent implements OnInit {
     });
   }
 
+  // ordenar(sort: { name: string, value: number }) {
+  //   console.log(this.demandasService.getFiltroData)
+  //   let filtro: Filtro;
+  //   if (this.demandasService.getFiltroData) {
+  //     filtro = this.demandasService.getFiltroData;
+  //     filtro.sort = sort.value;
+  //   } else {
+  //     filtro =
+  //     {
+  //       solicitante: "",
+  //       codigoDemanda: "",
+  //       status: "",
+  //       tamanho: "",
+  //       tituloDemanda: "",
+  //       analista: "",
+  //       departamento: "",
+  //       sort: sort.value,
+  //     };
+  //   }
+  //   this.demandasService.setFiltroData = filtro;
+  //   this.pesquisarDemandas(undefined);
+  // }
+
   openModalCriarReuniao() {
     this.matDialog.open(ModalCriarReuniaoComponent, {
       minHeight: '',
     }).afterClosed().subscribe((reuniao: Reuniao | undefined) => {
-      if(reuniao){
+      if (reuniao) {
         //verificar se ja existe
         const index = this.listaReunioes.findIndex(e => e.codigoReuniao === reuniao.codigoReuniao);
 
@@ -98,6 +125,7 @@ export class TelaReuniaoComponent implements OnInit {
       .getReuniao()
       .subscribe({
         next: reuniao => {
+
           this.listaReunioes = reuniao
         }, error: err => {
           this.showError("Não foi possível atualizar esta reunião")
@@ -112,6 +140,9 @@ export class TelaReuniaoComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
+  ordenarReunioes(dropdown: any) {
+    this.pesquisarReunioes({nomeComissao: "", dataReuniao: "", statusReuniao: "", ppmProposta: "", analista: "", solicitante: "", ordenar: dropdown.value, page: "0", size: ""})
+  }
 
 
   pesquisarReunioes(event: {
@@ -121,16 +152,18 @@ export class TelaReuniaoComponent implements OnInit {
     ppmProposta: string;
     analista: string;
     solicitante: string;
+    ordenar: string;
     page: string;
     size: string
-  }){
-      this.reuniaoService.getReuniaoFiltrada(event).subscribe({
-        next: reuniao => {
-          this.listaReunioes = reuniao
-        }, error: err => {
-          this.showError("Não foi possível mostrar as reuniões!")
-        }
-      });
+  }) {
+    this.reuniaoService.getReuniaoFiltrada(event).subscribe({
+      next: reuniao => {
+        console.log(reuniao)
+        this.listaReunioes = reuniao
+      }, error: err => {
+        this.showError("Não foi possível mostrar as reuniões!")
+      }
+    });
   }
 
   moveSidebar() {

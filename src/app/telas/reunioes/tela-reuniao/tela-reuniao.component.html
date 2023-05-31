@@ -48,6 +48,7 @@
             class="ms-3"
             [options]="opcoesOrdenacao"
             [(ngModel)]="ordenarSelect"
+            (ngModelChange)="ordenarReunioes(ordenarSelect)"
             placeholder="Ordenar"
             optionLabel="name"
           ></p-dropdown>

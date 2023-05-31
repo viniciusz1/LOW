@@ -72,21 +72,25 @@ export class HeaderComponent implements OnInit {
   //Função que é executada quando o componente inicia.
   firstClick = false;
 
-  openModalNotificacoes(){
+  openModalNotificacoes() {
     console.log("abriu modal notificacoes")
     this.firstClick = true;
-    this.mostrarModal = true;
+    if (this.mostrarModal == false) {
+      this.mostrarModal = true;
+    } else {
+      this.mostrarModal = false;
+    }
   }
 
   @HostListener('document:click', ['$event'])
   fecharModalAoClicarFora(event: MouseEvent) {
-    if(this.firstClick == false){
+    if (this.firstClick == false) {
       if (this.mostrarModal == true) {
         if (!this.modalElement.nativeElement.contains(event.target)) {
           this.mostrarModal = false;
         }
       }
-    }else{
+    } else {
       this.firstClick = false;
     }
 

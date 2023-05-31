@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
   @Input() telaLogin = false;
   //?
   mostrar_modal = false;
-  
+
   //Variável em que recebe o texto do tutorial
   textoTutorial = textoTutorial;
   //items que são exibidos nos breadcrumbs
@@ -89,7 +89,24 @@ export class HeaderComponent implements OnInit {
   //Função que é executada quando o componente inicia.
   ngOnInit() {
     this.activeItem = this.items[0];
+    document.addEventListener('click', this.fecharModalAoClicarFora);
     // this.iniciarWebSocketNotificationCount();
+  }
+
+
+  ngOnDestroy() {
+    document.removeEventListener('click', this.fecharModalAoClicarFora);
+  }
+
+  fecharModalAoClicarFora = (event: MouseEvent) => {
+    console.log(event.target)
+    if (this.mostrar_modal == true) {
+      console.log(this.mostrar_modal)
+      const modalElement = document.getElementById('modal');
+      // if (!modalElement?.contains(event.target as Node)) {
+      //   this.mostrar_modal = false;
+      // }
+    }
   }
 
   subscribeNotificationCount() {

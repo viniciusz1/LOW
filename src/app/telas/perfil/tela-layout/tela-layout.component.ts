@@ -1,3 +1,4 @@
+import { ConfiguracoesIniciaisService } from './../../../services/configuracoes-iniciais.service';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 })
 export class TelaLayoutComponent implements OnInit {
   themeSelection: boolean = false
-  constructor() {
+  constructor(public  configIniciaisService: ConfiguracoesIniciaisService) {
     // @Inject(DOCUMENT) private document: Document
 
     // let theme = window.localStorage.getItem('theme');
@@ -16,15 +17,21 @@ export class TelaLayoutComponent implements OnInit {
     //   this.themeSelection = theme == 'dark' ? true : false;
     //   this.changeTheme(this.themeSelection);
     // }
-    let font = window.localStorage.getItem('fontFamily');
-    if(font){
-      this.fontAtual = font
-    }
-    let fontSize = window.localStorage.getItem('fontSize');
-    if(fontSize){
-      this.fontSize = fontSize
-    }
+
    }
+
+   setFontTheme(opc: string){
+    this.configIniciaisService.setFontTheme(opc)
+  }
+
+  redefinir(){
+    this.configIniciaisService.redefinir()
+  }
+
+  setFontSize(opc: string){
+   this.configIniciaisService.setFontSize(opc)
+  }
+
 
   // changeTheme(state:boolean){
   //   let theme = state ? 'dark' : 'light';
@@ -33,26 +40,6 @@ export class TelaLayoutComponent implements OnInit {
   //   themelink.href = `bootstrap-${theme}-blue.css`;
   // }
 
-  fontSize = "13";
-  fontAtual = "Roboto"
-
-  setFontTheme(opc: string){
-    let htmlRoot:HTMLElement = <HTMLElement> document.getElementsByTagName('body')[0];
-    if(htmlRoot != null){
-      htmlRoot.style.fontFamily = opc;
-      window.localStorage.setItem('fontFamily', opc);
-    }
-  }
-
-  setFontSize(opc: string){
-   this.fontSize = opc;
-
-    let htmlRoot:HTMLElement = <HTMLElement> document.getElementsByTagName('html')[0];
-    if(htmlRoot != null && window.localStorage.getItem('fontSize') != htmlRoot.style.fontSize){
-      htmlRoot.style.fontSize = this.fontSize + 'px';
-      window.localStorage.setItem('fontSize', this.fontSize);
-    }
-  }
 
 
   ngOnInit(): void {

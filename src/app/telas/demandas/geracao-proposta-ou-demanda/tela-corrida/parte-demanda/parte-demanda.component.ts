@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { DemandaService } from './../../../../../services/demanda.service';
 import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ElementRef } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
-import { Editor, Toolbar } from 'ngx-editor';
+import { Editor, NgxEditorComponent, Toolbar } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
 
 interface Tab {
@@ -49,9 +49,8 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
 
 
-  onFocoIn(elementRef : any) {
-    console.log(elementRef)
-    console.log(elementRef.elementRef.nativeElement)
+  onFocoIn(elementRef : NgxEditorComponent) {
+    this.voiceRecognitionService.setInputEmFoco(this.htmlSituacaoAtual)
   }
 
   onFocoOut() {
@@ -59,7 +58,8 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
   //serve para setar o tipo do editor de texto como html por padrão
   //NÃO DELETAR
-  html = ""
+  htmlSituacaoAtual = ""
+  htmlObjetivo = ""
   onInputChange() {
     // Em vez de chamar diretamente o método, envie um evento ao Subject
     this.inputSubject.next('aaaA');

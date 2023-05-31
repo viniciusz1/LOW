@@ -22,7 +22,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   mensagens: Mensagem[] = [];
   conversasDemandas: Demanda[] = [];
   mostrarConversas = false;
-  usuarioLogado: any;
   demandaDiscutida: Demanda | undefined;
   pesquisaFiltro = '';
 
@@ -45,28 +44,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
         this.iniciarSubscribeChat();
       }
     });
-    // this.initializeChat();
   }
-
-  // async initializeChat() {
-  //   await this.waitForWebSocketConnection();
-  //   if (this.codigoRota != '') {
-  //     this.setMensagens();
-  //     this.subscribeEmmiterMensagens();
-  //     this.iniciarSubscribeChat();
-  //   }
-  // }
-
-  // waitForWebSocketConnection(): Promise<void> {
-  //   return new Promise((resolve) => {
-  //     const intervalId = setInterval(() => {
-  //       if (this.messagesService.client?.active) {
-  //         clearInterval(intervalId);
-  //         resolve();
-  //       }
-  //     }, 100); // Verifica a cada 100ms se o WebSocket está ativo
-  //   });
-  // }
 
   setMensagens() {
     this.messagesService

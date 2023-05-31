@@ -23,8 +23,9 @@ export class InputFocoDirective {
 
 
 
-  @HostListener('focusIn', ['$event.elementRef'])
+  @HostListener('focusIn', ['$event'])
   onFocusIn(target: any) {
+    console.log(target)
     // console.log(target);
     // Lógica adicional a ser executada quando o evento for disparado
   }

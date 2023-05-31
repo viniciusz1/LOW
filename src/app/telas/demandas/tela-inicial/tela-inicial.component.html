@@ -112,7 +112,7 @@
                 nivelAcessoUsuario == 'Analista' ||
                 nivelAcessoUsuario == 'GestorTI'
               "
-              >({{ qtdDemandasStatus[i-1] }})</span
+              >({{ qtdDemandasStatus[i] }})</span
             >
           </div>
         </div>
@@ -317,16 +317,17 @@
               <h5>{{ linha.titulo }}</h5>
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
-            <div *ngIf="linha.status != 'DRAFT'" class="me-3" style="align-self: flex-end; cursor: pointer" (click)="
+            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="
                 pesquisarDemandas({
                   status: linha.status,
                   pesquisaCampo: undefined
                 })
               "
             >
-              {{ "telas.tela-inicial.ver-mais" | translate }} ({{
-                qtdDemandasStatus[i-1]
+              {{ "telas.tela-inicial.ver-mais" | translate }} <span *ngIf="linha.titulo != 'Suas Demandas'">({{
+                qtdDemandasStatus[i]
               }})
+              </span>
             </div>
           </div>
           <div class="d-flex position-relative" #tamanhoDaFila style="width: 100%">

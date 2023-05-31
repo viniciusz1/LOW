@@ -133,8 +133,6 @@ export class DemandaService {
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
-    console.log(this.demandaForm.value.objetivoDemanda)
-    console.log(this.demandaForm.value.situacaoAtualDemanda)
 
     let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
     let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
@@ -380,7 +378,7 @@ export class DemandaService {
     let linkParaTodasDemandas = this.link
     linkParaTodasDemandas += '&size=2000'
     console.log(linkParaTodasDemandas)
-    return this.http.get<Demanda[]>(
+    return this.http.get<any>(
       linkParaTodasDemandas
     );
   }

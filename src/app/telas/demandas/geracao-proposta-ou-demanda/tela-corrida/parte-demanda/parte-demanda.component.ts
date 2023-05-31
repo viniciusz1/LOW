@@ -105,6 +105,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     'Grande',
     'Muito Grande',
   ];
+  porcentagem: number = 0
   opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   moedaSelecionada: any = { name: 'BRL', value: 'Real' };
   moedaSelecionada2: any = { name: 'BRL', value: 'Real' };
@@ -158,6 +159,11 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
   adicionarCentroCusto() {
     try {
+      if(this.demandaForm.value.centroCustosDemanda){
+        for (let i of this.demandaForm.value.centroCustosDemanda) {
+          this.porcentagem += parseInt(i.porcentagemCentroCusto)
+        }
+      }
       this.demandaService.addCenterOfCost();
     } catch (err) {
       this.showError("Não foi possível adicionar o centro de custo")

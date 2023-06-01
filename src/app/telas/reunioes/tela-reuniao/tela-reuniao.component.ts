@@ -117,7 +117,7 @@ export class TelaReuniaoComponent implements OnInit {
 
   ngOnInit() {
     // this.openModalCriarReuniao();
-    this.atualizarReunioes();
+    this.pesquisarReunioes({nomeComissao: "", dataReuniao: "", statusReuniao: "", ppmProposta: "", analista: "", solicitante: "", ordenar: "", page: "", size: ""})
   }
 
   atualizarReunioes() {
@@ -143,7 +143,28 @@ export class TelaReuniaoComponent implements OnInit {
   ordenarReunioes(dropdown: any) {
     this.pesquisarReunioes({nomeComissao: "", dataReuniao: "", statusReuniao: "", ppmProposta: "", analista: "", solicitante: "", ordenar: dropdown.value, page: "0", size: ""})
   }
+  filtrarPorStatus(status: string){
+    this.pesquisarReunioes({nomeComissao: "", dataReuniao: "", statusReuniao: status, ppmProposta: "", analista: "", solicitante: "", ordenar: "", page: "", size: ""})
+  }
+  totalPagesPagination = 0
+  isFiltrado = false
+  nenhumResultadoEncontrado = false
 
+  paginate(event: any) {
+    this.reuniaoService.avancarPage(event.page)
+      .subscribe((listaReunioes: Reuniao[]) => {
+        if (listaReunioes.length > 0) {
+          this.totalPagesPagination = this.reuniaoService.totalPages
+          this.listaReunioes = listaReunioes;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        } else {
+          this.isFiltrado = true;
+          this.listaReunioes = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      });
+  }
 
   pesquisarReunioes(event: {
     nomeComissao: string;
@@ -157,9 +178,17 @@ export class TelaReuniaoComponent implements OnInit {
     size: string
   }) {
     this.reuniaoService.getReuniaoFiltrada(event).subscribe({
-      next: reuniao => {
-        console.log(reuniao)
-        this.listaReunioes = reuniao
+      next: listaReunioes => {
+        if (listaReunioes.length > 0) {
+          this.totalPagesPagination = this.reuniaoService.totalPages
+          this.listaReunioes = listaReunioes;
+          this.isFiltrado = true;
+          this.nenhumResultadoEncontrado = false;
+        } else {
+          this.isFiltrado = true;
+          this.listaReunioes = [];
+          this.nenhumResultadoEncontrado = true;
+        }
       }, error: err => {
         this.showError("Não foi possível mostrar as reuniões!")
       }

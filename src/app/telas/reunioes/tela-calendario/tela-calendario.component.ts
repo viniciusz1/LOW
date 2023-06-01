@@ -8,6 +8,7 @@ import { CalendarOptions, defineFullCalendarElement, EventApi } from '@fullcalen
 import brasil from '@fullcalendar/core/locales/pt-br';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { MessageService } from 'primeng/api';
+import { path } from 'src/app/services/path/rota-api';
 defineFullCalendarElement();
 @Component({
   selector: 'app-tela-calendario',
@@ -29,7 +30,7 @@ export class TelaCalendarioComponent implements OnInit {
     @Inject(DIALOG_DATA) public data: Reuniao[]) {
     let events: { title?: string, date?: Date, url?: string, color: string }[] = []
     data.forEach(reuniao => {
-      events.push({ title: reuniao.comissaoReuniao, date: reuniao.dataReuniao, url: '/tela-inicial/ver-reuniao/' + reuniao.codigoReuniao, color: this.defineColorReuniao(reuniao.statusReuniao) })
+      events.push({ title: reuniao.comissaoReuniao, date: reuniao.dataReuniao, url:'http://localhost:4200/tela-inicial/ver-reuniao/' + reuniao.codigoReuniao, color: this.defineColorReuniao(reuniao.statusReuniao) })
     })
 
     this.calendarOptions = {

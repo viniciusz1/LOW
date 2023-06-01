@@ -8,8 +8,8 @@
   <div class="card-body pb-1">
     <div class="mt-2 card-title d-flex" style="align-items: baseline; justify-content: space-between">
       <div class="d-flex" style="width: 80%">
-        <label class="me-2" for="" *ngIf="!rascunho">{{ dadosDemanda.codigoDemanda }}</label>
-        <label class="me-2 text-truncate" for="titulo">
+        <label falarTexto class="me-2" for="" *ngIf="!rascunho">{{ dadosDemanda.codigoDemanda }}</label>
+        <label falarTexto class="me-2 text-truncate" for="titulo">
           <b>{{ dadosDemanda.tituloDemanda }}</b>
         </label>
       </div>
@@ -42,44 +42,44 @@
       <mat-menu #menu="matMenu">
         <button (click)="abrirModalHistorico()" mat-menu-item>
           <i class="bi bi-arrow-counterclockwise me-3"></i>
-          <span>{{ "componentes-reutilizaveis.card-demanda.historico" | translate }}</span>
+          <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.historico" | translate }}</span>
         </button>
         <button (click)="verDocumentoProposta.emit(dadosDemanda)" mat-menu-item>
           <i class="bi bi-arrows-angle-expand me-3"></i>
-          <span>{{ "componentes-reutilizaveis.card-demanda.ver-demanda" | translate }}</span>
+          <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-demanda" | translate }}</span>
         </button>
         <button *ngIf="existePauta()" [routerLink]="['/tela-inicial/reunioes']" mat-menu-item>
           <i class="bi bi-person-lines-fill me-3"></i>
-          <span>{{ "componentes-reutilizaveis.card-demanda.ir-reuniao" | translate }}</span>
+          <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ir-reuniao" | translate }}</span>
         </button>
         <button (click)="verDocumentoEmAta.emit()" *ngIf="existeAta()" mat-menu-item>
           <i class="bi-file-text me-3"></i>
-          <span>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
+          <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
         </button>
         <button *ngIf="statusPermitido() && exibirIniciarChat()" [routerLink]="['/tela-inicial/chat/'+dadosDemanda.codigoDemanda]" mat-menu-item>
           <i class="bi bi-chat-left-quote me-3"></i>
-          <span>{{ "componentes-reutilizaveis.card-demanda.iniciar-conversa" | translate }}</span>
+          <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.iniciar-conversa" | translate }}</span>
         </button>
         <button *ngIf="mostrarCancelarPropriaDemanda()" (click)="abrirModalReprovar.emit(dadosDemanda)" mat-menu-item>
           <i class="bi bi-x-circle me-3"></i>
-          <span>Cancelar Demanda</span>
+          <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.cancelar-demanda" | translate }}</span>
         </button>
       </mat-menu>
     </div>
 
     <p class="card-text d-flex justify-content-between">
-      <span>
-          <b>Status:</b> <small for=""> {{ dadosDemanda.statusDemanda | uppercase }}</small>
+      <span falarTexto>
+          <b>{{ "componentes-reutilizaveis.card-demanda.status" | translate }}</b> <small for=""> {{ dadosDemanda.statusDemanda | uppercase }}</small>
       </span>
-      <span *ngIf="dadosDemanda.score != undefined"> <b>{{ "componentes-reutilizaveis.card-demanda.score" | translate }}</b> {{ formatarNumero(dadosDemanda.score, 2) }} </span>
+      <span falarTexto *ngIf="dadosDemanda.score != undefined"> <b>{{ "componentes-reutilizaveis.card-demanda.score" | translate }}</b> {{ formatarNumero(dadosDemanda.score, 2) }} </span>
       <span *ngIf="dadosDemanda.score == undefined"></span>
     </p>
     <p class="card-text d-flex justify-content-between">
-      <span><b>{{ "componentes-reutilizaveis.card-demanda.autor" | translate }} </b>{{ dadosDemanda.solicitanteDemanda?.nomeUsuario }}</span>
-      <span *ngIf="tipoDeAta.length != 0">{{ tipoDeAta }}</span>
+      <span falarTexto><b>{{ "componentes-reutilizaveis.card-demanda.autor" | translate }} </b>{{ dadosDemanda.solicitanteDemanda?.nomeUsuario }}</span>
+      <span falarTexto *ngIf="tipoDeAta.length != 0">{{ tipoDeAta }}</span>
     </p>
     <p class="card-text bottom-card">
-      <label class="d-inline-block me-2" [ngClass]="{
+      <label falarTexto class="d-inline-block me-2" [ngClass]="{
           'text-truncate': textoExibidoEmBotaoDependendoRota || rascunho,
           tamanho:
             !textoExibidoEmBotaoDependendoRota &&
@@ -91,7 +91,7 @@
         {{ dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento }}
       </label>
       <span>
-        <button *ngIf="exibicaoBotoes()"
+        <button falarTexto *ngIf="exibicaoBotoes()"
           class="btn btn-primary btn-sm" style="width: 147px" (click)="direcionarUsuario()">
           {{ textoExibidoEmBotaoDependendoRota?.texto }}
         </button>

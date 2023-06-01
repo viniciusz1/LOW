@@ -2,33 +2,32 @@
     <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
     <div class="d-flex" style="width: 80%;">
         <li class="nav-item">
-            <label class="" for="">00{{dadosDemanda.codigoDemanda}}</label>
+            <label falarTexto class="" for="">00{{dadosDemanda.codigoDemanda}}</label>
         </li>
-        <li class="nav-item d-flex justify-content-center" [ngStyle]="{'width': !demandaPequena ? '25%' : '45%'}">
-            <label class="text-truncate d-inline-block" for=""><b>{{dadosDemanda.tituloDemanda}}</b></label>
+        <li class="nav-item d-flex justify-content-center" style="width: 45%;">
+            <label falarTexto  class="text-truncate d-inline-block" for=""><b>{{dadosDemanda.tituloDemanda}}</b></label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width: 20%;">
-            <label class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.nomeUsuario}}</label>
+            <label falarTexto class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.nomeUsuario}}</label>
         </li>
-        <li class="nav-item" [ngStyle]="{'width': !demandaPequena ? '15%' : '50%'}">
-            <label
-                class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
+        <li class="nav-item"  style="width: 50%;">
+            <label falarTexto class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  5%;">
-            <label class="text-truncate d-inline-block">190.8</label>
+            <label falarTexto class="text-truncate d-inline-block">190.8</label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  15%;">
 
-            <label class="text-truncate d-inline-block">{{dadosDemanda.statusDemanda | uppercase}}</label>
+            <label falarTexto class="text-truncate d-inline-block">{{dadosDemanda.statusDemanda | uppercase}}</label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  10%;">
-            <label class="text-truncate d-inline-block">{{dadosDemanda.score}}</label>
+            <label falarTexto class="text-truncate d-inline-block">{{dadosDemanda.score}}</label>
         </li>
 
     </div>
     <div class="d-flex final-list" style="width: 20%;">
         <li *ngIf="mostrarBotao && textoExibidoEmBotaoDependendoRota">
-            <button class="btn btn-primary btn-sm me-2" style="width: 147px;" (click)="direcionarUsuario()">
+            <button falarTexto class="btn btn-primary btn-sm me-2" style="width: 147px;" (click)="direcionarUsuario()">
                 {{textoExibidoEmBotaoDependendoRota.texto}}
             </button>
         </li>
@@ -37,19 +36,19 @@
             [matMenuTriggerFor]="menu"></i>
         <i class="bi bi-plus-lg" *ngIf="demandaPequena" role="button" (click)="clicouAdicionarPauta.emit()"></i>
         <mat-menu #menu="matMenu">
-            <button (click)="abrirModalHistorico()" mat-menu-item>
+            <button falarTexto (click)="abrirModalHistorico()" mat-menu-item>
                 <i class="bi bi-arrow-counterclockwise me-3"></i>
                 <span>{{ "componentes-reutilizaveis.list-demanda.historico" | translate }}</span>
             </button>
-            <button (click)="verDocumentoProposta.emit(dadosDemanda)" mat-menu-item>
+            <button falarTexto (click)="verDocumentoProposta.emit(dadosDemanda)" mat-menu-item>
                 <i class="bi bi-arrows-angle-expand me-3"></i>
                 <span>{{ "componentes-reutilizaveis.list-demanda.ver-demanda" | translate }}</span>
             </button>
-            <button *ngIf="existePauta()" routerLink="/tela-inicial/reunioes" mat-menu-item>
+            <button falarTexto *ngIf="existePauta()" routerLink="/tela-inicial/reunioes" mat-menu-item>
                 <i class="bi bi-person-lines-fill me-3"></i>
                 <span>{{ "componentes-reutilizaveis.list-demanda.ir-reuniao" | translate }}</span>
             </button>
-            <button routerLink="/tela-inicial/chat" (click)="fechouModal.emit()"  mat-menu-item>
+            <button falarTexto routerLink="/tela-inicial/chat" (click)="fechouModal.emit()"  mat-menu-item>
                 <i class="bi bi-chat-left-quote me-3"></i>
                 <span>{{ "componentes-reutilizaveis.list-demanda.iniciar-conversa" | translate }}</span>
             </button>

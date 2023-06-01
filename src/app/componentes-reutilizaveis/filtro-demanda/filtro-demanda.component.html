@@ -1,5 +1,5 @@
 <div class="low-shadow rounded border" style="padding: 15px; background: white;">
-    <h6 class="d-flex justify-content-between">{{ "componentes-reutilizaveis.filtro-demanda.filtrar-demandas" | translate }}
+    <h6 falarTexto class="d-flex justify-content-between">{{ "componentes-reutilizaveis.filtro-demanda.filtrar-demandas" | translate }}
         <i *ngIf="mostrarIconeDeAbrirFiltro" type="button" class="bi bi-chevron-down" (click)="closeFiltro.emit()"
             aria-controls="collapseExample">
         </i>
@@ -10,20 +10,20 @@
                 <div class="d-flex justify-content-center" >
                     <div class="d-flex mt-3" [ngClass]="{'reduzir-inputs': filtroReduzidoVertical}">
                         <span class="p-float-label me-2 ">
-                            <input class="p-inputtext-sm" #titulo placeholder="Ex: Sistema de Gerenciamento" pInputText
+                            <input inputEmFoco class="p-inputtext-sm" #titulo placeholder="Ex: Sistema de Gerenciamento" pInputText
                                 type="text" pInputText>
                             <label for="float-input" *ngIf="!filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.titulo-demanda" | translate }}</label>
                             <label for="float-input" *ngIf="filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.s-titulo-demanda" | translate }}</label>
 
                         </span>
                         <span class="p-float-label me-2">
-                            <input class="p-inputtext-sm" #codigo placeholder="Ex: 123" pInputText type="text"
+                            <input inputEmFoco class="p-inputtext-sm" #codigo placeholder="Ex: 123" pInputText type="text"
                                 pInputText>
                             <label for="float-input" *ngIf="!filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.numero-solicitacao" | translate }}</label>
                             <label for="float-input" *ngIf="filtroReduzidoVertical">{{ "componentes-reutilizaveis.filtro-demanda.s-numero-solicitacao" | translate }}</label>
                         </span>
                         <span class="p-float-label me-2">
-                            <input class="p-inputtext-sm" #analista placeholder="Ex: Vinícius" pInputText type="text"
+                            <input inputEmFoco class="p-inputtext-sm" #analista placeholder="Ex: Vinícius" pInputText type="text"
                                 pInputText>
                             <label for="float-input">{{ "componentes-reutilizaveis.filtro-demanda.responsavel" | translate }}</label>
                         </span>
@@ -38,12 +38,12 @@
                 </div>
                 <div class="d-flex mt-3" [ngClass]="{'reduzir-inputs': filtroReduzidoVertical}" style="margin-top: 2.5vh !important;">
                     <span class="p-float-label me-2">
-                        <input class="p-inputtext-sm" #solicitante placeholder="Ex: Cléber" pInputText type="text"
+                        <input inputEmFoco class="p-inputtext-sm" #solicitante placeholder="Ex: Cléber" pInputText type="text"
                             pInputText>
                         <label for="float-input">{{ "componentes-reutilizaveis.filtro-demanda.solicitante" | translate }}</label>
                     </span>
                     <span class="p-float-label me-2">
-                        <input class="p-inputtext-sm" #departamento placeholder="Ex: Motores" pInputText type="text"
+                        <input inputEmFoco class="p-inputtext-sm" #departamento placeholder="Ex: Motores" pInputText type="text"
                             pInputText>
                         <label for="float-input">{{ "componentes-reutilizaveis.filtro-demanda.departamento" | translate }}</label>
                     </span>

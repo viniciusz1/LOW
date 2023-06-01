@@ -1,12 +1,13 @@
+import { VoiceRecognitionService } from './../../../../../services/voice-recognition.service';
 import { ActivatedRoute } from '@angular/router';
 import { RascunhoService } from './../../../../../services/rascunho.service';
 import { debounceTime } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { DemandaService } from './../../../../../services/demanda.service';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ElementRef } from '@angular/core';
 import { CentroCusto } from 'src/app/models/centro-custo.model';
-import { Editor, Toolbar } from 'ngx-editor';
+import { Editor, NgxEditorComponent, Toolbar } from 'ngx-editor';
 import { MessageService } from 'primeng/api';
 
 interface Tab {
@@ -24,8 +25,10 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     private demandaService: DemandaService,
     private rascunhoService: RascunhoService,
     private route: ActivatedRoute,
+    public voiceRecognitionService: VoiceRecognitionService,
     private messageService: MessageService
   ) {
+
     let indiceRascunho = route.snapshot.params['indiceRascunho']
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
       if (route.snapshot.url) {
@@ -35,9 +38,28 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  startVoice() {
+    this.voiceRecognitionService.start();
+  }
+
+  stopService(){
+    this.voiceRecognitionService.stop()
+  }
+
+
+
+  onFocoIn(elementRef : NgxEditorComponent) {
+    this.voiceRecognitionService.setInputEmFoco(this.htmlSituacaoAtual)
+  }
+
+  onFocoOut() {
+  }
+
   //serve para setar o tipo do editor de texto como html por padrão
   //NÃO DELETAR
-  html = ""
+  htmlSituacaoAtual = ""
+  htmlObjetivo = ""
   onInputChange() {
     // Em vez de chamar diretamente o método, envie um evento ao Subject
     this.inputSubject.next('');
@@ -84,6 +106,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     'Muito Grande',
   ];
   opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
+  moedaSelecionada: any = { name: 'BRL', value: 'Real' };
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
   abrirSegundoAccordion: boolean = false;

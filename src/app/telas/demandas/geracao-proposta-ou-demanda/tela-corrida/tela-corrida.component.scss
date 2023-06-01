@@ -18,45 +18,9 @@ label {
     margin: 5px;
 }
 
-// ::ng-deep{
-//     .p-multiselect, .p-placeholder {
-//         width: 58.5vw;
-//     }
-// }
 hr {
     margin: 0
 }
-
-// ::ng-deep{
-//     .p-dropdown .p-dropdown-label  {
-//         width: 56.5vw;
-//     }
-// } 
-
-
-// nav {
-//     animation-duration: 1s;
-//     animation-name: slidein;
-//     animation-delay: calc(var(--scroll) * -1s);
-//     scroll-snap-type: proximity;
-//     // position: fixed;
-//     /* make sure it stays put so we can see it! */
-
-//     // animation: slidein 1s linear infinite;
-//     // animation-play-state: paused;
-// }
-
-// @keyframes slidein {
-//     from {
-//         margin-top: 100%;
-//         height: 300%;
-//     }
-
-//     to {
-//         margin-top: 0%;
-//         height: 100%;
-//     }
-// }
 
 .custom-marker {
     display: flex;
@@ -117,24 +81,75 @@ hr {
     }
 }
 
-@media screen and (max-width: 960px) {
-    ::ng-deep {
-        .customized-timeline {
-            .p-timeline-event:nth-child(even) {
-                flex-direction: row !important;
+// @media screen and (max-width: 960px) {
+//     ::ng-deep {
+//         .customized-timeline {
+//             .p-timeline-event:nth-child(even) {
+//                 flex-direction: row !important;
 
-                .p-timeline-event-content {
-                    text-align: left !important;
-                }
-            }
+//                 .p-timeline-event-content {
+//                     text-align: left !important;
+//                 }
+//             }
 
-            .p-timeline-event-opposite {
-                flex: 0;
-            }
+//             .p-timeline-event-opposite {
+//                 flex: 0;
+//             }
 
-            .p-card {
-                margin-top: 1rem;
-            }
-        }
+//             .p-card {
+//                 margin-top: 1rem;
+//             }
+//         }
+//     }
+// }
+
+@media screen and (max-width: 1200px) {
+    a {
+        font-size: 0.95rem;
+    }
+    i {
+        font-size: 0.95rem;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    a {
+        font-size: 0.9rem;
+    }
+    i {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    a {
+        font-size: 0.85rem;
+    }
+    i {
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    a {
+        font-size: 0.8rem;
+    }
+    i {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    a {
+        font-size: 0.7rem;
+    }
+    i {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .lateral {
+        opacity: 0;
     }
 }

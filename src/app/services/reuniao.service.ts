@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   providedIn: 'root',
 })
 export class ReuniaoService {
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   getReuniao() {
     return this.http.get<Reuniao[]>(path + 'reuniao');
@@ -21,11 +21,11 @@ export class ReuniaoService {
     );
   }
 
-  cancelarReuniao(codigoReuniao: number | undefined, motivoReuniao: string){
+  cancelarReuniao(codigoReuniao: number | undefined, motivoReuniao: string) {
     return this.http.put<Reuniao>(path + 'reuniao/cancelar/' + codigoReuniao, motivoReuniao);
-
   }
-  finalizarReuniao(codigoReuniao: number | undefined){
+
+  finalizarReuniao(codigoReuniao: number | undefined) {
     return this.http.put<Reuniao>(path + 'reuniao/finalizar/' + codigoReuniao, null);
   }
 
@@ -33,8 +33,15 @@ export class ReuniaoService {
     return this.http.post<Reuniao>(path + 'reuniao', reuniao);
   }
 
-  enviarParecerComissao(codigoReuniao: number | undefined, info: {tipoAtaProposta: string, parecerComissaoProposta: string, decisaoProposta: string, recomendacaoProposta: string}, codigoProposta: string){
+  enviarParecerComissao(codigoReuniao: number | undefined, info: { tipoAtaProposta: string, parecerComissaoProposta: string, decisaoProposta: string, recomendacaoProposta: string }, codigoProposta: string) {
     return this.http.put<Demanda>(path + 'reuniao/parecer/' + codigoProposta + '?codigoReuniao=' + codigoReuniao, info)
+  }
+
+  addInfoDG(arquivo: File, codigoReuniao: number, codigoAtaDG: string) {
+    let formData = new FormData();
+    formData.append('arquivo', arquivo)
+    formData.append('numAtaDG', codigoAtaDG)
+    return this.http.put<Reuniao>(path + 'reuniao/parecer-dg/' + codigoReuniao, formData);
   }
 
   getReuniaoFiltrada(filtros: {
@@ -46,11 +53,12 @@ export class ReuniaoService {
     solicitante: string;
     page: string;
     size: string;
-  } ) {
+  }) {
     return this.http.get<Reuniao[]>(
       path + `reuniao/filtro?nomeComissao=${filtros.nomeComissao}&dataReuniao=${filtros.dataReuniao}&statusReuniao=${filtros.statusReuniao}&ppmProposta=${filtros.ppmProposta}&analista=${filtros.analista}&solicitante=${filtros.solicitante}`
     );
   }
+
   putReuniao(reuniao: Reuniao) {
     this.route.url.subscribe((url) => {
       console.log(url);

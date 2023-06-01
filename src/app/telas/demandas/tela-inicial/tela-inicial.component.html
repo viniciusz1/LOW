@@ -130,14 +130,14 @@
           [stepContent]="customContent"
           [stepContentParams]="{ texto: textoTutorial[2] }"
           [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
-          (click)="changeToList()"
+          (click)="openModalTrocarModoExibicao()"
           class="change-type-list me-2"
         >
           <i class="bi bi-list" style="font-size: 15px"></i>
         </div>
         <div
           [ngClass]="{ 'color-actived': tipoExibicaoDemanda }"
-          (click)="changeToCard()"
+          (click)="openModalTrocarModoExibicao()"
           class="change-type-list"
         >
           <i class="bi bi-border-all" style="font-size: 15px"> </i>
@@ -581,6 +581,7 @@
       </ng-template></p-confirmDialog
     >
   </div>
+  
   <div>
     <p-confirmDialog
       icon="pi pi-exclamation-triangle"
@@ -590,6 +591,7 @@
     >
       <ng-template pTemplate="footer">
         <button
+        *ngIf="confirmacaoReprovacao"
           type="button"
           class="btn btn-outline-primary"
           (click)="bt.accept()"
@@ -599,6 +601,7 @@
           {{ "telas.tela-inicial.modal-b-reformular" | translate }}
         </button>
         <button
+        *ngIf="confirmacaoReprovacao"
           type="button"
           class="btn btn-outline-primary"
           (click)="bt.reject()"
@@ -606,6 +609,14 @@
         >
           <i class="pi pi-check me-2"></i>
           {{ "telas.tela-inicial.modal-b-ok" | translate }}
+        </button>
+        <button *ngIf="!confirmacaoReprovacao" falarTexto type="button" class="btn btn-outline-primary" (click)="bt.reject()">
+          <i class="pi pi-times me-2"></i>
+          {{ "telas.tela-chat.modal-b-nao" | translate }}
+        </button>
+        <button *ngIf="!confirmacaoReprovacao" falarTexto type="button" class="btn btn-outline-primary" (click)="bt.accept()">
+          <i class="pi pi-check me-2"></i>
+          {{ "telas.tela-chat.modal-b-sim" | translate }}
         </button>
       </ng-template></p-confirmDialog
     >

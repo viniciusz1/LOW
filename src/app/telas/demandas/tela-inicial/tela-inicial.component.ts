@@ -40,7 +40,7 @@ export class TelaInicialComponent implements OnInit {
     private rascunhoService: RascunhoService,
     private messageService: MessageService,
     private usuarioService: UsuarioService,
-    private falarTextoService: FalarTextoService
+    private falarTextoService: FalarTextoService,
   ) {
     //Pipe ativado quando é realizado algum tipo de filtro por campo de texto
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
@@ -73,6 +73,7 @@ export class TelaInicialComponent implements OnInit {
   ];
   departamentoUsuario?= ''
   nivelAcessoUsuario?= ''
+  confirmacaoReprovacao: boolean = false;
   totalPagesPagination = 0
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
@@ -278,11 +279,13 @@ export class TelaInicialComponent implements OnInit {
     this.tipoExibicaoDemanda = false;
   }
 
-
   //Muda a exibição das demandas para formato de card
   changeToCard() {
     this.tipoExibicaoDemanda = true;
   }
+
+
+
   //Abre e fecha o sidebar lateral esquerdo
   moveSidebar() {
     if (this.showSidebar == 0) {
@@ -388,11 +391,7 @@ export class TelaInicialComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
-
-
   //Verifica o status da demanda, adiciona o título e o status na lista de títulos
-
-
   mudarStatusFiltro() {
     this.showFiltro = !this.showFiltro;
     if (!this.showFiltro) {
@@ -403,7 +402,6 @@ export class TelaInicialComponent implements OnInit {
       this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro;
     }
   }
-
 
   //Método que carrega as demandas inciais dependendo do nível de acesso do usuário
   carregarDemandasIniciais() {
@@ -420,7 +418,7 @@ export class TelaInicialComponent implements OnInit {
             }
           });
           e['qtdDemandas'].forEach((qtd: number) => {
-            if(qtd > 0){
+            if (qtd > 0) {
               this.qtdDemandasStatus.push(qtd)
             }
           })
@@ -435,7 +433,7 @@ export class TelaInicialComponent implements OnInit {
       this.demandasService.getDemandasTelaInicialByDepartamento().subscribe({
         next: (demandas) => {
           if (demandas.length > 0) {
-            console.log("divscroll 1 " , this.divScrollCircle)
+            console.log("divscroll 1 ", this.divScrollCircle)
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
             this.isFirstIfExecuted = true;
@@ -443,8 +441,8 @@ export class TelaInicialComponent implements OnInit {
             this.nenhumResultadoEncontrado = false;
           }
 
-          if(!this.isFirstIfExecuted && demandas.length == 0) {
-            console.log("divscroll 2 " , this.divScrollCircle)
+          if (!this.isFirstIfExecuted && demandas.length == 0) {
+            console.log("divscroll 2 ", this.divScrollCircle)
             this.divScrollCircle = true;
             setTimeout(() => {
               this.demandasVazias = true;
@@ -462,6 +460,7 @@ export class TelaInicialComponent implements OnInit {
 
   //Abre o modal do motivo de reprovação da demanda
   openModalMotivoReprovacao(demanda: Demanda) {
+    this.confirmacaoReprovacao = true;
     this.confirmationService.confirm({
       dismissableMask: true,
       key: 'motivoReprovacao',
@@ -475,6 +474,19 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  openModalTrocarModoExibicao() {
+    this.confirmacaoReprovacao = false;
+    this.confirmationService.confirm({
+      key: 'motivoReprovacao',
+      message: 'Deseja realmente trocar o modo de exibição?',
+      dismissableMask: true,
+      blockScroll: false,
+      header: 'Alterar modo de exibição',
+      accept: () => {
+        this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda
+      },
+    });
+  }
   ngOnInit(): void {
     // this.listaDemandas = listaDemandas
     this.carregarDemandasIniciais();
@@ -500,7 +512,7 @@ export class TelaInicialComponent implements OnInit {
           status: 'SUAS_DEMANDAS',
           titulo: 'Suas Demandas',
         });
-      }else {
+      } else {
         this.listaTituloNaoFiltrado.push({
           status: 'Sem demandas',
           titulo: 'Sem demandas',
@@ -510,8 +522,6 @@ export class TelaInicialComponent implements OnInit {
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
-
-
       return
     }
 
@@ -522,19 +532,17 @@ export class TelaInicialComponent implements OnInit {
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
         });
-      }else{
+      } else {
         this.listaTituloNaoFiltrado.push({
           status: 'Sem demandas',
           titulo: 'Sem demandas',
         });
       }
 
-
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
-
 
       return
     }

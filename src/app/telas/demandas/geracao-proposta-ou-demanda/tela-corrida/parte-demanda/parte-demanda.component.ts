@@ -64,7 +64,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
   onInputChange() {
     // Em vez de chamar diretamente o método, envie um evento ao Subject
-    this.inputSubject.next('aaaA');
+    this.inputSubject.next('');
   }
 
   inputSubject = new Subject<string>();

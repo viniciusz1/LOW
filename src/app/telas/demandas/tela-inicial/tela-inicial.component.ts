@@ -522,23 +522,24 @@ export class TelaInicialComponent implements OnInit {
 
     if (this.nivelAcessoUsuario == 'GerenteNegocio') {
       if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
-        console.log("Hey")
         this.listaTituloNaoFiltrado.push({
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
         });
-      }else{
-        this.listaTituloNaoFiltrado.push({
-          status: 'Sem demandas',
-          titulo: 'Sem demandas',
-        });
       }
+      // else{
+      //   this.listaTituloNaoFiltrado.push({
+      //     status: 'Sem demandas',
+      //     titulo: 'Sem demandas',
+      //   });
+      // }
 
 
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
+
 
 
       return

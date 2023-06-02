@@ -63,7 +63,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.atualizarDemandas();
+    this.pesquisarDemandas();
   }
 
   listaComissoes = [
@@ -156,7 +156,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
           }
         })
     } else {
-      console.log("edit")
       this.reuniaoService.putReuniao(reuniao)
         .subscribe({
           next: reuniao => {
@@ -277,6 +276,40 @@ export class ModalCriarReuniaoComponent implements OnInit {
       }
     }
     return index;
+  }
+  totalPagesPagination = 0;
+  nenhumResultadoEncontrado = false;
+
+  paginate(event: { page: number }) {
+    this.demandaService.avancarPage(event.page)
+      .subscribe((listaDemandas: Demanda[]) => {
+        if (listaDemandas.length > 0) {
+          this.listaDemandas = listaDemandas;
+          this.nenhumResultadoEncontrado = false;
+          this.removerDaListaAdicSecundaria()
+        } else {
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      });
+  }
+
+  pesquisarDemandas() {
+    this.demandaService
+      .getDemandasFiltradas("")
+      .subscribe((listaDemandas: Demanda[]) => {
+        console.log(listaDemandas)
+        if (listaDemandas.length > 0) {
+          this.totalPagesPagination = this.demandaService.totalPages
+          this.listaDemandas = listaDemandas;
+          this.nenhumResultadoEncontrado = false;
+          this.removerDaListaAdicSecundaria()
+        } else {
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      });
+
   }
 
 }

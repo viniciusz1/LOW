@@ -14,15 +14,17 @@ export class FiltroDemandaComponent implements OnInit {
   @Input() mostrarIconeDeAbrirFiltro = true;
   @Input() filtroReduzidoVertical = false;
   tamanho: string[] = [];
-  status: string[] = [];
+  status:  { label: string, value: string }[] = [];
   // tamanho: any[] = [];
   valorTamanho: any = "";
   valorStatus: any = "";
-  mostrarExel = false
-  atualizarFiltro(dados: Filtro){
+  mostrarExcel: boolean = false
+  atualizarFiltro(dados: Filtro) {
     this.demandaService.setFiltroData = dados
     this.filtroAcionado.emit()
-    this.mostrarExel = true
+    if (!this.filtroReduzidoVertical) {
+      this.mostrarExcel = true
+    }
   }
 
   constructor(private demandaService: DemandaService) {
@@ -33,17 +35,31 @@ export class FiltroDemandaComponent implements OnInit {
       "Grande",
       "Muito Grande",
     ]
-
-    this.status = [
-      "Backlog",
-      "Assessment",
-      "To-Do",
-      "Cancelled",
-      "Done",
-    ]
   }
 
   ngOnInit(): void {
-    this.mostrarExel = false
+    this.mostrarExcel = false
+    console.log(this.filtroReduzidoVertical)
+    if (this.filtroReduzidoVertical == true) {
+      this.status = [
+        { label: "Business Case", value: "BUSINESS_CASE" },
+        { label: "Assessment", value: "ASSESSMENT" },
+      ]
+    } else {
+      this.status = [
+        { label: "Backlog - Classificação", value: "BACKLOG_CLASSIFICACAO" },
+        { label: "Backlog - Proposta", value: "BACKLOG_PROPOSTA" },
+        { label: "Backlog - Aprovação", value: "BACKLOG_APROVACAO" },
+        { label: "Business Case", value: "BUSINESS_CASE" },
+        { label: "Assessment", value: "ASSESSMENT" },
+        { label: "To Do", value: "TO_DO" },
+        { label: "Design and Build", value: "DESIGN_AND_BUILD" },
+        { label: "Support", value: "SUPPORT" },
+        { label: "Cancelled", value: "CANCELLED" },
+        { label: "Done", value: "DONE" },
+        { label: "Discussion", value: "DISCUSSION" },
+        { label: "Draft", value: "DRAFT" },
+      ]
+    }
   }
 }

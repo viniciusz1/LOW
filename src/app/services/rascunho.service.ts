@@ -74,6 +74,10 @@ export class RascunhoService {
         return this.http.put<Demanda>(path + 'rascunho/update', demanda)
     }
 
+    deleteRascunhoDemanda(codigo: string) {
+        return this.http.delete<string>(path + 'rascunho/' + codigo)
+    }
+
     // get getSizeRascunho(): number {
     //     let rasc: any = localStorage.getItem('rascunhos')
     //     if (rasc) {

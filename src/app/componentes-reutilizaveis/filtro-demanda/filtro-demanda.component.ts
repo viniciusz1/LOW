@@ -22,6 +22,11 @@ export class FiltroDemandaComponent implements OnInit {
   valorStatus: any = "";
   mostrarExel = false
   atualizarFiltro(dados: Filtro){
+    if(this.nivelAcesso == 'Solicitante' || this.nivelAcesso == 'GerenteNegocio'){
+      if(this.usuarioService.getDepartamento){
+      dados.departamento = this.usuarioService.getDepartamento
+      }
+    }
     this.demandaService.setFiltroData = dados
     this.filtroAcionado.emit()
     this.mostrarExel = true

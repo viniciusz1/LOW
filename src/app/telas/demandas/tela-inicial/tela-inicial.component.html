@@ -329,7 +329,7 @@
                 let demanda of listaDemandas
                   | filtrarDemandaStatus : listaTituloNaoFiltrado[0].titulo
               "
-              (clicouEmExcluir)="carregarDemandasIniciais()"
+              (clicouEmExcluir)="deletarDemanda($event)"
               [dadosDemanda]="demanda"
               (verDocumentoProposta)="openModalDemandaDocumento($event)"
               (irParaChat)="irParaChat($event, demanda)"

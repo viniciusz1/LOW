@@ -420,7 +420,7 @@ export class TelaInicialComponent implements OnInit {
             }
           });
           e['qtdDemandas'].forEach((qtd: number) => {
-            if(qtd > 0){
+            if (qtd > 0) {
               this.qtdDemandasStatus.push(qtd)
             }
           })
@@ -435,7 +435,7 @@ export class TelaInicialComponent implements OnInit {
       this.demandasService.getDemandasTelaInicialByDepartamento().subscribe({
         next: (demandas) => {
           if (demandas.length > 0) {
-            console.log("divscroll 1 " , this.divScrollCircle)
+            console.log("divscroll 1 ", this.divScrollCircle)
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
             this.isFirstIfExecuted = true;
@@ -443,8 +443,8 @@ export class TelaInicialComponent implements OnInit {
             this.nenhumResultadoEncontrado = false;
           }
 
-          if(!this.isFirstIfExecuted && demandas.length == 0) {
-            console.log("divscroll 2 " , this.divScrollCircle)
+          if (!this.isFirstIfExecuted && demandas.length == 0) {
+            console.log("divscroll 2 ", this.divScrollCircle)
             this.divScrollCircle = true;
             setTimeout(() => {
               this.demandasVazias = true;
@@ -498,18 +498,18 @@ export class TelaInicialComponent implements OnInit {
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
-    
-      if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
-        this.listaTituloNaoFiltrado.push({
-          status: 'SUAS_DEMANDAS',
-          titulo: 'Suas Demandas',
-        });
-      }else {
-        this.listaTituloNaoFiltrado.push({
-          status: 'Sem demandas',
-          titulo: 'Sem demandas',
-        });
-      }
+
+    if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
+      this.listaTituloNaoFiltrado.push({
+        status: 'SUAS_DEMANDAS',
+        titulo: 'Suas Demandas',
+      });
+    } else {
+      this.listaTituloNaoFiltrado.push({
+        status: 'Sem demandas',
+        titulo: 'Sem demandas',
+      });
+    }
     if (this.nivelAcessoUsuario == 'Solicitante') {
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
@@ -556,10 +556,13 @@ export class TelaInicialComponent implements OnInit {
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'
       )
     ) {
+      if(this.listaDemandas.filter((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO' &&
+       e.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()).length != 0){
       this.listaTituloNaoFiltrado.push({
         status: 'BACKLOG_CLASSIFICACAO',
         titulo: 'Backlog - Classificação',
       });
+    }
     }
     if (
       this.listaDemandas.some(
@@ -633,5 +636,25 @@ export class TelaInicialComponent implements OnInit {
       this.listaTituloNaoFiltrado.push({ status: 'DONE', titulo: 'Done' });
     }
   }
+
+  deletarDemanda(demanda: Demanda) {
+    if (demanda?.codigoDemanda)
+    this.rascunhoService.deleteRascunhoDemanda(demanda?.codigoDemanda).subscribe(
+      {
+        next: e => {
+          this.showSuccess("Rascunho deletado!")
+          this.carregarDemandasIniciais()
+        },
+        error: err => {
+          console.log(err.error.text)
+          if(err.error.text == "Rascunho Deletado com Sucesso!"){
+            this.showSuccess("Rascunho deletado!")
+            this.carregarDemandasIniciais()
+          }else{
+            this.showError("Não foi possível excluir o rascunho!")
+          }
+        }
+      }
+  )}
 
 }

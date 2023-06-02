@@ -282,11 +282,11 @@ export class CardDemandaComponent implements OnInit {
     }
   }
 
-  deleteRascunhoFromLocalStorage() {
+  deletarRascunho() {
     if (this.dadosDemanda.codigoDemanda) {
-      this.showSuccess("Rascunho deletado!")
-      // this.rascunhoService.deleteRascunho(this.dadosDemanda.codigoDemanda)
-      this.clicouEmExcluir.emit()
+      this.clicouEmExcluir.emit(this.dadosDemanda)
+      
+      
     } else {
       this.showError("Não foi possível excluir o rascunho!")
     }

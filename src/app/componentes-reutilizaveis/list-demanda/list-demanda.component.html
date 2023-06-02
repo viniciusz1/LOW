@@ -2,26 +2,26 @@
     <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
     <div class="d-flex" style="width: 80%;">
         <li class="nav-item">
-            <label falarTexto class="" for="">00{{dadosDemanda.codigoDemanda}}</label>
+            <label pTooltip="Código demanda" tooltipPosition="top" falarTexto class="" for="">{{dadosDemanda.codigoDemanda}}</label>
         </li>
         <li class="nav-item d-flex justify-content-center" style="width: 45%;">
-            <label falarTexto  class="text-truncate d-inline-block" for=""><b>{{dadosDemanda.tituloDemanda}}</b></label>
+            <label pTooltip="Nome Demanda" tooltipPosition="top" falarTexto class="text-truncate d-inline-block" for=""><b>{{dadosDemanda.tituloDemanda}}</b></label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width: 20%;">
-            <label falarTexto class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.nomeUsuario}}</label>
+            <label falarTexto pTooltip="Usuário" tooltipPosition="top"
+                class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.nomeUsuario}}</label>
         </li>
-        <li class="nav-item"  style="width: 50%;">
-            <label falarTexto class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
+        <li class="nav-item" style="width: 30%;">
+            <label falarTexto pTooltip="Departamento" tooltipPosition="top"
+                class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
         </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width:  5%;">
-            <label falarTexto class="text-truncate d-inline-block">190.8</label>
+        <li *ngIf="!demandaPequena" class="nav-item" style="width:  10%; margin-right: 2vw;">
+            <span pTooltip="Score" tooltipPosition="top" falarTexto *ngIf="dadosDemanda.score != undefined">{{
+                formatarNumero(dadosDemanda.score, 2) }} </span>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  15%;">
 
-            <label falarTexto class="text-truncate d-inline-block">{{dadosDemanda.statusDemanda | uppercase}}</label>
-        </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width:  10%;">
-            <label falarTexto class="text-truncate d-inline-block">{{dadosDemanda.score}}</label>
+            <label pTooltip="Status" tooltipPosition="top" falarTexto class="text-truncate d-inline-block">{{dadosDemanda.statusDemanda | uppercase}}</label>
         </li>
 
     </div>
@@ -31,26 +31,41 @@
                 {{textoExibidoEmBotaoDependendoRota.texto}}
             </button>
         </li>
-        <i class="bi bi-chat-left-dots me-3 ms-3" *ngIf="!demandaPequena" (click)="irParaChat.emit()"></i>
+        <i
+        class="bi bi-chat-left-dots me-3"
+        *ngIf="!rascunho && statusPermitido() && exibirIniciarChat() && !demandaPequena " 
+        (click)="irParaChat.emit($event)"
+        style="cursor: pointer"
+      ></i>
         <i class="bi bi-three-dots-vertical three-dots" [ngClass]="{'me-3': demandaPequena}" role="button"
             [matMenuTriggerFor]="menu"></i>
         <i class="bi bi-plus-lg" *ngIf="demandaPequena" role="button" (click)="clicouAdicionarPauta.emit()"></i>
         <mat-menu #menu="matMenu">
-            <button falarTexto (click)="abrirModalHistorico()" mat-menu-item>
+            <button (click)="abrirModalHistorico()" mat-menu-item>
                 <i class="bi bi-arrow-counterclockwise me-3"></i>
-                <span>{{ "componentes-reutilizaveis.list-demanda.historico" | translate }}</span>
+                <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.historico" | translate }}</span>
             </button>
-            <button falarTexto (click)="verDocumentoProposta.emit(dadosDemanda)" mat-menu-item>
+            <button (click)="verDocumentoProposta.emit(dadosDemanda)" mat-menu-item>
                 <i class="bi bi-arrows-angle-expand me-3"></i>
-                <span>{{ "componentes-reutilizaveis.list-demanda.ver-demanda" | translate }}</span>
+                <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-demanda" | translate }}</span>
             </button>
-            <button falarTexto *ngIf="existePauta()" routerLink="/tela-inicial/reunioes" mat-menu-item>
+            <button *ngIf="existePauta()" [routerLink]="['/tela-inicial/reunioes']" mat-menu-item>
                 <i class="bi bi-person-lines-fill me-3"></i>
-                <span>{{ "componentes-reutilizaveis.list-demanda.ir-reuniao" | translate }}</span>
+                <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ir-reuniao" | translate }}</span>
             </button>
-            <button falarTexto routerLink="/tela-inicial/chat" (click)="fechouModal.emit()"  mat-menu-item>
+            <button (click)="verDocumentoEmAta.emit()" *ngIf="existeAta()" mat-menu-item>
+                <i class="bi-file-text me-3"></i>
+                <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
+            </button>
+            <button *ngIf="statusPermitido() && exibirIniciarChat()"
+                [routerLink]="['/tela-inicial/chat/'+dadosDemanda.codigoDemanda]" mat-menu-item>
                 <i class="bi bi-chat-left-quote me-3"></i>
-                <span>{{ "componentes-reutilizaveis.list-demanda.iniciar-conversa" | translate }}</span>
+                <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.iniciar-conversa" | translate }}</span>
+            </button>
+            <button *ngIf="mostrarCancelarPropriaDemanda()" (click)="abrirModalReprovar.emit(dadosDemanda)"
+                mat-menu-item>
+                <i class="bi bi-x-circle me-3"></i>
+                <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.cancelar-demanda" | translate }}</span>
             </button>
         </mat-menu>
     </div>

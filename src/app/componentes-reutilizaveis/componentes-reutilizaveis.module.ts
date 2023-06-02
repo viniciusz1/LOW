@@ -21,6 +21,8 @@ import { DropdownModule } from "primeng/dropdown";
 import { FormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SharedModule } from '../shared/shared.module';
+import { TooltipModule } from 'primeng/tooltip';
+
 
 
 @NgModule({
@@ -48,7 +50,8 @@ import { SharedModule } from '../shared/shared.module';
     DropdownModule,
     FormsModule,
     ConfirmDialogModule,
-    SharedModule
+    SharedModule,
+    TooltipModule
   ],
   exports:[
     CardDemandaComponent,

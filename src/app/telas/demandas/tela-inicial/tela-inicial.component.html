@@ -258,13 +258,19 @@
       <div style="padding: 10px; margin-left: 6px"></div>
       <div class="container d-flex flex-column align-items-center">
         <app-list-demanda
-          (irParaChat)="irParaChat($event, demanda)"
-          (modalHistorico)="openModalHistorico($event)"
-          *ngFor="let demanda of listaDemandas"
-          [dadosDemanda]="demanda"
-          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-          class="mb-2"
-        >
+              (clicouEmExcluir)="carregarDemandasIniciais()"
+              [dadosDemanda]="demanda"
+              (verDocumentoProposta)="openModalDemandaDocumento($event)"
+              (irParaChat)="irParaChat($event, demanda)"
+              (modalHistorico)="openModalHistorico($event)"
+              (avancarStatusDemanda)="avancarStatusDemanda($event)"
+              (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
+              (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
+              (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
+              (verDocumentoEmAta)="openModalAtaDocumento()"
+              *ngFor="let demanda of listaDemandas"
+              [dadosDemanda]="demanda"
+          class="mb-2">
         </app-list-demanda>
       </div>
     </div>

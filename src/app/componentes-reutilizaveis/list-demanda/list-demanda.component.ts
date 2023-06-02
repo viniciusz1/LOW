@@ -4,6 +4,7 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { NivelAcesso } from 'src/app/models/nivel-acesso.enum';
 import { MessageService } from 'primeng/api';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-list-demanda',
@@ -23,7 +24,9 @@ export class ListDemandaComponent implements OnInit {
   @Output() irParaChat = new EventEmitter();
   @Output() abrirModalCriarReuniao = new EventEmitter();
   @Output() verDocumentoEmAta = new EventEmitter();
+  @Output() clicouEmExcluir = new EventEmitter();
   @Output() fechouModal = new EventEmitter();
+  @Output() abrirModalReprovar = new EventEmitter<Demanda>()
   @Output() avancarStatusDemanda = new EventEmitter<{
     mensagem: string;
     codigoDemanda: string | undefined;
@@ -32,6 +35,7 @@ export class ListDemandaComponent implements OnInit {
 
   @Input() isPauta: boolean = false;
   @Input() rascunho: boolean = false;
+  @Input() tipoDeAta: string = '';
   @Input() exibirBotaoParecerComissao: boolean = false;
   @Input() exibirBotaoParecerDg: boolean = false;
   @Input() dadosDemanda: Demanda = {};
@@ -44,7 +48,7 @@ export class ListDemandaComponent implements OnInit {
   nivelAcesso: NivelAcesso = NivelAcesso.Analista;
   textoExibidoEmBotaoDependendoRota: { rota: string, texto: string } | undefined = undefined;
 
-  constructor(private route: Router, private messageService: MessageService) { }
+  constructor(private route: Router, private usuarioService: UsuarioService, private messageService: MessageService) { }
   statusPermitido() {
     if (
       this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -61,6 +65,38 @@ export class ListDemandaComponent implements OnInit {
     console.log("clicou no historico");
 
     this.modalHistorico.emit(this.dadosDemanda.codigoDemanda)
+  }
+
+  exibirIniciarChat() {
+
+    if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()) {
+      return true;
+    }
+    else if (this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista) {
+
+      if (this.dadosDemanda.analista == undefined) {
+        return true;
+      }
+      //Se um outro analista já tiver iniciado a conversa, não exibe o botão
+      else if (this.dadosDemanda.analista?.codigoUsuario == this.usuarioService.getCodigoUser()) {
+        return true;
+      }
+      else if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+        return false;
+      }
+    }
+    return false;
+  }
+
+  formatarNumero(numero: number | undefined, casasDecimais: number): string {
+    return numero !== undefined ? numero.toFixed(casasDecimais) : '';
+  }
+
+  mostrarCancelarPropriaDemanda() {
+    if (this.usuarioService.getCodigoUser() == this.dadosDemanda.solicitanteDemanda?.codigoUsuario) {
+      return true
+    }
+    return false;
   }
 
   showSuccess(message: string) {

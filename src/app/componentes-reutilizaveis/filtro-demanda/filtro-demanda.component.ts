@@ -2,6 +2,7 @@ import { outputAst } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Filtro } from 'src/app/models/filtro.model';
 import { DemandaService } from 'src/app/services/demanda.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
   selector: 'app-filtro-demanda',
   templateUrl: './filtro-demanda.component.html',
@@ -15,6 +16,7 @@ export class FiltroDemandaComponent implements OnInit {
   @Input() filtroReduzidoVertical = false;
   tamanho: string[] = [];
   status: string[] = [];
+  nivelAcesso = "";
   // tamanho: any[] = [];
   valorTamanho: any = "";
   valorStatus: any = "";
@@ -25,7 +27,8 @@ export class FiltroDemandaComponent implements OnInit {
     this.mostrarExel = true
   }
 
-  constructor(private demandaService: DemandaService) {
+  constructor(private demandaService: DemandaService,
+    private usuarioService: UsuarioService) {
     this.tamanho = [
       "Muito Pequeno",
       "Pequeno",
@@ -44,6 +47,10 @@ export class FiltroDemandaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.mostrarExel = false
+    this.mostrarExel = false;
+    if(this.usuarioService.getRole){
+    this.nivelAcesso = this.usuarioService.getRole
+    console.log(this.nivelAcesso)
+    }
   }
 }

@@ -42,9 +42,8 @@
                             pInputText>
                         <label for="float-input">{{ "componentes-reutilizaveis.filtro-demanda.solicitante" | translate }}</label>
                     </span>
-                    <span class="p-float-label me-2">
-                        <input inputEmFoco class="p-inputtext-sm" #departamento placeholder="Ex: Motores" pInputText type="text"
-                            pInputText>
+                    <span class="p-float-label me-2" [hidden]="this.nivelAcesso == 'Solicitante' || this.nivelAcesso == 'GerenteNegocio'">
+                        <input inputEmFoco class="p-inputtext-sm" #departamento placeholder="Ex: Motores" pInputText type="text">
                         <label for="float-input">{{ "componentes-reutilizaveis.filtro-demanda.departamento" | translate }}</label>
                     </span>
                     <span class="p-float-label me-2">

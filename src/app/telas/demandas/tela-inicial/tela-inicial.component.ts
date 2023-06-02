@@ -43,6 +43,10 @@ export class TelaInicialComponent implements OnInit {
     private falarTextoService: FalarTextoService,
   ) {
     //Pipe ativado quando é realizado algum tipo de filtro por campo de texto
+    let tipo =localStorage.getItem("meu dado")
+    if(tipo){
+      this.tipoExibicaoDemanda = JSON.parse(tipo)
+    }
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {
         this.carregarDemandasIniciais()
@@ -484,6 +488,7 @@ export class TelaInicialComponent implements OnInit {
       header: 'Alterar modo de exibição',
       accept: () => {
         this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda
+        localStorage.setItem("meu dado", JSON.stringify(this.tipoExibicaoDemanda))
       },
     });
   }

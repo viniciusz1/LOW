@@ -63,7 +63,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pesquisarDemandas();
+    this.pesquisarDemandas(undefined);
   }
 
   listaComissoes = [
@@ -281,7 +281,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
   nenhumResultadoEncontrado = false;
 
   paginate(event: { page: number }) {
-    console.log(event)
     this.demandaService.avancarPage(event.page)
       .subscribe((listaDemandas: Demanda[]) => {
         if (listaDemandas.length > 0) {
@@ -295,9 +294,11 @@ export class ModalCriarReuniaoComponent implements OnInit {
       });
   }
 
-  pesquisarDemandas() {
+  //undefined - valores iniciais
+  //string - do filtro
+  pesquisarDemandas(tipo: string | undefined) {
     this.demandaService
-      .getDemandasFiltradas({status: "ass", pesquisaCampo: ""})
+      .getDemandasFiltradas(typeof tipo == 'string' ? '' : {status: 'ASSESSMENT', pesquisaCampo: ''})
       .subscribe((listaDemandas: Demanda[]) => {
         console.log(listaDemandas)
         if (listaDemandas.length > 0) {

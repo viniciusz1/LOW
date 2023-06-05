@@ -24,18 +24,25 @@
     </span>
   </p>
 
-  <mat-dialog-content
-    class="mat-typography"
-    style="overflow: hidden;"
-    [ngStyle]="{ display: documentoEmAta ? 'inline-table' : 'flex' }"
-  >
-    <p-scrollPanel
-    *ngIf="documentoEmAta == false"
-      [style]="{ width: '100%', height: '100%' }"
-      styleClass="custombar1"
-    >
+  <mat-dialog-content class="mat-typography" style="overflow: hidden;"
+    [ngStyle]="{ display: documentoEmAta ? 'inline-table' : 'contents' }">
+    <p-scrollPanel *ngIf="documentoEmAta == false" [style]="{ width: '100%', height: '70vh' }" styleClass="custombar1">
       <app-info-modal-demanda [dadosDemanda]="dadosDemanda" [custosTotais]="custosTotais"></app-info-modal-demanda>
     </p-scrollPanel>
 
-    <app-info-modal-demanda *ngIf="documentoEmAta == true" [dadosDemanda]="dadosDemanda" [custosTotais]="custosTotais"></app-info-modal-demanda>
+    <app-info-modal-demanda *ngIf="documentoEmAta == true" [dadosDemanda]="dadosDemanda"
+      [custosTotais]="custosTotais"></app-info-modal-demanda>
+    <mat-dialog-actions class="d-flex justify-content-between" *ngIf="documentoEmAta == false">
+      <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">
+        {{ "documento-pdf.b-cancelar" | translate }}
+      </button>
+      <div>
+        <button class="btn btn-danger me-2" *ngIf="showbotoesAprovarDemanda" (click)="openModalReprovacao()">
+          {{ "documento-pdf.b-reprovar" | translate }}
+        </button>
+        <button class="btn btn-primary" *ngIf="showbotoesAprovarDemanda" (click)="enviarDecisao(1)">
+          {{ "documento-pdf.b-aprovar" | translate }}
+        </button>
+      </div>
+    </mat-dialog-actions>
   </mat-dialog-content>

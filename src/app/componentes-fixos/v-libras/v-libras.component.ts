@@ -28,10 +28,11 @@ export class VLibrasComponent implements OnInit {
 
     const vLibrasScript = this.renderer.createElement('script');
     vLibrasScript.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
-    vLibrasScript.onload = async () => {
+    setTimeout(() => {
+
       //@ts-ignore
-      await new window.VLibras.Widget('https://vlibras.gov.br/app');
-    };
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    }, 2000)
     this.renderer.appendChild(document.body, vLibrasScript);
   }
 

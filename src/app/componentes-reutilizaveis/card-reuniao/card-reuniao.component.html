@@ -6,7 +6,7 @@
     justify-content: space-between;">
           <div class="d-flex">
             <label falarTexto class="me-2" for="">{{dadosReuniao.codigoReuniao}}</label>
-            <label falarTexto class="me-2 text-truncate" for="titulo"><b>{{ "componentes-reutilizaveis.card-reuniao.dia-comissao" | translate }} {{dadosReuniao.dataReuniao | date:"dd/MM/YY"}}</b></label>
+            <label falarTexto class="me-2 text-truncate" for="titulo"><b>{{ "componentes-reutilizaveis.card-reuniao.dia-comissao" | translate }} </b>{{dadosReuniao.dataReuniao | date:"dd/MM/YY"}} - <b> Horário:</b> {{dadosReuniao.dataReuniao | date:"HH:mm"}}</label>
           </div>
             <small falarTexto class="me-3" for="">{{ "componentes-reutilizaveis.card-reuniao.status" | translate }} {{dadosReuniao.statusReuniao | titlecase}}</small>
             <!-- <i class="bi bi-three-dots-vertical three-dots" role="button" [matMenuTriggerFor]="menu"></i>

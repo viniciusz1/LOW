@@ -147,10 +147,10 @@
     </thead>
 
     <tbody
-      *ngFor="let itemRecurso of dadosDemanda?.recursosProposta"
       class="table-group-divider"
     >
-      <tr>
+      <tr
+      *ngFor="let itemRecurso of dadosDemanda?.recursosProposta">
         <td falarTexto>
           {{ itemRecurso.nomeRecurso }}
         </td>

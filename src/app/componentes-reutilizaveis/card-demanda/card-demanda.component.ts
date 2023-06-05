@@ -221,11 +221,11 @@ export class CardDemandaComponent implements OnInit {
         };
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
-          if(this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()){
+          // if(this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()){
           this.textoExibidoEmBotaoDependendoRota = {
             rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
             texto: 'Criar Proposta'
-          };
+          // };
         }
         return true;
       case StatusDemanda.BACKLOG_APROVACAO:

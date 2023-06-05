@@ -1,15 +1,7 @@
 <div id="html-to-pdf">
-  <p-timeline
-    *ngIf="showTimeline"
-    [value]="timeline"
-    align="top"
-    layout="horizontal"
-  >
+  <p-timeline *ngIf="showTimeline" [value]="timeline" align="top" layout="horizontal">
     <ng-template pTemplate="marker" let-event>
-      <span
-        class="custom-marker shadow-2"
-        [style.backgroundColor]="event.color"
-      >
+      <span class="custom-marker shadow-2" [style.backgroundColor]="event.color">
         <i [ngClass]="event.icon"></i>
       </span>
     </ng-template>
@@ -29,27 +21,30 @@
         <a [href]="[path + 'demanda/pdf/' + dadosDemanda?.codigoDemanda]">
           <i class="bi bi-download me-3" style="font-size: 25px"></i>
         </a>
-        <img
-          style="width: 60px"
-          src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png"
-          alt=""
-        />
+        <img style="width: 60px" src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo.png" alt="" />
       </div>
     </span>
   </p>
 
-  <mat-dialog-content
-    class="mat-typography"
-    style="overflow: hidden;"
-    [ngStyle]="{ display: documentoEmAta ? 'inline-table' : 'flex' }"
-  >
-    <p-scrollPanel
-    *ngIf="documentoEmAta == false"
-      [style]="{ width: '100%', height: '70vh' }"
-      styleClass="custombar1"
-    >
+  <mat-dialog-content class="mat-typography" style="overflow: hidden;"
+    [ngStyle]="{ display: documentoEmAta ? 'inline-table' : 'contents' }">
+    <p-scrollPanel *ngIf="documentoEmAta == false" [style]="{ width: '100%', height: '70vh' }" styleClass="custombar1">
       <app-info-modal-demanda [dadosDemanda]="dadosDemanda" [custosTotais]="custosTotais"></app-info-modal-demanda>
     </p-scrollPanel>
 
-    <app-info-modal-demanda *ngIf="documentoEmAta == true" [dadosDemanda]="dadosDemanda" [custosTotais]="custosTotais"></app-info-modal-demanda>
+    <app-info-modal-demanda *ngIf="documentoEmAta == true" [dadosDemanda]="dadosDemanda"
+      [custosTotais]="custosTotais"></app-info-modal-demanda>
+    <mat-dialog-actions class="d-flex justify-content-between" *ngIf="documentoEmAta == false">
+      <button class="btn btn-outline-primary me-2" [mat-dialog-close]="true">
+        {{ "documento-pdf.b-cancelar" | translate }}
+      </button>
+      <div>
+        <button class="btn btn-danger me-2" *ngIf="showbotoesAprovarDemanda" (click)="openModalReprovacao()">
+          {{ "documento-pdf.b-reprovar" | translate }}
+        </button>
+        <button class="btn btn-primary" *ngIf="showbotoesAprovarDemanda" (click)="enviarDecisao(1)">
+          {{ "documento-pdf.b-aprovar" | translate }}
+        </button>
+      </div>
+    </mat-dialog-actions>
   </mat-dialog-content>

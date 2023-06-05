@@ -115,14 +115,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     });
   }
 
-  download(arquivo: Arquivo): void {
-    this.demandaService.saveByteArray(
-      arquivo.dadosArquivo,
-      arquivo.tipoArquivo,
-      arquivo.nomeArquivo
-    );
-  }
-
+ 
   timeline: { status: string, date: string, icon: string, color: string, fontWeight: string }[] = [
     {
       status: 'Reserva',

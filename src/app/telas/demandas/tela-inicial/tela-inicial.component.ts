@@ -163,48 +163,14 @@ export class TelaInicialComponent implements OnInit {
   }
 
   exportExcel() {
+    //Realiza o mesmo filtro que está salvo no serviço de demandas
+    //porém sem a paginação, logo, retornando todas as demandas filtradas
     this.demandasService
       .getTodasAsDemandasFiltradas()
-      .subscribe((listaDemandas: Demanda[]) => {
-        let listaExport: DemandaExcel[] = [];
-
-        //Converte a demanda em um formato possível de exportar para excel
-        for (let i = 0; i < listaDemandas.length; i++) {
-          listaExport.push({
-            codigoDemanda: listaDemandas[i].codigoDemanda,
-            tituloDemanda: listaDemandas[i].tituloDemanda,
-            nomeSolicitante: listaDemandas[i].solicitanteDemanda?.nomeUsuario,
-            situacaoAtualDemanda: listaDemandas[i].situacaoAtualDemanda,
-            objetivoDemanda: listaDemandas[i].objetivoDemanda,
-            codigoBeneficioReal:
-              listaDemandas[i].beneficioRealDemanda?.codigoBeneficio,
-            moedaBeneficioReal:
-              listaDemandas[i].beneficioRealDemanda?.moedaBeneficio,
-            valorBeneficioReal:
-              listaDemandas[i].beneficioRealDemanda?.valorBeneficio,
-            codigoBeneficioPotencial:
-              listaDemandas[i].beneficioPotencialDemanda?.codigoBeneficio,
-            moedaBeneficioPotencial:
-              listaDemandas[i].beneficioPotencialDemanda?.moedaBeneficio,
-            valorBeneficioPotencial:
-              listaDemandas[i].beneficioPotencialDemanda?.valorBeneficio,
-            beneficioQualitativoDemanda:
-              listaDemandas[i].beneficioQualitativoDemanda,
-            frequenciaDeUsoSistemaDemanda:
-              listaDemandas[i].frequenciaDeUsoDemanda,
-            statusDemanda: listaDemandas[i].statusDemanda,
-            codigoCentroCusto: listaDemandas[i].centroCustosDemanda
-              ?.map((cc) => cc.codigoCentroCusto)
-              .join(', '),
-            nomeCentroCusto: listaDemandas[i].centroCustosDemanda
-              ?.map((cc) => cc.nomeCentroCusto)
-              .join(', '),
-          });
-        }
-
-        //Importa o xlsx e exporta para excel
+      .subscribe((listaDemandas: any) => {
+        // Importa o xlsx e exporta para excel
         import('xlsx').then((xlsx) => {
-          const worksheet = xlsx.utils.json_to_sheet(listaExport);
+          const worksheet = xlsx.utils.json_to_sheet(listaDemandas['content']);
           const workbook = {
             Sheets: { data: worksheet },
             SheetNames: ['data'],
@@ -213,7 +179,7 @@ export class TelaInicialComponent implements OnInit {
             bookType: 'xlsx',
             type: 'array',
           });
-          this.saveAsExcelFile(excelBuffer, 'products');
+          this.saveAsExcelFile(excelBuffer, 'filtragem de demandas - ');
         });
       });
   }
@@ -228,7 +194,7 @@ export class TelaInicialComponent implements OnInit {
     });
     FileSaver.saveAs(
       data,
-      fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION
+      fileName + new Date().getTime() + EXCEL_EXTENSION
     );
   }
 

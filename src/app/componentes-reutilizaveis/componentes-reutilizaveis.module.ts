@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SharedModule } from '../shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
+import { InfoModalDemandaComponent } from './info-modal-demanda/info-modal-demanda.component';
 
 
 
@@ -34,7 +35,8 @@ import { TooltipModule } from 'primeng/tooltip';
     SidebarReuniaoComponent,
     FiltroDemandaComponent,
     FiltroReuniaoComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    InfoModalDemandaComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +63,8 @@ import { TooltipModule } from 'primeng/tooltip';
     FiltroDemandaComponent,
     FiltroReuniaoComponent,
     SidebarReuniaoComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    InfoModalDemandaComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

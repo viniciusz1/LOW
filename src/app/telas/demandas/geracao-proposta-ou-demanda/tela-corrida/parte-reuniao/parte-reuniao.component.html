@@ -382,6 +382,8 @@
         inputEmFoco
         (input)="onInputChange()"
         [editor]="editor"
+        (focusOut)="onFocoOut()" (focusIn)="onFocoIn()"
+        [ngModel]="htmlEscopoDemanda"
         formControlName="escopoDemandaProposta"
         placeholder="Escreva aqui..."
       >

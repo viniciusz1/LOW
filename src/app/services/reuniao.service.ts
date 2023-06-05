@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Reuniao } from '../models/reuniao.model';
 import { Demanda } from '../models/demanda.model';
 import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -44,6 +45,48 @@ export class ReuniaoService {
     return this.http.put<Reuniao>(path + 'reuniao/parecer-dg/' + codigoReuniao, formData);
   }
 
+  infosFiltro: {
+    nomeComissao: string;
+    dataReuniao: string;
+    statusReuniao: string;
+    ppmProposta: string;
+    analista: string;
+    solicitante: string;
+    ordenar: string;
+    page: string;
+    size: string;
+  } = {
+
+      nomeComissao: '',
+      dataReuniao: '',
+      statusReuniao: '',
+      ppmProposta: '',
+      analista: '',
+      solicitante: '',
+      ordenar: '',
+      page: '',
+      size: '',
+
+    }
+
+  filtroOrdenado = false;
+  pageable: any;
+  link: string = path + `reuniao/filtro?nomeComissao=&dataReuniao=&statusReuniao=&ppmProposta=&analista=&solicitante=&ordenar=`
+  get totalPages() {
+    return this.pageable.totalPages || 0
+  }
+
+  avancarPage(page: number) {
+    let linkComPaginacao = this.link;
+    linkComPaginacao += '&page=' + page
+    return this.http.get<Demanda[]>(
+      linkComPaginacao
+    ).pipe(map((pageable: any) => {
+      this.pageable = pageable
+      return pageable.content
+    }))
+  }
+
   getReuniaoFiltrada(filtros: {
     nomeComissao: string;
     dataReuniao: string;
@@ -51,12 +94,27 @@ export class ReuniaoService {
     ppmProposta: string;
     analista: string;
     solicitante: string;
+    ordenar: string;
     page: string;
     size: string;
   }) {
+    if (filtros.ordenar != '') {
+      console.log(filtros.ordenar)
+      this.infosFiltro.ordenar = filtros.ordenar
+      filtros = this.infosFiltro
+      this.filtroOrdenado = true
+    } else {
+      this.filtroOrdenado = false
+    }
+    this.infosFiltro = filtros
+    this.link = path + `reuniao/filtro?nomeComissao=${filtros.nomeComissao}&dataReuniao=${filtros.dataReuniao}&statusReuniao=${filtros.statusReuniao}&ppmProposta=${filtros.ppmProposta}&analista=${filtros.analista}&solicitante=${filtros.solicitante}&ordenar=${filtros.ordenar}`
+    console.log(this.link)
     return this.http.get<Reuniao[]>(
-      path + `reuniao/filtro?nomeComissao=${filtros.nomeComissao}&dataReuniao=${filtros.dataReuniao}&statusReuniao=${filtros.statusReuniao}&ppmProposta=${filtros.ppmProposta}&analista=${filtros.analista}&solicitante=${filtros.solicitante}`
-    );
+      this.link
+    ).pipe(map((pageable: any) => {
+      this.pageable = pageable
+      return pageable.content
+    }))
   }
 
   putReuniao(reuniao: Reuniao) {

@@ -1,3 +1,4 @@
+import { VoiceRecognitionService } from './../../../../../services/voice-recognition.service';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { CentroCusto } from './../../../../../models/centro-custo.model';
 import { PropostaService } from './../../../../../services/proposta.service';
@@ -26,7 +27,8 @@ export class ParteReuniaoComponent implements OnInit {
     private demandaService: DemandaService,
     private rascunhoService: RascunhoService,
     private route: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private voiceRecognitionService: VoiceRecognitionService
   ) {
 
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
@@ -136,6 +138,17 @@ export class ParteReuniaoComponent implements OnInit {
     this.paybackProposta = this.custosTotais / (this.demandaService.getBeneficioReal() + this.demandaService.getBeneficioPotencial());
   }
 
+  htmlEscopoDemanda: string = "";
+
+  onFocoIn() {
+    this.voiceRecognitionService.setInputEmFoco('string')
+  }
+
+  onFocoOut() {
+    this.voiceRecognitionService.setInputEmFoco(null)
+  }
+
+
   editarRecurso(index: number) {
     this.formRecursos.patchValue({
       nomeRecurso: this.listaRecursos[index].nomeRecurso,
@@ -169,5 +182,8 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.voiceRecognitionService.$novasPalavrasFaladas.subscribe(palavra => {
+      this.htmlEscopoDemanda = palavra
+    })
   }
 }

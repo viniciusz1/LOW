@@ -57,7 +57,47 @@ export class HeaderComponent implements OnInit {
   }
   quantidadeNotificacoes: Number = 0;
   quantidadeMensagensNaoLidas: Number = 0;
+  @ViewChild('modal') modalElement!: ElementRef;
+  linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
+  mostrarModal = false;
+  @Input() telaLogin = false;
+  mostrar_modal = false;
+  //Variável em que recebe o texto do tutorial
+  textoTutorial = textoTutorial;
+  //items que são exibidos nos breadcrumbs
+  items: MenuItem[] = [];
+  //item que fica ativo nos breadcrumbs
+  activeItem: MenuItem | undefined;
+  //?
+  inicial = false;
+  //?
+  nivelAcessoUsuario: NivelAcesso | undefined
+  //Função que é executada quando o componente inicia.
+  firstClick = false;
 
+  openModalNotificacoes() {
+    console.log("abriu modal notificacoes")
+    this.firstClick = true;
+    if (this.mostrarModal == false) {
+      this.mostrarModal = true;
+    } else {
+      this.mostrarModal = false;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  fecharModalAoClicarFora(event: MouseEvent) {
+    if (this.firstClick == false) {
+      if (this.mostrarModal == true) {
+        if (!this.modalElement.nativeElement.contains(event.target)) {
+          this.mostrarModal = false;
+        }
+      }
+    } else {
+      this.firstClick = false;
+    }
+
+  }
 
   versaoSolicitante() {
     if (this.usuarioService.getRole == "Solicitante") {
@@ -70,31 +110,22 @@ export class HeaderComponent implements OnInit {
     this.usuarioService.logout().subscribe();
   }
 
-  linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
   mudarIdioma(sigla: string, link: string) {
     this.linkImagemPais = link
     this.translate.use(sigla);
   }
-  @Input() telaLogin = false;
-  //?
-  mostrar_modal = false;
-  
-  //Variável em que recebe o texto do tutorial
-  textoTutorial = textoTutorial;
-  //items que são exibidos nos breadcrumbs
-  items: MenuItem[] = [];
-  //item que fica ativo nos breadcrumbs
-  activeItem: MenuItem | undefined;
-  //?
-  inicial = false;
-  //?
-  nivelAcessoUsuario: NivelAcesso | undefined
-  //Função que é executada quando o componente inicia.
   ngOnInit() {
     this.usuario = this.usuarioService.getUser('user')
     this.activeItem = this.items[0];
+    document.addEventListener('click', this.fecharModalAoClicarFora);
     // this.iniciarWebSocketNotificationCount();
   }
+
+
+  ngOnDestroy() {
+    document.removeEventListener('click', this.fecharModalAoClicarFora);
+  }
+
 
   subscribeNotificationCount() {
     this.notificacoesService.$notificationCountEmmiter.subscribe(quantidade => {

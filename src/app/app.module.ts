@@ -22,6 +22,7 @@ import { TranslateModule, TranslateService, TranslateStore, TranslateLoader } fr
 import { LogInterceptor } from './interceptor';
 import { TelasModule } from './telas/telas.module';
 import { MessagesModule } from 'primeng/messages';
+import { ConfiguracoesIniciaisService } from './services/configuracoes-iniciais.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -58,7 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     useClass: LogInterceptor,
     multi: true
   },
-    DemandaService, ConfirmationService, UsuarioService, TranslateService, TranslateStore],
+    DemandaService, ConfirmationService, UsuarioService, TranslateService, TranslateStore, ConfiguracoesIniciaisService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

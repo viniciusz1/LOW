@@ -48,7 +48,8 @@
                     </span>
                     <span class="p-float-label me-2">
                         <p-dropdown [style]="{height: '37px'}" inputId="dropdown" [autoDisplayFirst]="false"
-                            [options]="status" [(ngModel)]="valorStatus"></p-dropdown>
+                        placeholder="Selecione o Status"
+                            [options]="status" [optionLabel]="'label'" [optionValue]="'value'" [(ngModel)]="valorStatus"></p-dropdown>
                         <label for="dropdown">{{ "componentes-reutilizaveis.filtro-demanda.status" | translate }}</label>
 
                     </span>
@@ -57,7 +58,7 @@
                             (click)="atualizarFiltro({solicitante: solicitante.value,codigoDemanda: codigo.value,status: valorStatus, tamanho: valorTamanho, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value, sort: ''})"
                             class="btn btn-primary"><i class="bi bi-search"></i></button>
                     </span>
-                    <span class="p-float-label me-2" *ngIf="mostrarExel">
+                    <span class="p-float-label me-2" *ngIf="mostrarExcel">
                         <button
                             (click)="exportarExcel.emit({solicitante: solicitante.value,codigoDemanda: codigo.value,status: valorStatus, tamanho: valorTamanho, tituloDemanda: titulo.value, analista: analista.value, departamento: departamento.value, sort: ''})"
                             class="btn btn-success"><i class="bi bi-filetype-csv " style="font-size: 17px"></i></button>

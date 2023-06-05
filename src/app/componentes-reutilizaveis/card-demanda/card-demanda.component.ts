@@ -234,13 +234,21 @@ export class CardDemandaComponent implements OnInit {
           };
         }
         return true;
-      case StatusDemanda.ASSESSMENT || StatusDemanda.BUSINESS_CASE:
+      case StatusDemanda.ASSESSMENT:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_ADD_REUNIAO',
             texto: 'Adicionar Proposta',
           };
         }
+        return true;
+        case StatusDemanda.BUSINESS_CASE:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_ADD_REUNIAO',
+            texto: 'Adicionar Proposta',
+          };
+      }
         return true;
       case StatusDemanda.TO_DO || StatusDemanda.DESIGN_AND_BUILD || StatusDemanda.SUPPORT:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {

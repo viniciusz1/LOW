@@ -1,22 +1,22 @@
 <nav class="nav position-relative">
     <ul class="nav flex-column container-sidebar" style="width: 18vw; font-size: 1rem;">
-        <li class="nav-item d-flex border-bottom">
+        <li (click)="clicouEmUmStatus.emit('aguardando')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item backlog" style="background-color: #00579D;"></div>
             <a class="nav-link"><img style="width: 1.5em;" class="me-2" src="assets/images/icons8-waiting-64 1.png"> {{ "componentes-reutilizaveis.sidebar-reuniao.aguardando" | translate }}</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
+        <li (click)="clicouEmUmStatus.emit('proximo')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item to-do" style="background-color: #EF8300;"></div>
             <a class="nav-link"><img style="width: 1.5em;" class="me-2" src="assets/images/icons8-à-direita-dentro-de-um-círculo-50 1.png" alt="">{{ "componentes-reutilizaveis.sidebar-reuniao.proximo" | translate }}</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
+        <li (click)="clicouEmUmStatus.emit('pendente')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item" style="background-color: #681F8B;"></div>
             <a class="nav-link"><img style="width: 1.5em;" class="me-2" src="assets/images/icons8-à-direita-dentro-de-um-círculo-50 2.png"> {{ "componentes-reutilizaveis.sidebar-reuniao.pendente" | translate }}</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
+        <li (click)="clicouEmUmStatus.emit('concluido')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item design-and-build done" style="background-color: #00612E;"></div>
             <a class="nav-link"><img style="width: 1.5em;" class="me-2" src="assets/images/icons8-marcador-duplo-100 3.png"> {{ "componentes-reutilizaveis.sidebar-reuniao.concluido" | translate }}</a>
         </li>
-        <li class="nav-item d-flex border-bottom">
+        <li (click)="clicouEmUmStatus.emit('cancelado')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item cancelled" style="background-color: #EA1010;"></div>
             <a class="nav-link"><img style="width: 1.5em;" class="me-2" src="assets/images/icons8-cancelar-50 2.png"> {{ "componentes-reutilizaveis.sidebar-reuniao.cancelado" | translate }}</a>
         </li>

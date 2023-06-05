@@ -282,6 +282,7 @@ export class DemandaService {
   avancarPage(page: number) {
     let linkComPaginacao = this.link;
     linkComPaginacao += '&page=' + page
+    console.log(linkComPaginacao)
     return this.http.get<Demanda[]>(
       linkComPaginacao
     ).pipe(map((pageable: any) => {
@@ -364,6 +365,7 @@ export class DemandaService {
     } else {
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=&analista=&departamento=${pesquisaEspecial}&ordenar=`
     }
+    console.log(this.link)
     return this.http.get<Demanda[]>(
       this.link
     ).pipe(map((pageable: any) => {

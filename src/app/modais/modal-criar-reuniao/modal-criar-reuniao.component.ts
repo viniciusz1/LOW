@@ -281,6 +281,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   nenhumResultadoEncontrado = false;
 
   paginate(event: { page: number }) {
+    console.log(event)
     this.demandaService.avancarPage(event.page)
       .subscribe((listaDemandas: Demanda[]) => {
         if (listaDemandas.length > 0) {
@@ -296,7 +297,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
 
   pesquisarDemandas() {
     this.demandaService
-      .getDemandasFiltradas("")
+      .getDemandasFiltradas({status: "ass", pesquisaCampo: ""})
       .subscribe((listaDemandas: Demanda[]) => {
         console.log(listaDemandas)
         if (listaDemandas.length > 0) {

@@ -179,6 +179,7 @@ export class TelaReuniaoComponent implements OnInit {
   }) {
     this.reuniaoService.getReuniaoFiltrada(event).subscribe({
       next: listaReunioes => {
+        console.log(listaReunioes)
         if (listaReunioes.length > 0) {
           this.totalPagesPagination = this.reuniaoService.totalPages
           this.listaReunioes = listaReunioes;

@@ -108,7 +108,7 @@ export class ReuniaoService {
     }
     this.infosFiltro = filtros
     this.link = path + `reuniao/filtro?nomeComissao=${filtros.nomeComissao}&dataReuniao=${filtros.dataReuniao}&statusReuniao=${filtros.statusReuniao}&ppmProposta=${filtros.ppmProposta}&analista=${filtros.analista}&solicitante=${filtros.solicitante}&ordenar=${filtros.ordenar}`
-
+    console.log(this.link)
     return this.http.get<Reuniao[]>(
       this.link
     ).pipe(map((pageable: any) => {

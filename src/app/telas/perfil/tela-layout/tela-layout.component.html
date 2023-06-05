@@ -36,10 +36,10 @@
                                     <div class="nome-dado">
                                         <select #themefont (click)="setFontTheme(themefont.value)" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <!-- <option selected>Selecione a opção:</option> -->
-                                            <option falarTexto [selected]="fontAtual == 'system-ui'" value="system-ui">System-ui</option>
-                                            <option falarTexto [selected]="fontAtual == 'monospace'" value="monospace">Monospace</option>
-                                            <option falarTexto [selected]="fontAtual == 'ui-sans-serif'" value="ui-sans-serif">Ui-sans-serif</option>
-                                            <option falarTexto [selected]="fontAtual == 'Roboto, Helvetica Neue, sans-serif'" value="Roboto, Helvetica Neue, sans-serif" selected>Roboto</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontAtual == 'Roboto, Helvetica Neue, sans-serif'" value="Roboto, Helvetica Neue, sans-serif" selected>Roboto</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontAtual == 'system-ui'" value="system-ui">System-ui</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontAtual == 'monospace'" value="monospace">Monospace</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontAtual == 'ui-sans-serif'" value="ui-sans-serif">Ui-sans-serif</option>
                                           </select>
                                     </div>
                                 </div>
@@ -53,20 +53,20 @@
                                     <div class="nome-dado">
                                         <select #fontes (change)="setFontSize(fontes.value)" class="form-select form-select-sm" aria-label=".form-select-sm example">
                                             <!-- <option selected>Selecione a opção:</option> -->
-                                            <option falarTexto [selected]="fontSize == '10'" value="10">10</option>
-                                            <option falarTexto [selected]="fontSize == '11'" value="11">11</option>
-                                            <option falarTexto [selected]="fontSize == '12'" value="12">12</option>
-                                            <option falarTexto [selected]="fontSize == '13'" value="13">13</option>
-                                            <option falarTexto [selected]="fontSize == '14'" value="14">14</option>
-                                            <option falarTexto [selected]="fontSize == '15'" value="15">15</option>
-                                            <option falarTexto [selected]="fontSize == '16'" value="16">16</option>
-                                            <option falarTexto [selected]="fontSize == '17'" value="17">17</option>
-                                            <option falarTexto [selected]="fontSize == '18'" value="18">18</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '10'" value="10">10</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '11'" value="11">11</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '12'" value="12">12</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '13'" value="13">13</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '14'" value="14">14</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '15'" value="15">15</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '16'" value="16">16</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '17'" value="17">17</option>
+                                            <option falarTexto [selected]="configIniciaisService.fontSize == '18'" value="18">18</option>
                                           </select>
                                     </div>
                                 </div>
                             </div>
-
+                            <button class="btn btn-outline-primary" (click)="redefinir()">Redefinir configurações</button>
                         </div>
                     </div>
                 </div>

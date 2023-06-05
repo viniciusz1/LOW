@@ -49,15 +49,19 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
 
 
-  onFocoIn(elementRef : NgxEditorComponent) {
-    this.voiceRecognitionService.setInputEmFoco(this.htmlSituacaoAtual)
+  onFocoIn(nomeEditorEmFoco: string) {
+    this.editorEspecialEmFoco = nomeEditorEmFoco;
+    this.voiceRecognitionService.setInputEmFoco('string')
   }
 
   onFocoOut() {
+    this.editorEspecialEmFoco = "";
+    this.voiceRecognitionService.setInputEmFoco(null)
   }
 
   //serve para setar o tipo do editor de texto como html por padrão
   //NÃO DELETAR
+  editorEspecialEmFoco: string = "";
   htmlSituacaoAtual = ""
   htmlObjetivo = ""
   onInputChange() {
@@ -122,6 +126,16 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.demandaService.listaArquivosDemanda.subscribe(arquivos => {
       this.listaFiles = arquivos
+    })
+
+    this.voiceRecognitionService.$novasPalavrasFaladas.subscribe(palavra => {
+      if(this.editorEspecialEmFoco == 'objetivo'){
+        this.htmlObjetivo = palavra
+      }else if(this.editorEspecialEmFoco == 'situacao'){
+        this.htmlSituacaoAtual += palavra
+      }
+
+
     })
   }
 

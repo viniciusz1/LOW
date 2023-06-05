@@ -40,10 +40,10 @@ export interface Demanda {
 
   isHistorico?: boolean,
   recomendacaoProposta?: string,
-  tamanhoDemandaAnalista?: Tamanho,
-  buSolicitanteDemandaAnalista?: BusinessUnit,
-  busBeneficiadasDemandaAnalista?: BusinessUnit[],
-  secaoDemandaAnalista?: string,
+  tamanhoDemandaClassificada?: Tamanho,
+  buSolicitanteDemandaClassificada?: string,
+  busBeneficiadasDemandaClassificada?: string[],
+  secaoDemandaClassificada?: string,
   analista?: Usuario,
   gerenteNegocio?: Usuario
   horaUltimaMensagem?: Date

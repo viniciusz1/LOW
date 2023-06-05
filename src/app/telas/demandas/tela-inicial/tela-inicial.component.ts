@@ -448,19 +448,23 @@ export class TelaInicialComponent implements OnInit {
 
   //Lógica para a criação de uma nova demanda
   criarUmaNovaDemanda() {
-    let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
-    if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
-      this.router.navigate(['tela-inicial/rascunho/' + 0])
-    } else {
-      this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
-    }
+    this.rascunhoService.postRascunhoDemanda().subscribe((rascunho) => {
+      console.log("entrou")
+      this.router.navigate(['tela-inicial/rascunho/' + rascunho.codigoDemanda])
+    })
+    // let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
+    // if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
+    //   this.router.navigate(['tela-inicial/rascunho/' + 0])
+    // } else {
+    //   this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
+    // }
   }
 
 
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
-    if (this.nivelAcessoUsuario == 'Solicitante') {
+    
       if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
         this.listaTituloNaoFiltrado.push({
           status: 'SUAS_DEMANDAS',
@@ -472,6 +476,7 @@ export class TelaInicialComponent implements OnInit {
           titulo: 'Sem demandas',
         });
       }
+    if (this.nivelAcessoUsuario == 'Solicitante') {
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
@@ -483,17 +488,17 @@ export class TelaInicialComponent implements OnInit {
 
     if (this.nivelAcessoUsuario == 'GerenteNegocio') {
       if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
-        console.log("Hey")
         this.listaTituloNaoFiltrado.push({
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
         });
-      }else{
-        this.listaTituloNaoFiltrado.push({
-          status: 'Sem demandas',
-          titulo: 'Sem demandas',
-        });
       }
+      // else{
+      //   this.listaTituloNaoFiltrado.push({
+      //     status: 'Sem demandas',
+      //     titulo: 'Sem demandas',
+      //   });
+      // }
 
 
       this.listaTituloNaoFiltrado.push({
@@ -502,15 +507,16 @@ export class TelaInicialComponent implements OnInit {
       });
 
 
+
       return
     }
 
-    if (this.rascunhoService.getRascunhosDemanda.length > 0) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'DRAFT',
-        titulo: 'Seus Rascunhos',
-      });
-    }
+    // if (this.rascunhoService.getRascunhosDemanda.length > 0) {
+    //   this.listaTituloNaoFiltrado.push({
+    //     status: 'DRAFT',
+    //     titulo: 'Seus Rascunhos',
+    //   });
+    // }
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'

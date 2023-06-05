@@ -211,15 +211,17 @@ export class CardDemandaComponent implements OnInit {
     switch (this.dadosDemanda.statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          if(nivelAcesso == 'GestorTI' || this.dadosDemanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()){
           this.textoExibidoEmBotaoDependendoRota = {
             rota:
               '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
             texto: 'Classificar Demanda',
           }
+        }
         };
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
-        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          if(this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()){
           this.textoExibidoEmBotaoDependendoRota = {
             rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
             texto: 'Criar Proposta'
@@ -248,7 +250,7 @@ export class CardDemandaComponent implements OnInit {
             rota: 'MODAL_ADD_REUNIAO',
             texto: 'Adicionar Proposta',
           };
-        }
+      }
         return true;
       case StatusDemanda.TO_DO || StatusDemanda.DESIGN_AND_BUILD || StatusDemanda.SUPPORT:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
@@ -291,7 +293,7 @@ export class CardDemandaComponent implements OnInit {
   deleteRascunhoFromLocalStorage() {
     if (this.dadosDemanda.codigoDemanda) {
       this.showSuccess("Rascunho deletado!")
-      this.rascunhoService.deleteRascunho(this.dadosDemanda.codigoDemanda)
+      // this.rascunhoService.deleteRascunho(this.dadosDemanda.codigoDemanda)
       this.clicouEmExcluir.emit()
     } else {
       this.showError("Não foi possível excluir o rascunho!")

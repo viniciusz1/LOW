@@ -75,6 +75,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
     { value: "CWBS", nome: "CWBS – Comitê WEG Business Services" },
     { value: "DTI", nome: "DTI – Diretoria de TI" },
   ]
+  currentPageReportTemplate = '{{currentPage}} de {{totalPages}}';
 
   openModalHistorico(codigoDemanda: string) {
     this.matDialog.open(ModalHistoricoComponent, {

@@ -46,12 +46,16 @@ export class CardDemandaComponent implements OnInit {
     | undefined = undefined;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
+  analistaAssociado: boolean = false;
+
+
 
   constructor(private route: Router,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService) {
+      
   }
 
   statusPermitido() {
@@ -325,6 +329,12 @@ export class CardDemandaComponent implements OnInit {
     //Adicionando classes para estilização do card
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + '-sec';
+    //Verificando demandas que ja existem analistas associados
+    if(this.dadosDemanda.analista){
+      this.analistaAssociado = true;
+    } else {      
+      this.analistaAssociado = false;
+    }
 
     this.exibicaoBotoes();
   }

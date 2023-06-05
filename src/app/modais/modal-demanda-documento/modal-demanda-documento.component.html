@@ -13,7 +13,7 @@
   </p-timeline>
 
   <p class="paragrafo-inicial" *ngIf="documentoEmAta == false">
-    <b class="me-2" falarTexto>{{dadosDemanda?.codigoDemanda}} aaaaaaaaaaaaaa</b>
+    <b class="me-2" falarTexto>{{dadosDemanda?.codigoDemanda}}</b>
     <span>
       <div class="d-flex align-items-center justify-content-between">
         <a [href]="[path + 'demanda/pdf/' + dadosDemanda?.codigoDemanda]">
@@ -31,7 +31,7 @@
   >
     <p-scrollPanel
     *ngIf="documentoEmAta == false"
-      [style]="{ width: '100%', height: '70vh' }"
+      [style]="{ width: '100%', height: '100%' }"
       styleClass="custombar1"
     >
       <app-info-modal-demanda [dadosDemanda]="dadosDemanda" [custosTotais]="custosTotais"></app-info-modal-demanda>

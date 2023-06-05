@@ -16,7 +16,8 @@
     </div>
     <div class="d-flex justify-content-end mt-3">
         <button  class="btn btn-outline-primary me-3" (click)="dialogRef.close()" falarTexto>{{ "modais.modal-reprovacao-demanda.b-cancelar" | translate }}</button>
-        <button routerLink="/tela-inicial" class="btn btn-primary" (click)="reprovarDemanda()" falarTexto>{{ "modais.modal-reprovacao-demanda.b-reprovar" | translate }}</button>
+        <button *ngIf="!solicitante" routerLink="/tela-inicial" class="btn btn-primary" (click)="reprovarDemanda()" falarTexto>{{ "modais.modal-reprovacao-demanda.b-reprovar" | translate }}</button>
+        <button *ngIf="solicitante" routerLink="/tela-inicial" class="btn btn-primary" (click)="reprovarDemanda()" falarTexto>Cancelar Demanda</button>
     </div>
 </div>
 <p-toast></p-toast>

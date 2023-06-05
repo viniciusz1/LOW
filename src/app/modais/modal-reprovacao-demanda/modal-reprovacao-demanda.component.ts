@@ -6,6 +6,8 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { MessageService } from 'primeng/api';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Component({
   selector: 'app-modal-reprovacao-demanda',
@@ -14,15 +16,24 @@ import { MessageService } from 'primeng/api';
 })
 export class ModalReprovacaoDemandaComponent implements OnInit {
   dadosDemanda: Demanda | undefined;
+  usuario: Usuario | undefined;
+  solicitante: boolean = false;
 
   constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
+    private usuarioService: UsuarioService,
     @Inject(DIALOG_DATA) public data: Demanda,
     private router: Router,
     private messageService: MessageService
   ) {
+    this.usuario = usuarioService.getUser('user')
     console.log(data)
     this.dadosDemanda = data
+    if(this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuario?.codigoUsuario){
+      this.solicitante = true;
+    } else {
+      this.solicitante = false;
+    }
   }
 
   ngOnInit(): void {

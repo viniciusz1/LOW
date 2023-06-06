@@ -30,7 +30,8 @@ export class HeaderComponent implements OnInit {
     private messagesService: MessagesService) {
 
     this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: Number) => {
-      this.quantidadeMensagensNaoLidas = qtdMensagensNaoLida;
+      console.log("Nova mensagem recebida")
+      this.mensagemNova = true;
     })
 
     //Tem o objetivo de setar as rotas em que o sistema se encontra, no caso os chamados breadcrummbs
@@ -53,7 +54,7 @@ export class HeaderComponent implements OnInit {
       });
   }
   quantidadeNotificacoes: Number = 0;
-  quantidadeMensagensNaoLidas: Number = 0;
+  mensagemNova: boolean = false;;
   @ViewChild('modal') modalElement!: ElementRef;
   linkImagemPais = "https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
   mostrarModal = false;
@@ -80,6 +81,10 @@ export class HeaderComponent implements OnInit {
     } else {
       this.mostrarModal = false;
     }
+  }
+  irParaMensagens(){
+    this.mostrarModal = false
+    this.router.navigate(["/tela-inicial/chat"])
   }
 
   @HostListener('document:click', ['$event'])

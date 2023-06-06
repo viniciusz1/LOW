@@ -74,10 +74,10 @@
           >
         </li>
       </div>
-      <li1
+      <li
         role="button"
         class="nav-item"
-        routerLink="/tela-inicial/chat"
+        (click)="irParaMensagens()"
         *ngIf="!inicial"
         joyrideStep="sete"
         [title]="'Suas Mensagens'"
@@ -86,10 +86,10 @@
       >
         <a class="nav-link"
           ><i class="bi bi-chat-left-dots icon">
-            <span class="badge badge-danger small-badge">!</span>
+            <span *ngIf="" class="badge badge-danger small-badge">!</span>
           </i></a
         >
-      </li1>
+      </li>
       <li
         role="button"
         class="nav-item"

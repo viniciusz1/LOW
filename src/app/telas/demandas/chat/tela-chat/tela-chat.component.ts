@@ -1,5 +1,6 @@
+
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { MessagesService } from 'src/app/websocket/messages.service';
@@ -28,6 +29,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   constructor(
     private confirmationService: ConfirmationService,
     private route: ActivatedRoute,
+    private router: Router,
     public usuarioService: UsuarioService,
     private messagesService: MessagesService,
     private matDialog: MatDialog
@@ -36,6 +38,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
     this.setarConversas();
     this.route.params.subscribe((e) => {
+      console.log("oi")
       this.codigoRota = e['codigoDemanda'];
       this.messagesService.codigoRota = this.codigoRota;
       if (this.codigoRota != '' && this.codigoRota != undefined) {
@@ -54,6 +57,11 @@ export class TelaChatComponent implements OnInit, OnDestroy {
         this.mostrarConversas = true;
       });
     this.scrollToBottom();
+  }
+
+  alterarConversa(conversa: Demanda){
+    this.demandaDiscutida = conversa;
+    this.router.navigate(['/tela-inicial/chat/' + conversa.codigoDemanda])
   }
 
   iniciarSubscribeChat() {
@@ -142,9 +150,9 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   setarConversas() {
     this.messagesService.getDemandasRelacionadas().subscribe((e) => {
       this.conversasDemandas = e;
-      this.demandaDiscutida = this.conversasDemandas.find(
-        (e) => e.codigoDemanda == this.codigoRota
-      );
+      // this.demandaDiscutida = this.conversasDemandas.find(
+      //   (e) => e.codigoDemanda == this.codigoRota
+      // );
       this.scrollToBottom();
     });
   }

@@ -249,19 +249,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
-  atualizarDemandas() {
-    this.demandaService
-      .getDemandasFiltradasStatus({ status1: StatusDemanda.ASSESSMENT + "", status2: StatusDemanda.BUSINESS_CASE + "" })
-      .subscribe({
-        next: demandas => {
-          this.listaDemandas = demandas
-          this.removerDaListaAdicSecundaria()
-        }, error: err => {
-          this.showError("Não foi possível filtrar as demandas")
-        }
-      });
-  }
-
 
   dragEnd() {
     this.draggedDemanda = undefined;
@@ -280,7 +267,8 @@ export class ModalCriarReuniaoComponent implements OnInit {
   totalPagesPagination = 0;
   nenhumResultadoEncontrado = false;
 
-  paginate(event: { page: number }) {
+  paginate(event: any) {
+    console.log("Paginando")
     this.demandaService.avancarPage(event.page)
       .subscribe((listaDemandas: Demanda[]) => {
         if (listaDemandas.length > 0) {
@@ -298,7 +286,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   //string - do filtro
   pesquisarDemandas(tipo: string | undefined) {
     this.demandaService
-      .getDemandasFiltradas(typeof tipo == 'string' ? '' : {status: 'ASSESSMENT', pesquisaCampo: ''})
+      .getDemandasFiltradas(typeof tipo == 'string' ? undefined : {status: 'ASSESSMENT', pesquisaCampo: ''})
       .subscribe((listaDemandas: Demanda[]) => {
         console.log(listaDemandas)
         if (listaDemandas.length > 0) {

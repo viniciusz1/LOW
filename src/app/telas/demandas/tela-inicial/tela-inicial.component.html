@@ -376,7 +376,7 @@
               let demanda of listaDemandas
                 | filtrarDemandaStatus : listaTituloNaoFiltrado[1].titulo
             "
-            (clicouEmExcluir)="carregarDemandasIniciais()"
+            (clicouEmExcluir)="deletarDemanda($event)"
             [dadosDemanda]="demanda"
             [mudarTamanho]="'100%'"
             (verDocumentoProposta)="openModalDemandaDocumento($event)"
@@ -433,6 +433,7 @@
                   pesquisaCampo: undefined
                 })
               "
+              *ngIf="linha.titulo != 'Sem demandas'"
               falarTexto
             >
               {{ "telas.tela-inicial.ver-mais" | translate }} <span *ngIf="linha.titulo != 'Suas Demandas'">({{
@@ -456,7 +457,7 @@
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                 "
-                (clicouEmExcluir)="carregarDemandasIniciais()"
+                (clicouEmExcluir)="deletarDemanda($event)"
                 [dadosDemanda]="demanda"
                 (verDocumentoProposta)="openModalDemandaDocumento($event)"
                 (irParaChat)="irParaChat($event, demanda)"

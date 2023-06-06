@@ -31,12 +31,16 @@
         [matMenuTriggerFor]="menu"
       ></i>
       <div *ngIf="rascunho">
+        <div class="card flex justify-content-center gap-2">
+          <p-toast></p-toast>
+          <p-confirmDialog></p-confirmDialog>
         <i
           class="bi bi-trash3"
           role="button"
           (click)="deletarRascunho()"
           style="font-size: 20px"
         ></i>
+      </div>
       </div>
 
       <mat-menu #menu="matMenu">

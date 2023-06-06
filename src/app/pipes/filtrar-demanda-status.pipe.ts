@@ -26,12 +26,14 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
       return undefined
     }
 
-    if (titulo[0] == "Suas Tarefas" && this.usuarioService.getRole == 'GerenteNegocio') {
-      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
-    }
     if (titulo[0] == "Suas Demandas") {
       return demandas.filter(d => d.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())
     }
+
+    if (titulo[0] == "Suas Tarefas" && this.usuarioService.getRole == 'GerenteNegocio') {
+      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
+    }
+
     if (titulo[0] == "Demandas do Seu Departamento") {
       return demandas.filter(d => d.statusDemanda != StatusDemanda.DRAFT)
     }

@@ -412,18 +412,36 @@ export class TelaInicialComponent implements OnInit {
     if (this.nivelAcessoUsuario == 'Analista' || this.nivelAcessoUsuario == 'GestorTI') {
       this.demandasService.getDemandasTelaInicial().subscribe({
         next: (e) => {
+          let ExistsDemandaRascunho = true;
+          let qtdDemandasUsuário = 0;
           e['demandas'].forEach((demandas: Demanda[]) => {
+            if(demandas.some((e) => e.statusDemanda?.toString() == 'DRAFT')){
+              ExistsDemandaRascunho = false;
+            }
+            if(this.usuarioService.getRole == 'Analista'){
+            if(demandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')){
+              qtdDemandasUsuário = demandas.filter((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()).length;
+            }
+          }
             if (demandas.length > 0) {
               this.listaDemandas.push(...demandas);
               this.isFiltrado = false;
               this.nenhumResultadoEncontrado = false;
             }
           });
-          e['qtdDemandas'].forEach((qtd: number) => {
+          e['qtdDemandas'].forEach((qtd: number, index: number) => {
+            if(ExistsDemandaRascunho == true){
+              this.qtdDemandasStatus.push(0)
+              ExistsDemandaRascunho = false;
+            }
+            if(index == 1){
+              qtd = qtd - qtdDemandasUsuário;
+            }
             if (qtd > 0) {
               this.qtdDemandasStatus.push(qtd)
             }
           })
+          console.log(this.qtdDemandasStatus)
 
           this.exibirFilasDeStatus();
         },
@@ -499,17 +517,21 @@ export class TelaInicialComponent implements OnInit {
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
 
+    if(this.listaDemandas.length == 0){
+      this.listaTituloNaoFiltrado.push({
+        status: 'Sem demandas',
+        titulo: 'Sem demandas',
+      });
+
+      return;
+    }
+
     if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
       this.listaTituloNaoFiltrado.push({
         status: 'SUAS_DEMANDAS',
         titulo: 'Suas Demandas',
       });
-    } else {
-      this.listaTituloNaoFiltrado.push({
-        status: 'Sem demandas',
-        titulo: 'Sem demandas',
-      });
-    }
+    } 
     if (this.nivelAcessoUsuario == 'Solicitante') {
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
@@ -527,12 +549,12 @@ export class TelaInicialComponent implements OnInit {
           titulo: 'Suas Tarefas',
         });
       }
-      // else{
-      //   this.listaTituloNaoFiltrado.push({
-      //     status: 'Sem demandas',
-      //     titulo: 'Sem demandas',
-      //   });
-      // }
+      else{
+        this.listaTituloNaoFiltrado.push({
+          status: 'Sem demandas',
+          titulo: 'Sem demandas',
+        });
+      }
 
 
       this.listaTituloNaoFiltrado.push({

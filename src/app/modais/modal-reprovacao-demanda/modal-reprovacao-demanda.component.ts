@@ -8,6 +8,7 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { MessageService } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-modal-reprovacao-demanda',
@@ -24,6 +25,7 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
     private usuarioService: UsuarioService,
     @Inject(DIALOG_DATA) public data: Demanda,
     private router: Router,
+    private modalService: ModalService,
     private messageService: MessageService
   ) {
     this.usuario = usuarioService.getUser('user')
@@ -53,6 +55,9 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
           this.showSuccess("Demanda reprovada com sucesso!")
           this.router.navigate(['/tela-inicial'])
           this.dialogRef.close()
+          if (this.modalService.dialogRefDemandaDocumento) {
+            this.modalService.dialogRefDemandaDocumento.close();
+          }
         },
         error: err => {
           this.showError("Não foi possivel reprovar a demanda!")

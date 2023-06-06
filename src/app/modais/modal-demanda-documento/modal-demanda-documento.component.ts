@@ -12,6 +12,7 @@ import { ModalReprovacaoDemandaComponent } from '../modal-reprovacao-demanda/mod
 import { Proposta } from 'src/app/models/proposta.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-modal-demanda-documento',
@@ -28,6 +29,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private demandaService: DemandaService,
     private dialogRef: MatDialogRef<ModalDemandaDocumentoComponent>,
     private matDialog: MatDialog,
+    private modalService: ModalService,
     private messageService: MessageService,
     private usuarioService: UsuarioService) {
     console.log(data)
@@ -108,6 +110,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   }
 
   openModalReprovacao() {
+    this.modalService.dialogRefDemandaDocumento = this.dialogRef;
     this.matDialog.open(ModalReprovacaoDemandaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',

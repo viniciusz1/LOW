@@ -29,8 +29,8 @@ export class HeaderComponent implements OnInit {
     private notificacoesService: NotificacoesService,
     private messagesService: MessagesService) {
 
-    this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: Number) => {
-      console.log("Nova mensagem recebida")
+    this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: number) => {
+      console.log(qtdMensagensNaoLida)
       this.mensagemNova = true;
     })
 

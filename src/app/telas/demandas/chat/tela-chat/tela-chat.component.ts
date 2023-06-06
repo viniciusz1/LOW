@@ -37,12 +37,11 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     console.log('Rodou construtor   ');
 
     this.setarConversas();
+    //Atualiza o código da rota e se increve e seta mensagens quando troca de rota
     this.route.params.subscribe((e) => {
-      console.log("oi")
       this.codigoRota = e['codigoDemanda'];
       this.messagesService.codigoRota = this.codigoRota;
       if (this.codigoRota != '' && this.codigoRota != undefined) {
-        // this.messagesService.subscriptionChat.unsubscribe();
         this.setMensagens();
         this.iniciarSubscribeChat();
       }
@@ -68,6 +67,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     this.messagesService.subscribeChat();
   }
 
+  //Desinscreve do chat quando sai da tela
   ngOnDestroy(): void {
     if (this.messagesService.subscriptionChat != undefined) {
       this.messagesService.subscriptionChat.unsubscribe();
@@ -92,6 +92,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     return false;
   }
 
+
   verificarMensagemMaisAtual() {
     const mensagemMaisAtual = this.mensagens.reduce(
       (mensagemMaisRecente: Mensagem | undefined, mensagemAtual: Mensagem) => {
@@ -109,6 +110,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     );
   }
 
+  //Quando recebe uma nova mensagem, da um publish para realizar o visto
   subscribeEmmiterMensagens() {
     this.messagesService.$mensagesEmmiter.subscribe((mensagem) => {
       if (mensagem.usuarioMensagens?.codigoUsuario != this.usuarioService.getCodigoUser()) {
@@ -130,6 +132,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     });
   }
 
+  //Verifica o dono da mensagem
   trocarLadoDaMensagem(mensagens: Mensagem[]) {
     for (let mensagem of mensagens) {
       if (
@@ -147,12 +150,10 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
   @ViewChild('mensagemDigitada') private mensagem: any;
 
+  //Seta as conversas que o usuário está participando
   setarConversas() {
     this.messagesService.getDemandasRelacionadas().subscribe((e) => {
       this.conversasDemandas = e;
-      // this.demandaDiscutida = this.conversasDemandas.find(
-      //   (e) => e.codigoDemanda == this.codigoRota
-      // );
       this.scrollToBottom();
     });
   }

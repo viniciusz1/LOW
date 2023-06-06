@@ -18,7 +18,7 @@ export class CardReuniaoComponent implements OnInit {
   ngOnInit(): void {
     this.primaryColorClass = this.dadosReuniao.statusReuniao;
     this.secondaryColorClass = this.dadosReuniao.statusReuniao + "-sec";
-    1
+    
   }
 
   titulosPropostas() {

@@ -364,7 +364,7 @@
         <div class="ms-3 title-demanda" for="status">
           <div style="width: 30%">
             <h5
-            falarTexto>{{ listaTituloNaoFiltrado[1].titulo }}</h5>
+            falarTexto *ngIf="listaTituloNaoFiltrado">{{ listaTituloNaoFiltrado[1].titulo }}</h5>
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
           <div
@@ -376,7 +376,7 @@
             {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
         </div>
-        <div class="d-flex row" #tamanhoDaFila style="width: 100%">
+        <div  class="d-flex row" #tamanhoDaFila style="width: 100%">
           <app-card-demanda
             class="col-6"
             *ngFor="

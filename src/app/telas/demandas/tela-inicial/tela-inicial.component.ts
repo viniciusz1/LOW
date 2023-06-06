@@ -288,14 +288,8 @@ export class TelaInicialComponent implements OnInit {
       })
       .afterClosed().subscribe({
         next: e => {
-          let indice: number | undefined = -1
-          if (this.listaDemandas) {
-            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-            if (indice !== -1) {
-              this.listaTituloNaoFiltrado = [];
-              this.listaDemandas.splice(indice, 1, e);
-              this.exibirFilasDeStatus()
-            }
+          if(e != undefined){
+              this.carregarDemandasIniciais();          
           }
         }
       })
@@ -505,13 +499,12 @@ export class TelaInicialComponent implements OnInit {
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
         });
+      } else{
+        this.listaTituloNaoFiltrado.push({
+          status: 'Sem demandas',
+          titulo: 'Sem demandas',
+        });
       }
-      // else{
-      //   this.listaTituloNaoFiltrado.push({
-      //     status: 'Sem demandas',
-      //     titulo: 'Sem demandas',
-      //   });
-      // }
 
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',

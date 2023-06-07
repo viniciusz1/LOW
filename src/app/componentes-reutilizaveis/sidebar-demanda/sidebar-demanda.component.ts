@@ -11,7 +11,7 @@ export class SidebarDemandaComponent implements OnInit {
   @Output() clicouNaSeta = new EventEmitter<string>();
   @Output() clicouEmUmStatus = new EventEmitter();
 
-  onClick(){
+  onClick() {
     this.isCollapsed = !this.isCollapsed;
     this.clicouNaSeta.emit();
   }
@@ -19,7 +19,7 @@ export class SidebarDemandaComponent implements OnInit {
   centered = false;
   disabled = false;
   unbounded = false;
-  isCollapsed:boolean = false;
+  isCollapsed: boolean = false;
   radius: number = 0;
   color: string = 'black';
 }

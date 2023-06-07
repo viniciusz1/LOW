@@ -1,14 +1,16 @@
-:host ::ng-deep .p-inputtext{
-    width:100%
-}
-:host ::ng-deep .p-inputnumber	{
-      width: 100%;
-}
-:host ::ng-deep .dropDespesa{
-    width:90%;
+:host ::ng-deep .p-inputtext {
+    width: 100%
 }
 
-:host ::ng-deep .dropStatus{
+:host ::ng-deep .p-inputnumber {
+    width: 100%;
+}
+
+:host ::ng-deep .dropDespesa {
+    width: 90%;
+}
+
+:host ::ng-deep .dropStatus {
     width: 30%;
 }
 
@@ -16,11 +18,12 @@
     background-color: #00579D !important;
 }
 
-label, i{
+label,
+i {
     margin-top: 20px;
 }
 
-.escopo-demanda{
+.escopo-demanda {
     border: 1px solid #dee2e6 !important;
     border-radius: 5px !important;
     width: 100%;

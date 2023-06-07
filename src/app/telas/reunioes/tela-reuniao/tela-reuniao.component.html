@@ -35,6 +35,10 @@
     <div class="container">
       <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{ width: '40vw' }">
         <ng-template pTemplate="footer">
+          <div style="display: flex; align-items:center; padding: 0.5vw; padding-left: 0px !important;">
+            <span style="font-weight: 600; margin-right: 0.5vw; font-size: 1.05rem;">Comissão: </span>
+            <span style="font-size: 1.05rem;">{{reuniao.comissaoReuniao}}</span>
+          </div>
           <button falarTexto *ngIf="!mostrarBotaoModal" type="button" (click)="cd.reject()"
             class="btn btn-outline-danger">
             <i class="pi pi-times me-2"></i>

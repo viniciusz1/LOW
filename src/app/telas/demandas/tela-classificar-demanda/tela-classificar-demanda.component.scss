@@ -1,29 +1,34 @@
 @import '../../../../themes.scss';
-.line-top-start{
+
+.line-top-start {
     width: 80%;
-    position:absolute;
+    position: absolute;
     top: 0;
     left: 0;
     background-color: $primary;
     height: 10px;
 }
-.form-label{
+
+.form-label {
     margin: 0px;
     margin-top: 10px;
     font-size: 15px;
 }
-.line-top-end{
+
+.line-top-end {
     width: 20%;
-    position:absolute;
+    position: absolute;
     top: 0;
     right: 0;
     background-color: $primarysec;
     height: 10px;
 }
-h4{
+
+h4 {
     font-size: 15px;
 }
-.retangulo-container{
+
+.retangulo-container {
     height: 60vh;
     padding: 10px;
     font-size: 13px;
@@ -38,8 +43,8 @@ h4{
 }
 
 :host::ng-deep {
-    .p-fileupload-content{
-       height: 18vh;
+    .p-fileupload-content {
+        height: 18vh;
     }
 
-  }
+}

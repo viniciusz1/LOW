@@ -1,10 +1,14 @@
-// :host ::ng-deep .p-dropdown {
-//     width: 50vw;
-// }
-
 .largura-customizada {
     width: 100%;
     display: grid;
+}
+
+.opacity{
+    opacity: 0;
+}
+
+.opacity-normal{
+    opacity: 1;
 }
 
 .drop {
@@ -37,4 +41,3 @@ i {
     min-height: 25vh;
     word-wrap: break-word;
 }
-

@@ -45,6 +45,9 @@
     </div>
     <div class="col-lg-6">
       <p class="text-end">
+        <a [href]="[path + 'demanda/pdf/' + demanda?.codigoDemanda]">
+          <i class="bi bi-download me-3" style="color: black;"></i>
+        </a>
         <i role="button" (click)="openModalDemandaDocumento()" class="bi bi-arrows-fullscreen"></i>
       </p>
       <p-scrollPanel [style]="{height: '70vh', width:'42.6vw'}">

@@ -15,12 +15,13 @@ import { DemandaService } from 'src/app/services/demanda.service';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
 import { textoTutorial } from '../../../shared/textoDoTutorial';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
 import { ModalHistoricoComponent } from 'src/app/modais/modal-historico/modal-historico.component';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -39,10 +40,16 @@ export class TelaInicialComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private messageService: MessageService,
+    private modalService: ModalService,
+    private primengConfig: PrimeNGConfig,
     private usuarioService: UsuarioService,
-    private falarTextoService: FalarTextoService
+    private falarTextoService: FalarTextoService,
   ) {
     //Pipe ativado quando é realizado algum tipo de filtro por campo de texto
+    let tipo =localStorage.getItem("exibicao")
+    if(tipo){
+      this.tipoExibicaoDemanda = JSON.parse(tipo)
+    }
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
       if (this.pesquisaDemanda == "") {
         this.carregarDemandasIniciais()
@@ -73,6 +80,7 @@ export class TelaInicialComponent implements OnInit {
   ];
   departamentoUsuario?= ''
   nivelAcessoUsuario?= ''
+  confirmacaoReprovacao: boolean = false;
   totalPagesPagination = 0
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
@@ -84,7 +92,7 @@ export class TelaInicialComponent implements OnInit {
   isFiltrado = false;
   showFiltro = false;
   showPesquisaEBotaoFiltro = true;
-  showSidebar = -350;
+  showSidebar = -18.2;
   listaDemandas: Demanda[] = [];
   demandasVazias: boolean = false;
   divScrollCircle: boolean = false;
@@ -139,6 +147,8 @@ export class TelaInicialComponent implements OnInit {
     this.demandasService.setFiltroData = filtro;
     this.pesquisarDemandas(undefined);
   }
+
+  
 
   paginate(event: { page: number }) {
     this.demandasService.avancarPage(event.page)
@@ -244,15 +254,17 @@ export class TelaInicialComponent implements OnInit {
     this.tipoExibicaoDemanda = false;
   }
 
-
   //Muda a exibição das demandas para formato de card
   changeToCard() {
     this.tipoExibicaoDemanda = true;
   }
+
+
+
   //Abre e fecha o sidebar lateral esquerdo
   moveSidebar() {
     if (this.showSidebar == 0) {
-      this.showSidebar = -350;
+      this.showSidebar = -18.2;
     } else {
       this.showSidebar = 0;
     }
@@ -265,7 +277,7 @@ export class TelaInicialComponent implements OnInit {
         maxWidth: '70vw',
         minWidth: '50vw',
         data: demanda
-      });
+      })
   }
 
   //Abre modal de documento da demanda
@@ -278,14 +290,8 @@ export class TelaInicialComponent implements OnInit {
       })
       .afterClosed().subscribe({
         next: e => {
-          let indice: number | undefined = -1
-          if (this.listaDemandas) {
-            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-            if (indice !== -1) {
-              this.listaTituloNaoFiltrado = [];
-              this.listaDemandas.splice(indice, 1, e);
-              this.exibirFilasDeStatus()
-            }
+          if(e != undefined){
+              this.carregarDemandasIniciais();          
           }
         }
       })
@@ -296,7 +302,7 @@ export class TelaInicialComponent implements OnInit {
     this.matDialog.open(ModalHistoricoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      minHeight: '30vh',
+      minHeight: '50vh',
       data: codigoDemanda
     });
   }
@@ -354,11 +360,7 @@ export class TelaInicialComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
-
-
   //Verifica o status da demanda, adiciona o título e o status na lista de títulos
-
-
   mudarStatusFiltro() {
     this.showFiltro = !this.showFiltro;
     if (!this.showFiltro) {
@@ -369,7 +371,6 @@ export class TelaInicialComponent implements OnInit {
       this.showPesquisaEBotaoFiltro = !this.showPesquisaEBotaoFiltro;
     }
   }
-
 
   //Método que carrega as demandas inciais dependendo do nível de acesso do usuário
   carregarDemandasIniciais() {
@@ -386,7 +387,7 @@ export class TelaInicialComponent implements OnInit {
             }
           });
           e['qtdDemandas'].forEach((qtd: number) => {
-            if(qtd > 0){
+            if (qtd > 0) {
               this.qtdDemandasStatus.push(qtd)
             }
           })
@@ -401,7 +402,7 @@ export class TelaInicialComponent implements OnInit {
       this.demandasService.getDemandasTelaInicialByDepartamento().subscribe({
         next: (demandas) => {
           if (demandas.length > 0) {
-            console.log("divscroll 1 " , this.divScrollCircle)
+            console.log("divscroll 1 ", this.divScrollCircle)
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
             this.isFirstIfExecuted = true;
@@ -409,8 +410,8 @@ export class TelaInicialComponent implements OnInit {
             this.nenhumResultadoEncontrado = false;
           }
 
-          if(!this.isFirstIfExecuted && demandas.length == 0) {
-            console.log("divscroll 2 " , this.divScrollCircle)
+          if (!this.isFirstIfExecuted && demandas.length == 0) {
+            console.log("divscroll 2 ", this.divScrollCircle)
             this.divScrollCircle = true;
             setTimeout(() => {
               this.demandasVazias = true;
@@ -428,6 +429,7 @@ export class TelaInicialComponent implements OnInit {
 
   //Abre o modal do motivo de reprovação da demanda
   openModalMotivoReprovacao(demanda: Demanda) {
+    this.confirmacaoReprovacao = true;
     this.confirmationService.confirm({
       dismissableMask: true,
       key: 'motivoReprovacao',
@@ -441,48 +443,59 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
+  openModalTrocarModoExibicao() {
+    this.confirmacaoReprovacao = false;
+    this.confirmationService.confirm({
+      key: 'motivoReprovacao',
+      message: 'Deseja realmente trocar o modo de exibição?',
+      dismissableMask: true,
+      blockScroll: false,
+      header: 'Alterar modo de exibição',
+      accept: () => {
+        this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda
+        localStorage.setItem("exibicao", JSON.stringify(this.tipoExibicaoDemanda))
+      },
+    });
+  }
   ngOnInit(): void {
     // this.listaDemandas = listaDemandas
+    this.modalService.modalFechado.subscribe(() => {
+      // Chamar a função para carregar as demandas novamente
+      this.carregarDemandasIniciais();
+    });
     this.carregarDemandasIniciais();
   }
 
   //Lógica para a criação de uma nova demanda
   criarUmaNovaDemanda() {
-    this.rascunhoService.postRascunhoDemanda().subscribe((rascunho) => {
-      console.log("entrou")
-      this.router.navigate(['tela-inicial/rascunho/' + rascunho.codigoDemanda])
-    })
-    // let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
-    // if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
-    //   this.router.navigate(['tela-inicial/rascunho/' + 0])
-    // } else {
-    //   this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
-    // }
+    let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
+    if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
+      this.router.navigate(['tela-inicial/rascunho/' + 0])
+    } else {
+      this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
+    }
   }
 
 
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
-    
+    if (this.nivelAcessoUsuario == 'Solicitante') {
       if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
         this.listaTituloNaoFiltrado.push({
           status: 'SUAS_DEMANDAS',
           titulo: 'Suas Demandas',
         });
-      }else {
+      } else {
         this.listaTituloNaoFiltrado.push({
           status: 'Sem demandas',
           titulo: 'Sem demandas',
         });
       }
-    if (this.nivelAcessoUsuario == 'Solicitante') {
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
-
-
       return
     }
 
@@ -492,31 +505,27 @@ export class TelaInicialComponent implements OnInit {
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
         });
+      } else{
+        this.listaTituloNaoFiltrado.push({
+          status: 'Sem demandas',
+          titulo: 'Sem demandas',
+        });
       }
-      // else{
-      //   this.listaTituloNaoFiltrado.push({
-      //     status: 'Sem demandas',
-      //     titulo: 'Sem demandas',
-      //   });
-      // }
-
 
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
 
-
-
       return
     }
 
-    // if (this.rascunhoService.getRascunhosDemanda.length > 0) {
-    //   this.listaTituloNaoFiltrado.push({
-    //     status: 'DRAFT',
-    //     titulo: 'Seus Rascunhos',
-    //   });
-    // }
+    if (this.rascunhoService.getRascunhosDemanda.length > 0) {
+      this.listaTituloNaoFiltrado.push({
+        status: 'DRAFT',
+        titulo: 'Seus Rascunhos',
+      });
+    }
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'

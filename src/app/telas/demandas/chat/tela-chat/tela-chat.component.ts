@@ -10,6 +10,7 @@ import { ScrollPanel } from 'primeng/scrollpanel';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MenuModule } from 'ngx-editor/lib/modules/menu/menu.module';
+import { Conversa } from 'src/app/models/conversa.model';
 
 @Component({
   selector: 'app-tela-chat',
@@ -21,7 +22,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   items: MenuItem[] = [];
   codigoRota = '';
   mensagens: Mensagem[] = [];
-  conversasDemandas: Demanda[] = [];
+  conversasDemandas: Conversa[] = [];
   mostrarConversas = false;
   demandaDiscutida: Demanda | undefined;
   pesquisaFiltro = '';
@@ -53,17 +54,19 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       .getMessages(this.codigoRota)
       .subscribe((novasMensagens) => {
         this.mensagens = this.trocarLadoDaMensagem(novasMensagens);
+        console.log(this.mensagens)
         this.mostrarConversas = true;
       });
     this.scrollToBottom();
   }
 
-  alterarConversa(conversa: Demanda){
-    this.demandaDiscutida = conversa;
-    this.router.navigate(['/tela-inicial/chat/' + conversa.codigoDemanda])
+  alterarConversa(conversa: Conversa){
+    this.demandaDiscutida = conversa.demandaConversa;
+    this.router.navigate(['/tela-inicial/chat/' + conversa.codigoConversa])
   }
 
   iniciarSubscribeChat() {
+    this.messagesService.subscribeVisto();
     this.messagesService.subscribeChat();
   }
 
@@ -71,6 +74,11 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.messagesService.subscriptionChat != undefined) {
       this.messagesService.subscriptionChat.unsubscribe();
+    }
+
+
+    if (this.messagesService.subscriptionVisto != undefined) {
+      this.messagesService.subscriptionVisto.unsubscribe();
     }
   }
 
@@ -99,8 +107,8 @@ export class TelaChatComponent implements OnInit, OnDestroy {
         if (!mensagemMaisRecente) {
           return mensagemAtual;
         }
-        if (mensagemAtual.dataMensagens && mensagemMaisRecente.dataMensagens) {
-          return mensagemAtual.dataMensagens > mensagemMaisRecente.dataMensagens
+        if (mensagemAtual.dataMensagem && mensagemMaisRecente.dataMensagem) {
+          return mensagemAtual.dataMensagem > mensagemMaisRecente.dataMensagem
             ? mensagemAtual
             : mensagemMaisRecente;
         }
@@ -113,14 +121,14 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   //Quando recebe uma nova mensagem, da um publish para realizar o visto
   subscribeEmmiterMensagens() {
     this.messagesService.$mensagesEmmiter.subscribe((mensagem) => {
-      if (mensagem.usuarioMensagens?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+      if (mensagem.usuarioMensagem?.codigoUsuario != this.usuarioService.getCodigoUser()) {
         this.messagesService.client?.publish({
-          destination: '/low/visto/' + this.codigoRota, body: JSON.stringify({ textoMensagens: "agora vai" })
+          destination: '/low/visto/' + this.codigoRota, body: JSON.stringify({ textoMensagem: "agora vai" })
         })
       }
 
-      console.log("MENSAGEM: " + mensagem.textoMensagens)
-      if(mensagem.textoMensagens != undefined){
+      console.log("MENSAGEM: " + mensagem.textoMensagem)
+      if(mensagem.textoMensagem != undefined){
         let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
         this.mostrarConversas = true;
         this.mensagens.push(...novaMensagem);
@@ -136,8 +144,8 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   trocarLadoDaMensagem(mensagens: Mensagem[]) {
     for (let mensagem of mensagens) {
       if (
-        mensagem.usuarioMensagens &&
-        mensagem.usuarioMensagens.codigoUsuario ==
+        mensagem.usuarioMensagem &&
+        mensagem.usuarioMensagem.codigoUsuario ==
           this.usuarioService.getCodigoUser()
       ) {
         mensagem.ladoMensagem = true;
@@ -153,6 +161,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   //Seta as conversas que o usuário está participando
   setarConversas() {
     this.messagesService.getDemandasRelacionadas().subscribe((e) => {
+      console.log(e)
       this.conversasDemandas = e;
       this.scrollToBottom();
     });
@@ -176,7 +185,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       this.mensagem.nativeElement.value = '';
     }
   }
-
+  // commnet
   openModalDemandaDocumento() {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
@@ -189,7 +198,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     this.subscribeEmmiterMensagens();
     this.messagesService.$mensagensVistas.subscribe(() => {
       this.mensagens.forEach((mensagem) => {
-        mensagem.statusMensagens = "VISTA"
+        mensagem.statusMensagem = "VISTA"
         })
     })
   }

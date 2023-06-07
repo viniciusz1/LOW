@@ -32,9 +32,9 @@
             "
           >
             <div class="d-flex flex-column flex-fill">
-              <h6 falarTexto>{{ conversa.tituloDemanda }}</h6>
+              <h6 falarTexto>{{ conversa.demandaConversa?.tituloDemanda }}</h6>
 
-              <small>{{ conversa?.solicitanteDemanda?.nomeUsuario }}</small>
+              <small>{{ conversa.demandaConversa?.solicitanteDemanda?.nomeUsuario }}</small>
             </div>
             <div class="d-flex flex-column align-items-center">
               <span falarTexto class="timeago">{{
@@ -91,7 +91,7 @@
                   ]"
                 >
                   <span falarTexto>
-                    {{ mensagem.textoMensagens }}<br />
+                    {{ mensagem.textoMensagem }}<br />
                     <div
                       style="width: 100%; display: flex; justify-content: end"
                     >
@@ -103,7 +103,7 @@
                           margin-right: 0.5vw;
                         "
                         >{{
-                          mensagem.dataMensagens | date : "dd/MM/yyyy"
+                          mensagem.dataMensagem | date : "dd/MM/yyyy"
                         }}</small
                       >
                       <div
@@ -114,12 +114,12 @@
                         "
                       >
                         <small falarTexto style="margin-right: 0.1vw">{{
-                          mensagem.dataMensagens | date : "HH:mm"
+                          mensagem.dataMensagem | date : "HH:mm"
                         }}</small>
                         <div *ngIf="mensagem.ladoMensagem">
                           <small
                             class="pe-2"
-                            *ngIf="mensagem.statusMensagens == 'ENVIADA'"
+                            *ngIf="mensagem.statusMensagem == 'ENVIADA'"
                             ><i
                               class="bi bi-check-all"
                               style="color: #a1a1a1; font-size: 1.1rem"
@@ -127,7 +127,7 @@
                           ></small>
                           <small
                             class="pe-2"
-                            *ngIf="mensagem.statusMensagens == 'VISTA'"
+                            *ngIf="mensagem.statusMensagem == 'VISTA'"
                             ><i
                               class="bi bi-check-all"
                               style="color: #00579d; font-size: 1.1rem"

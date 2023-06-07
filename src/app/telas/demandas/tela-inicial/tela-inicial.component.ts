@@ -21,6 +21,7 @@ import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -39,6 +40,7 @@ export class TelaInicialComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private messageService: MessageService,
+    private modalService: ModalService,
     private primengConfig: PrimeNGConfig,
     private usuarioService: UsuarioService,
     private falarTextoService: FalarTextoService,
@@ -275,7 +277,7 @@ export class TelaInicialComponent implements OnInit {
         maxWidth: '70vw',
         minWidth: '50vw',
         data: demanda
-      });
+      })
   }
 
   //Abre modal de documento da demanda
@@ -457,6 +459,10 @@ export class TelaInicialComponent implements OnInit {
   }
   ngOnInit(): void {
     // this.listaDemandas = listaDemandas
+    this.modalService.modalFechado.subscribe(() => {
+      // Chamar a função para carregar as demandas novamente
+      this.carregarDemandasIniciais();
+    });
     this.carregarDemandasIniciais();
   }
 

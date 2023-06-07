@@ -4,7 +4,7 @@ import { Arquivo } from './../../models/arquivo.model';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { MessageService, PrimeIcons } from 'primeng/api';
+import { ConfirmationService, MessageService, PrimeIcons } from 'primeng/api';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Tamanho } from 'src/app/models/tamanho.enum';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { Proposta } from 'src/app/models/proposta.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { ModalService } from 'src/app/services/modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-demanda-documento',
@@ -29,6 +30,8 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     private demandaService: DemandaService,
     private dialogRef: MatDialogRef<ModalDemandaDocumentoComponent>,
     private matDialog: MatDialog,
+    private router: Router,
+    private confirmationService: ConfirmationService,
     private modalService: ModalService,
     private messageService: MessageService,
     private usuarioService: UsuarioService) {
@@ -115,6 +118,19 @@ export class ModalDemandaDocumentoComponent implements OnInit {
       maxWidth: '70vw',
       minWidth: '50vw',
       data: this.dadosDemanda
+    })
+  }
+
+  confirmarDecisao() {
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      key: 'confirmarDecisao',
+      header: 'Aprovar Demanda',
+      blockScroll: false,
+      message: 'Tem certeza de que realmente deseja aprovar essa demanda?',
+      accept: () => {
+        this.enviarDecisao(1)
+      },
     });
   }
 

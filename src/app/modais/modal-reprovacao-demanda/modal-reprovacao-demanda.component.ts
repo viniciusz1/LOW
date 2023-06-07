@@ -24,7 +24,6 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
     private demandaService: DemandaService,
     private usuarioService: UsuarioService,
     @Inject(DIALOG_DATA) public data: Demanda,
-    private router: Router,
     private modalService: ModalService,
     private messageService: MessageService
   ) {
@@ -53,11 +52,11 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
       .subscribe({
         next: event => {
           this.showSuccess("Demanda reprovada com sucesso!")
-          this.router.navigate(['/tela-inicial'])
           this.dialogRef.close()
           if (this.modalService.dialogRefDemandaDocumento) {
             this.modalService.dialogRefDemandaDocumento.close();
           }
+          this.modalService.modalFechado.emit(); 
         },
         error: err => {
           this.showError("Não foi possivel reprovar a demanda!")

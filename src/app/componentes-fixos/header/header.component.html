@@ -204,12 +204,11 @@
           <span falarTexto><i class="bi bi-gear me-3" style="font-size: 20px"></i>{{
             "componentes-fixos.header.configuracoes" | translate }}</span>
         </button>
-        <div style="margin-right: 9vw;">
-          <button routerLink="/" (click)="sair()" mat-menu-item>
-            <span falarTexto><i class="bi bi-box-arrow-right me-3" style="font-size: 20px"></i>{{
+        
+          <button routerLink="/" (click)="sair()" mat-menu-item style="padding-right: 9vw;">
+            <span falarTexto><i class="bi bi-box-arrow-right me-3" style="font-size: 20px; width: 100%;"></i>{{
               "componentes-fixos.header.sair" | translate }}</span>
           </button>
-        </div>
       </mat-menu>
     </ul>
   </nav>

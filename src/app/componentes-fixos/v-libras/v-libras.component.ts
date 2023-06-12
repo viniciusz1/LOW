@@ -27,7 +27,7 @@ export class VLibrasComponent implements OnInit {
   private initVLibras() {
 
     const vLibrasScript = this.renderer.createElement('script');
-    vLibrasScript.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+    vLibrasScript.src = 'https://vlibras.gov.br/app/vlibras-plugin.js#5.2.0';
     setTimeout(() => {
 
       //@ts-ignore

@@ -54,7 +54,7 @@ export class DemandaService {
       if (!beneficioReal.get('moedaBeneficio')?.value ||
         !beneficioReal.get('memoriaDeCalculoBeneficio')?.value ||
         !beneficioReal.get('valorBeneficio')?.value) {
-          return false;
+        return false;
       } else {
         return true
       }
@@ -67,7 +67,7 @@ export class DemandaService {
       if (!beneficioPotencial?.get('moedaBeneficio')?.value ||
         !beneficioPotencial?.get('memoriaDeCalculoBeneficio')?.value ||
         !beneficioPotencial?.get('valorBeneficio')?.value) {
-          return false;
+        return false;
       } else {
         return true
       }
@@ -353,20 +353,19 @@ export class DemandaService {
     return this.pageable.totalPages || 0
   }
 
+  //string = filtro por departamento
+  //
   getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | string | undefined) {
+    if (pesquisaEspecial == undefined) {
+      this.link = path + `demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}&ordenar=${this.filtros?.sort}`
+    }
     if (typeof pesquisaEspecial != 'string') {
       if (pesquisaEspecial?.status) {
-        console.log("status")
         this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=&ordenar=${this.filtros?.sort}`
       } else if (pesquisaEspecial?.pesquisaCampo) {
-        console.log("pesquisacampo")
         this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=&ordenar=${this.filtros?.sort}`
-      } else {
-        console.log("Ok")
-        this.link = path + `demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}&ordenar=${this.filtros?.sort}`
       }
-    } else {
-      console.log("else")
+    } else if (typeof pesquisaEspecial == 'string') {
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=&analista=&departamento=${pesquisaEspecial}&ordenar=`
     }
     console.log(this.link)

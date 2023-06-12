@@ -20,8 +20,7 @@
       <div class="list-group">
         <p-scrollPanel [style]="{ width: '100%', height: '70vh' }">
           <a
-
-            [routerLink]="['/tela-inicial/chat/' + conversa.codigoDemanda]"
+            (click)="alterarConversa(conversa)"
             routerLinkActive="na-rota"
             *ngFor="
               let conversa of conversasDemandas | filtrarChat : pesquisaFiltro
@@ -33,9 +32,9 @@
             "
           >
             <div class="d-flex flex-column flex-fill">
-              <h6 falarTexto>{{ conversa.tituloDemanda }}</h6>
+              <h6 falarTexto>{{ conversa.demandaConversa?.tituloDemanda }}</h6>
 
-              <small>{{ conversa?.solicitanteDemanda?.nomeUsuario }}</small>
+              <small *ngFor="let user of conversa.usuariosConversa"> <div *ngIf="user.codigoUsuario != usuarioService.getCodigoUser()">{{ user.nomeUsuario }}</div></small>
             </div>
             <div class="d-flex flex-column align-items-center">
               <span falarTexto class="timeago">{{
@@ -55,9 +54,7 @@
       <header class="d-flex align-items-center border-bottom">
         <div class="d-flex flex-column flex-fill ms-3">
           <h6 falarTexto>{{ demandaDiscutida?.tituloDemanda }}</h6>
-          <small falarTexto *ngIf="demandaDiscutida" class="timeago">{{ "telas.tela-chat.solicitante" | translate }} {{
-            demandaDiscutida.solicitanteDemanda?.nomeUsuario }} | {{ "telas.tela-chat.analista" | translate }} {{ demandaDiscutida.analista?.nomeUsuario
-            }}</small>
+          <small falarTexto *ngIf="demandaDiscutida" class="timeago d-flex"> Você está conversando com: <div class="ms-1" *ngFor="let i of conversaDiscutida?.usuariosConversa"><div *ngIf="i.codigoUsuario != usuarioService.getCodigoUser()"> {{i.nomeUsuario}}</div></div></small>
         </div>
         <i *ngIf="codigoRota" class="bi bi-mic-mute me-3" (click)="silenciarChat()" style="cursor: pointer;"></i>
         <i *ngIf="codigoRota" class="bi bi-x-circle me-3" (click)="finalizarChat()" style="cursor: pointer;"></i>
@@ -92,7 +89,7 @@
                   ]"
                 >
                   <span falarTexto>
-                    {{ mensagem.textoMensagens }}<br />
+                    {{ mensagem.textoMensagem }}<br />
                     <div
                       style="width: 100%; display: flex; justify-content: end"
                     >
@@ -104,7 +101,7 @@
                           margin-right: 0.5vw;
                         "
                         >{{
-                          mensagem.dataMensagens | date : "dd/MM/yyyy"
+                          mensagem.dataMensagem | date : "dd/MM/yyyy"
                         }}</small
                       >
                       <div
@@ -115,12 +112,12 @@
                         "
                       >
                         <small falarTexto style="margin-right: 0.1vw">{{
-                          mensagem.dataMensagens | date : "HH:mm"
+                          mensagem.dataMensagem | date : "HH:mm"
                         }}</small>
                         <div *ngIf="mensagem.ladoMensagem">
                           <small
                             class="pe-2"
-                            *ngIf="mensagem.statusMensagens == 'ENVIADA'"
+                            *ngIf="mensagem.statusMensagem == 'ENVIADA'"
                             ><i
                               class="bi bi-check-all"
                               style="color: #a1a1a1; font-size: 1.1rem"
@@ -128,7 +125,7 @@
                           ></small>
                           <small
                             class="pe-2"
-                            *ngIf="mensagem.statusMensagens == 'VISTA'"
+                            *ngIf="mensagem.statusMensagem == 'VISTA'"
                             ><i
                               class="bi bi-check-all"
                               style="color: #00579d; font-size: 1.1rem"

@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
     // }
       this.configIniciais.setFontSize(undefined)
       this.configIniciais.setFontTheme(undefined)
+      this.messagesService.subscribeToNotificationsMensagens()
   }
   ngOnInit(): void {
   }

@@ -500,7 +500,9 @@ export class TelaInicialComponent implements OnInit {
     }
 
     if (this.nivelAcessoUsuario == 'GerenteNegocio') {
+      console.log("GN")
       if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
+        console.log("Entrouss")
         this.listaTituloNaoFiltrado.push({
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',

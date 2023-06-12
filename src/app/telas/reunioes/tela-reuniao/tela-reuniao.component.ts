@@ -102,7 +102,7 @@ export class TelaReuniaoComponent implements OnInit {
           // Substituir a reunião existente
           this.listaReunioes[index] = reuniao;
         } else {
-          this.atualizarReunioes();
+          this.pesquisarReunioes({nomeComissao: "", dataReuniao: "", statusReuniao: "", ppmProposta: "", analista: "", solicitante: "", ordenar: "", page: "", size: ""});
         }
 
 
@@ -122,18 +122,18 @@ export class TelaReuniaoComponent implements OnInit {
     this.pesquisarReunioes({nomeComissao: "", dataReuniao: "", statusReuniao: "", ppmProposta: "", analista: "", solicitante: "", ordenar: "", page: "", size: ""})
   }
 
-  atualizarReunioes() {
-    this.reuniaoService
-      .getReuniao()
-      .subscribe({
-        next: reuniao => {
+  // atualizarReunioes() {
+  //   this.reuniaoService
+  //     .getReuniao()
+  //     .subscribe({
+  //       next: reuniao => {
 
-          this.listaReunioes = reuniao
-        }, error: err => {
-          this.showError("Não foi possível atualizar esta reunião")
-        }
-      });
-  }
+  //         this.listaReunioes = reuniao
+  //       }, error: err => {
+  //         this.showError("Não foi possível atualizar esta reunião")
+  //       }
+  //     });
+  // }
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }

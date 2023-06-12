@@ -30,7 +30,7 @@
 </div>
 
 <h4 falarTexto>
-  <b>{{ "documento-pdf.objetivo" | translate }}</b>
+  <strong>{{ "documento-pdf.objetivo" | translate }}</strong>
 </h4>
 <p falarTexto [innerHTML]="dadosDemanda?.objetivoDemanda"></p>
 
@@ -105,11 +105,6 @@
       dadosDemanda?.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio
     }}
   </h4>
-  <h4>
-    <b>{{
-      "documento-pdf.responsavel-proposta" | translate
-      }}</b>
-  </h4>
   <b falarTexto>
     {{ "documento-pdf.responsaveis-negocio" | translate | titlecase }}
   </b>
@@ -147,10 +142,10 @@
     </thead>
 
     <tbody
-      *ngFor="let itemRecurso of dadosDemanda?.recursosProposta"
       class="table-group-divider"
     >
-      <tr>
+      <tr
+      *ngFor="let itemRecurso of dadosDemanda?.recursosProposta">
         <td falarTexto>
           {{ itemRecurso.nomeRecurso }}
         </td>

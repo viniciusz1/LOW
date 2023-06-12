@@ -52,6 +52,7 @@ export class FiltroDemandaComponent implements OnInit {
         { label: "Business Case", value: "BUSINESS_CASE" },
         { label: "Assessment", value: "ASSESSMENT" },
       ]
+      this.valorStatus = "ASSESSMENT"
     } else {
       this.status = [
         { label: "Backlog - Classificação", value: "BACKLOG_CLASSIFICACAO" },

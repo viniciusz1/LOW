@@ -432,7 +432,6 @@
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
             <div
-              *ngIf="linha.status != 'DRAFT'"
               class="me-3"
               style="align-self: flex-end; cursor: pointer"
               (click)="
@@ -444,9 +443,11 @@
               *ngIf="linha.titulo != 'Sem demandas'"
               falarTexto
             >
-              {{ "telas.tela-inicial.ver-mais" | translate }} ({{
+              {{ "telas.tela-inicial.ver-mais" | translate }} 
+              <span *ngIf="linha.titulo != 'Suas Demandas'">({{
                 qtdDemandasStatus[i]
               }})
+            </span>
             </div>
           </div>
           <div

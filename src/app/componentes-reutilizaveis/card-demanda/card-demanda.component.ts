@@ -214,18 +214,20 @@ export class CardDemandaComponent implements OnInit {
     switch (this.dadosDemanda.statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          if(nivelAcesso == 'GestorTI' || this.dadosDemanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()){
           this.textoExibidoEmBotaoDependendoRota = {
             rota:
               '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
             texto: 'Classificar Demanda',
           }
+        }
         };
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
 
-        // if(this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()){
+        // if(nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI'){
 
-        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+        if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
             texto: 'Criar Proposta'
@@ -242,7 +244,7 @@ export class CardDemandaComponent implements OnInit {
         }
         return true;
       case StatusDemanda.ASSESSMENT:
-        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+        if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_ADD_REUNIAO',
             texto: 'Adicionar Proposta',
@@ -250,7 +252,7 @@ export class CardDemandaComponent implements OnInit {
         }
         return true;
       case StatusDemanda.BUSINESS_CASE:
-        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+        if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_ADD_REUNIAO',
             texto: 'Adicionar Proposta',
@@ -296,23 +298,12 @@ export class CardDemandaComponent implements OnInit {
   }
 
   deletarRascunho() { 
-    this.confirmationService.confirm({
-      key: "deletarRascunho",
-      header: 'Deletar Rascunho',
-      message: 'Você deseja deletar essa Rascunho?',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        if (this.dadosDemanda.codigoDemanda) {
-          this.clicouEmExcluir.emit(this.dadosDemanda)
-          
-        } else {
-          this.showError("Não foi possível excluir o rascunho!")
-        }
-      },
-      reject: () => {
-        
-      }
-  });
+    if (this.dadosDemanda.codigoDemanda) {
+      this.clicouEmExcluir.emit(this.dadosDemanda)
+      
+    } else {
+      this.showError("Não foi possível excluir o rascunho!")
+    }
     // if (this.dadosDemanda.codigoDemanda) {
     //   this.clicouEmExcluir.emit(this.dadosDemanda)
       

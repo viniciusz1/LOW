@@ -486,12 +486,10 @@ export class TelaInicialComponent implements OnInit {
 
   //Lógica para a criação de uma nova demanda
   criarUmaNovaDemanda() {
-    let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
-    if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
-      this.router.navigate(['tela-inicial/rascunho/' + 0])
-    } else {
-      this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
-    }
+    this.rascunhoService.postRascunhoDemanda().subscribe((rascunho) => {
+      console.log("entrou")
+      this.router.navigate(['tela-inicial/rascunho/' + rascunho.codigoDemanda])
+    })
   }
 
 
@@ -519,38 +517,42 @@ export class TelaInicialComponent implements OnInit {
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
+
+
       return
     }
 
     if (this.nivelAcessoUsuario == 'GerenteNegocio') {
-      console.log("GN")
       if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
-        console.log("Entrouss")
         this.listaTituloNaoFiltrado.push({
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
         });
-      } else{
+      }
+      else{
         this.listaTituloNaoFiltrado.push({
           status: 'Sem demandas',
           titulo: 'Sem demandas',
         });
       }
 
+
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
 
+
+
       return
     }
 
-    if (this.rascunhoService.getRascunhosDemanda.length > 0) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'DRAFT',
-        titulo: 'Seus Rascunhos',
-      });
-    }
+    // if (this.rascunhoService.getRascunhosDemanda.length > 0) {
+    //   this.listaTituloNaoFiltrado.push({
+    //     status: 'DRAFT',
+    //     titulo: 'Seus Rascunhos',
+    //   });
+    // }
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'
@@ -638,7 +640,14 @@ export class TelaInicialComponent implements OnInit {
   }
 
   deletarDemanda(demanda: Demanda) {
-    if (demanda?.codigoDemanda)
+    
+    this.confirmationService.confirm({
+      key: "motivoReprovacao",
+      header: 'Deletar Rascunho',
+      message: 'Você deseja deletar essa Rascunho?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (demanda?.codigoDemanda)
     this.rascunhoService.deleteRascunhoDemanda(demanda?.codigoDemanda).subscribe(
       {
         next: e => {
@@ -655,6 +664,12 @@ export class TelaInicialComponent implements OnInit {
           }
         }
       }
-  )}
+  )
+      },
+      reject: () => {
+        
+      }
+  });
+    }
 
 }

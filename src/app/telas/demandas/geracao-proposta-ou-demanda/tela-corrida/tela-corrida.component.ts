@@ -244,13 +244,13 @@ export class TelaCorridaComponent implements OnInit {
           } else {
             this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
           }
-        } else {
-          if (icones[i].classList.length > 2) {
+        }
+         else if (icones[i].classList.length > 2) {
             this.titulosProposta[i].color = '#00579d';
           } else {
             this.titulosProposta[i].color = 'rgb(233, 233, 233)';
           }
-        }
+        
       }
     });
 

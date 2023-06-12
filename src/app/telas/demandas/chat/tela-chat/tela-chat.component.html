@@ -54,7 +54,7 @@
       <header class="d-flex align-items-center border-bottom">
         <div class="d-flex flex-column flex-fill ms-3">
           <h6 falarTexto>{{ demandaDiscutida?.tituloDemanda }}</h6>
-          <small falarTexto *ngIf="demandaDiscutida" class="timeago d-flex"> Você está conversando com: <div class="ms-2" *ngFor="let i of conversaDiscutida?.usuariosConversa"><div *ngIf="i.codigoUsuario != usuarioService.getCodigoUser()"> {{i.nomeUsuario}}</div></div></small>
+          <small falarTexto *ngIf="demandaDiscutida" class="timeago d-flex"> Você está conversando com: <div class="ms-1" *ngFor="let i of conversaDiscutida?.usuariosConversa"><div *ngIf="i.codigoUsuario != usuarioService.getCodigoUser()"> {{i.nomeUsuario}}</div></div></small>
         </div>
         <i *ngIf="codigoRota" class="bi bi-mic-mute me-3" (click)="silenciarChat()" style="cursor: pointer;"></i>
         <i *ngIf="codigoRota" class="bi bi-x-circle me-3" (click)="finalizarChat()" style="cursor: pointer;"></i>

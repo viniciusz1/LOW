@@ -77,8 +77,9 @@ export class MessagesService {
       if (this._client) {
           this.subscriptionNotificacaoMensagem = this._client.subscribe(
           '/notificacoes-messages/' + codigoUser + '/chat',
-          (message: Message) => {
-            this.updateQuantidadeMensagensNotificacoes();
+          (message: any) => {
+            console.log("Recived")
+            // this.updateQuantidadeMensagensNotificacoes();
           }
         );
       }

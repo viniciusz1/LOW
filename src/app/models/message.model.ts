@@ -2,12 +2,12 @@ import { Demanda } from "./demanda.model"
 import { Usuario } from "./usuario.model"
 
 export interface Mensagem {
-    codigoMensagens?:number
-    demandaMensagens?: Demanda
-    textoMensagens: string
-    usuarioMensagens?: Usuario
+    codigoMensagem?:number
+    demandaMensagem?: Demanda
+    textoMensagem: string
+    usuarioMensagem?: Usuario
     ladoMensagem: boolean
-    dataMensagens?: Date
-    statusMensagens?: string
+    dataMensagem?: Date
+    statusMensagem?: string
   }
   

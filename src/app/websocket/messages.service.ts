@@ -6,6 +6,7 @@ import { Client, Message, StompHeaders, StompSubscription } from '@stomp/stompjs
 import * as SockJS from 'sockjs-client';
 import { Mensagem } from '../models/message.model';
 import { map, Subscription } from 'rxjs';
+import { Conversa } from '../models/conversa.model';
 
 @Injectable({
   providedIn: 'root',
@@ -76,8 +77,9 @@ export class MessagesService {
       if (this._client) {
           this.subscriptionNotificacaoMensagem = this._client.subscribe(
           '/notificacoes-messages/' + codigoUser + '/chat',
-          (message: Message) => {
-            this.updateQuantidadeMensagensNotificacoes();
+          (message: any) => {
+            console.log("Recived")
+            // this.updateQuantidadeMensagensNotificacoes();
           }
         );
       }
@@ -160,74 +162,39 @@ export class MessagesService {
 
   getDemandasRelacionadas() {
     return this.http
-      .get<any>(
-        'http://localhost:8085/low/mensagens/demandasDiscutidas/' +
+      .get<Conversa[]>(
+        'http://localhost:8085/low/mensagens/conversas/' +
         this.usuarioService.getCodigoUser()
       )
-      .pipe(
-        map((demandas: any) => {
-          console.log(demandas);
-          let qtdMensagensNaoLidas = 0;
-          for (let demanda of demandas.demandas) {
-            let infoExtras = demandas.infoCard.find(
-              (e: { codigoDemanda: any }) =>
-                e.codigoDemanda == demanda.codigoDemanda
-            );
-            demanda.horaUltimaMensagem = infoExtras.horaUltimaMensagem;
-            demanda.qtdMensagensNaoLidas = infoExtras.qtdMensagensNaoLidas;
-            qtdMensagensNaoLidas += demanda.qtdMensagensNaoLidas;
-            demanda.usuarioAguardando = infoExtras.usuarioAguardando;
-          }
-          if (qtdMensagensNaoLidas > 0) {
-            this.$qtdMensagensNaoLida.emit(qtdMensagensNaoLidas);
-          }
-
-          const mapaDemanda = new Map();
-          demandas.demandas.forEach((demanda: Demanda) => {
-            if (!mapaDemanda.has(demanda.codigoDemanda)) {
-              mapaDemanda.set(demanda.codigoDemanda, demanda);
-            } else {
-              const demandaExistente = mapaDemanda.get(demanda.codigoDemanda);
-              if (
-                demanda.version &&
-                demanda.version > demandaExistente.version
-              ) {
-                mapaDemanda.set(demanda.codigoDemanda, demanda);
-              }
-            }
-          });
-          return [...mapaDemanda.values()];
-        })
-      );
   }
 
-  getMessages(codigoDemanda: string) {
+  getMessages(codigoConversa: string) {
     return this.http.get<Mensagem[]>(
-      'http://localhost:8085/low/mensagens/' + codigoDemanda
+      'http://localhost:8085/low/mensagens/' + codigoConversa
     );
   }
 
   send(
     destino: string,
     mensagem: string,
-    codigoDemanda: string,
+    codigoConversa: string,
     codigoUsuario: string
   ) {
     let file = new File([new Blob()], 'filename.jpg', { type: 'image/jpeg' });
     const formData = new FormData();
     formData.append('file', file, 'filename.jpg');
     let mensagemDTO = {
-      textoMensagens: mensagem,
-      demandaMensagens: {
-        codigoDemanda: codigoDemanda,
+      textoMensagem: mensagem,
+      conversaMensagem: {
+        codigoConversa: codigoConversa,
       },
-      usuarioMensagens: {
+      usuarioMensagem: {
         codigoUsuario: codigoUsuario,
       },
       multipartFile: formData,
     };
 
-    if (this._client && mensagemDTO.textoMensagens != undefined) {
+    if (this._client && mensagemDTO.textoMensagem != undefined) {
       this._client.publish({
         destination: destino,
         body: JSON.stringify(mensagemDTO),

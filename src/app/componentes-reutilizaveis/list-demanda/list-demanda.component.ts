@@ -69,10 +69,7 @@ export class ListDemandaComponent implements OnInit {
 
   exibirIniciarChat() {
 
-    if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()) {
-      return true;
-    }
-    else if (this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista) {
+    if (this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista) {
 
       if (this.dadosDemanda.analista == undefined) {
         return true;
@@ -83,6 +80,9 @@ export class ListDemandaComponent implements OnInit {
       }
       else if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
         return false;
+      }
+      if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()) {
+        return true;
       }
     }
     return false;

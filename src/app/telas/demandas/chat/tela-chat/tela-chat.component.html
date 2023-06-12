@@ -34,7 +34,7 @@
             <div class="d-flex flex-column flex-fill">
               <h6 falarTexto>{{ conversa.demandaConversa?.tituloDemanda }}</h6>
 
-              <small>{{ conversa.demandaConversa?.solicitanteDemanda?.nomeUsuario }}</small>
+              <small *ngFor="let user of conversa.usuariosConversa"> <div *ngIf="user.codigoUsuario != usuarioService.getCodigoUser()">{{ user.nomeUsuario }}</div></small>
             </div>
             <div class="d-flex flex-column align-items-center">
               <span falarTexto class="timeago">{{
@@ -54,9 +54,7 @@
       <header class="d-flex align-items-center border-bottom">
         <div class="d-flex flex-column flex-fill ms-3">
           <h6 falarTexto>{{ demandaDiscutida?.tituloDemanda }}</h6>
-          <small falarTexto *ngIf="demandaDiscutida" class="timeago">{{ "telas.tela-chat.solicitante" | translate }} {{
-            demandaDiscutida.solicitanteDemanda?.nomeUsuario }} | {{ "telas.tela-chat.analista" | translate }} {{ demandaDiscutida.analista?.nomeUsuario
-            }}</small>
+          <small falarTexto *ngIf="demandaDiscutida" class="timeago d-flex"> Você está conversando com: <div class="ms-2" *ngFor="let i of conversaDiscutida?.usuariosConversa"><div *ngIf="i.codigoUsuario != usuarioService.getCodigoUser()"> {{i.nomeUsuario}}</div></div></small>
         </div>
         <i *ngIf="codigoRota" class="bi bi-mic-mute me-3" (click)="silenciarChat()" style="cursor: pointer;"></i>
         <i *ngIf="codigoRota" class="bi bi-x-circle me-3" (click)="finalizarChat()" style="cursor: pointer;"></i>

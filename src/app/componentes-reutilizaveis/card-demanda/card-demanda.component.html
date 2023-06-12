@@ -20,7 +20,7 @@
       </div>
       <i
         class="bi bi-chat-left-dots me-3"
-        *ngIf="!rascunho && statusPermitido() && exibirIniciarChat()"
+        *ngIf="statusPermitido() && exibirIniciarChat()"
         (click)="irParaChat.emit($event)"
         style="cursor: pointer"
       ></i>

@@ -60,7 +60,10 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     this.scrollToBottom();
   }
 
+  conversaDiscutida?: Conversa
   alterarConversa(conversa: Conversa){
+    conversa.qtdMensagensNaoLidas = 0;
+    this.conversaDiscutida = conversa;
     this.demandaDiscutida = conversa.demandaConversa;
     this.router.navigate(['/tela-inicial/chat/' + conversa.codigoConversa])
   }

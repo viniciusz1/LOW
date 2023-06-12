@@ -43,6 +43,7 @@ export class TelaReuniaoComponent implements OnInit {
   pesquisaReuniao = "";
   mostrarBotaoModal = false;
   showFiltroComponent = false;
+  reuniao: any;
 
   modalDeConfirmacaoCancelamentoDemanda(reuniao: Reuniao) {
     this.matDialog.open(ModalCancelamentoReuniaoComponent, {
@@ -53,6 +54,7 @@ export class TelaReuniaoComponent implements OnInit {
 
   modalMotivoCancelamentoDemanda(reuniao: Reuniao) {
     this.mostrarBotaoModal = true;
+    this.reuniao = reuniao;
     this.confirmationService.confirm({
       blockScroll: false,
       closeOnEscape: false,

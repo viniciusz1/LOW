@@ -17,14 +17,14 @@ export class ModalAtaDocumentoComponent implements OnInit {
     this.tipoAta = data.tipoAta;
     console.log(this.tipoAta)
   }
-  mostrarHr(indice: number, tipoAta: string){
+  mostrarHr(indice: number, tipoAta: string) {
     console.log("Entrou")
-    if(indice == 0){
+    if (indice == 0) {
       return false;
     }
 
     console.log()
-    if(this.reuniao?.propostasReuniao?.filter(e => e.tipoAtaProposta == tipoAta).length == 1){
+    if (this.reuniao?.propostasReuniao?.filter(e => e.tipoAtaProposta == tipoAta).length == 1) {
       return false;
     }
     return true

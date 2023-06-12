@@ -19,11 +19,11 @@
         <p falarTexto class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.comissao" | translate }}</b> {{dadosReuniao.comissaoReuniao}}</p>
         <p falarTexto class="card-text"><b>{{ "componentes-reutilizaveis.card-reuniao.propostas-adicionadas" | translate }} </b>{{ titulosPropostas().join(', ')}} </p>
         <p falarTexto class="card-text bottom-card">
-            <label class=" me-2" (click)="departamentosBeneficiados()">
+            <label class=" me-2">
                 <b>
                   {{ "componentes-reutilizaveis.card-reuniao.bus-beneficiados" | translate }}
                 </b>
-               DADOS REUNIAO NÃO RETORNA CENTROS DE CUSTO
+               {{departamentosBeneficiados().join(', ')}}
             </label>
             <span class="d-flex">
               <button falarTexto class="btn btn-outline-danger btn-sm me-2" *ngIf="

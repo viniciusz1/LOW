@@ -15,7 +15,7 @@ export class SidebarReuniaoComponent implements OnInit {
   @Output() clicouNaSeta = new EventEmitter();
   @Output() clicouEmUmStatus = new EventEmitter();
 
-  onClick(){
+  onClick() {
     this.isCollapsed = !this.isCollapsed;
     this.clicouNaSeta.emit();
   }

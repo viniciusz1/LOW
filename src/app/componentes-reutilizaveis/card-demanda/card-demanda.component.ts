@@ -46,13 +46,17 @@ export class CardDemandaComponent implements OnInit {
     | undefined = undefined;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
+  analistaAssociado: boolean = false;
+
+
 
   constructor(private route: Router,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService) {
-     }
+      
+  }
 
   statusPermitido() {
     if (
@@ -211,22 +215,24 @@ export class CardDemandaComponent implements OnInit {
     switch (this.dadosDemanda.statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-          if(nivelAcesso == 'GestorTI' || this.dadosDemanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()){
           this.textoExibidoEmBotaoDependendoRota = {
             rota:
               '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
             texto: 'Classificar Demanda',
           }
-        }
         };
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
+
           // if(this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()){
+
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
             texto: 'Criar Proposta'
           // };
         }
+      }
         return true;
       case StatusDemanda.BACKLOG_APROVACAO:
         if (nivelAcesso == 'GerenteNegocio' || nivelAcesso == 'GestorTI') {
@@ -293,7 +299,7 @@ export class CardDemandaComponent implements OnInit {
   deleteRascunhoFromLocalStorage() {
     if (this.dadosDemanda.codigoDemanda) {
       this.showSuccess("Rascunho deletado!")
-      // this.rascunhoService.deleteRascunho(this.dadosDemanda.codigoDemanda)
+      this.rascunhoService.deleteRascunho(this.dadosDemanda.codigoDemanda)
       this.clicouEmExcluir.emit()
     } else {
       this.showError("Não foi possível excluir o rascunho!")
@@ -327,6 +333,12 @@ export class CardDemandaComponent implements OnInit {
     //Adicionando classes para estilização do card
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + '-sec';
+    //Verificando demandas que ja existem analistas associados
+    if(this.dadosDemanda.analista){
+      this.analistaAssociado = true;
+    } else {      
+      this.analistaAssociado = false;
+    }
 
     this.exibicaoBotoes();
   }

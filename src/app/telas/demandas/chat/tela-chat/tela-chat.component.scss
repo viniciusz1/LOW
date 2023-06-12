@@ -6,15 +6,16 @@ section header {
     border-bottom: #fff 1px solid;
 }
 
-header, footer {
-    background-color:#ffff;
+header,
+footer {
+    background-color: #ffff;
     padding: 5px;
     min-height: 60px;
 }
 
 main {
-  background-color: #ffffff;
-  min-height: calc(100vh - 32.5vh);
+    background-color: #ffffff;
+    min-height: calc(100vh - 32.5vh);
 }
 
 header img,
@@ -26,34 +27,36 @@ header img,
 header img {
     margin-left: 16px;
 }
-.alinhar-alerta{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+.alinhar-alerta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .list-group-item {
-    border-radius: 0!important;
+    border-radius: 0 !important;
     border-left: none;
     border-right: none;
     border-color: #f8f8f8;
 }
 
-
-
-:host ::ng-deep{
-    .p-speeddial-button{
-         width: 16px !important;
-         height: 20px !important;
+:host ::ng-deep {
+    .p-speeddial-button {
+        width: 16px !important;
+        height: 20px !important;
     }
+
     .p-button-icon {
         font-size: 1rem !important;
     }
-    .p-button{
+
+    .p-button {
         background-color: transparent;
         border: transparent;
         color: black;
     }
+
     .p-button:enabled:hover {
         background: rgb(238, 237, 237);
         color: #000;
@@ -61,30 +64,33 @@ header img {
     }
 }
 
-
 .badge-success {
     background-color: #09d261;
 }
 
 #search {
-    input{
+    input {
         outline: none;
         border: none;
         background-color: transparent;
     }
+
     padding: 10px;
-    background-color:  rgb(245, 245, 245);
+    background-color: rgb(245, 245, 245);
 }
-#send{
+
+#send {
     justify-content: space-evenly;
     align-items: center;
-    input{
+
+    input {
         outline: none;
         border: none;
         background-color: transparent;
         width: 100%;
     }
-    div{
+
+    div {
         padding: 0.3em;
         margin: 5px;
         width: 95%;
@@ -98,16 +104,18 @@ header img {
     border-right: #dbdbdb 1px solid;
     color: #4d4d4d;
 }
+
 #panel-left small {
     color: #9b9b9b;
 }
+
 .timeago {
     color: #999;
     font-size: .8em;
 }
 
 
-.balao-chat-analista{
+.balao-chat-analista {
     margin: 5px 20px 0px 25px;
     position: relative;
     font-size: 15px;
@@ -118,10 +126,10 @@ header img {
     padding: 10px 10px 10px 21px;
     /* text-align: center; */
     color: #495057;
-    word-wrap:break-word;
+    word-wrap: break-word;
 }
 
-.balao-chat-analista:before{
+.balao-chat-analista:before {
     content: "";
     width: 0px;
     height: 0px;
@@ -136,23 +144,23 @@ header img {
 
 }
 
-.balao-chat-solicitante{
+.balao-chat-solicitante {
     margin: 5px 25px 0px 20px;
     position: relative;
     font-size: 15px;
-    /* line-height: 14px; */
     width: 30vw;
     background-color: #E8F1F3;
     border-radius: 10px;
     padding: 10px 10px 10px 21px;
-    /* text-align: center; */
     color: #495057;
-    word-wrap:break-word;
+    word-wrap: break-word;
 }
-.na-rota{
+
+.na-rota {
     background-color: #f0f0ff;
 }
-.balao-chat-solicitante:after{
+
+.balao-chat-solicitante:after {
     content: "";
     width: 0px;
     height: 0px;

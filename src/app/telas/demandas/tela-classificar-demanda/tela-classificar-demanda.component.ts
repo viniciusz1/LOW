@@ -6,13 +6,14 @@ import { SecaoService } from '../../../services/secao.service';
 import { BusinessUnitService } from './../../../services/business-unit.service';
 import { BusinessUnit } from './../../../models/business-unit.model';
 import { DemandaClassificadaService } from '../../../services/demanda-classificada.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-documento/modal-demanda-documento.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalReprovacaoDemandaComponent } from 'src/app/modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { FileUpload } from 'primeng/fileupload';
 import { MessageService } from 'primeng/api';
+import { path } from 'src/app/services/path/rota-api';
 
 
 
@@ -31,7 +32,8 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
   }
 
-
+  path = path
+  
   listaBUs = [
     { value: 'WMOI', nome: 'WMO-I – WEG Motores Industrial' },
     { value: 'WMOC', nome: 'WMO-C – WEG Motores Comercial' },

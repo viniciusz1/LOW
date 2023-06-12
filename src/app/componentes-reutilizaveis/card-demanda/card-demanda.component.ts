@@ -284,28 +284,29 @@ export class CardDemandaComponent implements OnInit {
 
   deletarRascunho() {
     
-  //   this.confirmationService.confirm({
-  //     message: 'Você deseja deletar essa Rascunho?',
-  //     header: 'Deletar Rascunho',
-  //     icon: 'pi pi-exclamation-triangle',
-  //     accept: () => {
-  //       if (this.dadosDemanda.codigoDemanda) {
-  //         this.clicouEmExcluir.emit(this.dadosDemanda)
+    this.confirmationService.confirm({
+      key: "deletarRascunho",
+      header: 'Deletar Rascunho',
+      message: 'Você deseja deletar essa Rascunho?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (this.dadosDemanda.codigoDemanda) {
+          this.clicouEmExcluir.emit(this.dadosDemanda)
           
-  //       } else {
-  //         this.showError("Não foi possível excluir o rascunho!")
-  //       }
-  //     },
-  //     reject: () => {
+        } else {
+          this.showError("Não foi possível excluir o rascunho!")
+        }
+      },
+      reject: () => {
         
-  //     }
-  // });
-    if (this.dadosDemanda.codigoDemanda) {
-      this.clicouEmExcluir.emit(this.dadosDemanda)
+      }
+  });
+    // if (this.dadosDemanda.codigoDemanda) {
+    //   this.clicouEmExcluir.emit(this.dadosDemanda)
       
-    } else {
-      this.showError("Não foi possível excluir o rascunho!")
-    }
+    // } else {
+    //   this.showError("Não foi possível excluir o rascunho!")
+    // }
   }
 
 

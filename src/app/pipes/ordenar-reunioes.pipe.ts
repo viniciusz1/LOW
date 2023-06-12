@@ -1,9 +1,10 @@
+import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { Reuniao } from './../models/reuniao.model';
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, Injectable } from '@angular/core';
 import { Demanda } from '../models/demanda.model';
 import { StatusDemanda } from '../models/statusDemanda.enum';
 import { StatusReuniao } from '../models/statusReuniao.enum';
-
+@Injectable()
 @Pipe({
   name: 'ordenarReuniaoPipe'
 })
@@ -13,9 +14,15 @@ import { StatusReuniao } from '../models/statusReuniao.enum';
   reçam de acordo com sua prioridade.
 */
 export class OrdenarReuniaoPipe implements PipeTransform {
+  constructor(private reuniaoService :ReuniaoService) {
 
+  }
   transform(reuniao: Reuniao[]): Reuniao[] {
-    console.log("No pipe")
+    //Se o filtro de ordenação estiver ativado, retorna a lista sem alterações
+    //pois ela já está ordenada
+    if(this.reuniaoService.filtroOrdenado == true){
+      return reuniao;
+    }
     let novaLista: Reuniao[] = []
     novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.PROXIMO))
     novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.AGUARDANDO))

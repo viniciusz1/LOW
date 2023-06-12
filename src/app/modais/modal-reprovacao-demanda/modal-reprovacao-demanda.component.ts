@@ -6,6 +6,9 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { MessageService } from 'primeng/api';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Usuario } from 'src/app/models/usuario.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-modal-reprovacao-demanda',
@@ -14,15 +17,24 @@ import { MessageService } from 'primeng/api';
 })
 export class ModalReprovacaoDemandaComponent implements OnInit {
   dadosDemanda: Demanda | undefined;
+  usuario: Usuario | undefined;
+  solicitante: boolean = false;
 
   constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
+    private usuarioService: UsuarioService,
     @Inject(DIALOG_DATA) public data: Demanda,
-    private router: Router,
+    private modalService: ModalService,
     private messageService: MessageService
   ) {
+    this.usuario = usuarioService.getUser('user')
     console.log(data)
     this.dadosDemanda = data
+    if(this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuario?.codigoUsuario){
+      this.solicitante = true;
+    } else {
+      this.solicitante = false;
+    }
   }
 
   ngOnInit(): void {
@@ -40,8 +52,11 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
       .subscribe({
         next: event => {
           this.showSuccess("Demanda reprovada com sucesso!")
-          this.router.navigate(['/tela-inicial'])
           this.dialogRef.close()
+          if (this.modalService.dialogRefDemandaDocumento) {
+            this.modalService.dialogRefDemandaDocumento.close();
+          }
+          this.modalService.modalFechado.emit(); 
         },
         error: err => {
           this.showError("Não foi possivel reprovar a demanda!")

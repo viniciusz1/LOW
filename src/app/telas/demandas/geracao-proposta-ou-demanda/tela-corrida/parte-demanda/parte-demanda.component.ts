@@ -43,31 +43,37 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     this.voiceRecognitionService.start();
   }
 
-  stopService(){
+  stopService() {
     this.voiceRecognitionService.stop()
   }
 
 
 
-  onFocoIn(elementRef : NgxEditorComponent) {
-    this.voiceRecognitionService.setInputEmFoco(this.htmlSituacaoAtual)
+  onFocoIn(nomeEditorEmFoco: string) {
+    this.editorEspecialEmFoco = nomeEditorEmFoco;
+    this.voiceRecognitionService.setInputEmFoco('string')
   }
 
   onFocoOut() {
+    this.editorEspecialEmFoco = "";
+    this.voiceRecognitionService.setInputEmFoco(null)
   }
 
   //serve para setar o tipo do editor de texto como html por padrão
   //NÃO DELETAR
+  editorEspecialEmFoco: string = "";
   htmlSituacaoAtual = ""
   htmlObjetivo = ""
+
   onInputChange() {
     // Em vez de chamar diretamente o método, envie um evento ao Subject
-    this.inputSubject.next('');
+    this.inputSubject.next('aaaA');
   }
 
   inputSubject = new Subject<string>();
   @Input() aparecerProposta = false;
 
+  index: number = 0;
   listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];
   toolbar: Toolbar = [
@@ -97,6 +103,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   localMoedaBeneficio2 = 'pt-BR';
   currencyMoedaBeneficio1 = 'BRL';
   currencyMoedaBeneficio2 = 'BRL';
+  campoEntrada: string = '';
   demandaForm = this.demandaService.demandaForm;
   opcoesDeTamanho = [
     'Muito Pequena',
@@ -105,8 +112,11 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     'Grande',
     'Muito Grande',
   ];
+  porcentagem: number = 0
+  porcentagem100: boolean = false;
   opcoesDeMoeda = [{ name: 'BRL', value: "Real" }, { name: 'EUR', value: "Euro" }, { name: 'DOL', value: "Dollar" }];
   moedaSelecionada: any = { name: 'BRL', value: 'Real' };
+  moedaSelecionada2: any = { name: 'BRL', value: 'Real' };
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
   abrirSegundoAccordion: boolean = false;
@@ -123,6 +133,16 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     this.demandaService.listaArquivosDemanda.subscribe(arquivos => {
       this.listaFiles = arquivos
     })
+
+    this.voiceRecognitionService.$novasPalavrasFaladas.subscribe(palavra => {
+      if(this.editorEspecialEmFoco == 'objetivo'){
+        this.htmlObjetivo = palavra
+      }else if(this.editorEspecialEmFoco == 'situacao'){
+        this.htmlSituacaoAtual += palavra
+      }
+
+
+    })
   }
 
   uploadDocumentos(event: any) {
@@ -134,6 +154,7 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     }
 
   }
+
   isBiggerThan100MB(files: File[]): boolean {
     let totalSize = 0;
     for (const file of files) {
@@ -146,6 +167,19 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   }
   removerCentroDeCusto(index: number) {
     this.demandaService.removeCenterOfCost(index);
+    if (this.demandaForm.value.centroCustosDemanda) {
+      this.porcentagem = 0;
+      for (let i = 0; i < this.demandaForm.value.centroCustosDemanda.length; i++) {
+        this.porcentagem += parseInt(this.demandaForm.value.centroCustosDemanda[i].porcentagemCentroCusto)
+        console.log("Ta entrando sim ", this.porcentagem)
+      }
+    }
+
+    if (this.porcentagem < 100) {
+      this.porcentagem100 = false;
+    } else if (this.porcentagem > 100) {
+      this.showError("Sua porcentagem ainda está acima de 100")
+    }
   }
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
@@ -157,9 +191,35 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
 
   adicionarCentroCusto() {
     try {
-      this.demandaService.addCenterOfCost();
+      if (this.demandaForm.value.centroCustosDemanda) {
+        this.porcentagem = 0;
+        for (let i = 0; i < this.demandaForm.value.centroCustosDemanda.length; i++) {
+          this.porcentagem += parseInt(this.demandaForm.value.centroCustosDemanda[i].porcentagemCentroCusto)
+          console.log("Ta entrando sim ", this.porcentagem)
+        }
+      }
+
+      if (this.porcentagem < 100) {
+        this.porcentagem100 = false;
+      }
+
+      if (this.porcentagem == 100) {
+        this.porcentagem100 = true;
+      }
+
+      if (this.porcentagem > 100) {
+        this.porcentagem100 = true;
+        if (this.demandaForm.value.centroCustosDemanda?.length) {
+          this.removerCentroDeCusto(this.demandaForm.value.centroCustosDemanda.length - 1)
+        }
+        this.showError("A porcentagem ultrapassou os 100%")
+      }
+
+      if (!this.porcentagem100) {
+        this.demandaService.addCenterOfCost();
+      }
     } catch (err) {
-      this.showError("Não foi possível adicionar o centro de custo")
+      this.showError("Não foi possível adicionar centro de custo!")
     }
   }
 

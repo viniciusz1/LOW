@@ -1,19 +1,26 @@
-.nav-items-center{
+.nav-items-center {
     display: flex;
     align-items: center;
 }
-.bread{
-    border:0;
-    .p-breadcrumb{
+
+.bread {
+    border: 0;
+
+    .p-breadcrumb {
         border: 0;
     }
 }
-.active{
-  text-decoration: underline;
+
+.active {
+    text-decoration: underline;
+}
+
+.perfil{
+    margin-right: 0.5vw;
 }
 
 .small-badge {
-    font-size: 0.6rem; 
-    border-radius: 360px; 
-    background-color: #00579D; 
-  }
+    font-size: 0.6rem;
+    border-radius: 360px;
+    background-color: #00579D;
+}

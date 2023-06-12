@@ -1,8 +1,12 @@
 <nav class="nav position-relative">
     <ul class="nav flex-column container-sidebar" style="width: 18vw; font-size: 1rem;">
+        <li (click)="clicouEmUmStatus.emit('DRAFT')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item DRAFT"></div>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/rascunho.png" alt="" srcset=""> Draft </a>
+        </li>
         <li (click)="clicouEmUmStatus.emit('BACKLOG_CLASSIFICACAO')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item BACKLOG_CLASSIFICACAO"></div>
-            <a href="#" class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-backlog-68 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.classificacao" | translate }}</a>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-classificação-100.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.classificacao" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('BACKLOG_PROPOSTA')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item BACKLOG_PROPOSTA"></div>
@@ -10,7 +14,7 @@
         </li>
         <li (click)="clicouEmUmStatus.emit('BACKLOG_APROVACAO')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item BACKLOG_APROVACAO"></div>
-            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-backlog-68 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.aprovacao" | translate }}</a>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-aprovação-100.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.aprovacao" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('ASSESSMENT')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item ASSESSMENT"></div>
@@ -19,6 +23,10 @@
         <li  (click)="clicouEmUmStatus.emit('BUSINESS_CASE')"class="nav-item d-flex border-bottom">
             <div class="barra-nav-item BUSINESS_CASE"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-relatório-de-negócios-100 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.business-case" | translate }}</a>
+        </li>
+        <li (click)="clicouEmUmStatus.emit('DISCUSSION')" class="nav-item d-flex border-bottom">
+            <div class="barra-nav-item DISCUSSION"></div>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-colaboração-100.png" alt="" srcset=""> Discussion </a>
         </li>
         <li (click)="clicouEmUmStatus.emit('TO_DO')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item TO_DO"></div>
@@ -40,8 +48,6 @@
             <div class="barra-nav-item DONE"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-marcador-duplo-100 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.done" | translate }}</a>
         </li>
-
     </ul>
-
     <div class="barra-direita" role="button" (click)="onClick()" matRipple><i class="bi bi-chevron-right " [ngClass]="isCollapsed ? 'inverte': 'naoinverte'"></i></div>
 </nav>

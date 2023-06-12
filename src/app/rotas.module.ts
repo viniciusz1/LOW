@@ -106,13 +106,7 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
           }
         ]
       }
-    ],{
-      useHash: true,
-      scrollPositionRestoration: 'enabled',
-      anchorScrolling: 'enabled',
-      onSameUrlNavigation: 'reload',
-      preloadingStrategy: PreloadAllModules,
-    })
+    ])
   ],
   exports: [
     RouterModule

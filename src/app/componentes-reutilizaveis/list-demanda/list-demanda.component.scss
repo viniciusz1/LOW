@@ -1,28 +1,28 @@
 @import '../../../styles.scss';
-    
 
-.linha{
+.linha {
     height: 100%;
     width: 1vh;
     position: absolute;
     left: 0;
 }
 
-.container-lista{
+.container-lista {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     text-align: center;
-    padding:7px;
+    padding: 7px;
     border: 1px solid #8f8f8f;
     font-size: 15px;
 }
-li{
+
+li {
     display: inline-flex;
     margin-left: 1vh;
 }
 
-.final-list{
+.final-list {
     align-items: center;
     justify-content: end;
 }

@@ -83,7 +83,6 @@ export class PropostaService {
   }
 
   addRowRecurso() {
-
     let porcentagem: number = 0
     if (this.formRecursos.value.centroCustoRecurso)
       for (let i of this.formRecursos.value.centroCustoRecurso) {
@@ -95,7 +94,7 @@ export class PropostaService {
         this.formRecursos.reset()
       }
     } else {
-      throw new Error("A porcentagem dos centros de custo devem fechar 100%")
+      this.showError("A porcentagem dos centros de custo devem fechar 100%")
     }
 
   }
@@ -103,7 +102,6 @@ export class PropostaService {
   get getFormProposta(){
     return this.formProposta
   }
-
 
   addCenterOfCost() {
     (this.formRecursos.controls.centroCustoRecurso as FormArray).push(

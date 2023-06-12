@@ -432,7 +432,7 @@
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
             <div
-              *ngIf="linha.status != 'DRAFT'"
+              *ngIf="linha.status != 'DRAFT' && linha.titulo != 'Sem Demandas'"
               class="me-3"
               style="align-self: flex-end; cursor: pointer"
               (click)="
@@ -441,7 +441,6 @@
                   pesquisaCampo: undefined
                 })
               "
-              *ngIf="linha.titulo != 'Sem demandas'"
               falarTexto
             >
               {{ "telas.tela-inicial.ver-mais" | translate }} ({{

@@ -486,12 +486,12 @@ export class TelaInicialComponent implements OnInit {
 
   //Lógica para a criação de uma nova demanda
   criarUmaNovaDemanda() {
-    let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
-    if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
-      this.router.navigate(['tela-inicial/rascunho/' + 0])
-    } else {
-      this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
-    }
+    // let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
+    // if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
+    //   this.router.navigate(['tela-inicial/rascunho/' + 0])
+    // } else {
+    //   this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
+    // }
   }
 
 

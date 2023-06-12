@@ -1,77 +1,34 @@
 <nav>
   <nav class="nav low-shadow" style="background-color: white">
     <ul class="nav nav-pills nav-items-center" style="width: 40%">
-      <li
-        class="nav-item"
-        *ngIf="!telaLogin"
-        routerLink="/tela-inicial"
-        style="cursor: pointer"
-      >
-        <img
-          class="my-2 ms-5"
-          style="width: 70px"
-          src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png"
-          alt=""
-        />
+      <li class="nav-item" *ngIf="!telaLogin" routerLink="/tela-inicial" style="cursor: pointer">
+        <img class="my-2 ms-5" style="width: 70px"
+          src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="" />
       </li>
       <li class="nav-item" *ngIf="telaLogin" style="cursor: pointer">
-        <img
-          class="my-2 ms-5"
-          style="width: 70px"
-          src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png"
-          alt=""
-        />
+        <img class="my-2 ms-5" style="width: 70px"
+          src="https://logodownload.org/wp-content/uploads/2019/09/weg-logo-3.png" alt="" />
       </li>
-      <nav
-        aria-label="breadcrumb"
-        style="display: flex; justify-content: center; align-items: center"
-        *ngIf="!telaLogin"
-      >
+      <nav aria-label="breadcrumb" style="display: flex; justify-content: center; align-items: center"
+        *ngIf="!telaLogin">
         <ol class="breadcrumb" style="margin: 0px 0px 0px 2vw !important">
-          <li
-            role="button"
-            [ngClass]="{ active: item.disabled }"
-            class="breadcrumb-item"
-            aria-current="page"
-            [routerLink]="'/' + item.url"
-            *ngFor="let item of items"
-          >
+          <li role="button" [ngClass]="{ active: item.disabled }" class="breadcrumb-item" aria-current="page"
+            [routerLink]="'/' + item.url" *ngFor="let item of items">
             {{ item.label | titlecase }}
           </li>
         </ol>
       </nav>
     </ul>
-    <ul
-      class="nav justify-content-end nav-items-center"
-      style="width: 60%"
-      *ngIf="!telaLogin"
-    >
-      <div
-        class="d-flex"
-        joyrideStep="oito"
-        [title]="'Seções'"
-        [stepContentParams]="{ texto: textoTutorial[7] }"
-        style="overflow: auto"
-      >
+    <ul class="nav justify-content-end nav-items-center" style="width: 60%" *ngIf="!telaLogin">
+      <div class="d-flex" joyrideStep="oito" [title]="'Seções'" [stepContentParams]="{ texto: textoTutorial[7] }"
+        style="overflow: auto">
         <li *ngIf="!versaoSolicitante()" class="nav-item">
-          <a
-            falarTexto
-            class="nav-link"
-            routerLink="/tela-inicial/reunioes"
-            [routerLinkActive]="'active'"
-            >{{ "componentes-fixos.header.reunioes" | translate }}</a
-          >
+          <a falarTexto class="nav-link" routerLink="/tela-inicial/reunioes" [routerLinkActive]="'active'">{{
+            "componentes-fixos.header.reunioes" | translate }}</a>
         </li>
         <li class="nav-item">
-          <a
-            falarTexto
-            role="button"
-            class="nav-link"
-            routerLink="/tela-inicial"
-            [routerLinkActive]="'active'"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >{{ "componentes-fixos.header.demandas" | translate }}</a
-          >
+          <a falarTexto role="button" class="nav-link" routerLink="/tela-inicial" [routerLinkActive]="'active'"
+            [routerLinkActiveOptions]="{ exact: true }">{{ "componentes-fixos.header.demandas" | translate }}</a>
         </li>
       </div>
       <li1
@@ -84,17 +41,15 @@
         [stepContentParams]="{ texto: textoTutorial[6] }"
         style="overflow: auto"
       >
-        <a class="nav-link"><i class="bi bi-chat-left-dots icon">
-          <span
-            class="badge badge-danger small-badge"
-            >!</span
-          >
-        </i></a>
+        <a class="nav-link"
+          ><i class="bi bi-chat-left-dots icon">
+            <span class="badge badge-danger small-badge">!</span>
+          </i></a
+        >
       </li1>
       <li
         role="button"
         class="nav-item"
-        (click)="mostrar_modal = !mostrar_modal"
         *ngIf="!inicial"
         joyrideStep="seis"
         [title]="'Notificações'"
@@ -102,143 +57,159 @@
         style="overflow: auto"
       >
         <a class="nav-link">
-          <i class="bi bi-bell icon"></i>
+          <i class="bi bi-bell icon" (click)="openModalNotificacoes()"></i>
           <span
             *ngIf="this.quantidadeNotificacoes != 0"
             class="badge badge-danger small-badge"
             >{{ this.quantidadeNotificacoes }}</span
           >
         </a>
-        <app-notificacoes class="" *ngIf="mostrar_modal"></app-notificacoes>
+        <div #modal *ngIf="mostrarModal">
+          <app-notificacoes id="modal"></app-notificacoes>
+        </div>
       </li>
-      <li
-        role="button"
-        class="nav-item"
-        joyrideStep="cinco"
-        [mat-menu-trigger-for]="idiomaMenu"
-        [title]="'Idiomas'"
-        [stepContentParams]="{ texto: textoTutorial[4] }"
-        style="overflow: auto"
-      >
-        <a class="nav-link"
-          ><img
-            style="width: 30px; margin-right: 10px"
-            [src]="linkImagemPais" />
-          <i class="bi bi-chevron-down"> </i
-        ></a>
+      <li role="button" class="nav-item" joyrideStep="cinco" [mat-menu-trigger-for]="idiomaMenu" [title]="'Idiomas'"
+        [stepContentParams]="{ texto: textoTutorial[4] }" style="overflow: auto">
+        <a class="nav-link"><img style="width: 30px; margin-right: 10px" [src]="linkImagemPais" />
+          <i class="bi bi-chevron-down"> </i></a>
       </li>
-      <li
-        role="button"
-        class="nav-item"
-        *ngIf="!inicial"
-        joyrideStep="quatro"
-        [title]="'Configurações e Rascunho'"
-        [mat-menu-trigger-for]="menu"
-        [stepContentParams]="{ texto: textoTutorial[3] }"
-        style="overflow: auto"
-      >
+      <li role="button" class="nav-item perfil" *ngIf="!inicial" joyrideStep="quatro" [title]="'Configurações e Rascunho'"
+        [mat-menu-trigger-for]="menu" [stepContentParams]="{ texto: textoTutorial[3] }" style="overflow: auto">
         <a class="nav-link"><i class="bi bi-person-square icon"></i></a>
       </li>
 
       <mat-menu #idiomaMenu="matMenu">
-        <button
-          mat-menu-item
-          (click)="
+        <button mat-menu-item (click)="
             mudarIdioma(
               'es',
               'https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg'
             )
-          "
-        >
-          <span falarTexto
-            ><img
-              style="width: 24px; margin-right: 10px"
-              src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg"
-            />Español (ES)</span
-          >
+          ">
+          <span falarTexto><img style="width: 24px; margin-right: 10px"
+              src="https://s1.static.brasilescola.uol.com.br/be/conteudo/images/bandeira-espanha-55c26319db07f.jpg" />Español
+            (ES)</span>
         </button>
-        <button
-          mat-menu-item
-          (click)="
+        <button mat-menu-item (click)="
             mudarIdioma(
               'zh',
               'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png'
             )
-          "
-        >
-          <span falarTexto
-            ><img
-              style="width: 24px; margin-right: 10px"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png"
-            />Chinese (ZH)</span
-          >
+          ">
+          <span falarTexto><img style="width: 24px; margin-right: 10px"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png" />Chinese
+            (ZH)</span>
         </button>
-        <button
-          mat-menu-item
-          (click)="
+        <button mat-menu-item (click)="
             mudarIdioma(
               'en',
               'https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg'
             )
-          "
-        >
-          <span falarTexto
-            ><img
-              style="width: 24px; margin-right: 10px"
-              src="https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg"
-            />English (EN)</span
-          >
+          ">
+          <span falarTexto><img style="width: 24px; margin-right: 10px"
+              src="https://s3.static.brasilescola.uol.com.br/be/conteudo/images/estados-unidos.jpg" />English
+            (EN)</span>
         </button>
-        <button
-          mat-menu-item
-          (click)="
+        <button mat-menu-item (click)="
             mudarIdioma(
               'de',
               'https://s5.static.brasilescola.uol.com.br/be/2020/10/bandeira-da-alemanha.jpg'
             )
-          "
-        >
-          <span falarTexto
-            ><img
-              style="width: 24px; margin-right: 10px"
-              src="https://s5.static.brasilescola.uol.com.br/be/2020/10/bandeira-da-alemanha.jpg"
-            />Alemão (DE)</span
-          >
+          ">
+          <span falarTexto><img style="width: 24px; margin-right: 10px"
+              src="https://s5.static.brasilescola.uol.com.br/be/2020/10/bandeira-da-alemanha.jpg" />Alemão (DE)</span>
         </button>
-        <button
-          mat-menu-item
-          (click)="
+        <button mat-menu-item (click)="
             mudarIdioma(
               'pt',
               'https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png'
             )
-          "
-        >
-          <span falarTexto
-            ><img
-              style="width: 24px; margin-right: 10px"
-              src="https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png"
-            />Português (PT-BR)</span
-          >
+          ">
+          <span falarTexto><img style="width: 24px; margin-right: 10px"
+              src="https://www.gov.br/mre/pt-br/embaixada-seul/arquivos/imagens/BRASIL.png" />Português (PT-BR)</span>
         </button>
       </mat-menu>
 
       <mat-menu #menu="matMenu">
-        <!-- <button routerLink="/tela-inicial/rascunhos" mat-menu-item>
+        <div style="font-size: 12px; margin-left: 0.5vw; ">
+          Você está logado por:
+          <div class="nome"
+            style="display: flex; justify-content: start; align-items: center; border-bottom: 1px solid #d3d3d3; margin:0.5vw;">
+            <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
+              <div class="icone">
+                <i style="font-size: 1.5rem;" class="bi bi-person"></i>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
+              <div style="display: grid; justify-content: start; align-items: center;">
+                <div style="font-size: 1rem;">
+                  <span falarTexto>
+                    {{usuario?.nomeUsuario}}
+                  </span>
+                </div>
+                <div style="font-size: 0.7rem; margin-bottom: 0.5vw;">
+                  <span falarTexto>
+                    {{ "telas.configuracoes-perfil.nome" | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="username"
+            style="display: flex; justify-content: start; align-items: center; border-bottom: 1px solid #d3d3d3; margin-bottom: 0.5vw; margin-left: 0.5vw; margin-right: 0.5vw;">
+            <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
+              <div class="icone">
+                <i style="font-size: 1.5rem;" class="bi bi-person-video"></i>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
+              <div style="display: grid; justify-content: start; align-items: center;">
+                <div style="font-size: 1rem;">
+                  <span falarTexto>
+                    {{usuario?.userUsuario}}
+                  </span>
+                </div>
+                <div falarTexto style="font-size: 0.7rem; margin-bottom: 0.5vw;">
+                  <span>
+                    {{ "telas.configuracoes-perfil.username" | translate }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="email" style=" display: flex; justify-content: start; align-items: center ; border-bottom: 1px solid 
+            #d3d3d3; margin-bottom: 0.5vw; margin-left: 0.5vw; margin-right: 0.5vw;">
+            <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
+              <div class="icone">
+                <i style="font-size: 1.5rem;" class="bi bi-envelope"></i>
+              </div>
+            </div>
+            <div style="display: grid; justify-content: start; align-items: center;">
+              <div style="font-size: 1rem;">
+                <span falarTexto>
+                  {{usuario?.emailUsuario}}
+                </span>
+              </div>
+              <div style="font-size: 0.7rem; margin-bottom: 0.5vw;">
+                <span falarTexto>
+                  {{ "telas.configuracoes-perfil.email" | translate }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+          <button routerLink="/tela-inicial/rascunhos" mat-menu-item>
                 <span><i class="bi bi-clipboard-plus me-3" style="font-size: 20px;"></i>{{ "componentes-fixos.header.rascunhos" | translate }}</span>
-            </button> -->
+            </button>
         <button mat-menu-item routerLink="/tela-inicial/configuracoes/perfil">
-          <span falarTexto
-            ><i class="bi bi-gear me-3" style="font-size: 20px"></i
-            >{{ "componentes-fixos.header.configuracoes" | translate }}</span
-          >
+          <span falarTexto><i class="bi bi-gear me-3" style="font-size: 20px"></i>{{
+            "componentes-fixos.header.configuracoes" | translate }}</span>
         </button>
-        <button routerLink="/" (click)="sair()" mat-menu-item>
-          <span falarTexto
-            ><i class="bi bi-box-arrow-right me-3" style="font-size: 20px"></i
-            >{{ "componentes-fixos.header.sair" | translate }}</span
-          >
-        </button>
+        <div style="margin-right: 9vw;">
+          <button routerLink="/" (click)="sair()" mat-menu-item>
+            <span falarTexto><i class="bi bi-box-arrow-right me-3" style="font-size: 20px"></i>{{
+              "componentes-fixos.header.sair" | translate }}</span>
+          </button>
+        </div>
       </mat-menu>
     </ul>
   </nav>

@@ -30,7 +30,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { BusinessUnitService } from 'src/app/services/business-unit.service';
 
 
-
 @NgModule({
   declarations: [
     TelaInicialComponent,
@@ -60,7 +59,7 @@ import { BusinessUnitService } from 'src/app/services/business-unit.service';
     MultiSelectModule,
     ConfirmDialogModule,
     SharedModule,
-
+    PaginatorModule
   ],
   providers:[DemandaClassificadaService,BusinessUnitService, SecaoService]
 })

@@ -1,3 +1,4 @@
+import { VoiceRecognitionService } from './../../../../../services/voice-recognition.service';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { CentroCusto } from './../../../../../models/centro-custo.model';
 import { PropostaService } from './../../../../../services/proposta.service';
@@ -26,7 +27,8 @@ export class ParteReuniaoComponent implements OnInit {
     private demandaService: DemandaService,
     private rascunhoService: RascunhoService,
     private route: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private voiceRecognitionService: VoiceRecognitionService
   ) {
 
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
@@ -35,8 +37,13 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
   onInputChange() {
-    console.log("change")
+    console.log("change", this.inputSubject.next)
     this.inputSubject.next("");
+  }
+
+  onInputChangeDate(newValue: Date) {
+   // Use o valor atualizado conforme necessário
+    this.inicioData = newValue;
   }
 
   inputSubject = new Subject<string>();
@@ -91,6 +98,7 @@ export class ParteReuniaoComponent implements OnInit {
   inicioData: Date | any;
   fimData: Date | undefined = undefined;
   selectedCoin: any;
+  dataAtual: Date = new Date();
   clonedRecursos: { [s: string]: Recurso } = {};
   tipoDaDespesa = [{ tipo: 'Interna', value: 'interno' }, { tipo: 'Externa', value: 'externo' }];
   perfilDaDespesa = [{ tipo: 'Hardware', value: 'hardware' }, { tipo: 'Software', value: 'software' }, { tipo: 'Corporativo', value: 'corporativo' }];
@@ -130,6 +138,15 @@ export class ParteReuniaoComponent implements OnInit {
     this.paybackProposta = this.custosTotais / (this.demandaService.getBeneficioReal() + this.demandaService.getBeneficioPotencial());
   }
 
+  htmlEscopoDemanda: string = "";
+
+  onFocoIn() {
+    this.voiceRecognitionService.setInputEmFoco('string')
+  }
+
+  onFocoOut() {
+    this.voiceRecognitionService.setInputEmFoco(null)
+  }
 
 
   editarRecurso(index: number) {
@@ -165,5 +182,8 @@ export class ParteReuniaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.voiceRecognitionService.$novasPalavrasFaladas.subscribe(palavra => {
+      this.htmlEscopoDemanda = palavra
+    })
   }
 }

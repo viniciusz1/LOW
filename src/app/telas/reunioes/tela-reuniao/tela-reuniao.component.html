@@ -3,123 +3,73 @@
     <div class="container mt-4">
       <div class="d-flex justify-content-between">
         <div class="d-flex p-1">
-          <ng-template
-            #customContent
-            let-texto="texto"
-            style="border-radius: 20px"
-          >
-            <div
-              [innerHTML]="texto"
-              style="max-width: 300px; padding: 20px"
-            ></div>
+          <ng-template #customContent let-texto="texto" style="border-radius: 20px">
+            <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
           </ng-template>
           <div style="height: 4.4vh">
-            <button
-              falarTexto
-              joyrideStep="nove"
-              [title]="'Filtrar Demandas'"
-              [stepContent]="customContent"
-              [stepContentParams]="{ texto: textoTutorial[8] }"
-              style="font-size: 1rem; word-wrap: break-word"
-              (click)="openModalCriarReuniao()"
-              class="btn btn-primary"
-            >
+            <button falarTexto joyrideStep="nove" [title]="'Filtrar Demandas'" [stepContent]="customContent"
+              [stepContentParams]="{ texto: textoTutorial[8] }" style="font-size: 1rem; word-wrap: break-word"
+              (click)="openModalCriarReuniao()" class="btn btn-primary">
               <i class="bi bi-people me-2"></i>
               {{ "telas.tela-reunioes.marcar" | translate }}
             </button>
           </div>
           <!-- [routerLink]="'/tela-inicial/calendario'" -->
           <div style="height: 4.4vh">
-            <button
-              falarTexto
-              joyrideStep="dez"
-              [title]="'Filtrar Demandas'"
-              [stepContent]="customContent"
-              [stepContentParams]="{ texto: textoTutorial[9] }"
-              style="font-size: 1rem; word-wrap: break-word"
-              class="btn btn-primary ms-3"
-              (click)="openCalendario()"
-            >
+            <button falarTexto joyrideStep="dez" [title]="'Filtrar Demandas'" [stepContent]="customContent"
+              [stepContentParams]="{ texto: textoTutorial[9] }" style="font-size: 1rem; word-wrap: break-word"
+              class="btn btn-primary ms-3" (click)="openCalendario()">
               <i class="bi bi-calendar-week me-2"></i>
               {{ "telas.tela-reunioes.calendario" | translate }}
             </button>
           </div>
-          <p-dropdown
-            class="ms-3"
-            [options]="opcoesOrdenacao"
-            [(ngModel)]="ordenarSelect"
-            placeholder="Ordenar"
-            optionLabel="name"
-          ></p-dropdown>
+          <p-dropdown class="ms-3" [options]="opcoesOrdenacao" [(ngModel)]="ordenarSelect"
+            (ngModelChange)="ordenarReunioes(ordenarSelect)" placeholder="Ordenar" optionLabel="name"></p-dropdown>
         </div>
         <div class="p-1">
-          <app-filtro-reuniao
-            (filtroAcionado)="pesquisarReunioes($event)"
-            class="me-3"
-          >
+          <app-filtro-reuniao (filtroAcionado)="pesquisarReunioes($event)" class="me-3">
           </app-filtro-reuniao>
         </div>
       </div>
     </div>
     <div class="container">
-      <p-confirmDialog
-        #cd
-        icon="pi pi-exclamation-triangle"
-        [style]="{ width: '40vw' }"
-      >
+      <p-confirmDialog #cd icon="pi pi-exclamation-triangle" [style]="{ width: '40vw' }">
         <ng-template pTemplate="footer">
-          <button
-            falarTexto
-            *ngIf="!mostrarBotaoModal"
-            type="button"
-            (click)="cd.reject()"
-            class="btn btn-outline-danger"
-          >
+          <div style="display: flex; align-items:center; padding: 0.5vw; padding-left: 0px !important;">
+            <span style="font-weight: 600; margin-right: 0.5vw; font-size: 1.05rem;">Comissão: </span>
+            <span style="font-size: 1.05rem;">{{reuniao.comissaoReuniao}}</span>
+          </div>
+          <button falarTexto *ngIf="!mostrarBotaoModal" type="button" (click)="cd.reject()"
+            class="btn btn-outline-danger">
             <i class="pi pi-times me-2"></i>
             {{ "telas.tela-reunioes.modal-b-nao" | translate }}
           </button>
-          <button
-            falarTexto
-            *ngIf="!mostrarBotaoModal"
-            type="button"
-            class="btn btn-danger"
-            (click)="cd.accept()"
-          >
-            <i class="pi pi-check me-2"></i
-            >{{ "telas.tela-reunioes.modal-b-sim" | translate }}
+          <button falarTexto *ngIf="!mostrarBotaoModal" type="button" class="btn btn-danger" (click)="cd.accept()">
+            <i class="pi pi-check me-2"></i>{{ "telas.tela-reunioes.modal-b-sim" | translate }}
           </button>
-          <button
-            falarTexto
-            *ngIf="mostrarBotaoModal"
-            type="button"
-            class="btn btn-outline-primary"
-            (click)="cd.accept()"
-          >
+          <button falarTexto *ngIf="mostrarBotaoModal" type="button" class="btn btn-outline-primary"
+            (click)="cd.accept()">
             <i class="pi pi-check me-2"></i>
             {{ "telas.tela-reunioes.modal-b-ok" | translate }}
           </button>
         </ng-template>
       </p-confirmDialog>
-      <app-card-reuniao
-        class="m-1"
-        [dadosReuniao]="reuniao"
-        *ngFor="let reuniao of listaReunioes | ordenarReuniaoPipe"
+      <app-card-reuniao class="m-1" [dadosReuniao]="reuniao" *ngFor="let reuniao of listaReunioes | ordenarReuniaoPipe"
         (cancelarReuniao)="modalDeConfirmacaoCancelamentoDemanda(reuniao)"
-        (motivoCancelamento)="modalMotivoCancelamentoDemanda($event)"
-      >
+        (motivoCancelamento)="modalMotivoCancelamentoDemanda($event)">
       </app-card-reuniao>
     </div>
+      <p-paginator [rows]="1" [showJumpToPageDropdown]="true" [showPageLinks]="false"
+        [totalRecords]="totalPagesPagination" (onPageChange)="paginate($event)"></p-paginator>
   </div>
 
-  <app-sidebar-reuniao
-    [style.left.px]="showSidebar"
-    (clicouNaSeta)="moveSidebar()"
-    style="
+  <app-sidebar-reuniao [style.left.px]="showSidebar" (clicouNaSeta)="moveSidebar()"
+    (clicouEmUmStatus)="filtrarPorStatus($event)" style="
       position: fixed;
       z-index: 2;
       transition: left 0.3s ease 0s;
       top: 43vh;
-    "
-  ></app-sidebar-reuniao>
+    "></app-sidebar-reuniao>
+
 </div>
 <p-toast></p-toast>

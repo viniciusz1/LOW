@@ -9,11 +9,11 @@
   </div>
   <div role="button" *ngIf="falarTextoService.permitirFala" class="estilo-cards mt-2"
     style="top: 38.5%; background-color: red;" (click)="pararDeFalar()">
-    <i class="bi bi-volume-off" style="color: white; font-size: 20px;"></i>
+    <i class="bi bi-volume-mute" style="color: white; font-size: 20px;"></i>
   </div>
   <div role="button" *ngIf="!falarTextoService.permitirFala" class="estilo-cards mt-2" style="top: 38.5%"
     (click)="iniciarFala()">
-    <i class="bi bi-volume-mute" style="color: white; font-size: 20px"></i>
+    <i class="bi bi-volume-off" style="color: white; font-size: 20px"></i>
   </div>
 
   <app-v-libras class="mt-2"></app-v-libras>

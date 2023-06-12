@@ -21,6 +21,9 @@ import { DropdownModule } from "primeng/dropdown";
 import { FormsModule } from '@angular/forms';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SharedModule } from '../shared/shared.module';
+import { TooltipModule } from 'primeng/tooltip';
+import { InfoModalDemandaComponent } from './info-modal-demanda/info-modal-demanda.component';
+
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { SharedModule } from '../shared/shared.module';
     SidebarReuniaoComponent,
     FiltroDemandaComponent,
     FiltroReuniaoComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    InfoModalDemandaComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +52,8 @@ import { SharedModule } from '../shared/shared.module';
     DropdownModule,
     FormsModule,
     ConfirmDialogModule,
-    SharedModule
+    SharedModule,
+    TooltipModule
   ],
   exports:[
     CardDemandaComponent,
@@ -58,7 +63,8 @@ import { SharedModule } from '../shared/shared.module';
     FiltroDemandaComponent,
     FiltroReuniaoComponent,
     SidebarReuniaoComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    InfoModalDemandaComponent
   ]
 })
 export class ComponentesReutilizaveisModule { }

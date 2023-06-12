@@ -4,7 +4,7 @@ import { UsuarioService } from './../../services/usuario.service';
 import { Router } from '@angular/router';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
-import { Component, OnInit, Inject,LOCALE_ID } from '@angular/core';
+import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { Proposta } from 'src/app/models/proposta.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -63,7 +63,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.atualizarDemandas();
+    this.pesquisarDemandas(undefined);
   }
 
   listaComissoes = [
@@ -75,12 +75,13 @@ export class ModalCriarReuniaoComponent implements OnInit {
     { value: "CWBS", nome: "CWBS – Comitê WEG Business Services" },
     { value: "DTI", nome: "DTI – Diretoria de TI" },
   ]
+  currentPageReportTemplate = '{{currentPage}} de {{totalPages}}';
 
   openModalHistorico(codigoDemanda: string) {
     this.matDialog.open(ModalHistoricoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      minHeight: '30vh',
+      minHeight: '50vh',
       data: codigoDemanda
     });
   }
@@ -94,11 +95,13 @@ export class ModalCriarReuniaoComponent implements OnInit {
       })
       .afterClosed().subscribe({
         next: e => {
-          let indice: number | undefined = -1
-          if (this.listaDemandas) {
-            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-            if (indice !== -1) {
-              this.listaDemandas.splice(indice, 1, e);
+          if(e != undefined){
+            let indice: number | undefined = -1
+            if (this.listaDemandas) {
+              indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+              if (indice !== -1) {
+                this.listaDemandas.splice(indice, 1, e);
+              }
             }
           }
         }
@@ -154,7 +157,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
           }
         })
     } else {
-      console.log("edit")
       this.reuniaoService.putReuniao(reuniao)
         .subscribe({
           next: reuniao => {
@@ -236,8 +238,8 @@ export class ModalCriarReuniaoComponent implements OnInit {
 
   setInformacoesPreDefinidas(reuniao: Reuniao) {
     this.comissaoSelecionada = reuniao.comissaoReuniao
-    if(reuniao.dataReuniao)
-    this.dataReuniao = new Date(reuniao.dataReuniao)
+    if (reuniao.dataReuniao)
+      this.dataReuniao = new Date(reuniao.dataReuniao)
   }
 
   showSuccess(message: string) {
@@ -275,6 +277,42 @@ export class ModalCriarReuniaoComponent implements OnInit {
       }
     }
     return index;
+  }
+  totalPagesPagination = 0;
+  nenhumResultadoEncontrado = false;
+
+  paginate(event: { page: number }) {
+    this.demandaService.avancarPage(event.page)
+      .subscribe((listaDemandas: Demanda[]) => {
+        if (listaDemandas.length > 0) {
+          this.listaDemandas = listaDemandas;
+          this.nenhumResultadoEncontrado = false;
+          this.removerDaListaAdicSecundaria()
+        } else {
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      });
+  }
+
+  //undefined - valores iniciais
+  //string - do filtro
+  pesquisarDemandas(tipo: string | undefined) {
+    this.demandaService
+      .getDemandasFiltradas(typeof tipo == 'string' ? '' : {status: 'ASSESSMENT', pesquisaCampo: ''})
+      .subscribe((listaDemandas: Demanda[]) => {
+        console.log(listaDemandas)
+        if (listaDemandas.length > 0) {
+          this.totalPagesPagination = this.demandaService.totalPages
+          this.listaDemandas = listaDemandas;
+          this.nenhumResultadoEncontrado = false;
+          this.removerDaListaAdicSecundaria()
+        } else {
+          this.listaDemandas = [];
+          this.nenhumResultadoEncontrado = true;
+        }
+      });
+
   }
 
 }

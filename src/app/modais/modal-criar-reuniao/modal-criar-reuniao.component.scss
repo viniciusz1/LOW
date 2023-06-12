@@ -1,8 +1,9 @@
-.alinhar-baixo{
+.alinhar-baixo {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 :host ::ng-deep .inputComissoes {
     width: 35vw;
 }
@@ -10,4 +11,3 @@
 :host ::ng-deep .inputCalendario {
     width: 30vw;
 }
-

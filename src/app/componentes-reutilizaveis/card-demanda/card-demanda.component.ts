@@ -46,13 +46,17 @@ export class CardDemandaComponent implements OnInit {
     | undefined = undefined;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
+  analistaAssociado: boolean = false;
+
+
 
   constructor(private route: Router,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService) {
-     }
+      
+  }
 
   statusPermitido() {
     if (
@@ -70,9 +74,9 @@ export class CardDemandaComponent implements OnInit {
 
     if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()) {
       return true;
-    }  
+    }
     else if (this.usuarioService.getRole == NivelAcesso.GestorTI || this.usuarioService.getRole == NivelAcesso.Analista) {
-      
+
       if (this.dadosDemanda.analista == undefined) {
         return true;
       }
@@ -211,17 +215,15 @@ export class CardDemandaComponent implements OnInit {
     switch (this.dadosDemanda.statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-          if(nivelAcesso == 'GestorTI' || this.dadosDemanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()){
           this.textoExibidoEmBotaoDependendoRota = {
             rota:
               '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
             texto: 'Classificar Demanda',
           }
-        }
         };
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
-          if(this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()){
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
             texto: 'Criar Proposta'
@@ -236,12 +238,20 @@ export class CardDemandaComponent implements OnInit {
           };
         }
         return true;
-      case StatusDemanda.ASSESSMENT || StatusDemanda.BUSINESS_CASE:
-          if(this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()){
+      case StatusDemanda.ASSESSMENT:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_ADD_REUNIAO',
             texto: 'Adicionar Proposta',
-          };        
+          };
+        }
+        return true;
+        case StatusDemanda.BUSINESS_CASE:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_ADD_REUNIAO',
+            texto: 'Adicionar Proposta',
+          };
       }
         return true;
       case StatusDemanda.TO_DO || StatusDemanda.DESIGN_AND_BUILD || StatusDemanda.SUPPORT:
@@ -335,6 +345,12 @@ export class CardDemandaComponent implements OnInit {
     //Adicionando classes para estilização do card
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + '-sec';
+    //Verificando demandas que ja existem analistas associados
+    if(this.dadosDemanda.analista){
+      this.analistaAssociado = true;
+    } else {      
+      this.analistaAssociado = false;
+    }
 
     this.exibicaoBotoes();
   }

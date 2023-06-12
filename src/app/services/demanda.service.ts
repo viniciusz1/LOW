@@ -133,8 +133,6 @@ export class DemandaService {
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
       })
     }
-    console.log(this.demandaForm.value.objetivoDemanda)
-    console.log(this.demandaForm.value.situacaoAtualDemanda)
 
     let objetivoDemanda: any = this.demandaForm.value.objetivoDemanda
     let situacaoAtualDemanda: any = this.demandaForm.value.situacaoAtualDemanda
@@ -284,6 +282,7 @@ export class DemandaService {
   avancarPage(page: number) {
     let linkComPaginacao = this.link;
     linkComPaginacao += '&page=' + page
+    console.log(linkComPaginacao)
     return this.http.get<Demanda[]>(
       linkComPaginacao
     ).pipe(map((pageable: any) => {
@@ -357,15 +356,20 @@ export class DemandaService {
   getDemandasFiltradas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | string | undefined) {
     if (typeof pesquisaEspecial != 'string') {
       if (pesquisaEspecial?.status) {
+        console.log("status")
         this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=&ordenar=${this.filtros?.sort}`
       } else if (pesquisaEspecial?.pesquisaCampo) {
+        console.log("pesquisacampo")
         this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=${pesquisaEspecial.pesquisaCampo}&analista=&departamento=&ordenar=${this.filtros?.sort}`
       } else {
+        console.log("Ok")
         this.link = path + `demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}&ordenar=${this.filtros?.sort}`
       }
     } else {
+      console.log("else")
       this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=&tamanho=&tituloDemanda=&analista=&departamento=${pesquisaEspecial}&ordenar=`
     }
+    console.log(this.link)
     return this.http.get<Demanda[]>(
       this.link
     ).pipe(map((pageable: any) => {
@@ -380,7 +384,7 @@ export class DemandaService {
     let linkParaTodasDemandas = this.link
     linkParaTodasDemandas += '&size=2000'
     console.log(linkParaTodasDemandas)
-    return this.http.get<Demanda[]>(
+    return this.http.get<any>(
       linkParaTodasDemandas
     );
   }

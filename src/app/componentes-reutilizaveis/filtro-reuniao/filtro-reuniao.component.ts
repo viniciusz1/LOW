@@ -14,8 +14,10 @@ export class FiltroReuniaoComponent implements OnInit {
     ppmProposta: string;
     analista: string;
     solicitante: string;
+    ordenar: string;
     page: string;
-    size: string}>();
+    size: string
+  }>();
   constructor() { }
 
   ngOnInit(): void {

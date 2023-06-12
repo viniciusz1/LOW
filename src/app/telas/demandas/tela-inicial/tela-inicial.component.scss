@@ -6,13 +6,12 @@
     background-color: rgba(0, 0, 0, 0.26);
 }
 
-
 :host::ng-deep {
-    .p-dropdown{
-        width: 200px!important;
+    .p-dropdown {
+        width: 200px !important;
     }
-  }
-  
+}
+
 .right-arrow:hover,
 .left-arrow:hover {
     background-color: rgba(0, 0, 0, 0.596);
@@ -33,7 +32,7 @@ h5 {
     right: 95vh;
 }
 
-.nao-encontrado{
+.nao-encontrado {
     position: relative;
     top: 35vh;
     left: 80vh;

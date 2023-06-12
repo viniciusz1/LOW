@@ -27,14 +27,7 @@ export class VoiceRecognitionService {
         .map((result) => result.transcript)
         .join('');
       this.tempWords = transcript;
-      if(this.inputEmFoco != null){
-        if(typeof this.inputEmFoco  == 'string'){
-          this.inputEmFoco = this.tempWords
-        }else{
-          //@ts-ignore
-          this.inputEmFoco.value = this.tempWords
-        }
-      }
+
       // console.log(transcript);
     });
   }
@@ -62,14 +55,24 @@ export class VoiceRecognitionService {
   }
 
   wordConcat() {
-    console.log("tempoWords: " + this.tempWords)
     this.text = this.text + ' ' + this.tempWords + '.';
-    console.log("text: " + this.text)
     this.tempWords = '';
+
+    if(this.inputEmFoco != null){
+      if(typeof this.inputEmFoco  == 'string'){
+        this.$novasPalavrasFaladas.emit(this.text)
+      }else{
+        //@ts-ignore
+        this.inputEmFoco.value = this.text
+      }
+    }
   }
 
   private inputEmFoco: HTMLElement | null | string =  null;
 
+
+  //Se for do tipo string serve para emitir informações para o
+  //editor de texto personalizado
   setInputEmFoco(input: HTMLElement | null | string): void {
     this.text = ''
     this.inputEmFoco = input;

@@ -336,7 +336,7 @@
                 let demanda of listaDemandas
                   | filtrarDemandaStatus : listaTituloNaoFiltrado[0].titulo
               "
-              (clicouEmExcluir)="carregarDemandasIniciais()"
+              (clicouEmExcluir)="deletarDemanda($event)"
               [dadosDemanda]="demanda"
               (verDocumentoProposta)="openModalDemandaDocumento($event)"
               (irParaChat)="irParaChat($event, demanda)"
@@ -383,7 +383,7 @@
               let demanda of listaDemandas
                 | filtrarDemandaStatus : listaTituloNaoFiltrado[1].titulo
             "
-            (clicouEmExcluir)="carregarDemandasIniciais()"
+            (clicouEmExcluir)="deletarDemanda($event)"
             [dadosDemanda]="demanda"
             [mudarTamanho]="'100%'"
             (verDocumentoProposta)="openModalDemandaDocumento($event)"
@@ -432,7 +432,6 @@
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
             <div
-              *ngIf="linha.status != 'DRAFT'"
               class="me-3"
               style="align-self: flex-end; cursor: pointer"
               (click)="
@@ -441,11 +440,14 @@
                   pesquisaCampo: undefined
                 })
               "
+              *ngIf="linha.titulo != 'Sem demandas'"
               falarTexto
             >
-              {{ "telas.tela-inicial.ver-mais" | translate }} ({{
+              {{ "telas.tela-inicial.ver-mais" | translate }} 
+              <span *ngIf="linha.titulo != 'Suas Demandas'">({{
                 qtdDemandasStatus[i]
               }})
+            </span>
             </div>
           </div>
           <div
@@ -463,7 +465,7 @@
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                 "
-                (clicouEmExcluir)="carregarDemandasIniciais()"
+                (clicouEmExcluir)="deletarDemanda($event)"
                 [dadosDemanda]="demanda"
                 (verDocumentoProposta)="openModalDemandaDocumento($event)"
                 (irParaChat)="irParaChat($event, demanda)"

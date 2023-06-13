@@ -21,37 +21,25 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
 
 
   transform(demandas: Demanda[], ...titulo: string[]): Demanda[] | undefined {
-    if (titulo[0] == "Seus Rascunhos") {
-      let list: any = localStorage.getItem('rascunhos')
-      // let listProposta: any = localStorage.getItem('rascunhosProposta')
-      // if (list)
-      //   listProposta = JSON.parse(listProposta)
-      list = JSON.parse(list)
-      for (let i of list) {
-        i.statusDemanda = StatusDemanda.DRAFT
-      }
-      // for (let i of listProposta) {
-      //   i.statusDemanda = StatusDemanda.DRAFT_PROPOSTA
-      // }
-      // for (let i of listProposta) {
-      //   list.push(i)
-      // }
-
-      return list
-    }
 
     if(titulo[0] == "Sem demandas"){
       return undefined
     }
 
-    if (titulo[0] == "Suas Tarefas" && this.usuarioService.getRole == 'GerenteNegocio') {
-      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
-    }
     if (titulo[0] == "Suas Demandas") {
       return demandas.filter(d => d.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())
     }
+
+    if (titulo[0] == "Suas Tarefas" && this.usuarioService.getRole == 'GerenteNegocio') {
+      return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_APROVACAO)
+    }
+
     if (titulo[0] == "Demandas do Seu Departamento") {
-      return demandas
+      return demandas.filter(d => d.statusDemanda != StatusDemanda.DRAFT)
+    }
+    //Caso as demadas sejam do analista, não devem ficar no fluxo principal (que correspodem a suas tarefas ou ações possiveis)
+    if(this.usuarioService.getRole == 'Analista'){
+    demandas = demandas.filter(d => d.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser())
     }
     if (titulo[0] == "Backlog - Classificação") {
       return demandas.filter(d => d.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO)
@@ -90,5 +78,4 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
 
     return demandas;
   }
-
 }

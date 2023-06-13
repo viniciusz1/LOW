@@ -3,16 +3,18 @@
 }
 
 .estilo-cards {
-  border-radius: 9px;
-  right: 0;
-  z-index: 2;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: linear-gradient(to right, #0C94BD, #004A98);
-  background-position: center;
+  border-radius: 12px;
+    right: 11px;
+    z-index: 2;
+    width: 40px;
+    float: right;
+    top: 3.5vw;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #0C94BD, #004A98);
+    background-position: center;
 }
 
 .div-principal {

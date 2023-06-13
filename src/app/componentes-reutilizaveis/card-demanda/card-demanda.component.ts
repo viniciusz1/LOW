@@ -300,7 +300,6 @@ export class CardDemandaComponent implements OnInit {
   deletarRascunho() { 
     if (this.dadosDemanda.codigoDemanda) {
       this.clicouEmExcluir.emit(this.dadosDemanda)
-      
     } else {
       this.showError("Não foi possível excluir o rascunho!")
     }

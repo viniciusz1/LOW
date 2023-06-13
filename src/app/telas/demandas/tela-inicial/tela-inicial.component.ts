@@ -379,18 +379,36 @@ export class TelaInicialComponent implements OnInit {
     if (this.nivelAcessoUsuario == 'Analista' || this.nivelAcessoUsuario == 'GestorTI') {
       this.demandasService.getDemandasTelaInicial().subscribe({
         next: (e) => {
+          let ExistsDemandaRascunho = true;
+          let qtdDemandasUsuário = 0;
           e['demandas'].forEach((demandas: Demanda[]) => {
+            if(demandas.some((e) => e.statusDemanda?.toString() == 'DRAFT')){
+              ExistsDemandaRascunho = false;
+            }
+            if(this.usuarioService.getRole == 'Analista'){
+            if(demandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')){
+              qtdDemandasUsuário = demandas.filter((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()).length;
+            }
+          }
             if (demandas.length > 0) {
               this.listaDemandas.push(...demandas);
               this.isFiltrado = false;
               this.nenhumResultadoEncontrado = false;
             }
           });
-          e['qtdDemandas'].forEach((qtd: number) => {
+          e['qtdDemandas'].forEach((qtd: number, index: number) => {
+            if(ExistsDemandaRascunho == true){
+              this.qtdDemandasStatus.push(0)
+              ExistsDemandaRascunho = false;
+            }
+            if(index == 1){
+              qtd = qtd - qtdDemandasUsuário;
+            }
             if (qtd > 0) {
               this.qtdDemandasStatus.push(qtd)
             }
           })
+          console.log(this.qtdDemandasStatus)
 
           this.exibirFilasDeStatus();
         },
@@ -468,75 +486,85 @@ export class TelaInicialComponent implements OnInit {
 
   //Lógica para a criação de uma nova demanda
   criarUmaNovaDemanda() {
-    let quantidadeRascunhos = this.rascunhoService.getSizeRascunho
-    if (quantidadeRascunhos == -1 || quantidadeRascunhos == undefined) {
-      this.router.navigate(['tela-inicial/rascunho/' + 0])
-    } else {
-      this.router.navigate(['tela-inicial/rascunho/' + quantidadeRascunhos])
-    }
+    this.rascunhoService.postRascunhoDemanda().subscribe((rascunho) => {
+      console.log("entrou")
+      this.router.navigate(['tela-inicial/rascunho/' + rascunho.codigoDemanda])
+    })
   }
 
 
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
+
+    if(this.listaDemandas.length == 0){
+      this.listaTituloNaoFiltrado.push({
+        status: 'Sem demandas',
+        titulo: 'Sem demandas',
+      });
+
+      return;
+    }
+
+    if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
+      this.listaTituloNaoFiltrado.push({
+        status: 'SUAS_DEMANDAS',
+        titulo: 'Suas Demandas',
+      });
+    } 
     if (this.nivelAcessoUsuario == 'Solicitante') {
-      if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
-        this.listaTituloNaoFiltrado.push({
-          status: 'SUAS_DEMANDAS',
-          titulo: 'Suas Demandas',
-        });
-      } else {
-        this.listaTituloNaoFiltrado.push({
-          status: 'Sem demandas',
-          titulo: 'Sem demandas',
-        });
-      }
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
+
+
       return
     }
 
     if (this.nivelAcessoUsuario == 'GerenteNegocio') {
-      console.log("GN")
       if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
-        console.log("Entrouss")
         this.listaTituloNaoFiltrado.push({
           status: 'BACKLOG_APROVACAO',
           titulo: 'Suas Tarefas',
         });
-      } else{
+      }
+      else{
         this.listaTituloNaoFiltrado.push({
           status: 'Sem demandas',
           titulo: 'Sem demandas',
         });
       }
 
+
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
 
+
+
       return
     }
 
-    if (this.rascunhoService.getRascunhosDemanda.length > 0) {
-      this.listaTituloNaoFiltrado.push({
-        status: 'DRAFT',
-        titulo: 'Seus Rascunhos',
-      });
-    }
+    // if (this.rascunhoService.getRascunhosDemanda.length > 0) {
+    //   this.listaTituloNaoFiltrado.push({
+    //     status: 'DRAFT',
+    //     titulo: 'Seus Rascunhos',
+    //   });
+    // }
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'
       )
     ) {
+      if(this.listaDemandas.filter((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO' &&
+       e.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()).length != 0){
       this.listaTituloNaoFiltrado.push({
         status: 'BACKLOG_CLASSIFICACAO',
         titulo: 'Backlog - Classificação',
       });
+    }
     }
     if (
       this.listaDemandas.some(
@@ -610,5 +638,38 @@ export class TelaInicialComponent implements OnInit {
       this.listaTituloNaoFiltrado.push({ status: 'DONE', titulo: 'Done' });
     }
   }
+
+  deletarDemanda(demanda: Demanda) {
+    
+    this.confirmationService.confirm({
+      key: "motivoReprovacao",
+      header: 'Deletar Rascunho',
+      message: 'Você deseja deletar essa Rascunho?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (demanda?.codigoDemanda)
+    this.rascunhoService.deleteRascunhoDemanda(demanda?.codigoDemanda).subscribe(
+      {
+        next: e => {
+          this.showSuccess("Rascunho deletado!")
+          this.carregarDemandasIniciais()
+        },
+        error: err => {
+          console.log(err.error.text)
+          if(err.error.text == "Rascunho Deletado com Sucesso!"){
+            this.showSuccess("Rascunho deletado!")
+            this.carregarDemandasIniciais()
+          }else{
+            this.showError("Não foi possível excluir o rascunho!")
+          }
+        }
+      }
+  )
+      },
+      reject: () => {
+        
+      }
+  });
+    }
 
 }

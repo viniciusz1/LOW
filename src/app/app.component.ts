@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { VoiceRecognitionService } from './services/voice-recognition.service';
 import { FalarTextoDirective } from './directives/falar-texto.directive';
@@ -44,7 +44,12 @@ export class AppComponent implements OnInit {
       this.configIniciais.setFontTheme(undefined)
       this.messagesService.subscribeToNotificationsMensagens()
   }
+
+  @ViewChild('vlibras') vlibras: any
   ngOnInit(): void {
+    setTimeout(()=>{
+      console.log(this.vlibras)
+    },2000)
   }
 
 

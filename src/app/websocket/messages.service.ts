@@ -34,6 +34,9 @@ export class MessagesService {
     this._client = new Client({
       webSocketFactory: () => ws,
       debug: (msg: string) => console.log(msg),
+      onWebSocketClose: (e: CloseEvent) => this.initializeWebSocketConnection(),
+      onStompError: (frame: any) => this.initializeWebSocketConnection(),
+      onWebSocketError: (e: Event) => this.initializeWebSocketConnection(),
     });
 
     this._client.onStompError = (frame: any) => {

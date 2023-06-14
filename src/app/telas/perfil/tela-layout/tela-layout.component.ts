@@ -9,6 +9,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 })
 export class TelaLayoutComponent implements OnInit {
   themeSelection: boolean = false
+  color: string = '#6466f1';
+  
   constructor(public  configIniciaisService: ConfiguracoesIniciaisService) {
     // @Inject(DOCUMENT) private document: Document
 

@@ -22,7 +22,7 @@ export class DemandaService {
     situacaoAtualDemanda: ['', ValidatorsEditor.required],
     objetivoDemanda: ['', ValidatorsEditor.required],
     beneficioRealDemanda: this.fb.group({
-      moedaBeneficio: [''],
+      moedaBeneficio: ['Real'],
       memoriaDeCalculoBeneficio: [''],
       valorBeneficio: [''],
     }),
@@ -164,6 +164,14 @@ export class DemandaService {
     //Inserindo o form da demanda em si
 
     console.log(this.demandaForm.value)
+    if(this.demandaForm.value.beneficioRealDemanda?.memoriaDeCalculoBeneficio == ""){
+      console.log("Foiiiii")
+      this.demandaForm.value.beneficioRealDemanda?.memoriaDeCalculoBeneficio == null;
+    }
+    if(this.demandaForm.value.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio == ""){
+      this.demandaForm.value.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio == null;
+    }
+
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
 
     //Retornando a requisição
@@ -234,12 +242,12 @@ export class DemandaService {
       beneficioRealDemanda: {
         moedaBeneficio: demanda.beneficioRealDemanda?.moedaBeneficio,
         memoriaDeCalculoBeneficio: demanda.beneficioRealDemanda?.memoriaDeCalculoBeneficio,
-        valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio.toString()
+        valorBeneficio: demanda.beneficioRealDemanda?.valorBeneficio?.toString()
       },
       beneficioPotencialDemanda: {
         moedaBeneficio: demanda.beneficioPotencialDemanda?.moedaBeneficio,
         memoriaDeCalculoBeneficio: demanda.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio,
-        valorBeneficio: demanda.beneficioPotencialDemanda?.valorBeneficio.toString()
+        valorBeneficio: demanda.beneficioPotencialDemanda?.valorBeneficio?.toString()
       },
       beneficioQualitativoDemanda: demanda.beneficioQualitativoDemanda,
       frequenciaDeUsoDemanda: demanda.frequenciaDeUsoDemanda,

@@ -35,11 +35,10 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     private messagesService: MessagesService,
     private matDialog: MatDialog
   ) {
-    console.log('Rodou construtor   ');
-
     this.setarConversas();
     //Atualiza o código da rota e se increve e seta mensagens quando troca de rota
     this.route.params.subscribe((e) => {
+      console.log("PARAMS")
       this.codigoRota = e['codigoDemanda'];
       this.messagesService.codigoRota = this.codigoRota;
       if (this.codigoRota != '' && this.codigoRota != undefined) {
@@ -57,11 +56,13 @@ export class TelaChatComponent implements OnInit, OnDestroy {
         console.log(this.mensagens)
         this.mostrarConversas = true;
       });
-    this.scrollToBottom();
+    setTimeout(() => {
+      this.scrollToBottom();
+    }, 1000)
   }
 
   conversaDiscutida?: Conversa
-  alterarConversa(conversa: Conversa){
+  alterarConversa(conversa: Conversa) {
     conversa.qtdMensagensNaoLidas = 0;
     this.conversaDiscutida = conversa;
     this.demandaDiscutida = conversa.demandaConversa;
@@ -96,11 +97,12 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       this.scrollPanel.scrollTop(99999);
     }
   }
+
   exibirQtdMensagensNaoLidas(conversa: any) {
     if (
       conversa?.qtdMensagensNaoLidas != 0 &&
       conversa?.usuarioAguardando.codigoUsuario !=
-        this.usuarioService.getCodigoUser()
+      this.usuarioService.getCodigoUser()
     ) {
       return true;
     }
@@ -135,7 +137,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       }
 
       console.log("MENSAGEM: " + mensagem.textoMensagem)
-      if(mensagem.textoMensagem != undefined){
+      if (mensagem.textoMensagem != undefined) {
         let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
         this.mostrarConversas = true;
         this.mensagens.push(...novaMensagem);
@@ -153,7 +155,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       if (
         mensagem.usuarioMensagem &&
         mensagem.usuarioMensagem.codigoUsuario ==
-          this.usuarioService.getCodigoUser()
+        this.usuarioService.getCodigoUser()
       ) {
         mensagem.ladoMensagem = true;
       } else {
@@ -207,17 +209,17 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     this.messagesService.$mensagensVistas.subscribe(() => {
       this.mensagens.forEach((mensagem) => {
         mensagem.statusMensagem = "VISTA"
-        })
+      })
     })
     this.messagesService.$qtdMensagensNaoLida.subscribe((codigoConversa: number) => {
-      for(let conversa of this.conversasDemandas){
+      for (let conversa of this.conversasDemandas) {
         //se o código em que recebeu a notificação é diferente do que está sendo conversado no momento
-        if(codigoConversa != parseInt(this.codigoRota)){
+        if (codigoConversa != parseInt(this.codigoRota)) {
           //Se a conversa que recebeu a notificação é a mesma que está sendo conversada no momento
-          if(conversa.codigoConversa == codigoConversa && conversa.qtdMensagensNaoLidas){
+          if (conversa.codigoConversa == codigoConversa && conversa.qtdMensagensNaoLidas) {
             console.log("Entrou para atualizar a qtd de mensagens")
             conversa.qtdMensagensNaoLidas = conversa.qtdMensagensNaoLidas + 1;
-          }else{
+          } else {
             conversa.qtdMensagensNaoLidas = 1;
           }
         }

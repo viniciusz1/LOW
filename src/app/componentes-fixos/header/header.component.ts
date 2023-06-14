@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
     private usuarioService: UsuarioService,
     private notificacoesService: NotificacoesService,
     private messagesService: MessagesService) {
-      console.log(router.url)
     this.messagesService.$qtdMensagensNaoLida.subscribe((codigoConversa: number) => {
       //Se não estiver na tela de chat, ele mostra a notificação
       if(this.router.url.includes("chat") == false){

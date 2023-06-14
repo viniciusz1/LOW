@@ -65,6 +65,10 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     conversa.qtdMensagensNaoLidas = 0;
     this.conversaDiscutida = conversa;
     this.demandaDiscutida = conversa.demandaConversa;
+    this.codigoRota = conversa.codigoConversa?.toString() as string;
+    this.messagesService.codigoRota = this.codigoRota;
+    this.setMensagens();
+    this.iniciarSubscribeChat();
     this.router.navigate(['/tela-inicial/chat/' + conversa.codigoConversa])
   }
 
@@ -198,12 +202,29 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log("Rodou on init")
     this.subscribeEmmiterMensagens();
     this.messagesService.$mensagensVistas.subscribe(() => {
       this.mensagens.forEach((mensagem) => {
         mensagem.statusMensagem = "VISTA"
         })
     })
+    this.messagesService.$qtdMensagensNaoLida.subscribe((codigoConversa: number) => {
+      for(let conversa of this.conversasDemandas){
+        //se o código em que recebeu a notificação é diferente do que está sendo conversado no momento
+        if(codigoConversa != parseInt(this.codigoRota)){
+          //Se a conversa que recebeu a notificação é a mesma que está sendo conversada no momento
+          if(conversa.codigoConversa == codigoConversa && conversa.qtdMensagensNaoLidas){
+            console.log("Entrou para atualizar a qtd de mensagens")
+            conversa.qtdMensagensNaoLidas = conversa.qtdMensagensNaoLidas + 1;
+          }else{
+            conversa.qtdMensagensNaoLidas = 1;
+          }
+        }
+
+      }
+    })
+
   }
 
   silenciarChat() {

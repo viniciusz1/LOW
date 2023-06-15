@@ -1,21 +1,39 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { path } from './path/rota-api';
+import { Personalizacao } from '../models/personalizacao.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonalizacaoService {
+
+  private _personalizacaoAtiva: Personalizacao = {}
+
+  get personalizacaoAtiva(){
+    if(this._personalizacaoAtiva == undefined){
+      let personaliza = localStorage.getItem('personalizacao')
+      if(personaliza){
+        this._personalizacaoAtiva = JSON.parse(personaliza);
+      }
+    }
+      return this._personalizacaoAtiva
+
+  }
+  set personalizacaoAtiva(personalizacao: Personalizacao){
+    this._personalizacaoAtiva = personalizacao
+  }
+
   getPersonalizacaoAtiva(){
-    return this.http.get(path + 'personalizacao/ativa');
+    return this.http.get<Personalizacao>(path + 'personalizacao/ativa');
   }
 
   getPersonalizacoes(){
-    return this.http.get(path + 'personalizacao');
+    return this.http.get<Personalizacao[]>(path + 'personalizacao');
   }
 
-  postPersonalizacaoAtiva(personalizacao: any){
+  postPersonalizacaoAtiva(personalizacao: Personalizacao){
     return this.http.post(path + 'personalizacao', personalizacao);
   }
 
@@ -24,7 +42,7 @@ export class PersonalizacaoService {
   }
 
   mudarPersonalizacaoAtiva(codigoPersonalizacao: number){
-    return this.http.put(path + 'personalizacao/' + codigoPersonalizacao, null);
+    return this.http.put<Personalizacao[]>(path + 'personalizacao/' + codigoPersonalizacao, null);
   }
 
   constructor(private http: HttpClient) { }

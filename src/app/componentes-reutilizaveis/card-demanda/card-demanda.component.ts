@@ -8,6 +8,7 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { Route, Router } from '@angular/router';
 import { RascunhoService } from 'src/app/services/rascunho.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
 
 @Component({
   selector: 'app-card-demanda',
@@ -46,6 +47,8 @@ export class CardDemandaComponent implements OnInit {
     | undefined = undefined;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
+  primaryColor?: string = '';
+  secondaryColor: string = '';
   analistaAssociado: boolean = false;
 
 
@@ -54,8 +57,19 @@ export class CardDemandaComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private personalizacaoService: PersonalizacaoService) {
+      if(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao){
+        let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
+        this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]
+        this.secondaryColor = this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao[ordinal]
+      }
+  }
 
+  getOrdinalValueStatusDemanda(value: StatusDemanda | undefined): number | undefined {
+    const enumValues = Object.values(StatusDemanda);
+    const index = enumValues.indexOf(value as StatusDemanda);
+    return index !== -1 ? index : undefined;
   }
 
   statusPermitido() {
@@ -117,6 +131,7 @@ export class CardDemandaComponent implements OnInit {
 
   porcentagemBarraProgressao() {
     switch (this.dadosDemanda.statusDemanda) {
+      case StatusDemanda.DRAFT: return 0
       case StatusDemanda.BACKLOG_CLASSIFICACAO: return 10
       case StatusDemanda.BACKLOG_APROVACAO: return 20
       case StatusDemanda.BACKLOG_PROPOSTA: return 30
@@ -214,13 +229,13 @@ export class CardDemandaComponent implements OnInit {
     switch (this.dadosDemanda.statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-          if(nivelAcesso == 'GestorTI' || this.dadosDemanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()){
-          this.textoExibidoEmBotaoDependendoRota = {
-            rota:
-              '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
-            texto: 'Classificar Demanda',
+          if (nivelAcesso == 'GestorTI' || this.dadosDemanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota:
+                '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
+              texto: 'Classificar Demanda',
+            }
           }
-        }
         };
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
@@ -297,7 +312,7 @@ export class CardDemandaComponent implements OnInit {
     }
   }
 
-  deletarRascunho() { 
+  deletarRascunho() {
     if (this.dadosDemanda.codigoDemanda) {
       this.clicouEmExcluir.emit(this.dadosDemanda)
     } else {
@@ -305,7 +320,7 @@ export class CardDemandaComponent implements OnInit {
     }
     // if (this.dadosDemanda.codigoDemanda) {
     //   this.clicouEmExcluir.emit(this.dadosDemanda)
-      
+
     // } else {
     //   this.showError("Não foi possível excluir o rascunho!")
     // }

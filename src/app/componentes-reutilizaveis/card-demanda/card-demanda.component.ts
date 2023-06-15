@@ -59,11 +59,7 @@ export class CardDemandaComponent implements OnInit {
     private usuarioService: UsuarioService,
     private messageService: MessageService,
     private personalizacaoService: PersonalizacaoService) {
-      if(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao){
-        let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
-        this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]
-        this.secondaryColor = this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao[ordinal]
-      }
+
   }
 
   getOrdinalValueStatusDemanda(value: StatusDemanda | undefined): number | undefined {
@@ -351,6 +347,16 @@ export class CardDemandaComponent implements OnInit {
 
   ngOnInit(): void {
     //Adicionando classes para estilização do card
+
+    if(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao){
+
+      let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
+      console.log(ordinal)
+      console.log(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal])
+      this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]
+      this.secondaryColor = this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao[ordinal]
+    }
+
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + '-sec';
     //Verificando demandas que ja existem analistas associados

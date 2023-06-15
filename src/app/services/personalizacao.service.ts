@@ -33,7 +33,7 @@ export class PersonalizacaoService {
     return this.http.get<Personalizacao[]>(path + 'personalizacao');
   }
 
-  postPersonalizacaoAtiva(personalizacao: Personalizacao){
+  postPersonalizacao(personalizacao: Personalizacao){
     return this.http.post(path + 'personalizacao', personalizacao);
   }
 

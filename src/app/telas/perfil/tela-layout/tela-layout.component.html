@@ -114,9 +114,10 @@
                             </div>
                         </div>
                         <div style="display: flex; justify-content: center; margin-top: 1vw;">
-                            <div class="flex-1 flex flex-column align-items-center gap-3"
+                            <div class="flex-1 flex flex-column align-items-center gap-3 mx-2"
                                 *ngFor="let list of listOfColorsStatusDemand">
-                                <span>{{ list.corPrimaria }}</span>
+                                <input type="text" class="form-control" [(ngModel)]="list.corPrimaria">
+                                <input type="text" class="form-control" [(ngModel)]="list.corSecundaria">
                                 <div style="display: flex;">
                                     <p-colorPicker [(ngModel)]="list.corPrimaria"></p-colorPicker>
                                     <p-colorPicker id="cor-secundaria" [(ngModel)]="list.corSecundaria">
@@ -170,7 +171,8 @@
                     <div style="display: flex; justify-content: center; margin-top: 1vw;">
                         <div class="flex-1 flex flex-column align-items-center gap-3"
                             *ngFor="let list of listOfColorsStatusReuniao">
-                            <span>{{ list.corPrimaria }}</span>
+                            <input type="text" class="form-control" [(ngModel)]="list.corPrimaria">
+                            <input type="text" class="form-control" [(ngModel)]="list.corSecundaria">
                             <div style="display: flex;">
                                 <p-colorPicker [(ngModel)]="list.corPrimaria"></p-colorPicker>
                                 <p-colorPicker id="cor-secundaria" [(ngModel)]="list.corSecundaria">
@@ -187,7 +189,7 @@
                 <div style=" margin-top: 1vw; display: flex; justify-content: end; margin-right: 1vw;">
                     <button class="btn btn-outline-primary" style="margin-right: 1vw;" (click)="redefinir()">Redefinir
                         configurações</button>
-                    <button class="btn btn-outline-primary" (click)="redefinir()">Salvar Alterações</button>
+                    <button class="btn btn-outline-primary" (click)="salvarAlteracoes()">Salvar Alterações</button>
                 </div>
             </div>
             <div>

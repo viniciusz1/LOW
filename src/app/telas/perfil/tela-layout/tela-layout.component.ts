@@ -1,3 +1,5 @@
+import { Personalizacao } from './../../../models/personalizacao.model';
+import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
 import { ConfiguracoesIniciaisService } from './../../../services/configuracoes-iniciais.service';
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
@@ -12,12 +14,15 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 })
 export class TelaLayoutComponent implements OnInit {
   themeSelection: boolean = false
-  color: string = '#6466f1';
   demanda: Demanda;
   alterarTamanhoTexto = true;
   tipoExibicaoDemanda = true;
 
-  constructor(public configIniciaisService: ConfiguracoesIniciaisService, private confirmationService: ConfirmationService,) {
+  constructor(
+    public configIniciaisService: ConfiguracoesIniciaisService,
+    private confirmationService: ConfirmationService,
+    private personalizacaoService: PersonalizacaoService
+  ) {
     this.demanda = { statusDemanda: StatusDemanda.ASSESSMENT }
   }
 
@@ -42,7 +47,7 @@ export class TelaLayoutComponent implements OnInit {
       blockScroll: false,
       header: 'Alterar modo de exibição',
       accept: () => {
-        if(number == 1){
+        if (number == 1) {
           this.changeToCard();
         } else {
           this.changeToList();
@@ -76,6 +81,32 @@ export class TelaLayoutComponent implements OnInit {
     { status: 'Concluído', corPrimaria: '#00612E', corSecundaria: '#529572' },
   ]
 
+  salvarAlteracoes() {
+    let personalizacao: Personalizacao = {
+      coresPrimariasPersonalizacao: [],
+      coresSecundariasPersonalizacao: [],
+      ativaPersonalizacao: true
+    }
+
+    for (let cores of this.listOfColorsStatusDemand) {
+      if(personalizacao.coresPrimariasPersonalizacao && personalizacao.coresSecundariasPersonalizacao){
+        personalizacao.coresPrimariasPersonalizacao.push(cores.corPrimaria)
+        personalizacao.coresSecundariasPersonalizacao.push(cores.corSecundaria)
+
+      }
+    }
+
+    this.personalizacaoService.postPersonalizacao(personalizacao).subscribe(
+      {
+        next: (res) => {
+          console.log(res)
+        }, error: (err) => {
+          console.log(err)
+        }
+      }
+    )
+  }
+
 
 
   setFontTheme(opc: string) {
@@ -89,16 +120,6 @@ export class TelaLayoutComponent implements OnInit {
   setFontSize(opc: string) {
     this.configIniciaisService.setFontSize(opc)
   }
-
-
-  // changeTheme(state:boolean){
-  //   let theme = state ? 'dark' : 'light';
-  //   window.localStorage.setItem('theme', theme);
-  //   let themelink = this.document.getElementById('app-theme') as HTMLLinkElement;
-  //   themelink.href = `bootstrap-${theme}-blue.css`;
-  // }
-
-
 
   ngOnInit(): void {
   }

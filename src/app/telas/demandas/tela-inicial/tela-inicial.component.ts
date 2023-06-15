@@ -457,7 +457,7 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalTrocarModoExibicao() {
+  openModalTrocarModoExibicao(number: number) {
     this.confirmacaoReprovacao = false;
     this.confirmationService.confirm({
       key: 'motivoReprovacao',
@@ -466,7 +466,11 @@ export class TelaInicialComponent implements OnInit {
       blockScroll: false,
       header: 'Alterar modo de exibição',
       accept: () => {
-        this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda
+        if(number == 1){
+          this.changeToCard();
+        } else {
+          this.changeToList();
+        }
         localStorage.setItem("exibicao", JSON.stringify(this.tipoExibicaoDemanda))
       },
     });

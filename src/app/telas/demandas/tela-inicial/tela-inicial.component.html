@@ -63,13 +63,22 @@
       <i *ngIf="isFiltrado" (click)="carregarDemandasIniciais()" class="bi bi-arrow-left"
         style="font-size: 25px; cursor: pointer"></i>
       <div class="d-flex">
-        <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
-          [stepContentParams]="{ texto: textoTutorial[2] }" [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
-          (click)="openModalTrocarModoExibicao()" class="change-type-list me-2">
+        <div
+          joyrideStep="tres"
+          [title]="'Trocar Exibição'"
+          [stepContent]="customContent"
+          [stepContentParams]="{ texto: textoTutorial[2] }"
+          [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
+          (click)="openModalTrocarModoExibicao(2)"
+          class="change-type-list me-2"
+        >
           <i class="bi bi-list" style="font-size: 15px"></i>
         </div>
-        <div [ngClass]="{ 'color-actived': tipoExibicaoDemanda }" (click)="openModalTrocarModoExibicao()"
-          class="change-type-list">
+        <div
+          [ngClass]="{ 'color-actived': tipoExibicaoDemanda }"
+          (click)="openModalTrocarModoExibicao(1)"
+          class="change-type-list"
+        >
           <i class="bi bi-border-all" style="font-size: 15px"> </i>
         </div>
       </div>

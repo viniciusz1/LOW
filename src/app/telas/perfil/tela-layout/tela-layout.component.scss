@@ -9,6 +9,28 @@
     justify-content: space-between;
 }
 
+.cor-secundaria {
+    font-size: 10px;
+    height: 1.5rem;
+    width: 0.5rem; /* Altere o valor do tamanho da fonte conforme necessário */
+  }
+
+  .color-actived {
+    background: #00579D !important;
+    color: white;
+}
+
+.change-type-list {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    border-radius: 510px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
 .buttons {
     display: flex;
     align-items: center;

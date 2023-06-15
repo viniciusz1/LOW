@@ -113,21 +113,95 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="nome-dado">
-                            <div class="flex-1 flex flex-column align-items-center gap-3">
-                                <label htmlFor="cp-hex" class="font-bold block mb-2"> HEX </label>
+                        <div style="display: flex; justify-content: center; margin-top: 1vw;">
+                            <div class="flex-1 flex flex-column align-items-center gap-3"
+                                *ngFor="let list of listOfColorsStatusDemand">
+                                <span>{{ list.corPrimaria }}</span>
                                 <div style="display: flex;">
-                                    <p-colorPicker style="width: 25px; height: 25px;"
-                                        [(ngModel)]="color"></p-colorPicker>
-                                    <p-colorPicker style="width: 20px; height: 20px;"
-                                        [(ngModel)]="color"></p-colorPicker>
+                                    <p-colorPicker [(ngModel)]="list.corPrimaria"></p-colorPicker>
+                                    <p-colorPicker id="cor-secundaria" [(ngModel)]="list.corSecundaria">
+                                    </p-colorPicker>
                                 </div>
-                                <span>{{ color }}</span>
+                                <label style="font-size: 10px;" htmlFor="cp-hex" class="font-bold block mb-2">
+                                    {{list.status}}</label>
                             </div>
                         </div>
+                        <div style="display: flex; margin-top: 1.5vw; margin-left: 1vw; margin-bottom: 0.5vw;">
+                            <div>
+                                <div [ngClass]="{ 'color-actived': tipoExibicaoDemanda }"
+                                    (click)="openModalTrocarModoExibicao(1)" class="change-type-list">
+                                    <i class="bi bi-border-all" style="font-size: 15px"> </i>
+                                </div>
+                                <div joyrideStep="tres" [title]="'Trocar Exibição'"
+                                    [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
+                                    (click)="openModalTrocarModoExibicao(2)" class="change-type-list me-2">
+                                    <i class="bi bi-list" style="font-size: 15px"></i>
+                                </div>
+                            </div>
+                            <app-list-demanda style="display: flex; align-items: center;"
+                                *ngIf="!tipoExibicaoDemanda"></app-list-demanda>
+                            <app-card-demanda *ngIf="tipoExibicaoDemanda" style="margin-right: 1vw;"></app-card-demanda>
+                            <app-card-demanda *ngIf="tipoExibicaoDemanda" [mudarTamanho]="'47vw'"></app-card-demanda>
+                        </div>
                     </div>
-                    <button class="btn btn-outline-primary" (click)="redefinir()">Redefinir configurações</button>
                 </div>
+                <div class="nome" style="border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px; margin: 10px;">
+                    <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
+                        <div class="caracteristica" style="margin-right: 10px;">
+                            <span falarTexto>
+                                Card Reunião:
+                            </span>
+                        </div>
+                        <div class="nome-dado">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <!-- <option selected>Selecione a opção:</option> -->
+                                <option falarTexto
+                                    [selected]="configIniciaisService.fontAtual == 'Roboto, Helvetica Neue, sans-serif'"
+                                    value="Roboto, Helvetica Neue, sans-serif" selected>Padrão Low</option>
+                                <option falarTexto [selected]="configIniciaisService.fontAtual == 'system-ui'"
+                                    value="system-ui">Claro</option>
+                                <option falarTexto [selected]="configIniciaisService.fontAtual == 'monospace'"
+                                    value="monospace">Tonalidade WEG</option>
+                                <option falarTexto [selected]="configIniciaisService.fontAtual == 'ui-sans-serif'"
+                                    value="ui-sans-serif">Personalizar</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center; margin-top: 1vw;">
+                        <div class="flex-1 flex flex-column align-items-center gap-3"
+                            *ngFor="let list of listOfColorsStatusReuniao">
+                            <span>{{ list.corPrimaria }}</span>
+                            <div style="display: flex;">
+                                <p-colorPicker [(ngModel)]="list.corPrimaria"></p-colorPicker>
+                                <p-colorPicker id="cor-secundaria" [(ngModel)]="list.corSecundaria">
+                                </p-colorPicker>
+                            </div>
+                            <label style="font-size: 10px;" htmlFor="cp-hex" class="font-bold block mb-2">
+                                {{list.status}}</label>
+                        </div>
+                    </div>
+                    <div style="display: flex; margin-top: 1.5vw; margin-left: 1vw; margin-bottom: 0.5vw;">
+                        <app-card-reuniao style="width: 100%;"></app-card-reuniao>
+                    </div>
+                </div>
+                <div style=" margin-top: 1vw; display: flex; justify-content: end; margin-right: 1vw;">
+                    <button class="btn btn-outline-primary" style="margin-right: 1vw;" (click)="redefinir()">Redefinir
+                        configurações</button>
+                    <button class="btn btn-outline-primary" (click)="redefinir()">Salvar Alterações</button>
+                </div>
+            </div>
+            <div>
+                <p-confirmDialog icon="pi pi-exclamation-triangle" key="trocarExibicao" #bt [style]="{ width: '40vw' }">
+                    <ng-template pTemplate="footer">
+                        <button falarTexto type="button" class="btn btn-outline-primary" (click)="bt.reject()">
+                            <i class="pi pi-times me-2"></i>
+                            {{ "telas.tela-chat.modal-b-nao" | translate }}
+                        </button>
+                        <button falarTexto type="button" class="btn btn-outline-primary" (click)="bt.accept()">
+                            <i class="pi pi-check me-2"></i>
+                            {{ "telas.tela-chat.modal-b-sim" | translate }}
+                        </button>
+                    </ng-template></p-confirmDialog>
             </div>
         </div>
     </div>

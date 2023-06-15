@@ -107,20 +107,21 @@ export class TelaInicialComponent implements OnInit {
   }
   //Pesquisa demandas por status, pelo campo de pesquisa pequeno, ou por todos os campos, no caso do filtro especializado
   pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | string | undefined) {
-    this.demandasService
-      .getDemandasFiltradas(pesquisaEspecial)
-      .subscribe((listaDemandas: Demanda[]) => {
-        if (listaDemandas.length > 0) {
-          this.totalPagesPagination = this.demandasService.totalPages
-          this.listaDemandas = listaDemandas;
-          this.isFiltrado = true;
-          this.nenhumResultadoEncontrado = false;
-        } else {
-          this.isFiltrado = true;
-          this.listaDemandas = [];
-          this.nenhumResultadoEncontrado = true;
-        }
-      });
+    console.log(pesquisaEspecial)
+    // this.demandasService
+    //   .getDemandasFiltradas(pesquisaEspecial)
+    //   .subscribe((listaDemandas: Demanda[]) => {
+    //     if (listaDemandas.length > 0) {
+    //       this.totalPagesPagination = this.demandasService.totalPages
+    //       this.listaDemandas = listaDemandas;
+    //       this.isFiltrado = true;
+    //       this.nenhumResultadoEncontrado = false;
+    //     } else {
+    //       this.isFiltrado = true;
+    //       this.listaDemandas = [];
+    //       this.nenhumResultadoEncontrado = true;
+    //     }
+    //   });
 
   }
 

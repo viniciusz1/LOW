@@ -26,7 +26,8 @@
                 <div class="d-flex mt-3" style="margin-top: 2.5vh !important;">
                     <div class="">
                         <span class="p-float-label">
-                            <input inputEmFoco #status class="p-inputtext-sm" placeholder="Ex: Backlog" pInputText type="text">
+                          <p-dropdown [options]="statusReuniao"  inputEmFoco #status class="p-inputtext-sm" placeholder="Ex: Backlog" pInputText type="text"></p-dropdown>
+                            <!-- <input inputEmFoco #status class="p-inputtext-sm" placeholder="Ex: Backlog" pInputText type="text"> -->
                             <label for="float-input">{{ "componentes-reutilizaveis.filtro-reuniao.status-aprovacao" | translate }}</label>
                         </span>
                     </div>

@@ -21,20 +21,21 @@ export class FiltroReuniaoComponent implements OnInit {
     size: string
   }>();
 
-  teste(cal: Calendar){
+  statusReuniao: string[] = ['Aguardando', 'Proximo', 'Concluido', 'Cancelado', 'Pendente'];
+
+  teste(cal: Calendar) {
     console.log(cal)
   }
 
   constructor(private datePipe: DatePipe) { }
 
-  emitirFiltro(dados: {nomeComissao: string, dataReuniao: Date | string, statusReuniao: string, ppmProposta: string, analista: string, solicitante: string, ordenar: string, page: string, size: string }){
+  emitirFiltro(dados: { nomeComissao: string, dataReuniao: Date | string, statusReuniao: string, ppmProposta: string, analista: string, solicitante: string, ordenar: string, page: string, size: string }) {
     let data = this.datePipe.transform(dados.dataReuniao, 'yyyy-MM-dd');
     dados.dataReuniao = data as string
-    console.log(data)
-    if(typeof dados.dataReuniao == 'string'){
-      //@ts-ignore
-      this.filtroAcionado.emit(dados)
-    }
+    // console.log(data)
+    // console.log("Entrou no if - ok")
+    //@ts-ignore
+    this.filtroAcionado.emit(dados)
 
   }
 

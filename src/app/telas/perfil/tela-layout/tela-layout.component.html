@@ -139,7 +139,15 @@
                             <app-card-demanda [primaryColor]="primaryColorSelected" [secondaryColor]="secondaryColorSelected" *ngIf="tipoExibicaoDemanda" style="margin-right: 1vw;"></app-card-demanda>
                             <app-card-demanda [primaryColor]="primaryColorSelected" [secondaryColor]="secondaryColorSelected" *ngIf="tipoExibicaoDemanda" [mudarTamanho]="'47vw'"></app-card-demanda>
                         </div>
+                        <button class="btn btn-outline-primary" (click)="salvarAlteracoes()">Salvar Alterações</button>
+                        <button *ngIf="!novaPersoDemanda" class="btn btn-outline-primary" (click)="novaPersoDemanda = !novaPersoDemanda">Criar novo padrão</button>
+                        <div *ngIf="novaPersoDemanda">
+                            <input  type="text" pInputText>
+                            <button class="btn btn-primary" (click)="criarNovoPadrao()">Criar nova</button>
+                            <button class="btn btn-danger" (click)="novaPersoDemanda = !novaPersoDemanda">Cancelar</button>
+                        </div>
                     </div>
+
                 </div>
                 <!-- <div class="nome" style="border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px; margin: 10px;">
                     <div class="dadosPrincipais" style="display: flex; width: 100%; justify-content: space-between;">
@@ -184,7 +192,6 @@
                 <div style=" margin-top: 1vw; display: flex; justify-content: end; margin-right: 1vw;">
                     <button class="btn btn-outline-primary" style="margin-right: 1vw;" (click)="redefinir()">Redefinir
                         configurações</button>
-                    <button class="btn btn-outline-primary" (click)="salvarAlteracoes()">Salvar Alterações</button>
                 </div>
             </div>
             <div>

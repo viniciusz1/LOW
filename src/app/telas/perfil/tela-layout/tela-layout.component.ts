@@ -26,7 +26,7 @@ export class TelaLayoutComponent implements OnInit {
     this.demanda = { statusDemanda: StatusDemanda.ASSESSMENT };
     this.personalizacaoService.getPersonalizacoes().subscribe({
       next: (e) => {
-        console.log(e)
+        console.log(e);
         this.opcoesPersonalizacao = e;
       },
       error: (err) => {
@@ -34,16 +34,32 @@ export class TelaLayoutComponent implements OnInit {
       },
     });
   }
+  novaPersoDemanda: boolean = false;
 
-  trocarPersonalizacao(personalizacao: any){
-    let personalizacaoEscolhida = this.opcoesPersonalizacao[personalizacao.value]
+  criarNovoPadrao() {
+    this.personalizacaoService.postPersonalizacao(this.personalizacaoEscolhida as Personalizacao)
+    .subscribe({next: e => {
+
+    }, error: err => {
+      console.log(err)
+    }});
+  }
+
+  trocarPersonalizacao(personalizacao: any) {
+    this.personalizacaoEscolhida =
+      this.opcoesPersonalizacao[personalizacao.value];
     // console.log(personalizacao)
     // console.log(this.listOfColorsStatusDemand)
-    let count= 0
-    for(let i of this.listOfColorsStatusDemand){
-      if(personalizacaoEscolhida.coresPrimariasPersonalizacao && personalizacaoEscolhida.coresSecundariasPersonalizacao){
-        i['corPrimaria'] = personalizacaoEscolhida.coresPrimariasPersonalizacao[count]
-        i['corSecundaria'] = personalizacaoEscolhida.coresSecundariasPersonalizacao[count]
+    let count = 0;
+    for (let i of this.listOfColorsStatusDemand) {
+      if (
+        this.personalizacaoEscolhida.coresPrimariasPersonalizacao &&
+        this.personalizacaoEscolhida.coresSecundariasPersonalizacao
+      ) {
+        i['corPrimaria'] =
+          this.personalizacaoEscolhida.coresPrimariasPersonalizacao[count];
+        i['corSecundaria'] =
+          this.personalizacaoEscolhida.coresSecundariasPersonalizacao[count];
       }
       // console.log(i)
       count++;
@@ -59,6 +75,7 @@ export class TelaLayoutComponent implements OnInit {
   changeToCard() {
     this.tipoExibicaoDemanda = true;
   }
+  personalizacaoEscolhida: Personalizacao | undefined;
   opcoesPersonalizacao: Personalizacao[] = [];
   confirmacaoTrocaLayout: boolean = false;
 
@@ -163,6 +180,9 @@ export class TelaLayoutComponent implements OnInit {
     this.primaryColorSelected = event;
     this.secondaryColorSelected =
       this.listOfColorsStatusDemand[index].corSecundaria;
+    if (this.personalizacaoEscolhida?.coresPrimariasPersonalizacao) {
+      this.personalizacaoEscolhida.coresPrimariasPersonalizacao[index] = event;
+    }
   }
 
   changeSecondaryColor(event: any, index: number) {
@@ -172,6 +192,10 @@ export class TelaLayoutComponent implements OnInit {
     this.primaryColorSelected =
       this.listOfColorsStatusDemand[index].corPrimaria;
     this.secondaryColorSelected = event;
+    if (this.personalizacaoEscolhida?.coresSecundariasPersonalizacao) {
+      this.personalizacaoEscolhida.coresSecundariasPersonalizacao[index] =
+        event;
+    }
   }
 
   setFontTheme(opc: string) {

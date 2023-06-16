@@ -1,3 +1,4 @@
+import { InputTextModule } from 'primeng/inputtext';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
@@ -24,7 +25,8 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
     RouterModule,
     SharedModule,
     ColorPickerModule,
-    ComponentesReutilizaveisModule
+    ComponentesReutilizaveisModule,
+    InputTextModule
   ]
 })
 export class PerfilModule { }

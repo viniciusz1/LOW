@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
+import { TableModule } from 'primeng/table';
+
 
 
 
@@ -24,7 +26,8 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
     RouterModule,
     SharedModule,
     ColorPickerModule,
-    ComponentesReutilizaveisModule
+    ComponentesReutilizaveisModule,
+    TableModule
   ]
 })
 export class PerfilModule { }

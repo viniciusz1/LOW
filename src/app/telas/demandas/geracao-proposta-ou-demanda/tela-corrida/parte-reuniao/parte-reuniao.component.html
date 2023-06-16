@@ -69,6 +69,7 @@
           </div>
           <!-- Ta aparecendo o 0 por causa do formControlName -->
           <p-inputNumber 
+            [maxlength]="15"
             inputEmFoco 
             [min]="0"
             mode="decimal" 
@@ -98,6 +99,7 @@
         </div>
         <input
           inputEmFoco
+          maxlength="500"
           (input)="onInputChange()"
           placeholder="Ex: https://jiraprojetoweg.atlassian.net/jira/software/projects/LOW/boards/3"
           type="text"
@@ -174,6 +176,7 @@
         >
         <input
           inputEmFoco
+          maxlength="70"
           (input)="onInputChange()"
           placeholder="Ex: Programador Back-end"
           type="text"
@@ -188,18 +191,18 @@
         <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.perfil-despesa" | translate }}:</label
         >
-        <p-dropdown
+        <input
+          inputEmFoco
+          maxlength="70"
           (onChange)="onInputChange()"
-          styleClass="dropDespesa"
           placeholder="Ex: Interna"
           type="text"
           [required]="true"por
-          [options]="perfilDaDespesa"
-          optionValue="value"
-          optionLabel="tipo"
+          pInputText
+          class="input" 
+          style="width: 90% !important;"
           formControlName="perfilDespesaRecurso"
-        >
-        </p-dropdown>
+        />
       </div>
 
       <div class="col-3" style="padding-left: 0px !important">
@@ -301,7 +304,6 @@
                   inputEmFoco
                   (input)="onInputChange()"
                   [id]="'porcentagemListaReuniao' + i"
-                  
                   [required]="true"
                   formControlName="porcentagemCentroCusto"
                   placeholder="Porcentagem"

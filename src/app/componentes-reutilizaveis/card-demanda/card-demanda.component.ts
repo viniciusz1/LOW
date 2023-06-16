@@ -47,8 +47,8 @@ export class CardDemandaComponent implements OnInit {
     | undefined = undefined;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
-  primaryColor?: string = '';
-  secondaryColor: string = '';
+  @Input() primaryColor?: string = '';
+  @Input() secondaryColor: string = '';
   analistaAssociado: boolean = false;
 
 

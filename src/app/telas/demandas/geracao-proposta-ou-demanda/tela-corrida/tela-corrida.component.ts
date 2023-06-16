@@ -164,10 +164,11 @@ export class TelaCorridaComponent implements OnInit {
   }
 
 
+  //Workflow só funciona corretamente quando o Zoom da tela esta em 100%
   onScroll() {
 
     const sections = document.querySelectorAll('section');
-    const scrollPosition = window.pageYOffset;
+    const scrollPosition = window.scrollY;
 
     if (!this.aparecerProposta) {
       sections.forEach((section) => {
@@ -180,7 +181,7 @@ export class TelaCorridaComponent implements OnInit {
         ) {
           this.activeSection = section.id;
         }
-        if (scrollPosition >= 1270) {
+        if (scrollPosition >= 1200) {
           this.activeSection = 'section3';
         }
       });
@@ -188,7 +189,7 @@ export class TelaCorridaComponent implements OnInit {
       sections.forEach((section) => {
         const sectionTop = section.offsetTop - 50;
         const sectionBottom = sectionTop + section.offsetHeight;
-
+        
         if (
           scrollPosition >= sectionTop - 200 &&
           scrollPosition < sectionBottom
@@ -198,10 +199,10 @@ export class TelaCorridaComponent implements OnInit {
         if (scrollPosition >= 500) {
           this.activeSection = 'section2';
         }
-        if (scrollPosition >= 900) {
+        if (scrollPosition >= 800) {
           this.activeSection = 'section3';
         }
-        if (scrollPosition >= 1000) {
+        if (scrollPosition >= 920) {
           this.activeSection = 'section4';
         }
       });
@@ -227,9 +228,9 @@ export class TelaCorridaComponent implements OnInit {
     if (element?.id == 'section1') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (element?.id == 'section2') {
-      window.scrollTo({ top: 550, behavior: 'smooth' });
+      window.scrollTo({ top: 500, behavior: 'smooth' });
     } else if (element?.id == 'section3') {
-      window.scrollTo({ top: 950, behavior: 'smooth' });
+      window.scrollTo({ top: 850, behavior: 'smooth' });
     } else {
       window.scrollTo({ top: scrollHeight, behavior: 'smooth' });
     }

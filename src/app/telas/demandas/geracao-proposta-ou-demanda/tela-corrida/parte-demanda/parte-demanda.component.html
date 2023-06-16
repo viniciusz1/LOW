@@ -24,13 +24,14 @@
         ></i>
       </div>
       <input
+        inputEmFoco
         (input)="onInputChange()"
         placeholder="Ex: Melhoria em Sistemas de Informação"
         type="text"
         pInputText
         formControlName="tituloDemanda"
-        class="input w-100"
-        maxlength="100"
+        class="input"
+        maxlength="200"
         [ngClass]="{
           'ng-dirty ng-invalid':
             demandaForm.controls.tituloDemanda.errors &&
@@ -70,8 +71,7 @@
                 demandaForm.controls.objetivoDemanda.touched
             }"
           >
-            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-            </ngx-editor-menu>
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
             <ngx-editor #editor1 (focusOut)="onFocoOut()" (focusIn)="onFocoIn('situacao')" (input)="onInputChange()" [ngModel]="htmlSituacaoAtual"
               [editor]="editor" formControlName="situacaoAtualDemanda">
             </ngx-editor>
@@ -153,7 +153,11 @@
             <div [formGroupName]="i" class="d-flex">
               <div class="p-inputgroup" style="margin-right: 0.5vw">
                 <p-inputNumber
+                  mode="decimal" 
+                  inputId="withoutgrouping" 
+                  [useGrouping]="false"
                   [min]="0"
+                  [maxlength]="3"
                   inputEmFoco
                   (input)="onInputChange()"
                   [id]="'porcentagemListaReuniao' + i"
@@ -277,6 +281,7 @@
                 placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
                 style="width: 100%"
                 [rows]="5"
+                maxlength="5000"
                 [cols]="30"
                 [autoResize]="true"
                 pInputTextarea
@@ -344,6 +349,7 @@
               </div>
               <div style="display: flex">
                 <textarea
+                  maxlength="5000"
                   (input)="onInputChange()"
                   placeholder="Ex: Para contratar um desenvolvedor ou uma empresa custa em torno..."
                   style="width: 100%"
@@ -378,6 +384,7 @@
             </div>
             <div style="display: grid">
               <textarea
+                maxlength="5000"
                 (input)="onInputChange()"
                 placeholder="Ex: O benefício se torna qualitativo porque seu retorno..."
                 style="width: 100%"

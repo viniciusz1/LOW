@@ -1,9 +1,8 @@
 import { Personalizacao } from './../../../models/personalizacao.model';
 import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
 import { ConfiguracoesIniciaisService } from './../../../services/configuracoes-iniciais.service';
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Demanda } from 'src/app/models/demanda.model';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 
@@ -21,13 +20,31 @@ export class TelaLayoutComponent implements OnInit {
   constructor(
     public configIniciaisService: ConfiguracoesIniciaisService,
     private confirmationService: ConfirmationService,
-    private personalizacaoService: PersonalizacaoService
+    private personalizacaoService: PersonalizacaoService,
+    private messageService: MessageService
   ) {
     this.demanda = { statusDemanda: StatusDemanda.ASSESSMENT };
     this.personalizacaoService.getPersonalizacoes().subscribe({
       next: (e) => {
         console.log(e);
         this.opcoesPersonalizacao = e;
+        this.personalizacaoEscolhida = this.opcoesPersonalizacao.find(
+          (e) => (e.ativaPersonalizacao = true)
+        );
+        let count = 0;
+        if (this.personalizacaoEscolhida) {
+          for (let i of this.listOfColorsStatusDemand) {
+            if (
+              this.personalizacaoEscolhida.coresPrimariasPersonalizacao &&
+              this.personalizacaoEscolhida.coresSecundariasPersonalizacao
+            ) {
+              i['corPrimaria'] =this.personalizacaoEscolhida.coresPrimariasPersonalizacao[count];
+              i['corSecundaria'] =this.personalizacaoEscolhida.coresSecundariasPersonalizacao[count];
+            }
+            count++;
+            console.log(i)
+          }
+        }
       },
       error: (err) => {
         console.log(err);
@@ -35,14 +52,24 @@ export class TelaLayoutComponent implements OnInit {
     });
   }
   novaPersoDemanda: boolean = false;
-
-  criarNovoPadrao() {
-    this.personalizacaoService.postPersonalizacao(this.personalizacaoEscolhida as Personalizacao)
-    .subscribe({next: e => {
-
-    }, error: err => {
-      console.log(err)
-    }});
+  definirAtivo() {
+    console.log('antes');
+    if (this.personalizacaoEscolhida?.codigoPersonalizacao) {
+      console.log('depoist');
+      this.personalizacaoService
+        .mudarPersonalizacaoAtiva(
+          this.personalizacaoEscolhida.codigoPersonalizacao
+        )
+        .subscribe({
+          next: (e) => {
+            console.log(e);
+            this.opcoesPersonalizacao = e;
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+    }
   }
 
   trocarPersonalizacao(personalizacao: any) {
@@ -144,11 +171,31 @@ export class TelaLayoutComponent implements OnInit {
     { status: 'Concluído', corPrimaria: '#00612E', corSecundaria: '#529572' },
   ];
 
-  salvarAlteracoes() {
+  showSuccess(message: string) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: message,
+    });
+  }
+
+  showError(message: string) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: message,
+    });
+  }
+
+  salvarAlteracoes(value: string) {
+    if (value == '') {
+    }
+
     let personalizacao: Personalizacao = {
       coresPrimariasPersonalizacao: [],
       coresSecundariasPersonalizacao: [],
       ativaPersonalizacao: true,
+      nomePersonalizacao: value,
     };
 
     for (let cores of this.listOfColorsStatusDemand) {
@@ -210,5 +257,5 @@ export class TelaLayoutComponent implements OnInit {
     this.configIniciaisService.setFontSize(opc);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

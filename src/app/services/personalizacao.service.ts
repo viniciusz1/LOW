@@ -42,7 +42,7 @@ export class PersonalizacaoService {
   }
 
   mudarPersonalizacaoAtiva(codigoPersonalizacao: number){
-    return this.http.put<Personalizacao[]>(path + 'personalizacao/' + codigoPersonalizacao, null);
+    return this.http.put<Personalizacao[]>(path + 'personalizacao/ativa/' + codigoPersonalizacao, null);
   }
 
   constructor(private http: HttpClient) { }

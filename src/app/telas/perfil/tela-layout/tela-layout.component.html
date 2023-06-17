@@ -103,7 +103,7 @@
                                     <!-- <option selected>Selecione a opção:</option> -->
                                     <option falarTexto *ngFor="let option of opcoesPersonalizacao; let i = index"
                            
-                                        [selected]="configIniciaisService.fontAtual == 'Roboto, Helvetica Neue, sans-serif'"
+                                        [selected]="option.ativaPersonalizacao"
                                         [value]="i" selected>{{option.nomePersonalizacao}}</option>
                                 </select>
                             </div>
@@ -139,11 +139,11 @@
                             <app-card-demanda [primaryColor]="primaryColorSelected" [secondaryColor]="secondaryColorSelected" *ngIf="tipoExibicaoDemanda" style="margin-right: 1vw;"></app-card-demanda>
                             <app-card-demanda [primaryColor]="primaryColorSelected" [secondaryColor]="secondaryColorSelected" *ngIf="tipoExibicaoDemanda" [mudarTamanho]="'47vw'"></app-card-demanda>
                         </div>
-                        <button class="btn btn-outline-primary" (click)="salvarAlteracoes()">Salvar Alterações</button>
+                        <button class="btn btn-outline-primary" (click)="definirAtivo()">Definir Como Ativo</button>
                         <button *ngIf="!novaPersoDemanda" class="btn btn-outline-primary" (click)="novaPersoDemanda = !novaPersoDemanda">Criar novo padrão</button>
                         <div *ngIf="novaPersoDemanda">
-                            <input  type="text" pInputText>
-                            <button class="btn btn-primary" (click)="criarNovoPadrao()">Criar nova</button>
+                            <input  type="text" pInputText #input>
+                            <button class="btn btn-primary" (click)="salvarAlteracoes(input.value)">Criar nova</button>
                             <button class="btn btn-danger" (click)="novaPersoDemanda = !novaPersoDemanda">Cancelar</button>
                         </div>
                     </div>

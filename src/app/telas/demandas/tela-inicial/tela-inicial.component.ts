@@ -84,7 +84,7 @@ export class TelaInicialComponent implements OnInit {
   totalPagesPagination = 0
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
-  positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0];
   //true = card
   tipoExibicaoDemanda = true;
   cabecalhoMensagemDeConfirmacao = 'Avançar status';

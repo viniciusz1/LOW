@@ -36,7 +36,7 @@ export class TelaLayoutComponent implements OnInit {
   setarPersonalizacoes(){
     this.personalizacaoService.getPersonalizacoes().subscribe({
       next: (e) => {
-        
+
         this.opcoesPersonalizacao = e;
         let index = this.opcoesPersonalizacao.findIndex(
           (e) => (e.ativaPersonalizacao == true)
@@ -186,8 +186,9 @@ export class TelaLayoutComponent implements OnInit {
     });
   }
 
-  salvarAlteracoes(value: string) {
+  criarNovaPersonalizacao(value: string) {
     if (value == '') {
+      return;
     }
 
     let personalizacao: Personalizacao = {
@@ -206,13 +207,28 @@ export class TelaLayoutComponent implements OnInit {
         personalizacao.coresSecundariasPersonalizacao.push(cores.corSecundaria);
       }
     }
-    console.log(personalizacao)
 
     this.personalizacaoService.postPersonalizacao(personalizacao).subscribe({
       next: (res) => {
         this.setarPersonalizacoes();
         this.showSuccess("Nova Personalização Criada!\n Defina ela como ativa!")
         this.novaPersoDemanda = !this.novaPersoDemanda
+        localStorage.setItem('personalizacao', JSON.stringify(res))
+        this.personalizacaoService.personalizacaoAtiva = res
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  editarPersonalizacao() {
+    let personalizacao = this.personalizacaoEscolhida as Personalizacao;
+    this.personalizacaoService.putPersonalizacao(personalizacao).subscribe({
+      next: (res) => {
+        localStorage.setItem('personalizacao', JSON.stringify(res))
+        this.personalizacaoService.personalizacaoAtiva = res
+        this.showSuccess("Personalização Editada com sucesso!")
       },
       error: (err) => {
         console.log(err);

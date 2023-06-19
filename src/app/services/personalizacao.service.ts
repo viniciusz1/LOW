@@ -37,6 +37,11 @@ export class PersonalizacaoService {
     return this.http.post<Personalizacao>(path + 'personalizacao', personalizacao);
   }
 
+  putPersonalizacao(personalizacao: Personalizacao){
+    return this.http.put<Personalizacao>(path + 'personalizacao/' + personalizacao.codigoPersonalizacao, personalizacao);
+  }
+
+
   deletePersonalizacao(codigoPersonalizacao: number){
       return this.http.delete(path + 'personalizacao/' + codigoPersonalizacao);
   }

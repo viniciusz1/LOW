@@ -46,14 +46,17 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
             path: 'rascunho/:indiceRascunho',
             component: TelaCorridaComponent
           },
-          {
-            path: 'chat/:codigoDemanda',
-            component: TelaChatComponent
-          },
-          {
-            path: 'chat',
-            component: TelaChatComponent
-          },
+            {
+              path: 'chat',
+              component: TelaChatComponent,
+              children: [
+                {
+                  path: ':codigoDemanda',
+                  component: TelaChatComponent
+                },
+              ]
+            },
+
           {
             path: 'demanda',
             component: TelaCorridaComponent

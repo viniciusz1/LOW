@@ -8,6 +8,7 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { Route, Router } from '@angular/router';
 import { RascunhoService } from 'src/app/services/rascunho.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
 
 @Component({
   selector: 'app-card-demanda',
@@ -46,6 +47,8 @@ export class CardDemandaComponent implements OnInit {
     | undefined = undefined;
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
+  @Input() primaryColor?: string = '';
+  @Input() secondaryColor: string = '';
   analistaAssociado: boolean = false;
 
   constructor(
@@ -53,8 +56,16 @@ export class CardDemandaComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
-    private messageService: MessageService
-  ) {}
+    private messageService: MessageService,
+    private personalizacaoService: PersonalizacaoService) {
+
+  }
+
+  getOrdinalValueStatusDemanda(value: StatusDemanda | undefined): number | undefined {
+    const enumValues = Object.values(StatusDemanda);
+    const index = enumValues.indexOf(value as StatusDemanda);
+    return index !== -1 ? index : undefined;
+  }
 
   statusPermitido() {
     if (
@@ -136,28 +147,18 @@ export class CardDemandaComponent implements OnInit {
 
   porcentagemBarraProgressao() {
     switch (this.dadosDemanda.statusDemanda) {
-      case StatusDemanda.BACKLOG_CLASSIFICACAO:
-        return 10;
-      case StatusDemanda.BACKLOG_APROVACAO:
-        return 20;
-      case StatusDemanda.BACKLOG_PROPOSTA:
-        return 30;
-      case StatusDemanda.ASSESSMENT:
-        return 40;
-      case StatusDemanda.BUSINESS_CASE:
-        return 40;
-      case StatusDemanda.DISCUSSION:
-        return 50;
-      case StatusDemanda.TO_DO:
-        return 60;
-      case StatusDemanda.DESIGN_AND_BUILD:
-        return 70;
-      case StatusDemanda.SUPPORT:
-        return 80;
-      case StatusDemanda.DONE:
-        return 100;
-      default:
-        return 0;
+      case StatusDemanda.DRAFT: return 0
+      case StatusDemanda.BACKLOG_CLASSIFICACAO: return 10
+      case StatusDemanda.BACKLOG_APROVACAO: return 20
+      case StatusDemanda.BACKLOG_PROPOSTA: return 30
+      case StatusDemanda.ASSESSMENT: return 40
+      case StatusDemanda.BUSINESS_CASE: return 40
+      case StatusDemanda.DISCUSSION: return 50
+      case StatusDemanda.TO_DO: return 60
+      case StatusDemanda.DESIGN_AND_BUILD: return 70
+      case StatusDemanda.SUPPORT: return 80
+      case StatusDemanda.DONE: return 100
+      default: return 0
     }
   }
 
@@ -407,6 +408,16 @@ export class CardDemandaComponent implements OnInit {
 
   ngOnInit(): void {
     //Adicionando classes para estilização do card
+
+    if(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao){
+
+      let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
+      console.log(ordinal)
+      console.log(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal])
+      this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]
+      this.secondaryColor = this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao[ordinal]
+    }
+
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + '-sec';
     //Verificando demandas que ja existem analistas associados

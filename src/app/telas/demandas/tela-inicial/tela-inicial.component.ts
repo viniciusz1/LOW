@@ -107,26 +107,25 @@ export class TelaInicialComponent implements OnInit {
   }
   //Pesquisa demandas por status, pelo campo de pesquisa pequeno, ou por todos os campos, no caso do filtro especializado
   pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | string | undefined) {
-    this.demandasService
-      .getDemandasFiltradas(pesquisaEspecial)
-      .subscribe((listaDemandas: Demanda[]) => {
-        console.log(listaDemandas)
-        if (listaDemandas.length > 0) {
-          this.totalPagesPagination = this.demandasService.totalPages
-          this.listaDemandas = listaDemandas;
-          this.isFiltrado = true;
-          this.nenhumResultadoEncontrado = false;
-        } else {
-          this.isFiltrado = true;
-          this.listaDemandas = [];
-          this.nenhumResultadoEncontrado = true;
-        }
-      });
+    console.log(pesquisaEspecial)
+    // this.demandasService
+    //   .getDemandasFiltradas(pesquisaEspecial)
+    //   .subscribe((listaDemandas: Demanda[]) => {
+    //     if (listaDemandas.length > 0) {
+    //       this.totalPagesPagination = this.demandasService.totalPages
+    //       this.listaDemandas = listaDemandas;
+    //       this.isFiltrado = true;
+    //       this.nenhumResultadoEncontrado = false;
+    //     } else {
+    //       this.isFiltrado = true;
+    //       this.listaDemandas = [];
+    //       this.nenhumResultadoEncontrado = true;
+    //     }
+    //   });
 
   }
 
   ordenar(sort: { name: string, value: number }) {
-    console.log(this.demandasService.getFiltroData)
     let filtro: Filtro;
     if (this.demandasService.getFiltroData) {
       filtro = this.demandasService.getFiltroData;
@@ -148,7 +147,7 @@ export class TelaInicialComponent implements OnInit {
     this.pesquisarDemandas(undefined);
   }
 
-  
+
 
   paginate(event: { page: number }) {
     this.demandasService.avancarPage(event.page)
@@ -291,7 +290,7 @@ export class TelaInicialComponent implements OnInit {
       .afterClosed().subscribe({
         next: e => {
           if(e != undefined){
-              this.carregarDemandasIniciais();          
+              this.carregarDemandasIniciais();
           }
         }
       })
@@ -408,7 +407,6 @@ export class TelaInicialComponent implements OnInit {
               this.qtdDemandasStatus.push(qtd)
             }
           })
-          console.log(this.qtdDemandasStatus)
 
           this.exibirFilasDeStatus();
         },
@@ -420,7 +418,6 @@ export class TelaInicialComponent implements OnInit {
       this.demandasService.getDemandasTelaInicialByDepartamento().subscribe({
         next: (demandas) => {
           if (demandas.length > 0) {
-            console.log("divscroll 1 ", this.divScrollCircle)
             this.listaDemandas.push(...demandas);
             this.isFiltrado = false;
             this.isFirstIfExecuted = true;
@@ -429,7 +426,6 @@ export class TelaInicialComponent implements OnInit {
           }
 
           if (!this.isFirstIfExecuted && demandas.length == 0) {
-            console.log("divscroll 2 ", this.divScrollCircle)
             this.divScrollCircle = true;
             setTimeout(() => {
               this.demandasVazias = true;
@@ -461,7 +457,7 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  openModalTrocarModoExibicao() {
+  openModalTrocarModoExibicao(number: number) {
     this.confirmacaoReprovacao = false;
     this.confirmationService.confirm({
       key: 'motivoReprovacao',
@@ -470,7 +466,11 @@ export class TelaInicialComponent implements OnInit {
       blockScroll: false,
       header: 'Alterar modo de exibição',
       accept: () => {
-        this.tipoExibicaoDemanda = !this.tipoExibicaoDemanda
+        if(number == 1){
+          this.changeToCard();
+        } else {
+          this.changeToList();
+        }
         localStorage.setItem("exibicao", JSON.stringify(this.tipoExibicaoDemanda))
       },
     });
@@ -487,7 +487,6 @@ export class TelaInicialComponent implements OnInit {
   //Lógica para a criação de uma nova demanda
   criarUmaNovaDemanda() {
     this.rascunhoService.postRascunhoDemanda().subscribe((rascunho) => {
-      console.log("entrou")
       this.router.navigate(['tela-inicial/rascunho/' + rascunho.codigoDemanda])
     })
   }
@@ -511,7 +510,7 @@ export class TelaInicialComponent implements OnInit {
         status: 'SUAS_DEMANDAS',
         titulo: 'Suas Demandas',
       });
-    } 
+    }
     if (this.nivelAcessoUsuario == 'Solicitante') {
       this.listaTituloNaoFiltrado.push({
         status: 'DEMANDAS_DEPARTAMENTO',
@@ -640,7 +639,7 @@ export class TelaInicialComponent implements OnInit {
   }
 
   deletarDemanda(demanda: Demanda) {
-    
+
     this.confirmationService.confirm({
       key: "motivoReprovacao",
       header: 'Deletar Rascunho',
@@ -655,7 +654,6 @@ export class TelaInicialComponent implements OnInit {
           this.carregarDemandasIniciais()
         },
         error: err => {
-          console.log(err.error.text)
           if(err.error.text == "Rascunho Deletado com Sucesso!"){
             this.showSuccess("Rascunho deletado!")
             this.carregarDemandasIniciais()
@@ -667,7 +665,7 @@ export class TelaInicialComponent implements OnInit {
   )
       },
       reject: () => {
-        
+
       }
   });
     }

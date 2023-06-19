@@ -31,10 +31,13 @@ export class HeaderComponent implements OnInit {
     private usuarioService: UsuarioService,
     private notificacoesService: NotificacoesService,
     private messagesService: MessagesService) {
+    this.messagesService.$qtdMensagensNaoLida.subscribe((codigoConversa: number) => {
+      //Se não estiver na tela de chat, ele mostra a notificação
+      if(this.router.url.includes("chat") == false){
+        this.mensagemNova = true;
 
-    this.messagesService.$qtdMensagensNaoLida.subscribe((qtdMensagensNaoLida: number) => {
-      console.log(qtdMensagensNaoLida)
-      this.mensagemNova = true;
+      }
+
     })
 
     //Tem o objetivo de setar as rotas em que o sistema se encontra, no caso os chamados breadcrummbs
@@ -86,7 +89,8 @@ export class HeaderComponent implements OnInit {
     }
   }
   irParaMensagens(){
-    this.mostrarModal = false
+    this.mostrarModal = false;
+    this.mensagemNova = false
     this.router.navigate(["/tela-inicial/chat"])
   }
 
@@ -123,6 +127,10 @@ export class HeaderComponent implements OnInit {
     this.usuario = this.usuarioService.getUser('user')
     this.activeItem = this.items[0];
     document.addEventListener('click', this.fecharModalAoClicarFora);
+
+    this.messagesService.verificaSeTemNotificacoes().subscribe((temNotificacoes) => {
+      this.mensagemNova = temNotificacoes;
+    })
     // this.iniciarWebSocketNotificationCount();
   }
 

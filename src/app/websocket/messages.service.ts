@@ -34,6 +34,9 @@ export class MessagesService {
     this._client = new Client({
       webSocketFactory: () => ws,
       debug: (msg: string) => console.log(msg),
+      onWebSocketClose: (e: CloseEvent) => this.initializeWebSocketConnection(),
+      onStompError: (frame: any) => this.initializeWebSocketConnection(),
+      onWebSocketError: (e: Event) => this.initializeWebSocketConnection(),
     });
 
     this._client.onStompError = (frame: any) => {
@@ -70,6 +73,10 @@ export class MessagesService {
     }
   }
 
+  verificaSeTemNotificacoes(){
+    return this.http.get<boolean>('http://localhost:8085/low/mensagens/verificanotificacoes/')
+  }
+
   subscribeToNotificationsMensagens() {
     let codigoUser = this.usuarioService.getCodigoUser();
 
@@ -79,8 +86,7 @@ export class MessagesService {
           this.subscriptionNotificacaoMensagem = this._client.subscribe(
           '/notifica/' + codigoUser,
           (message: any) => {
-            console.log("Recived")
-            // this.updateQuantidadeMensagensNotificacoes();
+            this.$qtdMensagensNaoLida.emit(JSON.parse(message.body));
           }
         );
       }
@@ -147,19 +153,6 @@ export class MessagesService {
     }
   }
 
-  updateQuantidadeMensagensNotificacoes() {
-    return this.http
-      .get<any>(
-        'http://localhost:8085/low/mensagens/qtd-total-n-lidas/' +
-        this.usuarioService.getCodigoUser()
-      )
-      .subscribe({
-        next: (e) => {
-          console.log('QTD mensagens não lidas: ' + e);
-          this.$qtdMensagensNaoLida.next(e);
-        },
-      });
-  }
 
   getDemandasRelacionadas() {
     return this.http

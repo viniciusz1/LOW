@@ -1,3 +1,4 @@
+import { InputTextModule } from 'primeng/inputtext';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
@@ -6,6 +7,8 @@ import { TelaSugestoesComponent } from './tela-sugestoes/tela-sugestoes.componen
 import { TelaAjudaComponent } from './tela-ajuda/tela-ajuda.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 
 
 
@@ -20,7 +23,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ColorPickerModule,
+    ComponentesReutilizaveisModule,
+    InputTextModule
   ]
 })
 export class PerfilModule { }

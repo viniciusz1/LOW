@@ -33,7 +33,7 @@ export class MessagesService {
     const ws = new SockJS(serverUrl);
     this._client = new Client({
       webSocketFactory: () => ws,
-      debug: (msg: string) => console.log(msg),
+      // debug: (msg: string) => console.log(msg),
       onWebSocketClose: (e: CloseEvent) => this.initializeWebSocketConnection(),
       onStompError: (frame: any) => this.initializeWebSocketConnection(),
       onWebSocketError: (e: Event) => this.initializeWebSocketConnection(),
@@ -82,7 +82,6 @@ export class MessagesService {
 
     try {
       if (this._client) {
-        console.log(codigoUser)
           this.subscriptionNotificacaoMensagem = this._client.subscribe(
           '/notifica/' + codigoUser,
           (message: any) => {

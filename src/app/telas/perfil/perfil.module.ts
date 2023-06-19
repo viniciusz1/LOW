@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
+import { MessagesModule } from 'primeng/messages';
 
 
 
@@ -26,7 +27,8 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
     SharedModule,
     ColorPickerModule,
     ComponentesReutilizaveisModule,
-    InputTextModule
-  ]
+    InputTextModule,
+    MessagesModule
+  ],
 })
 export class PerfilModule { }

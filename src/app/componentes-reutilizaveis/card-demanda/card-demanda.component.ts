@@ -412,8 +412,6 @@ export class CardDemandaComponent implements OnInit {
     if(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao){
 
       let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
-      console.log(ordinal)
-      console.log(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal])
       this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]
       this.secondaryColor = this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao[ordinal]
     }

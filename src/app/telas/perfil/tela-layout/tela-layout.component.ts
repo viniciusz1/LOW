@@ -10,6 +10,7 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
   selector: 'app-tela-layout',
   templateUrl: './tela-layout.component.html',
   styleUrls: ['./tela-layout.component.scss'],
+  providers: [ MessageService]
 })
 export class TelaLayoutComponent implements OnInit {
   themeSelection: boolean = false;
@@ -24,46 +25,46 @@ export class TelaLayoutComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.demanda = { statusDemanda: StatusDemanda.ASSESSMENT };
+    this.setarPersonalizacoes()
+  }
+
+  teste(){
+    console.log("ok")
+    this.showSuccess("foiasjdpofajspodfja")
+  }
+
+  setarPersonalizacoes(){
     this.personalizacaoService.getPersonalizacoes().subscribe({
       next: (e) => {
-        console.log(e);
+        
         this.opcoesPersonalizacao = e;
-        this.personalizacaoEscolhida = this.opcoesPersonalizacao.find(
-          (e) => (e.ativaPersonalizacao = true)
+        let index = this.opcoesPersonalizacao.findIndex(
+          (e) => (e.ativaPersonalizacao == true)
         );
-        let count = 0;
-        if (this.personalizacaoEscolhida) {
-          for (let i of this.listOfColorsStatusDemand) {
-            if (
-              this.personalizacaoEscolhida.coresPrimariasPersonalizacao &&
-              this.personalizacaoEscolhida.coresSecundariasPersonalizacao
-            ) {
-              i['corPrimaria'] =this.personalizacaoEscolhida.coresPrimariasPersonalizacao[count];
-              i['corSecundaria'] =this.personalizacaoEscolhida.coresSecundariasPersonalizacao[count];
-            }
-            count++;
-            console.log(i)
-          }
-        }
+        this.trocarPersonalizacao({value: index})
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
+
   novaPersoDemanda: boolean = false;
   definirAtivo() {
-    console.log('antes');
     if (this.personalizacaoEscolhida?.codigoPersonalizacao) {
-      console.log('depoist');
       this.personalizacaoService
         .mudarPersonalizacaoAtiva(
           this.personalizacaoEscolhida.codigoPersonalizacao
         )
         .subscribe({
           next: (e) => {
-            console.log(e);
             this.opcoesPersonalizacao = e;
+            let ativa = e.find(e => e.ativaPersonalizacao == true);
+            if(ativa){
+              localStorage.setItem('personalizacao', JSON.stringify(ativa))
+              this.personalizacaoService.personalizacaoAtiva = ativa
+            }
+            this.showSuccess("Estilo de Cores das Demandas Alterado com sucesso!")
           },
           error: (err) => {
             console.log(err);
@@ -72,11 +73,10 @@ export class TelaLayoutComponent implements OnInit {
     }
   }
 
+  //personalização.value é o índice
   trocarPersonalizacao(personalizacao: any) {
     this.personalizacaoEscolhida =
       this.opcoesPersonalizacao[personalizacao.value];
-    // console.log(personalizacao)
-    // console.log(this.listOfColorsStatusDemand)
     let count = 0;
     for (let i of this.listOfColorsStatusDemand) {
       if (
@@ -88,7 +88,6 @@ export class TelaLayoutComponent implements OnInit {
         i['corSecundaria'] =
           this.personalizacaoEscolhida.coresSecundariasPersonalizacao[count];
       }
-      // console.log(i)
       count++;
     }
   }
@@ -128,7 +127,7 @@ export class TelaLayoutComponent implements OnInit {
     });
   }
 
-  listOfColorsStatusDemand = [
+  listOfColorsStatusDemand: { status: string, corPrimaria:  string, corSecundaria:  string}[] = [
     { status: 'Draft', corPrimaria: '#72BBF7', corSecundaria: '#A7D5FB' },
     {
       status: 'Backlog - Classificação',
@@ -207,10 +206,13 @@ export class TelaLayoutComponent implements OnInit {
         personalizacao.coresSecundariasPersonalizacao.push(cores.corSecundaria);
       }
     }
+    console.log(personalizacao)
 
     this.personalizacaoService.postPersonalizacao(personalizacao).subscribe({
       next: (res) => {
-        console.log(res);
+        this.setarPersonalizacoes();
+        this.showSuccess("Nova Personalização Criada!\n Defina ela como ativa!")
+        this.novaPersoDemanda = !this.novaPersoDemanda
       },
       error: (err) => {
         console.log(err);

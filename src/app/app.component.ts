@@ -40,9 +40,6 @@ export class AppComponent implements OnInit {
 
   @ViewChild('vlibras') vlibras: any
   ngOnInit(): void {
-    setTimeout(() => {
-      console.log(this.vlibras)
-    }, 2000)
   }
 
 

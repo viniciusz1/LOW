@@ -122,12 +122,23 @@ export class DemandaService {
   //São feitas algumas inserções no formulário antes de enviar, por conta de tipos de input
   //ou até mesmo o número do código de usuário
   insertsBeforePostDemanda() {
+    if(this.demandaForm.value.beneficioRealDemanda?.memoriaDeCalculoBeneficio == ""){
+      this.demandaForm.patchValue({
+        beneficioRealDemanda: {memoriaDeCalculoBeneficio: null}
+      })
+    }
+    if(this.demandaForm.value.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio == ""){
+      this.demandaForm.patchValue({
+        beneficioPotencialDemanda: {memoriaDeCalculoBeneficio: null}
+      })
+    }
+
     if (this.demandaForm.value.beneficioPotencialDemanda?.moedaBeneficio == '') {
       this.demandaForm.patchValue({
         beneficioPotencialDemanda: { moedaBeneficio: 'Real' }
       })
     }
-    console.log(this.demandaForm.value.beneficioRealDemanda)
+    // console.log(this.demandaForm.value.beneficioRealDemanda)
     if (this.demandaForm.value.beneficioRealDemanda?.moedaBeneficio == '') {
       this.demandaForm.patchValue({
         beneficioRealDemanda: { moedaBeneficio: 'Real' }
@@ -162,16 +173,6 @@ export class DemandaService {
     }
 
     //Inserindo o form da demanda em si
-
-    console.log(this.demandaForm.value)
-    if(this.demandaForm.value.beneficioRealDemanda?.memoriaDeCalculoBeneficio == ""){
-      console.log("Foiiiii")
-      this.demandaForm.value.beneficioRealDemanda?.memoriaDeCalculoBeneficio == null;
-    }
-    if(this.demandaForm.value.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio == ""){
-      this.demandaForm.value.beneficioPotencialDemanda?.memoriaDeCalculoBeneficio == null;
-    }
-
     demandaFormData.append('demanda', JSON.stringify(this.demandaForm.value));
 
     //Retornando a requisição
@@ -288,6 +289,7 @@ export class DemandaService {
   }
 
   avancarPage(page: number) {
+    console.log(this.link)
     let linkComPaginacao = this.link;
     linkComPaginacao += '&page=' + page
     console.log(linkComPaginacao)
@@ -432,6 +434,16 @@ export class DemandaService {
     );
   }
 
+  getDemandasByUsuario(){
+    this.link = path + 'demanda/usuario?size=""';
+    return this.http.get<Demanda[]>(
+      this.link
+    ).pipe(map((pageable: any) => {
+      console.log(pageable)
+      this.pageable = pageable
+      return pageable.content
+    }))
+  }
 
 
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {

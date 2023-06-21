@@ -6,6 +6,10 @@ import { TelaSugestoesComponent } from './tela-sugestoes/tela-sugestoes.componen
 import { TelaAjudaComponent } from './tela-ajuda/tela-ajuda.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ColorPickerModule } from 'primeng/colorpicker';
+import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
+import { TableModule } from 'primeng/table';
+
 
 
 
@@ -20,7 +24,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ColorPickerModule,
+    ComponentesReutilizaveisModule,
+    TableModule
   ]
 })
 export class PerfilModule { }

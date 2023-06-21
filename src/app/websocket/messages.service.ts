@@ -75,8 +75,9 @@ export class MessagesService {
 
     try {
       if (this._client) {
+        console.log(codigoUser)
           this.subscriptionNotificacaoMensagem = this._client.subscribe(
-          '/notificacoes-messages/' + codigoUser + '/chat',
+          '/notifica/' + codigoUser,
           (message: any) => {
             console.log("Recived")
             // this.updateQuantidadeMensagensNotificacoes();

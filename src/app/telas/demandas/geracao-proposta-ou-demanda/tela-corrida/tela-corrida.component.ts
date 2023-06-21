@@ -62,7 +62,7 @@ export class TelaCorridaComponent implements OnInit {
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
             this.showSuccess("Demanda criada com sucesso!")
-            let codigo = this.route.snapshot.params['indiceRascunho']
+            // let codigo = this.route.snapshot.params['indiceRascunho']
             // this.rascunhoService.deleteRascunho(codigo)
             this.router.navigate(['/tela-inicial']);
           },
@@ -70,7 +70,9 @@ export class TelaCorridaComponent implements OnInit {
             console.log("Erro ", err.error);
             if(err.error === "Falta completar as porcentagem de centro de custos"){
               this.showError("Centros de custo está inválido! Verifique se ele se encontra em 100%")
-            } else {
+            } else if(err.error === "É necessário preencher todos os campos do benefício Potencial" || err.error === "É necessário preencher todos os campos do benefício Real"){
+              this.showError(err.error)
+            }else{
               this.showError("Certifique-se do preenchimento de todos os campos!")
             }
           },
@@ -236,7 +238,20 @@ export class TelaCorridaComponent implements OnInit {
     }
   }
 
+  inserirInformacoesFormDemanda(){
+    let codigoDemanda = this.route.snapshot.params['indiceRascunho']
+    let demanda = this.demandaService.getDemandaByCodigoDemanda(codigoDemanda);
+    this.demandaService.demandaForm.patchValue({
+      codigoDemanda: codigoDemanda,
+    })
+  }
+
   ngOnInit(): void {
+    // this.inserirInformacoesFormDemanda()
+    let codigoDemanda = this.route.snapshot.params['indiceRascunho']
+    this.demandaService.getDemandaByCodigoDemanda(codigoDemanda).subscribe((demada) => {
+      this.demandaService.setFormDemandaData(demada)
+    })
     window.addEventListener('scroll', this.onScroll.bind(this));
     this.onScroll();
     setInterval(() => {

@@ -405,7 +405,6 @@
         >
       </div>
     </div>
-    <div class="bloco-branco" style="width: 10%"></div>
   </div>
   <div
     @fadeAnimation
@@ -431,6 +430,8 @@
               falarTexto>{{ linha.titulo }}</h5>
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
+            
+            <!-- Ver-mais para a demandas por status -->
             <div
               class="me-3"
               style="align-self: flex-end; cursor: pointer"
@@ -440,15 +441,27 @@
                   pesquisaCampo: undefined
                 })
               "
-              *ngIf="linha.titulo != 'Sem demandas'"
+              *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas'"
               falarTexto
             >
               {{ "telas.tela-inicial.ver-mais" | translate }} 
-              <span *ngIf="linha.titulo != 'Suas Demandas'">({{
+              ({{
                 qtdDemandasStatus[i]
               }})
-            </span>
             </div>
+
+            <!-- Ver-mais para a demandas do usuário -->
+            <div
+            class="me-3"
+            style="align-self: flex-end; cursor: pointer"
+            (click)="
+              pesquisarDemandasDoUsuario()
+            "
+            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'"
+            falarTexto
+          >
+            {{ "telas.tela-inicial.ver-mais" | translate }} 
+          </div>
           </div>
           <div
             class="d-flex position-relative"

@@ -49,7 +49,8 @@ export class CardDemandaComponent implements OnInit {
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
   analistaAssociado: boolean = false;
-  codigoReuniao: number = 0;
+  codigoReuniao: number | undefined;
+  demandaEncontrada: boolean = false;
 
   reunioes: Reuniao[] | undefined;
 
@@ -62,21 +63,26 @@ export class CardDemandaComponent implements OnInit {
 
   }
 
-  testeCodigoReuniao(){
+  encaminharParaReuniao(codigoDemanda?: string) {
     this.reuniaoService.getReuniao().subscribe(reunioes => {
       this.reunioes = reunioes;
-      this.procurarCodigoDemanda('codigoDemanda');
+      this.procurarCodigoDemanda(codigoDemanda);
+      if (this.demandaEncontrada) {
+        this.route.navigate(['tela-inicial/ver-reuniao/' + this.codigoReuniao]);
+      }
     });
   }
 
-  procurarCodigoDemanda(codigoDemanda: string) {
-    if(this.reunioes){
+  procurarCodigoDemanda(codigoDemanda: string | undefined) {
+    if (this.reunioes) {
       for (const reuniao of this.reunioes) {
-        if(reuniao.propostasReuniao){
+        if (reuniao.propostasReuniao) {
           for (const demanda of reuniao.propostasReuniao) {
-            if (demanda.codigoDemanda === codigoDemanda) {
-              console.log('Demanda encontrada na reunião:', reuniao);
-              return; // Se deseja encontrar apenas a primeira ocorrência
+            if (demanda.codigoDemanda == codigoDemanda) {
+              console.log("entrou no if");
+              this.codigoReuniao = reuniao.codigoReuniao;
+              this.demandaEncontrada = true;
+              return;
             }
           }
         }
@@ -240,13 +246,13 @@ export class CardDemandaComponent implements OnInit {
     switch (this.dadosDemanda.statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-          if(nivelAcesso == 'GestorTI' || this.dadosDemanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()){
-          this.textoExibidoEmBotaoDependendoRota = {
-            rota:
-              '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
-            texto: 'Classificar Demanda',
+          if (nivelAcesso == 'GestorTI' || this.dadosDemanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota:
+                '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
+              texto: 'Classificar Demanda',
+            }
           }
-        }
         };
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
@@ -323,7 +329,7 @@ export class CardDemandaComponent implements OnInit {
     }
   }
 
-  deletarRascunho() { 
+  deletarRascunho() {
     if (this.dadosDemanda.codigoDemanda) {
       this.clicouEmExcluir.emit(this.dadosDemanda)
     } else {
@@ -331,7 +337,7 @@ export class CardDemandaComponent implements OnInit {
     }
     // if (this.dadosDemanda.codigoDemanda) {
     //   this.clicouEmExcluir.emit(this.dadosDemanda)
-      
+
     // } else {
     //   this.showError("Não foi possível excluir o rascunho!")
     // }

@@ -267,7 +267,7 @@
               (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
               (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
               (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-              (verDocumentoEmAta)="openModalAtaDocumento()"
+              (verDocumentoEmAta)="openModalAtaDocumento($event)"
               *ngFor="let demanda of listaDemandas"
               [dadosDemanda]="demanda"
           class="mb-2">
@@ -345,7 +345,7 @@
               (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
               (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
               (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-              (verDocumentoEmAta)="openModalAtaDocumento()"
+              (verDocumentoEmAta)="openModalAtaDocumento($event)"
             ></app-card-demanda>
           </div>
           <div
@@ -393,7 +393,7 @@
             (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
             (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-            (verDocumentoEmAta)="openModalAtaDocumento()"
+            (verDocumentoEmAta)="openModalAtaDocumento($event)"
           ></app-card-demanda>
         </div>
         <a
@@ -487,7 +487,7 @@
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
                 (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-                (verDocumentoEmAta)="openModalAtaDocumento()"
+                (verDocumentoEmAta)="openModalAtaDocumento($event)"
               ></app-card-demanda>
             </div>
             <div
@@ -529,7 +529,7 @@
           (irParaChat)="irParaChat($event, demanda)"
           (modalHistorico)="openModalHistorico($event)"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-          (verDocumentoEmAta)="openModalAtaDocumento()"
+          (verDocumentoEmAta)="openModalAtaDocumento($event)"
           class="col-lg-6 col-xl-4 mb-3"
         >
         </app-card-demanda>

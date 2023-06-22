@@ -50,11 +50,11 @@
           <i class="bi bi-arrows-angle-expand me-3"></i>
           <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-demanda" | translate }}</span>
         </button>
-        <button *ngIf="testeCodigoReuniao()"  mat-menu-item>
+        <button (click)="encaminharParaReuniao(dadosDemanda.codigoDemanda)"  mat-menu-item>
           <i class="bi bi-person-lines-fill me-3"></i>
           <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ir-reuniao" | translate }}</span>
         </button>
-        <button (click)="verDocumentoEmAta.emit()" *ngIf="existeAta()" mat-menu-item>
+        <button (click)="verDocumentoEmAta.emit(dadosDemanda)" *ngIf="existeAta()" mat-menu-item>
           <i class="bi-file-text me-3"></i>
           <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
         </button>

@@ -8,6 +8,8 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { Route, Router } from '@angular/router';
 import { RascunhoService } from 'src/app/services/rascunho.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { Reuniao } from 'src/app/models/reuniao.model';
 
 @Component({
   selector: 'app-card-demanda',
@@ -47,15 +49,39 @@ export class CardDemandaComponent implements OnInit {
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
   analistaAssociado: boolean = false;
+  codigoReuniao: number = 0;
 
-
+  reunioes: Reuniao[] | undefined;
 
   constructor(private route: Router,
+    private reuniaoService: ReuniaoService,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService) {
 
+  }
+
+  testeCodigoReuniao(){
+    this.reuniaoService.getReuniao().subscribe(reunioes => {
+      this.reunioes = reunioes;
+      this.procurarCodigoDemanda('codigoDemanda');
+    });
+  }
+
+  procurarCodigoDemanda(codigoDemanda: string) {
+    if(this.reunioes){
+      for (const reuniao of this.reunioes) {
+        if(reuniao.propostasReuniao){
+          for (const demanda of reuniao.propostasReuniao) {
+            if (demanda.codigoDemanda === codigoDemanda) {
+              console.log('Demanda encontrada na reunião:', reuniao);
+              return; // Se deseja encontrar apenas a primeira ocorrência
+            }
+          }
+        }
+      }
+    }
   }
 
   statusPermitido() {

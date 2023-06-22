@@ -50,7 +50,7 @@
           <i class="bi bi-arrows-angle-expand me-3"></i>
           <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-demanda" | translate }}</span>
         </button>
-        <button *ngIf="existePauta()" [routerLink]="['/tela-inicial/reunioes']" mat-menu-item>
+        <button *ngIf="testeCodigoReuniao()"  mat-menu-item>
           <i class="bi bi-person-lines-fill me-3"></i>
           <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ir-reuniao" | translate }}</span>
         </button>

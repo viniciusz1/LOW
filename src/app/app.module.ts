@@ -16,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemandaService } from './services/demanda.service';
 import {  HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import {DialogModule} from 'primeng/dialog';
 import { TranslateModule, TranslateService, TranslateStore, TranslateLoader } from '@ngx-translate/core';
 import { LogInterceptor } from './interceptor';
@@ -59,7 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     useClass: LogInterceptor,
     multi: true
   },
-    DemandaService, ConfirmationService, UsuarioService, TranslateService, TranslateStore, ConfiguracoesIniciaisService],
+    DemandaService, ConfirmationService, UsuarioService, TranslateService, TranslateStore, ConfiguracoesIniciaisService,MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

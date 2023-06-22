@@ -40,12 +40,12 @@ export class NotificacoesService {
 
 
   initializeWebSocketConnectionCount() {
-    // const serverUrl = 'http://localhost:8085/low/ws/info';
-    // const ws = new SockJS(serverUrl);
-    // this.stompClient = Stomp.over(ws);
-    // this.stompClient.connect({}, (frame: any) => {
-    //   this.inscreverCount()
-    // });
+    const serverUrl = 'http://localhost:8085/low/ws/info';
+    const ws = new SockJS(serverUrl);
+    this.stompClient = Stomp.over(ws);
+    this.stompClient.connect({}, (frame: any) => {
+      this.inscreverCount()
+    });
   }
 
   inscrever() {
@@ -71,10 +71,23 @@ export class NotificacoesService {
     // }
   }
 
-  inscreverCount(codigoRota?: string) {
-    this.getCountNotifications().subscribe(e => {
-      this.$notificationCountEmmiter.emit(e);
-    })
+  inscreverCount() {
+    // this.getCountNotifications().subscribe(e => {
+    //   this.$notificationCountEmmiter.emit(e);
+    // })
+
+
+      this.getCountNotifications().subscribe(e => {
+        this.$notificationCountEmmiter.emit(e);
+      })
+  
+    this.stompClient.subscribe('/usuario', (message: any) => {
+      if (message.body) {
+        this.getCountNotifications().subscribe(e => {
+          this.$notificationCountEmmiter.emit(e);
+        })
+      }
+    });
   }
 
   getNotifications() {
@@ -102,6 +115,7 @@ export class NotificacoesService {
         console.log('WebSocket desconectado');
       });
     }
+    
   }
 
 }

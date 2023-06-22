@@ -2,7 +2,7 @@ import { NotificacoesComponent } from './notificacoes/notificacoes.component';
 import { RotasModule } from './../rotas.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ListDemandaComponent } from './list-demanda/list-demanda.component';
 import { CardReuniaoComponent } from './card-reuniao/card-reuniao.component';
 import { SidebarDemandaComponent } from './sidebar-demanda/sidebar-demanda.component';
@@ -23,6 +23,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SharedModule } from '../shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { InfoModalDemandaComponent } from './info-modal-demanda/info-modal-demanda.component';
+import { CalendarModule } from 'primeng/calendar';
 
 
 
@@ -53,7 +54,8 @@ import { InfoModalDemandaComponent } from './info-modal-demanda/info-modal-deman
     FormsModule,
     ConfirmDialogModule,
     SharedModule,
-    TooltipModule
+    TooltipModule,
+    CalendarModule
   ],
   exports:[
     CardDemandaComponent,
@@ -65,6 +67,9 @@ import { InfoModalDemandaComponent } from './info-modal-demanda/info-modal-deman
     SidebarReuniaoComponent,
     NotificacoesComponent,
     InfoModalDemandaComponent
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class ComponentesReutilizaveisModule { }

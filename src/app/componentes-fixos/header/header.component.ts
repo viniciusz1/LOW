@@ -123,7 +123,7 @@ export class HeaderComponent implements OnInit {
     this.usuario = this.usuarioService.getUser('user')
     this.activeItem = this.items[0];
     document.addEventListener('click', this.fecharModalAoClicarFora);
-    // this.iniciarWebSocketNotificationCount();
+    // this.subscribeNotificationCount();
   }
 
 
@@ -133,6 +133,7 @@ export class HeaderComponent implements OnInit {
 
 
   subscribeNotificationCount() {
+    this.notificacoesService.initializeWebSocketConnectionCount();
     this.notificacoesService.$notificationCountEmmiter.subscribe(quantidade => {
       // this.setarNotificacoes()
       this.quantidadeNotificacoes = quantidade;

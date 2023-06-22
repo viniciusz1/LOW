@@ -183,6 +183,7 @@
                   : departamentoUsuario
               )
             "
+            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas'"
           >
             {{ "telas.tela-inicial.ver-mais" | translate }}
             <span
@@ -193,7 +194,21 @@
               falarTexto
               >({{ qtdDemandasStatus[i] }})</span
             >
+            </div>
+
+            <!-- Ver-mais para a demandas do usuário -->
+            <div
+            class="me-3"
+            style="align-self: flex-end; cursor: pointer"
+            (click)="
+              pesquisarDemandasDoUsuario()
+            "
+            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'"
+            falarTexto
+          >
+            {{ "telas.tela-inicial.ver-mais" | translate }} 
           </div>
+
         </div>
         <div
           class="d-flex justify-content-center align-items-center flex-column my-2"
@@ -396,6 +411,7 @@
             (verDocumentoEmAta)="openModalAtaDocumento()"
           ></app-card-demanda>
         </div>
+        
         <a
           class="d-flex align-items-end justify-content-end"
           role="button"

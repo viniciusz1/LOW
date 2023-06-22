@@ -22,6 +22,7 @@ export class NotificacoesComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.notificacoesService.disconect();
+    this.notificacoesService.initializeWebSocketConnectionCount();
   }
 
   setarNotificacoes() {

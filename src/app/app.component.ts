@@ -7,6 +7,7 @@ import { FalarTextoService } from './services/falar-textos.service';
 import { MessageService } from 'primeng/api';
 import { MessagesService } from './websocket/messages.service';
 import { ConfiguracoesIniciaisService } from './services/configuracoes-iniciais.service';
+import { PersonalizacaoService } from './services/personalizacao.service';
 
 @Component({
   selector: 'app-root',
@@ -21,35 +22,24 @@ export class AppComponent implements OnInit {
     private messagesService: MessagesService,
     public voiceRecognitionService: VoiceRecognitionService,
     public falarTextoService: FalarTextoService,
-    public configIniciais: ConfiguracoesIniciaisService) {
+    public configIniciais: ConfiguracoesIniciaisService,
+    public personalizacaoService: PersonalizacaoService) {
 
     this.messagesService.initializeWebSocketConnection();
     this.messagesService.activate();
-    // this.messagesService.initializeWebSocketConnection();
     this.voiceRecognitionService.init()
     translate.setDefaultLang('pt');
-    // let htmlRoot: HTMLElement = <HTMLElement>document.getElementsByTagName('html')[0];
-    // let bodyroot: HTMLElement = <HTMLElement>document.getElementsByTagName('body')[0];
-    // let fontFamily = window.localStorage.getItem('fontFamily');
-    // if (fontFamily != null && bodyroot.style.fontFamily != fontFamily) {
-    //   bodyroot.style.fontFamily = fontFamily;
-    //   window.localStorage.setItem('fontFamily', fontFamily);
-    // }
-    // let fontSize = window.localStorage.getItem('fontSize');
-    // if (fontSize != null && fontSize != htmlRoot.style.fontSize) {
-    //   htmlRoot.style.fontSize = fontSize + 'px';
-    //   window.localStorage.setItem('fontSize', fontSize);
-    // }
-      this.configIniciais.setFontSize(undefined)
-      this.configIniciais.setFontTheme(undefined)
-      this.messagesService.subscribeToNotificationsMensagens()
+    this.configIniciais.setFontSize(undefined)
+    this.configIniciais.setFontTheme(undefined)
+    this.messagesService.subscribeToNotificationsMensagens()
+    this.personalizacaoService.getPersonalizacaoAtiva().subscribe((personalizacao) => {
+      localStorage.setItem('personalizacao', JSON.stringify(personalizacao))
+      this.personalizacaoService.personalizacaoAtiva = personalizacao
+    })
   }
 
   @ViewChild('vlibras') vlibras: any
   ngOnInit(): void {
-    setTimeout(()=>{
-      console.log(this.vlibras)
-    },2000)
   }
 
 

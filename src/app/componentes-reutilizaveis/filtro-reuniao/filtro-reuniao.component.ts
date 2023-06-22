@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Calendar } from 'primeng/calendar';
 
 @Component({
   selector: 'app-filtro-reuniao',
@@ -18,7 +20,24 @@ export class FiltroReuniaoComponent implements OnInit {
     page: string;
     size: string
   }>();
-  constructor() { }
+
+  statusReuniao: string[] = ['Aguardando', 'Proximo', 'Concluido', 'Cancelado', 'Pendente'];
+
+  teste(cal: Calendar) {
+    console.log(cal)
+  }
+
+  constructor(private datePipe: DatePipe) { }
+
+  emitirFiltro(dados: { nomeComissao: string, dataReuniao: Date | string, statusReuniao: string, ppmProposta: string, analista: string, solicitante: string, ordenar: string, page: string, size: string }) {
+    let data = this.datePipe.transform(dados.dataReuniao, 'yyyy-MM-dd');
+    dados.dataReuniao = data as string
+    // console.log(data)
+    // console.log("Entrou no if - ok")
+    //@ts-ignore
+    this.filtroAcionado.emit(dados)
+
+  }
 
   ngOnInit(): void {
   }

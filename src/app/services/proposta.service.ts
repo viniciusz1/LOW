@@ -31,7 +31,7 @@ export class PropostaService {
 
   public paybackProposta: number = 0;
   public formProposta = this.fb.group({
-    prazoProposta: ['', [Validators.required]],
+    prazoProposta: [''],
     codigoPPMProposta: ['', [Validators.required]],
     jiraProposta: ['', [Validators.required]],
     recursosProposta: [this.listaRecursos],

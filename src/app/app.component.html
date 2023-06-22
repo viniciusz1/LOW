@@ -4,12 +4,12 @@
     <i class="bi bi-mic" style="color: white"></i>
   </div>
 
-  <div role="button" *ngIf="startedRecodAudio" class="estilo-cards" style="top: 33%; background-color: red;"
+  <div role="button" *ngIf="startedRecodAudio" class="estilo-cards" style="position: relative !important; background-color: red !important;"
     (click)="stopVoice()">
     <i class="bi bi-x-lg" style="color: white"></i>
   </div>
   <div role="button" *ngIf="falarTextoService.permitirFala" class="estilo-cards mt-2"
-    style="top: 38.5%; background-color: red;" (click)="pararDeFalar()">
+    style="position: relative !important; background-color: red !important;" (click)="pararDeFalar()">
     <i class="bi bi-volume-mute" style="color: white; font-size: 20px;"></i>
   </div>
   <div role="button" *ngIf="!falarTextoService.permitirFala" class="estilo-cards mt-2" style="position: relative !important;"

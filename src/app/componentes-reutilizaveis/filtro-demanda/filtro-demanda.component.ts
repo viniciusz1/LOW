@@ -1,6 +1,7 @@
 import { outputAst } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Filtro } from 'src/app/models/filtro.model';
+import { Tamanho } from 'src/app/models/tamanho.enum';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
@@ -32,11 +33,11 @@ export class FiltroDemandaComponent implements OnInit {
   constructor(private demandaService: DemandaService,
     private usuarioService: UsuarioService) {
     this.tamanho = [
-      "Muito Pequeno",
-      "Pequeno",
-      "Médio",
-      "Grande",
-      "Muito Grande",
+      Tamanho.MuitoPequeno,
+      Tamanho.Pequeno,
+      Tamanho.Medio,
+      Tamanho.Grande,
+      Tamanho.MuitoGrande
     ]
     let nivel =  this.usuarioService.getRole
     if(nivel){

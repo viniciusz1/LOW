@@ -10,6 +10,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { MessagesModule } from 'primeng/messages';
+import { TableModule } from 'primeng/table';
+
 
 
 
@@ -28,7 +30,8 @@ import { MessagesModule } from 'primeng/messages';
     ColorPickerModule,
     ComponentesReutilizaveisModule,
     InputTextModule,
-    MessagesModule
-  ],
+    MessagesModule,
+    TableModule
+  ]
 })
 export class PerfilModule { }

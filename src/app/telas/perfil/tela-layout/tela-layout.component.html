@@ -179,8 +179,8 @@
                     <div style="display: flex; justify-content: center; margin-top: 1vw;">
                         <div class="flex-1 flex flex-column align-items-center gap-3"
                             *ngFor="let list of listOfColorsStatusReuniao">
-                            <input type="text" class="form-control" [(ngModel)]="list.corPrimaria">
-                            <input type="text" class="form-control" [(ngModel)]="list.corSecundaria">
+                            
+                            <span>{{ list.corPrimaria }}</span>
                             <div style="display: flex;">
                                 <p-colorPicker [(ngModel)]="list.corPrimaria"></p-colorPicker>
                                 <p-colorPicker id="cor-secundaria" [(ngModel)]="list.corSecundaria">

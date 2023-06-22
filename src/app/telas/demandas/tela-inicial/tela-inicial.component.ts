@@ -51,6 +51,7 @@ export class TelaInicialComponent implements OnInit {
       this.tipoExibicaoDemanda = JSON.parse(tipo)
     }
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
+      console.log("Foi no pesquisa alterada")
       if (this.pesquisaDemanda == "") {
         this.carregarDemandasIniciais()
       } else {
@@ -123,6 +124,22 @@ export class TelaInicialComponent implements OnInit {
         }
       });
 
+  }
+
+  pesquisarDemandasDoUsuario(){
+    console.log("Entrou")
+    this.demandasService.getDemandasByUsuario().subscribe((listaDemandas: Demanda[]) => {
+      if (listaDemandas.length > 0) {
+        this.totalPagesPagination = this.demandasService.totalPages
+        this.listaDemandas = listaDemandas;
+        this.isFiltrado = true;
+        this.nenhumResultadoEncontrado = false;
+      } else {
+        this.isFiltrado = true;
+        this.listaDemandas = [];
+        this.nenhumResultadoEncontrado = true;
+      }
+    })
   }
 
   ordenar(sort: { name: string, value: number }) {

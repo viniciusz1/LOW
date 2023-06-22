@@ -21,6 +21,7 @@ interface Tab {
   styleUrls: ['./parte-demanda.component.scss'],
 })
 export class ParteDemandaComponent implements OnInit, OnDestroy {
+
   constructor(
     private demandaService: DemandaService,
     private rascunhoService: RascunhoService,
@@ -46,8 +47,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   stopService() {
     this.voiceRecognitionService.stop()
   }
-
-
 
   onFocoIn(nomeEditorEmFoco: string) {
     this.editorEspecialEmFoco = nomeEditorEmFoco;

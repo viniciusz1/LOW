@@ -141,6 +141,7 @@ export class HeaderComponent implements OnInit {
 
 
   subscribeNotificationCount() {
+    this.notificacoesService.initializeWebSocketConnectionCount();
     this.notificacoesService.$notificationCountEmmiter.subscribe(quantidade => {
       // this.setarNotificacoes()
       this.quantidadeNotificacoes = quantidade;

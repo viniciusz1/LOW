@@ -62,7 +62,7 @@ export class TelaCorridaComponent implements OnInit {
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
             this.showSuccess("Demanda criada com sucesso!")
-            let codigo = this.route.snapshot.params['indiceRascunho']
+            // let codigo = this.route.snapshot.params['indiceRascunho']
             // this.rascunhoService.deleteRascunho(codigo)
             this.router.navigate(['/tela-inicial']);
           },
@@ -70,7 +70,9 @@ export class TelaCorridaComponent implements OnInit {
             console.log("Erro ", err.error);
             if(err.error === "Falta completar as porcentagem de centro de custos"){
               this.showError("Centros de custo está inválido! Verifique se ele se encontra em 100%")
-            } else {
+            } else if(err.error === "É necessário preencher todos os campos do benefício Potencial" || err.error === "É necessário preencher todos os campos do benefício Real"){
+              this.showError(err.error)
+            }else{
               this.showError("Certifique-se do preenchimento de todos os campos!")
             }
           },
@@ -164,10 +166,11 @@ export class TelaCorridaComponent implements OnInit {
   }
 
 
+  //Workflow só funciona corretamente quando o Zoom da tela esta em 100%
   onScroll() {
 
     const sections = document.querySelectorAll('section');
-    const scrollPosition = window.pageYOffset;
+    const scrollPosition = window.scrollY;
 
     if (!this.aparecerProposta) {
       sections.forEach((section) => {
@@ -180,7 +183,7 @@ export class TelaCorridaComponent implements OnInit {
         ) {
           this.activeSection = section.id;
         }
-        if (scrollPosition >= 1270) {
+        if (scrollPosition >= 1200) {
           this.activeSection = 'section3';
         }
       });
@@ -188,7 +191,7 @@ export class TelaCorridaComponent implements OnInit {
       sections.forEach((section) => {
         const sectionTop = section.offsetTop - 50;
         const sectionBottom = sectionTop + section.offsetHeight;
-
+        
         if (
           scrollPosition >= sectionTop - 200 &&
           scrollPosition < sectionBottom
@@ -198,10 +201,10 @@ export class TelaCorridaComponent implements OnInit {
         if (scrollPosition >= 500) {
           this.activeSection = 'section2';
         }
-        if (scrollPosition >= 900) {
+        if (scrollPosition >= 800) {
           this.activeSection = 'section3';
         }
-        if (scrollPosition >= 1000) {
+        if (scrollPosition >= 920) {
           this.activeSection = 'section4';
         }
       });
@@ -227,15 +230,28 @@ export class TelaCorridaComponent implements OnInit {
     if (element?.id == 'section1') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (element?.id == 'section2') {
-      window.scrollTo({ top: 550, behavior: 'smooth' });
+      window.scrollTo({ top: 500, behavior: 'smooth' });
     } else if (element?.id == 'section3') {
-      window.scrollTo({ top: 950, behavior: 'smooth' });
+      window.scrollTo({ top: 850, behavior: 'smooth' });
     } else {
       window.scrollTo({ top: scrollHeight, behavior: 'smooth' });
     }
   }
 
+  inserirInformacoesFormDemanda(){
+    let codigoDemanda = this.route.snapshot.params['indiceRascunho']
+    let demanda = this.demandaService.getDemandaByCodigoDemanda(codigoDemanda);
+    this.demandaService.demandaForm.patchValue({
+      codigoDemanda: codigoDemanda,
+    })
+  }
+
   ngOnInit(): void {
+    // this.inserirInformacoesFormDemanda()
+    let codigoDemanda = this.route.snapshot.params['indiceRascunho']
+    this.demandaService.getDemandaByCodigoDemanda(codigoDemanda).subscribe((demada) => {
+      this.demandaService.setFormDemandaData(demada)
+    })
     window.addEventListener('scroll', this.onScroll.bind(this));
     this.onScroll();
     setInterval(() => {

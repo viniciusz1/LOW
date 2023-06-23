@@ -332,10 +332,11 @@ export class TelaInicialComponent implements OnInit {
   }
 
   //Abre modal de ata
-  openModalAtaDocumento() {
+  openModalAtaDocumento(demanda: Demanda) {
     this.matDialog.open(ModalAtaDocumentoComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
+      data: demanda
     });
   }
 

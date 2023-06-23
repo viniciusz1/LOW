@@ -195,7 +195,7 @@
           inputEmFoco
           maxlength="70"
           (onChange)="onInputChange()"
-          placeholder="Ex: Interna"
+          placeholder="Ex: Software"
           type="text"
           [required]="true"por
           pInputText
@@ -211,10 +211,16 @@
         >
         <div style="width: 100%; display: grid">
           <p-inputNumber
+            inputId="currency-br" 
+            mode="currency" 
+            currency="BRL" 
             [min]="0"
+            locale="pt-BR" 
             inputEmFoco
             (input)="onInputChange()"
             placeholder="Ex: R$55,00"
+            [(ngModel)]="valorHoraRecursoValue"
+            [maxlength]="15"
             [required]="true"
             type="text"
             class="input"
@@ -231,7 +237,12 @@
         >
         <div style="width: 100%; display: grid">
           <p-inputNumber
+            mode="decimal" 
+            inputId="withoutgrouping" 
+            [useGrouping]="false"
+            [maxlength]="15"
             [min]="0"
+            [(ngModel)]="qtdHorasRecurso"
             inputEmFoco
             (input)="onInputChange()"
             placeholder="Ex: 220"
@@ -269,7 +280,12 @@
         >
         <div style="width: 100%; display: grid">
           <p-inputNumber
+          mode="decimal" 
+            inputId="withoutgrouping" 
+            [useGrouping]="false"
+            [maxlength]="15"
             [min]="0"
+            [(ngModel)]="periodoExecucao"
             inputEmFoco
             (input)="onInputChange()"
             placeholder="Ex: 5"
@@ -300,8 +316,13 @@
             <div [formGroupName]="i" class="d-flex">
               <div class="p-inputgroup" style="margin-right: 0.5vw">
                 <p-inputNumber
-                  [min]="0"
-                  inputEmFoco
+                mode="decimal" 
+                inputId="withoutgrouping" 
+                [useGrouping]="false"
+                [min]="0"
+                [maxlength]="3"
+                inputEmFoco
+                [(ngModel)]="centroCustoValor"
                   (input)="onInputChange()"
                   [id]="'porcentagemListaReuniao' + i"
                   [required]="true"
@@ -311,6 +332,7 @@
                 <span class="p-inputgroup-addon">%</span>
               </div>
               <input
+                [maxlength]="70"
                 inputEmFoco
                 (input)="onInputChange()"
                 style="width: 10vw; margin-right: 0.5vw"
@@ -478,6 +500,7 @@
 
   <!-- formControlName="responsavelProposta" -->
   <p-chips
+  [max]="15"
     separator=","
     placeholder="Insira o/os responsáveis"
     (input)="onInputChange()"

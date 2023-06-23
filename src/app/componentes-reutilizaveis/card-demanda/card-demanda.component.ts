@@ -8,7 +8,10 @@ import { Demanda } from 'src/app/models/demanda.model';
 import { Route, Router } from '@angular/router';
 import { RascunhoService } from 'src/app/services/rascunho.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { Reuniao } from 'src/app/models/reuniao.model';
 import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
+
 
 @Component({
   selector: 'app-card-demanda',
@@ -50,15 +53,47 @@ export class CardDemandaComponent implements OnInit {
   @Input() primaryColor?: string = '';
   @Input() secondaryColor: string = '';
   analistaAssociado: boolean = false;
+  codigoReuniao: number | undefined;
+  demandaEncontrada: boolean = false;
 
-  constructor(
-    private route: Router,
+  reunioes: Reuniao[] | undefined;
+
+  constructor(private route: Router,
+    private reuniaoService: ReuniaoService,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService,
     private personalizacaoService: PersonalizacaoService) {
 
+  }
+
+
+  encaminharParaReuniao(codigoDemanda?: string) {
+    this.reuniaoService.getReuniao().subscribe(reunioes => {
+      this.reunioes = reunioes;
+      this.procurarCodigoDemanda(codigoDemanda);
+      if (this.demandaEncontrada) {
+        this.route.navigate(['tela-inicial/ver-reuniao/' + this.codigoReuniao]);
+      }
+    });
+  }
+
+  procurarCodigoDemanda(codigoDemanda: string | undefined) {
+    if (this.reunioes) {
+      for (const reuniao of this.reunioes) {
+        if (reuniao.propostasReuniao) {
+          for (const demanda of reuniao.propostasReuniao) {
+            if (demanda.codigoDemanda == codigoDemanda) {
+              console.log("entrou no if");
+              this.codigoReuniao = reuniao.codigoReuniao;
+              this.demandaEncontrada = true;
+              return;
+            }
+          }
+        }
+      }
+    }
   }
 
   getOrdinalValueStatusDemanda(value: StatusDemanda | undefined): number | undefined {
@@ -269,15 +304,10 @@ export class CardDemandaComponent implements OnInit {
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-          // if (
-          //   this.dadosDemanda.analista?.codigoUsuario !=
-          //   this.usuarioService.getCodigoUser()
-          // ) {
             this.textoExibidoEmBotaoDependendoRota = {
               rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
               texto: 'Criar Proposta',
             };
-          // }
         }
         return true;
       case StatusDemanda.BACKLOG_APROVACAO:

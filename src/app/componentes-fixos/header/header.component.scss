@@ -24,3 +24,8 @@
     border-radius: 360px;
     background-color: #00579D;
 }
+
+:host ::ng-deep .ui-tooltip .ui-tooltip-text {
+    font-size: 10px; /* Defina o tamanho de fonte desejado */
+    /* Outros estilos personalizados, se necessário */
+  }

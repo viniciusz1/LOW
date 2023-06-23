@@ -185,13 +185,9 @@
             <h5 falarTexto>{{ listaTituloNaoFiltrado[0].titulo }}</h5>
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
-          <div falarTexto *ngIf="listaTituloNaoFiltrado[0].status != 'DRAFT'" class="me-3"
-            style="align-self: flex-end; cursor: pointer" (click)="
-              pesquisarDemandas({
-                status: listaTituloNaoFiltrado[0].status,
-                pesquisaCampo: undefined
-              })
-            ">
+          <div falarTexto class="me-3"
+            style="align-self: flex-end; cursor: pointer" 
+            (click)="pesquisarDemandasDoUsuario()">
             {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
         </div>

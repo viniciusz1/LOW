@@ -22,6 +22,7 @@ import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { FiltrarDemandaStatusPipe } from 'src/app/pipes/filtrar-demanda-status.pipe';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -44,10 +45,11 @@ export class TelaInicialComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private usuarioService: UsuarioService,
     private falarTextoService: FalarTextoService,
+    private filtrarDemandaStatus: FiltrarDemandaStatusPipe
   ) {
     //Pipe ativado quando é realizado algum tipo de filtro por campo de texto
-    let tipo =localStorage.getItem("exibicao")
-    if(tipo){
+    let tipo = localStorage.getItem("exibicao")
+    if (tipo) {
       this.tipoExibicaoDemanda = JSON.parse(tipo)
     }
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
@@ -85,7 +87,7 @@ export class TelaInicialComponent implements OnInit {
   totalPagesPagination = 0
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
-  positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0];
+  positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   //true = card
   tipoExibicaoDemanda = true;
   cabecalhoMensagemDeConfirmacao = 'Avançar status';
@@ -103,6 +105,38 @@ export class TelaInicialComponent implements OnInit {
   qtdDemandasStatus: number[] = []
   pesquisaDemanda = '';
   nenhumResultadoEncontrado = false;
+  exibirDivLateral = true;
+  resultadoDivLateral: number = 0;
+
+  exibirDivRightArrow(titulo: string): boolean {
+    const demandasFiltradas = this.listaDemandas.filter(demanda =>
+      this.filtrarDemandaStatus.transform([demanda], titulo) !== undefined
+    );
+
+    const statusContagem: { [status: string]: number } = {};
+
+    demandasFiltradas.forEach(demanda => {
+      const status = this.filtrarDemandaStatus.transform([demanda], titulo);
+      if (status && status.length > 0) {
+        const statusDemanda = status[0].statusDemanda;
+        if (statusDemanda) {
+          const statusString = statusDemanda.toString();
+          statusContagem[statusString] = (statusContagem[statusString] || 0) + 1;
+        }
+      }
+    });
+
+    const statusKeys = Object.keys(statusContagem);
+    for (const key of statusKeys) {
+      if (statusContagem[key] > 3) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+
   mudouCampodePesquisa() {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
@@ -126,7 +160,7 @@ export class TelaInicialComponent implements OnInit {
 
   }
 
-  pesquisarDemandasDoUsuario(){
+  pesquisarDemandasDoUsuario() {
     console.log("Entrou")
     this.demandasService.getDemandasByUsuario().subscribe((listaDemandas: Demanda[]) => {
       if (listaDemandas.length > 0) {
@@ -163,8 +197,6 @@ export class TelaInicialComponent implements OnInit {
     this.demandasService.setFiltroData = filtro;
     this.pesquisarDemandas(undefined);
   }
-
-
 
   paginate(event: { page: number }) {
     this.demandasService.avancarPage(event.page)
@@ -233,7 +265,6 @@ export class TelaInicialComponent implements OnInit {
               }
               , error: (err) => { console.log(err) }
             })
-
         },
         reject: () => {
 
@@ -251,16 +282,26 @@ export class TelaInicialComponent implements OnInit {
       document.getElementById(`filaCompleta${index}`) as HTMLElement
     ).offsetWidth;
 
+    this.resultadoDivLateral == -tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth;
+
     if (
       this.positionListCards[index] >
       -tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth
     ) {
       this.positionListCards[index] -= 397 * 2;
     }
+
+    if (
+      this.positionListCards[index] <
+      -tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth
+    ) {
+      this.exibirDivLateral = false;
+    }
   }
   //Lógica para mover as demandas da tela inicial para a esquerda
   changeLeft(index: number) {
     if (this.positionListCards[index] < 0) {
+      this.exibirDivLateral = true;
       this.positionListCards[index] += 397 * 2;
     }
   }
@@ -306,8 +347,8 @@ export class TelaInicialComponent implements OnInit {
       })
       .afterClosed().subscribe({
         next: e => {
-          if(e != undefined){
-              this.carregarDemandasIniciais();
+          if (e != undefined) {
+            this.carregarDemandasIniciais();
           }
         }
       })
@@ -399,14 +440,14 @@ export class TelaInicialComponent implements OnInit {
           let ExistsDemandaRascunho = true;
           let qtdDemandasUsuário = 0;
           e['demandas'].forEach((demandas: Demanda[]) => {
-            if(demandas.some((e) => e.statusDemanda?.toString() == 'DRAFT')){
+            if (demandas.some((e) => e.statusDemanda?.toString() == 'DRAFT')) {
               ExistsDemandaRascunho = false;
             }
-            if(this.usuarioService.getRole == 'Analista'){
-            if(demandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')){
-              qtdDemandasUsuário = demandas.filter((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()).length;
+            if (this.usuarioService.getRole == 'Analista') {
+              if (demandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')) {
+                qtdDemandasUsuário = demandas.filter((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()).length;
+              }
             }
-          }
             if (demandas.length > 0) {
               this.listaDemandas.push(...demandas);
               this.isFiltrado = false;
@@ -414,11 +455,11 @@ export class TelaInicialComponent implements OnInit {
             }
           });
           e['qtdDemandas'].forEach((qtd: number, index: number) => {
-            if(ExistsDemandaRascunho == true){
+            if (ExistsDemandaRascunho == true) {
               this.qtdDemandasStatus.push(0)
               ExistsDemandaRascunho = false;
             }
-            if(index == 1){
+            if (index == 1) {
               qtd = qtd - qtdDemandasUsuário;
             }
             if (qtd > 0) {
@@ -484,7 +525,7 @@ export class TelaInicialComponent implements OnInit {
       blockScroll: false,
       header: 'Alterar modo de exibição',
       accept: () => {
-        if(number == 1){
+        if (number == 1) {
           this.changeToCard();
         } else {
           this.changeToList();
@@ -514,7 +555,7 @@ export class TelaInicialComponent implements OnInit {
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
 
-    if(this.listaDemandas.length == 0){
+    if (this.listaDemandas.length == 0) {
       this.listaTituloNaoFiltrado.push({
         status: 'Sem demandas',
         titulo: 'Sem demandas',
@@ -546,7 +587,7 @@ export class TelaInicialComponent implements OnInit {
           titulo: 'Suas Tarefas',
         });
       }
-      else{
+      else {
         this.listaTituloNaoFiltrado.push({
           status: 'Sem demandas',
           titulo: 'Sem demandas',
@@ -575,13 +616,13 @@ export class TelaInicialComponent implements OnInit {
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'
       )
     ) {
-      if(this.listaDemandas.filter((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO' &&
-       e.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()).length != 0){
-      this.listaTituloNaoFiltrado.push({
-        status: 'BACKLOG_CLASSIFICACAO',
-        titulo: 'Backlog - Classificação',
-      });
-    }
+      if (this.listaDemandas.filter((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO' &&
+        e.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()).length != 0) {
+        this.listaTituloNaoFiltrado.push({
+          status: 'BACKLOG_CLASSIFICACAO',
+          titulo: 'Backlog - Classificação',
+        });
+      }
     }
     if (
       this.listaDemandas.some(
@@ -665,27 +706,27 @@ export class TelaInicialComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         if (demanda?.codigoDemanda)
-    this.rascunhoService.deleteRascunhoDemanda(demanda?.codigoDemanda).subscribe(
-      {
-        next: e => {
-          this.showSuccess("Rascunho deletado!")
-          this.carregarDemandasIniciais()
-        },
-        error: err => {
-          if(err.error.text == "Rascunho Deletado com Sucesso!"){
-            this.showSuccess("Rascunho deletado!")
-            this.carregarDemandasIniciais()
-          }else{
-            this.showError("Não foi possível excluir o rascunho!")
-          }
-        }
-      }
-  )
+          this.rascunhoService.deleteRascunhoDemanda(demanda?.codigoDemanda).subscribe(
+            {
+              next: e => {
+                this.showSuccess("Rascunho deletado!")
+                this.carregarDemandasIniciais()
+              },
+              error: err => {
+                if (err.error.text == "Rascunho Deletado com Sucesso!") {
+                  this.showSuccess("Rascunho deletado!")
+                  this.carregarDemandasIniciais()
+                } else {
+                  this.showError("Não foi possível excluir o rascunho!")
+                }
+              }
+            }
+          )
       },
       reject: () => {
 
       }
-  });
-    }
+    });
+  }
 
 }

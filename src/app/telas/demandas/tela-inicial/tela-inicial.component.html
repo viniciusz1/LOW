@@ -144,7 +144,7 @@
             </div>
           </div>
           <!-- Bloco para expandir -->
-          <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
+          <div *ngIf="listaDemandas.length > 0 && exibirDivRightArrow(linha.titulo, 1)" type="button" (click)="collapse.toggle()"
             class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
             style="width: 30%; height: 30px">
             <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed[i]"
@@ -301,7 +301,7 @@
             <div *ngIf="positionListCards[i] != 0" class="left-arrow alinhacao" (click)="changeLeft(i)">
               <i style="font-size: 25px" class="bi bi-chevron-left"></i>
             </div>
-            <div *ngIf="exibirDivRightArrow(linha.titulo)" class="right-arrow alinhacao" (click)="changeRight(i)">
+            <div *ngIf="exibirDivRightArrow(linha.titulo, 2)" class="right-arrow alinhacao" (click)="changeRight(i)">
               <i style="font-size: 25px" class="bi bi-chevron-right"></i>
             </div>
           </div>

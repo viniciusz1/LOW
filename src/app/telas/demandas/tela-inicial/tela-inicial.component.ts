@@ -108,7 +108,7 @@ export class TelaInicialComponent implements OnInit {
   exibirDivLateral = true;
   resultadoDivLateral: number = 0;
 
-  exibirDivRightArrow(titulo: string): boolean {
+  exibirDivRightArrow(titulo: string, tipo: number): boolean {
     const demandasFiltradas = this.listaDemandas.filter(demanda =>
       this.filtrarDemandaStatus.transform([demanda], titulo) !== undefined
     );
@@ -126,12 +126,24 @@ export class TelaInicialComponent implements OnInit {
       }
     });
 
-    const statusKeys = Object.keys(statusContagem);
-    for (const key of statusKeys) {
-      if (statusContagem[key] > 3) {
-        return true;
+    if (tipo == 1) {
+      const statusKeys = Object.keys(statusContagem);
+      for (const key of statusKeys) {
+        if (statusContagem[key] > 6) {
+          return true;
+        }
       }
     }
+
+    if (tipo == 2) {
+      const statusKeys = Object.keys(statusContagem);
+      for (const key of statusKeys) {
+        if (statusContagem[key] > 3) {
+          return true;
+        }
+      }
+    }
+
 
     return false;
   }

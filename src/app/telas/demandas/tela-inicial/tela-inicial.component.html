@@ -63,22 +63,13 @@
       <i *ngIf="isFiltrado" (click)="carregarDemandasIniciais()" class="bi bi-arrow-left"
         style="font-size: 25px; cursor: pointer"></i>
       <div class="d-flex">
-        <div
-          joyrideStep="tres"
-          [title]="'Trocar Exibição'"
-          [stepContent]="customContent"
-          [stepContentParams]="{ texto: textoTutorial[2] }"
-          [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
-          (click)="openModalTrocarModoExibicao(2)"
-          class="change-type-list me-2"
-        >
+        <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
+          [stepContentParams]="{ texto: textoTutorial[2] }" [ngClass]="{ 'color-actived': !tipoExibicaoDemanda }"
+          (click)="openModalTrocarModoExibicao(2)" class="change-type-list me-2">
           <i class="bi bi-list" style="font-size: 15px"></i>
         </div>
-        <div
-          [ngClass]="{ 'color-actived': tipoExibicaoDemanda }"
-          (click)="openModalTrocarModoExibicao(1)"
-          class="change-type-list"
-        >
+        <div [ngClass]="{ 'color-actived': tipoExibicaoDemanda }" (click)="openModalTrocarModoExibicao(1)"
+          class="change-type-list">
           <i class="bi bi-border-all" style="font-size: 15px"> </i>
         </div>
       </div>
@@ -112,30 +103,19 @@
                     }
                   : departamentoUsuario
               )
-            "
-            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas'"
-          >
+            " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas'">
             {{ "telas.tela-inicial.ver-mais" | translate }}
             <span *ngIf="
                 nivelAcessoUsuario == 'Analista' ||
                 nivelAcessoUsuario == 'GestorTI'
-              "
-              falarTexto
-              >({{ qtdDemandasStatus[i] }})</span
-            >
-            </div>
+              " falarTexto>({{ qtdDemandasStatus[i] }})</span>
+          </div>
 
-            <!-- Ver-mais para a demandas do usuário -->
-            <div
-            class="me-3"
-            style="align-self: flex-end; cursor: pointer"
-            (click)="
+          <!-- Ver-mais para a demandas do usuário -->
+          <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="
               pesquisarDemandasDoUsuario()
-            "
-            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'"
-            falarTexto
-          >
-            {{ "telas.tela-inicial.ver-mais" | translate }} 
+            " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'" falarTexto>
+            {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
 
         </div>
@@ -260,14 +240,10 @@
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
             (verDocumentoEmAta)="openModalAtaDocumento($event)"></app-card-demanda>
         </div>
-        
-        <a
-          class="d-flex align-items-end justify-content-end"
-          role="button"
-          (click)="pesquisarDemandas(departamentoUsuario)"
-          falarTexto
-          >{{ "telas.tela-inicial.ver-mais" | translate }}</a
-        >
+
+        <a class="d-flex align-items-end justify-content-end" role="button"
+          (click)="pesquisarDemandas(departamentoUsuario)" falarTexto>{{ "telas.tela-inicial.ver-mais" | translate
+          }}</a>
       </div>
     </div>
     <div *ngIf="listaDemandas.length > 0" class="bloco-branco" style="width: 10%"></div>
@@ -287,38 +263,26 @@
               <h5 falarTexto>{{ linha.titulo }}</h5>
               <hr style="margin: 0; opacity: 1" class="mb-2" />
             </div>
-            
+
             <!-- Ver-mais para a demandas por status -->
-            <div
-              class="me-3"
-              style="align-self: flex-end; cursor: pointer"
-              (click)="
+            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="
                 pesquisarDemandas({
                   status: linha.status,
                   pesquisaCampo: undefined
                 })
-              "
-              *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas'"
-              falarTexto
-            >
-              {{ "telas.tela-inicial.ver-mais" | translate }} 
+              " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas'" falarTexto>
+              {{ "telas.tela-inicial.ver-mais" | translate }}
               ({{
-                qtdDemandasStatus[i]
+              qtdDemandasStatus[i]
               }})
             </div>
 
             <!-- Ver-mais para a demandas do usuário -->
-            <div
-            class="me-3"
-            style="align-self: flex-end; cursor: pointer"
-            (click)="
+            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="
               pesquisarDemandasDoUsuario()
-            "
-            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'"
-            falarTexto
-          >
-            {{ "telas.tela-inicial.ver-mais" | translate }} 
-          </div>
+            " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'" falarTexto>
+              {{ "telas.tela-inicial.ver-mais" | translate }}
+            </div>
           </div>
           <div class="d-flex position-relative" #tamanhoDaFila style="width: 100%">
             <div [style.left.px]="positionListCards[i]" [id]="'filaCompleta' + i"

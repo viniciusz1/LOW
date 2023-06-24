@@ -90,6 +90,20 @@ export class TelaLayoutComponent implements OnInit {
       }
       count++;
     }
+    count = 0;
+    
+    for (let i of this.listOfColorsStatusReuniao) {
+      if (
+        this.personalizacaoEscolhida.coresPrimariasReuniaoPersonalizacao &&
+        this.personalizacaoEscolhida.coresSecundariasReuniaoPersonalizacao
+      ) {
+        i['corPrimaria'] =
+          this.personalizacaoEscolhida.coresPrimariasReuniaoPersonalizacao[count];
+        i['corSecundaria'] =
+          this.personalizacaoEscolhida.coresSecundariasReuniaoPersonalizacao[count];
+      }
+      count++;
+    }
   }
 
   //Muda a exibição das demandas para formato de lista
@@ -187,6 +201,8 @@ export class TelaLayoutComponent implements OnInit {
   }
 
   criarNovaPersonalizacao(value: string) {
+    console.log(this.listOfColorsStatusReuniao)
+    console.log(this.listOfColorsStatusDemand)
     if (value == '') {
       return;
     }
@@ -194,6 +210,8 @@ export class TelaLayoutComponent implements OnInit {
     let personalizacao: Personalizacao = {
       coresPrimariasPersonalizacao: [],
       coresSecundariasPersonalizacao: [],
+      coresPrimariasReuniaoPersonalizacao: [],
+      coresSecundariasReuniaoPersonalizacao: [],
       ativaPersonalizacao: true,
       nomePersonalizacao: value,
     };
@@ -205,6 +223,16 @@ export class TelaLayoutComponent implements OnInit {
       ) {
         personalizacao.coresPrimariasPersonalizacao.push(cores.corPrimaria);
         personalizacao.coresSecundariasPersonalizacao.push(cores.corSecundaria);
+      }
+    }
+
+    for (let cores of this.listOfColorsStatusReuniao) {
+      if (
+        personalizacao.coresPrimariasReuniaoPersonalizacao &&
+        personalizacao.coresSecundariasReuniaoPersonalizacao
+      ) {
+        personalizacao.coresPrimariasReuniaoPersonalizacao.push(cores.corPrimaria);
+        personalizacao.coresSecundariasReuniaoPersonalizacao.push(cores.corSecundaria);
       }
     }
 

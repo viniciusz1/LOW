@@ -3,5 +3,7 @@ export interface Personalizacao{
   codigoPersonalizacao?: number;
   coresPrimariasPersonalizacao?: string[];
   coresSecundariasPersonalizacao?: string[];
+  coresPrimariasReuniaoPersonalizacao?: string[];
+  coresSecundariasReuniaoPersonalizacao?: string[];
   ativaPersonalizacao?: boolean;
 }

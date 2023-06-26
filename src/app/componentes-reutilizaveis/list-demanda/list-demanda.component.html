@@ -1,5 +1,5 @@
 <ul class="nav position-relative container-lista low-shadow p-2" [ngStyle]="{'width':  mudarTamanho}">
-    <div class="linha" style="height: 100%; width: 10px;" [ngClass]="primaryColorClass"></div>
+    <div class="linha" style="height: 100%; width: 10px;" [ngStyle]="{ 'background-color': primaryColor }"></div>
     <div class="d-flex" style="width: 80%;">
         <li class="nav-item">
             <label pTooltip="Código demanda" tooltipPosition="top" falarTexto class="" for="">{{dadosDemanda.codigoDemanda}}</label>

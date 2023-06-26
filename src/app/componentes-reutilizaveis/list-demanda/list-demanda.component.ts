@@ -5,6 +5,7 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { NivelAcesso } from 'src/app/models/nivel-acesso.enum';
 import { MessageService } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
 
 @Component({
   selector: 'app-list-demanda',
@@ -42,13 +43,18 @@ export class ListDemandaComponent implements OnInit {
   @Input() mostrarBotao = true;
   @Input() mudarTamanho: string = '68vw';
   @Input('mostrarIconeAdicionar') demandaPequena = false;
+  @Input() primaryColor?: string = '';
+  @Input() secondaryColor: string = '';
 
 
 
   nivelAcesso: NivelAcesso = NivelAcesso.Analista;
   textoExibidoEmBotaoDependendoRota: { rota: string, texto: string } | undefined = undefined;
 
-  constructor(private route: Router, private usuarioService: UsuarioService, private messageService: MessageService) { }
+  constructor(private route: Router, 
+    private usuarioService: UsuarioService, 
+    private messageService: MessageService,
+    private personalizacaoService: PersonalizacaoService) { }
   statusPermitido() {
     if (
       this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -282,8 +288,20 @@ export class ListDemandaComponent implements OnInit {
     }
     return true;
   }
-
+  getOrdinalValueStatusDemanda(value: StatusDemanda | undefined): number | undefined {
+    const enumValues = Object.values(StatusDemanda);
+    const index = enumValues.indexOf(value as StatusDemanda);
+    return index !== -1 ? index : undefined;
+  }
   ngOnInit(): void {
+
+    if(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao){
+
+      let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
+      this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]
+      this.secondaryColor = this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao[ordinal]
+    }
+
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + "-sec";
     this.exibicaoBotoes()

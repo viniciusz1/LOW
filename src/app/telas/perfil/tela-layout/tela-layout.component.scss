@@ -55,6 +55,14 @@ h6 {
     justify-content: center;
 }
 
+.list-items{
+    min-width: 40%;
+    height: 200px; 
+    overflow-y: scroll;
+  
+}
+
+
 .nome-dado {
     width: 20vw;
     display: flex;
@@ -70,13 +78,6 @@ h6 {
     font-size: 11px;
 }
 
-.perfil,
-.layout,
-.notificacoes,
-.sugestoes,
-.ajuda {
-    cursor: pointer;
-}
 
 .rota-Ativa {
     background-color: #00579D;

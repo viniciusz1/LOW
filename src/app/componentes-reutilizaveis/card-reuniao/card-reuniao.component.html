@@ -1,6 +1,6 @@
 <div class="card low-shadow position-relative">
-    <div class="line-top-start" [ngClass]="primaryColorClass"></div>
-    <div class="line-top-end" [ngClass]="secondaryColorClass"></div>
+    <div class="line-top-start" [ngStyle]="{ 'background-color': primaryColor }"></div>
+    <div class="line-top-end" [ngStyle]="{ 'background-color': secondaryColor }"></div>
     <div class="card-body pb-1">
         <div class="mt-2 card-title d-flex" style="align-items: baseline;
     justify-content: space-between;">

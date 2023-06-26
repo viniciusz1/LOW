@@ -31,12 +31,14 @@
                 {{textoExibidoEmBotaoDependendoRota.texto}}
             </button>
         </li>
-        <i
-        class="bi bi-chat-left-dots me-3"
-        *ngIf="!rascunho && statusPermitido() && exibirIniciarChat() && !demandaPequena " 
-        (click)="irParaChat.emit($event)"
-        style="cursor: pointer"
-      ></i>
+        <div class="final-list" style="width: 5%; margin-right: 0.5vh;">
+            <i
+            class="bi bi-chat-left-dots me-3"
+            *ngIf="!rascunho && statusPermitido() && exibirIniciarChat() && !demandaPequena " 
+            (click)="irParaChat.emit($event)"
+            style="cursor: pointer"
+          ></i>
+        </div>
         <i class="bi bi-three-dots-vertical three-dots" [ngClass]="{'me-3': demandaPequena}" role="button"
             [matMenuTriggerFor]="menu"></i>
         <i class="bi bi-plus-lg" *ngIf="demandaPequena" role="button" (click)="clicouAdicionarPauta.emit()"></i>

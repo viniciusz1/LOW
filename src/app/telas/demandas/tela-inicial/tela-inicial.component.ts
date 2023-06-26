@@ -129,7 +129,7 @@ export class TelaInicialComponent implements OnInit {
     if (tipo == 1) {
       const statusKeys = Object.keys(statusContagem);
       for (const key of statusKeys) {
-        if (statusContagem[key] > 6) {
+        if (statusContagem[key] > 5) {
           return true;
         }
       }

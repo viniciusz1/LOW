@@ -5,6 +5,9 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Demanda } from 'src/app/models/demanda.model';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
+import { Usuario } from 'src/app/models/usuario.model';
+import { Reuniao } from 'src/app/models/reuniao.model';
+import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
 
 @Component({
   selector: 'app-tela-layout',
@@ -15,6 +18,7 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 export class TelaLayoutComponent implements OnInit {
   themeSelection: boolean = false;
   demanda: Demanda;
+  reuniao: Reuniao;
   alterarTamanhoTexto = true;
   tipoExibicaoDemanda = true;
 
@@ -24,12 +28,54 @@ export class TelaLayoutComponent implements OnInit {
     private personalizacaoService: PersonalizacaoService,
     private messageService: MessageService
   ) {
-    this.demanda = { statusDemanda: StatusDemanda.ASSESSMENT };
+    let user: any = {
+      nomeUsuario: 'Demanda de exemplo',
+      departamentoUsuario: {
+        nomeDepartamento: 'Lorem ipsum...',
+      },
+    };
+    this.demanda = {
+      statusDemanda: StatusDemanda.DRAFT,
+      solicitanteDemanda: user,
+      codigoDemanda: '100',
+      tituloDemanda: 'Análise de cor',
+    };
+
+    let propostas: Demanda[] = [
+      {
+        tituloDemanda: 'teste',
+        busBeneficiadasDemandaClassificada: ['cores novas'],
+      },
+      {
+        tituloDemanda: 'teste',
+        busBeneficiadasDemandaClassificada: ['cores novas'],
+      },
+      {
+        tituloDemanda: 'teste',
+        busBeneficiadasDemandaClassificada: ['cores novas'],
+      },
+      {
+        tituloDemanda: 'teste',
+        busBeneficiadasDemandaClassificada: ['cores novas'],
+      },
+      {
+        tituloDemanda: 'teste',
+        busBeneficiadasDemandaClassificada: ['cores novas'],
+      },
+    ];
+
+    this.reuniao = {
+      dataReuniao: new Date(),
+      codigoReuniao: 100,
+      comissaoReuniao: 'Teste suas cores',
+      statusReuniao: StatusReuniao.AGUARDANDO,
+      propostasReuniao: propostas,
+    };
     this.setarPersonalizacoes();
   }
 
   teste() {
-    console.log('ok');
+    console.log(this.personalizacaoEscolhida);
     this.showSuccess('foiasjdpofajspodfja');
   }
 
@@ -37,10 +83,10 @@ export class TelaLayoutComponent implements OnInit {
     this.personalizacaoService.getPersonalizacoes().subscribe({
       next: (e) => {
         this.opcoesPersonalizacao = e;
-        let index = this.opcoesPersonalizacao.findIndex(
+        let personalizacao = this.opcoesPersonalizacao.find(
           (e) => e.ativaPersonalizacao == true
         );
-        this.trocarPersonalizacao({ value: index });
+        this.trocarPersonalizacao(personalizacao as Personalizacao);
       },
       error: (err) => {
         console.log(err);
@@ -49,7 +95,8 @@ export class TelaLayoutComponent implements OnInit {
   }
 
   novaPersoDemanda: boolean = false;
-  definirAtivo() {
+  definirAtivo(index: number) {
+    this.personalizacaoEscolhida = this.opcoesPersonalizacao[index];
     if (this.personalizacaoEscolhida?.codigoPersonalizacao) {
       this.personalizacaoService
         .mudarPersonalizacaoAtiva(
@@ -63,6 +110,8 @@ export class TelaLayoutComponent implements OnInit {
               localStorage.setItem('personalizacao', JSON.stringify(ativa));
               this.personalizacaoService.personalizacaoAtiva = ativa;
             }
+            this.personalizacaoEscolhida = ativa;
+            alert('Estilo de Cores das Demandas Alterado com sucesso!');
             this.showSuccess(
               'Estilo de Cores das Demandas Alterado com sucesso!'
             );
@@ -75,9 +124,13 @@ export class TelaLayoutComponent implements OnInit {
   }
 
   //personalização.value é o índice
-  trocarPersonalizacao(personalizacao: any) {
-    this.personalizacaoEscolhida =
-      this.opcoesPersonalizacao[personalizacao.value];
+  trocarPersonalizacao(personalizacao: Personalizacao) {
+    this.personalizacaoEscolhida = personalizacao as Personalizacao;
+    if(this.personalizacaoEscolhida.coresPrimariasReuniaoPersonalizacao &&
+      this.personalizacaoEscolhida.coresSecundariasReuniaoPersonalizacao){
+      this.primaryColorReuniaoSelected = this.personalizacaoEscolhida.coresPrimariasReuniaoPersonalizacao[0]
+      this.secondaryColorReuniaoSelected = this.personalizacaoEscolhida.coresSecundariasReuniaoPersonalizacao[0]
+    }
     let count = 0;
     for (let i of this.listOfColorsStatusDemand) {
       if (
@@ -271,6 +324,7 @@ export class TelaLayoutComponent implements OnInit {
       next: (res) => {
         localStorage.setItem('personalizacao', JSON.stringify(res));
         this.personalizacaoService.personalizacaoAtiva = res;
+        alert('Salvo com sucesso!');
         this.showSuccess('Personalização Editada com sucesso!');
       },
       error: (err) => {
@@ -286,29 +340,32 @@ export class TelaLayoutComponent implements OnInit {
 
   changePrimaryColor(event: any, index: number, tipo: string) {
     // this.demanda.statusDemanda = this.listOfColorsStatusDemand[i].status
-    if(tipo == 'demanda'){
+    if (tipo == 'demanda') {
+      
       this.listOfColorsStatusDemand[index].corPrimaria = event;
       this.primaryColorSelected = event;
       this.secondaryColorSelected =
         this.listOfColorsStatusDemand[index].corSecundaria;
       if (this.personalizacaoEscolhida?.coresPrimariasPersonalizacao) {
-        this.personalizacaoEscolhida.coresPrimariasPersonalizacao[index] = event;
+        this.personalizacaoEscolhida.coresPrimariasPersonalizacao[index] =
+          event;
       }
-    }else{
+    } else {
       this.listOfColorsStatusReuniao[index].corPrimaria = event;
       this.primaryColorReuniaoSelected = event;
       this.secondaryColorReuniaoSelected =
         this.listOfColorsStatusReuniao[index].corSecundaria;
       if (this.personalizacaoEscolhida?.coresPrimariasReuniaoPersonalizacao) {
-        this.personalizacaoEscolhida.coresPrimariasReuniaoPersonalizacao[index] = event;
+        this.personalizacaoEscolhida.coresPrimariasReuniaoPersonalizacao[
+          index
+        ] = event;
       }
     }
-    
   }
 
   changeSecondaryColor(event: any, index: number, tipo: string) {
     // this.demanda.statusDemanda = this.listOfColorsStatusDemand[i].status
-    if(tipo == 'demanda'){
+    if (tipo == 'demanda') {
       this.listOfColorsStatusDemand[index].corSecundaria = event;
       this.primaryColorSelected =
         this.listOfColorsStatusDemand[index].corPrimaria;
@@ -317,27 +374,40 @@ export class TelaLayoutComponent implements OnInit {
         this.personalizacaoEscolhida.coresSecundariasPersonalizacao[index] =
           event;
       }
-    }else{
+    } else {
       this.listOfColorsStatusReuniao[index].corSecundaria = event;
       this.primaryColorReuniaoSelected =
         this.listOfColorsStatusReuniao[index].corPrimaria;
       this.secondaryColorReuniaoSelected = event;
       if (this.personalizacaoEscolhida?.coresSecundariasReuniaoPersonalizacao) {
-        this.personalizacaoEscolhida.coresSecundariasReuniaoPersonalizacao[index] =
-          event;
+        this.personalizacaoEscolhida.coresSecundariasReuniaoPersonalizacao[
+          index
+        ] = event;
       }
     }
-
-   
   }
 
-  deletarPersonalizacao() {
+  deletarPersonalizacao(index: number) {
+    this.personalizacaoEscolhida = this.opcoesPersonalizacao[index]
+    if (this.personalizacaoEscolhida?.ativaPersonalizacao == true) {
+      alert(
+        'Você não pode excluir uma personalização que se encontra ativa! Defina uma outra personalização como ativa, e então exclua esta.'
+      );
+      return;
+    }
     this.personalizacaoService
       .deletePersonalizacao(
         this.personalizacaoEscolhida?.codigoPersonalizacao as number
       )
       .subscribe({
         next: (e) => {
+          let index = this.opcoesPersonalizacao.findIndex(
+            (e) =>
+              e.codigoPersonalizacao ==
+              this.personalizacaoEscolhida?.codigoPersonalizacao
+          );
+          this.opcoesPersonalizacao.splice(index, 1);
+          this.setarPersonalizacoes();
           alert('Deletado com sucesso!');
         },
         error: (err) => {
@@ -349,7 +419,15 @@ export class TelaLayoutComponent implements OnInit {
   setFontTheme(opc: string) {
     this.configIniciaisService.setFontTheme(opc);
   }
-
+  salvarEDefinirAtivo() {
+    this.editarPersonalizacao();
+    let index = this.opcoesPersonalizacao.findIndex(
+      (e) =>
+        e.codigoPersonalizacao ==
+        this.personalizacaoEscolhida?.codigoPersonalizacao
+    );
+    this.definirAtivo(index);
+  }
   redefinir() {
     this.configIniciaisService.redefinir();
   }

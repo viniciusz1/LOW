@@ -131,7 +131,7 @@ export class HeaderComponent implements OnInit {
     this.messagesService.verificaSeTemNotificacoes().subscribe((temNotificacoes) => {
       this.mensagemNova = temNotificacoes;
     })
-    // this.iniciarWebSocketNotificationCount();
+    this.subscribeNotificationCount();
   }
 
 

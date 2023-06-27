@@ -8,6 +8,7 @@ import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Usuario } from 'src/app/models/usuario.model';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { StatusReuniao } from 'src/app/models/statusReuniao.enum';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-tela-layout',
@@ -21,13 +22,15 @@ export class TelaLayoutComponent implements OnInit {
   reuniao: Reuniao;
   alterarTamanhoTexto = true;
   tipoExibicaoDemanda = true;
-
+  nivelAcesso = ''
   constructor(
     public configIniciaisService: ConfiguracoesIniciaisService,
     private confirmationService: ConfirmationService,
     private personalizacaoService: PersonalizacaoService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private usuarioService: UsuarioService
   ) {
+    this.nivelAcesso = usuarioService.getRole as string;
     let user: any = {
       nomeUsuario: 'Demanda de exemplo',
       departamentoUsuario: {

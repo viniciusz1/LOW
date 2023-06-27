@@ -178,7 +178,17 @@ export class TelaReuniaoComponent implements OnInit {
     ordenar: string;
     page: string;
     size: string
-  }) {
+  } = {
+    nomeComissao: "",
+    dataReuniao: "",
+    statusReuniao: "",
+    ppmProposta: "",
+    analista: "",
+    solicitante: "",
+    ordenar: "",
+    page: "",
+    size: ""}) {
+      // console.log("SALVE")
     this.reuniaoService.getReuniaoFiltrada(event).subscribe({
       next: listaReunioes => {
         console.log(listaReunioes)

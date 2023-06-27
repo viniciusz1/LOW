@@ -31,8 +31,16 @@ export class FiltroReuniaoComponent implements OnInit {
 
   emitirFiltro(dados: { nomeComissao: string, dataReuniao: Date | string, statusReuniao: string, ppmProposta: string, analista: string, solicitante: string, ordenar: string, page: string, size: string }) {
     let data = this.datePipe.transform(dados.dataReuniao, 'yyyy-MM-dd');
-    dados.dataReuniao = data as string
-    // console.log(data)
+    if(data != undefined){
+      dados.dataReuniao = data as string
+    }else{
+      dados.dataReuniao = ''
+    }
+
+    if(dados.statusReuniao == undefined){
+      dados.statusReuniao = '';
+    }
+      
     // console.log("Entrou no if - ok")
     //@ts-ignore
     this.filtroAcionado.emit(dados)

@@ -276,11 +276,28 @@ export class ModalCriarReuniaoComponent implements OnInit {
           this.listaDemandas = listaDemandas;
           this.nenhumResultadoEncontrado = false;
           this.removerDaListaAdicSecundaria()
+          this.removerExcessoListaPrimaria();
         } else {
           this.listaDemandas = [];
           this.nenhumResultadoEncontrado = true;
         }
       });
+  }
+
+  removerExcessoListaPrimaria(){
+    const lista = this.listaDemandasEscolhidas;
+    let listaEditada = this.listaDemandas 
+    listaEditada.forEach(function (demandaUm, indexUm) {
+      // percorre cada objeto na listaDois
+      lista.forEach(function (demandaDois, indexDois) {
+        // verifica se as demandas têm o mesmo código
+        if (demandaUm.codigoDemanda === demandaDois.codigoDemanda) {
+          // remove o objeto da listaUm
+          listaEditada.splice(indexUm, 1);
+        }
+      });
+    });
+    this.listaDemandas = listaEditada
   }
 
   //undefined - valores iniciais
@@ -294,7 +311,8 @@ export class ModalCriarReuniaoComponent implements OnInit {
           this.totalPagesPagination = this.demandaService.totalPages
           this.listaDemandas = listaDemandas;
           this.nenhumResultadoEncontrado = false;
-          this.removerDaListaAdicSecundaria()
+          this.removerDaListaAdicSecundaria();
+          this.removerExcessoListaPrimaria();
         } else {
           this.listaDemandas = [];
           this.nenhumResultadoEncontrado = true;

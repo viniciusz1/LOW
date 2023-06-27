@@ -102,6 +102,11 @@ export class ParteReuniaoComponent implements OnInit {
   clonedRecursos: { [s: string]: Recurso } = {};
   tipoDaDespesa = [{ tipo: 'Interna', value: 'interno' }, { tipo: 'Externa', value: 'externo' }];
   perfilDaDespesa = [{ tipo: 'Hardware', value: 'hardware' }, { tipo: 'Software', value: 'software' }, { tipo: 'Corporativo', value: 'corporativo' }];
+  valorHoraRecursoValue: number | undefined;
+  qtdHorasRecurso: number | undefined;
+  periodoExecucao: number | undefined;
+  centroCustoValor: number | undefined;
+
 
   onSubmit() {
     // console.log(this.formProposta.value);

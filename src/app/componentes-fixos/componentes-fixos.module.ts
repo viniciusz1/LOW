@@ -13,6 +13,7 @@ import {TabMenuModule} from 'primeng/tabmenu';
 import { EscopoPerfilComponent } from './escopo-perfil/escopo-perfil.component';
 import { SharedModule } from '../shared/shared.module';
 import { VLibrasComponent } from './v-libras/v-libras.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 /*
   Módulo do sistema onde ficam componentes em que são usados em múltiplas telas e não necessitam
@@ -37,7 +38,8 @@ import { VLibrasComponent } from './v-libras/v-libras.component';
     BreadcrumbModule,
     JoyrideModule.forRoot(),
     TabMenuModule,
-    SharedModule
+    SharedModule,
+    TooltipModule
   ],
   exports: [
     HeaderComponent,

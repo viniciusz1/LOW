@@ -270,7 +270,7 @@
                   status: linha.status,
                   pesquisaCampo: undefined
                 })
-              " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas'" falarTexto>
+              " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas' && exibirDivRightArrow(linha.titulo, 2)" falarTexto>
               {{ "telas.tela-inicial.ver-mais" | translate }}
               ({{
               qtdDemandasStatus[i]
@@ -278,9 +278,8 @@
             </div>
 
             <!-- Ver-mais para a demandas do usuário -->
-            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="
-              pesquisarDemandasDoUsuario()
-            " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'" falarTexto>
+            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="pesquisarDemandasDoUsuario()" 
+            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'" falarTexto>
               {{ "telas.tela-inicial.ver-mais" | translate }}
             </div>
           </div>

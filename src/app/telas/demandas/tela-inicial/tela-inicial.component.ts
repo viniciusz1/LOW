@@ -108,6 +108,7 @@ export class TelaInicialComponent implements OnInit {
   exibirDivLateral = true;
   resultadoDivLateral: number = 0;
 
+
   exibirDivRightArrow(titulo: string, tipo: number): boolean {
     const demandasFiltradas = this.listaDemandas.filter(demanda =>
       this.filtrarDemandaStatus.transform([demanda], titulo) !== undefined
@@ -514,14 +515,23 @@ export class TelaInicialComponent implements OnInit {
 
   //Abre o modal do motivo de reprovação da demanda
   openModalMotivoReprovacao(demanda: Demanda) {
+    let mensagemReprovacao = '';
     this.confirmacaoReprovacao = true;
+
+    if (demanda.motivoReprovacaoDemanda) {
+      mensagemReprovacao = demanda.motivoReprovacaoDemanda;
+    }
+
+    if (demanda.motivoReprovacaoDemanda == null) {
+      mensagemReprovacao = "Os motivos não foram disponibilizados";
+    }
+
     this.confirmationService.confirm({
       dismissableMask: true,
       key: 'motivoReprovacao',
       header: 'Motivo da Reprovação',
       blockScroll: false,
-      message:
-        demanda.motivoReprovacaoDemanda,
+      message: mensagemReprovacao,
       accept: () => {
         this.router.navigate(['/tela-inicial/reformular-demanda/' + demanda.codigoDemanda])
       },

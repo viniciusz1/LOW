@@ -85,7 +85,6 @@ export class CardDemandaComponent implements OnInit {
         if (reuniao.propostasReuniao) {
           for (const demanda of reuniao.propostasReuniao) {
             if (demanda.codigoDemanda == codigoDemanda) {
-              console.log("entrou no if");
               this.codigoReuniao = reuniao.codigoReuniao;
               this.demandaEncontrada = true;
               return;

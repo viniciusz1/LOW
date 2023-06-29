@@ -32,3 +32,7 @@
 .estilo-cards:hover {
   background: #015da8;
 }
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background: #00579D;
+}

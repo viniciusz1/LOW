@@ -12,6 +12,12 @@
     }
 }
 
+:host ::ng-deep {
+    .p-dialog{
+        width: 45vw;
+    }
+}
+
 .right-arrow:hover,
 .left-arrow:hover {
     background-color: rgba(0, 0, 0, 0.596);

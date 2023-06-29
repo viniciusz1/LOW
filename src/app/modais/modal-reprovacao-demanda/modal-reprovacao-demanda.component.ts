@@ -5,7 +5,7 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/models/usuario.model';
 import { ModalService } from 'src/app/services/modal.service';
@@ -19,13 +19,15 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
   dadosDemanda: Demanda | undefined;
   usuario: Usuario | undefined;
   solicitante: boolean = false;
+  motivoDemandaPropria = "Os motivos não foram disponibilizados";
 
   constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
     private usuarioService: UsuarioService,
     @Inject(DIALOG_DATA) public data: Demanda,
     private modalService: ModalService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
   ) {
     this.usuario = usuarioService.getUser('user')
     console.log(data)
@@ -39,7 +41,36 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   motivoReprovacao = ""
+
+  cancelarDemanda(){
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      header: 'Cancelar Demanda',
+      blockScroll: false,
+      message: 'Tem certeza que deseja cancelar esta demanda?',
+      accept: () => {
+        if (this.data.codigoDemanda) {
+          this.demandaService
+            .reprovarDemanda(
+              parseInt(this.data.codigoDemanda),
+              this.motivoDemandaPropria
+            )
+            .subscribe({
+              next: event => {
+                this.showSuccess("Demanda reprovada com sucesso!")
+              },
+              error: err => {
+                this.showError("Não foi possivel cancelar a demanda!")
+              }
+            });
+        }
+      },
+      },
+    );
+  }
+
   reprovarDemanda() {
     // console.log(this.dadosDemanda)
     if(this.dadosDemanda?.codigoDemanda)

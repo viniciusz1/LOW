@@ -14,24 +14,33 @@ export class ModalAtaDocumentoComponent implements OnInit {
   path = path;
   demandaEncontrada: boolean = false;
   reunioes: Reuniao[] | undefined;
-
+  reuniao: Reuniao | undefined;
+  demandasPorAta: Demanda[] = [];
 
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
-    private reuniaoService: ReuniaoService) {
-
+    private reuniaoService: ReuniaoService
+  ) { }
+  
+  ngOnInit() {
     this.reuniaoService.getReuniao().subscribe(reunioes => {
       this.reunioes = reunioes;
-
+  
       if (this.reunioes) {
         for (const reuniaoPrincipal of this.reunioes) {
           if (reuniaoPrincipal.propostasReuniao) {
             for (const demanda of reuniaoPrincipal.propostasReuniao) {
-              if (demanda.codigoDemanda == data.codigoDemanda) {
-                console.log("entrou no if");
+              if (demanda.codigoDemanda === this.data.codigoDemanda) {
+                console.log("Entrou no if");
                 this.reuniao = reuniaoPrincipal;
-                // this.tipoAta = reuniao.tipo;
                 this.demandaEncontrada = true;
+  
+                // Exibir informações das propostas
+                console.log("Propostas encontradas:");
+                for (const proposta of reuniaoPrincipal.propostasReuniao) {
+                  console.log(JSON.stringify(proposta.codigoDemanda));
+                  this.demandasPorAta.push(proposta);
+                }
                 return;
               }
             }
@@ -39,28 +48,26 @@ export class ModalAtaDocumentoComponent implements OnInit {
         }
       }
     });
-
-    // this.reuniao = data.reuniao;
-    // 
-    console.log(this.tipoAta)
+  
+    console.log(this.tipoAta);
   }
+
   mostrarHr(indice: number, tipoAta: string) {
-    console.log("Entrou")
-    if (indice == 0) {
+    console.log("Entrou");
+    if (indice === 0) {
       return false;
     }
 
-    console.log()
-    if (this.reuniao?.propostasReuniao?.filter(e => e.tipoAtaProposta == tipoAta).length == 1) {
+    if (
+      this.reuniao?.propostasReuniao?.filter(
+        e => e.tipoAtaProposta === tipoAta
+      ).length === 1
+    ) {
       return false;
     }
-    return true
+
+    return true;
   }
 
-  ngOnInit(): void {
-  }
-
-  tipoAta: string = ""
-  reuniao: Reuniao | undefined
-
+  tipoAta: string = "";
 }

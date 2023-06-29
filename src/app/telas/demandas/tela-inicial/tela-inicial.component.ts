@@ -248,6 +248,10 @@ export class TelaInicialComponent implements OnInit {
       });
   }
 
+  reloadPage() {
+    window.location.reload();
+  }
+
   //Salva o arquivo excel
   saveAsExcelFile(buffer: any, fileName: string): void {
     let EXCEL_TYPE =
@@ -402,6 +406,7 @@ export class TelaInicialComponent implements OnInit {
   }) {
     this.cabecalhoMensagemDeConfirmacao = 'Avançar status';
     this.confirmationService.confirm({
+      header: "Avançar Status",
       dismissableMask: true,
       blockScroll: false,
       message: info.mensagem,
@@ -720,10 +725,10 @@ export class TelaInicialComponent implements OnInit {
   }
 
   deletarDemanda(demanda: Demanda) {
-
     this.confirmationService.confirm({
       key: "motivoReprovacao",
       header: 'Deletar Rascunho',
+      blockScroll: false,
       message: 'Você deseja deletar essa Rascunho?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

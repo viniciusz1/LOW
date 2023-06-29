@@ -15,29 +15,32 @@ export class ModalAtaDocumentoComponent implements OnInit {
   demandaEncontrada: boolean = false;
   reunioes: Reuniao[] | undefined;
   reuniao: Reuniao | undefined;
+  demandasPorAta: Demanda[] = [];
 
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
     private reuniaoService: ReuniaoService
-  ) {
+  ) { }
+  
+  ngOnInit() {
     this.reuniaoService.getReuniao().subscribe(reunioes => {
       this.reunioes = reunioes;
-
+  
       if (this.reunioes) {
         for (const reuniaoPrincipal of this.reunioes) {
           if (reuniaoPrincipal.propostasReuniao) {
             for (const demanda of reuniaoPrincipal.propostasReuniao) {
-              if (demanda.codigoDemanda === data.codigoDemanda) {
+              if (demanda.codigoDemanda === this.data.codigoDemanda) {
                 console.log("Entrou no if");
                 this.reuniao = reuniaoPrincipal;
                 this.demandaEncontrada = true;
-
+  
                 // Exibir informações das propostas
                 console.log("Propostas encontradas:");
                 for (const proposta of reuniaoPrincipal.propostasReuniao) {
-                  console.log(JSON.stringify(proposta));
+                  console.log(JSON.stringify(proposta.codigoDemanda));
+                  this.demandasPorAta.push(proposta);
                 }
-
                 return;
               }
             }
@@ -45,7 +48,7 @@ export class ModalAtaDocumentoComponent implements OnInit {
         }
       }
     });
-
+  
     console.log(this.tipoAta);
   }
 
@@ -66,7 +69,5 @@ export class ModalAtaDocumentoComponent implements OnInit {
     return true;
   }
 
-  ngOnInit(): void {}
-  
   tipoAta: string = "";
 }

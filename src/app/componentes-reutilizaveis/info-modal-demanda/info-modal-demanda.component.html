@@ -22,11 +22,11 @@
   >
 </h4>
 <div class="espacamento mb-3" *ngIf="dadosDemanda?.tamanhoDemandaClassificada">
-  <h3 class="h3"><strong>Dados da classificação do Analista: </strong> {{dadosDemanda?.analista?.nomeUsuario}}</h3>
-  <p><b>Tamanho da Demanda: </b>{{dadosDemanda?.tamanhoDemandaClassificada}}</p>
-  <p><b>BU Solicitante: </b>{{dadosDemanda?.buSolicitanteDemandaClassificada}}</p>
-  <p><b>BUs Beneficiadas: </b><span *ngFor="let bu of dadosDemanda?.busBeneficiadasDemandaClassificada">{{bu}}</span></p>
-  <p><b>Seção de TI Responsável: </b>{{dadosDemanda?.secaoDemandaClassificada}}</p>
+  <h3 class="h3"><strong>{{ "documento-pdf.dados-classificacao" | translate }} </strong> {{dadosDemanda?.analista?.nomeUsuario}}</h3>
+  <p><b>{{ "documento-pdf.tamanho-demanda" | translate }} </b>{{dadosDemanda?.tamanhoDemandaClassificada}}</p>
+  <p><b>{{ "documento-pdf.bu-solicitante" | translate }} </b>{{dadosDemanda?.buSolicitanteDemandaClassificada}}</p>
+  <p><b>{{ "documento-pdf.bu-beneficiada" | translate }} </b><span *ngFor="let bu of dadosDemanda?.busBeneficiadasDemandaClassificada">{{bu}}</span></p>
+  <p><b>{{ "documento-pdf.secao-responsavel" | translate }} </b>{{dadosDemanda?.secaoDemandaClassificada}}</p>
 </div>
 
 <h4 falarTexto>
@@ -115,7 +115,7 @@
   </ol>
 
   <p falarTexto>
-    <b> {{ "documento-pdf.custos-totais" | translate }}</b> R${{
+    <b> {{ "documento-pdf.custos-totais" | translate }}</b> {{ "documento-pdf.din" | translate }}{{
       custosTotais
     }}
   </p>
@@ -182,7 +182,7 @@
     <b>
       {{ "documento-pdf.periodo-execucao" | translate }}
     </b>
-    {{ dadosDemanda?.inicioExDemandaProposta | date : "dd/MM/yyyy" }} à
+    {{ dadosDemanda?.inicioExDemandaProposta | date : "dd/MM/yyyy" }} {{ "documento-pdf.a" | translate }}
     {{ dadosDemanda?.fimExDemandaProposta | date : "dd/MM/yyyy" }}
   </p>
   <p falarTexto>

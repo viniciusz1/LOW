@@ -97,7 +97,7 @@
               class="btn btn-outline-primary mb-3"
               (click)="openModalCriarReuniao()"
             >
-              Editar Reunião
+            {{ "telas.tela-ver-pauta.editar-reuniao" | translate }}
             </button>
             <button
               falarTexto
@@ -118,10 +118,10 @@
           <div *ngIf="reuniao?.statusReuniao == 'CONCLUIDO'">
             <button (click)="openModalDG()" class="btn btn-primary mb-4">
               <span falarTexto *ngIf="reuniao?.numAtaDG == ''"
-                >Adicionar Info. DG</span
+                >{{ "telas.tela-ver-pauta.add-info" | translate }}</span
               >
               <span falarTexto *ngIf="reuniao?.numAtaDG != ''"
-                >Editar Info. DG</span
+                >{{ "telas.tela-ver-pauta.editar-info" | translate }}</span
               >
             </button>
           </div>

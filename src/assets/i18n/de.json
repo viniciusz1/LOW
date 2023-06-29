@@ -70,7 +70,19 @@
             "preto": "Schwarz",
             "temas": "Themen",
             "fonte": "Schriftart",
-            "tamanho": "Größe"
+            "tamanho": "Schriftgröße",
+            "personalizacao": "Farbanpassung:",
+            "descricao1": "Klicken Sie auf eine vorhandene Anpassung oder erstellen Sie eine neue, nehmen Sie die gewünschten Änderungen vor, speichern Sie diese und setzen Sie sie als aktiv.",
+            "descricao2": "Wenn Sie eine neue Farbanpassung für das System festlegen, wird diese Operation für alle Benutzer durchgeführt.",
+            "descricao3": "Wählen Sie eine Vorlage aus, die Sie anpassen möchten!",
+            "definir-ativo": "Als Aktiv festlegen",
+            "criar-nova": "Neu erstellen",
+            "cancelar": "Abbrechen",
+            "criar-personalizacao": "Neue Anpassung erstellen",
+            "cores-demandas": "Farben der Anfragen:",
+            "cores-reuniao": "Farben der Meetings",
+            "salvar-alteracao": "Änderungen speichern",
+            "salvar-ativo": "Speichern und als Aktiv festlegen"
         },
         "configuracoes-sugestoes": {
             "titulo": "Vorschläge",
@@ -176,7 +188,9 @@
             "tool-memoria-beneficio-potencial": "Wie haben Sie den Nutzen berechnet?",
             "tool-beneficio-qualitativo": "Was wäre der Nutzen in Bezug auf Disziplin, Kontrolle und Planung?",
             "tool-frequencia-uso-sistema": "Wie oft würde das System genutzt werden?",
-            "tool-anexar-documento": "Möchten Sie Dateien (PDF, XML, POM...) anhängen, die sich auf Ihren Vorschlag beziehen, wie z. B. Untersuchungen?"
+            "tool-anexar-documento": "Möchten Sie Dateien (PDF, XML, POM...) anhängen, die sich auf Ihren Vorschlag beziehen, wie z. B. Untersuchungen?",
+            "maximo-total": "Maximaler Gesamtwert: 100MB",
+            "enter": "Klicken Sie auf 'Enter', um zu bestätigen"
         },
         "proposta": {
             "proposta": "Vorschlag",
@@ -259,7 +273,8 @@
             "solicitante": "Antragsteller:",
             "analista": "Analyst:",
             "selecione-conversa": "WÄHLE EINE UNTERHALTUNG AUS",
-            "conversas-cadastradas": "DU HAST KEINE REGISTRIERTEN UNTERHALTUNGEN"
+            "conversas-cadastradas": "DU HAST KEINE REGISTRIERTEN UNTERHALTUNGEN",
+            "conversando": "Sie chatten mit:"
         },
         "tela-calendario": {
             "calendario-reunioes": "Kalender der Meetings"
@@ -284,7 +299,9 @@
             "b-cancelar-reuniao": "Treffen absagen",
             "b-nao": "Nein",
             "b-sim": "Ja",
-            "editar-reuniao": "Besprechung bearbeiten"
+            "editar-reuniao": "Besprechung bearbeiten",
+            "add-info": "DG-Information hinzufügen",
+            "editar-info": "DG-Information bearbeiten"
         },
         "tela-login": {
             "login": "Anmeldung",
@@ -317,7 +334,8 @@
             "historico": "Verlauf",
             "data-alteracao": "Änderungsdatum",
             "autor": "Autor",
-            "visualizar": "Anzeigen"
+            "visualizar": "Anzeigen",
+            "clique": "Klicken"
         },
         "modal-motivo-devolucao": {
             "motivo-devolucao": "Rücksendegrund",
@@ -336,7 +354,8 @@
             "demanda": "Anforderung",
             "motivo-reprovacao": "Grund für die Ablehnung der Anforderung:",
             "b-reprovar": "Anforderung ablehnen",
-            "b-cancelar": "Abbrechen"
+            "b-cancelar": "Abbrechen",
+            "b-cancelar-demanda": "Anfrage abbrechen"
         },
         "modal-cancelamento-reuniao": {
             "demanda": "Nachfrage",
@@ -395,7 +414,15 @@
         "qtd-horas": "Stundenmenge",
         "valor-hora": "Stundensatz",
         "periodo-execucao-mensal": "Ausführungszeitraum (monatlich)",
-        "responsavel-proposta": "Verantwortlicher für den Vorschlag:"
+        "responsavel-proposta": "Verantwortlicher für den Vorschlag:",
+        "dados-classificacao": "Analystenklassifikationsdaten:",
+        "tamanho-demanda": "Anfragengröße",
+        "bu-solicitante": "Anfordernde BU:",
+        "bu-beneficiada": "Nutzbare BU:",
+        "secao-responsavel": "Verantwortlicher IT-Bereich:",
+        "din": "€",
+        "demanda": "ANFRAGE",
+        "adicionar": "Hinzufügen"
     },
     "componentes-reutilizaveis": {
         "card-demanda": {
@@ -469,7 +496,9 @@
             "design": "Design und Aufbau",
             "support": "Support",
             "cancelled": "Abgebrochen",
-            "done": "Erledigt"
+            "done": "Erledigt",
+            "draft": "Entwurf",
+            "discussion": "Diskussion"
         }
     },
     "componentes-fixos": {
@@ -486,7 +515,8 @@
             "demandas": "ANFORDERUNGEN",
             "rascunhos": "Entwürfe",
             "configuracoes": "Einstellungen",
-            "sair": "Ausloggen"
+            "sair": "Ausloggen",
+            "logado": "Sie sind angemeldet als:"
         }
     }
 }

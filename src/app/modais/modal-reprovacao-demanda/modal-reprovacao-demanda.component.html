@@ -17,13 +17,13 @@
     <div class="d-flex justify-content-end mt-3">
         <button  class="btn btn-outline-primary me-3" (click)="dialogRef.close()" falarTexto>{{ "modais.modal-reprovacao-demanda.b-cancelar" | translate }}</button>
         <button *ngIf="!solicitante" routerLink="/tela-inicial" class="btn btn-primary" (click)="reprovarDemanda()" falarTexto>{{ "modais.modal-reprovacao-demanda.b-reprovar" | translate }}</button>
-        <button *ngIf="solicitante" routerLink="/tela-inicial" class="btn btn-primary" (click)="cancelarDemanda()" falarTexto>Cancelar Demanda</button>
+        <button *ngIf="solicitante" routerLink="/tela-inicial" class="btn btn-primary" (click)="cancelarDemanda()" falarTexto>{{ "modais.modal-reprovacao-demanda.b-cancelar-demanda" | translate }}</button>
     </div>
 </div>
 <div>
     <p-confirmDialog icon="pi pi-exclamation-triangle" #cd>
       <ng-template pTemplate="header">
-        <h4 falarTexto>Cancelar Demanda</h4>
+        <h4 falarTexto>{{ "modais.modal-reprovacao-demanda.b-cancelar-demanda" | translate }}</h4>
       </ng-template>
       <ng-template pTemplate="footer">
         <button type="button" (click)="cd.reject()" class="btn btn-outline-primary" falarTexto>

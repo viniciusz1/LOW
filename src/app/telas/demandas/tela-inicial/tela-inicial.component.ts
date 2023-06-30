@@ -541,18 +541,11 @@ export class TelaInicialComponent implements OnInit {
       }
       else{
         this.listaTituloNaoFiltrado.push({
-          status: 'Sem demandas',
-          titulo: 'Sem demandas',
+          status: 'DEMANDAS_DEPARTAMENTO',
+          titulo: 'Demandas do Seu Departamento',
         });
+  
       }
-
-
-      this.listaTituloNaoFiltrado.push({
-        status: 'DEMANDAS_DEPARTAMENTO',
-        titulo: 'Demandas do Seu Departamento',
-      });
-
-
 
       return
     }

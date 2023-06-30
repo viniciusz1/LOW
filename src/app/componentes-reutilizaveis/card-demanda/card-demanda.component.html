@@ -30,16 +30,13 @@
         role="button"
         [matMenuTriggerFor]="menu"
       ></i>
-      <div *ngIf="rascunho">
-        <div class="card flex justify-content-center gap-2" style="border: none !important;">
-        <i
-          class="bi bi-trash3"
-          role="button"
-          (click)="deletarRascunho()"
-          style="font-size: 20px;"
-        ></i>
-      </div>
-      </div>
+      <i
+        *ngIf="rascunho"
+        class="bi bi-trash3"
+        role="button"
+        (click)="deletarRascunho()"
+        style="font-size: 20px;"
+      ></i>
 
       <mat-menu #menu="matMenu">
         <button (click)="abrirModalHistorico()" mat-menu-item>
@@ -66,7 +63,7 @@
           <i class="bi bi-chat-left-quote me-3"></i>
           <span falarTexto>Conversar</span>
         </button>
-        <button *ngIf="mostrarCancelarPropriaDemanda()" (click)="abrirModalReprovar.emit(dadosDemanda)" mat-menu-item>
+        <button *ngIf="mostrarCancelarPropriaDemanda()" (click)="cancelarPropriaDemanda()" mat-menu-item>
           <i class="bi bi-x-circle me-3"></i>
           <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.cancelar-demanda" | translate }}</span>
         </button>

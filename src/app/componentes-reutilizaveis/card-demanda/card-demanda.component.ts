@@ -23,6 +23,7 @@ export class CardDemandaComponent implements OnInit {
   @Output() abrirModalMotivoReprovacao = new EventEmitter<Demanda>();
   @Output() abrirModalAvaliarDemanda = new EventEmitter();
   @Output() abrirModalParecerComissao = new EventEmitter<Demanda>();
+  @Output() abrirModalParecerDG = new EventEmitter<Demanda>();
   @Output() abrirModalReprovar = new EventEmitter<Demanda>();
   @Output() verDocumentoProposta = new EventEmitter<Demanda>();
   @Output() clicouEmExcluir = new EventEmitter();

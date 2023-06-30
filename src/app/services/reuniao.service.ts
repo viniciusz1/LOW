@@ -38,6 +38,10 @@ export class ReuniaoService {
     return this.http.post<Reuniao>(path + 'reuniao', reuniao);
   }
 
+  enviarParecerDG(){
+    
+  }
+
   enviarParecerComissao(
     codigoReuniao: number | undefined,
     info: {

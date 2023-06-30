@@ -111,15 +111,14 @@ export class TelaVerPauta implements OnInit {
     return true
   }
 
-  openModalDG() {
+  openModalDG(demanda: Demanda) {
     this.matDialog.open(ModalDgDocumentosComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      data: this.reuniao
+      data: demanda
     }).afterClosed().subscribe({
       next: e => {
         if (e != undefined) {
-          this.reuniao = e;
         }
       },
       error: err => {

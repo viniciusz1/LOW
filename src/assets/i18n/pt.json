@@ -334,7 +334,7 @@
     },
     "modal-reprovacao-demanda": {
       "demanda": "Demanda",
-      "motivo-reprovacao": "Motivo de reprovação da demanda:",
+      "motivo-reprovacao": "Motivo da reprovação da demanda:",
       "b-reprovar": "Reprovar Demanda",
       "b-cancelar": "Cancelar"
     },

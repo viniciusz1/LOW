@@ -468,30 +468,23 @@ export class TelaInicialComponent implements OnInit {
       this.demandasService.getDemandasTelaInicial().subscribe({
         next: (e) => {
           let ExistsDemandaRascunho = true;
-          let qtdDemandasUsuário = 0;
           e['demandas'].forEach((demandas: Demanda[]) => {
-            if (demandas.some((e) => e.statusDemanda?.toString() == 'DRAFT')) {
+            if(demandas.some((e) => e.statusDemanda?.toString() == 'DRAFT') || 
+            demandas.filter((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.usuario?.codigoUsuario)){
               ExistsDemandaRascunho = false;
             }
-            if (this.usuarioService.getRole == 'Analista') {
-              if (demandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO')) {
-                qtdDemandasUsuário = demandas.filter((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser()).length;
-              }
-            }
+
             if (demandas.length > 0) {
               this.listaDemandas.push(...demandas);
               this.isFiltrado = false;
               this.nenhumResultadoEncontrado = false;
             }
           });
-          e['qtdDemandas'].forEach((qtd: number, index: number) => {
-            if (ExistsDemandaRascunho == true) {
-              this.qtdDemandasStatus.push(0)
-              ExistsDemandaRascunho = false;
-            }
-            if (index == 1) {
-              qtd = qtd - qtdDemandasUsuário;
-            }
+          if(ExistsDemandaRascunho == true){
+            this.qtdDemandasStatus.push(0)
+            ExistsDemandaRascunho = false;
+          }
+          e['qtdDemandas'].forEach((qtd: number) => {
             if (qtd > 0) {
               this.qtdDemandasStatus.push(qtd)
             }
@@ -628,18 +621,11 @@ export class TelaInicialComponent implements OnInit {
       }
       else {
         this.listaTituloNaoFiltrado.push({
-          status: 'Sem demandas',
-          titulo: 'Sem demandas',
+          status: 'DEMANDAS_DEPARTAMENTO',
+          titulo: 'Demandas do Seu Departamento',
         });
+  
       }
-
-
-      this.listaTituloNaoFiltrado.push({
-        status: 'DEMANDAS_DEPARTAMENTO',
-        titulo: 'Demandas do Seu Departamento',
-      });
-
-
 
       return
     }

@@ -266,6 +266,7 @@ export class DemandaService {
   reprovarDemanda(codigoDemanda: number, motivoReprovacao: string) {
     return this.http.put(path + 'demanda/cancell/' + codigoDemanda, motivoReprovacao)
   }
+  
   public addCenterOfCost() {
     (this.demandaForm.controls['centroCustosDemanda'] as FormArray).push(
       this.createCentroCusto(undefined)

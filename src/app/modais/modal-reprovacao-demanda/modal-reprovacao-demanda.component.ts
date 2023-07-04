@@ -28,6 +28,7 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
     private modalService: ModalService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private route: Router
   ) {
     this.usuario = usuarioService.getUser('user')
     console.log(data)
@@ -73,8 +74,12 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
 
   reprovarDemanda() {
     // console.log(this.dadosDemanda)
-    if(this.dadosDemanda?.codigoDemanda)
+    if(this.dadosDemanda?.codigoDemanda){
+      console.log(this.motivoReprovacao)
     //Parâmetro 0 na decisão significa que a demand é reprovada
+    if(this.motivoReprovacao == ""){
+      this.showError("O campo motivo reprovação, deve ser preenchido!")
+    }else{
     this.demandaService
       .reprovarDemanda(
         parseInt(this.dadosDemanda.codigoDemanda),
@@ -88,11 +93,14 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
             this.modalService.dialogRefDemandaDocumento.close();
           }
           this.modalService.modalFechado.emit(); 
+          this.route.navigate(['tela-inicial']);
         },
         error: err => {
           this.showError("Não foi possivel reprovar a demanda!")
         }
       });
+    }
+  }
   }
 
   showSuccess(message: string) {

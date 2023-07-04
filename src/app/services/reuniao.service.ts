@@ -38,8 +38,12 @@ export class ReuniaoService {
     return this.http.post<Reuniao>(path + 'reuniao', reuniao);
   }
 
-  enviarParecerDG(){
-    
+  enviarParecerDG(objeto: any, codigoDemanda: string, arquivo: File){
+
+    let infos = new FormData();
+    infos.append('arquivo', arquivo)
+    infos.append('infoDg', JSON.stringify(objeto))
+    return this.http.put<Demanda>(path + 'proposta/dg/' + codigoDemanda, infos);
   }
 
   enviarParecerComissao(
@@ -102,6 +106,8 @@ export class ReuniaoService {
   get totalPages() {
     return this.pageable.totalPages || 0;
   }
+
+  
 
   avancarPage(page: number) {
     let linkComPaginacao = this.link;

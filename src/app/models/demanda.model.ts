@@ -50,4 +50,8 @@ export interface Demanda {
   qtdMensagensNaoLidas?: number
   //usuario aguardando a mensagem ser visualizada
   usuarioAguardando?: Usuario
+  parecerDGProposta?: string
+  decisaoDG?: string
+  numAtaDG?: string
+  arquivoDG?: string
 }

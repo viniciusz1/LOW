@@ -89,15 +89,12 @@
           'text-truncate': textoExibidoEmBotaoDependendoRota || rascunho,
           tamanho:
             !textoExibidoEmBotaoDependendoRota &&
-            !rascunho &&
-            !exibirBotaoParecerComissao &&
-            !exibirBotaoParecerDg
+            !rascunho
         }" style="width: 160px">
         <b>{{ "componentes-reutilizaveis.card-demanda.departamento" | translate }} </b>
         {{ dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento }}
       </label>
       <span>
-        <button (click)="abrirModalParecerDG.emit(dadosDemanda)">teste</button>
         <button falarTexto *ngIf="exibicaoBotoes()"
           class="btn btn-primary btn-sm" style="width: 147px" (click)="direcionarUsuario()">
           {{ textoExibidoEmBotaoDependendoRota?.texto }}

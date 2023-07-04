@@ -98,9 +98,11 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
         .subscribe({
           next: e => {
             this.showSuccess("Parecer enviado!")
+            console.log("here", e)
             this.dialogRef.close(e)
           },
           error: err => {
+            throw err
             this.showError("Não foi possível enviar o Parecer da Comissão")
           }
         })

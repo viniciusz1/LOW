@@ -9,8 +9,8 @@
         <p-dropdown
           placeholder="Resultado DG"
           class="me-3"
-          [options]="resultadoComissao"
-          [(ngModel)]="resultadoComissaoSelecionado"
+          [options]="resultadoDG"
+          [(ngModel)]="resultadoDGSelecionado"
           (onChange)="selecionaResultado()"
           optionLabel="name"
           optionValue="value"
@@ -48,7 +48,7 @@
       inputEmFoco
       pInputTextarea
       style="min-height: 300px"
-      [(ngModel)]="parecerComissaoInput"
+      [(ngModel)]="parecerDGInput"
     ></textarea>
   </div>
   <div class="d-flex flex-column" *ngIf="aparecerRecomendacao">

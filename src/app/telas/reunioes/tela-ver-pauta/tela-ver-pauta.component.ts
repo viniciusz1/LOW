@@ -119,6 +119,14 @@ export class TelaVerPauta implements OnInit {
     }).afterClosed().subscribe({
       next: e => {
         if (e != undefined) {
+          let indice: number | undefined = -1
+          if (this.listaDemandas) {
+            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+            if (indice !== -1) {
+              this.listaTituloNaoFiltrado = [];
+              this.listaDemandas.splice(indice, 1, e);
+            }
+          }
         }
       },
       error: err => {

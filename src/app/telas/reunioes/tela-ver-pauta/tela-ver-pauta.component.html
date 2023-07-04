@@ -12,7 +12,6 @@
     >
       <div *ngFor="let proposta of reuniao?.propostasReuniao" class="mb-2">
         <app-card-demanda
-          [exibirBotaoParecerComissao]="true"
           [tipoDeAta]="'Ata Publicada'"
           (modalHistorico)="openModalHistorico($event)"
           (abrirModalParecerDG)="openModalDG($event)"

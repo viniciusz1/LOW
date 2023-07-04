@@ -41,8 +41,6 @@ export class CardDemandaComponent implements OnInit {
   @Input() isPauta: boolean = false;
   @Input() dadosDemanda: Demanda = {};
   @Input() rascunho: boolean = false;
-  @Input() exibirBotaoParecerComissao: boolean = false;
-  @Input() exibirBotaoParecerDg: boolean = false;
   @Input() tipoDeAta: string = '';
   @Input() mostrarBotao = true;
 
@@ -267,6 +265,9 @@ export class CardDemandaComponent implements OnInit {
       case 'PARECER_COMISSAO':
         this.abrirModalParecerComissao.emit(this.dadosDemanda);
         break;
+      case 'PARECER_DG':
+        this.abrirModalParecerDG.emit(this.dadosDemanda);
+        break;
       default:
         //Caso não tenha uma função pré-definida, vai para a rota atrelada ao botão
         this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
@@ -376,23 +377,32 @@ export class CardDemandaComponent implements OnInit {
           texto: 'Continuar Demanda',
         };
         return true;
-      default:
-        if (this.exibirBotaoParecerComissao) {
-          this.textoExibidoEmBotaoDependendoRota = {
-            rota: 'PARECER_COMISSAO',
-            texto: 'Parecer Comissao',
-          };
-          return true;
-        } else if (this.exibirBotaoParecerDg) {
-          this.textoExibidoEmBotaoDependendoRota = {
-            rota: 'PARECER_DG',
-            texto: 'Parecer da DG',
-          };
+
+        case StatusDemanda.DISCUSSION:
+          
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          if (this.dadosDemanda.parecerComissaoProposta?.length == null) {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'PARECER_COMISSAO',
+              texto: 'Parecer Comissao',
+            };
+            return true;
+          } else {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'PARECER_DG',
+              texto: 'Parecer da DG',
+            };
+          }
         }
+        return true;
+      default:
+        
         return true;
     }
   }
-
+  teste(){
+    console.log(this.dadosDemanda.parecerComissaoProposta)
+  }
   deletarRascunho() {
     if (this.dadosDemanda.codigoDemanda) {
       this.clicouEmExcluir.emit(this.dadosDemanda);

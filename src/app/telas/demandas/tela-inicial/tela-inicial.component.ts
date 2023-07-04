@@ -8,7 +8,7 @@ import { fadeAnimation } from './../../../shared/app.animation';
 import { StatusDemanda } from './../../../models/statusDemanda.enum';
 import { ModalReprovacaoDemandaComponent } from './../../../modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { Router } from '@angular/router';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
@@ -70,7 +70,7 @@ export class TelaInicialComponent implements OnInit {
   }
   //Utilizado para realizar o calculo dos cards que se movimentam para o lado
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
-
+  @ViewChild('elementoTopo') elementoTopo: ElementRef | undefined;
 
   @Input() rascunho: boolean = false;
   ordenarSelect = '';
@@ -426,6 +426,18 @@ export class TelaInicialComponent implements OnInit {
         }
       },
     });
+  }
+
+  isScrolled: boolean = false;
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event) {
+    this.isScrolled = window.scrollY > 0;
+  }
+  
+  voltarAoTopo() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    console.log("Aqui");
   }
 
   showSuccess(message: string) {

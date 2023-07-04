@@ -432,7 +432,7 @@ export class TelaInicialComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event) {
-    this.isScrolled = window.scrollY > 0;
+    this.isScrolled = window.scrollY > 100;
   }
   
   voltarAoTopo() {

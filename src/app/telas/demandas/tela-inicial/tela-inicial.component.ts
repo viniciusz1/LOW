@@ -468,23 +468,13 @@ export class TelaInicialComponent implements OnInit {
     if (this.nivelAcessoUsuario == 'Analista' || this.nivelAcessoUsuario == 'GestorTI') {
       this.demandasService.getDemandasTelaInicial().subscribe({
         next: (e) => {
-          let ExistsDemandaRascunho = true;
           e['demandas'].forEach((demandas: Demanda[]) => {
-            if(demandas.some((e) => e.statusDemanda?.toString() == 'DRAFT') || 
-            demandas.filter((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.usuario?.codigoUsuario)){
-              ExistsDemandaRascunho = false;
-            }
-
             if (demandas.length > 0) {
               this.listaDemandas.push(...demandas);
               this.isFiltrado = false;
               this.nenhumResultadoEncontrado = false;
             }
           });
-          if(ExistsDemandaRascunho == true){
-            this.qtdDemandasStatus.push(0)
-            ExistsDemandaRascunho = false;
-          }
           e['qtdDemandas'].forEach((qtd: number) => {
             if (qtd > 0) {
               this.qtdDemandasStatus.push(qtd)
@@ -587,6 +577,9 @@ export class TelaInicialComponent implements OnInit {
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
+
+    //Tira duplicidade
+    this.listaDemandas = this.listaDemandas.filter((objeto, index, self) => index === self.findIndex((t) => (t.codigoDemanda === objeto.codigoDemanda)));
 
     if (this.listaDemandas.length == 0) {
       this.listaTituloNaoFiltrado.push({

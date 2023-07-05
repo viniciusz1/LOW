@@ -40,9 +40,19 @@ export class CardDemandaComponent implements OnInit {
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
   @Input() dadosDemanda: Demanda = {};
+  @Input() demandaEmReuniao: boolean = false;
   @Input() rascunho: boolean = false;
   @Input() tipoDeAta: string = '';
   @Input() mostrarBotao = true;
+
+  exibirBotaoParecerComissao(){
+    if(this.demandaEmReuniao && (this.dadosDemanda.parecerComissaoProposta != null) && this.dadosDemanda.statusDemanda == StatusDemanda.DISCUSSION){
+      return true;
+    }
+    return false;
+  }
+
+  
 
   textoExibidoEmBotaoDependendoRota:
     | { rota: string; texto: string }
@@ -381,10 +391,16 @@ export class CardDemandaComponent implements OnInit {
         case StatusDemanda.DISCUSSION:
           
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-          if (this.dadosDemanda.parecerComissaoProposta?.length == null) {
+          if (this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == true) {
             this.textoExibidoEmBotaoDependendoRota = {
               rota: 'PARECER_COMISSAO',
               texto: 'Parecer Comissao',
+            };
+            return true;
+          }else if(this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == false){
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'IR_PARA_REUNIAO',
+              texto: 'Ir para Reunião',
             };
             return true;
           } else {

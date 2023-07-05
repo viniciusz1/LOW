@@ -207,6 +207,7 @@
               (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
               (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
               (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
+              (abrirModalParecerDG)="openModalDG($event)"
               (verDocumentoEmAta)="openModalAtaDocumento($event)"></app-card-demanda>
           </div>
           <div *ngIf="positionListCards[0] != 0" class="left-arrow alinhacao" (click)="changeLeft(0)">
@@ -238,6 +239,7 @@
             (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
             (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
             (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
+            (abrirModalParecerDG)="openModalDG($event)"
             (verDocumentoEmAta)="openModalAtaDocumento($event)"></app-card-demanda>
         </div>
 
@@ -295,6 +297,7 @@
                 (modalHistorico)="openModalHistorico($event)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
                 (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
+                (abrirModalParecerDG)="openModalDG($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 (verDocumentoEmAta)="openModalAtaDocumento($event)"></app-card-demanda>
             </div>
@@ -318,6 +321,7 @@
       <div class="row" *ngIf="!tipoRascunho">
         <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemanda]="demanda"
           (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
+          (abrirModalParecerDG)="openModalDG($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)" [mudarTamanho]="'100%'"
           (irParaChat)="irParaChat($event, demanda)" (modalHistorico)="openModalHistorico($event)"

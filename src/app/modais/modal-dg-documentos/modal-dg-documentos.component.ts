@@ -112,6 +112,8 @@ export class ModalDgDocumentosComponent implements OnInit {
       numAtaDG: this.numAtaDG,
     };
     if (this.demanda?.codigoDemanda) {
+
+
       this.reuniaoService
         .enviarParecerDG(objeto, this.demanda.codigoDemanda, this.listaFiles[0])
         .subscribe({

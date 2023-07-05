@@ -18,6 +18,7 @@
           (abrirModalParecerComissao)="
             openModalParecerComissaoProposta(proposta)
           "
+          [demandaEmReuniao]="true"
           [dadosDemanda]="proposta"
           [mudarTamanho]="'100%'"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"

@@ -22,6 +22,7 @@ import { debounceTime } from 'rxjs/operators';
 import * as FileSaver from 'file-saver';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalDgDocumentosComponent } from 'src/app/modais/modal-dg-documentos/modal-dg-documentos.component';
 
 @Component({
   selector: 'app-tela-inicial',
@@ -141,6 +142,31 @@ export class TelaInicialComponent implements OnInit {
       }
     })
   }
+
+  openModalDG(demanda: Demanda) {
+    this.matDialog.open(ModalDgDocumentosComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      data: demanda
+    }).afterClosed().subscribe({
+      next: e => {
+        if (e != undefined) {
+          let indice: number | undefined = -1
+          if (this.listaDemandas) {
+            indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+            console.log(indice)
+            if (indice !== -1) {
+              this.listaDemandas.splice(indice, 1, e);
+            }
+          }
+        }
+      },
+      error: err => {
+        this.showError("Não foi possível adicionar dados!: " + err)
+      }
+    })
+  }
+
 
   ordenar(sort: { name: string, value: number }) {
     let filtro: Filtro;

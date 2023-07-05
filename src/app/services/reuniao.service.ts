@@ -40,6 +40,11 @@ export class ReuniaoService {
 
   enviarParecerDG(objeto: any, codigoDemanda: string, arquivo: File){
 
+    
+    if (arquivo == undefined) {
+      arquivo = new File([], '');
+    }
+
     let infos = new FormData();
     infos.append('arquivo', arquivo)
     infos.append('infoDg', JSON.stringify(objeto))

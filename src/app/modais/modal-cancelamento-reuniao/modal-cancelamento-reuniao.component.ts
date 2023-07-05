@@ -2,6 +2,7 @@ import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-cancelamento-reuniao',
@@ -14,7 +15,8 @@ export class ModalCancelamentoReuniaoComponent implements OnInit {
     @Inject(DIALOG_DATA) public data: number,
     public dialogRef: DialogRef<ModalCancelamentoReuniaoComponent>,
     private messageService: MessageService,
-    public reuniaoService: ReuniaoService) {
+    public reuniaoService: ReuniaoService,
+    private route: Router) {
     this.codigoReuniao = data
   }
   motivoInput = ""
@@ -22,15 +24,20 @@ export class ModalCancelamentoReuniaoComponent implements OnInit {
   ngOnInit(): void {
   }
   cancelarReuniao() {
+    if(this.motivoInput == ""){
+      this.showError("Adicione o motivo do cancelamento da reunião!")
+    } else {
     this.reuniaoService.cancelarReuniao(this.codigoReuniao, this.motivoInput)
       .subscribe({
         next: e => {
           this.showSuccess("Reunião Cancelada")
           this.dialogRef.close()
+          this.route.navigate(['tela-inicial/reunioes']);
         }, error: err => {
           this.showError("Não foi possível cancelar a reunião")
         }
       })
+    }
   }
 
   showSuccess(message: string) {

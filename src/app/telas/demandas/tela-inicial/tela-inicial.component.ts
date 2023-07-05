@@ -108,14 +108,13 @@ export class TelaInicialComponent implements OnInit {
   exibirDivLateral = true;
   resultadoDivLateral: number = 0;
 
-
   exibirDivRightArrow(titulo: string, tipo: number): boolean {
     const demandasFiltradas = this.listaDemandas.filter(demanda =>
       this.filtrarDemandaStatus.transform([demanda], titulo) !== undefined
     );
-
+  
     const statusContagem: { [status: string]: number } = {};
-
+  
     demandasFiltradas.forEach(demanda => {
       const status = this.filtrarDemandaStatus.transform([demanda], titulo);
       if (status && status.length > 0) {
@@ -126,26 +125,27 @@ export class TelaInicialComponent implements OnInit {
         }
       }
     });
-
-    if (tipo == 1) {
+  
+    if (tipo === 1) {
+      const statusKeys = Object.keys(statusContagem);
+      let totalDemandas = 0;
+      for (const key of statusKeys) {
+        totalDemandas += statusContagem[key];
+      }
+      if (totalDemandas > 5) {
+        return true;
+      }
+    }
+  
+    if (tipo === 2) {
       const statusKeys = Object.keys(statusContagem);
       for (const key of statusKeys) {
-        if (statusContagem[key] > 5) {
+        if (statusContagem[key] >= 3) {
           return true;
         }
       }
     }
-
-    if (tipo == 2) {
-      const statusKeys = Object.keys(statusContagem);
-      for (const key of statusKeys) {
-        if (statusContagem[key] > 3) {
-          return true;
-        }
-      }
-    }
-
-
+  
     return false;
   }
 
@@ -271,6 +271,7 @@ export class TelaInicialComponent implements OnInit {
     if (event.target && demanda.analista?.codigoUsuario == undefined) {
       this.confirmationService.confirm({
         target: event.target,
+        header:"Iniciar Chat",
         message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
         icon: 'pi pi-exclamation-triangle',
         blockScroll: false,

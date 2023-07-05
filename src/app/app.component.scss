@@ -36,3 +36,8 @@
 ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
   background: #00579D;
 }
+
+::ng-deep .fc.fc-theme-standard .fc-toolbar .fc-button{
+  background: #00579D !important;
+  border: #00579D !important;
+}

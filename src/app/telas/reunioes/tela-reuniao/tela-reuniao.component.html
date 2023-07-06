@@ -6,7 +6,7 @@
           <ng-template #customContent let-texto="texto" style="border-radius: 20px">
             <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
           </ng-template>
-          <div style="height: 42px; overflow: auto;">
+          <div style="height: 42px;">
             <button falarTexto joyrideStep="nove" [title]="'Filtrar Demandas'" [stepContent]="customContent"
               [stepContentParams]="{ texto: textoTutorial[8] }" style="font-size: 1rem; word-wrap: break-word"
               (click)="openModalCriarReuniao()" class="btn btn-primary">
@@ -15,7 +15,7 @@
             </button>
           </div>
           <!-- [routerLink]="'/tela-inicial/calendario'" -->
-          <div style="height: 42px; overflow: auto">
+          <div style="height: 42px;">
             <button falarTexto joyrideStep="dez" [title]="'Filtrar Demandas'" [stepContent]="customContent"
               [stepContentParams]="{ texto: textoTutorial[9] }" style="font-size: 1rem; word-wrap: break-word"
               class="btn btn-primary ms-3" (click)="openCalendario()">

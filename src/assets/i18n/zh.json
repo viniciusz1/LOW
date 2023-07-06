@@ -70,7 +70,19 @@
             "preto": "黑色的",
             "temas": "主题",
             "fonte": "字体",
-            "tamanho": "大小"
+            "tamanho": "字体大小",
+            "personalizacao": "颜色个性化：",
+            "descricao1": "点击一个个性化选项或创建一个新的，进行所需的修改，然后保存并设为活动状态",
+            "descricao2": "当为系统定义新的颜色个性化时，该操作将适用于所有用户。",
+            "descricao3": "选择要自定义的模板！",
+            "definir-ativo": "设为活动",
+            "criar-nova": "创建新的",
+            "cancelar": "取消",
+            "criar-personalizacao": "创建新的个性化",
+            "cores-demandas": "需求颜色：",
+            "cores-reuniao": "会议颜色",
+            "salvar-alteracao": "保存更改",
+            "salvar-ativo": "保存并设为活动"
         },
         "configuracoes-sugestoes": {
             "titulo": "建议",
@@ -176,7 +188,9 @@
             "tool-memoria-beneficio-potencial": "您如何计算收益？",
             "tool-beneficio-qualitativo": "在纪律、控制和规划方面，该提案将产生哪些好处？",
             "tool-frequencia-uso-sistema": "该系统的可用性是什么？",
-            "tool-anexar-documento": "是否要添加与提案相关的文件（PDF、XML、POM...），例如研究资料"
+            "tool-anexar-documento": "是否要添加与提案相关的文件（PDF、XML、POM...），例如研究资料",
+            "maximo-total": "最大总额：100MB",
+            "enter": "点击“Enter”进行验证"
         },
         "proposta": {
             "proposta": "提案",
@@ -259,7 +273,8 @@
             "solicitante": "请求者：",
             "analista": "分析师：",
             "selecione-conversa": "选择一次对话",
-            "conversas-cadastradas": "您没有注册的对话"
+            "conversas-cadastradas": "您没有注册的对话",
+            "conversando": "您正在与以下用户交谈："
         },
         "tela-calendario": {
             "calendario-reunioes": "会议日历"
@@ -284,7 +299,9 @@
             "b-cancelar-reuniao": "取消會議",
             "b-nao": "否",
             "b-sim": "是",
-            "editar-reuniao": "编辑会议"
+            "editar-reuniao": "编辑会议",
+            "add-info": "添加DG信息",
+            "editar-info": "编辑DG信息"
         },
         "tela-login": {
             "login": "登录",
@@ -317,7 +334,8 @@
             "historico": "历史",
             "data-alteracao": "修改日期",
             "autor": "作者",
-            "visualizar": "查看"
+            "visualizar": "查看",
+            "clique": "点击"
         },
         "modal-motivo-devolucao": {
             "motivo-devolucao": "退回原因",
@@ -336,7 +354,8 @@
             "demanda": "需求",
             "motivo-reprovacao": "需求被拒绝的原因：",
             "b-reprovar": "拒绝需求",
-            "b-cancelar": "取消"
+            "b-cancelar": "取消",
+            "b-cancelar-demanda": "取消需求"
         },
         "modal-cancelamento-reuniao": {
             "demanda": "需求",
@@ -395,7 +414,15 @@
         "qtd-horas": "工时数量",
         "valor-hora": "小时费率",
         "periodo-execucao-mensal": "执行期间（每月）",
-        "responsavel-proposta": "建议负责人："
+        "responsavel-proposta": "建议负责人：",
+        "dados-classificacao": "分析师分类数据：",
+        "tamanho-demanda": "需求大小",
+        "bu-solicitante": "请求BU：",
+        "bu-beneficiada": "受益BU：",
+        "secao-responsavel": "责任IT部门：",
+        "din": "¥",
+        "demanda": "需求",
+        "adicionar": "添加"
     },
     "componentes-reutilizaveis": {
         "card-demanda": {
@@ -469,7 +496,9 @@
             "design": "设计与构建",
             "support": "支持",
             "cancelled": "已取消",
-            "done": "已完成"
+            "done": "已完成",
+            "draft": "草稿",
+            "discussion": "讨论"
         }
     },
     "componentes-fixos": {
@@ -486,7 +515,8 @@
             "demandas": "需求",
             "rascunhos": "草稿",
             "configuracoes": "设置",
-            "sair": "退出"
+            "sair": "退出",
+            "logado": "您已登录："
         }
     }
 }

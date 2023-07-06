@@ -45,7 +45,6 @@ export class TelaVerPauta implements OnInit {
 
   codigoReuniao = this.activatedRoute.snapshot.params['codigoReuniao']
   reuniao: Reuniao | undefined = undefined;
-  listaDemandas: Demanda[] = [];
   listaTituloNaoFiltrado: { status: string; titulo: string }[] = [];
 
   ngOnInit(): void {
@@ -111,15 +110,22 @@ export class TelaVerPauta implements OnInit {
     return true
   }
 
-  openModalDG() {
+  openModalDG(demanda: Demanda) {
     this.matDialog.open(ModalDgDocumentosComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
-      data: this.reuniao
+      data: demanda
     }).afterClosed().subscribe({
       next: e => {
         if (e != undefined) {
-          this.reuniao = e;
+          let indice: number | undefined = -1
+          if (this.reuniao?.propostasReuniao) {
+            indice = this.reuniao?.propostasReuniao.findIndex(p => p.codigoDemanda == e.codigoDemanda);
+            console.log(indice)
+            if (indice !== -1) {
+              this.reuniao?.propostasReuniao.splice(indice, 1, e);
+            }
+          }
         }
       },
       error: err => {
@@ -154,20 +160,6 @@ export class TelaVerPauta implements OnInit {
         maxWidth: '70vw',
         minWidth: '50vw',
         data: event,
-      })
-      .afterClosed().subscribe({
-        next: e => {
-          if (e != undefined) {
-            let indice: number | undefined = -1
-            if (this.listaDemandas) {
-              indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-              if (indice !== -1) {
-                this.listaTituloNaoFiltrado = [];
-                this.listaDemandas.splice(indice, 1, e);
-              }
-            }
-          }
-        }
       })
   }
 

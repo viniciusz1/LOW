@@ -1,51 +1,51 @@
 <nav class="nav position-relative">
     <ul class="nav flex-column container-sidebar" style="width: 18vw; font-size: 1rem;">
         <li (click)="clicouEmUmStatus.emit('DRAFT')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item DRAFT"></div>
-            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/rascunho.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.draft" | translate }} </a>
+            <div [style.backgroundColor]="listCoresPrimarias[0]" class="barra-nav-item DRAFT"></div>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/rascunho.png" alt="" srcset=""> Draft </a>
         </li>
         <li (click)="clicouEmUmStatus.emit('BACKLOG_CLASSIFICACAO')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item BACKLOG_CLASSIFICACAO"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[1]" class="barra-nav-item BACKLOG_CLASSIFICACAO"></div>
             <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-classificação-100.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.classificacao" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('BACKLOG_PROPOSTA')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item BACKLOG_PROPOSTA"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[2]" class="barra-nav-item BACKLOG_PROPOSTA"></div>
             <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-backlog-68 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.proposta" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('BACKLOG_APROVACAO')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item BACKLOG_APROVACAO"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[3]" class="barra-nav-item BACKLOG_APROVACAO"></div>
             <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-aprovação-100.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.aprovacao" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('ASSESSMENT')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item ASSESSMENT"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[4]" class="barra-nav-item ASSESSMENT"></div>
             <a class="nav-link"><img  style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-assessment-64 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.assessment" | translate }}</a>
         </li>
         <li  (click)="clicouEmUmStatus.emit('BUSINESS_CASE')"class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item BUSINESS_CASE"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[5]" class="barra-nav-item BUSINESS_CASE"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-relatório-de-negócios-100 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.business-case" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('DISCUSSION')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item DISCUSSION"></div>
-            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-colaboração-100.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.discussion" | translate }} </a>
+            <div [style.backgroundColor]="listCoresPrimarias[6]" class="barra-nav-item DISCUSSION"></div>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-colaboração-100.png" alt="" srcset=""> Discussion </a>
         </li>
         <li (click)="clicouEmUmStatus.emit('TO_DO')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item TO_DO"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[7]" class="barra-nav-item TO_DO"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-à-fazer-100 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.to-do" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('DESIGN_AND_BUILD')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item DESIGN_AND_BUILD"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[8]" class="barra-nav-item DESIGN_AND_BUILD"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-ferramenta-de-pintura-online-80 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.design" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('SUPPORT')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item SUPPORT"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[9]" class="barra-nav-item SUPPORT"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-suporte-ao-cliente-100 2.png" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.support" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('CANCELLED')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item CANCELLED"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[10]" class="barra-nav-item CANCELLED"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-cancelar-50 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.cancelled" | translate }}</a>
         </li>
         <li (click)="clicouEmUmStatus.emit('DONE')" class="nav-item d-flex border-bottom">
-            <div class="barra-nav-item DONE"></div>
+            <div [style.backgroundColor]="listCoresPrimarias[11]" class="barra-nav-item DONE"></div>
             <a class="nav-link"><img style="width: 1.5em; margin-right: 13px;" src="assets/images/icons8-marcador-duplo-100 2.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.done" | translate }}</a>
         </li>
     </ul>

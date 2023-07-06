@@ -115,7 +115,7 @@
 
       <mat-menu #menu="matMenu">
         <div style="font-size: 12px; margin-left: 0.5vw">
-          Você está logado por:
+          {{ "componentes-fixos.header.logado" | translate }}
           <div class="nome" style="
               display: flex;
               justify-content: start;
@@ -157,28 +157,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="username"
-            style="display: flex; justify-content: start; align-items: center; border-bottom: 1px solid #d3d3d3; margin-bottom: 0.5vw; margin-left: 0.5vw; margin-right: 0.5vw;">
-            <div style="margin-right: 1vw; display: flex; justify-content: start; align-items: center;">
-              <div class="icone">
-                <i style="font-size: 1.5rem;" class="bi bi-person-video"></i>
-              </div>
-            </div>
-            <div style="display: flex; align-items: center; justify-content: space-between; width: 95%;">
-              <div style="display: grid; justify-content: start; align-items: center;">
-                <div style="font-size: 1rem;">
-                  <span falarTexto>
-                    {{usuario?.userUsuario}}
-                  </span>
-                </div>
-                <div falarTexto style="font-size: 0.7rem; margin-bottom: 0.5vw;">
-                  <span>
-                    {{ "telas.configuracoes-perfil.username" | translate }}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div> -->
+
           <ng-template #customContent let-texto="texto" style="border-radius: 20px">
             <div [innerHTML]="texto" style="max-width: 300px; padding: 20px"></div>
           </ng-template>

@@ -94,7 +94,7 @@ export class CardDemandaComponent implements OnInit {
             )
             .subscribe({
               next: event => {
-                this.showSuccess("Demanda reprovada com sucesso!")
+                this.showSuccess("Demanda cancelada com sucesso!")
               },
               error: err => {
                 this.showError("Não foi possivel cancelar a demanda!")

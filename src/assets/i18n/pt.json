@@ -70,7 +70,19 @@
       "preto": "Preto",
       "temas": "Temas",
       "fonte": "Fonte",
-      "tamanho": "Tamanho da Fonte"
+      "tamanho": "Tamanho da Fonte",
+      "personalizacao": "Personalização de cores:",
+      "descricao1":" Clique em cima de uma personalização ou crie uma nova, faas alterações desejadas, então salve e defina como ativa",
+      "descricao2":"Ao definir uma nova personalização de cores para o sistema, esta operação é executada para todos os usuários.",
+      "descricao3":"Selecione um modelo em que deseja personalizar!",
+      "definir-ativo":"Definir Ativa",
+      "criar-nova":"Criar nova",
+      "cancelar":"Cancelar",
+      "criar-personalizacao":"Criar nova Personalização",
+      "cores-demandas":"Cores das Demandas:",
+      "cores-reuniao":"Cores das Reuniões",
+      "salvar-alteracao":"Salvar Alterações",
+      "salvar-ativo":"Salvar e definir como Ativo"
     },
     "configuracoes-sugestoes": {
       "titulo": "Sugestões",
@@ -176,7 +188,9 @@
       "tool-memoria-beneficio-potencial": "Como você calculou o benefício?",
       "tool-beneficio-qualitativo": "Qual seria o benefício em questão de disciplina, controle e planejamento?",
       "tool-frequencia-uso-sistema": "Qual seria a usabilidade do sistema?",
-      "tool-anexar-documento": "Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"
+      "tool-anexar-documento": "Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas",
+      "maximo-total":"Máximo Total: 100MB",
+      "enter":"Clique 'Enter' para validar"
     },
     "proposta": {
       "proposta": "Proposta",
@@ -259,7 +273,8 @@
       "solicitante": "Solicitante:",
       "analista": "Analista:",
       "selecione-conversa": "SELECIONE UMA CONVERSA",
-      "conversas-cadastradas": "VOCÊ NÃO TEM CONVERSAS CADASTRADAS"
+      "conversas-cadastradas": "VOCÊ NÃO TEM CONVERSAS CADASTRADAS",
+      "conversando":"Você esta conversando com:"
     },
     "tela-calendario": {
       "calendario-reunioes": "Calendário de Reuniões"
@@ -284,7 +299,9 @@
       "b-cancelar-reuniao": "Cancelar Reunião",
       "b-nao": "Não",
       "b-sim": "Sim",
-      "editar-reuniao": "Editar Reunião"
+      "editar-reuniao": "Editar Reunião",
+      "add-info":"Adicionar Info. DG",
+      "editar-info":"Editar Info. DG"
     },
     "tela-login": {
       "login": "Login",
@@ -317,7 +334,8 @@
       "historico": "Histórico",
       "data-alteracao": "Data de Alteração",
       "autor": "Autor",
-      "visualizar": "Visualizar"
+      "visualizar": "Visualizar",
+      "clique":"Clique"
     },
     "modal-motivo-devolucao": {
       "motivo-devolucao": "Motivo Devolução",
@@ -336,7 +354,8 @@
       "demanda": "Demanda",
       "motivo-reprovacao": "Motivo da reprovação da demanda:",
       "b-reprovar": "Reprovar Demanda",
-      "b-cancelar": "Cancelar"
+      "b-cancelar": "Cancelar",
+      "b-cancelar-demanda":"Cancelar Demanda"
     },
     "modal-cancelamento-reuniao": {
       "demanda": "Demanda",
@@ -395,7 +414,15 @@
     "qtd-horas": "Qtd de Horas",
     "valor-hora": "Valor da hora",
     "periodo-execucao-mensal": "Período de Execução (Mensal)",
-    "responsavel-proposta": "Responsável Proposta:"
+    "responsavel-proposta": "Responsável Proposta:",
+    "dados-classificacao": "Dados da Classificação do Analista:",
+    "tamanho-demanda":"Tamanho da Demanda",
+    "bu-solicitante":"BU Solicitante:",
+    "bu-beneficiada":"BU beneficiada:",
+    "secao-responsavel":"Seção de TI Responsável:",
+    "din": "R$",
+    "demanda":"DEMANDA",
+    "adicionar":"Adicionar"
   },
   "componentes-reutilizaveis": {
     "card-demanda": {
@@ -469,7 +496,9 @@
       "design": "Design and Build",
       "support": "Support",
       "cancelled": "Cancelled",
-      "done": "Done"
+      "done": "Done",
+      "draft":"Draft",
+      "discussion": "Discussion"
     }
   },
   "componentes-fixos": {
@@ -486,7 +515,8 @@
       "demandas": "DEMANDAS",
       "rascunhos": "Rascunhos",
       "configuracoes": "Configurações",
-      "sair": "Sair"
+      "sair": "Sair",
+      "logado": "Você está logado por:"
     }
   }
 }

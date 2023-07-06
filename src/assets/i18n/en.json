@@ -70,7 +70,19 @@
       "preto": "Black",
       "temas": "Themes",
       "fonte": "Font",
-      "tamanho": "Size"
+      "tamanho": "Font Size",
+      "personalizacao": "Color Customization:",
+      "descricao1": "Click on an existing customization or create a new one, make the desired changes, then save and set as active.",
+      "descricao2": "When setting a new color customization for the system, this operation is performed for all users.",
+      "descricao3": "Select a template to customize!",
+      "definir-ativo": "Set as Active",
+      "criar-nova": "Create New",
+      "cancelar": "Cancel",
+      "criar-personalizacao": "Create New Customization",
+      "cores-demandas": "Demand Colors:",
+      "cores-reuniao": "Meeting Colors:",
+      "salvar-alteracao": "Save Changes",
+      "salvar-ativo": "Save and Set as Active"
     },
     "configuracoes-sugestoes": {
       "titulo": "Suggestions",
@@ -176,7 +188,9 @@
       "tool-memoria-beneficio-potencial": "How did you calculate the benefit?",
       "tool-beneficio-qualitativo": "What would be the benefit in terms of discipline, control, and planning?",
       "tool-frequencia-uso-sistema": "What would be the usability of the system?",
-      "tool-anexar-documento": "Do you want to add files (PDF, XML, POM...) related to the proposal, such as research?"
+      "tool-anexar-documento": "Do you want to add files (PDF, XML, POM...) related to the proposal, such as research?",
+      "maximo-total": "Total Maximum: 100MB",
+      "enter": "Press 'Enter' to validate"
     },
     "proposta": {
       "proposta": "Proposal",
@@ -259,7 +273,8 @@
       "solicitante": "Requester:",
       "analista": "Analyst:",
       "selecione-conversa": "SELECT A CONVERSATION",
-      "conversas-cadastradas": "YOU HAVE NO REGISTERED CONVERSATIONS"
+      "conversas-cadastradas": "YOU HAVE NO REGISTERED CONVERSATIONS",
+      "conversando": "You are chatting with:"
     },
     "tela-calendario": {
       "calendario-reunioes": "Meetings Calendar"
@@ -284,7 +299,9 @@
       "b-cancelar-reuniao": "Cancel Meeting",
       "b-nao": "No",
       "b-sim": "Yes",
-      "editar-reuniao": "Edit Meeting"
+      "editar-reuniao": "Edit Meeting",
+      "add-info": "Add DG Info",
+      "editar-info": "Edit DG Info"
     },
     "tela-login": {
       "login": "Login",
@@ -317,7 +334,8 @@
       "historico": "History",
       "data-alteracao": "Date of modification",
       "autor": "Author",
-      "visualizar": "View"
+      "visualizar": "View",
+      "clique": "Click"
     },
     "modal-motivo-devolucao": {
       "motivo-devolucao": "Reason for return",
@@ -336,7 +354,8 @@
       "demanda": "Demand",
       "motivo-reprovacao": "Reason for rejecting the demand:",
       "b-reprovar": "Reject Demand",
-      "b-cancelar": "Cancel"
+      "b-cancelar": "Cancel",
+      "b-cancelar-demanda": "Cancel Demand"
     },
     "modal-cancelamento-reuniao": {
       "demanda": "Demand",
@@ -395,7 +414,15 @@
     "qtd-horas": "Hours Quantity",
     "valor-hora": "Hourly Rate",
     "periodo-execucao-mensal": "Execution Period (Monthly)",
-    "responsavel-proposta": "Proposal Responsible:"
+    "responsavel-proposta": "Proposal Responsible:",
+    "dados-classificacao": "Analyst Classification Data:",
+    "tamanho-demanda": "Demand Size",
+    "bu-solicitante": "Requesting BU:",
+    "bu-beneficiada": "Beneficiary BU:",
+    "secao-responsavel": "IT Responsible Section:",
+    "din": "$",
+    "demanda": "DEMAND",
+    "adicionar": "Add"
   },
   "componentes-reutilizaveis": {
     "card-demanda": {
@@ -469,7 +496,9 @@
       "design": "Design and Build",
       "support": "Support",
       "cancelled": "Cancelled",
-      "done": "Done"
+      "done": "Done",
+      "draft": "Draft",
+      "discussion": "Discussion"
     }
   },
   "componentes-fixos": {
@@ -486,7 +515,8 @@
       "demandas": "DEMANDS",
       "rascunhos": "DRAFTS",
       "configuracoes": "Settings",
-      "sair": "Logout"
+      "sair": "Logout",
+      "logado": "You are logged in as:"
     }
   }
 }

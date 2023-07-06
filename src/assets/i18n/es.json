@@ -70,7 +70,19 @@
             "preto": "Negro",
             "temas": "Temas",
             "fonte": "Fuente",
-            "tamanho": "Tamaño"
+            "tamanho": "Tamaño de Fuente",
+            "personalizacao": "Personalización de colores:",
+            "descricao1": "Haz clic en una personalización existente o crea una nueva, realiza los cambios deseados, luego guarda y establece como activa.",
+            "descricao2": "Al definir una nueva personalización de colores para el sistema, esta operación se realiza para todos los usuarios.",
+            "descricao3": "¡Selecciona una plantilla en la que deseas personalizar!",
+            "definir-ativo": "Establecer como Activa",
+            "criar-nova": "Crear Nueva",
+            "cancelar": "Cancelar",
+            "criar-personalizacao": "Crear Nueva Personalización",
+            "cores-demandas": "Colores de las Demandas:",
+            "cores-reuniao": "Colores de las Reuniones",
+            "salvar-alteracao": "Guardar Cambios",
+            "salvar-ativo": "Guardar y Establecer como Activo"
         },
         "configuracoes-sugestoes": {
             "titulo": "Sugerencias",
@@ -176,7 +188,9 @@
             "tool-memoria-beneficio-potencial": "¿Cómo calculó el beneficio?",
             "tool-beneficio-qualitativo": "¿Cuál sería el beneficio en términos de disciplina, control y planificación?",
             "tool-frequencia-uso-sistema": "¿Cuál sería la usabilidad del sistema?",
-            "tool-anexar-documento": "¿Desea adjuntar archivos (PDF, XML, POM...) relacionados con la propuesta, como investigaciones?"
+            "tool-anexar-documento": "¿Desea adjuntar archivos (PDF, XML, POM...) relacionados con la propuesta, como investigaciones?",
+            "maximo-total": "Máximo Total: 100MB",
+            "enter": "Presiona 'Enter' para validar"
         },
         "proposta": {
             "proposta": "Propuesta",
@@ -259,7 +273,8 @@
             "solicitante": "Solicitante:",
             "analista": "Analista:",
             "selecione-conversa": "SELECCIONA UNA CONVERSACIÓN",
-            "conversas-cadastradas": "NO TIENES CONVERSACIONES REGISTRADAS"
+            "conversas-cadastradas": "NO TIENES CONVERSACIONES REGISTRADAS",
+            "conversando": "Estás chateando con:"
         },
         "tela-calendario": {
             "calendario-reunioes": "Calendario de Reuniones"
@@ -284,7 +299,9 @@
             "b-cancelar-reuniao": "Cancelar reunión",
             "b-nao": "No",
             "b-sim": "Sí",
-            "editar-reuniao": "Editar Reunión"
+            "editar-reuniao": "Editar Reunión",
+            "add-info": "Agregar Info. DG",
+            "editar-info": "Editar Info. DG"
         },
         "tela-login": {
             "login": "Inicio de Sesión",
@@ -317,7 +334,8 @@
             "historico": "Historial",
             "data-alteracao": "Fecha de Cambio",
             "autor": "Autor",
-            "visualizar": "Visualizar"
+            "visualizar": "Visualizar",
+            "clique": "Clic"
         },
         "modal-motivo-devolucao": {
             "motivo-devolucao": "Motivo de Devolución",
@@ -336,7 +354,8 @@
             "demanda": "Demanda",
             "motivo-reprovacao": "Motivo de rechazo de la demanda:",
             "b-reprovar": "Rechazar Demanda",
-            "b-cancelar": "Cancelar"
+            "b-cancelar": "Cancelar",
+            "b-cancelar-demanda": "Cancelar Demanda"
         },
         "modal-cancelamento-reuniao": {
             "demanda": "Demanda",
@@ -395,7 +414,15 @@
         "qtd-horas": "Cantidad de Horas",
         "valor-hora": "Tarifa Horaria",
         "periodo-execucao-mensal": "Período de Ejecución (Mensual)",
-        "responsavel-proposta": "Responsable de la Propuesta:"
+        "responsavel-proposta": "Responsable de la Propuesta:",
+        "dados-classificacao": "Datos de Clasificación del Analista:",
+        "tamanho-demanda": "Tamaño de la Demanda",
+        "bu-solicitante": "BU Solicitante:",
+        "bu-beneficiada": "BU Beneficiada:",
+        "secao-responsavel": "Sección de TI Responsable:",
+        "din": "$",
+        "demanda": "DEMANDA",
+        "adicionar": "Agregar"
     },
     "componentes-reutilizaveis": {
         "card-demanda": {
@@ -469,7 +496,9 @@
             "design": "Diseño y Construcción",
             "support": "Soporte",
             "cancelled": "Cancelado",
-            "done": "Hecho"
+            "done": "Hecho",
+            "draft": "Borrador",
+            "discussion": "Discusión"
         }
     },
     "componentes-fixos": {
@@ -486,7 +515,8 @@
             "demandas": "DEMANDAS",
             "rascunhos": "Borradores",
             "configuracoes": "Configuraciones",
-            "sair": "Salir"
+            "sair": "Salir",
+            "logado": "Has iniciado sesión como:"
         }
     }
 }

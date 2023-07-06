@@ -2,7 +2,7 @@
     <ul class="nav flex-column container-sidebar" style="width: 18vw; font-size: 1rem;">
         <li (click)="clicouEmUmStatus.emit('DRAFT')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item DRAFT"></div>
-            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/rascunho.png" alt="" srcset=""> Draft </a>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/rascunho.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.draft" | translate }} </a>
         </li>
         <li (click)="clicouEmUmStatus.emit('BACKLOG_CLASSIFICACAO')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item BACKLOG_CLASSIFICACAO"></div>
@@ -26,7 +26,7 @@
         </li>
         <li (click)="clicouEmUmStatus.emit('DISCUSSION')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item DISCUSSION"></div>
-            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-colaboração-100.png" alt="" srcset=""> Discussion </a>
+            <a class="nav-link active" aria-current="page"><img style="width: 1.5em; margin-right: 13px;"  src="assets/images/icons8-colaboração-100.png" alt="" srcset=""> {{ "componentes-reutilizaveis.sidebar-demanda.discussion" | translate }} </a>
         </li>
         <li (click)="clicouEmUmStatus.emit('TO_DO')" class="nav-item d-flex border-bottom">
             <div class="barra-nav-item TO_DO"></div>

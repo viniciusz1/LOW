@@ -20,7 +20,7 @@
               <td falarTexto>{{i.version}}</td>
               <td falarTexto>{{i.dataCriacaoDemanda}}</td>
               <td falarTexto>{{i.solicitanteDemanda?.nomeUsuario  }}</td>
-              <td falarTexto><a (click)="openModalDemandaDocumento(i)" style="color:rgb(50, 111, 223); text-decoration-line: underline" role="button">clique</a></td>
+              <td falarTexto><a (click)="openModalDemandaDocumento(i)" style="color:rgb(50, 111, 223); text-decoration-line: underline" role="button">{{ "modais.modal-historico.clique" | translate }}</a></td>
             </tr>
           </tbody>
     </table>

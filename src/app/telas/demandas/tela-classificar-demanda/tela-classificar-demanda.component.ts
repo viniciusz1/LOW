@@ -12,8 +12,9 @@ import { ModalDemandaDocumentoComponent } from 'src/app/modais/modal-demanda-doc
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalReprovacaoDemandaComponent } from 'src/app/modais/modal-reprovacao-demanda/modal-reprovacao-demanda.component';
 import { FileUpload } from 'primeng/fileupload';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { path } from 'src/app/services/path/rota-api';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 
@@ -33,7 +34,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
   }
 
   path = path
-  
+
   listaBUs = [
     { value: 'WMOI', nome: 'WMO-I – WEG Motores Industrial' },
     { value: 'WMOC', nome: 'WMO-C – WEG Motores Comercial' },
@@ -45,10 +46,11 @@ export class TelaClassificarDemandaComponent implements OnInit {
     { value: 'WTD', nome: 'WTD – WEG Transmissão e Distribuição' },
   ]
 
-
   demanda: Demanda | undefined = undefined
   demandaClassificadaForm = this.demandaClassificadaService.demandaClassificadaForm;
   selectedBUs: any;
+  solicitanteAnalista: boolean = false;
+  motivoDemandaPropria = "Os motivos não foram disponibilizados";
 
   opcoesDeTamanho = [
     {
@@ -100,19 +102,63 @@ export class TelaClassificarDemandaComponent implements OnInit {
     private demandaService: DemandaService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private usuarioService: UsuarioService
   ) {
 
     this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota).subscribe({
       next: (value) => {
         console.log(value)
         this.demanda = value;
+        if(this.usuarioService.getCodigoUser() ==
+        this.demanda.solicitanteDemanda?.codigoUsuario){
+          this.solicitanteAnalista = true;
+        }
       },
       error: (err) => {
         this.showError("Código não encontrado!")
       },
     });
     // this.isFormClassificadaInvalid =
+  }
+
+  dadosDemanda: Demanda | undefined;
+
+  cancelarDemandaPropria() {
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      header: 'Cancelar Demanda',
+      blockScroll: false,
+      message: 'Tem certeza que deseja cancelar esta demanda?',
+      accept: () => {
+        this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota).subscribe({
+          next: (value) => {
+            console.log(value)
+            this.dadosDemanda = value;
+
+            if (this.dadosDemanda.codigoDemanda) {
+              this.demandaService
+                .reprovarDemanda(
+                  parseInt(this.dadosDemanda.codigoDemanda),
+                  this.motivoDemandaPropria
+                )
+                .subscribe({
+                  next: event => {
+                    this.showSuccess("Demanda cancelada com sucesso!")
+                  },
+                  error: err => {
+                    this.showError("Não foi possivel cancelar a demanda!")
+                  }
+                });
+            }
+          },
+          error: (err) => {
+            this.showError("Código não encontrado!")
+          },
+        });
+      },
+    });
   }
 
 

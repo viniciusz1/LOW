@@ -18,6 +18,14 @@
     }
 }
 
+.flutuante {
+    position: fixed;
+    bottom: 1vh;
+    right: 10px;
+    z-index: 999;
+    /* Outros estilos desejados */
+  }
+
 .right-arrow:hover,
 .left-arrow:hover {
     background-color: rgba(0, 0, 0, 0.596);

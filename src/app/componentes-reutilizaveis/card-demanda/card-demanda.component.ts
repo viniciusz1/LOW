@@ -284,6 +284,9 @@ export class CardDemandaComponent implements OnInit {
       case 'MODAL_ADD_REUNIAO':
         this.abrirModalCriarReuniao.emit(this.dadosDemanda);
         break;
+      case 'IR_PARA_REUNIAO':
+        this.encaminharParaReuniao(this.dadosDemanda.codigoDemanda);
+        break;
       case 'ver em ata':
         break;
       case 'MODAL_AVANCAR_FASE':

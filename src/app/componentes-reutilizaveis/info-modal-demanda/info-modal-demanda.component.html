@@ -205,3 +205,25 @@
     </a>
   </h4>
 </div>
+<div>
+  <div *ngIf="dadosDemanda?.parecerComissaoProposta != undefined">
+    <b>Parecer da Comissão:</b> <span>{{dadosDemanda?.parecerComissaoProposta}}</span>
+    <b>Decisão da Comissão:</b> <span>{{dadosDemanda?.ultimaDecisaoComissao}}</span>
+  </div>
+  <div *ngIf="dadosDemanda?.parecerDGProposta != undefined">
+    <b>Decisão da Diretoria Geral:</b> <span>{{dadosDemanda?.decisaoDG}}</span>
+    <b>Parecer da Diretoria Geral:</b> <span>{{dadosDemanda?.parecerDGProposta}}</span>
+    <b>Número da Ata da Diretoria Geral:</b> <span>{{dadosDemanda?.numAtaDG}}</span>
+    <div *ngIf="dadosDemanda?.arquivoDG != undefined">
+      <b>Arquivo Diretoria Geral:</b> <span><a falarTexto
+        role="button"
+        (click)="download(dadosDemanda?.arquivoDG)"
+      >
+        {{ dadosDemanda?.arquivoDG?.nomeArquivo }}
+      </a></span>
+
+
+    </div>
+
+  </div>
+</div>

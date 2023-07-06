@@ -53,5 +53,5 @@ export interface Demanda {
   parecerDGProposta?: string
   decisaoDG?: string
   numAtaDG?: string
-  arquivoDG?: string
+  arquivoDG?: Arquivo
 }

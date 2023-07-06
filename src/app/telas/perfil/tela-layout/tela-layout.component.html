@@ -17,41 +17,7 @@
     <div class="confDados" style="margin: 10px">
       <div class="dadosPessoais">
         <div class="perfil">
-          <div
-            class="nome"
-            style="
-              display: flex;
-              border-bottom: 1px solid #8f8f8f;
-              padding: 10px 0px 10px 10px;
-              margin: 10px;
-              justify-content: space-between;
-            "
-          >
-            <div
-              class="dadosPrincipais"
-              style="display: flex; width: 100%; justify-content: space-between"
-            >
-              <div class="caracteristica" style="margin-right: 10px">
-                <span falarTexto>
-                  {{ "telas.configuracoes-layout.temas" | translate }}:
-                </span>
-              </div>
-              <div class="nome-dado">
-                <select
-                  class="form-select form-select-sm"
-                  aria-label=".form-select-sm example"
-                >
-                  <!-- <option selected>Selecione a opção:</option> -->
-                  <option value="1" falarTexto>
-                    {{ "telas.configuracoes-layout.padrao" | translate }}
-                  </option>
-                  <option value="2" falarTexto>
-                    {{ "telas.configuracoes-layout.preto" | translate }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
+          <h5 style="margin-left: 15px" class="mt-3">Configurações Pessoais</h5>
           <div
             class="nome"
             style="
@@ -211,7 +177,11 @@
               </div>
             </div>
           </div>
+          <div class="d-flex justify-content-end" style="margin-right: 10px">
+            <button (click)="redefinir()" class="btn btn-outline-primary">Redefinir Configurações</button>
+          </div>
           <div *ngIf="nivelAcesso == 'GestorTI'">
+            <h5 style="margin-left: 15px" class="mt-3">Configurações Gerais (Para todos os usuários)</h5>
             <div class="nome" style="padding: 10px 0px 10px 10px; margin: 10px">
               <div class="caracteristica mb-3" style="margin-right: 10px">
                 <span falarTexto> Personalização de cores: </span>

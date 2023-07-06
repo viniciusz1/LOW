@@ -295,7 +295,7 @@ export class TelaInicialComponent implements OnInit {
 
   //Inicia e direciona o usuário para a tela de chat caso ele seja o analista da demanda
   irParaChat(event: Event, demanda: Demanda) {
-    if (event.target && demanda.analista?.codigoUsuario == undefined) {
+    if (event.target && demanda.analista?.codigoUsuario == undefined && demanda.solicitanteDemanda?.codigoUsuario != this.usuarioService.getCodigoUser()) {
       this.confirmationService.confirm({
         target: event.target,
         message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',

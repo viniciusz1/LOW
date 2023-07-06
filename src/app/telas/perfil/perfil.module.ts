@@ -1,5 +1,5 @@
 import { InputTextModule } from 'primeng/inputtext';
-import { NgModule } from '@angular/core';
+import { Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TelaPerfilComponent } from './tela-perfil/tela-perfil.component';
 import { TelaLayoutComponent } from './tela-layout/tela-layout.component';
@@ -11,6 +11,7 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizaveis/componentes-reutilizaveis.module';
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 
@@ -31,7 +32,8 @@ import { TableModule } from 'primeng/table';
     ComponentesReutilizaveisModule,
     InputTextModule,
     MessagesModule,
-    TableModule
+    TableModule,
+    InputSwitchModule
   ]
 })
 export class PerfilModule { }

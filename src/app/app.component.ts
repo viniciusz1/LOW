@@ -38,10 +38,17 @@ export class AppComponent implements OnInit {
     })
   }
 
-  @ViewChild('vlibras') vlibras: any
+  @ViewChild('vlibras') vlibras: any;
+
   ngOnInit(): void {
   }
 
+  checked: boolean = true;
+
+  checkedChanged() {
+    this.checked = this.personalizacaoService.checked;
+    return this.checked;
+  }
 
   startedRecodAudio = false;
   pararDeFalar() {
@@ -57,6 +64,8 @@ export class AppComponent implements OnInit {
 
   startVoice() {
     this.showSuccess('Selecione um campo de Texto e certifique-se de que o microfone está ligado para começar a falar!')
+    console.log("Log foi " + this.checked);
+    
     this.startedRecodAudio = true;
     this.voiceRecognitionService.start();
   }

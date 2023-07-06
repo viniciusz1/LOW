@@ -24,6 +24,7 @@ export class CardDemandaComponent implements OnInit {
   @Output() abrirModalMotivoReprovacao = new EventEmitter<Demanda>();
   @Output() abrirModalAvaliarDemanda = new EventEmitter();
   @Output() abrirModalParecerComissao = new EventEmitter<Demanda>();
+  @Output() abrirModalParecerDG = new EventEmitter<Demanda>();
   @Output() abrirModalReprovar = new EventEmitter<Demanda>();
   @Output() verDocumentoProposta = new EventEmitter<Demanda>();
   @Output() clicouEmExcluir = new EventEmitter();
@@ -40,11 +41,19 @@ export class CardDemandaComponent implements OnInit {
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
   @Input() dadosDemanda: Demanda = {};
+  @Input() demandaEmReuniao: boolean = false;
   @Input() rascunho: boolean = false;
-  @Input() exibirBotaoParecerComissao: boolean = false;
-  @Input() exibirBotaoParecerDg: boolean = false;
   @Input() tipoDeAta: string = '';
   @Input() mostrarBotao = true;
+
+  exibirBotaoParecerComissao(){
+    if(this.demandaEmReuniao && (this.dadosDemanda.parecerComissaoProposta != null) && this.dadosDemanda.statusDemanda == StatusDemanda.DISCUSSION){
+      return true;
+    }
+    return false;
+  }
+
+  
 
   textoExibidoEmBotaoDependendoRota:
     | { rota: string; texto: string }
@@ -275,6 +284,9 @@ export class CardDemandaComponent implements OnInit {
       case 'MODAL_ADD_REUNIAO':
         this.abrirModalCriarReuniao.emit(this.dadosDemanda);
         break;
+      case 'IR_PARA_REUNIAO':
+        this.encaminharParaReuniao(this.dadosDemanda.codigoDemanda);
+        break;
       case 'ver em ata':
         break;
       case 'MODAL_AVANCAR_FASE':
@@ -291,6 +303,9 @@ export class CardDemandaComponent implements OnInit {
         break;
       case 'PARECER_COMISSAO':
         this.abrirModalParecerComissao.emit(this.dadosDemanda);
+        break;
+      case 'PARECER_DG':
+        this.abrirModalParecerDG.emit(this.dadosDemanda);
         break;
       default:
         //Caso não tenha uma função pré-definida, vai para a rota atrelada ao botão
@@ -401,23 +416,38 @@ export class CardDemandaComponent implements OnInit {
           texto: 'Continuar Demanda',
         };
         return true;
-      default:
-        if (this.exibirBotaoParecerComissao) {
-          this.textoExibidoEmBotaoDependendoRota = {
-            rota: 'PARECER_COMISSAO',
-            texto: 'Parecer Comissao',
-          };
-          return true;
-        } else if (this.exibirBotaoParecerDg) {
-          this.textoExibidoEmBotaoDependendoRota = {
-            rota: 'PARECER_DG',
-            texto: 'Parecer da DG',
-          };
+
+        case StatusDemanda.DISCUSSION:
+          
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          if (this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == true) {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'PARECER_COMISSAO',
+              texto: 'Parecer Comissao',
+            };
+            return true;
+          }else if(this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == false){
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'IR_PARA_REUNIAO',
+              texto: 'Ir para Reunião',
+            };
+            return true;
+          } else {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'PARECER_DG',
+              texto: 'Parecer da DG',
+            };
+          }
         }
+        return true;
+      default:
+        
         return true;
     }
   }
-
+  teste(){
+    console.log(this.dadosDemanda.parecerComissaoProposta)
+  }
   deletarRascunho() {
     if (this.dadosDemanda.codigoDemanda) {
       this.clicouEmExcluir.emit(this.dadosDemanda);

@@ -6,6 +6,8 @@ import { NivelAcesso } from 'src/app/models/nivel-acesso.enum';
 import { MessageService } from 'primeng/api';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
+import { Reuniao } from 'src/app/models/reuniao.model';
+import { ReuniaoService } from 'src/app/services/reuniao.service';
 
 @Component({
   selector: 'app-list-demanda',
@@ -15,45 +17,52 @@ import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
 
 
 export class ListDemandaComponent implements OnInit {
-  primaryColorClass?: string = "";
-  secondaryColorClass?: string = "";
-
   @Output() abrirModalMotivoReprovacao = new EventEmitter<Demanda>();
+  @Output() abrirModalAvaliarDemanda = new EventEmitter();
+  @Output() abrirModalParecerComissao = new EventEmitter<Demanda>();
+  @Output() abrirModalParecerDG = new EventEmitter<Demanda>();
+  @Output() abrirModalReprovar = new EventEmitter<Demanda>();
   @Output() verDocumentoProposta = new EventEmitter<Demanda>();
-  @Output() clicouAdicionarPauta = new EventEmitter();
-  @Output() modalHistorico = new EventEmitter();
-  @Output() irParaChat = new EventEmitter();
-  @Output() abrirModalCriarReuniao = new EventEmitter();
-  @Output() verDocumentoEmAta = new EventEmitter();
   @Output() clicouEmExcluir = new EventEmitter();
-  @Output() fechouModal = new EventEmitter();
-  @Output() abrirModalReprovar = new EventEmitter<Demanda>()
+  @Output() irParaChat = new EventEmitter();
+  @Output() abrirModalCriarReuniao = new EventEmitter<Demanda>();
+  @Output() modalHistorico = new EventEmitter();
+  @Output() verDocumentoEmAta = new EventEmitter();
+  @Output() clicouAdicionarPauta = new EventEmitter();
   @Output() avancarStatusDemanda = new EventEmitter<{
     mensagem: string;
     codigoDemanda: string | undefined;
     statusDemanda: StatusDemanda | undefined;
   }>();
 
+  @Input() mudarTamanho: string = '68vw';
   @Input() isPauta: boolean = false;
+  @Input() dadosDemanda: Demanda = {};
+  @Input() demandaEmReuniao: boolean = false;
   @Input() rascunho: boolean = false;
   @Input() tipoDeAta: string = '';
-  @Input() exibirBotaoParecerComissao: boolean = false;
-  @Input() exibirBotaoParecerDg: boolean = false;
-  @Input() dadosDemanda: Demanda = {};
   @Input() mostrarBotao = true;
-  @Input() mudarTamanho: string = '68vw';
   @Input('mostrarIconeAdicionar') demandaPequena = false;
+
+
+  mostrarIconeAdicionar = false;
+  textoExibidoEmBotaoDependendoRota:
+    | { rota: string; texto: string }
+    | undefined = undefined;
+  primaryColorClass?: string = '';
+  secondaryColorClass: string = '';
   @Input() primaryColor?: string = '';
   @Input() secondaryColor: string = '';
-
-
-
-  nivelAcesso: NivelAcesso = NivelAcesso.Analista;
-  textoExibidoEmBotaoDependendoRota: { rota: string, texto: string } | undefined = undefined;
+  analistaAssociado: boolean = false;
+  codigoReuniao: number | undefined;
+  demandaEncontrada: boolean = false;
+  motivoDemandaPropria = "Os motivos não foram disponibilizados";
+  reunioes: Reuniao[] | undefined;
 
   constructor(private route: Router, 
     private usuarioService: UsuarioService, 
     private messageService: MessageService,
+    private reuniaoService: ReuniaoService,
     private personalizacaoService: PersonalizacaoService) { }
   statusPermitido() {
     if (
@@ -161,133 +170,206 @@ export class ListDemandaComponent implements OnInit {
     return true;
   }
 
+  encaminharParaReuniao(codigoDemanda?: string) {
+    this.reuniaoService.getReuniao().subscribe(reunioes => {
+      this.reunioes = reunioes;
+      this.procurarCodigoDemanda(codigoDemanda);
+      if (this.demandaEncontrada) {
+        this.route.navigate(['tela-inicial/ver-reuniao/' + this.codigoReuniao]);
+      }
+    });
+  }
+
+  procurarCodigoDemanda(codigoDemanda: string | undefined) {
+    if (this.reunioes) {
+      for (const reuniao of this.reunioes) {
+        if (reuniao.propostasReuniao) {
+          for (const demanda of reuniao.propostasReuniao) {
+            if (demanda.codigoDemanda == codigoDemanda) {
+              this.codigoReuniao = reuniao.codigoReuniao;
+              this.demandaEncontrada = true;
+              return;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  //Função chamada quando o usuário clica na ação do card
   direcionarUsuario() {
-    if (this.textoExibidoEmBotaoDependendoRota?.rota == '') {
-      this.abrirModalMotivoReprovacao.emit(this.dadosDemanda);
-    } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avaliar') {
-      this.verDocumentoProposta.emit(this.dadosDemanda);
-    } else if (
-      this.textoExibidoEmBotaoDependendoRota?.rota == 'adicionar a reuniao'
-    ) {
-      this.abrirModalCriarReuniao.emit(this.dadosDemanda);
-    } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'ver em ata') {
-      this.verDocumentoEmAta.emit();
-    } else if (this.textoExibidoEmBotaoDependendoRota?.rota == 'avancar fase') {
-      this.avancarStatusDemanda.emit({
-        mensagem:
-          'Tem certeza que deseja a fase da demanda?<br>Ela avançará para o Status: ' +
-          this.retornaProximoStatusDemanda(this.dadosDemanda.statusDemanda),
-        codigoDemanda: this.dadosDemanda.codigoDemanda,
-        statusDemanda: this.dadosDemanda.statusDemanda,
-      });
-    } else if (
-      this.textoExibidoEmBotaoDependendoRota?.rota == 'ver documento'
-    ) {
-      this.verDocumentoProposta.emit(this.dadosDemanda);
-    } else {
-      this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
+    switch (this.textoExibidoEmBotaoDependendoRota?.rota) {
+      case '':
+        this.abrirModalMotivoReprovacao.emit(this.dadosDemanda);
+        break;
+      case 'ABRIR_MODAL_AVALIAR':
+        this.verDocumentoProposta.emit(this.dadosDemanda);
+        break;
+      case 'MODAL_ADD_REUNIAO':
+        this.abrirModalCriarReuniao.emit(this.dadosDemanda);
+        break;
+      case 'IR_PARA_REUNIAO':
+        this.encaminharParaReuniao(this.dadosDemanda.codigoDemanda);
+        break;
+      case 'ver em ata':
+        break;
+      case 'MODAL_AVANCAR_FASE':
+        this.avancarStatusDemanda.emit({
+          mensagem:
+            'Tem certeza que deseja avançar a fase da demanda?<br>Ela avançará para o Status: ' +
+            this.retornaProximoStatusDemanda(this.dadosDemanda.statusDemanda),
+          codigoDemanda: this.dadosDemanda.codigoDemanda,
+          statusDemanda: this.dadosDemanda.statusDemanda,
+        });
+        break;
+      case 'VER_DOCUMENTO':
+        this.verDocumentoProposta.emit(this.dadosDemanda);
+        break;
+      case 'PARECER_COMISSAO':
+        this.abrirModalParecerComissao.emit(this.dadosDemanda);
+        break;
+      case 'PARECER_DG':
+        this.abrirModalParecerDG.emit(this.dadosDemanda);
+        break;
+      default:
+        //Caso não tenha uma função pré-definida, vai para a rota atrelada ao botão
+        this.route.navigate([this.textoExibidoEmBotaoDependendoRota?.rota]);
     }
   }
 
   exibicaoBotoes() {
-    if (
-      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO &&
-      this.nivelAcesso == NivelAcesso.Analista
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota:
-          '/tela-inicial/classificar-demanda/' + this.dadosDemanda.codigoDemanda,
-        texto: 'Classificar Demanda',
-      };
-      return true;
-    } else if (
-      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_PROPOSTA &&
-      this.nivelAcesso == NivelAcesso.Analista
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
-        texto: 'Criar Proposta',
-      };
-      return true;
-    } else if (
-      this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_APROVACAO &&
-      this.nivelAcesso == NivelAcesso.GerenteNegocio
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'avaliar',
-        texto: 'Avaliar Demanda',
-      };
-      return true;
-    } else if (
-      (this.dadosDemanda.statusDemanda == StatusDemanda.ASSESSMENT ||
-        this.dadosDemanda.statusDemanda == StatusDemanda.BUSINESS_CASE) &&
-      this.nivelAcesso == NivelAcesso.Analista
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'adicionar a reuniao',
-        texto: 'Adicionar Proposta',
-      };
-      return true;
-    } else if (
-      this.dadosDemanda.statusDemanda == StatusDemanda.TO_DO ||
-      this.dadosDemanda.statusDemanda == StatusDemanda.DESIGN_AND_BUILD ||
-      this.dadosDemanda.statusDemanda == StatusDemanda.SUPPORT
-    ) {
-      if (this.nivelAcesso == NivelAcesso.Analista) {
-        this.textoExibidoEmBotaoDependendoRota = {
-          rota: 'avancar fase',
-          texto: 'Avançar Fase',
-        };
-      } else {
-        this.textoExibidoEmBotaoDependendoRota = {
-          rota: 'ver documento',
-          texto: 'Ver Demanda',
-        };
-      }
-      return true;
-    } else if (this.dadosDemanda.statusDemanda == StatusDemanda.CANCELLED) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
-        texto: 'Motivo',
-      };
-      return true;
-    } else if (this.exibirBotaoParecerDg) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
-        texto: 'Parecer da DG',
-      };
-      return true;
-    } else if (this.exibirBotaoParecerComissao) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
-        texto: 'Parecer Comissao',
-      };
-      return true;
-    } else if (
-      !this.isPauta &&
-      !this.rascunho &&
-      this.textoExibidoEmBotaoDependendoRota &&
-      !this.exibirBotaoParecerComissao &&
-      !this.exibirBotaoParecerDg
-    ) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'ver documento',
-        texto: 'Ver Demanda',
-      };
-      return true;
-    } else if (!this.isPauta && this.rascunho) {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: '',
-        texto: 'Continuar Demanda',
-      };
-    } else {
-      this.textoExibidoEmBotaoDependendoRota = {
-        rota: 'ver documento',
-        texto: 'Ver Demanda',
-      };
+    const nivelAcesso = this.usuarioService.getRole;
+    //Caso o usuário não tenha permissão de ação na demanda, ele poderá ve-la
+    this.textoExibidoEmBotaoDependendoRota = {
+      rota: 'VER_DOCUMENTO',
+      texto: 'Ver Demanda',
+    };
+    //Caso o card seja definido que não precisa mostrar o botão
+    if (!this.mostrarBotao) {
+      return false;
     }
-    return true;
+
+    //Caso a rota não existir, é um comando para a função direcionarUsuario()
+    switch (this.dadosDemanda.statusDemanda) {
+      case StatusDemanda.BACKLOG_CLASSIFICACAO:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          if (
+            nivelAcesso == 'GestorTI' ||
+            this.dadosDemanda.solicitanteDemanda?.codigoUsuario !=
+            this.usuarioService.getCodigoUser()
+          ) {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota:
+                '/tela-inicial/classificar-demanda/' +
+                this.dadosDemanda.codigoDemanda,
+              texto: 'Classificar Demanda',
+            };
+          }
+        }
+        return true;
+      case StatusDemanda.BACKLOG_PROPOSTA:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
+            texto: 'Criar Proposta',
+          };
+        }
+        return true;
+      case StatusDemanda.BACKLOG_APROVACAO:
+        if (nivelAcesso == 'GerenteNegocio' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'ABRIR_MODAL_AVALIAR',
+            texto: 'Avaliar Demanda',
+          };
+        }
+        return true;
+      case StatusDemanda.ASSESSMENT:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          // if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_ADD_REUNIAO',
+            texto: 'Adicionar Proposta',
+            // };
+          };
+        }
+        return true;
+      case StatusDemanda.BUSINESS_CASE:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          // if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_ADD_REUNIAO',
+            texto: 'Adicionar Proposta',
+            // };
+          };
+        }
+        return true;
+      case StatusDemanda.TO_DO:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_AVANCAR_FASE',
+            texto: 'Avançar Fase',
+          };
+        }
+        return true;
+      case StatusDemanda.DESIGN_AND_BUILD:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_AVANCAR_FASE',
+            texto: 'Avançar Fase',
+          };
+        }
+        return true;
+      case StatusDemanda.SUPPORT:
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: 'MODAL_AVANCAR_FASE',
+            texto: 'Avançar Fase',
+          };
+        }
+        return true;
+      case StatusDemanda.CANCELLED:
+        this.textoExibidoEmBotaoDependendoRota = {
+          rota: '',
+          texto: 'Motivo',
+        };
+        return true;
+      case StatusDemanda.DRAFT:
+        this.rascunho = true;
+        this.textoExibidoEmBotaoDependendoRota = {
+          rota: 'tela-inicial/rascunho/' + this.dadosDemanda.codigoDemanda,
+          texto: 'Continuar Demanda',
+        };
+        return true;
+
+        case StatusDemanda.DISCUSSION:
+          
+        if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
+          if (this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == true) {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'PARECER_COMISSAO',
+              texto: 'Parecer Comissao',
+            };
+            return true;
+          }else if(this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == false){
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'IR_PARA_REUNIAO',
+              texto: 'Ir para Reunião',
+            };
+            return true;
+          } else {
+            this.textoExibidoEmBotaoDependendoRota = {
+              rota: 'PARECER_DG',
+              texto: 'Parecer da DG',
+            };
+          }
+        }
+        return true;
+      default:
+        
+        return true;
+    }
   }
+  
   getOrdinalValueStatusDemanda(value: StatusDemanda | undefined): number | undefined {
     const enumValues = Object.values(StatusDemanda);
     const index = enumValues.indexOf(value as StatusDemanda);

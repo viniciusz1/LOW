@@ -60,7 +60,7 @@
     <div *ngIf="!tipoRascunho" [ngClass]="
         isFiltrado ? 'justify-content-between' : 'justify-content-end container'
       " style="overflow: auto" class="my-3 d-flex w-100">
-      <i *ngIf="isFiltrado" (click)="carregarDemandasIniciais()" class="bi bi-arrow-left"
+      <i *ngIf="isFiltrado" (click)="reloadPage()" class="bi bi-arrow-left"
         style="font-size: 25px; cursor: pointer"></i>
       <div class="d-flex">
         <div joyrideStep="tres" [title]="'Trocar Exibição'" [stepContent]="customContent"
@@ -144,7 +144,7 @@
             </div>
           </div>
           <!-- Bloco para expandir -->
-          <div *ngIf="listaDemandas.length > 0" type="button" (click)="collapse.toggle()"
+          <div *ngIf="listaDemandas.length > 0 && exibirDivRightArrow(linha.titulo, 1)" type="button" (click)="collapse.toggle()"
             class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
             style="width: 30%; height: 30px">
             <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed[i]"
@@ -185,13 +185,9 @@
             <h5 falarTexto>{{ listaTituloNaoFiltrado[0].titulo }}</h5>
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
-          <div falarTexto *ngIf="listaTituloNaoFiltrado[0].status != 'DRAFT'" class="me-3"
-            style="align-self: flex-end; cursor: pointer" (click)="
-              pesquisarDemandas({
-                status: listaTituloNaoFiltrado[0].status,
-                pesquisaCampo: undefined
-              })
-            ">
+          <div falarTexto class="me-3"
+            style="align-self: flex-end; cursor: pointer" 
+            (click)="pesquisarDemandasDoUsuario()">
             {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
         </div>
@@ -272,7 +268,7 @@
                   status: linha.status,
                   pesquisaCampo: undefined
                 })
-              " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas'" falarTexto>
+              " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas' && exibirDivRightArrow(linha.titulo, 2)" falarTexto>
               {{ "telas.tela-inicial.ver-mais" | translate }}
               ({{
               qtdDemandasStatus[i]
@@ -280,9 +276,8 @@
             </div>
 
             <!-- Ver-mais para a demandas do usuário -->
-            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="
-              pesquisarDemandasDoUsuario()
-            " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'" falarTexto>
+            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="pesquisarDemandasDoUsuario()" 
+            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'" falarTexto>
               {{ "telas.tela-inicial.ver-mais" | translate }}
             </div>
           </div>
@@ -304,7 +299,7 @@
             <div *ngIf="positionListCards[i] != 0" class="left-arrow alinhacao" (click)="changeLeft(i)">
               <i style="font-size: 25px" class="bi bi-chevron-left"></i>
             </div>
-            <div class="right-arrow alinhacao" (click)="changeRight(i)">
+            <div *ngIf="exibirDivRightArrow(linha.titulo, 2)" class="right-arrow alinhacao" (click)="changeRight(i)">
               <i style="font-size: 25px" class="bi bi-chevron-right"></i>
             </div>
           </div>
@@ -357,9 +352,6 @@
   </div>
   <div>
     <p-confirmDialog icon="pi pi-exclamation-triangle" #cd>
-      <ng-template pTemplate="header">
-        <h4 falarTexto>{{ cabecalhoMensagemDeConfirmacao }}</h4>
-      </ng-template>
       <ng-template pTemplate="footer">
         <button type="button" (click)="cd.reject()" class="btn btn-outline-primary" falarTexto>
           <i class="pi pi-times me-2"></i>

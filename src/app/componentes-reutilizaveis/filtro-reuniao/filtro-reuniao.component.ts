@@ -22,6 +22,8 @@ export class FiltroReuniaoComponent implements OnInit {
   }>();
 
   statusReuniao: string[] = ['Aguardando', 'Proximo', 'Concluido', 'Cancelado', 'Pendente'];
+  naoAparecer = false;
+
 
   teste(cal: Calendar) {
     console.log(cal)

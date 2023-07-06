@@ -28,6 +28,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BusinessUnitService } from 'src/app/services/business-unit.service';
+import { FiltrarDemandaStatusPipe } from 'src/app/pipes/filtrar-demanda-status.pipe';
 
 
 @NgModule({
@@ -61,6 +62,6 @@ import { BusinessUnitService } from 'src/app/services/business-unit.service';
     SharedModule,
     PaginatorModule
   ],
-  providers:[DemandaClassificadaService,BusinessUnitService, SecaoService]
+  providers:[DemandaClassificadaService,BusinessUnitService, SecaoService, FiltrarDemandaStatusPipe]
 })
 export class DemandasModule { }

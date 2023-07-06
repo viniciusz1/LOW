@@ -11,6 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
+import { DemandaService } from 'src/app/services/demanda.service';
 
 
 @Component({
@@ -64,7 +65,7 @@ export class CardDemandaComponent implements OnInit {
   analistaAssociado: boolean = false;
   codigoReuniao: number | undefined;
   demandaEncontrada: boolean = false;
-
+  motivoDemandaPropria = "Os motivos não foram disponibilizados";
   reunioes: Reuniao[] | undefined;
 
   constructor(private route: Router,
@@ -73,10 +74,36 @@ export class CardDemandaComponent implements OnInit {
     private rascunhoService: RascunhoService,
     private usuarioService: UsuarioService,
     private messageService: MessageService,
+    private demandaService: DemandaService,
     private personalizacaoService: PersonalizacaoService) {
 
   }
 
+  cancelarPropriaDemanda() {
+    this.confirmationService.confirm({
+      dismissableMask: true,
+      header: 'Cancelar Demanda',
+      blockScroll: false,
+      message: 'Tem certeza que deseja cancelar esta demanda?',
+      accept: () => {
+        if (this.dadosDemanda.codigoDemanda) {
+          this.demandaService
+            .reprovarDemanda(
+              parseInt(this.dadosDemanda.codigoDemanda),
+              this.motivoDemandaPropria
+            )
+            .subscribe({
+              next: event => {
+                this.showSuccess("Demanda reprovada com sucesso!")
+              },
+              error: err => {
+                this.showError("Não foi possivel cancelar a demanda!")
+              }
+            });
+        }
+      },
+    });
+  }
 
   encaminharParaReuniao(codigoDemanda?: string) {
     this.reuniaoService.getReuniao().subscribe(reunioes => {
@@ -94,7 +121,6 @@ export class CardDemandaComponent implements OnInit {
         if (reuniao.propostasReuniao) {
           for (const demanda of reuniao.propostasReuniao) {
             if (demanda.codigoDemanda == codigoDemanda) {
-              console.log("entrou no if");
               this.codigoReuniao = reuniao.codigoReuniao;
               this.demandaEncontrada = true;
               return;
@@ -303,7 +329,7 @@ export class CardDemandaComponent implements OnInit {
           if (
             nivelAcesso == 'GestorTI' ||
             this.dadosDemanda.solicitanteDemanda?.codigoUsuario !=
-              this.usuarioService.getCodigoUser()
+            this.usuarioService.getCodigoUser()
           ) {
             this.textoExibidoEmBotaoDependendoRota = {
               rota:
@@ -316,10 +342,10 @@ export class CardDemandaComponent implements OnInit {
         return true;
       case StatusDemanda.BACKLOG_PROPOSTA:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-            this.textoExibidoEmBotaoDependendoRota = {
-              rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
-              texto: 'Criar Proposta',
-            };
+          this.textoExibidoEmBotaoDependendoRota = {
+            rota: '/tela-inicial/proposta/' + this.dadosDemanda.codigoDemanda,
+            texto: 'Criar Proposta',
+          };
         }
         return true;
       case StatusDemanda.BACKLOG_APROVACAO:
@@ -466,7 +492,7 @@ export class CardDemandaComponent implements OnInit {
   ngOnInit(): void {
     //Adicionando classes para estilização do card
 
-    if(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao){
+    if (this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao) {
 
       let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
       this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]

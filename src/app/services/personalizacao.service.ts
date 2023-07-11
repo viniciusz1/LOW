@@ -11,6 +11,15 @@ export class PersonalizacaoService {
 
   private _personalizacaoAtiva: Personalizacao = {}
 
+  checked: boolean = true;
+
+  onCheckedChanged(checked: boolean) {
+    console.log("LOg 1 " + checked);
+    this.checked = checked;
+    console.log("LOg 2 " + checked);
+  }
+
+
   get personalizacaoAtiva(){
     if(this._personalizacaoAtiva == undefined){
       let personaliza = localStorage.getItem('personalizacao')

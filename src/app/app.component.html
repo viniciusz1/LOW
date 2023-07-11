@@ -1,18 +1,18 @@
 <div class="position-fixed div-principal" style="right: 0; top: 33%; margin: 0!important;">
-  
-  <div role="button" *ngIf="!startedRecodAudio" class="estilo-cards" style="position: relative !important;" (click)="startVoice()">
+
+  <div role="button" *ngIf="!startedRecodAudio && checkedChanged()" class="estilo-cards" style="position: relative !important;" (click)="startVoice()">
     <i class="bi bi-mic" style="color: white"></i>
   </div>
 
-  <div role="button" *ngIf="startedRecodAudio" class="estilo-cards" style="position: relative !important; background-color: red !important;"
+  <div role="button" *ngIf="startedRecodAudio && checkedChanged()" class="estilo-cards" style="position: relative !important; background-color: red !important;"
     (click)="stopVoice()">
     <i class="bi bi-x-lg" style="color: white"></i>
   </div>
-  <div role="button" *ngIf="falarTextoService.permitirFala" class="estilo-cards mt-2"
+  <div role="button" *ngIf="falarTextoService.permitirFala && checkedChanged()" class="estilo-cards mt-2"
     style="position: relative !important; background-color: red !important;" (click)="pararDeFalar()">
     <i class="bi bi-volume-mute" style="color: white; font-size: 20px;"></i>
   </div>
-  <div role="button" *ngIf="!falarTextoService.permitirFala" class="estilo-cards mt-2" style="position: relative !important;"
+  <div role="button" *ngIf="!falarTextoService.permitirFala && checkedChanged()" class="estilo-cards mt-2" style="position: relative !important;"
     (click)="iniciarFala()">
     <i class="bi bi-volume-off" style="color: white; font-size: 20px"></i>
   </div>

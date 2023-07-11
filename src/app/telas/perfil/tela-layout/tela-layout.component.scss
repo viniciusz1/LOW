@@ -4,6 +4,29 @@
     }
 }
 
+:host ::ng-deep .p-inputswitch .p-inputswitch-slider:before{
+    width: 1.25rem;
+    height: 1.25rem;
+    left: 0.25rem;
+    margin-top: -0.625rem;
+    border-radius: 50%;
+    transition-duration: 0.2s;
+}
+
+:host ::ng-deep .p-inputswitch .p-inputswitch-slider {
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 30px
+}
+
+:host ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+    background: #00579D;
+}
+
+:host ::ng-deep .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
+    background: #00579D;
+}
+
+
 .perfil-label {
     display: flex;
     justify-content: space-between;

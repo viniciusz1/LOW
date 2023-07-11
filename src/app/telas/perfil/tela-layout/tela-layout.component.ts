@@ -1,7 +1,7 @@
 import { Personalizacao } from './../../../models/personalizacao.model';
 import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
 import { ConfiguracoesIniciaisService } from './../../../services/configuracoes-iniciais.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Demanda } from 'src/app/models/demanda.model';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
@@ -23,6 +23,7 @@ export class TelaLayoutComponent implements OnInit {
   alterarTamanhoTexto = true;
   tipoExibicaoDemanda = true;
   nivelAcesso = ''
+  
   constructor(
     public configIniciaisService: ConfiguracoesIniciaisService,
     private confirmationService: ConfirmationService,
@@ -75,6 +76,14 @@ export class TelaLayoutComponent implements OnInit {
       propostasReuniao: propostas,
     };
     this.setarPersonalizacoes();
+  }
+
+  checked: boolean = true;
+  
+  onCheckedChange() {
+    this.personalizacaoService.onCheckedChanged(this.checked);
+    console.log("Foi 2 " + this.checked);
+    
   }
 
   teste() {

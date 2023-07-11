@@ -18,7 +18,7 @@ export class ModalAtaDocumentoComponent implements OnInit {
   demandasPorAta: Demanda[] = [];
 
   constructor(
-    @Inject(DIALOG_DATA) public data: Demanda,
+    @Inject(DIALOG_DATA) public data: { reuniao: Reuniao, tipoAta: string, codigoDemanda?: string },
     private reuniaoService: ReuniaoService
   ) { }
   
@@ -41,15 +41,27 @@ export class ModalAtaDocumentoComponent implements OnInit {
                   console.log(JSON.stringify(proposta.codigoDemanda));
                   this.demandasPorAta.push(proposta);
                 }
-                return;
               }
             }
           }
+
         }
+        if(this.reuniao == null){
+          
+        this.reuniao = this.data.reuniao
+        this.tipoAta = this.data.tipoAta
+        if(this.reuniao.propostasReuniao){
+          for (const proposta of this.reuniao.propostasReuniao) {
+            if(proposta.tipoAtaProposta == this.tipoAta){
+              this.demandasPorAta.push(proposta);
+            }
+          }
+        }
+        }
+
       }
     });
-  
-    console.log(this.tipoAta);
+
   }
 
   mostrarHr(indice: number, tipoAta: string) {

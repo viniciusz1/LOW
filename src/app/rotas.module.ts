@@ -1,6 +1,5 @@
 import { EscopoPerfilComponent } from './componentes-fixos/escopo-perfil/escopo-perfil.component';
 import { TelaAjudaComponent } from './telas/perfil/tela-ajuda/tela-ajuda.component';
-import { TelaSugestoesComponent } from './telas/perfil/tela-sugestoes/tela-sugestoes.component';
 import { TelaLayoutComponent } from './telas/perfil/tela-layout/tela-layout.component';
 import { TelaReuniaoComponent } from './telas/reunioes/tela-reuniao/tela-reuniao.component';
 import { TelaVerPauta } from './telas/reunioes/tela-ver-pauta/tela-ver-pauta.component';
@@ -92,10 +91,6 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
               {
                 path: 'layout',
                 component: TelaLayoutComponent
-              },
-              {
-                path: 'sugestoes',
-                component: TelaSugestoesComponent
               },
               {
                 path: 'ajuda',

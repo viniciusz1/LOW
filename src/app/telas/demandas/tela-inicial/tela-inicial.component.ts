@@ -601,6 +601,10 @@ export class TelaInicialComponent implements OnInit {
   }
 
 
+  trocarOrdemExibicaoCarrossel(){
+    this.listaTituloNaoFiltrado = this.listaTituloNaoFiltrado.reverse()
+  }
+
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {

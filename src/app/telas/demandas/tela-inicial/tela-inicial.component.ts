@@ -258,23 +258,44 @@ export class TelaInicialComponent implements OnInit {
   exportExcel() {
     //Realiza o mesmo filtro que está salvo no serviço de demandas
     //porém sem a paginação, logo, retornando todas as demandas filtradas
+    console.log(this.listaDemandas);
+    
     this.demandasService
-      .getTodasAsDemandasFiltradas()
-      .subscribe((listaDemandas: any) => {
-        // Importa o xlsx e exporta para excel
-        import('xlsx').then((xlsx) => {
-          const worksheet = xlsx.utils.json_to_sheet(listaDemandas['content']);
-          const workbook = {
-            Sheets: { data: worksheet },
-            SheetNames: ['data'],
-          };
-          const excelBuffer: any = xlsx.write(workbook, {
-            bookType: 'xlsx',
-            type: 'array',
-          });
-          this.saveAsExcelFile(excelBuffer, 'filtragem de demandas - ');
-        });
+    .getTodasAsDemandasFiltradas()
+    .subscribe((listaDemandas: any) => {
+      const demandasComCamposSeparados: any = [];
+  
+      listaDemandas['content'].forEach((demanda: Demanda) => {
+        // Copia a demanda original, excluindo os campos não desejados
+        const { arquivosDemanda, ...demandaSemArquivos } = demanda;
+  
+        const { beneficioPotencialDemanda, beneficioRealDemanda, ...demandaComCamposSeparados} = {
+          ...demandaSemArquivos,
+          solicitanteDemanda: demandaSemArquivos.solicitanteDemanda?.nomeUsuario,
+          analista: demandaSemArquivos.analista?.nomeUsuario,
+          gerenteNegocio: demandaSemArquivos.gerenteNegocio?.nomeUsuario,
+          busBeneficiadasDemandaClassificada: demanda.busBeneficiadasDemandaClassificada?.join(", "),
+          ...demandaSemArquivos.beneficioPotencialDemanda,
+          ...demandaSemArquivos.beneficioRealDemanda
+        };
+        
+  
+        demandasComCamposSeparados.push(demandaComCamposSeparados);
       });
+  
+      import('xlsx').then((xlsx) => {
+        const worksheet = xlsx.utils.json_to_sheet(demandasComCamposSeparados);
+        const workbook = {
+          Sheets: { data: worksheet },
+          SheetNames: ['data'],
+        };
+        const excelBuffer: any = xlsx.write(workbook, {
+          bookType: 'xlsx',
+          type: 'array',
+        });
+        this.saveAsExcelFile(excelBuffer, 'filtragem de demandas - ');
+      });
+    });
   }
 
   reloadPage() {

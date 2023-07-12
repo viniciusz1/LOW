@@ -442,6 +442,10 @@ export class TelaLayoutComponent implements OnInit {
   }
   redefinir() {
     this.configIniciaisService.redefinir();
+    
+    this.showSuccess(
+      'Estilos redefinidos com sucesso!'
+    );
   }
 
   setFontSize(opc: string) {

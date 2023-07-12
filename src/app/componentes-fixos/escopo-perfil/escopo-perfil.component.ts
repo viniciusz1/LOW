@@ -1,5 +1,6 @@
 import { JoyrideService } from 'ngx-joyride';
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-escopo-perfil',
@@ -15,7 +16,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class EscopoPerfilComponent implements OnInit {
 
-  constructor(private joyrideService: JoyrideService) { }
+  constructor(private joyrideService: JoyrideService, public usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
   }

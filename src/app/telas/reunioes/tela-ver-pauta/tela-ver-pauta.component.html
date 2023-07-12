@@ -1,13 +1,10 @@
 <div class="container mt-5">
-  <div class="row">
+  <div class="row border rounded">
     <div
       class="col-9 mb-5"
       style="
         overflow: auto;
         height: 70vh;
-        border: 1px solid #c5c5c5;
-        border-radius: 5px;
-        padding: 20px;
       "
     >
       <div *ngFor="let proposta of reuniao?.propostasReuniao" class="mb-2">
@@ -26,11 +23,10 @@
       </div>
     </div>
 
-    <div class="col-3 direita-grande">
-      <div class="alinhar-direita h-100">
+    <div class="col-3 direita-grande border-start">
         <div
-          class="d-flex flex-column p-3 rounded"
-          style="border: 1px solid rgb(112, 110, 110); width: fit-content"
+          class="d-flex border flex-column p-3 rounded"
+          style="width: -webkit-fill-available;"
         >
           <span falarTexto class="d-flex">
             {{ "telas.tela-ver-pauta.data-comissao" | translate }}
@@ -116,7 +112,6 @@
             </button>
           </div>
         </div>
-      </div>
     </div>
   </div>
   <p-confirmDialog

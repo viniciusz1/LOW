@@ -115,6 +115,14 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
+  versaoGerenteNegocio() {
+    if (this.usuarioService.getRole == "GerenteNegocio") {
+      return true;
+    }
+    return false;
+  }
+
+
   sair() {
     this.usuarioService.logout().subscribe();
   }

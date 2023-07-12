@@ -147,10 +147,20 @@ export class TelaInicialComponent implements OnInit {
         }
       }
     }
+
+    if (tipo === 3) {
+      const statusKeys = Object.keys(statusContagem);
+      let totalDemandas = 0;
+      for (const key of statusKeys) {
+        totalDemandas += statusContagem[key];
+      }
+      if (totalDemandas > 6) {
+        return true;
+      }
+    }
   
     return false;
   }
-
 
   mudouCampodePesquisa() {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
@@ -463,9 +473,8 @@ export class TelaInicialComponent implements OnInit {
     this.isScrolled = window.scrollY > 100;
   }
   
-  voltarAoTopo() {
+  voltarAoTopo() { 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    console.log("Aqui");
   }
 
   showSuccess(message: string) {

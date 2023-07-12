@@ -187,25 +187,24 @@
         />
       </div>
 
-      <div class="col-3" style="display: grid; padding-right: 0px !important">
+      <div class="col-3">
         <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.perfil-despesa" | translate }}:</label
         >
         <input
           inputEmFoco
           maxlength="70"
-          (onChange)="onInputChange()"
+          (input)="onInputChange()"
           placeholder="Ex: Software"
           type="text"
-          [required]="true"por
+          required="true"
           pInputText
           class="input" 
-          style="width: 90% !important;"
           formControlName="perfilDespesaRecurso"
         />
       </div>
 
-      <div class="col-3" style="padding-left: 0px !important">
+      <div class="col-3">
         <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.valor-hora" | translate }}:</label
         >
@@ -255,26 +254,21 @@
         </div>
       </div>
 
-      <div class="col-3" style="display: grid; padding-right: 0px !important">
+      <div class="col-3">
         <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.tipo-despesa" | translate }}:</label
         >
-        <p-dropdown
-          (onChange)="onInputChange()"
-          styleClass="dropDespesa"
+          <p-selectButton
           [options]="tipoDaDespesa"
           optionValue="value"
           optionLabel="tipo"
           [required]="true"
           placeholder="Selecione o Tipo"
           formControlName="tipoDespesaRecurso"
-          [showClear]="true"
-         
-        >
-        </p-dropdown>
+          ></p-selectButton>
       </div>
 
-      <div class="col-3" style="padding-left: 0px !important">
+      <div class="col-3">
         <label falarTexto class="mt-1" for="Recurso Necessário:"
           >{{ "telas.proposta.periodo-execucao" | translate }}:</label
         >
@@ -302,7 +296,7 @@
       <label falarTexto class="mt-1" for="Recurso Necessário:"
         >{{ "telas.proposta.centros-custo" | translate }}:</label
       >
-      <div style="width: 50%; display: -webkit-box">
+      <div style="width: 50%; display: -webkit-box" (click)="logs()">
         <div class="d-flex flex-column">
           <div
             *ngFor="
@@ -322,12 +316,11 @@
                 [min]="0"
                 [maxlength]="3"
                 inputEmFoco
-                [(ngModel)]="centroCustoValor"
-                  (input)="onInputChange()"
-                  [id]="'porcentagemListaReuniao' + i"
-                  [required]="true"
-                  formControlName="porcentagemCentroCusto"
-                  placeholder="Porcentagem"
+                (input)="onInputChange()"
+                [id]="'porcentagemListaReuniao' + i"
+                [required]="true"
+                formControlName="porcentagemCentroCusto"
+                placeholder="Porcentagem"
                 ></p-inputNumber>
                 <span class="p-inputgroup-addon">%</span>
               </div>

@@ -24,6 +24,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalDgDocumentosComponent } from 'src/app/modais/modal-dg-documentos/modal-dg-documentos.component';
 import { FiltrarDemandaStatusPipe } from 'src/app/pipes/filtrar-demanda-status.pipe';
+import { JoyrideService } from 'ngx-joyride';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class TelaInicialComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private usuarioService: UsuarioService,
     private falarTextoService: FalarTextoService,
-    private filtrarDemandaStatus: FiltrarDemandaStatusPipe
+    private filtrarDemandaStatus: FiltrarDemandaStatusPipe,
+    private joyrideService: JoyrideService
   ) {
     //Pipe ativado quando é realizado algum tipo de filtro por campo de texto
     let tipo = localStorage.getItem("exibicao")
@@ -591,6 +593,21 @@ export class TelaInicialComponent implements OnInit {
       this.carregarDemandasIniciais();
     });
     this.carregarDemandasIniciais();
+    if(this.usuarioService.usuario?.primeiroAcesso == false){
+      if(this.usuarioService.getRole == "Solicitante" || this.usuarioService.getRole == "GerenteNegocio"){
+        this.joyrideService.startTour(
+          {
+            steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete'],
+          }
+        );
+      }else{
+        this.joyrideService.startTour(
+          {
+            steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete', 'oito@tela-inicial/reunioes', 'nove', 'dez'],
+          }
+        );
+      }
+    }
   }
 
   //Lógica para a criação de uma nova demanda

@@ -601,19 +601,11 @@ export class TelaInicialComponent implements OnInit {
   }
 
 
-  trocarOrdemExibicaoCarrossel(){
-    this.listaTituloNaoFiltrado = this.listaTituloNaoFiltrado.reverse()
-  }
 
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
-    //Caso o usuário tenha feito alguma alteração na ordem de exibição das demandas
-    let ordemDemandas = localStorage.getItem('ordemExibicaoDemandasAtivada')
-    if(ordemDemandas){
-      this.listaTituloNaoFiltrado = JSON.parse(ordemDemandas)
-      return
-    }
+    
 
     //Tira duplicidade
     this.listaDemandas = this.listaDemandas.filter((objeto, index, self) => index === self.findIndex((t) => (t.codigoDemanda === objeto.codigoDemanda)));
@@ -667,6 +659,14 @@ export class TelaInicialComponent implements OnInit {
     //     titulo: 'Seus Rascunhos',
     //   });
     // }
+
+//Caso o usuário tenha feito alguma alteração na ordem de exibição das demandas
+let ordemDemandas = localStorage.getItem('ordemExibicaoDemandasAtivada')
+if(ordemDemandas){
+  this.listaTituloNaoFiltrado = JSON.parse(ordemDemandas)
+  return
+}
+
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'

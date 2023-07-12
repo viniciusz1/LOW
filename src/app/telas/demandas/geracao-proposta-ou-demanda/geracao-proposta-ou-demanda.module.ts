@@ -27,6 +27,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {ChipsModule} from 'primeng/chips';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { InputFocoDirective } from 'src/app/directives/input-foco.directive';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 
@@ -93,7 +94,8 @@ import { InputFocoDirective } from 'src/app/directives/input-foco.directive';
     AccordionModule,
     InputNumberModule,
     ChipsModule,
-    SharedModule
+    SharedModule,
+    SelectButtonModule
   ],
   providers: [
     MessageService,

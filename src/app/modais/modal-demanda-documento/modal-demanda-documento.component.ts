@@ -14,6 +14,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { StatusDemanda } from 'src/app/models/statusDemanda.enum';
 import { ModalService } from 'src/app/services/modal.service';
 import { Router } from '@angular/router';
+import { ModalRecomendacaoDemandaComponent } from '../modal-recomendacao-demanda/modal-recomendacao-demanda.component';
 
 @Component({
   selector: 'app-modal-demanda-documento',
@@ -115,6 +116,15 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   openModalReprovacao() {
     this.modalService.dialogRefDemandaDocumento = this.dialogRef;
     this.matDialog.open(ModalReprovacaoDemandaComponent, {
+      maxWidth: '70vw',
+      minWidth: '50vw',
+      data: this.dadosDemanda
+    })
+  }
+
+  confirmarRecomendacao(){
+    this.modalService.dialogRefDemandaDocumento = this.dialogRef;
+    this.matDialog.open(ModalRecomendacaoDemandaComponent, {
       maxWidth: '70vw',
       minWidth: '50vw',
       data: this.dadosDemanda

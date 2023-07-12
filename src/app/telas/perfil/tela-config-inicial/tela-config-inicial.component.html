@@ -1,3 +1,36 @@
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <app-list-demanda *ngFor="" [dadosDemanda]=""></app-list-demanda>
+<div class="desc-incial" style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #8f8f8f;
+        padding: 10px 0px 10px 10px;
+      ">
+      <h5 falarTexto style="margin: 0px">
+        CONFIGURAÇÕES DA TELA INICIAL
+      </h5>
+    </div>
+<div class="container">
+  <div class="d-flex justify-content-around mt-3">
+    <div class="example-container">
+      <h5>Opções Ativadas na Tela Inicial</h5>
+
+      <div cdkDropList #ativada="cdkDropList" [cdkDropListData]="statusOrdemAtivada"
+        [cdkDropListConnectedTo]="[desativada]" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of statusOrdemAtivada" cdkDrag>{{item.titulo}}</div>
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h5>Opções Desativadas na Tela Inicial</h5>
+
+      <div cdkDropList #desativada="cdkDropList" [cdkDropListData]="statusOrdemDesativada"
+        [cdkDropListConnectedTo]="[ativada]" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of statusOrdemDesativada" cdkDrag>{{item.titulo}}</div>
+      </div>
+    </div>
   </div>
+  <div class="d-flex justify-content-end my-3">
+    <button class="btn btn-outline-primary me-2" (click)="redefinir()">Redefinir Configurações</button>
+    <button class="btn btn-primary" (click)="salvarAlteracoes()">Salvar Alterações</button>
+  </div>
+</div>

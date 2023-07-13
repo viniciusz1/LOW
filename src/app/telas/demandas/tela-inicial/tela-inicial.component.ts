@@ -504,6 +504,7 @@ export class TelaInicialComponent implements OnInit {
     if (this.nivelAcessoUsuario == 'Analista' || this.nivelAcessoUsuario == 'GestorTI') {
       this.demandasService.getDemandasTelaInicial().subscribe({
         next: (e) => {
+          console.log(e)
           e['demandas'].forEach((demandas: Demanda[]) => {
             if (demandas.length > 0) {
               this.listaDemandas.push(...demandas);
@@ -610,9 +611,11 @@ export class TelaInicialComponent implements OnInit {
   }
 
 
+
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
+    
 
     //Tira duplicidade
     this.listaDemandas = this.listaDemandas.filter((objeto, index, self) => index === self.findIndex((t) => (t.codigoDemanda === objeto.codigoDemanda)));
@@ -666,6 +669,14 @@ export class TelaInicialComponent implements OnInit {
     //     titulo: 'Seus Rascunhos',
     //   });
     // }
+
+//Caso o usuário tenha feito alguma alteração na ordem de exibição das demandas
+let ordemDemandas = localStorage.getItem('ordemExibicaoDemandasAtivada')
+if(ordemDemandas){
+  this.listaTituloNaoFiltrado = JSON.parse(ordemDemandas)
+  return
+}
+
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'
@@ -750,6 +761,7 @@ export class TelaInicialComponent implements OnInit {
     if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'DONE')) {
       this.listaTituloNaoFiltrado.push({ status: 'DONE', titulo: 'Done' });
     }
+    localStorage.setItem('ordemExibicaoDemandasAtivada', JSON.stringify(this.listaTituloNaoFiltrado))
   }
 
   deletarDemanda(demanda: Demanda) {

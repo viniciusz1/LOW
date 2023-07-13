@@ -123,7 +123,6 @@ export class TelaLayoutComponent implements OnInit {
               this.personalizacaoService.personalizacaoAtiva = ativa;
             }
             this.personalizacaoEscolhida = ativa;
-            alert('Estilo de Cores das Demandas Alterado com sucesso!');
             this.showSuccess(
               'Estilo de Cores das Demandas Alterado com sucesso!'
             );
@@ -336,7 +335,6 @@ export class TelaLayoutComponent implements OnInit {
       next: (res) => {
         localStorage.setItem('personalizacao', JSON.stringify(res));
         this.personalizacaoService.personalizacaoAtiva = res;
-        alert('Salvo com sucesso!');
         this.showSuccess('Personalização Editada com sucesso!');
       },
       error: (err) => {
@@ -402,9 +400,7 @@ export class TelaLayoutComponent implements OnInit {
   deletarPersonalizacao(index: number) {
     this.personalizacaoEscolhida = this.opcoesPersonalizacao[index]
     if (this.personalizacaoEscolhida?.ativaPersonalizacao == true) {
-      alert(
-        'Você não pode excluir uma personalização que se encontra ativa! Defina uma outra personalização como ativa, e então exclua esta.'
-      );
+      this.showError('Você não pode excluir uma personalização que se encontra ativa! Defina uma outra personalização como ativa, e então exclua esta.')
       return;
     }
     this.personalizacaoService
@@ -420,7 +416,7 @@ export class TelaLayoutComponent implements OnInit {
           );
           this.opcoesPersonalizacao.splice(index, 1);
           this.setarPersonalizacoes();
-          alert('Deletado com sucesso!');
+          this.showSuccess('Deletado com sucesso!')
         },
         error: (err) => {
           console.log(err);
@@ -442,6 +438,10 @@ export class TelaLayoutComponent implements OnInit {
   }
   redefinir() {
     this.configIniciaisService.redefinir();
+    
+    this.showSuccess(
+      'Estilos redefinidos com sucesso!'
+    );
   }
 
   setFontSize(opc: string) {

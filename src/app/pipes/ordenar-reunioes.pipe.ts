@@ -24,9 +24,9 @@ export class OrdenarReuniaoPipe implements PipeTransform {
       return reuniao;
     }
     let novaLista: Reuniao[] = []
+    novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.PENDENTE))
     novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.PROXIMO))
     novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.AGUARDANDO))
-    novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.PENDENTE))
     novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.CONCLUIDO))
     novaLista.push(...reuniao.filter(e => e.statusReuniao == StatusReuniao.CANCELADO))
     return novaLista;

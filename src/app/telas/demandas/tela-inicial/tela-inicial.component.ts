@@ -495,6 +495,7 @@ export class TelaInicialComponent implements OnInit {
     if (this.nivelAcessoUsuario == 'Analista' || this.nivelAcessoUsuario == 'GestorTI') {
       this.demandasService.getDemandasTelaInicial().subscribe({
         next: (e) => {
+          console.log(e)
           e['demandas'].forEach((demandas: Demanda[]) => {
             if (demandas.length > 0) {
               this.listaDemandas.push(...demandas);

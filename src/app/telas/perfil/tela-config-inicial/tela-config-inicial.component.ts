@@ -29,7 +29,7 @@ export class TelaConfigInicialComponent implements OnInit {
   }
   statusOrdemAtivada: any = [];
   statusOrdemDesativada: any = [];
-  padrao: any = [{ "status": "SUAS_DEMANDAS", "titulo": "Suas Demandas" }, { "status": "BACKLOG_CLASSIFICACAO", "titulo": "Backlog - Classificação" }, { "status": "BACKLOG_PROPOSTA", "titulo": "Backlog - Propostas" }, { "status": "BUSINESS_CASE", "titulo": "Business Case" }, { "status": "ASSESSMENT", "titulo": "Assessment" }, { "status": "DISCUSSION", "titulo": "Discussion" }, { "status": "TO_DO", "titulo": "To Do" }, { "status": "DESIGN_AND_BUILD", "titulo": "Design and Build" }, { "status": "SUPPORT", "titulo": "Support" }, { "status": "CANCELLED", "titulo": "Cancelled" }, { "status": "DONE", "titulo": "Done" }]
+  padrao: any =[{"status":"SUAS_DEMANDAS","titulo":"Suas Demandas"},{"status":"BACKLOG_CLASSIFICACAO","titulo":"Backlog - Classificação"},{"status":"BACKLOG_APROVACAO","titulo":"Backlog - Aprovação"},{"status":"BACKLOG_PROPOSTA","titulo":"Backlog - Propostas"},{"status":"BUSINESS_CASE","titulo":"Business Case"},{"status":"ASSESSMENT","titulo":"Assessment"},{"status":"DISCUSSION","titulo":"Discussion"},{"status":"TO_DO","titulo":"To Do"},{"status":"DESIGN_AND_BUILD","titulo":"Design and Build"},{"status":"SUPPORT","titulo":"Support"},{"status":"CANCELLED","titulo":"Cancelled"},{"status":"DONE","titulo":"Done"}]
 
   salvarAlteracoes() {
     localStorage.setItem('ordemExibicaoDemandasAtivada', JSON.stringify(this.statusOrdemAtivada))

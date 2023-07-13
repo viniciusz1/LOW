@@ -28,6 +28,7 @@ export interface Demanda {
   parecerComissaoProposta?: string,
   ultimaDecisaoComissao?: string,
   tipoAtaProposta?: string,
+  jiraProposta?: string,
   //Não tem nos inputs mas acredito que é necessário
   ppmDemanda?: string
   escopoDemandaProposta?: string,

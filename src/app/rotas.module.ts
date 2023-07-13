@@ -15,6 +15,7 @@ import { TelaLoginComponent } from './telas/login/tela-login/tela-login.componen
 import { TelaCorridaComponent } from './telas/demandas/geracao-proposta-ou-demanda/tela-corrida/tela-corrida.component';
 import { AuthenticationChildGuard } from './security/authentication-child.guard';
 import { NotFoundComponent } from './telas/not-found/not-found.component';
+import { TelaConfigInicialComponent } from './telas/perfil/tela-config-inicial/tela-config-inicial.component';
 
 
 @NgModule({
@@ -95,6 +96,10 @@ import { NotFoundComponent } from './telas/not-found/not-found.component';
               {
                 path: 'ajuda',
                 component: TelaAjudaComponent
+              },
+              {
+                path: 'config-inicial',
+                component: TelaConfigInicialComponent
               }
             ]
           },

@@ -16,8 +16,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 
 export class EscopoPerfilComponent implements OnInit {
 
-  constructor(private joyrideService: JoyrideService,
-    private usuarioService: UsuarioService) { }
+  constructor(private joyrideService: JoyrideService, public usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
   }

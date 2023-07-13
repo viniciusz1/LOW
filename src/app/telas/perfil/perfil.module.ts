@@ -11,7 +11,8 @@ import { ComponentesReutilizaveisModule } from 'src/app/componentes-reutilizavei
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
 import { InputSwitchModule } from 'primeng/inputswitch';
-
+import { TelaConfigInicialComponent } from './tela-config-inicial/tela-config-inicial.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -20,7 +21,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
   declarations: [
     TelaPerfilComponent,
     TelaLayoutComponent,
-    TelaAjudaComponent
+    TelaAjudaComponent,
+    TelaConfigInicialComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     InputTextModule,
     MessagesModule,
     TableModule,
-    InputSwitchModule
+    InputSwitchModule,
+    DragDropModule
   ]
 })
 export class PerfilModule { }

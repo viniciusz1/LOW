@@ -40,6 +40,9 @@
         <button class="btn btn-danger me-2" *ngIf="showbotoesAprovarDemanda" (click)="openModalReprovacao()">
           {{ "documento-pdf.b-reprovar" | translate }}
         </button>
+        <button class="btn btn-outline-primary me-2" *ngIf="showbotoesAprovarDemanda" (click)="confirmarRecomendacao()">
+          Aprovar com Recomendação
+        </button>
         <button class="btn btn-primary" *ngIf="showbotoesAprovarDemanda" (click)="confirmarDecisao()">
           {{ "documento-pdf.b-aprovar" | translate }}
         </button>

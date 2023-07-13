@@ -108,6 +108,11 @@ export class ParteReuniaoComponent implements OnInit {
   centroCustoValor: number | undefined;
 
 
+
+  logs(){
+    console.log(this.formRecursos.controls.centroCustoRecurso.controls);
+  }
+
   onSubmit() {
     // console.log(this.formProposta.value);
   }

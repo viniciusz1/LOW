@@ -1,4 +1,16 @@
-<div class="position-fixed div-principal" style="right: 0; top: 33%; margin: 0!important;">
+
+<div vw class="enabled" [hidden]="!checkedChanged()" style="top: 39%">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+
+<app-v-libras #vlibras class="mt-2" >
+
+</app-v-libras>
+
+<div class="position-fixed div-principal" style="right: 0; top: 40%; margin: 0!important;">
 
   <div role="button" *ngIf="!startedRecodAudio && checkedChanged()" class="estilo-cards" style="position: relative !important;" (click)="startVoice()">
     <i class="bi bi-mic" style="color: white"></i>
@@ -16,9 +28,7 @@
     (click)="iniciarFala()">
     <i class="bi bi-volume-off" style="color: white; font-size: 20px"></i>
   </div>
-  <app-v-libras #vlibras class="mt-2">
-
-  </app-v-libras>
+  
 </div>
 
 <router-outlet></router-outlet>

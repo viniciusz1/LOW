@@ -6,4 +6,5 @@ nivelAcessoUsuario: string
 nomeUsuario: string
 senhaUsuario: string
 userUsuario: string
+primeiroAcesso: boolean
 }

@@ -4,7 +4,8 @@ import { StatusDemanda } from '../models/statusDemanda.enum';
 import { UsuarioService } from '../services/usuario.service';
 @Injectable()
 @Pipe({
-  name: 'filtrarDemandaStatus'
+  name: 'filtrarDemandaStatus',
+  pure: false
 })
 
 /*

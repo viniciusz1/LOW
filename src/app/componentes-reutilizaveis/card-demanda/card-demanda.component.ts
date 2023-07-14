@@ -73,7 +73,7 @@ export class CardDemandaComponent implements OnInit {
     private reuniaoService: ReuniaoService,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
-    private usuarioService: UsuarioService,
+    public usuarioService: UsuarioService,
     private messageService: MessageService,
     private demandaService: DemandaService,
     private personalizacaoService: PersonalizacaoService) {

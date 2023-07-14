@@ -4,109 +4,50 @@
   </h3>
   <hr />
 
-  <div
-    class="campo"
-    style="
+  <div class="campo" style="
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 0px;
-    "
-  >
+    ">
     <div class="w-100">
       <div class="d-flex justify-content-between">
         <div class="titulo" style="display: grid; width: 28vw; height: 9vh">
-          <div
-            class="infos"
-            style="display: flex; align-items: center; width: 28vw"
-          >
-            <label
-              falarTexto
-              style="font-weight: 500"
-              class="me-2"
-              for="time"
-              >{{ "telas.proposta.prazo-elaboracao" | translate }}</label
-            >
-            <i
-              falarTexto
-              class="bi bi-info-circle me-2"
-              style="font-size: 0.9rem; color: #00579d; cursor: pointer"
-              pTooltip="Em quanto tempo a proposta ficará pronta?"
-              tooltipPosition="top"
-            ></i>
+          <div class="infos" style="display: flex; align-items: center; width: 28vw">
+            <label falarTexto style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.prazo-elaboracao" |
+              translate }}</label>
+            <i falarTexto class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+              pTooltip="Em quanto tempo a proposta ficará pronta?" tooltipPosition="top"></i>
           </div>
-          <p-calendar
-            (ngModelChange)="onInputChange()"
-            placeholder="Clique para Agendar"
-            formControlName="prazoProposta"
-            [showTime]="true"
-            [dataType]="'dd/mm/yy'"
-            [showSeconds]="true"
-            inputId="time"
-            [minDate]="dataAtual"
-          ></p-calendar>
+          <p-calendar (ngModelChange)="onInputChange()" placeholder="Clique para Agendar"
+            formControlName="prazoProposta" [showTime]="true" [dataType]="'dd/mm/yy'" [showSeconds]="true"
+            inputId="time" [minDate]="dataAtual"></p-calendar>
         </div>
 
         <div class="titulo" style="display: grid; width: 32vw; height: 9vh">
-          <div
-            class="infos"
-            style="display: flex; align-items: center; width: 28vw"
-          >
-            <label
-              falarTexto
-              style="font-weight: 500"
-              class="me-2"
-              for="time"
-              >{{ "telas.proposta.codigo-ppm" | translate }}</label
-            >
-            <i
-              falarTexto
-              class="bi bi-info-circle me-2"
-              style="font-size: 0.9rem; color: #00579d; cursor: pointer"
-              pTooltip="Qual o código do SAP?"
-              tooltipPosition="top"
-            ></i>
+          <div class="infos" style="display: flex; align-items: center; width: 28vw">
+            <label falarTexto style="font-weight: 500" class="me-2" for="time">{{ "telas.proposta.codigo-ppm" |
+              translate }}</label>
+            <i falarTexto class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+              pTooltip="Qual o código do SAP?" tooltipPosition="top"></i>
           </div>
           <!-- Ta aparecendo o 0 por causa do formControlName -->
-          <p-inputNumber 
-            [maxlength]="15"
-            inputEmFoco 
-            [min]="0"
-            mode="decimal" 
-            (input)="onInputChange()"
-            placeholder="Ex: 458"
-            inputId="withoutgrouping" 
-            formControlName="codigoPPMProposta"
-            [useGrouping]="false"> 
+          <p-inputNumber [maxlength]="15" inputEmFoco [min]="0" mode="decimal" (input)="onInputChange()" [(ngModel)]="codigoPPM"
+            placeholder="Ex: 458" inputId="withoutgrouping" formControlName="codigoPPMProposta" [useGrouping]="false">
           </p-inputNumber>
         </div>
       </div>
       <div class="titulo" style="display: grid" id="item-1-1">
-        <div
-          class="infos"
-          style="display: flex; align-items: center; width: 28vw"
-        >
+        <div class="infos" style="display: flex; align-items: center; width: 28vw">
           <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
             "telas.proposta.link-jira" | translate
-          }}</label>
-          <i
-            falarTexto
-            class="bi bi-info-circle me-2"
-            style="font-size: 0.9rem; color: #00579d; cursor: pointer"
-            pTooltip="Insira a URL que aparece ao topo da sua página do JIRA"
-            tooltipPosition="top"
-          ></i>
+            }}</label>
+          <i falarTexto class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+            pTooltip="Insira a URL que aparece ao topo da sua página do JIRA" tooltipPosition="top"></i>
         </div>
-        <input
-          inputEmFoco
-          maxlength="500"
-          (input)="onInputChange()"
-          placeholder="Ex: https://jiraprojetoweg.atlassian.net/jira/software/projects/LOW/boards/3"
-          type="text"
-          pInputText
-          class="input"
-          formControlName="jiraProposta"
-        />
+        <input inputEmFoco maxlength="500" (input)="onInputChange()"
+          placeholder="Ex: https://jiraprojetoweg.atlassian.net/jira/software/projects/LOW/boards/3" type="text"
+          pInputText class="input" formControlName="jiraProposta" />
       </div>
     </div>
   </div>
@@ -114,11 +55,7 @@
     {{ "telas.proposta.recursos" | translate }}
   </h3>
   <hr />
-  <p-table
-    *ngIf="listaRecursos.length != 0"
-    [value]="listaRecursos"
-    [tableStyle]="{ 'min-width': '60rem' }"
-  >
+  <p-table *ngIf="listaRecursos.length != 0" [value]="listaRecursos" [tableStyle]="{ 'min-width': '60rem' }">
     <ng-template pTemplate="header">
       <tr>
         <th falarTexto>
@@ -142,10 +79,8 @@
         <td falarTexto>{{ recursos.tipoDespesaRecurso | titlecase }}</td>
         <td falarTexto>{{ recursos.perfilDespesaRecurso }}</td>
         <td falarTexto>
-          <span falarTexto *ngFor="let centro of recursos.centroCustoRecurso"
-            >{{ centro.nomeCentroCusto }} -
-            {{ centro.porcentagemCentroCusto }}%<br
-          /></span>
+          <span falarTexto *ngFor="let centro of recursos.centroCustoRecurso">{{ centro.nomeCentroCusto }} -
+            {{ centro.porcentagemCentroCusto }}%<br /></span>
         </td>
         <td falarTexto>{{ recursos.quantidadeHorasRecurso }}</td>
         <td falarTexto>{{ recursos.valorHoraRecurso }}</td>
@@ -171,60 +106,25 @@
   <div [formGroup]="formRecursos">
     <div class="row">
       <div class="col-3">
-        <label falarTexto class="mt-1" for="Recurso Necessário:"
-          >{{ "telas.proposta.recurso-necessario" | translate }}:</label
-        >
-        <input
-          inputEmFoco
-          maxlength="70"
-          (input)="onInputChange()"
-          placeholder="Ex: Programador Back-end"
-          type="text"
-          required="true"
-          pInputText
-          class="input"
-          formControlName="nomeRecurso"
-        />
+        <label falarTexto class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.recurso-necessario" | translate
+          }}:</label>
+        <input inputEmFoco maxlength="70" (input)="onInputChange()" placeholder="Ex: Programador Back-end" type="text"
+          required="true" pInputText class="input" formControlName="nomeRecurso" />
       </div>
 
       <div class="col-3">
-        <label falarTexto class="mt-1" for="Recurso Necessário:"
-          >{{ "telas.proposta.perfil-despesa" | translate }}:</label
-        >
-        <input
-          inputEmFoco
-          maxlength="70"
-          (input)="onInputChange()"
-          placeholder="Ex: Software"
-          type="text"
-          required="true"
-          pInputText
-          class="input" 
-          formControlName="perfilDespesaRecurso"
-        />
+        <label falarTexto class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.perfil-despesa" | translate
+          }}:</label>
+        <input inputEmFoco maxlength="70" (input)="onInputChange()" placeholder="Ex: Software" type="text"
+          required="true" pInputText class="input" formControlName="perfilDespesaRecurso" />
       </div>
 
       <div class="col-3">
-        <label falarTexto class="mt-1" for="Recurso Necessário:"
-          >{{ "telas.proposta.valor-hora" | translate }}:</label
-        >
+        <label falarTexto class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.valor-hora" | translate }}:</label>
         <div style="width: 100%; display: grid">
-          <p-inputNumber
-            inputId="currency-br" 
-            mode="currency" 
-            currency="BRL" 
-            [min]="0"
-            locale="pt-BR" 
-            inputEmFoco
-            (input)="onInputChange()"
-            placeholder="Ex: R$55,00"
-            [(ngModel)]="valorHoraRecursoValue"
-            [maxlength]="15"
-            [required]="true"
-            type="text"
-            class="input"
-            formControlName="valorHoraRecurso"
-          >
+          <p-inputNumber inputId="currency-br" mode="currency" currency="BRL" [min]="0" locale="pt-BR" inputEmFoco
+            (input)="onInputChange()" placeholder="Ex: R$55,00" [(ngModel)]="valorHoraRecursoValue" [maxlength]="15"
+            [required]="true" type="text" class="input" formControlName="valorHoraRecurso">
           </p-inputNumber>
         </div>
       </div>
@@ -232,140 +132,66 @@
     <div class="row">
       <div class="col-3">
         <label falarTexto class="mt-1" for="Recurso Necessário:">
-          {{ "telas.proposta.quantidade-horas" | translate }}:</label
-        >
+          {{ "telas.proposta.quantidade-horas" | translate }}:</label>
         <div style="width: 100%; display: grid">
-          <p-inputNumber
-            mode="decimal" 
-            inputId="withoutgrouping" 
-            [useGrouping]="false"
-            [maxlength]="15"
-            [min]="0"
-            [(ngModel)]="qtdHorasRecurso"
-            inputEmFoco
-            (input)="onInputChange()"
-            placeholder="Ex: 220"
-            type="text"
-            class="input"
-            [required]="true"
-            formControlName="quantidadeHorasRecurso"
-          >
+          <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false" [maxlength]="15" [min]="0"
+            [(ngModel)]="qtdHorasRecurso" inputEmFoco (input)="onInputChange()" placeholder="Ex: 220" type="text"
+            class="input" [required]="true" formControlName="quantidadeHorasRecurso">
           </p-inputNumber>
         </div>
       </div>
 
       <div class="col-3">
-        <label falarTexto class="mt-1" for="Recurso Necessário:"
-          >{{ "telas.proposta.tipo-despesa" | translate }}:</label
-        >
-          <p-selectButton
-          [options]="tipoDaDespesa"
-          optionValue="value"
-          optionLabel="tipo"
-          [required]="true"
-          placeholder="Selecione o Tipo"
-          formControlName="tipoDespesaRecurso"
-          ></p-selectButton>
+        <label falarTexto class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.tipo-despesa" | translate
+          }}:</label>
+        <p-selectButton [options]="tipoDaDespesa" optionValue="value" optionLabel="tipo" [required]="true"
+          placeholder="Selecione o Tipo" formControlName="tipoDespesaRecurso"></p-selectButton>
       </div>
 
       <div class="col-3">
-        <label falarTexto class="mt-1" for="Recurso Necessário:"
-          >{{ "telas.proposta.periodo-execucao" | translate }}:</label
-        >
+        <label falarTexto class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.periodo-execucao" | translate
+          }}:</label>
         <div style="width: 100%; display: grid">
-          <p-inputNumber
-          mode="decimal" 
-            inputId="withoutgrouping" 
-            [useGrouping]="false"
-            [maxlength]="15"
-            [min]="0"
-            [(ngModel)]="periodoExecucao"
-            inputEmFoco
-            (input)="onInputChange()"
-            placeholder="Ex: 5"
-            [required]="true"
-            type="text"
-            class="input"
-            formControlName="periodoExMesesRecurso"
-          >
+          <p-inputNumber mode="decimal" inputId="withoutgrouping" [useGrouping]="false" [maxlength]="15" [min]="0"
+            [(ngModel)]="periodoExecucao" inputEmFoco (input)="onInputChange()" placeholder="Ex: 5" [required]="true"
+            type="text" class="input" formControlName="periodoExMesesRecurso">
           </p-inputNumber>
         </div>
       </div>
     </div>
-    <div formArrayName="centroCustoRecurso" class="row align-items-center">
-      <label falarTexto class="mt-1" for="Recurso Necessário:"
-        >{{ "telas.proposta.centros-custo" | translate }}:</label
-      >
-      <div style="width: 50%; display: -webkit-box" (click)="logs()">
+    <div formArrayName="centroCustoRecurso" class="row align-items-center" style="padding: 0.5rem;">
+      <label falarTexto style="padding-left: 0px; margin-top: 0px !important;" class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.centros-custo" | translate }}:</label>
+      <div class="d-flex" style="width: 100%; padding-left: 0px;"  (click)="logs()">
         <div class="d-flex flex-column">
-          <div
-            *ngFor="
-              let centroCusto of formRecursos.controls.centroCustoRecurso
-                .controls;
-              let i = index
-            "
-            style="flex-wrap: wrap"
-            class="mb-1"
-          >
+          <div *ngFor="let centroCusto of formRecursos.controls.centroCustoRecurso.controls; let i = index"
+            style="flex-wrap: wrap" class="mb-1">
             <div [formGroupName]="i" class="d-flex">
-              <div class="p-inputgroup" style="margin-right: 0.5vw">
-                <p-inputNumber
-                mode="decimal" 
-                inputId="withoutgrouping" 
-                [useGrouping]="false"
-                [min]="0"
-                [maxlength]="3"
-                inputEmFoco
-                (input)="onInputChange()"
-                [id]="'porcentagemListaReuniao' + i"
-                [required]="true"
-                formControlName="porcentagemCentroCusto"
-                placeholder="Porcentagem"
-                ></p-inputNumber>
+              <div class="d-flex" style="margin-right: 0.5vw">
+                <p-inputNumber styleClass="custom-input"
+                 mode="decimal" inputId="withoutgrouping" [min]="0" [maxlength]="3" inputEmFoco (input)="onInputChange()"
+                  [id]="'porcentagemListaReuniao' + i" [required]="true" formControlName="porcentagemCentroCusto"
+                  placeholder="Porcentagem"></p-inputNumber>
                 <span class="p-inputgroup-addon">%</span>
               </div>
-              <input
-                [maxlength]="70"
-                inputEmFoco
-                (input)="onInputChange()"
-                style="width: 10vw; margin-right: 0.5vw"
-                [id]="'nomeCentroCusto' + i"
-                pInputText
-                [required]="true"
-                formControlName="nomeCentroCusto"
-                placeholder="Centro de Custo"
-              />
-              <button
-                (click)="removerCentroDeCusto(i)"
-                [disabled]="
-                  this.formRecursos.controls.centroCustoRecurso.length == 1
-                "
-                class="btn btn-danger"
-              >
+              <input [maxlength]="70" inputEmFoco (input)="onInputChange()" style="width: 45vw; margin-right: 0.5vw"
+                [id]="'nomeCentroCusto' + i" pInputText [required]="true" formControlName="nomeCentroCusto"
+                placeholder="Centro de Custo" />
+              <button (click)="removerCentroDeCusto(i)"
+                [disabled]="this.formRecursos.controls.centroCustoRecurso.length == 1" class="btn btn-danger">
                 <i class="bi bi-trash"></i>
               </button>
             </div>
           </div>
         </div>
-        <button
-          class="btn btn-outline-primary ms-2"
-          [disabled]="
-            !formRecursos.controls.centroCustoRecurso.valid || !resultado
-          "
-          (click)="adicionarCentroCusto()"
-        >
+        <button class="btn btn-outline-primary ms-2" style="height: 4.1vh !important;"
+          [disabled]="!formRecursos.controls.centroCustoRecurso.valid || !resultado" (click)="adicionarCentroCusto()">
           <i class="bi bi-plus-lg" style="font-size: 19px"></i>
         </button>
       </div>
     </div>
 
-    <div class="">
-      <button
-        falarTexto
-        class="btn btn-primary mt-3"
-        [disabled]="!formRecursos.valid"
-        (click)="addRowRecurso()"
-      >
+    <div style="display: flex; justify-content: flex-end; padding: 0.5rem;">
+      <button falarTexto class="btn btn-primary mt-3" [disabled]="!formRecursos.valid" (click)="addRowRecurso()">
         {{ "telas.proposta.adicionar-recurso" | translate }}
       </button>
     </div>
@@ -378,31 +204,16 @@
     <div class="infos" style="display: flex; align-items: center; width: 28vw">
       <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
         "telas.proposta.escopo-demanda" | translate
-      }}</label>
-      <i
-        falarTexto
-        class="bi bi-info-circle me-2"
-        style="font-size: 0.9rem; color: #00579d; cursor: pointer"
-        pTooltip="Defina e personalize a finalidade da sua proposta"
-        tooltipPosition="top"
-      ></i>
+        }}</label>
+      <i falarTexto class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+        pTooltip="Defina e personalize a finalidade da sua proposta" tooltipPosition="top"></i>
     </div>
 
-    <div
-      falarTexto
-      class="NgxEditor__Wrapper escopo-demanda"
-     
-    >
+    <div falarTexto class="NgxEditor__Wrapper escopo-demanda">
       <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
-      <ngx-editor
-        inputEmFoco
-        (input)="onInputChange()"
-        [editor]="editor"
-        (focusOut)="onFocoOut()" (focusIn)="onFocoIn()"
-        [ngModel]="htmlEscopoDemanda"
-        formControlName="escopoDemandaProposta"
-        placeholder="Escreva aqui..."
-      >
+      <ngx-editor inputEmFoco (input)="onInputChange()" [editor]="editor" (focusOut)="onFocoOut()"
+        (focusIn)="onFocoIn()" [ngModel]="htmlEscopoDemanda" formControlName="escopoDemandaProposta"
+        placeholder="Escreva aqui...">
       </ngx-editor>
     </div>
   </div>
@@ -413,119 +224,64 @@
   <hr />
   <div class="union" style="display: flex; justify-content: space-between">
     <div class="d-block">
-      <div
-        class="infos"
-        style="display: flex; align-items: center; width: 28vw"
-      >
+      <div class="infos" style="display: flex; align-items: center; width: 28vw">
         <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
           "telas.proposta.periodo-execucao-demanda" | translate
-        }}</label>
-        <i
-          falarTexto
-          class="bi bi-info-circle me-2"
-          style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+          }}</label>
+        <i falarTexto class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Insira a data que irá iniciar sua proposta e data que irá finalizar sua proposta"
-          tooltipPosition="top"
-        ></i>
+          tooltipPosition="top"></i>
       </div>
       <div class="d-flex gap-2">
         <div style="display: grid">
-          <p-calendar
-            (ngModelChange)="onInputChangeDate($event)"
-            formControlName="inicioExDemandaProposta"
-            placeholder="Início"
-            dateFormat="dd/mm/yy"
-            [minDate]="dataAtual"
-          >
+          <p-calendar (ngModelChange)="onInputChangeDate($event)" formControlName="inicioExDemandaProposta"
+            placeholder="Início" dateFormat="dd/mm/yy" [minDate]="dataAtual">
           </p-calendar>
         </div>
         <div style="display: grid">
-          <p-calendar
-            (ngModelChange)="onInputChange()"
-            formControlName="fimExDemandaProposta"
-            placeholder="Fim"
-            dateFormat="dd/mm/yy"
-            [minDate]="inicioData"
-          >
+          <p-calendar (ngModelChange)="onInputChange()" formControlName="fimExDemandaProposta" placeholder="Fim"
+            dateFormat="dd/mm/yy" [minDate]="inicioData">
           </p-calendar>
         </div>
       </div>
     </div>
 
     <div class="d-flex flex-column">
-      <div
-        class="infos"
-        style="display: flex; align-items: center; width: 28vw"
-      >
+      <div class="infos" style="display: flex; align-items: center; width: 28vw">
         <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
           "telas.proposta.payback-simples" | translate
-        }}</label>
-        <i
-          class="bi bi-info-circle me-2"
-          style="font-size: 0.9rem; color: #00579d; cursor: pointer"
-          pTooltip="Em reais, este é o retorno dos benefícios"
-          tooltipPosition="top"
-        ></i>
+          }}</label>
+        <i class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+          pTooltip="Em reais, este é o retorno dos benefícios" tooltipPosition="top"></i>
       </div>
-      <input
-        inputEmFoco
-        (input)="onInputChange()"
-        type="text"
-        pInputText
-        [value]="paybackProposta"
-        disabled="true"
-      />
+      <input inputEmFoco (input)="onInputChange()" type="text" pInputText [value]="paybackProposta" disabled="true" />
     </div>
   </div>
 
   <div class="infos" style="display: flex; align-items: center; width: 28vw">
     <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
       "telas.proposta.responsaveis-negocio" | translate
-    }}</label>
-    <i
-      falarTexto
-      class="bi bi-info-circle me-2"
-      style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+      }}</label>
+    <i falarTexto class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
       pTooltip="Insira os responsáveis por suceder a proposta, validando-os por vírgulas ou acionando a tecla Enter"
-      tooltipPosition="top"
-    > {{ "telas.demanda.enter" | translate }}</i>
+      tooltipPosition="top"> {{ "telas.demanda.enter" | translate }}</i>
   </div>
 
   <!-- formControlName="responsavelProposta" -->
-  <p-chips
-  [max]="15"
-    separator=","
-    placeholder="Insira o/os responsáveis"
-    (input)="onInputChange()"
-    styleClass="w-100"
-    optionLabel="nome"
-    display="chip"
-    formControlName="responsavelProposta"
-    inputEmFoco
-    
-  ></p-chips>
+  <p-chips [max]="15" separator="," placeholder="Insira o/os responsáveis" (input)="onInputChange()" styleClass="w-100"
+    optionLabel="nome" display="chip" formControlName="responsavelProposta" inputEmFoco></p-chips>
 
   <div class="infos" style="display: flex; align-items: center; width: 28vw">
     <label falarTexto style="font-weight: 500" class="me-2" for="time">{{
       "telas.proposta.selecione-status" | translate
-    }}</label>
-    <i
-      falarTexto
-      class="bi bi-info-circle me-2"
-      style="font-size: 0.9rem; color: #00579d; cursor: pointer"
+      }}</label>
+    <i falarTexto class="bi bi-info-circle me-2" style="font-size: 0.9rem; color: #00579d; cursor: pointer"
       pTooltip="Insira os responsáveis por suceder a proposta, validando-os por vírgulas ou acionando a tecla Enter"
-      tooltipPosition="top"
-    ></i>
+      tooltipPosition="top"></i>
   </div>
   <div>
-    <p-dropdown
-      (onChange)="onInputChange()"
-      formControlName="statusDemanda"
-      [options]="statusDemanda"
-      placeholder="Status de Discussão"
-      [optionLabel]="'name'"
-      [optionValue]="'value'"
-    ></p-dropdown>
+    <p-dropdown (onChange)="onInputChange()" formControlName="statusDemanda" [options]="statusDemanda"
+      placeholder="Status de Discussão" [optionLabel]="'name'" [optionValue]="'value'"></p-dropdown>
   </div>
 </form>
 

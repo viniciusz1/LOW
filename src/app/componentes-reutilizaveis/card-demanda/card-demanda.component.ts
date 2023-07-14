@@ -274,6 +274,7 @@ export class CardDemandaComponent implements OnInit {
 
   //Função chamada quando o usuário clica na ação do card
   direcionarUsuario() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     switch (this.textoExibidoEmBotaoDependendoRota?.rota) {
       case '':
         this.abrirModalMotivoReprovacao.emit(this.dadosDemanda);
@@ -314,6 +315,7 @@ export class CardDemandaComponent implements OnInit {
   }
 
   exibicaoBotoes() {
+    
     const nivelAcesso = this.usuarioService.getRole;
     //Caso o usuário não tenha permissão de ação na demanda, ele poderá ve-la
     this.textoExibidoEmBotaoDependendoRota = {

@@ -49,3 +49,13 @@ i {
     width: 100%;
     min-height: 50vh;
 }
+
+.nome-centro-custo-input {
+    width: 25vw; /* Ajuste o valor do width conforme necessário */
+  }
+
+  .custom-input .ng-inputtext {
+    border-right: 0 transparent;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }

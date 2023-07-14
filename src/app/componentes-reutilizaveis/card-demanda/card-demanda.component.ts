@@ -46,14 +46,14 @@ export class CardDemandaComponent implements OnInit {
   @Input() tipoDeAta: string = '';
   @Input() mostrarBotao = true;
 
-  exibirBotaoParecerComissao(){
-    if(this.demandaEmReuniao && (this.dadosDemanda.parecerComissaoProposta != null) && this.dadosDemanda.statusDemanda == StatusDemanda.DISCUSSION){
+  exibirBotaoParecerComissao() {
+    if (this.demandaEmReuniao && (this.dadosDemanda.parecerComissaoProposta != null) && this.dadosDemanda.statusDemanda == StatusDemanda.DISCUSSION) {
       return true;
     }
     return false;
   }
 
-  
+
 
   textoExibidoEmBotaoDependendoRota:
     | { rota: string; texto: string }
@@ -67,15 +67,17 @@ export class CardDemandaComponent implements OnInit {
   demandaEncontrada: boolean = false;
   motivoDemandaPropria = "Os motivos não foram disponibilizados";
   reunioes: Reuniao[] | undefined;
+  isFavorita = false;
 
   constructor(private route: Router,
     private reuniaoService: ReuniaoService,
     private confirmationService: ConfirmationService,
     private rascunhoService: RascunhoService,
-    private usuarioService: UsuarioService,
+    public usuarioService: UsuarioService,
     private messageService: MessageService,
     private demandaService: DemandaService,
     private personalizacaoService: PersonalizacaoService) {
+    
 
   }
 
@@ -419,8 +421,8 @@ export class CardDemandaComponent implements OnInit {
         };
         return true;
 
-        case StatusDemanda.DISCUSSION:
-          
+      case StatusDemanda.DISCUSSION:
+
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           if (this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == true) {
             this.textoExibidoEmBotaoDependendoRota = {
@@ -428,7 +430,7 @@ export class CardDemandaComponent implements OnInit {
               texto: 'Parecer Comissao',
             };
             return true;
-          }else if(this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == false){
+          } else if (this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == false) {
             this.textoExibidoEmBotaoDependendoRota = {
               rota: 'IR_PARA_REUNIAO',
               texto: 'Ir para Reunião',
@@ -443,11 +445,11 @@ export class CardDemandaComponent implements OnInit {
         }
         return true;
       default:
-        
+
         return true;
     }
   }
-  teste(){
+  teste() {
     console.log(this.dadosDemanda.parecerComissaoProposta)
   }
   deletarRascunho() {
@@ -513,6 +515,31 @@ export class CardDemandaComponent implements OnInit {
       this.analistaAssociado = false;
     }
 
+    //verifica se a demanda é favorita
+    if (this.dadosDemanda.usuariosFavoritos) {
+      for (let user of this.dadosDemanda.usuariosFavoritos) {
+        if (user.codigoUsuario == this.usuarioService.getCodigoUser()) {
+          this.isFavorita = true
+        }
+      }
+
+    }
+
     this.exibicaoBotoes();
+  }
+
+
+
+
+  addOrRemoveFavoritos() {
+    if (this.dadosDemanda.codigoDemanda)
+      this.demandaService.addFavoritos(this.dadosDemanda.codigoDemanda)
+        .subscribe({
+          next: e => {
+            this.isFavorita = !this.isFavorita;
+          }, error: err => {
+            alert("Erro ao adicionar a favorita")
+          }
+        })
   }
 }

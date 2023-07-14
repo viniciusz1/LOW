@@ -156,29 +156,14 @@ export class CardDemandaComponent implements OnInit {
       this.usuarioService.getRole == NivelAcesso.GestorTI ||
       this.usuarioService.getRole == NivelAcesso.Analista
     ) {
-      if (this.dadosDemanda.analista == undefined) {
-        return true;
-      }
-      //Se um outro analista já tiver iniciado a conversa, não exibe o botão
-      else if (
-        this.dadosDemanda.analista?.codigoUsuario ==
-        this.usuarioService.getCodigoUser()
-      ) {
-        return true;
-      } else if (
-        this.dadosDemanda.analista?.codigoUsuario !=
-        this.usuarioService.getCodigoUser()
-      ) {
-        return false;
-      }
       if (
         this.dadosDemanda.solicitanteDemanda?.codigoUsuario ==
         this.usuarioService.getCodigoUser()
       ) {
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
   formatarNumero(numero: number | undefined, casasDecimais: number): string {

@@ -459,6 +459,12 @@ export class DemandaService {
   }
 
 
+  aprovacaoGNComRecomendacao(codigoDemanda: string, recomendacao: string){
+    return this.http.put<Demanda>(
+      path + 'demanda/aprovar-recomendacao/' + codigoDemanda, recomendacao
+    );
+  }
+
   avancarStatusDemandaComDecisao(codigoDemanda: string, decisao: number) {
     let data = new FormData();
     data.append('codigo', codigoDemanda);

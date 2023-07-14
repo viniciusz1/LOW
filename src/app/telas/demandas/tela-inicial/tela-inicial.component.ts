@@ -89,7 +89,7 @@ export class TelaInicialComponent implements OnInit {
   totalPagesPagination = 0
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
-  positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   //true = card
   tipoExibicaoDemanda = true;
   cabecalhoMensagemDeConfirmacao = 'Avançar status';
@@ -119,6 +119,7 @@ export class TelaInicialComponent implements OnInit {
   
     demandasFiltradas.forEach(demanda => {
       const status = this.filtrarDemandaStatus.transform([demanda], titulo);
+      // console.log(status)
       if (status && status.length > 0) {
         const statusDemanda = status[0].statusDemanda;
         if (statusDemanda) {
@@ -126,8 +127,13 @@ export class TelaInicialComponent implements OnInit {
           statusContagem[statusString] = (statusContagem[statusString] || 0) + 1;
         }
       }
+      
     });
   
+    if(titulo == "Favoritos"){
+      return true;
+    }
+
     if (tipo === 1) {
       const statusKeys = Object.keys(statusContagem);
       let totalDemandas = 0;
@@ -147,6 +153,7 @@ export class TelaInicialComponent implements OnInit {
         }
       }
     }
+
   
     return false;
   }
@@ -611,6 +618,8 @@ export class TelaInicialComponent implements OnInit {
     //Tira duplicidade
     this.listaDemandas = this.listaDemandas.filter((objeto, index, self) => index === self.findIndex((t) => (t.codigoDemanda === objeto.codigoDemanda)));
 
+
+
     if (this.listaDemandas.length == 0) {
       this.listaTituloNaoFiltrado.push({
         status: 'Sem demandas',
@@ -618,6 +627,21 @@ export class TelaInicialComponent implements OnInit {
       });
 
       return;
+    }
+
+    if(this.listaDemandas.some((e) => {
+      if(e.usuariosFavoritos)
+      for(let i of e.usuariosFavoritos){
+        if(i.codigoUsuario == this.usuarioService.getCodigoUser()){
+          return true;
+        }
+      }
+      return false;
+    })){
+      this.listaTituloNaoFiltrado.push({
+        status: 'FAVORITOS',
+        titulo: 'Favoritos',
+      });
     }
 
     if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
@@ -631,8 +655,6 @@ export class TelaInicialComponent implements OnInit {
         status: 'DEMANDAS_DEPARTAMENTO',
         titulo: 'Demandas do Seu Departamento',
       });
-
-
       return
     }
 

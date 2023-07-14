@@ -43,6 +43,10 @@ export class DemandaService {
 
   public arquivos: File[] = [];
 
+  addFavoritos(codigoDemanda: string){
+    return this.http.put(path + 'usuario/demanda-favorita/' + codigoDemanda, null)
+  }
+
   beneficioValidator() {
     const beneficioReal = this.demandaForm.get('beneficioRealDemanda');
     const beneficioPotencial = this.demandaForm.get('beneficioPotencialDemanda');
@@ -361,7 +365,7 @@ export class DemandaService {
   private pageable: any
 
   get totalPages() {
-    return this.pageable.totalPages || 0
+    return this.pageable.totalPages || 1
   }
 
   //string = filtro por departamento
@@ -371,6 +375,14 @@ export class DemandaService {
       this.link = path + `demanda/filtro?solicitante=${this.filtros?.solicitante}&codigoDemanda=${this.filtros?.codigoDemanda}&status=${this.filtros?.status}&tamanho=${this.filtros?.tamanho.split(" ").join("").replace(/\s/g, "")}&tituloDemanda=${this.filtros?.tituloDemanda}&analista=${this.filtros?.analista}&departamento=${this.filtros?.departamento}&ordenar=${this.filtros?.sort}`
     }
     if (typeof pesquisaEspecial != 'string') {
+
+      if(pesquisaEspecial?.status == 'FAVORITOS'){
+
+        this.pageable = {totalPages: 1};
+        return this.http.get<Demanda[]>(
+          path + 'usuario/demanda-favorita'
+        )
+      }
       if (pesquisaEspecial?.status) {
         this.link = path + `demanda/filtro?solicitante=&codigoDemanda=&status=${pesquisaEspecial.status}&tamanho=&tituloDemanda=&analista=&departamento=&ordenar=${this.filtros?.sort}`
       } else if (pesquisaEspecial?.pesquisaCampo) {

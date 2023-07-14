@@ -25,6 +25,18 @@ export class FiltrarDemandaStatusPipe implements PipeTransform {
     if(titulo[0] == "Sem demandas"){
       return undefined
     }
+    if(titulo[0] == "Favoritos"){
+      return demandas.filter((e) => {
+        if(e.usuariosFavoritos)
+        for(let i of e.usuariosFavoritos){
+          if(i.codigoUsuario == this.usuarioService.getCodigoUser()){
+            return true;
+          }
+        }
+        return false;
+      })    
+
+    }
 
     if (titulo[0] == "Suas Demandas") {
       return demandas.filter(d => d.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())

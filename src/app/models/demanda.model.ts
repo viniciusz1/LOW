@@ -54,4 +54,5 @@ export interface Demanda {
   decisaoDG?: string
   numAtaDG?: string
   arquivoDG?: Arquivo
+  usuariosFavoritos?: Usuario[]
 }

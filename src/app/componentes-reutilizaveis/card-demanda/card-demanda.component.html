@@ -36,6 +36,10 @@
           aria-valuemax="100"
         ></div>
       </div>
+      <i *ngIf="isFavorita == false" class="bi bi-star me-3" (click)="addOrRemoveFavoritos()"
+      style="cursor: pointer"></i>
+      <i *ngIf="isFavorita == true" class="bi bi-star-fill me-3" (click)="addOrRemoveFavoritos()"
+      style="cursor: pointer"></i>
       <i
         class="bi bi-chat-left-dots me-3"
         *ngIf="statusPermitido() && exibirIniciarChat()"

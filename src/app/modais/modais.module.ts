@@ -25,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ModalDgDocumentosComponent } from './modal-dg-documentos/modal-dg-documentos.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { PaginatorModule } from 'primeng/paginator';
+import { ModalRecomendacaoDemandaComponent } from './modal-recomendacao-demanda/modal-recomendacao-demanda.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { PaginatorModule } from 'primeng/paginator';
     ModalCriarReuniaoComponent,
     ModalCancelamentoReuniaoComponent,
     ModalDgDocumentosComponent,
+    ModalRecomendacaoDemandaComponent,
   ],
   imports: [
     CommonModule,

@@ -24,6 +24,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalDgDocumentosComponent } from 'src/app/modais/modal-dg-documentos/modal-dg-documentos.component';
 import { FiltrarDemandaStatusPipe } from 'src/app/pipes/filtrar-demanda-status.pipe';
+import { JoyrideService } from 'ngx-joyride';
 
 
 @Component({
@@ -47,7 +48,8 @@ export class TelaInicialComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private usuarioService: UsuarioService,
     private falarTextoService: FalarTextoService,
-    private filtrarDemandaStatus: FiltrarDemandaStatusPipe
+    private filtrarDemandaStatus: FiltrarDemandaStatusPipe,
+    private joyrideService: JoyrideService
   ) {
     //Pipe ativado quando é realizado algum tipo de filtro por campo de texto
     let tipo = localStorage.getItem("exibicao")
@@ -153,11 +155,19 @@ export class TelaInicialComponent implements OnInit {
         }
       }
     }
-
-
+    if (tipo === 3) {
+      const statusKeys = Object.keys(statusContagem);
+      let totalDemandas = 0;
+      for (const key of statusKeys) {
+        totalDemandas += statusContagem[key];
+      }
+      if (totalDemandas > 6) {
+        return true;
+      }
+    }
+  
     return false;
   }
-
 
   mudouCampodePesquisa() {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
@@ -263,23 +273,44 @@ export class TelaInicialComponent implements OnInit {
   exportExcel() {
     //Realiza o mesmo filtro que está salvo no serviço de demandas
     //porém sem a paginação, logo, retornando todas as demandas filtradas
+    console.log(this.listaDemandas);
+    
     this.demandasService
-      .getTodasAsDemandasFiltradas()
-      .subscribe((listaDemandas: any) => {
-        // Importa o xlsx e exporta para excel
-        import('xlsx').then((xlsx) => {
-          const worksheet = xlsx.utils.json_to_sheet(listaDemandas['content']);
-          const workbook = {
-            Sheets: { data: worksheet },
-            SheetNames: ['data'],
-          };
-          const excelBuffer: any = xlsx.write(workbook, {
-            bookType: 'xlsx',
-            type: 'array',
-          });
-          this.saveAsExcelFile(excelBuffer, 'filtragem de demandas - ');
-        });
+    .getTodasAsDemandasFiltradas()
+    .subscribe((listaDemandas: any) => {
+      const demandasComCamposSeparados: any = [];
+  
+      listaDemandas['content'].forEach((demanda: Demanda) => {
+        // Copia a demanda original, excluindo os campos não desejados
+        const { arquivosDemanda, ...demandaSemArquivos } = demanda;
+  
+        const { beneficioPotencialDemanda, beneficioRealDemanda, ...demandaComCamposSeparados} = {
+          ...demandaSemArquivos,
+          solicitanteDemanda: demandaSemArquivos.solicitanteDemanda?.nomeUsuario,
+          analista: demandaSemArquivos.analista?.nomeUsuario,
+          gerenteNegocio: demandaSemArquivos.gerenteNegocio?.nomeUsuario,
+          busBeneficiadasDemandaClassificada: demanda.busBeneficiadasDemandaClassificada?.join(", "),
+          ...demandaSemArquivos.beneficioPotencialDemanda,
+          ...demandaSemArquivos.beneficioRealDemanda
+        };
+        
+  
+        demandasComCamposSeparados.push(demandaComCamposSeparados);
       });
+  
+      import('xlsx').then((xlsx) => {
+        const worksheet = xlsx.utils.json_to_sheet(demandasComCamposSeparados);
+        const workbook = {
+          Sheets: { data: worksheet },
+          SheetNames: ['data'],
+        };
+        const excelBuffer: any = xlsx.write(workbook, {
+          bookType: 'xlsx',
+          type: 'array',
+        });
+        this.saveAsExcelFile(excelBuffer, 'filtragem de demandas - ');
+      });
+    });
   }
 
   reloadPage() {
@@ -469,10 +500,9 @@ export class TelaInicialComponent implements OnInit {
   onScroll(event: Event) {
     this.isScrolled = window.scrollY > 100;
   }
-
-  voltarAoTopo() {
+  
+  voltarAoTopo() { 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    console.log("Aqui");
   }
 
   showSuccess(message: string) {
@@ -599,6 +629,21 @@ export class TelaInicialComponent implements OnInit {
       this.carregarDemandasIniciais();
     });
     this.carregarDemandasIniciais();
+    if(this.usuarioService.usuario?.primeiroAcesso == false){
+      if(this.usuarioService.getRole == "Solicitante" || this.usuarioService.getRole == "GerenteNegocio"){
+        this.joyrideService.startTour(
+          {
+            steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete'],
+          }
+        );
+      }else{
+        this.joyrideService.startTour(
+          {
+            steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete', 'oito@tela-inicial/reunioes', 'nove', 'dez'],
+          }
+        );
+      }
+    }
   }
 
   //Lógica para a criação de uma nova demanda

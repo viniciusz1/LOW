@@ -104,9 +104,16 @@ export class ParteReuniaoComponent implements OnInit {
   perfilDaDespesa = [{ tipo: 'Hardware', value: 'hardware' }, { tipo: 'Software', value: 'software' }, { tipo: 'Corporativo', value: 'corporativo' }];
   valorHoraRecursoValue: number | undefined;
   qtdHorasRecurso: number | undefined;
+  porcentagem: number | null = null;  
   periodoExecucao: number | undefined;
   centroCustoValor: number | undefined;
+  codigoPPM: number | undefined;
 
+
+
+  logs(){
+    console.log(this.formRecursos.controls.centroCustoRecurso.controls);
+  }
 
   onSubmit() {
     // console.log(this.formProposta.value);
@@ -119,8 +126,14 @@ export class ParteReuniaoComponent implements OnInit {
   //fazer verificações necessárias
   addRowRecurso() {
     try {
+      console.log(this.formRecursos.controls.centroCustoRecurso.controls);
       this.propostaService.addRowRecurso()
       this.mudarCustoTotalProjetoEPayback()
+      if(this.formRecursos.controls.centroCustoRecurso.controls.length > 1){
+        for(let i = this.formRecursos.controls.centroCustoRecurso.controls.length; i >= 1; i--){
+          this.removerCentroDeCusto(i)
+        }
+      }
     } catch (err) {
       this.showError("Não foi possível adicionar recurso")
     }

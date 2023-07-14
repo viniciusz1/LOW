@@ -14,6 +14,10 @@
     width: 30%;
 }
 
+:host ::ng-deep .col-3 {
+    width: 33% !important;
+}
+
 :host ::ng-deep .p-chips .p-chips-multiple-container .p-chips-token {
     background-color: #00579D !important;
 }
@@ -23,9 +27,35 @@ i {
     margin-top: 20px;
 }
 
+:host ::ng-deep .p-button {
+    background: #ffffff; 
+    border: 1px solid #ced4da; 
+    color: #6C757D;
+    transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+:host ::ng-deep .p-buttonset .p-button:last-of-type {
+    width: 9.7vw;
+}
+
+:host ::ng-deep .p-buttonset .p-button:first-of-type {
+    width: 10vw;
+}
+
+
 .escopo-demanda {
     border: 1px solid #dee2e6 !important;
     border-radius: 5px !important;
     width: 100%;
     min-height: 50vh;
 }
+
+.nome-centro-custo-input {
+    width: 25vw; /* Ajuste o valor do width conforme necessário */
+  }
+
+  .custom-input .ng-inputtext {
+    border-right: 0 transparent;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }

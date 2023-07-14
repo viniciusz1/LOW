@@ -16,7 +16,8 @@
 
       <div cdkDropList #ativada="cdkDropList" [cdkDropListData]="statusOrdemAtivada"
         [cdkDropListConnectedTo]="[desativada]" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of statusOrdemAtivada" cdkDrag>{{item.titulo}}</div>
+        <div class="example-box" *ngFor="let item of statusOrdemAtivada" cdkDrag [ngStyle]="{ 'border-left': item.cor }">{{item.titulo}}</div>
+        <div style="width: 30vw; height: 1px; border-bottom: solid 1px #ccc;"></div>
       </div>
     </div>
 
@@ -25,7 +26,9 @@
 
       <div cdkDropList #desativada="cdkDropList" [cdkDropListData]="statusOrdemDesativada"
         [cdkDropListConnectedTo]="[ativada]" class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of statusOrdemDesativada" cdkDrag>{{item.titulo}}</div>
+        <div style="font-size: 1vw; justify-content: center; height: 63vh;" class="example-box" *ngIf="statusOrdemDesativada.length == 0"> Arraste e Solte</div>
+        <div class="example-box" *ngFor="let item of statusOrdemDesativada" cdkDrag [ngStyle]="{ 'border-left': item.cor }">{{item.titulo}}</div>
+        <div style="width: 30vw; height: 1px; border-bottom: solid 1px #ccc;"></div>
       </div>
     </div>
   </div>

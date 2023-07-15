@@ -104,7 +104,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
     private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private usuarioService: UsuarioService
+    public usuarioService: UsuarioService
   ) {
 
     this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota).subscribe({
@@ -122,7 +122,27 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
     // this.isFormClassificadaInvalid =
   }
+  iniciarChat(){
+    
+    this.confirmationService.confirm({
+      header: "Iniciar Chat",
+      message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
+      icon: 'pi pi-exclamation-triangle',
+      blockScroll: false,
+      accept: () => {
+        this.demandaService.iniciarConversa(this.demanda?.codigoDemanda)
+          .subscribe({
+            next: (e) => {
+              this.router.navigate(['/tela-inicial/chat/' + this.demanda?.codigoDemanda]);
+            }
+            , error: (err) => { console.log(err) }
+          })
+      },
+      reject: () => {
 
+      }
+    });
+  }
   dadosDemanda: Demanda | undefined;
 
   cancelarDemandaPropria() {

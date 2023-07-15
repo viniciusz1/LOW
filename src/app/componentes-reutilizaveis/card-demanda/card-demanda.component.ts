@@ -156,29 +156,14 @@ export class CardDemandaComponent implements OnInit {
       this.usuarioService.getRole == NivelAcesso.GestorTI ||
       this.usuarioService.getRole == NivelAcesso.Analista
     ) {
-      if (this.dadosDemanda.analista == undefined) {
-        return true;
-      }
-      //Se um outro analista já tiver iniciado a conversa, não exibe o botão
-      else if (
-        this.dadosDemanda.analista?.codigoUsuario ==
-        this.usuarioService.getCodigoUser()
-      ) {
-        return true;
-      } else if (
-        this.dadosDemanda.analista?.codigoUsuario !=
-        this.usuarioService.getCodigoUser()
-      ) {
-        return false;
-      }
       if (
         this.dadosDemanda.solicitanteDemanda?.codigoUsuario ==
         this.usuarioService.getCodigoUser()
       ) {
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
   formatarNumero(numero: number | undefined, casasDecimais: number): string {
@@ -324,6 +309,16 @@ export class CardDemandaComponent implements OnInit {
       rota: 'VER_DOCUMENTO',
       texto: 'Ver Demanda',
     };
+
+    if(this.dadosDemanda.statusDemanda == StatusDemanda.CANCELLED && this.demandaEmReuniao == true){
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: 'VER_DOCUMENTO',
+        texto: 'Ver Demanda',
+      };
+      return true
+    }
+
+
     //Caso o card seja definido que não precisa mostrar o botão
     if (!this.mostrarBotao) {
       return false;

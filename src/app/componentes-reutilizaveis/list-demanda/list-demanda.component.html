@@ -1,22 +1,22 @@
 <ul class="nav position-relative container-lista low-shadow p-2" [ngStyle]="{'width':  mudarTamanho}">
     <div class="linha" style="height: 100%; width: 10px;" [ngStyle]="{ 'background-color': primaryColor }"></div>
     <div class="d-flex" style="width: 80%;">
-        <li class="nav-item">
+        <li class="nav-item" style="width:5%;">
             <label pTooltip="Código demanda" tooltipPosition="top" falarTexto class="" for="">{{dadosDemanda.codigoDemanda}}</label>
         </li>
-        <li class="nav-item d-flex justify-content-center" style="width: 45%;">
+        <li class="nav-item d-flex justify-content-center" style="width: 25%;">
             <label pTooltip="Nome Demanda" tooltipPosition="top" falarTexto class="text-truncate d-inline-block" for=""><b>{{dadosDemanda.tituloDemanda}}</b></label>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width: 20%;">
             <label falarTexto pTooltip="Usuário" tooltipPosition="top"
                 class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.nomeUsuario}}</label>
         </li>
-        <li class="nav-item" style="width: 30%;">
+        <li class="nav-item" style="width: 23%;">
             <label falarTexto pTooltip="Departamento" tooltipPosition="top"
                 class="text-truncate d-inline-block">{{dadosDemanda.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</label>
         </li>
-        <li *ngIf="!demandaPequena" class="nav-item" style="width:  10%; margin-right: 2vw;">
-            <span pTooltip="Score" tooltipPosition="top" falarTexto *ngIf="dadosDemanda.score != undefined">{{
+        <li *ngIf="!demandaPequena && dadosDemanda.score != undefined" class="nav-item" style="width:  10%; margin-right: 2vw;">
+            <span pTooltip="Score" tooltipPosition="top" falarTexto >{{
                 formatarNumero(dadosDemanda.score, 2) }} </span>
         </li>
         <li *ngIf="!demandaPequena" class="nav-item" style="width:  15%;">
@@ -31,13 +31,11 @@
                 {{textoExibidoEmBotaoDependendoRota.texto}}
             </button>
         </li>
-        <div class="final-list" style="width: 5%; margin-right: 0.5vh;">
-            <i
-            class="bi bi-chat-left-dots me-3"
-            *ngIf="!rascunho && statusPermitido() && exibirIniciarChat() && !demandaPequena " 
-            (click)="irParaChat.emit($event)"
-            style="cursor: pointer"
-          ></i>
+        <div class="final-list" style="width: 7%; margin-right: 0.5vh;">
+            <i *ngIf="!isPauta && !rascunho && isFavorita == false && (usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI')" class="bi bi-star me-4" (click)="addOrRemoveFavoritos()"
+      style="cursor: pointer"></i>
+      <i *ngIf="!isPauta && !rascunho && isFavorita == true && (usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI')" class="bi bi-star-fill me-4" (click)="addOrRemoveFavoritos()"
+      style="cursor: pointer"></i>
         </div>
         <i class="bi bi-three-dots-vertical three-dots" [ngClass]="{'me-3': demandaPequena}" role="button"
             [matMenuTriggerFor]="menu"></i>
@@ -60,7 +58,7 @@
                 <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
             </button>
             <button *ngIf="statusPermitido() && exibirIniciarChat()"
-                [routerLink]="['/tela-inicial/chat/'+dadosDemanda.codigoDemanda]" mat-menu-item>
+                (click)="irParaChat.emit($event)" mat-menu-item>
                 <i class="bi bi-chat-left-quote me-3"></i>
                 <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.iniciar-conversa" | translate }}</span>
             </button>

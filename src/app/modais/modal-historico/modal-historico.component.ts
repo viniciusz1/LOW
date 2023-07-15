@@ -5,6 +5,15 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
 import { MessageService } from 'primeng/api';
+import { DatePipe } from '@angular/common';
+
+import * as FileSaver from 'file-saver';
+
+interface Column {
+  field: string;
+  header: string;
+  customExportHeader?: string;
+}
 
 @Component({
   selector: 'app-modal-historico',
@@ -23,6 +32,8 @@ export class ModalHistoricoComponent implements OnInit {
       next: (e) => {
         this.listaHistoricoDemandas = []
         for (let i of e) {
+          // const dataFormatada = this.datePipe.transform(i.dataCriacaoDemanda, 'dd/MM/yyyy HH:mm');
+          // this.listaHistoricoDemandas.push({ ...i, isHistorico: true, dataCriacaoDemanda: dataFormatada });
           this.listaHistoricoDemandas.push({ ...i, isHistorico: true })
         }
       },
@@ -31,7 +42,11 @@ export class ModalHistoricoComponent implements OnInit {
       },
     });
   }
+
+  cols!: Column[];
+
   listaHistoricoDemandas: Demanda[] = [];
+  demandasSelecionadas: Demanda[] = [];
   openModalDemandaDocumento(event: Demanda) {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',
@@ -44,5 +59,12 @@ export class ModalHistoricoComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.cols = [
+      { field: 'version', header: 'Versão', customExportHeader: 'Versão' },
+      { field: 'dataCriacaoDemanda', header: 'Data de Criação' },
+      { field: 'category', header: 'Category' },
+      { field: 'quantity', header: 'Quantity' }
+  ];
+  }
 }

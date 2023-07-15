@@ -8,12 +8,12 @@
   class="scrollspy-example-2"
   tabindex="0"
 >
-  <h3>{{ "telas.demanda.dados-gerais" | translate }}</h3>
+  <h3 falarTexto>{{ "telas.demanda.dados-gerais" | translate }}</h3>
   <hr />
   <section id="section1">
     <div class="titulo" style="display: grid" id="item-1-1">
       <div class="infos" style="display: flex; align-items: center">
-        <label style="font-weight: 500" class="me-2">
+        <label falarTexto style="font-weight: 500" class="me-2">
           {{ "telas.demanda.titulo" | translate }}</label
         >
         <i
@@ -39,6 +39,7 @@
         }"
       />
       <small
+      falarTexto
         *ngIf="
           demandaForm.controls.tituloDemanda.errors &&
           demandaForm.controls.tituloDemanda.touched
@@ -51,7 +52,7 @@
     <div>
       <div class="situacao-atual" style="display: grid" id="item-1-2">
         <div class="infos" style="display: flex; align-items: center">
-          <label style="font-weight: 500" class="me-2">
+          <label falarTexto style="font-weight: 500" class="me-2">
             {{ "telas.demanda.situacao-atual" | translate }}
           </label>
           <i
@@ -89,7 +90,7 @@
       </div>
       <div class="objetivo" style="display: grid" id="item-1-3">
         <div class="infos" style="display: flex; align-items: center">
-          <label style="font-weight: 500" class="me-2" (click)="teste()">
+          <label falarTexto style="font-weight: 500" class="me-2" (click)="teste()">
             {{ "telas.demanda.objetivo-final" | translate }}
           </label>
           <i
@@ -123,14 +124,14 @@
               demandaForm.controls.objetivoDemanda.touched
             "
             id="username2-help"
-            class="p-error block"
+            class="p-error block" falarTexto
             >{{ "telas.demanda.campo-obrigatorio" | translate }}</small
           >
         </div>
       </div>
     </div>
     <div formArrayName="centroCustosDemanda" class="row align-items-center">
-      <label style="font-weight: 500" class="me-2"
+      <label falarTexto style="font-weight: 500" class="me-2"
         >{{ "telas.demanda.centros-custo" | translate
         }} <i
           class="bi bi-info-circle me-2"
@@ -204,7 +205,7 @@
     </div>
   </section>
 
-  <h3 class="mt-4" spyTarget="beneficios">
+  <h3 falarTexto class="mt-4" spyTarget="beneficios">
     {{ "telas.demanda.beneficios" | translate }}
   </h3>
   <hr />
@@ -266,7 +267,7 @@
             </div>
             <div class="situacao-atual" style="display: grid" id="item-1-2">
               <div class="infos" style="display: flex; align-items: center">
-                <label style="font-weight: 500;" class="me-2">
+                <label falarTexto style="font-weight: 500;" class="me-2">
                   {{ "telas.demanda.memoria-beneficio-real" | translate }}
                 </label>
                 <i
@@ -282,6 +283,7 @@
                 style="width: 100%"
                 [rows]="5"
                 maxlength="5000"
+                inputEmFoco
                 [cols]="30"
                 [autoResize]="true"
                 pInputTextarea
@@ -293,7 +295,7 @@
           <div formGroupName="beneficioPotencialDemanda">
             <div class="objetivo" style="display: grid" id="item-1-3">
               <div class="infos" style="display: flex; align-items: center">
-                <label
+                <label falarTexto
                   style="font-weight: 500"
                   class="me-2"
                 >
@@ -337,7 +339,7 @@
             </div>
             <div class="ben-real">
               <div class="infos" style="display: flex; align-items: center">
-                <label style="font-weight: 500" class="me-2">
+                <label falarTexto style="font-weight: 500" class="me-2">
                   {{ "telas.demanda.memoria-beneficio-potencial" | translate }}
                 </label>
                 <i
@@ -356,6 +358,7 @@
                   [rows]="5"
                   [cols]="30"
                   [autoResize]="true"
+                  inputEmFoco
                   pInputTextarea
                   formControlName="memoriaDeCalculoBeneficio"
                 ></textarea>
@@ -364,7 +367,7 @@
           </div>
           <div style="display: grid">
             <div class="infos" style="display: flex; align-items: center">
-              <label
+              <label falarTexto
                 style="font-weight: 500"
                 class="me-2"
               >
@@ -392,6 +395,7 @@
                 [cols]="30"
                 [autoResize]="true"
                 pInputTextarea
+                inputEmFoco
                 formControlName="beneficioQualitativoDemanda"
               ></textarea>
             </div>
@@ -401,14 +405,14 @@
     </div>
   </section>
 
-  <h3 class="mt-4" spyTarget="adicionais">
+  <h3 falarTexto class="mt-4" spyTarget="adicionais">
     {{ "telas.demanda.adicionais" | translate }}
   </h3>
   <hr />
   <section id="section3">
     <div class="titulo" style="display: grid" id="item-2-1">
       <div class="infos" style="display: flex; align-items: center">
-        <label style="font-weight: 500" class="me-2">
+        <label falarTexto style="font-weight: 500" class="me-2">
           {{ "telas.demanda.frequencia-uso-sistema" | translate }}
         </label>
         <i
@@ -430,7 +434,7 @@
         formControlName="frequenciaDeUsoDemanda"
       >
       </p-dropdown>
-      <small
+      <small falarTexto
         *ngIf="
           demandaForm.controls.frequenciaDeUsoDemanda.errors &&
           demandaForm.controls.frequenciaDeUsoDemanda.touched
@@ -442,10 +446,10 @@
     </div>
     <div>
       <div class="infos" style="display: flex; align-items: center">
-        <label style="font-weight: 500" class="me-2" (click)="teste()">
+        <label falarTexto style="font-weight: 500" class="me-2" (click)="teste()">
           {{ "telas.demanda.anexar-documento" | translate }}
         </label>
-        <i
+        <i falarTexto
           class="bi bi-info-circle me-2"
           style="font-size: 0.9rem; color: #00579d; cursor: pointer"
           pTooltip="Deseja adicionar arquivos(PDF, XML, POM...) relacionados a proposta, como pesquisas"

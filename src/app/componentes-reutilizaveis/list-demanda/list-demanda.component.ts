@@ -8,6 +8,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
 import { Reuniao } from 'src/app/models/reuniao.model';
 import { ReuniaoService } from 'src/app/services/reuniao.service';
+import { DemandaService } from 'src/app/services/demanda.service';
 
 @Component({
   selector: 'app-list-demanda',
@@ -60,8 +61,9 @@ export class ListDemandaComponent implements OnInit {
   reunioes: Reuniao[] | undefined;
 
   constructor(private route: Router, 
-    private usuarioService: UsuarioService, 
+    public usuarioService: UsuarioService, 
     private messageService: MessageService,
+    private demandaService: DemandaService,
     private reuniaoService: ReuniaoService,
     private personalizacaoService: PersonalizacaoService) { }
   statusPermitido() {
@@ -386,7 +388,32 @@ export class ListDemandaComponent implements OnInit {
 
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + "-sec";
+
+//verifica se a demanda é favorita
+if (this.dadosDemanda.usuariosFavoritos) {
+  for (let user of this.dadosDemanda.usuariosFavoritos) {
+    if (user.codigoUsuario == this.usuarioService.getCodigoUser()) {
+      this.isFavorita = true
+    }
+  }
+
+}
+
+
     this.exibicaoBotoes()
+  }
+  isFavorita = false;
+  
+  addOrRemoveFavoritos() {
+    if (this.dadosDemanda.codigoDemanda)
+      this.demandaService.addFavoritos(this.dadosDemanda.codigoDemanda)
+        .subscribe({
+          next: e => {
+            this.isFavorita = !this.isFavorita;
+          }, error: err => {
+            alert("Erro ao adicionar a favorita")
+          }
+        })
   }
 
 }

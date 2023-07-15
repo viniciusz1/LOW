@@ -309,6 +309,16 @@ export class CardDemandaComponent implements OnInit {
       rota: 'VER_DOCUMENTO',
       texto: 'Ver Demanda',
     };
+
+    if(this.dadosDemanda.statusDemanda == StatusDemanda.CANCELLED && this.demandaEmReuniao == true){
+      this.textoExibidoEmBotaoDependendoRota = {
+        rota: 'VER_DOCUMENTO',
+        texto: 'Ver Demanda',
+      };
+      return true
+    }
+
+
     //Caso o card seja definido que não precisa mostrar o botão
     if (!this.mostrarBotao) {
       return false;

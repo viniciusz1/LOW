@@ -58,7 +58,7 @@
                 <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.ver-ata" | translate }}</span>
             </button>
             <button *ngIf="statusPermitido() && exibirIniciarChat()"
-                [routerLink]="['/tela-inicial/chat/'+dadosDemanda.codigoDemanda]" mat-menu-item>
+                (click)="irParaChat.emit($event)" mat-menu-item>
                 <i class="bi bi-chat-left-quote me-3"></i>
                 <span falarTexto>{{ "componentes-reutilizaveis.card-demanda.iniciar-conversa" | translate }}</span>
             </button>

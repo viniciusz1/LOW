@@ -15,7 +15,7 @@ import { PersonalizacaoService } from './services/personalizacao.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'low';
+  title = 'lira';
   constructor(translate: TranslateService,
     private http: HttpClient,
     private messageService: MessageService,

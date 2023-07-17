@@ -183,7 +183,7 @@ export class TelaCorridaComponent implements OnInit {
         ) {
           this.activeSection = section.id;
         }
-        if (scrollPosition >= 1200) {
+        if (scrollPosition >= 1100) {
           this.activeSection = 'section3';
         }
       });
@@ -201,10 +201,10 @@ export class TelaCorridaComponent implements OnInit {
         if (scrollPosition >= 500) {
           this.activeSection = 'section2';
         }
-        if (scrollPosition >= 800) {
+        if (scrollPosition >= 750) {
           this.activeSection = 'section3';
         }
-        if (scrollPosition >= 920) {
+        if (scrollPosition >= 850) {
           this.activeSection = 'section4';
         }
       });
@@ -232,7 +232,7 @@ export class TelaCorridaComponent implements OnInit {
     } else if (element?.id == 'section2') {
       window.scrollTo({ top: 500, behavior: 'smooth' });
     } else if (element?.id == 'section3') {
-      window.scrollTo({ top: 850, behavior: 'smooth' });
+      window.scrollTo({ top: 750, behavior: 'smooth' });
     } else {
       window.scrollTo({ top: scrollHeight, behavior: 'smooth' });
     }

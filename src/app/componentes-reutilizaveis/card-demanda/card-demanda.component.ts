@@ -261,7 +261,7 @@ export class CardDemandaComponent implements OnInit {
 
   //Função chamada quando o usuário clica na ação do card
   direcionarUsuario() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     switch (this.textoExibidoEmBotaoDependendoRota?.rota) {
       case '':
         this.abrirModalMotivoReprovacao.emit(this.dadosDemanda);

@@ -30,7 +30,7 @@ export class ParteReuniaoComponent implements OnInit {
     private messageService: MessageService,
     private voiceRecognitionService: VoiceRecognitionService
   ) {
-
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
       rascunhoService.atualizarRascunhoProposta = this.route.snapshot.params['codigoDemanda']
     });

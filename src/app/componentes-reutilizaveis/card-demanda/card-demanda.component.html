@@ -35,9 +35,11 @@
           aria-valuemax="100"
         ></div>
       </div>
-      <i *ngIf="!isPauta && !rascunho && isFavorita == false && (usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI')" class="bi bi-star me-3" (click)="addOrRemoveFavoritos()"
+      <i *ngIf="!isPauta && !rascunho && isFavorita == false && (usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI')" 
+      class="bi bi-star" [ngClass]="{'me-3': !(statusPermitido() && exibirIniciarChat())}" (click)="addOrRemoveFavoritos()"
       style="cursor: pointer"></i>
-      <i *ngIf="!isPauta && !rascunho && isFavorita == true && (usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI')" class="bi bi-star-fill me-3" (click)="addOrRemoveFavoritos()"
+      <i *ngIf="!isPauta && !rascunho && isFavorita == true && (usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI')" 
+      class="bi bi-star-fill" [ngClass]="{'me-3': !(statusPermitido() && exibirIniciarChat())}" (click)="addOrRemoveFavoritos()"
       style="cursor: pointer"></i>
       <i
         class="bi bi-chat-left-dots me-3"

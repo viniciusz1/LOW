@@ -26,6 +26,7 @@ import { ModalDgDocumentosComponent } from './modal-dg-documentos/modal-dg-docum
 import { FileUploadModule } from 'primeng/fileupload';
 import { PaginatorModule } from 'primeng/paginator';
 import { ModalRecomendacaoDemandaComponent } from './modal-recomendacao-demanda/modal-recomendacao-demanda.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ModalRecomendacaoDemandaComponent } from './modal-recomendacao-demanda/
     SharedModule,
     PaginatorModule,
     FileUploadModule,
+    TableModule
   ],
   exports: [ModalDemandaDocumentoComponent],
 })

@@ -70,11 +70,11 @@
     <div>
       <div style="margin: 0 10vw" class="mt-5">
         <div class="border rounded p-3 mb-4" *ngIf="verificaSeTemParecerOuRecomendacao()">
-          <h5 falarTexto *ngIf="this.dadosDemanda?.parecerComissaoProposta">{{ "telas.tela-corrida.parecer-comissao" | translate }}</h5>
+          <h5 falarTexto *ngIf="this.dadosDemanda?.parecerComissaoProposta">Parecer: </h5>
           
           <p falarTexto *ngIf="this.dadosDemanda?.parecerComissaoProposta">{{dadosDemanda?.parecerComissaoProposta}}</p>
           <br *ngIf="this.dadosDemanda?.parecerComissaoProposta">
-          <h5 *ngIf="this.dadosDemanda?.recomendacaoProposta" falarTexto>{{ "telas.tela-corrida.recomendacoes-comissao" | translate }}</h5>
+          <h5 *ngIf="this.dadosDemanda?.recomendacaoProposta" falarTexto>Recomendação: </h5>
           <p *ngIf="this.dadosDemanda?.recomendacaoProposta" falarTexto>{{dadosDemanda?.recomendacaoProposta}}</p>
         </div>
         <p-accordion

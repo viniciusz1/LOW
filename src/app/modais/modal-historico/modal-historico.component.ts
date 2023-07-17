@@ -4,7 +4,7 @@ import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Demanda } from 'src/app/models/demanda.model';
 import { DemandaService } from 'src/app/services/demanda.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DatePipe } from '@angular/common';
 
 import * as FileSaver from 'file-saver';
@@ -13,6 +13,11 @@ interface Column {
   field: string;
   header: string;
   customExportHeader?: string;
+}
+
+interface ExportColumn {
+  title: string;
+  dataKey: string;
 }
 
 @Component({
@@ -26,6 +31,7 @@ export class ModalHistoricoComponent implements OnInit {
     @Inject(DIALOG_DATA) public data: string,
     private demandaService: DemandaService,
     private matDialog: MatDialog,
+    private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {
     this.demandaService.getHistoricoDemandaByCodigo(data).subscribe({
@@ -44,6 +50,7 @@ export class ModalHistoricoComponent implements OnInit {
   }
 
   cols!: Column[];
+  exportColumns!: ExportColumn[];
 
   listaHistoricoDemandas: Demanda[] = [];
   demandasSelecionadas: Demanda[] = [];
@@ -59,12 +66,55 @@ export class ModalHistoricoComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
+  modalMotivoReprovacao(motivo: string) {
+    this.confirmationService.confirm({
+      message: motivo,
+      dismissableMask: true,
+      header: 'Motivo da Reprovação',
+      accept: () => {
+        // this.route.navigate(['/tela-inicial/chat']);
+      },
+    });
+  }
+
   ngOnInit(): void { 
     this.cols = [
       { field: 'version', header: 'Versão', customExportHeader: 'Versão' },
       { field: 'dataCriacaoDemanda', header: 'Data de Criação' },
-      { field: 'category', header: 'Category' },
-      { field: 'quantity', header: 'Quantity' }
+      { field: 'autor', header: 'Autor' },
+      { field: 'statusDemanda', header: 'Status' },
+      { field: 'motivoReprovacaoDemanda', header: 'Motivo da Reprovação' },
+      { field: 'codigoDemanda', header: 'Ver demanda'}
   ];
+
+  this.exportColumns = this.cols.map((col) => ({ title: col.header, dataKey: col.field }));
   }
+
+  exportPdf() {
+    import('jspdf').then((jsPDF) => {
+        import('jspdf-autotable').then((x) => {
+            const doc = new jsPDF.default('p', 'px', 'a4');
+            (doc as any).autoTable(this.exportColumns, this.listaHistoricoDemandas);
+            doc.save('HistoricoDemandas.pdf');
+        });
+    });
+}
+
+exportExcel() {
+    import('xlsx').then((xlsx) => {
+        const worksheet = xlsx.utils.json_to_sheet(this.listaHistoricoDemandas);
+        const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, 'HistoricoDemandas');
+    });
+}
+
+saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+}
 }

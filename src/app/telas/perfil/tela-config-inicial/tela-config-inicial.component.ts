@@ -31,6 +31,8 @@ export class TelaConfigInicialComponent implements OnInit {
     
     if(local3){
     let listaCores = JSON.parse(local3).coresPrimariasPersonalizacao;
+    listaCores.unshift("#7000ff");
+
     // Troca das cores de Assessment e Business Case
     let ass = listaCores[5];
     listaCores[5] = listaCores[4];
@@ -43,7 +45,8 @@ export class TelaConfigInicialComponent implements OnInit {
   }
   statusOrdemAtivada: any = [];
   statusOrdemDesativada: any = [];
-  padrao: any =[{"status":"SUAS_DEMANDAS","titulo":"Suas Demandas", "cor": "#72bbf7"},{"status":"BACKLOG_CLASSIFICACAO","titulo":"Backlog - Classificação", "cor": "#00579D"},{"status":"BACKLOG_APROVACAO","titulo":"Backlog - Aprovação", "cor": "#00579D"},{"status":"BACKLOG_PROPOSTA","titulo":"Backlog - Propostas", "cor": "#00579D"},{"status":"BUSINESS_CASE","titulo":"Business Case", "cor": "#FFDD43"},{"status":"ASSESSMENT","titulo":"Assessment", "cor": "#8862A2"},{"status":"DISCUSSION","titulo":"Discussion", "cor": "#b4b0a8"},{"status":"TO_DO","titulo":"To Do", "cor": "#EF8300"},{"status":"DESIGN_AND_BUILD","titulo":"Design and Build", "cor": "#000000"},{"status":"SUPPORT","titulo":"Support", "cor": "#0091BD"},{"status":"CANCELLED","titulo":"Cancelled", "cor": "#EA1010"},{"status":"DONE","titulo":"Done", "cor": "#82A584"}]
+  padrao: any =[{"status":"FAVORITOS","titulo":"Favoritos", "cor": "#72bbf7"}, {"status":"SUAS_DEMANDAS","titulo":"Suas Demandas", "cor": "#72bbf7"},{"status":"BACKLOG_CLASSIFICACAO","titulo":"Backlog - Classificação", "cor": "#00579D"},{"status":"BACKLOG_APROVACAO","titulo":"Backlog - Aprovação", "cor": "#00579D"},{"status":"BACKLOG_PROPOSTA","titulo":"Backlog - Propostas", "cor": "#00579D"},{"status":"BUSINESS_CASE","titulo":"Business Case", "cor": "#FFDD43"},{"status":"ASSESSMENT","titulo":"Assessment", "cor": "#8862A2"},{"status":"DISCUSSION","titulo":"Discussion", "cor": "#b4b0a8"},{"status":"TO_DO","titulo":"To Do", "cor": "#EF8300"},{"status":"DESIGN_AND_BUILD","titulo":"Design and Build", "cor": "#000000"},{"status":"SUPPORT","titulo":"Support", "cor": "#0091BD"},{"status":"CANCELLED","titulo":"Cancelled", "cor": "#EA1010"},{"status":"DONE","titulo":"Done", "cor": "#82A584"}]
+
 
   salvarAlteracoes() {
     localStorage.setItem('ordemExibicaoDemandasAtivada', JSON.stringify(this.statusOrdemAtivada))

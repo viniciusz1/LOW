@@ -1,7 +1,6 @@
 <div
   class="card low-shadow position-relative principal"
   [ngStyle]="{ width: mudarTamanho }"
-  style="font-size: 14px; height: 163px"
 >
   <div
     class="line-top-start"
@@ -36,6 +35,12 @@
           aria-valuemax="100"
         ></div>
       </div>
+      <i *ngIf="!isPauta && !rascunho && isFavorita == false && (usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI')" 
+      class="bi bi-star" [ngClass]="{'me-3': !(statusPermitido() && exibirIniciarChat())}" (click)="addOrRemoveFavoritos()"
+      style="cursor: pointer"></i>
+      <i *ngIf="!isPauta && !rascunho && isFavorita == true && (usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI')" 
+      class="bi bi-star-fill" [ngClass]="{'me-3': !(statusPermitido() && exibirIniciarChat())}" (click)="addOrRemoveFavoritos()"
+      style="cursor: pointer"></i>
       <i
         class="bi bi-chat-left-dots me-3"
         *ngIf="statusPermitido() && exibirIniciarChat()"

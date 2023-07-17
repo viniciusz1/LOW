@@ -136,8 +136,9 @@ export class ModalCriarReuniaoComponent implements OnInit {
       this.reuniaoService.postReuniao(reuniao)
         .subscribe({
           next: reuniao => {
+
             this.showSuccess("Reunião Marcada!")
-            this.router.navigate(['/tela-inicial/reunioes'])
+            this.router.navigate(['/tela-inicial/ver-reuniao/' + reuniao.codigoReuniao])
             this.dialogRef.close(reuniao)
           }, error: err => {
             this.showError("Não foi possível marcar a reunião")
@@ -150,7 +151,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
         .subscribe({
           next: reuniao => {
             this.showSuccess("Reunião Marcada!")
-            this.router.navigate(['/tela-inicial/reunioes'])
+            this.router.navigate(['/tela-inicial/ver-reuniao/' + reuniao.codigoReuniao])
             this.dialogRef.close(reuniao)
           }, error: err => {
             this.showError("Não foi possível marcar a reunião")
@@ -161,7 +162,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
         .subscribe({
           next: reuniao => {
             this.showSuccess("Reunião Editada com sucesso!")
-            this.router.navigate(['/tela-inicial/reunioes'])
+            this.router.navigate(['/tela-inicial/ver-reuniao/' + reuniao.codigoReuniao])
             this.dialogRef.close()
           }, error: err => {
             this.showError("Não foi possível editar a reunião")

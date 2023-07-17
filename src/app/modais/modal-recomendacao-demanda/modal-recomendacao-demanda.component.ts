@@ -8,6 +8,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-modal-recomendacao-demanda',
@@ -21,7 +22,7 @@ export class ModalRecomendacaoDemandaComponent implements OnInit {
   solicitante: boolean = false;
   motivoDemandaPropria = "Os motivos não foram disponibilizados";
 
-  constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>,
+  constructor(public dialogRef: MatDialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
     private usuarioService: UsuarioService,
     @Inject(DIALOG_DATA) public data: Demanda,
@@ -61,9 +62,9 @@ export class ModalRecomendacaoDemandaComponent implements OnInit {
   enviarDecisao(decisao: number) {
     if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0') {
       this.demandaService
-        .avancarStatusDemandaComDecisao(
+        .aprovacaoGNComRecomendacao(
           this.dadosDemanda.codigoDemanda,
-          decisao
+          this.motivoRecomendacao
         )
         .subscribe({
           next: event => {

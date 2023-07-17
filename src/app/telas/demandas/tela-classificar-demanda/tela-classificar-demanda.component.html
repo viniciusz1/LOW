@@ -36,7 +36,11 @@
           <div *ngIf="solicitanteAnalista" falarTexto class="btn btn-danger" (click)="cancelarDemandaPropria()">Cancelar Demanda</div>
           <div *ngIf="!solicitanteAnalista" falarTexto class="btn btn-danger" (click)="openModalReprovacao()">{{ "telas.tela-classificar-demanda.b-reprovar" | translate }}</div>
           <div class="justify-content-end">
-            <div falarTexto class="btn btn-outline-primary" routerLink="/tela-inicial/chat">{{ "telas.tela-classificar-demanda.b-contatar-solicitante" | translate }}</div>
+            <div 
+            *ngIf="usuarioService.getCodigoUser() != demanda?.solicitanteDemanda?.codigoUsuario"
+             falarTexto 
+             class="btn btn-outline-primary" 
+             (click)="iniciarChat()">{{ "telas.tela-classificar-demanda.b-contatar-solicitante" | translate }}</div>
             <button falarTexto [disabled]="isFormClassificadaInvalid()" (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">
               {{ "telas.tela-classificar-demanda.b-aprovar" | translate }}
             </button>

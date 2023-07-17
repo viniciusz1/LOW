@@ -27,6 +27,7 @@
             "
             class="list-group-item list-group-item-action d-flex align-items-center"
             style="
+              cursor: pointer;
               border-left: 4px solid #00579d;
               border-bottom: #dbdbdb 1px solid;
             "
@@ -69,7 +70,7 @@
           {{ "telas.tela-chat.conversas-cadastradas" | translate }}
         </span>
 
-        <p-scrollPanel #scrollPanel [style]="{ width: '100%', height: '70vh' }">
+        <p-scrollPanel #scrollPanel [style]="{ width: '100%', height: '69vh' }">
           <div style="width: 100%; margin-top: 0.5vh">
             <div *ngIf="mostrarConversas" class="mensagens">
               <div

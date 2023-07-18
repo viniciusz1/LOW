@@ -64,6 +64,9 @@ export class PosHeaderComponent implements OnInit {
         else if (e.url == '/tela-inicial/historico') {
           this.items.push({ label: 'Histórico' });
         }
+        else if (e.url == '/tela-inicial/configuracoes/config-inicial') {
+          this.items.push({ label: 'Ordenação' });
+        }
         else {
           this.items.push({ label: 'Not Found' });
         }

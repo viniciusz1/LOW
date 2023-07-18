@@ -23,6 +23,7 @@ import { LogInterceptor } from './interceptor';
 import { TelasModule } from './telas/telas.module';
 import { MessagesModule } from 'primeng/messages';
 import { ConfiguracoesIniciaisService } from './services/configuracoes-iniciais.service';
+import { TableModule } from 'primeng/table';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -46,6 +47,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DialogModule,
     SharedModule,
     MessagesModule,
+    TableModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

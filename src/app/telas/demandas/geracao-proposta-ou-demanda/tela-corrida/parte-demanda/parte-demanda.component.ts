@@ -29,7 +29,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     public voiceRecognitionService: VoiceRecognitionService,
     private messageService: MessageService
   ) {
-
     let indiceRascunho = route.snapshot.params['indiceRascunho']
     this.inputSubject.pipe(debounceTime(500)).subscribe(() => {
       if (route.snapshot.url) {
@@ -40,38 +39,12 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     });
   }
 
-  startVoice() {
-    this.voiceRecognitionService.start();
-  }
-
-  stopService() {
-    this.voiceRecognitionService.stop()
-  }
-
-  onFocoIn(nomeEditorEmFoco: string) {
-    this.editorEspecialEmFoco = nomeEditorEmFoco;
-    this.voiceRecognitionService.setInputEmFoco('string')
-  }
-
-  onFocoOut() {
-    this.editorEspecialEmFoco = "";
-    this.voiceRecognitionService.setInputEmFoco(null)
-  }
-
+  @Input() aparecerProposta = false;
   //serve para setar o tipo do editor de texto como html por padrão
-  //NÃO DELETAR
   editorEspecialEmFoco: string = "";
   htmlSituacaoAtual = ""
   htmlObjetivo = ""
-
-  onInputChange() {
-    // Em vez de chamar diretamente o método, envie um evento ao Subject
-    this.inputSubject.next('aaaA');
-  }
-
   inputSubject = new Subject<string>();
-  @Input() aparecerProposta = false;
-
   index: number = 0;
   listaFiles: File[] = []
   centroCustos: CentroCusto[] = [];
@@ -85,7 +58,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
-
   editor: Editor = new Editor();
   toolbarDemanda: Toolbar = [
     ['bold', 'italic'],
@@ -119,14 +91,35 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
   listaCentrodeCusto: number[] = [];
   resultado: boolean = true;
   abrirSegundoAccordion: boolean = false;
-
   tabs1: Tab[] = [
     { title: 'Tab 1', content: 'Conteúdo da Tab 1' },
     { title: 'Tab 2', content: 'Conteúdo da Tab 2' },
     { title: 'Tab 3', content: 'Conteúdo da Tab 3' }
   ];
-
   activeIndex = 0;
+
+  startVoice() {
+    this.voiceRecognitionService.start();
+  }
+
+  stopService() {
+    this.voiceRecognitionService.stop()
+  }
+
+  onFocoIn(nomeEditorEmFoco: string) {
+    this.editorEspecialEmFoco = nomeEditorEmFoco;
+    this.voiceRecognitionService.setInputEmFoco('string')
+  }
+
+  onFocoOut() {
+    this.editorEspecialEmFoco = "";
+    this.voiceRecognitionService.setInputEmFoco(null)
+  }
+
+  onInputChange() {
+    // Em vez de chamar diretamente o método, envie um evento ao Subject
+    this.inputSubject.next('aaaA');
+  }
 
   ngOnInit(): void {
     this.demandaService.listaArquivosDemanda.subscribe(arquivos => {
@@ -134,13 +127,11 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     })
 
     this.voiceRecognitionService.$novasPalavrasFaladas.subscribe(palavra => {
-      if(this.editorEspecialEmFoco == 'objetivo'){
+      if (this.editorEspecialEmFoco == 'objetivo') {
         this.htmlObjetivo = palavra
-      }else if(this.editorEspecialEmFoco == 'situacao'){
+      } else if (this.editorEspecialEmFoco == 'situacao') {
         this.htmlSituacaoAtual += palavra
       }
-
-
     })
   }
 
@@ -151,7 +142,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
       this.listaFiles = []
       this.showError("O tamanho total dos arquivos não pode ser maior que 100MB")
     }
-
   }
 
   isBiggerThan100MB(files: File[]): boolean {
@@ -161,25 +151,24 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
     }
     // Convertendo para megabytes
     const totalSizeInMB = totalSize / (1024 * 1024);
-
     return totalSizeInMB > 100;
   }
+
   removerCentroDeCusto(index: number) {
     this.demandaService.removeCenterOfCost(index);
     if (this.demandaForm.value.centroCustosDemanda) {
       this.porcentagem = 0;
       for (let i = 0; i < this.demandaForm.value.centroCustosDemanda.length; i++) {
         this.porcentagem += parseInt(this.demandaForm.value.centroCustosDemanda[i].porcentagemCentroCusto)
-        console.log("Ta entrando sim ", this.porcentagem)
       }
     }
-
     if (this.porcentagem < 100) {
       this.porcentagem100 = false;
     } else if (this.porcentagem > 100) {
       this.showError("Sua porcentagem ainda está acima de 100")
     }
   }
+
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
@@ -194,7 +183,6 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
         this.porcentagem = 0;
         for (let i = 0; i < this.demandaForm.value.centroCustosDemanda.length; i++) {
           this.porcentagem += parseInt(this.demandaForm.value.centroCustosDemanda[i].porcentagemCentroCusto)
-          console.log("Ta entrando sim ", this.porcentagem)
         }
       }
 
@@ -217,27 +205,20 @@ export class ParteDemandaComponent implements OnInit, OnDestroy {
       if (!this.porcentagem100) {
         this.demandaService.addCenterOfCost();
       }
+
     } catch (err) {
       this.showError("Não foi possível adicionar centro de custo!")
     }
   }
 
-  teste() {
-    console.log(this.listaFiles)
-    console.log(this.demandaForm)
-  }
-
   ngOnDestroy(): void {
     this.editor.destroy();
     this.editorDemanda.destroy();
-
   }
 
   mudouMoeda(event: any, ordemInput: number) {
     this.onInputChange()
-
     let moeda = event;
-    console.log(moeda)
 
     if (moeda.value == 'Real') {
       if (ordemInput == 1) {

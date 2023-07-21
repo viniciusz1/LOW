@@ -11,6 +11,7 @@ import { MenuItem } from 'primeng/api';
 })
 export class PosHeaderComponent implements OnInit {
 
+  //Define os títulos das telas no pós header através da rota 
   constructor(private router: Router) {
     this.router.events
       .pipe(filter((event: any) => event instanceof NavigationEnd))

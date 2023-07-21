@@ -1,9 +1,11 @@
 <div class="princ-container">
     <div class="divisao-divs" style="display: flex;">
         <div class="configuracoes" style=" width: 35vw; height: 78.5vh;">
-            <div class="parte-branca"  style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px; height: 4.65vh;">
+            <div class="parte-branca"
+                style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px; height: 4.65vh;">
             </div>
-            <div class="perfil menu-item" routerLinkActive="rota-Ativa" routerLink="perfil" style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
+            <div class="perfil menu-item" routerLinkActive="rota-Ativa" routerLink="perfil"
+                style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-person"></i>
                 </div>
@@ -11,7 +13,8 @@
                     {{ "componentes-fixos.escopo-perfil.conta" | translate }}
                 </h6>
             </div>
-            <div class="layout menu-item" routerLinkActive="rota-Ativa" routerLink="layout" style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
+            <div class="layout menu-item" routerLinkActive="rota-Ativa" routerLink="layout"
+                style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-grid-1x2"></i>
                 </div>
@@ -19,7 +22,9 @@
                     {{ "componentes-fixos.escopo-perfil.layout" | translate }}
                 </h6>
             </div>
-            <div *ngIf="usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI'" class="layout menu-item" routerLinkActive="rota-Ativa" routerLink="config-inicial" style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
+            <div *ngIf="usuarioService.getRole == 'Analista' || usuarioService.getRole == 'GestorTI'"
+                class="layout menu-item" routerLinkActive="rota-Ativa" routerLink="config-inicial"
+                style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-list-ul"></i>
                 </div>
@@ -27,7 +32,8 @@
                     Configurações da Tela Inicial
                 </h6>
             </div>
-            <div class="ajuda menu-item" routerLinkActive="rota-Ativa" routerLink="ajuda" style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
+            <div class="ajuda menu-item" routerLinkActive="rota-Ativa" routerLink="ajuda"
+                style="display: flex; border-bottom: 1px solid #8f8f8f; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-question-circle"></i>
                 </div>
@@ -35,7 +41,8 @@
                     {{ "componentes-fixos.escopo-perfil.ajuda" | translate }}
                 </h6>
             </div>
-            <div (click)="iniciarTutorial()" class="tutorial menu-item"  style="display: flex; border-bottom: 1px solid #8f8f8f !important;; padding: 10px 0px 10px 10px;">
+            <div (click)="iniciarTutorial()" class="tutorial menu-item"
+                style="display: flex; border-bottom: 1px solid #8f8f8f !important;; padding: 10px 0px 10px 10px;">
                 <div class="icones">
                     <i class="bi bi-diagram-3"></i>
                 </div>
@@ -51,10 +58,9 @@
                 <h6 falarTexto style="margin: 0px;" class="d-flex justify-content-between">
                     <span>
                         {{ "componentes-fixos.escopo-perfil.notificacoes" | translate }}
-
                     </span>
-
-                    <input class="form-check-input" style="position: absolute; right: 20px" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                    <input class="form-check-input" style="position: absolute; right: 20px" type="checkbox"
+                        role="switch" id="flexSwitchCheckChecked" checked>
                 </h6>
             </div>
         </div>

@@ -18,12 +18,14 @@ import { Conversa } from 'src/app/models/conversa.model';
   styleUrls: ['./tela-chat.component.scss'],
 })
 export class TelaChatComponent implements OnInit, OnDestroy {
+
   messageService: any;
   items: MenuItem[] = [];
   codigoRota = '';
   mensagens: Mensagem[] = [];
   conversasDemandas: Conversa[] = [];
   mostrarConversas = false;
+  conversaDiscutida?: Conversa
   demandaDiscutida: Demanda | undefined;
   pesquisaFiltro = '';
 
@@ -53,7 +55,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       .getMessages(this.codigoRota)
       .subscribe((novasMensagens) => {
         this.mensagens = this.trocarLadoDaMensagem(novasMensagens);
-        console.log(this.mensagens)
         this.mostrarConversas = true;
       });
     setTimeout(() => {
@@ -61,7 +62,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     }, 1000)
   }
 
-  conversaDiscutida?: Conversa
   alterarConversa(conversa: Conversa) {
     conversa.qtdMensagensNaoLidas = 0;
     this.conversaDiscutida = conversa;
@@ -83,7 +83,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     if (this.messagesService.subscriptionChat != undefined) {
       this.messagesService.subscriptionChat.unsubscribe();
     }
-
 
     if (this.messagesService.subscriptionVisto != undefined) {
       this.messagesService.subscriptionVisto.unsubscribe();
@@ -108,7 +107,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     }
     return false;
   }
-
 
   verificarMensagemMaisAtual() {
     const mensagemMaisAtual = this.mensagens.reduce(
@@ -135,13 +133,10 @@ export class TelaChatComponent implements OnInit, OnDestroy {
           destination: '/low/visto/' + this.codigoRota, body: JSON.stringify({ textoMensagem: "agora vai" })
         })
       }
-
-      console.log("MENSAGEM: " + mensagem.textoMensagem)
       if (mensagem.textoMensagem != undefined) {
         let novaMensagem = this.trocarLadoDaMensagem([mensagem]);
         this.mostrarConversas = true;
         this.mensagens.push(...novaMensagem);
-        console.log("emitiu")
         setTimeout(() => {
           this.scrollToBottom();
         }, 200);
@@ -182,7 +177,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
     }
   }
 
-
   enviarMensagem() {
     if (this.mensagem.nativeElement.value != '') {
       this.messagesService?.send(
@@ -194,6 +188,7 @@ export class TelaChatComponent implements OnInit, OnDestroy {
       this.mensagem.nativeElement.value = '';
     }
   }
+
   // commnet
   openModalDemandaDocumento() {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
@@ -204,7 +199,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log("Rodou on init")
     this.subscribeEmmiterMensagens();
     this.messagesService.$mensagensVistas.subscribe(() => {
       this.mensagens.forEach((mensagem) => {
@@ -217,7 +211,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
         if (codigoConversa != parseInt(this.codigoRota)) {
           //Se a conversa que recebeu a notificação é a mesma que está sendo conversada no momento
           if (conversa.codigoConversa == codigoConversa && conversa.qtdMensagensNaoLidas) {
-            console.log("Entrou para atualizar a qtd de mensagens")
             conversa.qtdMensagensNaoLidas = conversa.qtdMensagensNaoLidas + 1;
           } else {
             conversa.qtdMensagensNaoLidas = 1;
@@ -226,7 +219,6 @@ export class TelaChatComponent implements OnInit, OnDestroy {
 
       }
     })
-
   }
 
   silenciarChat() {

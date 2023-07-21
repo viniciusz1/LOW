@@ -29,6 +29,7 @@ registerLocaleData(localePt);
   ]
 })
 export class ModalCriarReuniaoComponent implements OnInit {
+
   localeConfig: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Demanda | Reuniao,
@@ -57,7 +58,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
       )
   }
 
-
   fecharModal() {
     this.dialogRef.close();
   }
@@ -75,6 +75,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
     { value: "CWBS", nome: "CWBS – Comitê WEG Business Services" },
     { value: "DTI", nome: "DTI – Diretoria de TI" },
   ]
+
   currentPageReportTemplate = '{{currentPage}} de {{totalPages}}';
 
   openModalHistorico(codigoDemanda: string) {
@@ -108,18 +109,12 @@ export class ModalCriarReuniaoComponent implements OnInit {
       })
   }
 
-  // irParaChat() {
-  //   this.dialogRef.close();
-  //   this.router.navigate(['/tela-inicial/chat']);
-  // }
-
   listaReunioes: Reuniao[] = [];
   listaDemandasEscolhidas: Demanda[] = [];
   draggedDemanda: Demanda | undefined = undefined;
   listaDemandas: Demanda[] = [];
   listaProposta: Proposta[] = [];
   cabecalhoMensagemDeConfirmacao = 'Avançar status';
-
   dataReuniao: Date;
   comissaoSelecionada: string | undefined = undefined;
 
@@ -131,7 +126,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
       statusReuniao: StatusReuniao.PROXIMO,
       codigoReuniao: parseInt(this.router.url.split("/").pop() as string)
     }
-
     if (this.data == undefined) {
       this.reuniaoService.postReuniao(reuniao)
         .subscribe({
@@ -145,7 +139,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
           }
         })
     }
-
     if (this.instanceOfDemanda(this.data)) {
       this.reuniaoService.postReuniao(reuniao)
         .subscribe({
@@ -170,6 +163,7 @@ export class ModalCriarReuniaoComponent implements OnInit {
         })
     }
   }
+
   dragStart(demanda: Demanda) {
     this.draggedDemanda = demanda;
   }
@@ -206,7 +200,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
   }
 
   removerDaListaAdicSecundaria() {
-
     if (this.data == undefined) {
       return
     }
@@ -236,7 +229,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
     }
   }
 
-
   setInformacoesPreDefinidas(reuniao: Reuniao) {
     this.comissaoSelecionada = reuniao.comissaoReuniao
     if (reuniao.dataReuniao)
@@ -250,7 +242,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
   showError(message: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
-
 
   dragEnd() {
     this.draggedDemanda = undefined;
@@ -270,7 +261,6 @@ export class ModalCriarReuniaoComponent implements OnInit {
   nenhumResultadoEncontrado = false;
 
   paginate(event: any) {
-    console.log("Paginando")
     this.demandaService.avancarPage(event.page)
       .subscribe((listaDemandas: Demanda[]) => {
         if (listaDemandas.length > 0) {

@@ -19,8 +19,9 @@ export class InfoModalDemandaComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
   download(arquivo?: Arquivo): void {
-    if(arquivo){
+    if (arquivo) {
       this.demandaService.saveByteArray(
         arquivo.dadosArquivo,
         arquivo.tipoArquivo,

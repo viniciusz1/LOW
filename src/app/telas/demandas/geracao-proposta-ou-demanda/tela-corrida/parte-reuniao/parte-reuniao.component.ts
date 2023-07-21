@@ -22,6 +22,7 @@ interface Responsavel {
   styleUrls: ['./parte-reuniao.component.scss'],
 })
 export class ParteReuniaoComponent implements OnInit {
+
   constructor(
     private propostaService: PropostaService,
     private demandaService: DemandaService,
@@ -36,16 +37,6 @@ export class ParteReuniaoComponent implements OnInit {
     });
   }
 
-  onInputChange() {
-    console.log("change", this.inputSubject.next)
-    this.inputSubject.next("");
-  }
-
-  onInputChangeDate(newValue: Date) {
-   // Use o valor atualizado conforme necessário
-    this.inicioData = newValue;
-  }
-
   inputSubject = new Subject<string>();
   custosTotais: number = 0;
   paybackProposta = this.propostaService.paybackProposta;
@@ -53,7 +44,6 @@ export class ParteReuniaoComponent implements OnInit {
   formProposta = this.propostaService.formProposta;
   formRecursos = this.propostaService.formRecursos;
   listaRecursos = this.propostaService.listaRecursos;
-
   statusDemanda = [
     {
       name: 'Business Case',
@@ -64,7 +54,6 @@ export class ParteReuniaoComponent implements OnInit {
       value: 'ASSESSMENT'
     }
   ]
-
   responsaveis: Responsavel[] = [
     { nome: 'Otavio Neves', area: 'WEG Digital' },
     { nome: 'Vinicius Bonatti', area: 'Vendas' },
@@ -72,17 +61,11 @@ export class ParteReuniaoComponent implements OnInit {
     { nome: 'Kenzo Hedeaky', area: 'Trefilação' },
     { nome: 'Felipe Viera', area: 'Corpotativo' },
   ];
-
   selectedResponsaveis: any;
-
-  ngOnDestroy(): void {
-    this.editor.destroy();
-  }
 
   formEditor = new FormGroup({
     editorContent: new FormControl('', Validators.required()),
   });
-
   toolbar: Toolbar = [
     ['bold', 'italic'],
     ['underline', 'strike'],
@@ -93,7 +76,6 @@ export class ParteReuniaoComponent implements OnInit {
     ['text_color', 'background_color'],
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
-
   editor: Editor = new Editor();
   inicioData: Date | any;
   fimData: Date | undefined = undefined;
@@ -104,33 +86,43 @@ export class ParteReuniaoComponent implements OnInit {
   perfilDaDespesa = [{ tipo: 'Hardware', value: 'hardware' }, { tipo: 'Software', value: 'software' }, { tipo: 'Corporativo', value: 'corporativo' }];
   valorHoraRecursoValue: number | undefined;
   qtdHorasRecurso: number | undefined;
-  porcentagem: number | null = null;  
+  porcentagem: number | null = null;
   periodoExecucao: number | undefined;
   centroCustoValor: number | undefined;
   codigoPPM: number | undefined;
-
-
-
-  logs(){
-    console.log(this.formRecursos.controls.centroCustoRecurso.controls);
-  }
-
-  onSubmit() {
-    // console.log(this.formProposta.value);
-  }
   porcentagemCC: [{ porcentagem: string; index: number }] = [
     { porcentagem: '', index: 0 },
   ];
   quantidadeCC = [0];
   centrosDeCustoOpcoes = ['Center 1', 'Center 2', 'Center 3'];
+  listaCentrodeCusto: number[] = [];
+  resultado: boolean = true;
+  htmlEscopoDemanda: string = "";
+
+  onSubmit() {
+
+  }
+
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
+
+  onInputChange() {
+    this.inputSubject.next("");
+  }
+
+  onInputChangeDate(newValue: Date) {
+    // Use o valor atualizado conforme necessário
+    this.inicioData = newValue;
+  }
+
   //fazer verificações necessárias
   addRowRecurso() {
     try {
-      console.log(this.formRecursos.controls.centroCustoRecurso.controls);
       this.propostaService.addRowRecurso()
       this.mudarCustoTotalProjetoEPayback()
-      if(this.formRecursos.controls.centroCustoRecurso.controls.length > 1){
-        for(let i = this.formRecursos.controls.centroCustoRecurso.controls.length; i >= 1; i--){
+      if (this.formRecursos.controls.centroCustoRecurso.controls.length > 1) {
+        for (let i = this.formRecursos.controls.centroCustoRecurso.controls.length; i >= 1; i--) {
           this.removerCentroDeCusto(i)
         }
       }
@@ -147,7 +139,6 @@ export class ParteReuniaoComponent implements OnInit {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 
-
   mudarCustoTotalProjetoEPayback() {
     this.custosTotais = 0
     this.listaRecursos.forEach(recurso => {
@@ -156,8 +147,6 @@ export class ParteReuniaoComponent implements OnInit {
     this.paybackProposta = this.custosTotais / (this.demandaService.getBeneficioReal() + this.demandaService.getBeneficioPotencial());
   }
 
-  htmlEscopoDemanda: string = "";
-
   onFocoIn() {
     this.voiceRecognitionService.setInputEmFoco('string')
   }
@@ -165,7 +154,6 @@ export class ParteReuniaoComponent implements OnInit {
   onFocoOut() {
     this.voiceRecognitionService.setInputEmFoco(null)
   }
-
 
   editarRecurso(index: number) {
     this.formRecursos.patchValue({
@@ -183,9 +171,6 @@ export class ParteReuniaoComponent implements OnInit {
   removerRecurso(index: number) {
     this.listaRecursos.splice(index, 1)
   }
-
-  listaCentrodeCusto: number[] = [];
-  resultado: boolean = true;
 
   adicionarCentroCusto() {
     try {

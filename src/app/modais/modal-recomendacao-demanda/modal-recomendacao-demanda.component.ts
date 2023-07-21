@@ -21,6 +21,7 @@ export class ModalRecomendacaoDemandaComponent implements OnInit {
   usuario: Usuario | undefined;
   solicitante: boolean = false;
   motivoDemandaPropria = "Os motivos não foram disponibilizados";
+  motivoRecomendacao = ""
 
   constructor(public dialogRef: MatDialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
@@ -32,7 +33,6 @@ export class ModalRecomendacaoDemandaComponent implements OnInit {
     private route: Router
   ) {
     this.usuario = usuarioService.getUser('user')
-    console.log(data)
     this.dadosDemanda = data
     if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuario?.codigoUsuario) {
       this.solicitante = true;
@@ -43,8 +43,6 @@ export class ModalRecomendacaoDemandaComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  motivoRecomendacao = ""
 
   aprovarDemanda() {
     // console.log(this.dadosDemanda)

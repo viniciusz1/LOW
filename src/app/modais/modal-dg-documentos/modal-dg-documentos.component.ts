@@ -17,6 +17,7 @@ import { ModalDemandaDocumentoComponent } from '../modal-demanda-documento/modal
   styleUrls: ['./modal-dg-documentos.component.scss'],
 })
 export class ModalDgDocumentosComponent implements OnInit {
+
   constructor(
     public dialogRef: MatDialogRef<ModalDgDocumentosComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Demanda,
@@ -27,13 +28,16 @@ export class ModalDgDocumentosComponent implements OnInit {
     this.demanda = this.data;
     this.setInformacoes();
   }
+  
   demanda: Demanda | undefined;
+  numAtaDG: string = '';
   tipoAtaSelecionada: string = '';
   tipoAtas = [
     { name: 'Ata Publicada', value: 'PUBLICADA' },
     { name: 'Ata não Publicada', value: 'NAO_PUBLICADA' },
   ];
   aparecerRecomendacao: boolean = false;
+  listaFiles: File[] = [];
   resultadoDGSelecionado: string = '';
   resultadoDG = [
     { name: 'Aprovar', value: 'APROVAR' },
@@ -101,10 +105,6 @@ export class ModalDgDocumentosComponent implements OnInit {
   }
 
   enviarParecerDG() {
-    console.log(this.parecerDGInput);
-    console.log(this.resultadoDGSelecionado);
-    console.log(this.numAtaDG);
-    console.log(this.listaFiles);
     let objeto = {
       decisaoDG: this.resultadoDGSelecionado,
       parecerDGProposta: this.parecerDGInput,
@@ -112,8 +112,6 @@ export class ModalDgDocumentosComponent implements OnInit {
       numAtaDG: this.numAtaDG,
     };
     if (this.demanda?.codigoDemanda) {
-
-
       this.reuniaoService
         .enviarParecerDG(objeto, this.demanda.codigoDemanda, this.listaFiles[0])
         .subscribe({
@@ -127,11 +125,10 @@ export class ModalDgDocumentosComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
-  numAtaDG: string = '';
+  ngOnInit(): void { }
+
   onUpload(event: any) {
     this.listaFiles = [];
     this.listaFiles.push(event['files'][0] as File);
   }
-  listaFiles: File[] = [];
 }

@@ -8,6 +8,7 @@ import { Calendar } from 'primeng/calendar';
   styleUrls: ['./filtro-reuniao.component.scss']
 })
 export class FiltroReuniaoComponent implements OnInit {
+
   @Output() closeFiltro = new EventEmitter();
   @Output() filtroAcionado = new EventEmitter<{
     nomeComissao: string;
@@ -24,26 +25,18 @@ export class FiltroReuniaoComponent implements OnInit {
   statusReuniao: string[] = ['Aguardando', 'Proximo', 'Concluido', 'Cancelado', 'Pendente'];
   naoAparecer = false;
 
-
-  teste(cal: Calendar) {
-    console.log(cal)
-  }
-
   constructor(private datePipe: DatePipe) { }
 
   emitirFiltro(dados: { nomeComissao: string, dataReuniao: Date | string, statusReuniao: string, ppmProposta: string, analista: string, solicitante: string, ordenar: string, page: string, size: string }) {
     let data = this.datePipe.transform(dados.dataReuniao, 'yyyy-MM-dd');
-    if(data != undefined){
+    if (data != undefined) {
       dados.dataReuniao = data as string
-    }else{
+    } else {
       dados.dataReuniao = ''
     }
-
-    if(dados.statusReuniao == undefined){
+    if (dados.statusReuniao == undefined) {
       dados.statusReuniao = '';
     }
-      
-    // console.log("Entrou no if - ok")
     //@ts-ignore
     this.filtroAcionado.emit(dados)
 

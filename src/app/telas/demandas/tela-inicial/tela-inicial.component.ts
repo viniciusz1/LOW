@@ -36,6 +36,7 @@ import { JoyrideService } from 'ngx-joyride';
 
 
 export class TelaInicialComponent implements OnInit {
+
   constructor(
     public dialog: Dialog,
     private matDialog: MatDialog,
@@ -51,13 +52,13 @@ export class TelaInicialComponent implements OnInit {
     private filtrarDemandaStatus: FiltrarDemandaStatusPipe,
     private joyrideService: JoyrideService
   ) {
+
     //Pipe ativado quando é realizado algum tipo de filtro por campo de texto
     let tipo = localStorage.getItem("exibicao")
     if (tipo) {
       this.tipoExibicaoDemanda = JSON.parse(tipo)
     }
     this.pesquisaAlterada.pipe(debounceTime(500)).subscribe(() => {
-      console.log("Foi no pesquisa alterada")
       if (this.pesquisaDemanda == "") {
         this.carregarDemandasIniciais()
       } else {
@@ -68,6 +69,7 @@ export class TelaInicialComponent implements OnInit {
         this.isFiltrado = true;
       };
     })
+
     //Setando nivel de acesso usuário e departamento
     this.nivelAcessoUsuario = usuarioService.getRole
     this.departamentoUsuario = usuarioService.getDepartamento
@@ -75,8 +77,8 @@ export class TelaInicialComponent implements OnInit {
   //Utilizado para realizar o calculo dos cards que se movimentam para o lado
   @ViewChild('tamanhoDaFila') tamanhoDaFila: ElementRef | undefined;
   @ViewChild('elementoTopo') elementoTopo: ElementRef | undefined;
-
   @Input() rascunho: boolean = false;
+
   ordenarSelect = '';
   opcoesOrdenacao = [
     { name: 'Data de criação ↑', value: '1' },
@@ -85,6 +87,7 @@ export class TelaInicialComponent implements OnInit {
     { name: 'A-Z', value: '4' },
     { name: 'Z-A', value: '5' },
   ];
+  isScrolled: boolean = false;
   departamentoUsuario?= ''
   nivelAcessoUsuario?= ''
   confirmacaoReprovacao: boolean = false;
@@ -92,7 +95,6 @@ export class TelaInicialComponent implements OnInit {
   pesquisaAlterada = new Subject<string>();
   textoTutorial = textoTutorial;
   positionListCards: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  //true = card
   tipoExibicaoDemanda = true;
   cabecalhoMensagemDeConfirmacao = 'Avançar status';
   isCollapsed: boolean[] = [true, true, true, true, true, true, true, true, true];
@@ -116,12 +118,9 @@ export class TelaInicialComponent implements OnInit {
     const demandasFiltradas = this.listaDemandas.filter(demanda =>
       this.filtrarDemandaStatus.transform([demanda], titulo) !== undefined
     );
-
     const statusContagem: { [status: string]: number } = {};
-
     demandasFiltradas.forEach(demanda => {
       const status = this.filtrarDemandaStatus.transform([demanda], titulo);
-      // console.log(status)
       if (status && status.length > 0) {
         const statusDemanda = status[0].statusDemanda;
         if (statusDemanda) {
@@ -129,7 +128,6 @@ export class TelaInicialComponent implements OnInit {
           statusContagem[statusString] = (statusContagem[statusString] || 0) + 1;
         }
       }
-
     });
 
     if (titulo == "Favoritos") {
@@ -155,6 +153,7 @@ export class TelaInicialComponent implements OnInit {
         }
       }
     }
+
     if (tipo === 3) {
       const statusKeys = Object.keys(statusContagem);
       let totalDemandas = 0;
@@ -165,16 +164,15 @@ export class TelaInicialComponent implements OnInit {
         return true;
       }
     }
-  
     return false;
   }
 
   mudouCampodePesquisa() {
     this.pesquisaAlterada.next(this.pesquisaDemanda as string);
   }
+
   //Pesquisa demandas por status, pelo campo de pesquisa pequeno, ou por todos os campos, no caso do filtro especializado
   pesquisarDemandas(pesquisaEspecial: { status: string | undefined, pesquisaCampo: string | undefined } | string | undefined) {
-    // console.log(pesquisaEspecial)
     this.demandasService
       .getDemandasFiltradas(pesquisaEspecial)
       .subscribe((listaDemandas: Demanda[]) => {
@@ -193,7 +191,6 @@ export class TelaInicialComponent implements OnInit {
   }
 
   pesquisarDemandasDoUsuario() {
-    console.log("Entrou")
     this.demandasService.getDemandasByUsuario().subscribe((listaDemandas: Demanda[]) => {
       if (listaDemandas.length > 0) {
         this.totalPagesPagination = this.demandasService.totalPages
@@ -219,7 +216,6 @@ export class TelaInicialComponent implements OnInit {
           let indice: number | undefined = -1
           if (this.listaDemandas) {
             indice = this.listaDemandas.findIndex(p => p.codigoDemanda == e.codigoDemanda);
-            console.log(indice)
             if (indice !== -1) {
               this.listaDemandas.splice(indice, 1, e);
             }
@@ -273,44 +269,37 @@ export class TelaInicialComponent implements OnInit {
   exportExcel() {
     //Realiza o mesmo filtro que está salvo no serviço de demandas
     //porém sem a paginação, logo, retornando todas as demandas filtradas
-    console.log(this.listaDemandas);
-    
     this.demandasService
-    .getTodasAsDemandasFiltradas()
-    .subscribe((listaDemandas: any) => {
-      const demandasComCamposSeparados: any = [];
-  
-      listaDemandas['content'].forEach((demanda: Demanda) => {
-        // Copia a demanda original, excluindo os campos não desejados
-        const { arquivosDemanda, ...demandaSemArquivos } = demanda;
-  
-        const { beneficioPotencialDemanda, beneficioRealDemanda, ...demandaComCamposSeparados} = {
-          ...demandaSemArquivos,
-          solicitanteDemanda: demandaSemArquivos.solicitanteDemanda?.nomeUsuario,
-          analista: demandaSemArquivos.analista?.nomeUsuario,
-          gerenteNegocio: demandaSemArquivos.gerenteNegocio?.nomeUsuario,
-          busBeneficiadasDemandaClassificada: demanda.busBeneficiadasDemandaClassificada?.join(", "),
-          ...demandaSemArquivos.beneficioPotencialDemanda,
-          ...demandaSemArquivos.beneficioRealDemanda
-        };
-        
-  
-        demandasComCamposSeparados.push(demandaComCamposSeparados);
-      });
-  
-      import('xlsx').then((xlsx) => {
-        const worksheet = xlsx.utils.json_to_sheet(demandasComCamposSeparados);
-        const workbook = {
-          Sheets: { data: worksheet },
-          SheetNames: ['data'],
-        };
-        const excelBuffer: any = xlsx.write(workbook, {
-          bookType: 'xlsx',
-          type: 'array',
+      .getTodasAsDemandasFiltradas()
+      .subscribe((listaDemandas: any) => {
+        const demandasComCamposSeparados: any = [];
+        listaDemandas['content'].forEach((demanda: Demanda) => {
+          // Copia a demanda original, excluindo os campos não desejados
+          const { arquivosDemanda, ...demandaSemArquivos } = demanda;
+          const { beneficioPotencialDemanda, beneficioRealDemanda, ...demandaComCamposSeparados } = {
+            ...demandaSemArquivos,
+            solicitanteDemanda: demandaSemArquivos.solicitanteDemanda?.nomeUsuario,
+            analista: demandaSemArquivos.analista?.nomeUsuario,
+            gerenteNegocio: demandaSemArquivos.gerenteNegocio?.nomeUsuario,
+            busBeneficiadasDemandaClassificada: demanda.busBeneficiadasDemandaClassificada?.join(", "),
+            ...demandaSemArquivos.beneficioPotencialDemanda,
+            ...demandaSemArquivos.beneficioRealDemanda
+          };
+          demandasComCamposSeparados.push(demandaComCamposSeparados);
         });
-        this.saveAsExcelFile(excelBuffer, 'filtragem de demandas - ');
+        import('xlsx').then((xlsx) => {
+          const worksheet = xlsx.utils.json_to_sheet(demandasComCamposSeparados);
+          const workbook = {
+            Sheets: { data: worksheet },
+            SheetNames: ['data'],
+          };
+          const excelBuffer: any = xlsx.write(workbook, {
+            bookType: 'xlsx',
+            type: 'array',
+          });
+          this.saveAsExcelFile(excelBuffer, 'filtragem de demandas - ');
+        });
       });
-    });
   }
 
   reloadPage() {
@@ -350,7 +339,6 @@ export class TelaInicialComponent implements OnInit {
             })
         },
         reject: () => {
-
         }
       });
     }
@@ -364,16 +352,13 @@ export class TelaInicialComponent implements OnInit {
     let tamanhoDaListaCompleta = (
       document.getElementById(`filaCompleta${index}`) as HTMLElement
     ).offsetWidth;
-
     this.resultadoDivLateral == -tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth;
-
     if (
       this.positionListCards[index] >
       -tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth
     ) {
       this.positionListCards[index] -= 397 * 2;
     }
-
     if (
       this.positionListCards[index] <
       -tamanhoDaListaCompleta + this.tamanhoDaFila?.nativeElement.offsetWidth
@@ -381,6 +366,7 @@ export class TelaInicialComponent implements OnInit {
       this.exibirDivLateral = false;
     }
   }
+
   //Lógica para mover as demandas da tela inicial para a esquerda
   changeLeft(index: number) {
     if (this.positionListCards[index] < 0) {
@@ -398,8 +384,6 @@ export class TelaInicialComponent implements OnInit {
   changeToCard() {
     this.tipoExibicaoDemanda = true;
   }
-
-
 
   //Abre e fecha o sidebar lateral esquerdo
   moveSidebar() {
@@ -435,8 +419,8 @@ export class TelaInicialComponent implements OnInit {
           }
         }
       })
-
   }
+
   //Abre modal de reprovação de histórico
   openModalHistorico(codigoDemanda: string) {
     this.matDialog.open(ModalHistoricoComponent, {
@@ -494,14 +478,12 @@ export class TelaInicialComponent implements OnInit {
     });
   }
 
-  isScrolled: boolean = false;
-
   @HostListener('window:scroll', ['$event'])
   onScroll(event: Event) {
     this.isScrolled = window.scrollY > 100;
   }
-  
-  voltarAoTopo() { 
+
+  voltarAoTopo() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -532,7 +514,6 @@ export class TelaInicialComponent implements OnInit {
     if (this.nivelAcessoUsuario == 'Analista' || this.nivelAcessoUsuario == 'GestorTI') {
       this.demandasService.getDemandasTelaInicial().subscribe({
         next: (e) => {
-          console.log(e)
           e['demandas'].forEach((demandas: Demanda[]) => {
             if (demandas.length > 0) {
               this.listaDemandas.push(...demandas);
@@ -562,7 +543,6 @@ export class TelaInicialComponent implements OnInit {
             this.divScrollCircle = false;
             this.nenhumResultadoEncontrado = false;
           }
-
           if (!this.isFirstIfExecuted && demandas.length == 0) {
             this.divScrollCircle = true;
             setTimeout(() => {
@@ -576,7 +556,6 @@ export class TelaInicialComponent implements OnInit {
         },
       });
     }
-
   }
 
   //Abre o modal do motivo de reprovação da demanda
@@ -622,21 +601,21 @@ export class TelaInicialComponent implements OnInit {
       },
     });
   }
+
   ngOnInit(): void {
-    // this.listaDemandas = listaDemandas
     this.modalService.modalFechado.subscribe(() => {
       // Chamar a função para carregar as demandas novamente
       this.carregarDemandasIniciais();
     });
     this.carregarDemandasIniciais();
-    if(this.usuarioService.usuario?.primeiroAcesso == false){
-      if(this.usuarioService.getRole == "Solicitante" || this.usuarioService.getRole == "GerenteNegocio"){
+    if (this.usuarioService.usuario?.primeiroAcesso == false) {
+      if (this.usuarioService.getRole == "Solicitante" || this.usuarioService.getRole == "GerenteNegocio") {
         this.joyrideService.startTour(
           {
             steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete'],
           }
         );
-      }else{
+      } else {
         this.joyrideService.startTour(
           {
             steps: ['bv@tela-inicial', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete', 'oito@tela-inicial/reunioes', 'nove', 'dez'],
@@ -653,30 +632,22 @@ export class TelaInicialComponent implements OnInit {
     })
   }
 
-  teste(){
+  teste() {
     this.exibirFilasDeStatus()
   }
-
 
   //Lógica para a exibição das fileiras de status da tela inicial
   //o pipe de filtrar-demandas está associado a essa lógica
   exibirFilasDeStatus() {
-
-
     //Tira duplicidade
     this.listaDemandas = this.listaDemandas.filter((objeto, index, self) => index === self.findIndex((t) => (t.codigoDemanda === objeto.codigoDemanda)));
-
-
-
     if (this.listaDemandas.length == 0) {
       this.listaTituloNaoFiltrado.push({
         status: 'Sem demandas',
         titulo: 'Sem demandas',
       });
-
       return;
     }
-
     if (this.nivelAcessoUsuario == 'GestorTI' || this.nivelAcessoUsuario == 'Analista') {
       if (this.listaDemandas.some((e) => {
         if (e.usuariosFavoritos)
@@ -693,8 +664,6 @@ export class TelaInicialComponent implements OnInit {
         });
       }
     }
-
-
     if (this.listaDemandas.some((e) => e.solicitanteDemanda?.codigoUsuario == this.usuarioService.getCodigoUser())) {
       this.listaTituloNaoFiltrado.push({
         status: 'SUAS_DEMANDAS',
@@ -708,7 +677,6 @@ export class TelaInicialComponent implements OnInit {
       });
       return
     }
-
     if (this.nivelAcessoUsuario == 'GerenteNegocio') {
       if (this.listaDemandas.some((e) => e.statusDemanda?.toString() == 'BACKLOG_APROVACAO')) {
         this.listaTituloNaoFiltrado.push({
@@ -721,18 +689,9 @@ export class TelaInicialComponent implements OnInit {
           status: 'DEMANDAS_DEPARTAMENTO',
           titulo: 'Demandas do Seu Departamento',
         });
-
       }
-
       return
     }
-
-    // if (this.rascunhoService.getRascunhosDemanda.length > 0) {
-    //   this.listaTituloNaoFiltrado.push({
-    //     status: 'DRAFT',
-    //     titulo: 'Seus Rascunhos',
-    //   });
-    // }
 
     //Caso o usuário tenha feito alguma alteração na ordem de exibição das demandas
     let ordemDemandas = localStorage.getItem('ordemExibicaoDemandasAtivada')
@@ -740,7 +699,6 @@ export class TelaInicialComponent implements OnInit {
       this.listaTituloNaoFiltrado = JSON.parse(ordemDemandas)
       return
     }
-
     if (
       this.listaDemandas.some(
         (e) => e.statusDemanda?.toString() == 'BACKLOG_CLASSIFICACAO'
@@ -855,9 +813,7 @@ export class TelaInicialComponent implements OnInit {
           )
       },
       reject: () => {
-
       }
     });
   }
-
 }

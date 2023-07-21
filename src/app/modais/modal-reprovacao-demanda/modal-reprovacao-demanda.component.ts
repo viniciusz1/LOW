@@ -20,6 +20,7 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
   usuario: Usuario | undefined;
   solicitante: boolean = false;
   motivoDemandaPropria = "Os motivos não foram disponibilizados";
+  motivoReprovacao = ""
 
   constructor(public dialogRef: DialogRef<ModalMotivoDevolucaoComponent>,
     private demandaService: DemandaService,
@@ -31,9 +32,8 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
     private route: Router
   ) {
     this.usuario = usuarioService.getUser('user')
-    console.log(data)
     this.dadosDemanda = data
-    if(this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuario?.codigoUsuario){
+    if (this.dadosDemanda.solicitanteDemanda?.codigoUsuario == this.usuario?.codigoUsuario) {
       this.solicitante = true;
     } else {
       this.solicitante = false;
@@ -42,10 +42,8 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
-  motivoReprovacao = ""
 
-  cancelarDemanda(){
+  cancelarDemanda() {
     this.confirmationService.confirm({
       dismissableMask: true,
       header: 'Cancelar Demanda',
@@ -68,39 +66,37 @@ export class ModalReprovacaoDemandaComponent implements OnInit {
             });
         }
       },
-      },
+    },
     );
   }
 
   reprovarDemanda() {
-    // console.log(this.dadosDemanda)
-    if(this.dadosDemanda?.codigoDemanda){
-      console.log(this.motivoReprovacao)
-    //Parâmetro 0 na decisão significa que a demand é reprovada
-    if(this.motivoReprovacao == ""){
-      this.showError("O campo motivo reprovação, deve ser preenchido!")
-    }else{
-    this.demandaService
-      .reprovarDemanda(
-        parseInt(this.dadosDemanda.codigoDemanda),
-        this.motivoReprovacao
-      )
-      .subscribe({
-        next: event => {
-          this.showSuccess("Demanda reprovada com sucesso!")
-          this.dialogRef.close()
-          if (this.modalService.dialogRefDemandaDocumento) {
-            this.modalService.dialogRefDemandaDocumento.close();
-          }
-          this.modalService.modalFechado.emit(); 
-          this.route.navigate(['tela-inicial']);
-        },
-        error: err => {
-          this.showError("Não foi possivel reprovar a demanda!")
-        }
-      });
+    if (this.dadosDemanda?.codigoDemanda) {
+      //Parâmetro 0 na decisão significa que a demand é reprovada
+      if (this.motivoReprovacao == "") {
+        this.showError("O campo motivo reprovação, deve ser preenchido!")
+      } else {
+        this.demandaService
+          .reprovarDemanda(
+            parseInt(this.dadosDemanda.codigoDemanda),
+            this.motivoReprovacao
+          )
+          .subscribe({
+            next: event => {
+              this.showSuccess("Demanda reprovada com sucesso!")
+              this.dialogRef.close()
+              if (this.modalService.dialogRefDemandaDocumento) {
+                this.modalService.dialogRefDemandaDocumento.close();
+              }
+              this.modalService.modalFechado.emit();
+              this.route.navigate(['tela-inicial']);
+            },
+            error: err => {
+              this.showError("Não foi possivel reprovar a demanda!")
+            }
+          });
+      }
     }
-  }
   }
 
   showSuccess(message: string) {

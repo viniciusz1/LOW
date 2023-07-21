@@ -27,21 +27,23 @@
             optionValue="value" placeholder="Selecione uma BU"></p-dropdown>
         </div>
         <div style="margin-top: 1vh;">
-          <label class="form-label" falarTexto>{{ "telas.tela-classificar-demanda.secao-ti-responsavel" | translate }}</label>
+          <label class="form-label" falarTexto>{{ "telas.tela-classificar-demanda.secao-ti-responsavel" | translate
+            }}</label>
           <br />
           <p-dropdown formControlName="secaoDemandaClassificada" [options]="listaSecoes" optionLabel="nome"
             optionValue="value" placeholder="Selecione uma sessão"></p-dropdown>
         </div>
         <div class="d-flex justify-content-between" style="margin-top: 26vh;">
-          <div *ngIf="solicitanteAnalista" falarTexto class="btn btn-danger" (click)="cancelarDemandaPropria()">Cancelar Demanda</div>
-          <div *ngIf="!solicitanteAnalista" falarTexto class="btn btn-danger" (click)="openModalReprovacao()">{{ "telas.tela-classificar-demanda.b-reprovar" | translate }}</div>
+          <div *ngIf="solicitanteAnalista" falarTexto class="btn btn-danger" (click)="cancelarDemandaPropria()">Cancelar
+            Demanda</div>
+          <div *ngIf="!solicitanteAnalista" falarTexto class="btn btn-danger" (click)="openModalReprovacao()">{{
+            "telas.tela-classificar-demanda.b-reprovar" | translate }}</div>
           <div class="justify-content-end">
-            <div 
-            *ngIf="usuarioService.getCodigoUser() != demanda?.solicitanteDemanda?.codigoUsuario"
-             falarTexto 
-             class="btn btn-outline-primary" 
-             (click)="iniciarChat()">{{ "telas.tela-classificar-demanda.b-contatar-solicitante" | translate }}</div>
-            <button falarTexto [disabled]="isFormClassificadaInvalid()" (click)="onSubmitClassificacaoDemanda()" class="btn btn-primary ms-3">
+            <div *ngIf="usuarioService.getCodigoUser() != demanda?.solicitanteDemanda?.codigoUsuario" falarTexto
+              class="btn btn-outline-primary" (click)="iniciarChat()">{{
+              "telas.tela-classificar-demanda.b-contatar-solicitante" | translate }}</div>
+            <button falarTexto [disabled]="isFormClassificadaInvalid()" (click)="onSubmitClassificacaoDemanda()"
+              class="btn btn-primary ms-3">
               {{ "telas.tela-classificar-demanda.b-aprovar" | translate }}
             </button>
           </div>
@@ -57,10 +59,12 @@
       </p>
       <p-scrollPanel [style]="{height: '70vh', width:'42.6vw'}">
         <h4 mat-dialog-title class="d-flex justify-content-between">
-          <span falarTexto><b>{{ "documento-pdf.solicitante" | translate }}: </b>{{demanda?.solicitanteDemanda?.nomeUsuario}}</span>
+          <span falarTexto><b>{{ "documento-pdf.solicitante" | translate }}:
+            </b>{{demanda?.solicitanteDemanda?.nomeUsuario}}</span>
 
         </h4>
-        <h4 falarTexto><b>{{ "documento-pdf.departamento" | translate }}:</b> {{demanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
+        <h4 falarTexto><b>{{ "documento-pdf.departamento" | translate }}:</b>
+          {{demanda?.solicitanteDemanda?.departamentoUsuario?.nomeDepartamento}}</h4>
         <h4 falarTexto class="d-flex justify-content-center">
           <b>{{demanda?.tituloDemanda}} –
             {{demanda?.codigoDemanda}}</b>
@@ -73,9 +77,8 @@
         <h4 falarTexto><b>{{ "documento-pdf.situacao-atual" | translate }}</b></h4>
         <p [innerHTML]="demanda?.situacaoAtualDemanda">
         </p>
-
-
-        <h4 falarTexto><b>{{ "documento-pdf.beneficio-real" | translate }}</b>{{demanda?.beneficioRealDemanda?.valorBeneficio}} {{ "documento-pdf.mensais" | translate }}</h4>
+        <h4 falarTexto><b>{{ "documento-pdf.beneficio-real" | translate
+            }}</b>{{demanda?.beneficioRealDemanda?.valorBeneficio}} {{ "documento-pdf.mensais" | translate }}</h4>
         <p falarTexto>
           <b>{{ "documento-pdf.memoria-calculo-beneficio-real" | translate }}</b>
         </p>
@@ -84,7 +87,8 @@
             {{demanda?.beneficioRealDemanda?.memoriaDeCalculoBeneficio}}
           </li>
         </ul>
-        <h4 falarTexto><b>{{ "documento-pdf.beneficio-potencial" | translate }}</b>{{demanda?.beneficioPotencialDemanda?.valorBeneficio}} {{ "documento-pdf.mensais" | translate }}</h4>
+        <h4 falarTexto><b>{{ "documento-pdf.beneficio-potencial" | translate
+            }}</b>{{demanda?.beneficioPotencialDemanda?.valorBeneficio}} {{ "documento-pdf.mensais" | translate }}</h4>
         <p falarTexto>
           <b>{{ "documento-pdf.memoria-calculo-beneficio-potencial" | translate }}</b>
         </p>
@@ -102,7 +106,8 @@
           </li>
         </ul>
 
-        <p falarTexto><b>{{ "documento-pdf.frequencia-uso-sistema" | translate }}</b>{{demanda?.frequenciaDeUsoDemanda}}</p>
+        <p falarTexto><b>{{ "documento-pdf.frequencia-uso-sistema" | translate }}</b>{{demanda?.frequenciaDeUsoDemanda}}
+        </p>
         <h4 falarTexto><b>{{ "documento-pdf.documentos" | translate }}</b>
           <a *ngFor="let arquivo of demanda?.arquivosDemanda" role="button" (click)="download(arquivo)">
             {{ arquivo.nomeArquivo }}

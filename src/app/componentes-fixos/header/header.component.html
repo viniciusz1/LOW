@@ -12,7 +12,7 @@
       <nav aria-label="breadcrumb" style="display: flex; justify-content: center; align-items: center"
         *ngIf="!telaLogin">
         <ol class="breadcrumb" style="margin: 0px 0px 0px 2vw !important">
-          <li pTooltip="Você se encontra nesta rota acima"  tooltipPosition="top" role="button"
+          <li pTooltip="Você se encontra nesta rota acima" tooltipPosition="top" role="button"
             [ngClass]="{ active: item.disabled }" class="breadcrumb-item" aria-current="page"
             [routerLink]="'/' + item.url" *ngFor="let item of items">
             {{ item.label | titlecase }}
@@ -195,12 +195,10 @@
             </div>
           </div>
         </div>
-        
         <button mat-menu-item routerLink="/tela-inicial/configuracoes/perfil">
           <span falarTexto><i class="bi bi-gear me-3" style="font-size: 20px"></i>{{
             "componentes-fixos.header.configuracoes" | translate }}</span>
         </button>
-
         <button routerLink="/" (click)="sair()" mat-menu-item style="padding-right: 9vw">
           <span falarTexto><i class="bi bi-box-arrow-right me-3" style="font-size: 20px; width: 100%"></i>{{
             "componentes-fixos.header.sair" | translate }}</span>

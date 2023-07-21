@@ -13,16 +13,19 @@ export class SidebarReuniaoComponent implements OnInit {
   ngOnInit(): void {
     let personalizacao = localStorage.getItem('personalizacao');
     let persona: Personalizacao | undefined;
-    if(personalizacao){
+
+    if (personalizacao) {
       persona = JSON.parse(personalizacao);
     }
+
     this.listCoresPrimarias = persona?.coresPrimariasReuniaoPersonalizacao;
-    console.log(this.listCoresPrimarias)
   }
-  isCollapsed: boolean = false;
+
   @Output() clicouNaSeta = new EventEmitter();
   @Output() clicouEmUmStatus = new EventEmitter();
+  
   listCoresPrimarias: any;
+  isCollapsed: boolean = false;
 
   onClick() {
     this.isCollapsed = !this.isCollapsed;

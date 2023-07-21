@@ -45,33 +45,40 @@ export class VLibrasComponent implements OnInit {
   }
 
   startedRecodAudio = false;
+
+  //Para o comando de voz
   pararDeFalar() {
     this.showError('Parando a tradução de texto para voz!')
     this.falarTextoService.cancel();
     this.falarTextoService.permitirFala = false;
   }
 
+  //Inicia o comando de voz
   iniciarFala() {
     this.showSuccess('Clique em um texto para ouvi-lo!')
     this.falarTextoService.permitirFala = true
   }
 
+  //Inicia o comando de escrita através da fala
   startVoice() {
     this.showSuccess('Selecione um campo de Texto e certifique-se de que o microfone está ligado para começar a falar!')
     this.startedRecodAudio = true;
     this.voiceRecognitionService.start();
   }
 
+  //Para o comando de escrita através da fala
   stopVoice() {
     this.showError('Parando a digitação por voz!')
     this.startedRecodAudio = false;
     this.voiceRecognitionService.stop()
   }
 
+  //Mostra feedback de Sucesso
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Funcionalidade Ativada!', detail: message });
   }
 
+  //Mostra feedback de erro
   showError(message: string) {
     this.messageService.add({ severity: 'warn', summary: 'Funcionalidade Desativada!', detail: message });
   }

@@ -9,15 +9,22 @@ import { PersonalizacaoService } from 'src/app/services/personalizacao.service';
   styleUrls: ['./card-reuniao.component.scss'],
 })
 export class CardReuniaoComponent implements OnInit {
-  @Input() dadosReuniao: Reuniao = {};
+
+  //Variáveis que são enviadas informações
   @Output() cancelarReuniao = new EventEmitter();
   @Output() motivoCancelamento = new EventEmitter();
+  
+  //Variáveis declaradas na classe
   primaryColorClass?: string = '';
   secondaryColorClass: string = '';
+  
+  //Variáveis que são atribuídas informações
+  @Input() dadosReuniao: Reuniao = {};
   @Input() primaryColor?: string = '';
   @Input() secondaryColor: string = '';
   constructor(private personalizacaoService: PersonalizacaoService) {}
 
+  //Mapeia o valor ordinal do status e retorna a posição
   getOrdinalValueStatusReuniao(
     value: StatusReuniao | undefined
   ): number | undefined {
@@ -27,8 +34,11 @@ export class CardReuniaoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Verifica as cores da reuniao
     this.primaryColorClass = this.dadosReuniao.statusReuniao;
     this.secondaryColorClass = this.dadosReuniao.statusReuniao + '-sec';
+
+    //Ordem dos status
     let ordinal = this.getOrdinalValueStatusReuniao(
       this.dadosReuniao.statusReuniao
     ) as number;
@@ -49,6 +59,7 @@ export class CardReuniaoComponent implements OnInit {
     }
   }
 
+  //Retorna os titulos das propostas adicionadas
   titulosPropostas() {
     const propostasAdicionadas = this.dadosReuniao.propostasReuniao;
     const titulosPropostas: string[] = [];
@@ -61,6 +72,7 @@ export class CardReuniaoComponent implements OnInit {
     return titulosPropostas;
   }
 
+  //Verifica os departamentos beneficiados através da classificação da demanda
   departamentosBeneficiados() {
     const propostasAdicionadas = this.dadosReuniao.propostasReuniao;
     const buBeneficiada: string[] = [];

@@ -60,8 +60,8 @@ export class ListDemandaComponent implements OnInit {
   motivoDemandaPropria = "Os motivos não foram disponibilizados";
   reunioes: Reuniao[] | undefined;
 
-  constructor(private route: Router, 
-    public usuarioService: UsuarioService, 
+  constructor(private route: Router,
+    public usuarioService: UsuarioService,
     private messageService: MessageService,
     private demandaService: DemandaService,
     private reuniaoService: ReuniaoService,
@@ -337,8 +337,8 @@ export class ListDemandaComponent implements OnInit {
         };
         return true;
 
-        case StatusDemanda.DISCUSSION:
-          
+      case StatusDemanda.DISCUSSION:
+
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           if (this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == true) {
             this.textoExibidoEmBotaoDependendoRota = {
@@ -346,7 +346,7 @@ export class ListDemandaComponent implements OnInit {
               texto: 'Parecer Comissao',
             };
             return true;
-          }else if(this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == false){
+          } else if (this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == false) {
             this.textoExibidoEmBotaoDependendoRota = {
               rota: 'IR_PARA_REUNIAO',
               texto: 'Ir para Reunião',
@@ -361,11 +361,11 @@ export class ListDemandaComponent implements OnInit {
         }
         return true;
       default:
-        
+
         return true;
     }
   }
-  
+
   getOrdinalValueStatusDemanda(value: StatusDemanda | undefined): number | undefined {
     const enumValues = Object.values(StatusDemanda);
     const index = enumValues.indexOf(value as StatusDemanda);
@@ -373,7 +373,7 @@ export class ListDemandaComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    if(this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao){
+    if (this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao) {
 
       let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
       this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]
@@ -383,21 +383,21 @@ export class ListDemandaComponent implements OnInit {
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + "-sec";
 
-//verifica se a demanda é favorita
-if (this.dadosDemanda.usuariosFavoritos) {
-  for (let user of this.dadosDemanda.usuariosFavoritos) {
-    if (user.codigoUsuario == this.usuarioService.getCodigoUser()) {
-      this.isFavorita = true
-    }
-  }
+    //verifica se a demanda é favorita
+    if (this.dadosDemanda.usuariosFavoritos) {
+      for (let user of this.dadosDemanda.usuariosFavoritos) {
+        if (user.codigoUsuario == this.usuarioService.getCodigoUser()) {
+          this.isFavorita = true
+        }
+      }
 
-}
+    }
 
 
     this.exibicaoBotoes()
   }
   isFavorita = false;
-  
+
   addOrRemoveFavoritos() {
     if (this.dadosDemanda.codigoDemanda)
       this.demandaService.addFavoritos(this.dadosDemanda.codigoDemanda)

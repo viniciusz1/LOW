@@ -21,11 +21,10 @@ export class ModalAtaDocumentoComponent implements OnInit {
     @Inject(DIALOG_DATA) public data: { reuniao: Reuniao, tipoAta: string, codigoDemanda?: string },
     private reuniaoService: ReuniaoService
   ) { }
-  
+
   ngOnInit() {
     this.reuniaoService.getReuniao().subscribe(reunioes => {
       this.reunioes = reunioes;
-  
       if (this.reunioes) {
         for (const reuniaoPrincipal of this.reunioes) {
           if (reuniaoPrincipal.propostasReuniao) {
@@ -34,7 +33,7 @@ export class ModalAtaDocumentoComponent implements OnInit {
                 console.log("Entrou no if");
                 this.reuniao = reuniaoPrincipal;
                 this.demandaEncontrada = true;
-  
+
                 // Exibir informações das propostas
                 console.log("Propostas encontradas:");
                 for (const proposta of reuniaoPrincipal.propostasReuniao) {
@@ -44,24 +43,20 @@ export class ModalAtaDocumentoComponent implements OnInit {
               }
             }
           }
-
         }
-        if(this.reuniao == null){
-          
-        this.reuniao = this.data.reuniao
-        this.tipoAta = this.data.tipoAta
-        if(this.reuniao.propostasReuniao){
-          for (const proposta of this.reuniao.propostasReuniao) {
-            if(proposta.tipoAtaProposta == this.tipoAta){
-              this.demandasPorAta.push(proposta);
+        if (this.reuniao == null) {
+          this.reuniao = this.data.reuniao
+          this.tipoAta = this.data.tipoAta
+          if (this.reuniao.propostasReuniao) {
+            for (const proposta of this.reuniao.propostasReuniao) {
+              if (proposta.tipoAtaProposta == this.tipoAta) {
+                this.demandasPorAta.push(proposta);
+              }
             }
           }
         }
-        }
-
       }
     });
-
   }
 
   mostrarHr(indice: number, tipoAta: string) {
@@ -69,7 +64,6 @@ export class ModalAtaDocumentoComponent implements OnInit {
     if (indice === 0) {
       return false;
     }
-
     if (
       this.reuniao?.propostasReuniao?.filter(
         e => e.tipoAtaProposta === tipoAta
@@ -77,7 +71,6 @@ export class ModalAtaDocumentoComponent implements OnInit {
     ) {
       return false;
     }
-
     return true;
   }
 

@@ -56,6 +56,7 @@
         (closeFiltro)="mudarStatusFiltro()" class="me-3" (exportarExcel)="exportExcel()">
       </app-filtro-demanda>
     </div>
+    
     <!-- Trocar exibição de lista para card e vice-versa -->
     <div *ngIf="!tipoRascunho" [ngClass]="
         isFiltrado ? 'justify-content-between' : 'justify-content-end container'
@@ -75,6 +76,7 @@
       </div>
     </div>
   </nav>
+
   <!-- sidebar -->
   <app-sidebar-demanda [style.left.vw]="showSidebar" (clicouNaSeta)="moveSidebar()" (clicouEmUmStatus)="
       pesquisarDemandas({ status: $event, pesquisaCampo: undefined })
@@ -86,6 +88,7 @@
       left: 0px;
     "></app-sidebar-demanda>
   <div @fadeAnimation *ngIf="!tipoExibicaoDemanda">
+
     <!-- Parte Não Filtrada em Lista -->
     <div class="" *ngIf="!isFiltrado">
       <div *ngFor="let linha of listaTituloNaoFiltrado; let i = index">
@@ -127,8 +130,7 @@
                 | slice : 0 : 5
             " [dadosDemanda]="demanda" (verDocumentoProposta)="openModalDemandaDocumento($event)"
             (irParaChat)="irParaChat($event, demanda)" (modalHistorico)="openModalHistorico($event)"
-            (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-            (abrirModalParecerDG)="openModalDG($event)"
+            (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (abrirModalParecerDG)="openModalDG($event)"
             (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)" class="mb-2">
           </app-list-demanda>
           <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
@@ -137,8 +139,7 @@
                   let demanda of listaDemandas
                     | filtrarDemandaStatus : linha.titulo
                     | slice : 5
-                " (irParaChat)="irParaChat($event, demanda)"
-                (abrirModalParecerDG)="openModalDG($event)"
+                " (irParaChat)="irParaChat($event, demanda)" (abrirModalParecerDG)="openModalDG($event)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
                 (modalHistorico)="openModalHistorico($event)" (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 [dadosDemanda]="demanda" class="mb-2">
@@ -146,7 +147,8 @@
             </div>
           </div>
           <!-- Bloco para expandir -->
-          <div *ngIf="listaDemandas.length > 0 && exibirDivRightArrow(linha.titulo, 1)" type="button" (click)="collapse.toggle()"
+          <div *ngIf="listaDemandas.length > 0 && exibirDivRightArrow(linha.titulo, 1)" type="button"
+            (click)="collapse.toggle()"
             class="btn btn-primary d-flex low-shadow rounded justify-content-center align-items-center"
             style="width: 30%; height: 30px">
             <i class="bi bi-chevron-down text-light" [attr.aria-expanded]="!isCollapsed[i]"
@@ -156,6 +158,7 @@
         </div>
       </div>
     </div>
+
     <!-- Parte Filtrada em Lista -->
     <div *ngIf="isFiltrado">
       <div style="padding: 10px; margin-left: 6px"></div>
@@ -163,8 +166,7 @@
         <app-list-demanda (clicouEmExcluir)="carregarDemandasIniciais()" [dadosDemanda]="demanda"
           (verDocumentoProposta)="openModalDemandaDocumento($event)" (irParaChat)="irParaChat($event, demanda)"
           (modalHistorico)="openModalHistorico($event)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
-          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-          (abrirModalParecerDG)="openModalDG($event)"
+          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)" (abrirModalParecerDG)="openModalDG($event)"
           (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
           (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (verDocumentoEmAta)="openModalAtaDocumento($event)"
           *ngFor="let demanda of listaDemandas" [dadosDemanda]="demanda" class="mb-2">
@@ -179,6 +181,7 @@
       (nivelAcessoUsuario == 'Solicitante' ||
         nivelAcessoUsuario == 'GerenteNegocio')
     ">
+
     <!-- Parte não Filtrada em card -->
     <div *ngIf="listaDemandas.length != 0" class="bloco-branco" style="width: 10%"></div>
     <div class="tamanho-container" style="width: 80%" *ngIf="listaDemandas.length != 0">
@@ -188,8 +191,7 @@
             <h5 falarTexto>{{ listaTituloNaoFiltrado[0].titulo }}</h5>
             <hr style="margin: 0; opacity: 1" class="mb-2" />
           </div>
-          <div falarTexto class="me-3"
-            style="align-self: flex-end; cursor: pointer" 
+          <div falarTexto class="me-3" style="align-self: flex-end; cursor: pointer"
             (click)="pesquisarDemandasDoUsuario()">
             {{ "telas.tela-inicial.ver-mais" | translate }}
           </div>
@@ -205,8 +207,7 @@
               (modalHistorico)="openModalHistorico($event)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
               (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
               (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
-              (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-              (abrirModalParecerDG)="openModalDG($event)"
+              (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (abrirModalParecerDG)="openModalDG($event)"
               (verDocumentoEmAta)="openModalAtaDocumento($event)"></app-card-demanda>
           </div>
           <div *ngIf="positionListCards[0] != 0" class="left-arrow alinhacao" (click)="changeLeft(0)">
@@ -237,15 +238,20 @@
             (modalHistorico)="openModalHistorico($event)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
             (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
             (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
-            (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
-            (abrirModalParecerDG)="openModalDG($event)"
+            (abrirModalCriarReuniao)="openModalCriarReuniao($event)" (abrirModalParecerDG)="openModalDG($event)"
             (verDocumentoEmAta)="openModalAtaDocumento($event)"></app-card-demanda>
         </div>
 
-        <div #elementoTopo [ngClass]="{'flutuante': isScrolled}" *ngIf="exibirDivRightArrow(listaTituloNaoFiltrado[1].titulo, 3)" class="align-items-center justify-content-center d-flex" style="margin-top: 1vh; cursor: pointer;" >
-          <div class="align-items-center justify-content-center d-flex" (click)="voltarAoTopo()" style="width: 8vw; background-color: #e9ecef; padding: 0.5vh; border-radius: 10px;">
-            <i class="bi bi-arrow-up-circle-fill" style="font-size: 1.2vw; display: flex; justify-content: center; align-items: center; color: #00579d; margin-right: 1vh;"></i>          
-            <div role="button" style="color: #00579d; font-weight: 550; display: flex; justify-content: center; align-items: center;" falarTexto> Voltar ao topo </div>
+        <div #elementoTopo [ngClass]="{'flutuante': isScrolled}"
+          *ngIf="exibirDivRightArrow(listaTituloNaoFiltrado[1].titulo, 3)"
+          class="align-items-center justify-content-center d-flex" style="margin-top: 1vh; cursor: pointer;">
+          <div class="align-items-center justify-content-center d-flex" (click)="voltarAoTopo()"
+            style="width: 8vw; background-color: #e9ecef; padding: 0.5vh; border-radius: 10px;">
+            <i class="bi bi-arrow-up-circle-fill"
+              style="font-size: 1.2vw; display: flex; justify-content: center; align-items: center; color: #00579d; margin-right: 1vh;"></i>
+            <div role="button"
+              style="color: #00579d; font-weight: 550; display: flex; justify-content: center; align-items: center;"
+              falarTexto> Voltar ao topo </div>
           </div>
         </div>
       </div>
@@ -257,6 +263,7 @@
       !isFiltrado &&
       (nivelAcessoUsuario == 'GestorTI' || nivelAcessoUsuario == 'Analista')
     ">
+
     <!-- Parte não Filtrada em card -->
     <div *ngIf="listaDemandas.length != 0" class="bloco-branco" style="width: 10%"></div>
     <div class="tamanho-container" style="width: 80%">
@@ -274,7 +281,9 @@
                   status: linha.status,
                   pesquisaCampo: undefined
                 })
-              " *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas' && exibirDivRightArrow(linha.titulo, 2)" falarTexto>
+              "
+              *ngIf="linha.titulo != 'Sem demandas' && linha.titulo != 'Suas Demandas' && exibirDivRightArrow(linha.titulo, 2)"
+              falarTexto>
               {{ "telas.tela-inicial.ver-mais" | translate }}
               ({{
               qtdDemandasStatus[i]
@@ -282,8 +291,8 @@
             </div>
 
             <!-- Ver-mais para a demandas do usuário -->
-            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="pesquisarDemandasDoUsuario()" 
-            *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'" falarTexto>
+            <div class="me-3" style="align-self: flex-end; cursor: pointer" (click)="pesquisarDemandasDoUsuario()"
+              *ngIf="linha.titulo != 'Sem demandas' && linha.titulo == 'Suas Demandas'" falarTexto>
               {{ "telas.tela-inicial.ver-mais" | translate }}
             </div>
           </div>
@@ -297,8 +306,7 @@
                 (verDocumentoProposta)="openModalDemandaDocumento($event)" (irParaChat)="irParaChat($event, demanda)"
                 (modalHistorico)="openModalHistorico($event)" (avancarStatusDemanda)="avancarStatusDemanda($event)"
                 (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-                (abrirModalReprovar)="openModalReprovacaoDemanda($event)"
-                (abrirModalParecerDG)="openModalDG($event)"
+                (abrirModalReprovar)="openModalReprovacaoDemanda($event)" (abrirModalParecerDG)="openModalDG($event)"
                 (abrirModalCriarReuniao)="openModalCriarReuniao($event)"
                 (verDocumentoEmAta)="openModalAtaDocumento($event)"></app-card-demanda>
             </div>
@@ -314,15 +322,13 @@
     </div>
     <div *ngIf="listaDemandas.length != 0" class="bloco-branco" style="width: 10%"></div>
   </div>
-
   <div *ngIf="isFiltrado && tipoExibicaoDemanda" [ngClass]="{ 'mt-5': tipoRascunho }"
     style="width: -webkit-fill-available">
     <div style="padding: 10px; margin-left: 6px"></div>
     <div class="container">
       <div class="row" *ngIf="!tipoRascunho">
         <app-card-demanda *ngFor="let demanda of listaDemandas; let i = index" [dadosDemanda]="demanda"
-          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)"
-          (abrirModalParecerDG)="openModalDG($event)"
+          (abrirModalMotivoReprovacao)="openModalMotivoReprovacao($event)" (abrirModalParecerDG)="openModalDG($event)"
           (verDocumentoProposta)="openModalDemandaDocumento($event)"
           (avancarStatusDemanda)="avancarStatusDemanda($event)" [mudarTamanho]="'100%'"
           (irParaChat)="irParaChat($event, demanda)" (modalHistorico)="openModalHistorico($event)"
@@ -369,7 +375,6 @@
         </button>
       </ng-template></p-confirmDialog>
   </div>
-
   <div>
     <p-confirmDialog icon="pi pi-exclamation-triangle" key="motivoReprovacao" #bt [style]="{ width: '40vw' }">
       <ng-template pTemplate="footer">
@@ -406,5 +411,4 @@
   <span *ngIf="demandasVazias" style="font-weight: 600; font-size: 1.4rem; color: #6c757d;" falarTexto>{{
     "telas.tela-inicial.nao-demandas" | translate }}</span>
 </div>
-
 <p-toast></p-toast>

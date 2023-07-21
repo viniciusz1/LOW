@@ -21,6 +21,7 @@ import { DemandaService } from 'src/app/services/demanda.service';
   providers: [NgbDropdownConfig],
 })
 export class CardDemandaComponent implements OnInit {
+  //Variáveis que são enviadas informações
   @Output() abrirModalMotivoReprovacao = new EventEmitter<Demanda>();
   @Output() abrirModalAvaliarDemanda = new EventEmitter();
   @Output() abrirModalParecerComissao = new EventEmitter<Demanda>();
@@ -38,6 +39,7 @@ export class CardDemandaComponent implements OnInit {
     statusDemanda: StatusDemanda | undefined;
   }>();
 
+  //Variáveis que são atribuídas informações
   @Input() mudarTamanho: string = '390px';
   @Input() isPauta: boolean = false;
   @Input() dadosDemanda: Demanda = {};
@@ -45,23 +47,13 @@ export class CardDemandaComponent implements OnInit {
   @Input() rascunho: boolean = false;
   @Input() tipoDeAta: string = '';
   @Input() mostrarBotao = true;
-
-  exibirBotaoParecerComissao() {
-    if (this.demandaEmReuniao && (this.dadosDemanda.parecerComissaoProposta != null) && this.dadosDemanda.statusDemanda == StatusDemanda.DISCUSSION) {
-      return true;
-    }
-    return false;
-  }
-
-
-
-  textoExibidoEmBotaoDependendoRota:
-    | { rota: string; texto: string }
-    | undefined = undefined;
-  primaryColorClass?: string = '';
-  secondaryColorClass: string = '';
   @Input() primaryColor?: string = '';
   @Input() secondaryColor: string = '';
+
+  //Variáveis declaradas na classe
+  textoExibidoEmBotaoDependendoRota: | { rota: string; texto: string } | undefined = undefined;
+  primaryColorClass?: string = '';
+  secondaryColorClass: string = '';
   analistaAssociado: boolean = false;
   codigoReuniao: number | undefined;
   demandaEncontrada: boolean = false;
@@ -77,10 +69,18 @@ export class CardDemandaComponent implements OnInit {
     private messageService: MessageService,
     private demandaService: DemandaService,
     private personalizacaoService: PersonalizacaoService) {
-    
 
   }
 
+  //Verifica o status da demanda e exibe o botão de Parecer da Comissão
+  exibirBotaoParecerComissao() {
+    if (this.demandaEmReuniao && (this.dadosDemanda.parecerComissaoProposta != null) && this.dadosDemanda.statusDemanda == StatusDemanda.DISCUSSION) {
+      return true;
+    }
+    return false;
+  }
+
+  //Se a demanda for do próprio usuário, ele poderá cancelar sem informar o motivo, apenas com um modal de confirmação
   cancelarPropriaDemanda() {
     this.confirmationService.confirm({
       dismissableMask: true,
@@ -107,6 +107,7 @@ export class CardDemandaComponent implements OnInit {
     });
   }
 
+  //Quando criada uma Reunião, esta função ja encaminha a mesma para a tela dos detalhes da reunião
   encaminharParaReuniao(codigoDemanda?: string) {
     this.reuniaoService.getReuniao().subscribe(reunioes => {
       this.reunioes = reunioes;
@@ -117,12 +118,19 @@ export class CardDemandaComponent implements OnInit {
     });
   }
 
+  //Procura códigos da demanda pelas reuniões
   procurarCodigoDemanda(codigoDemanda: string | undefined) {
+    //Se existir reuniões
     if (this.reunioes) {
+      //Entra em uma busca na lista de reuniões
       for (const reuniao of this.reunioes) {
+        //Se a reunião tiver uma proposta de reunião
         if (reuniao.propostasReuniao) {
+          //Entra em outra busca pelas demandas dentro das propostas da reuniao
           for (const demanda of reuniao.propostasReuniao) {
+            //Se o código da demanda for igual ao código passado no parâmetro
             if (demanda.codigoDemanda == codigoDemanda) {
+              //Verifica o codigo da reunião e retorna true para demanda encontrada
               this.codigoReuniao = reuniao.codigoReuniao;
               this.demandaEncontrada = true;
               return;
@@ -133,12 +141,14 @@ export class CardDemandaComponent implements OnInit {
     }
   }
 
+  //Mapeia o valor ordinal do status e retorna a posição
   getOrdinalValueStatusDemanda(value: StatusDemanda | undefined): number | undefined {
     const enumValues = Object.values(StatusDemanda);
     const index = enumValues.indexOf(value as StatusDemanda);
     return index !== -1 ? index : undefined;
   }
 
+  //Verifica os status permitidos para determinadas funções
   statusPermitido() {
     if (
       this.dadosDemanda.statusDemanda == StatusDemanda.BACKLOG_CLASSIFICACAO ||
@@ -151,11 +161,15 @@ export class CardDemandaComponent implements OnInit {
     }
     return false;
   }
+
+  //Verifica se é exibido o ícone de chat
   exibirIniciarChat() {
+    //Verifica se o usuário é um Gestor de TI ou um Analista
     if (
       this.usuarioService.getRole == NivelAcesso.GestorTI ||
       this.usuarioService.getRole == NivelAcesso.Analista
     ) {
+      //Verifica se a demanda não é do próprio usuário
       if (
         this.dadosDemanda.solicitanteDemanda?.codigoUsuario ==
         this.usuarioService.getCodigoUser()
@@ -166,10 +180,12 @@ export class CardDemandaComponent implements OnInit {
     return true;
   }
 
+  //Formata o número pras casas decimais corretas
   formatarNumero(numero: number | undefined, casasDecimais: number): string {
     return numero !== undefined ? numero.toFixed(casasDecimais) : '';
   }
 
+  //Retorna o status precedente ao atual
   retornaProximoStatusDemanda(statusDemanda: StatusDemanda | undefined) {
     switch (statusDemanda) {
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
@@ -196,12 +212,13 @@ export class CardDemandaComponent implements OnInit {
         return 0;
     }
   }
-  abrirModalHistorico() {
-    console.log('Clicou no modal');
 
+  //Abre o modal de Histórico
+  abrirModalHistorico() {
     this.modalHistorico.emit(this.dadosDemanda.codigoDemanda);
   }
 
+  //Verifica o status da demanda e retorna a porcentagem de progressão
   porcentagemBarraProgressao() {
     switch (this.dadosDemanda.statusDemanda) {
       case StatusDemanda.DRAFT: return 0
@@ -219,6 +236,7 @@ export class CardDemandaComponent implements OnInit {
     }
   }
 
+  //Verifica se o usuário é um Solicitante
   versaoSolicitante() {
     if (this.usuarioService.getRole == 'Solicitante') {
       return true;
@@ -226,6 +244,7 @@ export class CardDemandaComponent implements OnInit {
     return false;
   }
 
+  //Verifica se a demanda é do usuário e retorna true para exibir o botão de cancelar própria demanda
   mostrarCancelarPropriaDemanda() {
     if (
       this.usuarioService.getCodigoUser() ==
@@ -236,6 +255,7 @@ export class CardDemandaComponent implements OnInit {
     return false;
   }
 
+  //Confirma se o usuário realmente quer iniciar uma conversa
   confirmarChat() {
     this.confirmationService.confirm({
       message: 'Deseja realmente iniciar esta conversa?',
@@ -247,6 +267,7 @@ export class CardDemandaComponent implements OnInit {
     });
   }
 
+  //Verifica os status que necessitam da exibição do modal da Ata
   existeAta() {
     if (
       this.dadosDemanda.statusDemanda == StatusDemanda.TO_DO ||
@@ -261,7 +282,6 @@ export class CardDemandaComponent implements OnInit {
 
   //Função chamada quando o usuário clica na ação do card
   direcionarUsuario() {
-
     switch (this.textoExibidoEmBotaoDependendoRota?.rota) {
       case '':
         this.abrirModalMotivoReprovacao.emit(this.dadosDemanda);
@@ -301,23 +321,22 @@ export class CardDemandaComponent implements OnInit {
     }
   }
 
+  //Identifica o status e a ação que o usuário deve decidir, mostrando no botão
   exibicaoBotoes() {
-    
+    //Verifica o nível de acesso do usuário
     const nivelAcesso = this.usuarioService.getRole;
     //Caso o usuário não tenha permissão de ação na demanda, ele poderá ve-la
     this.textoExibidoEmBotaoDependendoRota = {
       rota: 'VER_DOCUMENTO',
       texto: 'Ver Demanda',
     };
-
-    if(this.dadosDemanda.statusDemanda == StatusDemanda.CANCELLED && this.demandaEmReuniao == true){
+    if (this.dadosDemanda.statusDemanda == StatusDemanda.CANCELLED && this.demandaEmReuniao == true) {
       this.textoExibidoEmBotaoDependendoRota = {
         rota: 'VER_DOCUMENTO',
         texto: 'Ver Demanda',
       };
       return true
     }
-
 
     //Caso o card seja definido que não precisa mostrar o botão
     if (!this.mostrarBotao) {
@@ -326,6 +345,7 @@ export class CardDemandaComponent implements OnInit {
 
     //Caso a rota não existir, é um comando para a função direcionarUsuario()
     switch (this.dadosDemanda.statusDemanda) {
+
       case StatusDemanda.BACKLOG_CLASSIFICACAO:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           if (
@@ -342,6 +362,7 @@ export class CardDemandaComponent implements OnInit {
           }
         }
         return true;
+
       case StatusDemanda.BACKLOG_PROPOSTA:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
@@ -350,6 +371,7 @@ export class CardDemandaComponent implements OnInit {
           };
         }
         return true;
+
       case StatusDemanda.BACKLOG_APROVACAO:
         if (nivelAcesso == 'GerenteNegocio' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
@@ -358,26 +380,25 @@ export class CardDemandaComponent implements OnInit {
           };
         }
         return true;
+
       case StatusDemanda.ASSESSMENT:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-          // if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_ADD_REUNIAO',
             texto: 'Adicionar Proposta',
-            // };
           };
         }
         return true;
+
       case StatusDemanda.BUSINESS_CASE:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
-          // if (this.dadosDemanda.analista?.codigoUsuario != this.usuarioService.getCodigoUser()) {
           this.textoExibidoEmBotaoDependendoRota = {
             rota: 'MODAL_ADD_REUNIAO',
             texto: 'Adicionar Proposta',
-            // };
           };
         }
         return true;
+
       case StatusDemanda.TO_DO:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
@@ -386,6 +407,7 @@ export class CardDemandaComponent implements OnInit {
           };
         }
         return true;
+
       case StatusDemanda.DESIGN_AND_BUILD:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
@@ -394,6 +416,7 @@ export class CardDemandaComponent implements OnInit {
           };
         }
         return true;
+
       case StatusDemanda.SUPPORT:
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           this.textoExibidoEmBotaoDependendoRota = {
@@ -402,12 +425,14 @@ export class CardDemandaComponent implements OnInit {
           };
         }
         return true;
+
       case StatusDemanda.CANCELLED:
         this.textoExibidoEmBotaoDependendoRota = {
           rota: '',
           texto: 'Motivo',
         };
         return true;
+
       case StatusDemanda.DRAFT:
         this.rascunho = true;
         this.textoExibidoEmBotaoDependendoRota = {
@@ -417,7 +442,6 @@ export class CardDemandaComponent implements OnInit {
         return true;
 
       case StatusDemanda.DISCUSSION:
-
         if (nivelAcesso == 'Analista' || nivelAcesso == 'GestorTI') {
           if (this.dadosDemanda.parecerComissaoProposta?.length == null && this.demandaEmReuniao == true) {
             this.textoExibidoEmBotaoDependendoRota = {
@@ -439,36 +463,31 @@ export class CardDemandaComponent implements OnInit {
           }
         }
         return true;
-      default:
 
+      default:
         return true;
     }
   }
-  teste() {
-    console.log(this.dadosDemanda.parecerComissaoProposta)
-  }
+
+  //Deleta o rascunho
   deletarRascunho() {
     if (this.dadosDemanda.codigoDemanda) {
       this.clicouEmExcluir.emit(this.dadosDemanda);
     } else {
       this.showError('Não foi possível excluir o rascunho!');
     }
-    // if (this.dadosDemanda.codigoDemanda) {
-    //   this.clicouEmExcluir.emit(this.dadosDemanda)
-
-    // } else {
-    //   this.showError("Não foi possível excluir o rascunho!")
-    // }
   }
 
+  //Exibe feedback de sucesso
   showSuccess(message: string) {
     this.messageService.add({
       severity: 'success',
-      summary: 'Success',
+      summary: 'Successo',
       detail: message,
     });
   }
 
+  //Exibe feedback de Errp
   showError(message: string) {
     this.messageService.add({
       severity: 'error',
@@ -477,6 +496,7 @@ export class CardDemandaComponent implements OnInit {
     });
   }
 
+  //Verifica os status que existem em pauta
   existePauta() {
     if (
       this.dadosDemanda.statusDemanda == StatusDemanda.ASSESSMENT ||
@@ -492,17 +512,16 @@ export class CardDemandaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     //Adicionando classes para estilização do card
-
     if (this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao && this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao) {
-
       let ordinal = this.getOrdinalValueStatusDemanda(this.dadosDemanda.statusDemanda) as number
       this.primaryColor = this.personalizacaoService.personalizacaoAtiva.coresPrimariasPersonalizacao[ordinal]
       this.secondaryColor = this.personalizacaoService.personalizacaoAtiva.coresSecundariasPersonalizacao[ordinal]
     }
-
     this.primaryColorClass = this.dadosDemanda.statusDemanda;
     this.secondaryColorClass = this.dadosDemanda.statusDemanda + '-sec';
+
     //Verificando demandas que ja existem analistas associados
     if (this.dadosDemanda.analista) {
       this.analistaAssociado = true;
@@ -517,15 +536,12 @@ export class CardDemandaComponent implements OnInit {
           this.isFavorita = true
         }
       }
-
     }
 
     this.exibicaoBotoes();
   }
 
-
-
-
+  //Adiciona ou remove dos favoritos
   addOrRemoveFavoritos() {
     if (this.dadosDemanda.codigoDemanda)
       this.demandaService.addFavoritos(this.dadosDemanda.codigoDemanda)

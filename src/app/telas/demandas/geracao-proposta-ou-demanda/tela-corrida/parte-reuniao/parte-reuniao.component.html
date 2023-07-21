@@ -32,8 +32,9 @@
               pTooltip="Qual o código do SAP?" tooltipPosition="top"></i>
           </div>
           <!-- Ta aparecendo o 0 por causa do formControlName -->
-          <p-inputNumber [maxlength]="15" inputEmFoco [min]="0" mode="decimal" (input)="onInputChange()" [(ngModel)]="codigoPPM"
-            placeholder="Ex: 458" inputId="withoutgrouping" formControlName="codigoPPMProposta" [useGrouping]="false">
+          <p-inputNumber [maxlength]="15" inputEmFoco [min]="0" mode="decimal" (input)="onInputChange()"
+            [(ngModel)]="codigoPPM" placeholder="Ex: 458" inputId="withoutgrouping" formControlName="codigoPPMProposta"
+            [useGrouping]="false">
           </p-inputNumber>
         </div>
       </div>
@@ -160,17 +161,17 @@
       </div>
     </div>
     <div formArrayName="centroCustoRecurso" class="row align-items-center" style="padding: 0.5rem;">
-      <label falarTexto style="padding-left: 0px; margin-top: 0px !important;" class="mt-1" for="Recurso Necessário:">{{ "telas.proposta.centros-custo" | translate }}:</label>
-      <div class="d-flex" style="width: 100%; padding-left: 0px;"  (click)="logs()">
+      <label falarTexto style="padding-left: 0px; margin-top: 0px !important;" class="mt-1" for="Recurso Necessário:">{{
+        "telas.proposta.centros-custo" | translate }}:</label>
+      <div class="d-flex" style="width: 100%; padding-left: 0px;">
         <div class="d-flex flex-column">
           <div *ngFor="let centroCusto of formRecursos.controls.centroCustoRecurso.controls; let i = index"
             style="flex-wrap: wrap" class="mb-1">
             <div [formGroupName]="i" class="d-flex">
               <div class="d-flex" style="margin-right: 0.5vw">
-                <p-inputNumber styleClass="custom-input"
-                 mode="decimal" inputId="withoutgrouping" [min]="0" [maxlength]="3" inputEmFoco (input)="onInputChange()"
-                  [id]="'porcentagemListaReuniao' + i" [required]="true" formControlName="porcentagemCentroCusto"
-                  placeholder="Porcentagem"></p-inputNumber>
+                <p-inputNumber styleClass="custom-input" mode="decimal" inputId="withoutgrouping" [min]="0"
+                  [maxlength]="3" inputEmFoco (input)="onInputChange()" [id]="'porcentagemListaReuniao' + i"
+                  [required]="true" formControlName="porcentagemCentroCusto" placeholder="Porcentagem"></p-inputNumber>
                 <span class="p-inputgroup-addon">%</span>
               </div>
               <input [maxlength]="70" inputEmFoco (input)="onInputChange()" style="width: 45vw; margin-right: 0.5vw"
@@ -285,4 +286,4 @@
   </div>
 </form>
 
-<p-toast></p-toast>
+<p-toast></p-toast>f

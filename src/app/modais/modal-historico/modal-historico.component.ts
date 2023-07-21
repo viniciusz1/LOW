@@ -12,6 +12,9 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./modal-historico.component.scss'],
 })
 export class ModalHistoricoComponent implements OnInit {
+  
+  listaHistoricoDemandas: Demanda[] = [];
+  
   constructor(
     public dialogRef: DialogRef<ModalHistoricoComponent>,
     @Inject(DIALOG_DATA) public data: string,
@@ -31,7 +34,7 @@ export class ModalHistoricoComponent implements OnInit {
       },
     });
   }
-  listaHistoricoDemandas: Demanda[] = [];
+  
   openModalDemandaDocumento(event: Demanda) {
     this.matDialog.open(ModalDemandaDocumentoComponent, {
       maxWidth: '70vw',

@@ -79,6 +79,7 @@ export class HeaderComponent implements OnInit {
   //Função que é executada quando o componente inicia.
   firstClick = false;
 
+  //Abre Modal Notificações
   openModalNotificacoes() {
     console.log("abriu modal notificacoes")
     this.firstClick = true;
@@ -88,12 +89,15 @@ export class HeaderComponent implements OnInit {
       this.mostrarModal = false;
     }
   }
+
+  //Encaminha para tela de chat
   irParaMensagens(){
     this.mostrarModal = false;
     this.mensagemNova = false
     this.router.navigate(["/tela-inicial/chat"])
   }
 
+  //Fecha o modal quando clicar fora dele
   @HostListener('document:click', ['$event'])
   fecharModalAoClicarFora(event: MouseEvent) {
     if (this.firstClick == false) {
@@ -107,7 +111,7 @@ export class HeaderComponent implements OnInit {
     }
 
   }
-
+  //Verifica se o usuário é um solicitante
   versaoSolicitante() {
     if (this.usuarioService.getRole == "Solicitante") {
       return true;
@@ -115,6 +119,7 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
+  //Verifica se o usuário é um Gerente de Negócio
   versaoGerenteNegocio() {
     if (this.usuarioService.getRole == "GerenteNegocio") {
       return true;
@@ -122,16 +127,19 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
-
+  //Sai do sistema
   sair() {
     this.usuarioService.logout().subscribe();
   }
 
+  //Muda o idioma
   mudarIdioma(sigla: string, link: string) {
     this.linkImagemPais = link
     this.translate.use(sigla);
   }
+
   ngOnInit() {
+    //Seta o usuario pelo banco de dados
     this.usuario = this.usuarioService.getUser('user')
     this.activeItem = this.items[0];
     document.addEventListener('click', this.fecharModalAoClicarFora);
@@ -143,11 +151,12 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  //Fechar modais
   ngOnDestroy() {
     document.removeEventListener('click', this.fecharModalAoClicarFora);
   }
 
-
+ //Receber as notificações e verifica-las
   subscribeNotificationCount() {
     this.notificacoesService.initializeWebSocketConnectionCount();
     this.notificacoesService.$notificationCountEmmiter.subscribe(quantidade => {

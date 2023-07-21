@@ -114,7 +114,8 @@
                   Botões de Áudio, Fala e Libras:
                 </span>
               </div>
-              <div style="padding: 0px !important; transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s; border-radius: 30px; margin-right: 1vh;">
+              <div
+                style="padding: 0px !important; transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s; border-radius: 30px; margin-right: 1vh;">
                 <p-inputSwitch [(ngModel)]="checked" (ngModelChange)="onCheckedChange()"></p-inputSwitch>
               </div>
             </div>
@@ -147,8 +148,8 @@
                           let i = index
                         "
                         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center gap-2"
-                        style="z-index: 0 !important;"
-                        (click)="trocarPersonalizacao(option)" [class.active]="personalizacaoEscolhida == option">
+                        style="z-index: 0 !important;" (click)="trocarPersonalizacao(option)"
+                        [class.active]="personalizacaoEscolhida == option">
                         <span>
                           {{ option.nomePersonalizacao }}
                         </span>

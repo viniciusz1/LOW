@@ -22,21 +22,25 @@ import { ModalRecomendacaoDemandaComponent } from '../modal-recomendacao-demanda
   styleUrls: ['./modal-demanda-documento.component.scss'],
 })
 export class ModalDemandaDocumentoComponent implements OnInit {
+
   showbotoesAprovarDemanda = false;
   showTimeline = false;
   path = path
   custosTotais: number = 0;
+
+  @Input() dadosDemanda: Demanda | undefined;
+  @Input() documentoEmAta = false;
+
   constructor(
     @Inject(DIALOG_DATA) public data: Demanda,
     private demandaService: DemandaService,
     private dialogRef: MatDialogRef<ModalDemandaDocumentoComponent>,
     private matDialog: MatDialog,
-    private router: Router,
     private confirmationService: ConfirmationService,
     private modalService: ModalService,
     private messageService: MessageService,
     private usuarioService: UsuarioService) {
-    console.log(data)
+
     this.dadosDemanda = data
     this.custosTotais = 0
     if (this.dadosDemanda.recursosProposta) {
@@ -45,11 +49,11 @@ export class ModalDemandaDocumentoComponent implements OnInit {
           this.custosTotais += recurso.valorHoraRecurso * recurso.quantidadeHorasRecurso;
         })
     }
+
     this.usuarioService.verificarTokenUserDetailsReturn()
       .subscribe({
         next: e => {
           if ((e.usuario.nivelAcessoUsuario == 'GestorTI' || e.usuario.nivelAcessoUsuario == 'GerenteNegocio') && this.dadosDemanda?.statusDemanda == StatusDemanda.BACKLOG_APROVACAO) {
-
             if (!this.dadosDemanda.isHistorico) {
               this.showbotoesAprovarDemanda = true
             }
@@ -63,9 +67,6 @@ export class ModalDemandaDocumentoComponent implements OnInit {
         }
       })
   }
-  @Input() dadosDemanda: Demanda | undefined;
-  @Input() documentoEmAta = false;
-
 
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
@@ -74,7 +75,6 @@ export class ModalDemandaDocumentoComponent implements OnInit {
   showError(message: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
-
 
   configureTimeline() {
     if (this.dadosDemanda?.statusDemanda) {
@@ -94,6 +94,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
 
     }
   }
+
   enviarDecisao(decisao: number) {
     if (this.dadosDemanda?.codigoDemanda || this.dadosDemanda?.codigoDemanda == '0') {
       this.demandaService
@@ -122,7 +123,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     })
   }
 
-  confirmarRecomendacao(){
+  confirmarRecomendacao() {
     this.modalService.dialogRefDemandaDocumento = this.dialogRef;
     this.matDialog.open(ModalRecomendacaoDemandaComponent, {
       maxWidth: '70vw',
@@ -144,7 +145,7 @@ export class ModalDemandaDocumentoComponent implements OnInit {
     });
   }
 
- 
+
   timeline: { status: string, date: string, icon: string, color: string, fontWeight: string }[] = [
     {
       status: 'Reserva',

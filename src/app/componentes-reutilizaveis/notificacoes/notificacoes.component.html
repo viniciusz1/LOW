@@ -1,44 +1,52 @@
-<div @fadeAnimation class="bloco px-3 pt-3 low-shadow" >
+<div @fadeAnimation class="bloco px-3 pt-3 low-shadow">
     <div class="titulo">
         <h4 falarTexto>{{ "telas.notificacoes.suas-notificacoes" | translate }}</h4>
     </div>
-
     <p-scrollPanel [style]="{width: '100%', height: '50vh'}">
         <h6 *ngIf="notificacoes.length == 0" falarTexto>{{ "telas.notificacoes.not-found" | translate }}</h6>
         <p-timeline [value]="notificacoes">
             <ng-template pTemplate="marker" let-notificacoes>
-                <span *ngIf="notificacoes.tipoNotificacao == 'CRIOU_DEMANDA'" class="custom-marker shadow-2" [style.backgroundColor]="'#00579D'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'CRIOU_DEMANDA'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#00579D'">
                     <i [ngClass]="'bi bi-plus-lg'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'EDITOU_DEMANDA'" class="custom-marker shadow-2" [style.backgroundColor]="'black'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'EDITOU_DEMANDA'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'black'">
                     <i [ngClass]="'bi bi-pencil'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'AVANCOU_STATUS_DEMANDA'" class="custom-marker shadow-2" [style.backgroundColor]="'#0091BD'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'AVANCOU_STATUS_DEMANDA'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#0091BD'">
                     <i [ngClass]="'pi pi-angle-double-right'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'CANCELOU_DEMANDA'" class="custom-marker shadow-2" [style.backgroundColor]="'#EA1010'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'CANCELOU_DEMANDA'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#EA1010'">
                     <i [ngClass]="'pi pi-ban'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'MARCOU_REUNIAO'" class="custom-marker shadow-2" [style.backgroundColor]="'#4889B8'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'MARCOU_REUNIAO'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#4889B8'">
                     <i [ngClass]="'pi pi-check-circle'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'EDITOU_REUNIAO'" class="custom-marker shadow-2" [style.backgroundColor]="'#b4b0a8'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'EDITOU_REUNIAO'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#b4b0a8'">
                     <i [ngClass]="'pi pi-file-edit'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'FINALIZOU_REUNIAO'" class="custom-marker shadow-2" [style.backgroundColor]="'#00612E'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'FINALIZOU_REUNIAO'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#00612E'">
                     <i [ngClass]="'pi pi-flag'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'DESMARCOU_REUNIAO'" class="custom-marker shadow-2" [style.backgroundColor]="'#FF7171'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'DESMARCOU_REUNIAO'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#FF7171'">
                     <i [ngClass]="'pi pi-calendar-times'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'REUNIAO_PROXIMA'" class="custom-marker shadow-2" [style.backgroundColor]="'#EF8300'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'REUNIAO_PROXIMA'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#EF8300'">
                     <i [ngClass]="'pi pi-chevron-circle-right'"></i>
                 </span>
-                <span *ngIf="notificacoes.tipoNotificacao == 'REUNIAO_PENDETE'" class="custom-marker shadow-2" [style.backgroundColor]="'#EF8300'">
+                <span *ngIf="notificacoes.tipoNotificacao == 'REUNIAO_PENDETE'" class="custom-marker shadow-2"
+                    [style.backgroundColor]="'#EF8300'">
                     <i [ngClass]="'pi pi-exclamation-circle'"></i>
                 </span>
             </ng-template>
-
             <ng-template pTemplate="content" let-notificacoes>
                 <p-card [header]="notificacoes.tituloDemandaNotificacao" [subheader]="notificacoes.dataNotificacao">
                     <span falarTexto>{{notificacoes.descricaoNotificacao}}</span>

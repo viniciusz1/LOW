@@ -10,18 +10,21 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./filtro-demanda.component.scss'],
 })
 export class FiltroDemandaComponent implements OnInit {
+
   @Output() closeFiltro = new EventEmitter();
   @Output() filtroAcionado = new EventEmitter<Filtro>();
   @Output() exportarExcel = new EventEmitter<Filtro>();
+
   @Input() mostrarIconeDeAbrirFiltro = true;
   @Input() filtroReduzidoVertical = false;
+
   tamanho: string[] = [];
-  status:  { label: string, value: string }[] = [];
+  status: { label: string, value: string }[] = [];
   nivelAcesso: string = "";
-  // tamanho: any[] = [];
   valorTamanho: any = "";
   valorStatus: any = "";
   mostrarExcel: boolean = false
+  
   atualizarFiltro(dados: Filtro) {
     this.demandaService.setFiltroData = dados
     this.filtroAcionado.emit()
@@ -39,8 +42,8 @@ export class FiltroDemandaComponent implements OnInit {
       Tamanho.Grande,
       Tamanho.MuitoGrande
     ]
-    let nivel =  this.usuarioService.getRole
-    if(nivel){
+    let nivel = this.usuarioService.getRole
+    if (nivel) {
       this.nivelAcesso = nivel
     }
   }

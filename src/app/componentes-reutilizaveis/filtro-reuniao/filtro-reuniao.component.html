@@ -1,5 +1,4 @@
-<div
-  (keydown.enter)="
+<div (keydown.enter)="
     emitirFiltro({
       nomeComissao: comissao.value,
       dataReuniao: data.value,
@@ -10,14 +9,10 @@
       ordenar: '',
       page: '1',
       size: '20'
-    })
-  "
-  class="low-shadow rounded border"
-  style="padding: 15px; background: white"
->
+    })" class="low-shadow rounded border" style="padding: 15px; background: white">
   <h6 class="d-flex justify-content-between">
     {{
-      "componentes-reutilizaveis.filtro-reuniao.filtrar-reunioes" | translate
+    "componentes-reutilizaveis.filtro-reuniao.filtrar-reunioes" | translate
     }}
   </h6>
   <div class="line">
@@ -26,100 +21,60 @@
         <div class="d-flex justify-content-between">
           <div class="d-flex mt-3 gap-2">
             <span class="p-float-label">
-              <input
-                inputEmFoco
-                #comissao
-                class="p-inputtext-sm"
-                placeholder="Ex: CPVM"
-                pInputText
-                type="text"
-              />
+              <input inputEmFoco #comissao class="p-inputtext-sm" placeholder="Ex: CPVM" pInputText type="text" />
               <label for="float-input">{{
                 "componentes-reutilizaveis.filtro-reuniao.comissao" | translate
-              }}</label>
+                }}</label>
             </span>
             <span class="p-float-label">
-              <p-calendar
-                inputEmFoco
-                #data
-                class="p-inputtext-sm"
-                placeholder="Ex: 123"
-                type="text"
-              ></p-calendar>
+              <p-calendar inputEmFoco #data class="p-inputtext-sm" placeholder="Ex: 123" type="text"></p-calendar>
               <label for="float-input">{{
                 "componentes-reutilizaveis.filtro-reuniao.data" | translate
-              }}</label>
+                }}</label>
             </span>
             <span class="p-float-label">
-              <input
-                inputEmFoco
-                #responsavel
-                class="p-inputtext-sm"
-                placeholder="Ex: Vinícius"
-                pInputText
-                type="text"
-              />
+              <input inputEmFoco #responsavel class="p-inputtext-sm" placeholder="Ex: Vinícius" pInputText
+                type="text" />
               <label for="float-input">{{
                 "componentes-reutilizaveis.filtro-reuniao.responsavel"
-                  | translate
-              }}</label>
+                | translate
+                }}</label>
             </span>
           </div>
         </div>
         <div class="d-flex mt-3 gap-2" style="margin-top: 2.5vh !important">
           <div class="">
             <span class="p-float-label">
-              <p-dropdown
-                [options]="statusReuniao"
-                inputEmFoco
-                #status
-                class="p-inputtext-sm"
-                placeholder="Ex: Backlog"
-                type="text"
-              ></p-dropdown>
+              <p-dropdown [options]="statusReuniao" inputEmFoco #status class="p-inputtext-sm" placeholder="Ex: Backlog"
+                type="text"></p-dropdown>
               <!-- <input inputEmFoco #status class="p-inputtext-sm" placeholder="Ex: Backlog" pInputText type="text"> -->
               <label for="float-input">{{
                 "componentes-reutilizaveis.filtro-reuniao.status-aprovacao"
-                  | translate
-              }}</label>
+                | translate
+                }}</label>
             </span>
           </div>
           <div class="d-flex flex-column">
             <span class="p-float-label">
-              <input
-                inputEmFoco
-                #solicitante
-                class="p-inputtext-sm"
-                placeholder="Ex: Cléber"
-                pInputText
-                type="text"
-              />
+              <input inputEmFoco #solicitante class="p-inputtext-sm" placeholder="Ex: Cléber" pInputText type="text" />
               <label for="float-input">{{
                 "componentes-reutilizaveis.filtro-reuniao.solicitante"
-                  | translate
-              }}</label>
+                | translate
+                }}</label>
             </span>
           </div>
           <div class="d-flex flex-column">
             <span class="p-float-label">
-              <input
-                inputEmFoco
-                #codigoPPM
-                class="p-inputtext-sm"
-                placeholder="Ex: 9283"
-                pInputText
-                type="text"
-              />
+              <input inputEmFoco #codigoPPM class="p-inputtext-sm" placeholder="Ex: 9283" pInputText type="text" />
               <label for="float-input">{{
                 "componentes-reutilizaveis.filtro-reuniao.codigo-ppm"
-                  | translate
-              }}</label>
+                | translate
+                }}</label>
             </span>
           </div>
           <div class="d-flex justify-content-center">
             <div class="rounded low-shadow">
-              <button
-                (click)="
+              <button (click)="
                   emitirFiltro({
                     nomeComissao: comissao.value,
                     dataReuniao: data.value,
@@ -131,9 +86,7 @@
                     page: '1',
                     size: '20'
                   })
-                "
-                class="btn btn-primary"
-              >
+                " class="btn btn-primary">
                 <i class="bi bi-search"></i>
               </button>
             </div>

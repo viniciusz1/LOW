@@ -1,7 +1,7 @@
 <div style="padding: 8px; background: white; width: 50vw;">
     <div>
         <div class="d-flex justify-content-between">
-            <span falarTexto  class="h3">Reunião {{data}}
+            <span falarTexto class="h3">Reunião {{data}}
                 <hr style="margin: 0; margin-bottom: 10px; width: 150%;">
             </span>
             <i class="bi bi-x" role="button" (click)="dialogRef.close()"></i>
@@ -15,8 +15,10 @@
 
     </div>
     <div class="d-flex justify-content-end mt-3">
-        <button falarTexto class="btn btn-outline-primary me-3" (click)="dialogRef.close()">{{"modais.modal-cancelamento-reuniao.cancelar" | translate}}</button>
-        <button falarTexto routerLink="/tela-inicial" class="btn btn-primary" (click)="cancelarReuniao()">{{"modais.modal-cancelamento-reuniao.cancelar-reuniao" | translate}}</button>
+        <button falarTexto class="btn btn-outline-primary me-3"
+            (click)="dialogRef.close()">{{"modais.modal-cancelamento-reuniao.cancelar" | translate}}</button>
+        <button falarTexto routerLink="/tela-inicial" class="btn btn-primary"
+            (click)="cancelarReuniao()">{{"modais.modal-cancelamento-reuniao.cancelar-reuniao" | translate}}</button>
     </div>
 </div>
 <p-toast></p-toast>

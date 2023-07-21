@@ -19,24 +19,27 @@ export class ModalCancelamentoReuniaoComponent implements OnInit {
     private route: Router) {
     this.codigoReuniao = data
   }
+
   motivoInput = ""
   codigoReuniao: number | undefined
+
   ngOnInit(): void {
   }
+
   cancelarReuniao() {
-    if(this.motivoInput == ""){
+    if (this.motivoInput == "") {
       this.showError("Adicione o motivo do cancelamento da reunião!")
     } else {
-    this.reuniaoService.cancelarReuniao(this.codigoReuniao, this.motivoInput)
-      .subscribe({
-        next: e => {
-          this.showSuccess("Reunião Cancelada")
-          this.dialogRef.close()
-          this.route.navigate(['tela-inicial/reunioes']);
-        }, error: err => {
-          this.showError("Não foi possível cancelar a reunião")
-        }
-      })
+      this.reuniaoService.cancelarReuniao(this.codigoReuniao, this.motivoInput)
+        .subscribe({
+          next: e => {
+            this.showSuccess("Reunião Cancelada")
+            this.dialogRef.close()
+            this.route.navigate(['tela-inicial/reunioes']);
+          }, error: err => {
+            this.showError("Não foi possível cancelar a reunião")
+          }
+        })
     }
   }
 
@@ -47,6 +50,5 @@ export class ModalCancelamentoReuniaoComponent implements OnInit {
   showError(message: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
-
 
 }

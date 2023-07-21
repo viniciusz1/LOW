@@ -16,8 +16,6 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { path } from 'src/app/services/path/rota-api';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
-
-
 @Component({
   selector: 'app-tela-classificar-demanda',
   templateUrl: './tela-classificar-demanda.component.html',
@@ -34,7 +32,6 @@ export class TelaClassificarDemandaComponent implements OnInit {
   }
 
   path = path
-
   listaBUs = [
     { value: 'WMOI', nome: 'WMO-I – WEG Motores Industrial' },
     { value: 'WMOC', nome: 'WMO-C – WEG Motores Comercial' },
@@ -45,13 +42,11 @@ export class TelaClassificarDemandaComponent implements OnInit {
     { value: 'WTI', nome: 'WTI – WEG Tintas' },
     { value: 'WTD', nome: 'WTD – WEG Transmissão e Distribuição' },
   ]
-
   demanda: Demanda | undefined = undefined
   demandaClassificadaForm = this.demandaClassificadaService.demandaClassificadaForm;
   selectedBUs: any;
   solicitanteAnalista: boolean = false;
   motivoDemandaPropria = "Os motivos não foram disponibilizados";
-
   opcoesDeTamanho = [
     {
       name: 'Muito Pequena',
@@ -74,7 +69,6 @@ export class TelaClassificarDemandaComponent implements OnInit {
       value: 'MuitoGrande',
     },
   ];
-
   listaSecoes = [
     { value: 'SVE', nome: 'SVE – Seção Desenvolvimento Sistemas de Vendas e E-commerce' },
     { value: 'SIM', nome: 'SIM – Seção Desenvolvimento Sistemas de manufatura' },
@@ -89,12 +83,12 @@ export class TelaClassificarDemandaComponent implements OnInit {
     { value: 'SEG', nome: 'SEG – Seção Segurança da Informação e Riscos TI' },
     { value: 'AAS', nome: 'AAS – Atendimento e serviços TI – América do Sul' },
   ]
-
+  dadosDemanda: Demanda | undefined;
   codigoDemandaRota = this.activatedRoute.snapshot.params['codigoDemanda'];
+
   isFormClassificadaInvalid() {
     return this.demandaClassificadaService.isFormDemandaClassificadaInvalid;
   }
-
 
   constructor(
     private matDialog: MatDialog,
@@ -106,13 +100,11 @@ export class TelaClassificarDemandaComponent implements OnInit {
     private confirmationService: ConfirmationService,
     public usuarioService: UsuarioService
   ) {
-
     this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota).subscribe({
       next: (value) => {
-        console.log(value)
         this.demanda = value;
-        if(this.usuarioService.getCodigoUser() ==
-        this.demanda.solicitanteDemanda?.codigoUsuario){
+        if (this.usuarioService.getCodigoUser() ==
+          this.demanda.solicitanteDemanda?.codigoUsuario) {
           this.solicitanteAnalista = true;
         }
       },
@@ -122,8 +114,8 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
     // this.isFormClassificadaInvalid =
   }
-  iniciarChat(){
-    
+
+  iniciarChat() {
     this.confirmationService.confirm({
       header: "Iniciar Chat",
       message: 'Deseja realmente iniciar uma conversa sobre esta demanda?',
@@ -139,11 +131,9 @@ export class TelaClassificarDemandaComponent implements OnInit {
           })
       },
       reject: () => {
-
       }
     });
   }
-  dadosDemanda: Demanda | undefined;
 
   cancelarDemandaPropria() {
     this.confirmationService.confirm({
@@ -154,9 +144,7 @@ export class TelaClassificarDemandaComponent implements OnInit {
       accept: () => {
         this.demandaService.getDemandaByCodigoDemanda(this.codigoDemandaRota).subscribe({
           next: (value) => {
-            console.log(value)
             this.dadosDemanda = value;
-
             if (this.dadosDemanda.codigoDemanda) {
               this.demandaService
                 .reprovarDemanda(
@@ -181,7 +169,6 @@ export class TelaClassificarDemandaComponent implements OnInit {
     });
   }
 
-
   showSuccess(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
@@ -189,7 +176,6 @@ export class TelaClassificarDemandaComponent implements OnInit {
   showError(message: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
-
 
   onSubmitClassificacaoDemanda() {
     this.demandaClassificadaService.postClassificacaoDemanda(this.demanda?.codigoDemanda).subscribe({

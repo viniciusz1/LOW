@@ -15,19 +15,16 @@ import { ModalDemandaDocumentoComponent } from '../modal-demanda-documento/modal
 export class ModalParecerComissaoPropostaComponent implements OnInit {
 
   constructor(
-
     @Inject(MAT_DIALOG_DATA) public data: { demanda: Demanda, reuniao: Reuniao },
     public dialogRef: MatDialogRef<ModalParecerComissaoPropostaComponent>,
     private matDialog: MatDialog,
     private reuniaoService: ReuniaoService,
     private messageService: MessageService
-
   ) {
-
     this.demanda = this.data.demanda
     this.setInformacoes()
-
   }
+
   demanda: Demanda | undefined
   tipoAtaSelecionada: string = "";
   tipoAtas = [
@@ -44,6 +41,7 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
   ]
   parecerComissaoInput = ""
   recomendacaoInput = ""
+  textoBotaoParecer = "Finalizar Parecer"
 
   bloquearCamposInput() {
     if (this.data.reuniao.statusReuniao == "CONCLUIDO" ||
@@ -52,8 +50,6 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
     }
     return false
   }
-
-  textoBotaoParecer = "Finalizar Parecer"
 
   setInformacoes() {
     if (this.demanda?.parecerComissaoProposta && this.demanda?.tipoAtaProposta && (this.demanda?.ultimaDecisaoComissao)) {
@@ -94,7 +90,7 @@ export class ModalParecerComissaoPropostaComponent implements OnInit {
 
   enviarParecerComissao() {
     if (this.demanda?.codigoDemanda)
-      this.reuniaoService.enviarParecerComissao(this.data.reuniao.codigoReuniao, {tipoAtaProposta: this.tipoAtaSelecionada, parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.demanda.codigoDemanda?.toString())
+      this.reuniaoService.enviarParecerComissao(this.data.reuniao.codigoReuniao, { tipoAtaProposta: this.tipoAtaSelecionada, parecerComissaoProposta: this.parecerComissaoInput, decisaoProposta: this.resultadoComissaoSelecionado, recomendacaoProposta: this.recomendacaoInput }, this.demanda.codigoDemanda?.toString())
         .subscribe({
           next: e => {
             this.showSuccess("Parecer enviado!")

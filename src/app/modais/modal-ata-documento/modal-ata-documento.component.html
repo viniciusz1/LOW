@@ -20,8 +20,10 @@
         <div>
             <!-- <div *ngIf="tipoAta == proposta.tipoAtaProposta"> -->
             <!-- <hr *ngIf="mostrarHr(i, tipoAta)"> -->
-            <div style="display: flex; justify-content: center; align-items: center; border-top: 1px solid #000000; border-bottom: 1px solid; padding: 1vh; margin-bottom: 1vh;">
-                <span style="font-weight: 600; color: #00579D; font-size: 1rem;">{{ "documento-pdf.demanda" | translate }}
+            <div
+                style="display: flex; justify-content: center; align-items: center; border-top: 1px solid #000000; border-bottom: 1px solid; padding: 1vh; margin-bottom: 1vh;">
+                <span style="font-weight: 600; color: #00579D; font-size: 1rem;">{{ "documento-pdf.demanda" | translate
+                    }}
                     {{proposta.codigoDemanda}}</span>
             </div>
             <app-modal-demanda-documento [documentoEmAta]="true"

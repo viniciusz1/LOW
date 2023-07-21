@@ -11,7 +11,6 @@
       </span>
     </ng-template>
   </p-timeline>
-
   <p class="paragrafo-inicial" *ngIf="documentoEmAta == false">
     <b class="me-2" falarTexto>{{dadosDemanda?.codigoDemanda}}</b>
     <span>
@@ -23,13 +22,11 @@
       </div>
     </span>
   </p>
-
   <mat-dialog-content class="mat-typography" style="overflow: hidden;"
     [ngStyle]="{ display: documentoEmAta ? 'inline-table' : 'contents' }">
     <p-scrollPanel *ngIf="documentoEmAta == false" [style]="{ width: '100%', height: '70vh' }" styleClass="custombar1">
       <app-info-modal-demanda [dadosDemanda]="dadosDemanda" [custosTotais]="custosTotais"></app-info-modal-demanda>
     </p-scrollPanel>
-
     <app-info-modal-demanda *ngIf="documentoEmAta == true" [dadosDemanda]="dadosDemanda"
       [custosTotais]="custosTotais"></app-info-modal-demanda>
     <mat-dialog-actions class="d-flex justify-content-between" *ngIf="documentoEmAta == false">
@@ -48,14 +45,8 @@
         </button>
       </div>
     </mat-dialog-actions>
-
     <div>
-      <p-confirmDialog
-        icon="pi pi-exclamation-triangle"
-        key="confirmarDecisao"
-        #bt
-        [style]="{ width: '40vw' }"
-      >
+      <p-confirmDialog icon="pi pi-exclamation-triangle" key="confirmarDecisao" #bt [style]="{ width: '40vw' }">
         <ng-template pTemplate="footer">
           <button falarTexto type="button" class="btn btn-outline-primary" (click)="bt.reject()">
             <i class="pi pi-times me-2"></i>
@@ -66,7 +57,7 @@
             {{ "telas.tela-chat.modal-b-sim" | translate }}
           </button>
         </ng-template>
-        </p-confirmDialog
-      >
+      </p-confirmDialog>
     </div>
   </mat-dialog-content>
+</div>

@@ -27,13 +27,11 @@ export class TelaCorridaComponent implements OnInit {
   titulosProposta: any[] = [];
   activeSection: string = '';
   activePage: string = '';
-
   tabs2: Tab[] = [
     { title: 'Aba 1', content: 'Conteúdo da Aba 1' },
     { title: 'Aba 2', content: 'Conteúdo da Aba 2' },
     { title: 'Aba 3', content: 'Conteúdo da Aba 3' }
   ];
-
   activeIndex = 1;
   dadosDemanda: Demanda | undefined;
 
@@ -43,9 +41,11 @@ export class TelaCorridaComponent implements OnInit {
     }
     return false;
   }
+
   beneficioValidator() {
     this.demandaService.beneficioValidator()
   }
+
   onSubmitDemanda() {
     if (!this.aparecerProposta) {
       if (this.router.url.includes('reformular-demanda')) {
@@ -62,17 +62,15 @@ export class TelaCorridaComponent implements OnInit {
         this.demandaService.postDemanda().subscribe({
           next: (response) => {
             this.showSuccess("Demanda criada com sucesso!")
-            // let codigo = this.route.snapshot.params['indiceRascunho']
-            // this.rascunhoService.deleteRascunho(codigo)
             this.router.navigate(['/tela-inicial']);
           },
           error: (err) => {
             console.log("Erro ", err.error);
-            if(err.error === "Falta completar as porcentagem de centro de custos"){
+            if (err.error === "Falta completar as porcentagem de centro de custos") {
               this.showError("Centros de custo está inválido! Verifique se ele se encontra em 100%")
-            } else if(err.error === "É necessário preencher todos os campos do benefício Potencial" || err.error === "É necessário preencher todos os campos do benefício Real"){
+            } else if (err.error === "É necessário preencher todos os campos do benefício Potencial" || err.error === "É necessário preencher todos os campos do benefício Real") {
               this.showError(err.error)
-            }else{
+            } else {
               this.showError("Certifique-se do preenchimento de todos os campos!")
             }
           },
@@ -84,8 +82,6 @@ export class TelaCorridaComponent implements OnInit {
           .postProposta()
           .subscribe({
             next: (response) => {
-              console.log("Chama 3x?");
-
               this.showSuccess("Proposta criada com sucesso!")
               this.router.navigate(['/tela-inicial']);
             },
@@ -96,10 +92,8 @@ export class TelaCorridaComponent implements OnInit {
       } else {
         this.showError("Adicione pelo menos um recurso!")
       }
-
     }
   }
-
 
   constructor(
     private router: Router,
@@ -111,18 +105,14 @@ export class TelaCorridaComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.tipoExibicaoTela();
-
   }
 
   invalid() {
     return this.demandaService.getFormDemanda.invalid
   }
+
   invalidProposta() {
     return this.propostaService.getFormProposta.invalid
-  }
-
-  teste() {
-    console.log(this.propostaService.getFormProposta)
   }
 
   showSuccess(message: string) {
@@ -132,7 +122,6 @@ export class TelaCorridaComponent implements OnInit {
   showError(message: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
-
 
   tipoExibicaoTela() {
     if (this.router.url.includes('reformular-demanda')) {
@@ -165,10 +154,8 @@ export class TelaCorridaComponent implements OnInit {
     }
   }
 
-
   //Workflow só funciona corretamente quando o Zoom da tela esta em 100%
   onScroll() {
-
     const sections = document.querySelectorAll('section');
     const scrollPosition = window.scrollY;
 
@@ -187,11 +174,12 @@ export class TelaCorridaComponent implements OnInit {
           this.activeSection = 'section3';
         }
       });
+
     } else {
       sections.forEach((section) => {
         const sectionTop = section.offsetTop - 50;
         const sectionBottom = sectionTop + section.offsetHeight;
-        
+
         if (
           scrollPosition >= sectionTop - 200 &&
           scrollPosition < sectionBottom
@@ -209,7 +197,6 @@ export class TelaCorridaComponent implements OnInit {
         }
       });
     }
-
   }
 
   indoPraCima(id: string) {
@@ -238,7 +225,7 @@ export class TelaCorridaComponent implements OnInit {
     }
   }
 
-  inserirInformacoesFormDemanda(){
+  inserirInformacoesFormDemanda() {
     let codigoDemanda = this.route.snapshot.params['indiceRascunho']
     let demanda = this.demandaService.getDemandaByCodigoDemanda(codigoDemanda);
     this.demandaService.demandaForm.patchValue({
@@ -264,12 +251,11 @@ export class TelaCorridaComponent implements OnInit {
             this.titulosDemanda[i].color = 'rgb(233, 233, 233)';
           }
         }
-         else if (icones[i].classList.length > 2) {
-            this.titulosProposta[i].color = '#00579d';
-          } else {
-            this.titulosProposta[i].color = 'rgb(233, 233, 233)';
-          }
-        
+        else if (icones[i].classList.length > 2) {
+          this.titulosProposta[i].color = '#00579d';
+        } else {
+          this.titulosProposta[i].color = 'rgb(233, 233, 233)';
+        }
       }
     });
 
